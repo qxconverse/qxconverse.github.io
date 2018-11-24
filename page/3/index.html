@@ -229,152 +229,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/02/在python3.5中使用OpenCV/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qinxue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="qxconverse">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/02/在python3.5中使用OpenCV/" itemprop="url">在python3.5中使用OpenCV</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-02T21:38:01+08:00">
-                2017-03-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="在python3-5中使用OpenCV"><a href="#在python3-5中使用OpenCV" class="headerlink" title="在python3.5中使用OpenCV"></a>在python3.5中使用OpenCV</h3><p>最近在OpenCV的官方文档上看到一个人脸识别的示例代码，想要实现。由于我之前下好的OpenCV3.1中并不自带相关的函数，即opencv2/contrib/contrib.hpp这个文件找不到。需要下载一个contrib的扩展包，然后再用cmake进行编译，最终才能使用。我按照某个博客上的内容（<a href="http://www.cnblogs.com/jliangqiu2016/p/5597501.html" target="_blank" rel="noopener">opencv+contrib</a>）试了一个下午，最后也没有完成，反正遇到了各种问题，最后放弃了。<br>于是，就去官网上下了一个OpenCV2.4.13，重新配置，也是搞了好久，最后才能使代码顺利运行，虽然最后还是出了一个不知道如何解决的bug。<br>为什么非要在vs2015上用C++写关于OpenCV的东西呢？于是我想到python，正所谓人生苦短，我用Python。至于在python中使用OpenCV，目前我知道的途径有两个，一个是在opencv文件夹里面的python文件夹里面的某个文件（就是最底下的那个cv2.pyd文件）拷贝到python文件夹里面的某个地方（根据自己安装python的位置）。<br><img src="http://img.blog.csdn.net/20170302212319371?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20170302212330502?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>一向喜欢方便的我，看到这个就很烦，再说，OpenCV3.1里面貌似只支持2.7的python，于是就找到了第二个方法。即用pip去安装。<br>于是按照网上的博客，需要在这个网站<a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy" target="_blank" rel="noopener">Python Extension Packages</a>里面下相关的whl文件（顺便强势安利一下这个神奇的网站）：<br><img src="http://img.blog.csdn.net/20170302212837925?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>由于我的电脑是64位的，我之前安装过python3.5，所以我就选择了opencv_python-3.2.0+contrib-cp35-cp35m-win_amd64.whl这个文件，（因为OpenCV3.0以上的版本有些函数需要融入contrib这个扩展包才行，所以要下带有contrib的这个whl文件）。<br>下好后，我就开始在cmd中安装了，这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install opencv_python-3.2.0+contrib-cp35-cp35m-win_amd64.whl</span><br></pre></td></tr></table></figure>
-<p>但是安装不了，很是纳闷，后来又去下了个32位的opencv_python-3.2.0+contrib-cp35-cp35m-win32.whl，最后终于装好了。我猜测可能我当初下的python是32位的，并不和系统的位数相关吧~<br><img src="http://img.blog.csdn.net/20170302213446460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>需要注意的是，在安装这个cv2之前，要保证已经装好了numpy，由于我的python里面之前装过，所以这边就省略这个步骤了。下面就开始起飞了！在sublime里面编辑如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import cv2</span><br><span class="line">img = cv2.imread(&apos;Building.bmp&apos;,0)</span><br><span class="line">cv2.imshow(&apos;image&apos;,img)</span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<p>最后终于成功显示图像了<br><img src="http://img.blog.csdn.net/20170302213702836?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/03/30/Win10环境下VS2015+opencv3.1.0配置/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -468,26 +322,17 @@
       
         
           
-            <h3 id="Win10环境下VS2015-opencv3-1-0配置"><a href="#Win10环境下VS2015-opencv3-1-0配置" class="headerlink" title="Win10环境下VS2015+opencv3.1.0配置"></a>Win10环境下VS2015+opencv3.1.0配置</h3><p>由于项目中要用到OpenCV，所以下了这个库，下面讲的是如何在vs2015中配置opencv3.1.0。</p>
-<ol>
-<li>去opencv的官网下载opencv(（<a href="http://opencv.org/）对应自己电脑的操纵系统下载。" target="_blank" rel="noopener">http://opencv.org/）对应自己电脑的操纵系统下载。</a>                            </li>
-<li>双击，选择安装目录，自定义解压安装到指定目录下面。比如我的在D盘下。</li>
-<li>打开计算机属性，选个高级设置，环境变量，选择系统环境变量，点击“新建”<br><img src="http://img.blog.csdn.net/20160330174426956" alt="这里写图片描述"></li>
-<li>点击“path”，新建一个环境变量路径，如图<br><img src="http://img.blog.csdn.net/20160330174527863" alt="这里写图片描述"></li>
-<li>然后点击确定，至此opencv3.1.0的系统环境变量配置完毕，此时一般都要重启下电脑，该环境变量才会生效。</li>
-<li>打开visual studio 2015，新建一个项目，新建一个Win32控制台应用程序</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// OpenCVTest.cpp : 定义控制台应用程序的入口点。</span><br><span class="line">//</span><br><span class="line"></span><br><span class="line">#include &quot;stdafx.h&quot;</span><br><span class="line">#include &lt;iostream&gt;  </span><br><span class="line">#include &lt;opencv2/core/core.hpp&gt;   </span><br><span class="line">#include &lt;opencv2/highgui/highgui.hpp&gt;  </span><br><span class="line">using namespace cv;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat img = imread(&quot;opencv_test.jpg&quot;);</span><br><span class="line">	if (img.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; &quot;error&quot;;</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line">	imshow(&quot;Lena&quot;, img);</span><br><span class="line">	waitKey();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>7.直接右键工程，选择属性，打开属性页。注意这里需要选择自己电脑的位数，因为我的是64位的，所以选择x64。<br><img src="http://img.blog.csdn.net/20160330184852405" alt="这里写图片描述"></p>
-<ol start="8">
-<li>配置包含目录和库目录。<br>在属性页，选择左侧配置属性–&gt;VC++目录，编辑包含目录，设置三条路径：<br>D:\OpenCV\opencv\build\include<br>D:\OpenCV\opencv\build\include\opencv<br>D:\OpenCV\opencv\build\include\opencv2</li>
-<li>编辑库目录，这里可自行选择编译平台，由于我是64位Win10系统，这里就选择OpenCV3.0的x64目录，配置路径如下：<br>D:\OpenCV\opencv\build\x64\vc14\lib<br>如图所示：<br><img src="http://img.blog.csdn.net/20160330184753373" alt="这里写图片描述"></li>
-<li>配置链接器输入依赖项。依次点击属性页的链接器–&gt;输入，编辑附加依赖项，添加如下项：<br>opencv_world310d.lib<br>这项就是目录\vc14\lib下面的不带d的文件名，注意添加时候不要忘了后缀.lib，否则编译或者运行时找不到依赖项。<br><img src="http://img.blog.csdn.net/20160330183310225" alt="这里写图片描述"></li>
-</ol>
-<hr>
-<p>2018-3-8更新<br>由于最近又开始折腾OpenCV，又遇到了一些问题。<br>首先我之前电脑上安装的是opencv3.1+vs2015，但是有个不好的地方是，对于3.1版本，里面没有contrib，而很多其它有用的功能在里面。<br>于是我就把它配置成之前下好的opencv2.4.13，奇怪的是，每次运行的时候就会报错，不是说缺失opencv_某某d.lib。<br>最后才知道，我之前的opencv2.4.13里面只有vc10，和vc12。<br>于是我下了一个opencv2.4.13.5_vc14.exe，然后配置了，就可以了。而且可以使用其中自带的contrib。不需要像3版本那样混编contrib。</p>
+          Win10环境下VS2015+opencv3.1.0配置由于项目中要用到OpenCV，所以下了这个库，下面讲的是如何在vs2015中配置opencv3.1.0。
 
-          
+去opencv的官网下载opencv(（http://opencv.org/）对应自己电脑的操纵系统下载。               
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/03/30/Win10环境下VS2015+opencv3.1.0配置/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -627,26 +472,16 @@
       
         
           
-            <p>###Python的SMTP发送邮件学习记录(这是我的第一个用markdown写的博客)<br><strong>首先上代码，这是我在学习了用Python邮箱编程后模仿写的测试代码</strong></p>
-<p>这是版本一的代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line">msg=MIMEText(<span class="string">'hello,send by python...'</span>,<span class="string">'plain'</span>,<span class="string">'utf-8'</span>)</span><br><span class="line">from_addr=raw_input(<span class="string">'From: '</span>)</span><br><span class="line">password=raw_input(<span class="string">'Password: '</span>)</span><br><span class="line">smtp_server=raw_input(<span class="string">'SMTP server: '</span>)</span><br><span class="line">to_addr=raw_input(<span class="string">'To: '</span>)</span><br><span class="line"><span class="keyword">import</span> smtplib</span><br><span class="line">server=smtplib.SMTP(smtp_server,<span class="number">25</span>)</span><br><span class="line">server.set_debuglevel(<span class="number">1</span>)</span><br><span class="line">server.starttls()</span><br><span class="line">server.login(from_addr,password)</span><br><span class="line">server.sendmail(from_addr,[to_addr],msg.as_string())</span><br><span class="line">server.quit()</span><br></pre></td></tr></table></figure></p>
-<p>此版本的特点是：</p>
-<ul>
-<li>邮件没有主题</li>
-<li>收件人的名字没有显示为友好的名字，比如Mr Green <a href="mailto:&#103;&#x72;&#101;&#x65;&#x6e;&#64;&#101;&#120;&#x61;&#109;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#109;" target="_blank" rel="noopener">&#103;&#x72;&#101;&#x65;&#x6e;&#64;&#101;&#120;&#x61;&#109;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#109;</a></li>
-<li>明明收到了邮件，却提示不在收件人中</li>
-</ul>
-<p>于是做了测试，用qq邮箱发给outlook与gmail，试了很多次，邮件都被回退了；相反，用qq给自家（另外一个邮箱）发，确成功了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">QXdeMacBook-Pro:workspace qx$ python smtp.py </span><br><span class="line">From: xqconverse@foxmail.com</span><br><span class="line">Password: ********(for secret!)</span><br><span class="line">SMTP server: smtp.qq.com</span><br><span class="line">To: 2453694798@qq.com</span><br><span class="line">send: &apos;ehlo QXdeMacBook-Pro.local\r\n&apos;</span><br><span class="line">reply: &apos;250-smtp.qq.com\r\n&apos;</span><br><span class="line">reply: &apos;250-PIPELINING\r\n&apos;</span><br><span class="line">reply: &apos;250-SIZE 73400320\r\n&apos;</span><br><span class="line">reply: &apos;250-STARTTLS\r\n&apos;</span><br><span class="line">reply: &apos;250-AUTH LOGIN PLAIN\r\n&apos;</span><br><span class="line">reply: &apos;250-AUTH=LOGIN\r\n&apos;</span><br><span class="line">reply: &apos;250-MAILCOMPRESS\r\n&apos;</span><br><span class="line">reply: &apos;250 8BITMIME\r\n&apos;</span><br><span class="line">reply: retcode (250); Msg: smtp.qq.com</span><br><span class="line">PIPELINING</span><br><span class="line">SIZE 73400320</span><br><span class="line">STARTTLS</span><br><span class="line">AUTH LOGIN PLAIN</span><br><span class="line">AUTH=LOGIN</span><br><span class="line">MAILCOMPRESS</span><br><span class="line">8BITMIME</span><br><span class="line">send: &apos;STARTTLS\r\n&apos;</span><br><span class="line">reply: &apos;220 Ready to start TLS\r\n&apos;</span><br><span class="line">reply: retcode (220); Msg: Ready to start TLS</span><br><span class="line">send: &apos;ehlo QXdeMacBook-Pro.local\r\n&apos;</span><br><span class="line">reply: &apos;250-smtp.qq.com\r\n&apos;</span><br><span class="line">reply: &apos;250-PIPELINING\r\n&apos;</span><br><span class="line">reply: &apos;250-SIZE 73400320\r\n&apos;</span><br><span class="line">reply: &apos;250-AUTH LOGIN PLAIN\r\n&apos;</span><br><span class="line">reply: &apos;250-AUTH=LOGIN\r\n&apos;</span><br><span class="line">reply: &apos;250-MAILCOMPRESS\r\n&apos;</span><br><span class="line">reply: &apos;250 8BITMIME\r\n&apos;</span><br><span class="line">reply: retcode (250); Msg: smtp.qq.com</span><br><span class="line">PIPELINING</span><br><span class="line">SIZE 73400320</span><br><span class="line">AUTH LOGIN PLAIN</span><br><span class="line">AUTH=LOGIN</span><br><span class="line">MAILCOMPRESS</span><br><span class="line">8BITMIME</span><br><span class="line">send: &apos;AUTH PLAIN AHhxY29udmVyc2VAZm94bWFpbC5jb20AMTExMjIwcXg=\r\n&apos;</span><br><span class="line">reply: &apos;235 Authentication successful\r\n&apos;</span><br><span class="line">reply: retcode (235); Msg: Authentication successful</span><br><span class="line">send: &apos;mail FROM:&lt;xqconverse@foxmail.com&gt; size=128\r\n&apos;</span><br><span class="line">reply: &apos;250 Ok\r\n&apos;</span><br><span class="line">reply: retcode (250); Msg: Ok</span><br><span class="line">send: &apos;rcpt TO:&lt;2453694798@qq.com&gt;\r\n&apos;</span><br><span class="line">reply: &apos;250 Ok\r\n&apos;</span><br><span class="line">reply: retcode (250); Msg: Ok</span><br><span class="line">send: &apos;data\r\n&apos;</span><br><span class="line">reply: &apos;354 End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;\r\n&apos;</span><br><span class="line">reply: retcode (354); Msg: End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;</span><br><span class="line">data: (354, &apos;End data with &lt;CR&gt;&lt;LF&gt;.&lt;CR&gt;&lt;LF&gt;&apos;)</span><br><span class="line">send: &apos;Content-Type: text/plain; charset=&quot;utf-8&quot;\r\nMIME-Version: 1.0\r\nContent-Transfer-Encoding: base64\r\n\r\naGVsbG8sc2VuZCBieSBweXRob24uLi4=\r\n.\r\n&apos;</span><br><span class="line">reply: &apos;250 Ok: queued as \r\n&apos;</span><br><span class="line">reply: retcode (250); Msg: Ok: queued as</span><br><span class="line">data: (250, &apos;Ok: queued as&apos;)</span><br><span class="line">send: &apos;quit\r\n&apos;</span><br><span class="line">reply: &apos;221 Bye\r\n&apos;</span><br><span class="line">reply: retcode (221); Msg: Bye</span><br></pre></td></tr></table></figure>
-<hr>
-<p>版本一的缺点，是因为邮件主题、如何显示发件人、收件人等信息并不是通过SMTP协议发给MTA，而是包含在发给MTA的文本中的，所以，我们必须把From、To和Subject添加到MIMEText中，才是一封完整的邮件：<br>以下就是版本二：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> email <span class="keyword">import</span> encoders</span><br><span class="line"><span class="keyword">from</span> email.header <span class="keyword">import</span> Header</span><br><span class="line"><span class="keyword">from</span> email.mime.text <span class="keyword">import</span> MIMEText</span><br><span class="line"><span class="keyword">from</span> email.utils <span class="keyword">import</span> parseaddr, formataddr</span><br><span class="line"><span class="keyword">import</span> smtplib</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_format_addr</span><span class="params">(s)</span>:</span></span><br><span class="line">		name, addr=parseaddr(s)</span><br><span class="line">		<span class="keyword">return</span> formataddr((\</span><br><span class="line">			Header(name,<span class="string">'utf-8'</span>).encode(),\</span><br><span class="line">			addr.encode(<span class="string">'utf-8'</span>) <span class="keyword">if</span> isinstance(addr,unicode) <span class="keyword">else</span> addr))</span><br><span class="line"></span><br><span class="line">from_addr=raw_input(<span class="string">'From: '</span>)</span><br><span class="line">password=raw_input(<span class="string">'Password: '</span>)</span><br><span class="line">to_addr=raw_input(<span class="string">'To: '</span>)</span><br><span class="line">smtp_server=raw_input(<span class="string">'SMTP Server: '</span>)</span><br><span class="line"></span><br><span class="line">msg=MIMEText(<span class="string">'hello, send by python...'</span>,<span class="string">'plain'</span>,<span class="string">'utf-8'</span>)</span><br><span class="line">msg[<span class="string">'From'</span>]=_format_addr(<span class="string">u'Python Lover &lt;%s&gt;'</span> % from_addr)</span><br><span class="line">msg[<span class="string">'To'</span>]=_format_addr(<span class="string">u'Admin &lt;%s&gt;'</span> % to_addr)</span><br><span class="line">msg[<span class="string">'Subject'</span>]=Header(<span class="string">u'Hello sent from SMTP....'</span>,<span class="string">'utf-8'</span>).encode()</span><br><span class="line"></span><br><span class="line">server=smtplib.SMTP(smtp_server,<span class="number">25</span>)</span><br><span class="line">server.set_debuglevel(<span class="number">1</span>)</span><br><span class="line">server.login(from_addr,password)</span><br><span class="line">server.sendmail(from_addr,[to_addr],msg.as_string())</span><br><span class="line">server.quit()</span><br></pre></td></tr></table></figure></p>
-<p><a href="http://www.liaoxuefeng.com/wiki/001374738125095c955c1e6d8bb493182103fac9270762a000/001386832745198026a685614e7462fb57dbf733cc9f3ad000" target="_blank" rel="noopener">点击参照原文</a></p>
-<hr>
-<p>这次我再次用了自己的qq邮箱做实验，发给outlook、gmail与qq邮箱，都成功了！原来当时邮件被回退是应为，缺少了一些信息，比如邮件主题、发件人、收件人。</p>
-<p><img src="http://img.blog.csdn.net/20151101205710892" alt="qq邮箱收到的邮件"></p>
-<p><img src="http://img.blog.csdn.net/20151101205801591" alt="outlook收到的邮件"></p>
-<p><img src="http://img.blog.csdn.net/20151101205839750" alt="Gmail收到的邮件"></p>
-
-          
+          ###Python的SMTP发送邮件学习记录(这是我的第一个用markdown写的博客)首先上代码，这是我在学习了用Python邮箱编程后模仿写的测试代码
+这是版本一的代码：12345678910111213from email.mime.text import MIMETextmsg=MIMETe
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/11/01/Python的SMTP发送邮件学习记录/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -786,25 +621,16 @@
       
         
           
-            <h4 id="在mac上安装Python下的模块管理工具pip"><a href="#在mac上安装Python下的模块管理工具pip" class="headerlink" title="在mac上安装Python下的模块管理工具pip"></a>在mac上安装Python下的模块管理工具pip</h4><p>在学习廖雪峰老师的python的模块时，需要使用到PIL这个第三方库。而为了得到这个，需要使用到pip这个管理工具，于是就试了用这个命令，结果显示未安装：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QXdeMacBook-Pro:/ qx$ pip</span><br><span class="line">-bash: pip: command not found</span><br></pre></td></tr></table></figure>
-<p>于是，就网上搜方法，看到了一个方法，就是使用这个命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://bootstrap.pypa.io/get-pip.py</span><br></pre></td></tr></table></figure>
-<p>试了后，显示结果如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QXdeMacBook-Pro:/ qx$ wget http://bootstrap.pypa.io/get-pip.py</span><br><span class="line">-bash: wget: command not found</span><br></pre></td></tr></table></figure>
-<p>原因是没有安装wget，于是去<a href="https://bootstrap.pypa.io/get-pip.py" target="_blank" rel="noopener">这里</a>将所有内容复制下来,新建<code>get-pip.py</code>文件，将内容拷进去就OK了，按照他的方法，终于成功了！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">QXdeMacBook-Pro:workspace qx$ sudo python get-pip.py</span><br><span class="line">The directory &apos;/Users/qx/Library/Caches/pip/http&apos; or its parent directory is not owned by the current user and the cache has been disabled. Please check the permissions and owner of that directory. If executing pip with sudo, you may want sudo&apos;s -H flag.</span><br><span class="line">The directory &apos;/Users/qx/Library/Caches/pip&apos; or its parent directory is not owned by the current user and caching wheels has been disabled. check the permissions and owner of that directory. If executing pip with sudo, you may want sudo&apos;s -H flag.</span><br><span class="line">Collecting pip</span><br><span class="line">/tmp/tmpUvRjM_/pip.zip/pip/_vendor/requests/packages/urllib3/util/ssl_.py:90: InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. For more information, see https://urllib3.readthedocs.org/en/latest/security.html#insecureplatformwarning.</span><br><span class="line">  Downloading pip-7.1.2-py2.py3-none-any.whl (1.1MB)</span><br><span class="line">    100% |████████████████████████████████| 1.1MB 324kB/s </span><br><span class="line">Collecting wheel</span><br><span class="line">  Downloading wheel-0.26.0-py2.py3-none-any.whl (63kB)</span><br><span class="line">    100% |████████████████████████████████| 65kB 2.5MB/s </span><br><span class="line">Installing collected packages: pip, wheel</span><br><span class="line">Successfully installed pip-7.1.2 wheel-0.26.0</span><br><span class="line">/tmp/tmpUvRjM_/pip.zip/pip/_vendor/requests/packages/urllib3/util/ssl_.py:90: InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. For more information, see https://urllib3.readthedocs.org/en/latest/security.html#insecureplatformwarning.</span><br></pre></td></tr></table></figure>
-<p>接下来就是安装PIL了<br>不管是用<code>pip install PIL</code>这个命令，还是<code>sudo pip install PIL</code>，还是p<code>ip install PIL --allow-external PIL --allow-unverified PIL</code>，都会安装失败。</p>
-<p>于是，看到有人建议安装Pillow，于是我试了<code>pip install Pillow</code>，还是报错了。。。</p>
-<p>再后来，试了试网上的<code>sudo pip install -U Pillow</code>，奇迹出现了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">QXdeMacBook-Pro:workspace qx$ sudo pip install -U Pillow</span><br><span class="line">Password:</span><br><span class="line">The directory &apos;/Users/qx/Library/Caches/pip/http&apos; or its parent directory is not owned by the current user and the cache has been disabled. Please check the permissions and owner of that directory. If executing pip with sudo, you may want sudo&apos;s -H flag.</span><br><span class="line">The directory &apos;/Users/qx/Library/Caches/pip&apos; or its parent directory is not owned by the current user and caching wheels has been disabled. check the permissions and owner of that directory. If executing pip with sudo, you may want sudo&apos;s -H flag.</span><br><span class="line">Collecting Pillow</span><br><span class="line">/Library/Python/2.7/site-packages/pip/_vendor/requests/packages/urllib3/util/ssl_.py:90: InsecurePlatformWarning: A true SSLContext object is not available. This prevents urllib3 from configuring SSL appropriately and may cause certain SSL connections to fail. For more information, see https://urllib3.readthedocs.org/en/latest/security.html#insecureplatformwarning.</span><br><span class="line">  InsecurePlatformWarning</span><br><span class="line">  Downloading Pillow-3.0.0-cp27-none-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl (2.9MB)</span><br><span class="line">    100% |████████████████████████████████| 2.9MB 124kB/s </span><br><span class="line">Installing collected packages: Pillow</span><br><span class="line">Successfully installed Pillow-3.0.0</span><br></pre></td></tr></table></figure>
-<p>终于安装好了Pillow！<br>可接下来想导入Image这个模块，还是报错：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import Image</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;</span><br><span class="line">ImportError: No module named Image</span><br></pre></td></tr></table></figure>
-<p>后来，终于找到了解决方案：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; from PIL import Image</span><br><span class="line">&gt;&gt;&gt; im=Image.open(&apos;qx.jpg&apos;)</span><br><span class="line">&gt;&gt;&gt; print im.format,im.size,im.mode</span><br><span class="line">JPEG (3000, 4200) RGB</span><br><span class="line">&gt;&gt;&gt; im.thumbnail((300,420))</span><br><span class="line">&gt;&gt;&gt; im.save(&apos;thumb_qx.jpg&apos;,&apos;JPEG&apos;)</span><br></pre></td></tr></table></figure>
-<p>原来需要：<code>from PIL import Image</code>这个命令才可以！<br>可能大家遇到的问题各不相同，但是只要有恒心去寻找问题的解决方案，一旦成功，就会很有自豪感！</p>
-
-          
+          在mac上安装Python下的模块管理工具pip在学习廖雪峰老师的python的模块时，需要使用到PIL这个第三方库。而为了得到这个，需要使用到pip这个管理工具，于是就试了用这个命令，结果显示未安装：
+12QXdeMacBook-Pro:/ qx$ pip-bash: pip: command n
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/10/26/在mac上安装Python下的模块管理工具pip/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -888,7 +714,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1031,6 +857,8 @@
   
 
 
+  
+
 
 
 
@@ -1069,6 +897,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -1154,5 +987,9 @@
 
   
 
+
+  
+  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
 </body>
 </html>
