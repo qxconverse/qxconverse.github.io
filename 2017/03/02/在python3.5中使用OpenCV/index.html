@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>在python3.5中使用OpenCV | qxconverse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在python3.5中使用OpenCV最近在OpenCV的官方文档上看到一个人脸识别的示例代码，想要实现。由于我之前下好的OpenCV3.1中并不自带相关的函数，即opencv2/contrib/contrib.hpp这个文件找不到。需要下载一个contrib的扩展包，然后再用cmake进行编译，最终才能使用。我按照某个博客上的内容（opencv+contrib）试了一个下午，最后也没有完成，反正">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在python3.5中使用OpenCV">
+<meta property="og:url" content="http://yoursite.com/2017/03/02/在python3.5中使用OpenCV/index.html">
+<meta property="og:site_name" content="qxconverse">
+<meta property="og:description" content="在python3.5中使用OpenCV最近在OpenCV的官方文档上看到一个人脸识别的示例代码，想要实现。由于我之前下好的OpenCV3.1中并不自带相关的函数，即opencv2/contrib/contrib.hpp这个文件找不到。需要下载一个contrib的扩展包，然后再用cmake进行编译，最终才能使用。我按照某个博客上的内容（opencv+contrib）试了一个下午，最后也没有完成，反正">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://img.blog.csdn.net/20170302212319371?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170302212330502?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170302212837925?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170302213446460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170302213702836?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2018-04-10T06:53:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在python3.5中使用OpenCV">
+<meta name="twitter:description" content="在python3.5中使用OpenCV最近在OpenCV的官方文档上看到一个人脸识别的示例代码，想要实现。由于我之前下好的OpenCV3.1中并不自带相关的函数，即opencv2/contrib/contrib.hpp这个文件找不到。需要下载一个contrib的扩展包，然后再用cmake进行编译，最终才能使用。我按照某个博客上的内容（opencv+contrib）试了一个下午，最后也没有完成，反正">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170302212319371?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+    <link rel="alternate" href="/atom.xml" title="qxconverse" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">qxconverse</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-在python3.5中使用OpenCV" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/02/在python3.5中使用OpenCV/" class="article-date">
+  <time datetime="2017-03-02T13:38:01.000Z" itemprop="datePublished">2017-03-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Python/">Python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在python3.5中使用OpenCV
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="在python3-5中使用OpenCV"><a href="#在python3-5中使用OpenCV" class="headerlink" title="在python3.5中使用OpenCV"></a>在python3.5中使用OpenCV</h3><p>最近在OpenCV的官方文档上看到一个人脸识别的示例代码，想要实现。由于我之前下好的OpenCV3.1中并不自带相关的函数，即opencv2/contrib/contrib.hpp这个文件找不到。需要下载一个contrib的扩展包，然后再用cmake进行编译，最终才能使用。我按照某个博客上的内容（<a href="http://www.cnblogs.com/jliangqiu2016/p/5597501.html" target="_blank" rel="noopener">opencv+contrib</a>）试了一个下午，最后也没有完成，反正遇到了各种问题，最后放弃了。<br>于是，就去官网上下了一个OpenCV2.4.13，重新配置，也是搞了好久，最后才能使代码顺利运行，虽然最后还是出了一个不知道如何解决的bug。<br>为什么非要在vs2015上用C++写关于OpenCV的东西呢？于是我想到python，正所谓人生苦短，我用Python。至于在python中使用OpenCV，目前我知道的途径有两个，一个是在opencv文件夹里面的python文件夹里面的某个文件（就是最底下的那个cv2.pyd文件）拷贝到python文件夹里面的某个地方（根据自己安装python的位置）。<br><img src="http://img.blog.csdn.net/20170302212319371?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20170302212330502?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>一向喜欢方便的我，看到这个就很烦，再说，OpenCV3.1里面貌似只支持2.7的python，于是就找到了第二个方法。即用pip去安装。<br>于是按照网上的博客，需要在这个网站<a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy" target="_blank" rel="noopener">Python Extension Packages</a>里面下相关的whl文件（顺便强势安利一下这个神奇的网站）：<br><img src="http://img.blog.csdn.net/20170302212837925?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>由于我的电脑是64位的，我之前安装过python3.5，所以我就选择了opencv_python-3.2.0+contrib-cp35-cp35m-win_amd64.whl这个文件，（因为OpenCV3.0以上的版本有些函数需要融入contrib这个扩展包才行，所以要下带有contrib的这个whl文件）。<br>下好后，我就开始在cmd中安装了，这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install opencv_python-3.2.0+contrib-cp35-cp35m-win_amd64.whl</span><br></pre></td></tr></table></figure>
+<p>但是安装不了，很是纳闷，后来又去下了个32位的opencv_python-3.2.0+contrib-cp35-cp35m-win32.whl，最后终于装好了。我猜测可能我当初下的python是32位的，并不和系统的位数相关吧~<br><img src="http://img.blog.csdn.net/20170302213446460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>需要注意的是，在安装这个cv2之前，要保证已经装好了numpy，由于我的python里面之前装过，所以这边就省略这个步骤了。下面就开始起飞了！在sublime里面编辑如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import cv2</span><br><span class="line">img = cv2.imread(&apos;Building.bmp&apos;,0)</span><br><span class="line">cv2.imshow(&apos;image&apos;,img)</span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<p>最后终于成功显示图像了<br><img src="http://img.blog.csdn.net/20170302213702836?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/02/在python3.5中使用OpenCV/" data-id="cjov8y3os000s4unigef7fmii" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/10/深度学习中Dropout浅析/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          深度学习中Dropout浅析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/30/Win10环境下VS2015+opencv3.1.0配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Win10环境下VS2015+opencv3.1.0配置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CV/">CV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式系统/">分布式系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/深度学习/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法与数据结构/">算法与数据结构</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机基础/">计算机基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/24/设计模式相关/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/14/leetcode(1-100)/">leetcode代码(1-100)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/14/leetcode(101-200)/">leetcode代码(101-200)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/14/leetcode(201-300)/">leetcode代码(201-300)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 qinxue<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

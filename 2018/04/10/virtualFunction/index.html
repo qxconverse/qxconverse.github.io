@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>关于C++中的析构函数 | qxconverse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关于析构函数遇到跟析构函数相关的题目，总是做错。现在总结如下，对于下面的一段代码： 12345678910111213141516171819202122232425262728293031323334class Base&amp;#123;public:    Base()&amp;#123;        cout &amp;lt;&amp;lt; &quot;Base cons&quot; &amp;lt;&amp;lt; endl;        m_in">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于C++中的析构函数">
+<meta property="og:url" content="http://yoursite.com/2018/04/10/virtualFunction/index.html">
+<meta property="og:site_name" content="qxconverse">
+<meta property="og:description" content="关于析构函数遇到跟析构函数相关的题目，总是做错。现在总结如下，对于下面的一段代码： 12345678910111213141516171819202122232425262728293031323334class Base&amp;#123;public:    Base()&amp;#123;        cout &amp;lt;&amp;lt; &quot;Base cons&quot; &amp;lt;&amp;lt; endl;        m_in">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-10T06:33:14.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于C++中的析构函数">
+<meta name="twitter:description" content="关于析构函数遇到跟析构函数相关的题目，总是做错。现在总结如下，对于下面的一段代码： 12345678910111213141516171819202122232425262728293031323334class Base&amp;#123;public:    Base()&amp;#123;        cout &amp;lt;&amp;lt; &quot;Base cons&quot; &amp;lt;&amp;lt; endl;        m_in">
+  
+    <link rel="alternate" href="/atom.xml" title="qxconverse" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">qxconverse</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-virtualFunction" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/10/virtualFunction/" class="article-date">
+  <time datetime="2018-04-10T06:32:12.000Z" itemprop="datePublished">2018-04-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C/">C++</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      关于C++中的析构函数
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="关于析构函数"><a href="#关于析构函数" class="headerlink" title="关于析构函数"></a>关于析构函数</h4><p>遇到跟析构函数相关的题目，总是做错。现在总结如下，对于下面的一段代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Base()&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Base cons"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        m_int = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     ~Base()&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Base des"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//~Base()&#123;&#125;</span></span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Base foo"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> m_int;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dervid</span> :</span><span class="keyword">public</span> Base&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Dervid()&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Dervid cons"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        str = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">32</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    ~Dervid()&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Dervid des"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">if</span> (str) <span class="keyword">delete</span>[] str;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Dervid foo"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">char</span> *str;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Base *a = <span class="keyword">new</span> Dervid(); <span class="comment">//如果foo不设置为virtual，那么调用的是Base的；如果加上virtual，那么就是调用Dervid的</span></span><br><span class="line">a-&gt;foo();</span><br><span class="line"><span class="keyword">delete</span> a; <span class="comment">//不加delete就不会执行析构函数</span></span><br></pre></td></tr></table></figure>
+<p>总结如下：</p>
+<p><strong>当父类指针由子类生成时。如果函数为虚函数，则调用子类的方法；否则调用父类的方法。</strong></p>
+<p><strong>如果父类析构函数为虚函数时，则在delete时，会先后调用子类和父类的析构函数；否则只调用父类的析构函数</strong></p>
+<p>而对于非指针或引用的情况。父类对象由子类生成。则不会有任何区别。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>virtual ~</th>
+<th>~</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>virtual foo</td>
+<td>Base cons</td>
+<td>Base cons</td>
+</tr>
+<tr>
+<td></td>
+<td>Dervid cons</td>
+<td>Dervid cons</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Dervid foo</strong></td>
+<td><strong>Dervid foo</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><em>Dervid des</em></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Base des</td>
+<td>Base des</td>
+</tr>
+<tr>
+<td>foo</td>
+<td>Base cons</td>
+<td>Base cons</td>
+</tr>
+<tr>
+<td></td>
+<td>Dervid cons</td>
+<td>Dervid cons</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Base foo</strong></td>
+<td><strong>Base foo</strong></td>
+</tr>
+<tr>
+<td></td>
+<td><em>Dervid des</em></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>Base des</td>
+<td>Base des</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//---------------------------------------</span></span><br><span class="line">Base b = Dervid();<span class="comment">//不管foo是不是virtual，都是Base的。不过在输出Base foo之前，还执行了Dervid的析构函数</span></span><br><span class="line">b.foo();<span class="comment">//而且不管Base是不是virtual析构，都要先执行Dervid的析构，然后执行Base的析构</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//对于上面的四种情况，都是如下的输出</span></span><br><span class="line">Base cons</span><br><span class="line">Dervid cons</span><br><span class="line">Dervid des <span class="comment">//都要先执行Dervid的析构</span></span><br><span class="line">Base des <span class="comment">//然后执行Base的析构</span></span><br><span class="line">Base foo <span class="comment">//都是Base的</span></span><br><span class="line">Base des</span><br><span class="line"></span><br><span class="line"><span class="comment">//---------------------------------------</span></span><br><span class="line">Dervid b = Dervid();</span><br><span class="line">b.foo();</span><br><span class="line"></span><br><span class="line">Base cons</span><br><span class="line">Dervid cons</span><br><span class="line">Dervid foo</span><br><span class="line">Dervid des</span><br><span class="line">Base des</span><br><span class="line"></span><br><span class="line"><span class="comment">//---------------------------------------</span></span><br><span class="line">Base b = Base();</span><br><span class="line">b.foo();</span><br><span class="line"></span><br><span class="line">Base cons</span><br><span class="line">Base foo</span><br><span class="line">Base des</span><br><span class="line"></span><br><span class="line"><span class="comment">//---------------------------------------</span></span><br><span class="line">Base *a = <span class="keyword">new</span> Base();<span class="comment">//不管foo是不是virtual，都是Base的  </span></span><br><span class="line">a-&gt;foo();</span><br><span class="line"><span class="keyword">delete</span> a;</span><br><span class="line"></span><br><span class="line"><span class="comment">//4种情况都是这样的</span></span><br><span class="line">Base cons</span><br><span class="line">Base foo</span><br><span class="line">Base des</span><br><span class="line"></span><br><span class="line"><span class="comment">//---------------------------------------</span></span><br><span class="line">Dervid *a = <span class="keyword">new</span> Dervid();<span class="comment">//不管foo是不是virtual，都是Dervid的</span></span><br><span class="line">a-&gt;foo();</span><br><span class="line"><span class="keyword">delete</span> a;</span><br><span class="line"></span><br><span class="line"><span class="comment">//4种情况都是这样的</span></span><br><span class="line">Base cons</span><br><span class="line">Dervid cons</span><br><span class="line">Dervid foo</span><br><span class="line">Dervid des</span><br><span class="line">Base des</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/10/virtualFunction/" data-id="cjov8y3ol000h4uniez9yuky0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/10/关于回溯法在排列和组合中的应用总结/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          关于回溯法在排列和组合中的应用总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/06/计算机视觉特征提取与图像处理总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">计算机视觉特征提取与图像处理总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CV/">CV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式系统/">分布式系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/深度学习/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法与数据结构/">算法与数据结构</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机基础/">计算机基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/24/设计模式相关/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/14/leetcode(1-100)/">leetcode代码(1-100)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/14/leetcode(101-200)/">leetcode代码(101-200)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/14/leetcode(201-300)/">leetcode代码(201-300)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 qinxue<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

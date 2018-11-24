@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>用Caffe进行NRIQA实验记录 | qxconverse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近看了一篇关于NR IQA的论文，其使用的是CNN，在电脑上装好了caffe环境后，打算根据那篇论文做一次实验，以下记录实验步骤。 首先需要准备好Live数据库和论文中关于图像预处理的matlab代码，下图就是训练数据的预处理代码：  而Live数据库文件结构如下：  首先我拿fastfading文件夹里面的图像做实验，这是一种失真类型（distortion type），里面有145张（295）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Caffe进行NRIQA实验记录">
+<meta property="og:url" content="http://yoursite.com/2018/04/06/用Caffe进行NRIQA实验记录/index.html">
+<meta property="og:site_name" content="qxconverse">
+<meta property="og:description" content="最近看了一篇关于NR IQA的论文，其使用的是CNN，在电脑上装好了caffe环境后，打算根据那篇论文做一次实验，以下记录实验步骤。 首先需要准备好Live数据库和论文中关于图像预处理的matlab代码，下图就是训练数据的预处理代码：  而Live数据库文件结构如下：  首先我拿fastfading文件夹里面的图像做实验，这是一种失真类型（distortion type），里面有145张（295）">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221042073?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221100055?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221134798?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221152543?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221217459?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221227089?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221302667?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221335260?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221359963?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221418460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221432826?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221452319?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221502854?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221520672?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221533970?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221542230?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221559875?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221615632?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20180408221632121?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2018-04-08T14:24:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用Caffe进行NRIQA实验记录">
+<meta name="twitter:description" content="最近看了一篇关于NR IQA的论文，其使用的是CNN，在电脑上装好了caffe环境后，打算根据那篇论文做一次实验，以下记录实验步骤。 首先需要准备好Live数据库和论文中关于图像预处理的matlab代码，下图就是训练数据的预处理代码：  而Live数据库文件结构如下：  首先我拿fastfading文件夹里面的图像做实验，这是一种失真类型（distortion type），里面有145张（295）">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20180408221042073?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+    <link rel="alternate" href="/atom.xml" title="qxconverse" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">qxconverse</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-用Caffe进行NRIQA实验记录" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/06/用Caffe进行NRIQA实验记录/" class="article-date">
+  <time datetime="2018-04-06T08:33:43.000Z" itemprop="datePublished">2018-04-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/深度学习/">深度学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      用Caffe进行NRIQA实验记录
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近看了一篇关于NR IQA的论文，其使用的是CNN，在电脑上装好了caffe环境后，打算根据那篇论文做一次实验，以下记录实验步骤。</p>
+<p>首先需要准备好Live数据库和论文中关于图像预处理的matlab代码，下图就是训练数据的预处理代码：</p>
+<p><img src="http://img.blog.csdn.net/20180408221042073?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>而Live数据库文件结构如下：</p>
+<p><img src="http://img.blog.csdn.net/20180408221100055?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>首先我拿<code>fastfading</code>文件夹里面的图像做实验，这是一种失真类型（distortion type），里面有145张（295）失真的图像，和29张原始图像，每张图像有5张不同强度的失真。看了下预处理的代码，首先执行<code>prep_training_data.m</code>代码。此代码的功能是将图像进行分块处理，每一张图像被分成很多3232大小的小块图像（patches），并进行局部正规化（Local Normalization）处理。最终生成<code>prepared_data</code>文件夹，里面共有174（包括参照图像）个子文件夹，每个子文件夹存放对应图像的小块图像。<br><img src="http://img.blog.csdn.net/20180408221134798?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20180408221152543?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20180408221217459?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20180408221227089?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<blockquote>
+<p>Twenty-nine high-resolution 24-bits/pixel RGB color images (typically 768 X 512) were distorted using five distortion types: JPEG2000, JPEG, white noise in the RGB components, Gaussian blur, and transmission errors in the JPEG2000 bit stream using a fast-fading Rayleigh channel model. A database was derived from the 29 images such that each image had test versions with each distortion type, and for each distortion type the perceptual quality roughly covered the entire quality range. Observers were asked to provide their perception of quality on a continuous linear scale that was divided into five equal regions marked with adjectives Bad”,Poor”, Fair”,Good” and <code></code>Excellent”. About 20-29 human observers rated each image. Each distortion type was evaluated by different subjects in different experiments using the same equipment and viewing conditions. In this way a total of 982 images, out of which 203 were the reference images, were evaluated by human subjects in seven experiments. The raw scores for each subject were converted to difference scores (between the test and the reference) and then Z-scores and then scaled and shifted to the full range (1 to 100). Finally, a Difference Mean Opinion Score (DMOS) value for each distorted image was computed.</p>
+<p>dmos=[dmos_jpeg2000(1:227) dmos_jpeg(1:233) white_noise(1:174) gaussian_blur(1:174) fast_fading(1:174)] where dmos_distortion(i) is the dmos value for image “distortion\imgi.bmp” where distortion can be one of the five described above. The values of dmos when corresponding orgs==1 are zero (they are reference images). Note that imperceptible loss of quality does not necessarily mean a dmos value of zero due to the nature of the score processing used.</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20180408221302667?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>接着将<code>dmos.mat</code>中的第809列到982列保存到<code>fastfading</code>文件夹里面，代码为：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">save(<span class="string">'E:\DeepLearning\Live\fastfading\dmos_local.mat'</span>, <span class="string">'dmos_local_fastfading'</span>)</span><br></pre></td></tr></table></figure>
+<p>接着开始运行<code>prep_scores_data.m</code>代码，生成训练验证集文件，这里设置得参数为100，所以得到了100个训练验证集数据。<br><img src="http://img.blog.csdn.net/20180408221335260?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20180408221359963?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>例如<code>scores_train_1.txt</code>这个文件大概就有50000行左右，因为生成的规则是：选取80%的图像（原始图像和失真图像）作为训练集，那么<code>fastfading</code>里面有174张图像，而每张图像大概被分成了380个左右的小块，那么就会有1740.8380，约52000行。而验证集为20%。<br><img src="http://img.blog.csdn.net/20180408221418460?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>到目前为止，图像与对应的评分就预处理完毕了，即已经获得了数据与标签，接下来就要用caffe来训练了。首先要生成lmdb格式的数据。<br><img src="http://img.blog.csdn.net/20180408221432826?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20180408221452319?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20180408221502854?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>生成训练集和测试集的lmdb格式的数据</p>
+<p>生成训练集和测试集的lmdb格式的数据</p>
+<p>生成好lmdb数据后就需要配置prototxt文件了。这里面需要修改很多，而且遇到了一些问题，比如在论文的实验代码中pooling用到了MIN，但是caffe源码里面并没有，后来才知道是他们自己添加到源码<code>pooling_layer.cpp</code>和对应的cuda文件里面的，其目录为：<code>(caffeRoot)\src\caffe\layers</code></p>
+<p><img src="http://img.blog.csdn.net/20180408221520672?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20180408221533970?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20180408221542230?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>源码文件中被添加的部分</p>
+<p>源码的<code>caffe.proto</code>里面的片段</p>
+<p>论文的代码<code>caffe.proto</code>里面的片段</p>
+<p>考虑到如果要用min池化类型的话，需要重新编译caffe源码，所以我暂且先用ave来代替这个。</p>
+<p>第二个很大的问题是最后的loss方法，论文中用到的是SVRloss，而我看到源码里面并没有，于是查看到他们确实也单独写了一个<code>svr_loss_layer.cpp</code>在相应的目录下，即<code>(caffeRoot)\src\caffe\layers</code>，到这里我确实有点懵逼了，没办法，我暂且先用其它的loss方法代替，于是找到了一个L2范数的loss，即EuclideanLoss，其实他们的这个所谓的svr_loss很像L1范数，就是求差值的绝对值。。。<br><img src="http://img.blog.csdn.net/20180408221559875?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>论文中自己写的代码</p>
+<p>最后终于训练起来了，等待中。。。<br><img src="http://img.blog.csdn.net/20180408221615632?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>明天早上来看吧。。。</p>
+<p>看到结果感觉很奇怪，loss值很高，而且一直居高不下，很没有优化的痕迹。于是去测试了一下，发现结果loss都很高。于是就想能不能把这个评分问题看成分类问题，原始图像的评分都在0-100，于是我做了处理，取十位数作为得分，比如55分，就改成5，38分就改成3，以此类推。接着就再次生成lmdb数据，然后用LeNet跑了一下，发现分类的精确度才47%左右。。。效果不是很好。所以还应该把它当做回归的问题来做。</p>
+<p>用LeNet模型来做分类，准确率只有47%左右<br><img src="http://img.blog.csdn.net/20180408221632121?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>然后，我就想会不会是代码的问题，因为论文中的代码改了很多，万一有些改动我没有发现，那也有可能导致结果不好，于是我就把它所有可能的改动给加了进去，比如加了svrloss那个cpp文件，最小池化的部分也加了，然后编译（对，又花了很久），然后训练，发现还是一样，loss值没有变，并没有得到权重优化。</p>
+<p>没办法，我只能去研究一下测试结果，返现loss值恰好是主观评分的平方除以2，考虑到每次只测试一张图像，再分析源码，用的是EuclideanLoss，所以可以推断出网络算出来的得分为0….顿时崩溃。用SVRLoss，再加上最小池化，得出的结果也是类似。思考了很久，猜测是输出的权重可能是都是0，于是把caffemodel文件里面的权值用matlab显示出来，发现也不是0，这时想了想，既然不是权重的问题，也不是模型的问题，也不是代码的问题，那就只有可能是输入的原始数据的问题了，于是就把小块图像用matlab显示出来，发现像素值在0-255之间，但是论文中不是说正规化处理过了吗，值不应该这样啊。</p>
+<p>于是在训练模型prototxt文件中的数据层里面加了一个除以256的操作，然后再训练，测试，居然可以了。虽然结果没有很好，但是至少上路了。而不是出现那种很恐怖的错误了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/06/用Caffe进行NRIQA实验记录/" data-id="cjov8y3ox00124uniasprako8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/06/计算机视觉特征提取与图像处理总结/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          计算机视觉特征提取与图像处理总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/28/面试常见问题/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">面试常见问题</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CV/">CV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式系统/">分布式系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/深度学习/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法与数据结构/">算法与数据结构</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机基础/">计算机基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/24/设计模式相关/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/14/leetcode(1-100)/">leetcode代码(1-100)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/14/leetcode(101-200)/">leetcode代码(101-200)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/14/leetcode(201-300)/">leetcode代码(201-300)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 qinxue<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

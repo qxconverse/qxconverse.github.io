@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>win10+VS2015+CPU-Only安装与配置Caffe | qxconverse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="win10+VS2015+CPU-Only安装与配置Caffe最近在配Caffe，由于我的电脑显卡不是NVIDIA的，所以用不了cuda，所以只能配置CPU-ONLY的，关于配置的教程网上已经很多了，但是具体每个人遇到的问题不一样，我这边就尽量做一个较完整的总结吧： 首先打开github上的项目Caffe for windows，这里面提供了较为完整的教程（当然里面并没有告诉你有哪些坑…），要想安">
+<meta property="og:type" content="article">
+<meta property="og:title" content="win10+VS2015+CPU-Only安装与配置Caffe">
+<meta property="og:url" content="http://yoursite.com/2017/07/30/win10+VS2015+CPU-Only安装与配置Caffe/index.html">
+<meta property="og:site_name" content="qxconverse">
+<meta property="og:description" content="win10+VS2015+CPU-Only安装与配置Caffe最近在配Caffe，由于我的电脑显卡不是NVIDIA的，所以用不了cuda，所以只能配置CPU-ONLY的，关于配置的教程网上已经很多了，但是具体每个人遇到的问题不一样，我这边就尽量做一个较完整的总结吧： 首先打开github上的项目Caffe for windows，这里面提供了较为完整的教程（当然里面并没有告诉你有哪些坑…），要想安">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://img.blog.csdn.net/20170730110610281?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170730111143754?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170730111439650?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170730112002696?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170730112211855?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170730112254220?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170730112728640?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170730113138368?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170730114355493?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170730143042977?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170730144310501?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170730145504087?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170730145642735?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170730143231598?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170730145849547?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170730150253144?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170730153043179?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2018-04-10T06:54:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="win10+VS2015+CPU-Only安装与配置Caffe">
+<meta name="twitter:description" content="win10+VS2015+CPU-Only安装与配置Caffe最近在配Caffe，由于我的电脑显卡不是NVIDIA的，所以用不了cuda，所以只能配置CPU-ONLY的，关于配置的教程网上已经很多了，但是具体每个人遇到的问题不一样，我这边就尽量做一个较完整的总结吧： 首先打开github上的项目Caffe for windows，这里面提供了较为完整的教程（当然里面并没有告诉你有哪些坑…），要想安">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170730110610281?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+    <link rel="alternate" href="/atom.xml" title="qxconverse" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">qxconverse</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-win10+VS2015+CPU-Only安装与配置Caffe" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/30/win10+VS2015+CPU-Only安装与配置Caffe/" class="article-date">
+  <time datetime="2017-07-30T03:53:50.000Z" itemprop="datePublished">2017-07-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/深度学习/">深度学习</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      win10+VS2015+CPU-Only安装与配置Caffe
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="win10-VS2015-CPU-Only安装与配置Caffe"><a href="#win10-VS2015-CPU-Only安装与配置Caffe" class="headerlink" title="win10+VS2015+CPU-Only安装与配置Caffe"></a>win10+VS2015+CPU-Only安装与配置Caffe</h3><p>最近在配Caffe，由于我的电脑显卡不是NVIDIA的，所以用不了cuda，所以只能配置CPU-ONLY的，关于配置的教程网上已经很多了，但是具体每个人遇到的问题不一样，我这边就尽量做一个较完整的总结吧：</p>
+<p>首先打开github上的项目<a href="https://github.com/BVLC/caffe/tree/windows/" target="_blank" rel="noopener">Caffe for windows</a>，这里面提供了较为完整的教程（当然里面并没有告诉你有哪些坑…），要想安装好，电脑里面要有这些东西，如下：<br><img src="http://img.blog.csdn.net/20170730110610281?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>我们一点一点分析：</p>
+<ol>
+<li>首先必须安装好VS2013或者VS2015，这是因为Caffe的底层代码主要是C++。</li>
+<li>必须安装好CMake，且版本要&gt;=3.4。关于cmake的下载，<a href="https://cmake.org/download/" target="_blank" rel="noopener">cmake下载</a>，最新的版本已经到了3.9了。已经下好的，可以打开cmd，试一试，如下：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake -version</span><br></pre></td></tr></table></figure>
+<p><img src="http://img.blog.csdn.net/20170730111143754?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>这里显示我的cmake版本为3.4，刚好满足最低需求。需要注意的是，<strong>这个cmake必须要已经添加在你的系统路径里面</strong>，因为在后面执行脚本的时候，要能直接使用，检验如下：</p>
+<p><img src="http://img.blog.csdn.net/20170730111439650?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>下面的就是可选项了，由于我的不支持gpu，所以3，4两点忽略掉。如果你想在python中使用Caffe，那么就需要安装好python，（推荐使用Anaconda，至于版本，只支持2.7和3.5的，可以在官网上下载对应的，<a href="https://www.continuum.io/downloads" target="_blank" rel="noopener">Anaconda下载</a>），<strong>需要注意的是python也需要在环境变量中</strong>，检查如下：</p>
+<p><img src="http://img.blog.csdn.net/20170730112002696?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20170730112211855?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>如果需要在matlab中使用Caffe，就要装好matlab。</p>
+<p>所以确保了这些，就可以继续往下走了：</p>
+<p><img src="http://img.blog.csdn.net/20170730112254220?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>按照下面的代码执行（根据自己的文件目录，不一定按照它的来）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C:\Projects&gt; git clone https://github.com/BVLC/caffe.git</span><br><span class="line">C:\Projects&gt; cd caffe</span><br><span class="line">C:\Projects\caffe&gt; git checkout windows</span><br><span class="line">C:\Projects\caffe&gt; scripts\build_win.cmd</span><br></pre></td></tr></table></figure>
+<p>一般执行到前面3步都没有问题。文件结构大概是这样的：</p>
+<p><img src="http://img.blog.csdn.net/20170730112728640?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>我的Caffe路径在<code>E:\DeepLearning\caffe</code>，<strong>这个时候里面还没有build文件夹，这是后面cmake生成的。</strong></p>
+<p>接着打开<code>scripts\build_win.cmd</code> 这个文件（比如用Notepad++），更改里面的一些配置（由于没有用到APPVEYOR，所以直接看else后面的）：</p>
+<p><img src="http://img.blog.csdn.net/20170730113138368?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>需要改动的主要如下：</p>
+<ol>
+<li>根据自己的VS版本，改变VS版本号</li>
+<li>把Ninja设为0，因为这里不需要用到它</li>
+<li>把CPU_ONLY设置为1，因为这里没有用到GPU</li>
+<li>根据自己的python版本，改变版本号</li>
+</ol>
+<p>改完后再执行<code>scripts\build_win.cmd</code>，这时我遇到了这样的问题：<code>Could NOT find PythonInterp (missing: PYTHON_EXECUTABLE) (minimum required is &quot;3.5&quot;)</code> ，我明明配置好了python路径，而且也可以直接在cmd里面运行。搜索了很久，还是没有解决，后来突然看到了这段代码：</p>
+<p><img src="http://img.blog.csdn.net/20170730114355493?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述">，</p>
+<p>虽然并没有运行，但是它手动写出了python的路径，所以我把它也放到了else那段里面了，如下：</p>
+<p><img src="http://img.blog.csdn.net/20170730143042977?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>然后就解决了这个问题，后来再执行<code>scripts\build_win.cmd</code>，发现还是报错，一个名为<code>libraries_v140_x64_py35_1.1.0.tar.bz2</code>的依赖包无法下载成功。于是打开<code>...\caffe\cmake\WindowsDownloadPrebuiltDependencies.cmake</code>文件，看看它的下载地址（后面需要加上具体的路径，比如我的是<code>(https://github.com/willyd/caffe-builder/releases/download/v1.1.0/libraries_v140_x64_py35_1.1.0.tar.bz2</code>）：</p>
+<p><img src="http://img.blog.csdn.net/20170730144310501?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p><a href="https://github.com/willyd/caffe-builder/releases/download/v1.1.0/libraries_v140_x64_py35_1.1.0.tar.bz2" target="_blank" rel="noopener">下载地址</a>就是这个。于是手动去这个地址上把包下载下来，当时也是下了很多次，一开始网速都很慢（10KB/s的样子。。）<br>把下载好的文件放在 <code>...(你的c盘当前用户目录)\.caffe\dependencies\download</code> 这个目录。然后打开<code>...\caffe\cmake\WindowsDownloadPrebuiltDependencies.cmake</code>这个文件，把下载部分注释掉（红色圈子里面）：</p>
+<p><img src="http://img.blog.csdn.net/20170730145504087?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>并且打开<code>...\caffe\scripts\download_prebuilt_dependencies.py</code>文件，注释掉下载部分：</p>
+<p><img src="http://img.blog.csdn.net/20170730145642735?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>接着再运行<code>build_win.cmd</code>，就可以顺利进行了，它会把刚刚下载的那个压缩包解压，然后慢慢编译。。。</p>
+<p><img src="http://img.blog.csdn.net/20170730143231598?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>大概用来7分多钟，就完成了：</p>
+<p><img src="http://img.blog.csdn.net/20170730145849547?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>看到这一幕的我开心地笑了。。。折腾了一天，终于配置得差不多了。于是又开始配置python接口：</p>
+<p><img src="http://img.blog.csdn.net/20170730150253144?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>这里的坑倒不是很多，因为安装了Anaconda，安装包特别方便（当然还是要看网速的心情了），但是有些是不用装的，比如cmake，ninja，graphviz，按照上面的图来就ok了。最后就可以在python的环境中导入caffe了！</p>
+<p><img src="http://img.blog.csdn.net/20170730153043179?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>关于mnist的测试下一次讲。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/30/win10+VS2015+CPU-Only安装与配置Caffe/" data-id="cjov8y3om000j4uniryy1q5zx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/03/02/计算机网络和操作系统复习/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          计算机网络和操作系统复习
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/10/深度学习中Dropout浅析/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">深度学习中Dropout浅析</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CV/">CV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式系统/">分布式系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/深度学习/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法与数据结构/">算法与数据结构</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机基础/">计算机基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/24/设计模式相关/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/14/leetcode(1-100)/">leetcode代码(1-100)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/14/leetcode(101-200)/">leetcode代码(101-200)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/14/leetcode(201-300)/">leetcode代码(201-300)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 qinxue<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

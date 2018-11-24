@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Win10环境下VS2015+opencv3.1.0配置 | qxconverse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Win10环境下VS2015+opencv3.1.0配置由于项目中要用到OpenCV，所以下了这个库，下面讲的是如何在vs2015中配置opencv3.1.0。  去opencv的官网下载opencv(（http://opencv.org/）对应自己电脑的操纵系统下载。                             双击，选择安装目录，自定义解压安装到指定目录下面。比如我的在D盘下。 打">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Win10环境下VS2015+opencv3.1.0配置">
+<meta property="og:url" content="http://yoursite.com/2016/03/30/Win10环境下VS2015+opencv3.1.0配置/index.html">
+<meta property="og:site_name" content="qxconverse">
+<meta property="og:description" content="Win10环境下VS2015+opencv3.1.0配置由于项目中要用到OpenCV，所以下了这个库，下面讲的是如何在vs2015中配置opencv3.1.0。  去opencv的官网下载opencv(（http://opencv.org/）对应自己电脑的操纵系统下载。                             双击，选择安装目录，自定义解压安装到指定目录下面。比如我的在D盘下。 打">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://img.blog.csdn.net/20160330174426956">
+<meta property="og:image" content="http://img.blog.csdn.net/20160330174527863">
+<meta property="og:image" content="http://img.blog.csdn.net/20160330184852405">
+<meta property="og:image" content="http://img.blog.csdn.net/20160330184753373">
+<meta property="og:image" content="http://img.blog.csdn.net/20160330183310225">
+<meta property="og:updated_time" content="2018-04-10T06:51:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Win10环境下VS2015+opencv3.1.0配置">
+<meta name="twitter:description" content="Win10环境下VS2015+opencv3.1.0配置由于项目中要用到OpenCV，所以下了这个库，下面讲的是如何在vs2015中配置opencv3.1.0。  去opencv的官网下载opencv(（http://opencv.org/）对应自己电脑的操纵系统下载。                             双击，选择安装目录，自定义解压安装到指定目录下面。比如我的在D盘下。 打">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20160330174426956">
+  
+    <link rel="alternate" href="/atom.xml" title="qxconverse" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">qxconverse</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Win10环境下VS2015+opencv3.1.0配置" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/30/Win10环境下VS2015+opencv3.1.0配置/" class="article-date">
+  <time datetime="2016-03-30T10:49:51.000Z" itemprop="datePublished">2016-03-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C/">C++</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Win10环境下VS2015+opencv3.1.0配置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Win10环境下VS2015-opencv3-1-0配置"><a href="#Win10环境下VS2015-opencv3-1-0配置" class="headerlink" title="Win10环境下VS2015+opencv3.1.0配置"></a>Win10环境下VS2015+opencv3.1.0配置</h3><p>由于项目中要用到OpenCV，所以下了这个库，下面讲的是如何在vs2015中配置opencv3.1.0。</p>
+<ol>
+<li>去opencv的官网下载opencv(（<a href="http://opencv.org/）对应自己电脑的操纵系统下载。" target="_blank" rel="noopener">http://opencv.org/）对应自己电脑的操纵系统下载。</a>                            </li>
+<li>双击，选择安装目录，自定义解压安装到指定目录下面。比如我的在D盘下。</li>
+<li>打开计算机属性，选个高级设置，环境变量，选择系统环境变量，点击“新建”<br><img src="http://img.blog.csdn.net/20160330174426956" alt="这里写图片描述"></li>
+<li>点击“path”，新建一个环境变量路径，如图<br><img src="http://img.blog.csdn.net/20160330174527863" alt="这里写图片描述"></li>
+<li>然后点击确定，至此opencv3.1.0的系统环境变量配置完毕，此时一般都要重启下电脑，该环境变量才会生效。</li>
+<li>打开visual studio 2015，新建一个项目，新建一个Win32控制台应用程序</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// OpenCVTest.cpp : 定义控制台应用程序的入口点。</span><br><span class="line">//</span><br><span class="line"></span><br><span class="line">#include &quot;stdafx.h&quot;</span><br><span class="line">#include &lt;iostream&gt;  </span><br><span class="line">#include &lt;opencv2/core/core.hpp&gt;   </span><br><span class="line">#include &lt;opencv2/highgui/highgui.hpp&gt;  </span><br><span class="line">using namespace cv;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	Mat img = imread(&quot;opencv_test.jpg&quot;);</span><br><span class="line">	if (img.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; &quot;error&quot;;</span><br><span class="line">		return -1;</span><br><span class="line">	&#125;</span><br><span class="line">	imshow(&quot;Lena&quot;, img);</span><br><span class="line">	waitKey();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>7.直接右键工程，选择属性，打开属性页。注意这里需要选择自己电脑的位数，因为我的是64位的，所以选择x64。<br><img src="http://img.blog.csdn.net/20160330184852405" alt="这里写图片描述"></p>
+<ol start="8">
+<li>配置包含目录和库目录。<br>在属性页，选择左侧配置属性–&gt;VC++目录，编辑包含目录，设置三条路径：<br>D:\OpenCV\opencv\build\include<br>D:\OpenCV\opencv\build\include\opencv<br>D:\OpenCV\opencv\build\include\opencv2</li>
+<li>编辑库目录，这里可自行选择编译平台，由于我是64位Win10系统，这里就选择OpenCV3.0的x64目录，配置路径如下：<br>D:\OpenCV\opencv\build\x64\vc14\lib<br>如图所示：<br><img src="http://img.blog.csdn.net/20160330184753373" alt="这里写图片描述"></li>
+<li>配置链接器输入依赖项。依次点击属性页的链接器–&gt;输入，编辑附加依赖项，添加如下项：<br>opencv_world310d.lib<br>这项就是目录\vc14\lib下面的不带d的文件名，注意添加时候不要忘了后缀.lib，否则编译或者运行时找不到依赖项。<br><img src="http://img.blog.csdn.net/20160330183310225" alt="这里写图片描述"></li>
+</ol>
+<hr>
+<p>2018-3-8更新<br>由于最近又开始折腾OpenCV，又遇到了一些问题。<br>首先我之前电脑上安装的是opencv3.1+vs2015，但是有个不好的地方是，对于3.1版本，里面没有contrib，而很多其它有用的功能在里面。<br>于是我就把它配置成之前下好的opencv2.4.13，奇怪的是，每次运行的时候就会报错，不是说缺失opencv_某某d.lib。<br>最后才知道，我之前的opencv2.4.13里面只有vc10，和vc12。<br>于是我下了一个opencv2.4.13.5_vc14.exe，然后配置了，就可以了。而且可以使用其中自带的contrib。不需要像3版本那样混编contrib。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/30/Win10环境下VS2015+opencv3.1.0配置/" data-id="cjov8y3o400044uni6zgat4up" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/02/在python3.5中使用OpenCV/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          在python3.5中使用OpenCV
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/01/Python的SMTP发送邮件学习记录/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Python的SMTP发送邮件学习记录</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/CV/">CV</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/分布式系统/">分布式系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构与算法/">数据结构与算法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/深度学习/">深度学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/算法与数据结构/">算法与数据结构</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/计算机基础/">计算机基础</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/面试/">面试</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/24/设计模式相关/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/14/leetcode(1-100)/">leetcode代码(1-100)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/14/leetcode(101-200)/">leetcode代码(101-200)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/14/leetcode(201-300)/">leetcode代码(201-300)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 qinxue<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
