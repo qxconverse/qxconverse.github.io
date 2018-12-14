@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="关于析构函数遇到跟析构函数相关的题目，总是做错。现在总结如下，对于下面的一段代码： 12345678910111213141516171819202122232425262728293031323334class Base&amp;#123;public:    Base()&amp;#123;        cout &amp;lt;&amp;lt; &quot;Base cons&quot; &amp;lt;&amp;lt; endl;        m_in">
+<meta name="description" content="关于析构函数遇到跟析构函数相关的题目，总是做错。">
 <meta name="keywords" content="编程语言,C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于C++中的析构函数">
 <meta property="og:url" content="http://yoursite.com/2018/04/10/virtualFunction/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="关于析构函数遇到跟析构函数相关的题目，总是做错。现在总结如下，对于下面的一段代码： 12345678910111213141516171819202122232425262728293031323334class Base&amp;#123;public:    Base()&amp;#123;        cout &amp;lt;&amp;lt; &quot;Base cons&quot; &amp;lt;&amp;lt; endl;        m_in">
+<meta property="og:description" content="关于析构函数遇到跟析构函数相关的题目，总是做错。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-25T06:08:55.775Z">
+<meta property="og:updated_time" content="2018-12-14T11:34:48.058Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于C++中的析构函数">
-<meta name="twitter:description" content="关于析构函数遇到跟析构函数相关的题目，总是做错。现在总结如下，对于下面的一段代码： 12345678910111213141516171819202122232425262728293031323334class Base&amp;#123;public:    Base()&amp;#123;        cout &amp;lt;&amp;lt; &quot;Base cons&quot; &amp;lt;&amp;lt; endl;        m_in">
+<meta name="twitter:description" content="关于析构函数遇到跟析构函数相关的题目，总是做错。">
 
 
 
@@ -352,7 +352,9 @@
       
 
       
-        <h4 id="关于析构函数"><a href="#关于析构函数" class="headerlink" title="关于析构函数"></a>关于析构函数</h4><p>遇到跟析构函数相关的题目，总是做错。现在总结如下，对于下面的一段代码：</p>
+        <h4 id="关于析构函数"><a href="#关于析构函数" class="headerlink" title="关于析构函数"></a>关于析构函数</h4><p>遇到跟析构函数相关的题目，总是做错。</p>
+<a id="more"></a>
+<p>现在总结如下，对于下面的一段代码：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span>&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Base()&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Base cons"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        m_int = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     ~Base()&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Base des"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//~Base()&#123;&#125;</span></span><br><span class="line">     <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Base foo"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">int</span> m_int;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dervid</span> :</span><span class="keyword">public</span> Base&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Dervid()&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Dervid cons"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        str = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">32</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    ~Dervid()&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Dervid des"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">if</span> (str) <span class="keyword">delete</span>[] str;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">foo</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"Dervid foo"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">char</span> *str;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Base *a = <span class="keyword">new</span> Dervid(); <span class="comment">//如果foo不设置为virtual，那么调用的是Base的；如果加上virtual，那么就是调用Dervid的</span></span><br><span class="line">a-&gt;foo();</span><br><span class="line"><span class="keyword">delete</span> a; <span class="comment">//不加delete就不会执行析构函数</span></span><br></pre></td></tr></table></figure>
 <p>总结如下：</p>
