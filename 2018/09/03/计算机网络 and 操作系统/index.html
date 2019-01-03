@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="操作系统,计算机网络,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="计算机网络ISO7层网络模型 应用层：处理网络应用 表示层：数据表示 会话层：互联主机通信 传输层：端到端链接（TCP/UDP协议） 网络层：寻址和最短路径（IP协议） 数据链路层：接入介质 物理层：二进制传输  5层无表示层和会话层 TCP三次握手SYN=1表示请求连接  建立链接时C端发送SYN包到S端（SYN=1，seq=x），C端进入SYS_SENT状态 S端在收到C端的SYN包以后必须确">
+<meta name="keywords" content="操作系统,计算机网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络、操作系统知识点">
+<meta property="og:url" content="http://yoursite.com/2018/09/03/计算机网络 and 操作系统/index.html">
+<meta property="og:site_name" content="Xxqin&#39;s Blog">
+<meta property="og:description" content="计算机网络ISO7层网络模型 应用层：处理网络应用 表示层：数据表示 会话层：互联主机通信 传输层：端到端链接（TCP/UDP协议） 网络层：寻址和最短路径（IP协议） 数据链路层：接入介质 物理层：二进制传输  5层无表示层和会话层 TCP三次握手SYN=1表示请求连接  建立链接时C端发送SYN包到S端（SYN=1，seq=x），C端进入SYS_SENT状态 S端在收到C端的SYN包以后必须确">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-03T13:44:13.685Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机网络、操作系统知识点">
+<meta name="twitter:description" content="计算机网络ISO7层网络模型 应用层：处理网络应用 表示层：数据表示 会话层：互联主机通信 传输层：端到端链接（TCP/UDP协议） 网络层：寻址和最短路径（IP协议） 数据链路层：接入介质 物理层：二进制传输  5层无表示层和会话层 TCP三次握手SYN=1表示请求连接  建立链接时C端发送SYN包到S端（SYN=1，seq=x），C端进入SYS_SENT状态 S端在收到C端的SYN包以后必须确">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/03/计算机网络 and 操作系统/">
+
+
+
+
+
+  <title>计算机网络、操作系统知识点 | Xxqin's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xxqin's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/计算机网络 and 操作系统/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">计算机网络、操作系统知识点</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-03T21:30:11+08:00">
+                2018-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/coding/" itemprop="url" rel="index">
+                    <span itemprop="name">coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3><h4 id="ISO7层网络模型"><a href="#ISO7层网络模型" class="headerlink" title="ISO7层网络模型"></a>ISO7层网络模型</h4><ol>
+<li>应用层：处理网络应用</li>
+<li>表示层：数据表示</li>
+<li>会话层：互联主机通信</li>
+<li>传输层：端到端链接（TCP/UDP协议）</li>
+<li>网络层：寻址和最短路径（IP协议）</li>
+<li>数据链路层：接入介质</li>
+<li>物理层：二进制传输</li>
+</ol>
+<p>5层无表示层和会话层</p>
+<h4 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h4><h5 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h5><p>SYN=1表示请求连接</p>
+<ol>
+<li>建立链接时C端发送SYN包到S端（SYN=1，seq=x），C端进入SYS_SENT状态</li>
+<li>S端在收到C端的SYN包以后必须确认C端的SYN包，所以发送（SYN=1，ACK=1，seq=y，ack=x+1）到C端，然后S端进入SYS_RCVD状态</li>
+<li>C端再收到S端发送的SYN和ACK包以后，向服务器发送ACK包（ACK=1，ack=y+1），然后C端进入ESTABLISHED状态，S端在收到C端的确认包后也进入ESTABLISHED状态</li>
+</ol>
+<h5 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h5><ol>
+<li>C端向S端发送释放链接请求，发送FIN=1，seq=x，发送完后进入FIN_WAIT_1状态</li>
+<li>S端在收到C端的请求后进入CLOSE_WAIT状态，然后发送给C端一个确认包（ACK=1，seq=x+1）。C端这时候不能再发送数据了，只能发送确认报文，C端在接受到S端发送的确认包以后进入FIN_WAIT_2状态</li>
+<li>当S端所有的数据都传完的时候，向C端发送释放链接报文（FIN=1，seq=y），发完之后自己进入LAST_WAIT状态</li>
+<li>C端收到S端的请求后，发送一个确认报文，自己进入TIME_WAIT状态，而不是立马关闭，因为C端发送的确认报文可能会丢失，丢失的话S端就会重传一个FIN，也就是释放连接报文，这个时候C端必须还没关闭。当S端接受到确认报文后，就进入CLOSE状态。但是由于上面所说原因，C端必须等待一定的时间才能够进入CLOSE状态。而这个等待的时间长度是2*msl（由于可能出现不可靠的连接，当C端发送确认后，可能S端没有收到，如果它没有收到，它就会再次发FIN，这时C端必须再次发送确认，因此C端不能急着关闭；而要等一段时间，如果这个时间S端没有消息过来，说明S端收到了确认，这时C端才能关闭）</li>
+</ol>
+<p>2倍报文最大生存时间，任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。等待2MSL时间主要目的是怕最后一个ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包。msl 30秒到2分钟</p>
+<p>为什么一个是三次，一个是四次；关键在于关闭连接时，当S端收到FIN后，它只能暂时确认，而不能同时FIN，因为它也许还要继续发数据给C端，因此造成了ACK和FIN不能同时发送过去。这样就多了一个流程。</p>
+<h5 id="握手攻击"><a href="#握手攻击" class="headerlink" title="握手攻击"></a>握手攻击</h5><p>DoS-拒绝服务攻击<br>TCP连接时，攻击者故意不完成三次握手，导致资源浪费</p>
+<p>解决方法：限制同时打开的SYN半连接数；缩短SYN半连接的TIME_OUT时间；启用防火墙</p>
+<h5 id="为什么是三次握手不是两次"><a href="#为什么是三次握手不是两次" class="headerlink" title="为什么是三次握手不是两次"></a>为什么是三次握手不是两次</h5><p>两次握手可能会发生死锁的情况。C端发送给S端一个请求，S端在收到后并发送确认（S端认为连接成功）。如果S端发送的确认丢失，C端会认为连接还未成功而忽略S端发送的任何数据。而S端会在发送数据超时后重发同样的分组，进而形成死锁。</p>
+<h4 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h4><p>用户数据报协议，无连接，面向报文，无阻塞控制，尽最大努力交付。</p>
+<h4 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h4><ol>
+<li>TCP是面向连接的，可靠的数据传输，而UDP是非面向连接的，不可靠的数据传输</li>
+<li>TCP的传输单位是TCP报文段，UDP则是用户数据报</li>
+<li>TCP注重安全，UDP传输更快</li>
+</ol>
+<h4 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h4><h5 id="慢开始"><a href="#慢开始" class="headerlink" title="慢开始"></a>慢开始</h5><p>发送端维持一个拥塞窗口变量（cwnd=1），由小到大逐渐增大（成倍增加）拥塞窗口的值</p>
+<h5 id="拥塞避免"><a href="#拥塞避免" class="headerlink" title="拥塞避免"></a>拥塞避免</h5><p>cwnd+1，若网络超时，ssthresh值减半，cwnd=1并使用慢开始算法</p>
+<p>##### </p>
+<h4 id="滑动窗口协议"><a href="#滑动窗口协议" class="headerlink" title="滑动窗口协议"></a>滑动窗口协议</h4><ol>
+<li>发送端和接收端分别维护一个缓冲区</li>
+<li>只有发送端收到了接收端的确认之后才会移动滑动窗口</li>
+<li>接收端会确认连续的数据分组，对于乱序的分组先接收以避免重复传递</li>
+</ol>
+<h4 id="关于滑动窗口与拥塞控制"><a href="#关于滑动窗口与拥塞控制" class="headerlink" title="关于滑动窗口与拥塞控制"></a>关于滑动窗口与拥塞控制</h4><ol>
+<li>发送方和接受方都持有自己的窗口值</li>
+<li>慢开始：发送发从初始的cwnd=1，慢慢指数级增长</li>
+<li>当达到了ssthresh的值后，开始拥塞算法，即cwnd加法增长，每次+1</li>
+<li>当网络中出现拥塞时，设置ssthresh的值为发送拥塞窗口值的一半，并设置cwnd=1，再次慢开始</li>
+<li>快重传，接收方每次收到失序的报文后立即发出重复确认，发送方连续3次接收到重复确认时，立即重传。配合6使用</li>
+<li>快恢复，在4中，设置cwnd=ssthresh，并使用拥塞算法（加1）增长</li>
+</ol>
+<p>相关博客：<a href="https://blog.csdn.net/yechaodechuntian/article/details/25429143" target="_blank" rel="noopener">https://blog.csdn.net/yechaodechuntian/article/details/25429143</a></p>
+<h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><h4 id="页面调度算法"><a href="#页面调度算法" class="headerlink" title="页面调度算法"></a>页面调度算法</h4><h5 id="最佳置换算法"><a href="#最佳置换算法" class="headerlink" title="最佳置换算法"></a>最佳置换算法</h5><p>选择被淘汰的页面将是最长时间不会被访问的（无法预测）</p>
+<h5 id="先进先出算法"><a href="#先进先出算法" class="headerlink" title="先进先出算法"></a>先进先出算法</h5><p>优先淘汰最早进入内存的页面</p>
+<h5 id="最近最久未使用"><a href="#最近最久未使用" class="headerlink" title="最近最久未使用"></a>最近最久未使用</h5><p>选择最近最长时间未访问过的页面淘汰</p>
+<h5 id="CLOCK-NRU-最近未使用算法"><a href="#CLOCK-NRU-最近未使用算法" class="headerlink" title="CLOCK/NRU 最近未使用算法"></a>CLOCK/NRU 最近未使用算法</h5><p>某页首次进入内存，u=1，若再次被访问u=1。当需要替换时，扫描缓冲区，查找u=0的页面置换，若遇到u=1则将其置0。</p>
+<h4 id="进程间通信方式"><a href="#进程间通信方式" class="headerlink" title="进程间通信方式"></a>进程间通信方式</h4><h5 id="共享存储"><a href="#共享存储" class="headerlink" title="共享存储"></a>共享存储</h5><p>通信进程间存在一块可以直接访问的共享空间（对共享空间读写需要互斥工具：P（通过）操作，V（释放）操作）</p>
+<h5 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h5><p>进程间数据交换以格式化的消息为单位（直接通信 or 间接通信：发送消息到中间实体）</p>
+<h5 id="管道通信"><a href="#管道通信" class="headerlink" title="管道通信"></a>管道通信</h5><p>管道指用于连接一个读进程和一个写进程以实现它们之间的一个共享文件（互斥、同步、确定对方存在）</p>
+<h4 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h4><p>指两个或两个以上进程在执行过程中因争夺资源而造成的一种互相等待现象，若无外力作用，它们都将无法继续执行。</p>
+<h5 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h5><p>系统资源不足、进程运行的顺序不合适、资源分配不当</p>
+<h5 id="产生死锁的必要条件"><a href="#产生死锁的必要条件" class="headerlink" title="产生死锁的必要条件"></a>产生死锁的必要条件</h5><ol>
+<li>互斥：进程在某段时间独占资源</li>
+<li>请求与保持：某进程因请求资源而阻塞时，对已获得的资源保持不放</li>
+<li>不剥夺：未使用完不剥夺资源</li>
+<li>循环等待：循环等待资源</li>
+</ol>
+<h5 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h5><p>打破上述必要条件中的一个或几个</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+            <a href="/tags/计算机网络/" rel="tag"># 计算机网络</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/03/Redis/" rel="next" title="Redis">
+                <i class="fa fa-chevron-left"></i> Redis
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/08/WebApi的安全性/" rel="prev" title="WebApi的安全性">
+                WebApi的安全性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">qin xue</p>
+              <p class="site-description motion-element" itemprop="description">现在就要幸福</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">41</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/qxconverse" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xqconver@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qxconverse/" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#计算机网络"><span class="nav-number">1.</span> <span class="nav-text">计算机网络</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ISO7层网络模型"><span class="nav-number">1.1.</span> <span class="nav-text">ISO7层网络模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP"><span class="nav-number">1.2.</span> <span class="nav-text">TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#三次握手"><span class="nav-number">1.2.1.</span> <span class="nav-text">三次握手</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#四次挥手"><span class="nav-number">1.2.2.</span> <span class="nav-text">四次挥手</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#握手攻击"><span class="nav-number">1.2.3.</span> <span class="nav-text">握手攻击</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#为什么是三次握手不是两次"><span class="nav-number">1.2.4.</span> <span class="nav-text">为什么是三次握手不是两次</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UDP"><span class="nav-number">1.3.</span> <span class="nav-text">UDP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP与UDP的区别"><span class="nav-number">1.4.</span> <span class="nav-text">TCP与UDP的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP拥塞控制"><span class="nav-number">1.5.</span> <span class="nav-text">TCP拥塞控制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#慢开始"><span class="nav-number">1.5.1.</span> <span class="nav-text">慢开始</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#拥塞避免"><span class="nav-number">1.5.2.</span> <span class="nav-text">拥塞避免</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#滑动窗口协议"><span class="nav-number">1.6.</span> <span class="nav-text">滑动窗口协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于滑动窗口与拥塞控制"><span class="nav-number">1.7.</span> <span class="nav-text">关于滑动窗口与拥塞控制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作系统"><span class="nav-number">2.</span> <span class="nav-text">操作系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#页面调度算法"><span class="nav-number">2.1.</span> <span class="nav-text">页面调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#最佳置换算法"><span class="nav-number">2.1.1.</span> <span class="nav-text">最佳置换算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#先进先出算法"><span class="nav-number">2.1.2.</span> <span class="nav-text">先进先出算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#最近最久未使用"><span class="nav-number">2.1.3.</span> <span class="nav-text">最近最久未使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CLOCK-NRU-最近未使用算法"><span class="nav-number">2.1.4.</span> <span class="nav-text">CLOCK/NRU 最近未使用算法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程间通信方式"><span class="nav-number">2.2.</span> <span class="nav-text">进程间通信方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#共享存储"><span class="nav-number">2.2.1.</span> <span class="nav-text">共享存储</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#消息传递"><span class="nav-number">2.2.2.</span> <span class="nav-text">消息传递</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#管道通信"><span class="nav-number">2.2.3.</span> <span class="nav-text">管道通信</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#死锁"><span class="nav-number">2.3.</span> <span class="nav-text">死锁</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#产生原因"><span class="nav-number">2.3.1.</span> <span class="nav-text">产生原因</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#产生死锁的必要条件"><span class="nav-number">2.3.2.</span> <span class="nav-text">产生死锁的必要条件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#死锁预防"><span class="nav-number">2.3.3.</span> <span class="nav-text">死锁预防</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qin xue</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

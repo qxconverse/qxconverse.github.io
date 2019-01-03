@@ -262,7 +262,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/07/情书、天使爱美丽、心灵捕手影评/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/计算机网络 and 操作系统/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -281,7 +281,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/07/情书、天使爱美丽、心灵捕手影评/" itemprop="url">情书、天使爱美丽、心灵捕手影评</a></h1>
+                <a class="post-title-link" href="/2018/09/03/计算机网络 and 操作系统/" itemprop="url">计算机网络、操作系统知识点</a></h1>
         
 
         <div class="post-meta">
@@ -293,8 +293,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-07T13:04:50+08:00">
-                2018-01-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-03T21:30:11+08:00">
+                2018-09-03
               </time>
             
 
@@ -316,8 +316,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/movies/" itemprop="url" rel="index">
-                    <span itemprop="name">movies</span>
+                  <a href="/categories/coding/" itemprop="url" rel="index">
+                    <span itemprop="name">coding</span>
                   </a>
                 </span>
 
@@ -354,11 +354,999 @@
 
       
         
-          <h4 id="情书"><a href="#情书" class="headerlink" title="情书"></a>情书</h4><p>这部电影让我想到了 初恋，同样是日本的电影。</p>
-<p>女主真是美。很感人，遇到同名也是很有缘份的一件事。</p>
+          
+            <h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3><h4 id="ISO7层网络模型"><a href="#ISO7层网络模型" class="headerlink" title="ISO7层网络模型"></a>ISO7层网络模型</h4><ol>
+<li>应用层：处理网络应用</li>
+<li>表示层：数据表示</li>
+<li>会话层：互联主机通信</li>
+<li>传输层：端到端链接（TCP/UDP协议）</li>
+<li>网络层：寻址和最短路径（IP协议）</li>
+<li>数据链路层：接入介质</li>
+<li>物理层：二进制传输</li>
+</ol>
+<p>5层无表示层和会话层</p>
+<h4 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h4><h5 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h5><p>SYN=1表示请求连接</p>
+<ol>
+<li>建立链接时C端发送SYN包到S端（SYN=1，seq=x），C端进入SYS_SENT状态</li>
+<li>S端在收到C端的SYN包以后必须确认C端的SYN包，所以发送（SYN=1，ACK=1，seq=y，ack=x+1）到C端，然后S端进入SYS_RCVD状态</li>
+<li>C端再收到S端发送的SYN和ACK包以后，向服务器发送ACK包（ACK=1，ack=y+1），然后C端进入ESTABLISHED状态，S端在收到C端的确认包后也进入ESTABLISHED状态</li>
+</ol>
+<h5 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h5><ol>
+<li>C端向S端发送释放链接请求，发送FIN=1，seq=x，发送完后进入FIN_WAIT_1状态</li>
+<li>S端在收到C端的请求后进入CLOSE_WAIT状态，然后发送给C端一个确认包（ACK=1，seq=x+1）。C端这时候不能再发送数据了，只能发送确认报文，C端在接受到S端发送的确认包以后进入FIN_WAIT_2状态</li>
+<li>当S端所有的数据都传完的时候，向C端发送释放链接报文（FIN=1，seq=y），发完之后自己进入LAST_WAIT状态</li>
+<li>C端收到S端的请求后，发送一个确认报文，自己进入TIME_WAIT状态，而不是立马关闭，因为C端发送的确认报文可能会丢失，丢失的话S端就会重传一个FIN，也就是释放连接报文，这个时候C端必须还没关闭。当S端接受到确认报文后，就进入CLOSE状态。但是由于上面所说原因，C端必须等待一定的时间才能够进入CLOSE状态。而这个等待的时间长度是2*msl（由于可能出现不可靠的连接，当C端发送确认后，可能S端没有收到，如果它没有收到，它就会再次发FIN，这时C端必须再次发送确认，因此C端不能急着关闭；而要等一段时间，如果这个时间S端没有消息过来，说明S端收到了确认，这时C端才能关闭）</li>
+</ol>
+<p>2倍报文最大生存时间，任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。等待2MSL时间主要目的是怕最后一个ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包。msl 30秒到2分钟</p>
+<p>为什么一个是三次，一个是四次；关键在于关闭连接时，当S端收到FIN后，它只能暂时确认，而不能同时FIN，因为它也许还要继续发数据给C端，因此造成了ACK和FIN不能同时发送过去。这样就多了一个流程。</p>
+<h5 id="握手攻击"><a href="#握手攻击" class="headerlink" title="握手攻击"></a>握手攻击</h5><p>DoS-拒绝服务攻击<br>TCP连接时，攻击者故意不完成三次握手，导致资源浪费</p>
+<p>解决方法：限制同时打开的SYN半连接数；缩短SYN半连接的TIME_OUT时间；启用防火墙</p>
+<h5 id="为什么是三次握手不是两次"><a href="#为什么是三次握手不是两次" class="headerlink" title="为什么是三次握手不是两次"></a>为什么是三次握手不是两次</h5><p>两次握手可能会发生死锁的情况。C端发送给S端一个请求，S端在收到后并发送确认（S端认为连接成功）。如果S端发送的确认丢失，C端会认为连接还未成功而忽略S端发送的任何数据。而S端会在发送数据超时后重发同样的分组，进而形成死锁。</p>
+<h4 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h4><p>用户数据报协议，无连接，面向报文，无阻塞控制，尽最大努力交付。</p>
+<h4 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h4><ol>
+<li>TCP是面向连接的，可靠的数据传输，而UDP是非面向连接的，不可靠的数据传输</li>
+<li>TCP的传输单位是TCP报文段，UDP则是用户数据报</li>
+<li>TCP注重安全，UDP传输更快</li>
+</ol>
+<h4 id="TCP拥塞控制"><a href="#TCP拥塞控制" class="headerlink" title="TCP拥塞控制"></a>TCP拥塞控制</h4><h5 id="慢开始"><a href="#慢开始" class="headerlink" title="慢开始"></a>慢开始</h5><p>发送端维持一个拥塞窗口变量（cwnd=1），由小到大逐渐增大（成倍增加）拥塞窗口的值</p>
+<h5 id="拥塞避免"><a href="#拥塞避免" class="headerlink" title="拥塞避免"></a>拥塞避免</h5><p>cwnd+1，若网络超时，ssthresh值减半，cwnd=1并使用慢开始算法</p>
+<p>##### </p>
+<h4 id="滑动窗口协议"><a href="#滑动窗口协议" class="headerlink" title="滑动窗口协议"></a>滑动窗口协议</h4><ol>
+<li>发送端和接收端分别维护一个缓冲区</li>
+<li>只有发送端收到了接收端的确认之后才会移动滑动窗口</li>
+<li>接收端会确认连续的数据分组，对于乱序的分组先接收以避免重复传递</li>
+</ol>
+<h4 id="关于滑动窗口与拥塞控制"><a href="#关于滑动窗口与拥塞控制" class="headerlink" title="关于滑动窗口与拥塞控制"></a>关于滑动窗口与拥塞控制</h4><ol>
+<li>发送方和接受方都持有自己的窗口值</li>
+<li>慢开始：发送发从初始的cwnd=1，慢慢指数级增长</li>
+<li>当达到了ssthresh的值后，开始拥塞算法，即cwnd加法增长，每次+1</li>
+<li>当网络中出现拥塞时，设置ssthresh的值为发送拥塞窗口值的一半，并设置cwnd=1，再次慢开始</li>
+<li>快重传，接收方每次收到失序的报文后立即发出重复确认，发送方连续3次接收到重复确认时，立即重传。配合6使用</li>
+<li>快恢复，在4中，设置cwnd=ssthresh，并使用拥塞算法（加1）增长</li>
+</ol>
+<p>相关博客：<a href="https://blog.csdn.net/yechaodechuntian/article/details/25429143" target="_blank" rel="noopener">https://blog.csdn.net/yechaodechuntian/article/details/25429143</a></p>
+<h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><h4 id="页面调度算法"><a href="#页面调度算法" class="headerlink" title="页面调度算法"></a>页面调度算法</h4><h5 id="最佳置换算法"><a href="#最佳置换算法" class="headerlink" title="最佳置换算法"></a>最佳置换算法</h5><p>选择被淘汰的页面将是最长时间不会被访问的（无法预测）</p>
+<h5 id="先进先出算法"><a href="#先进先出算法" class="headerlink" title="先进先出算法"></a>先进先出算法</h5><p>优先淘汰最早进入内存的页面</p>
+<h5 id="最近最久未使用"><a href="#最近最久未使用" class="headerlink" title="最近最久未使用"></a>最近最久未使用</h5><p>选择最近最长时间未访问过的页面淘汰</p>
+<h5 id="CLOCK-NRU-最近未使用算法"><a href="#CLOCK-NRU-最近未使用算法" class="headerlink" title="CLOCK/NRU 最近未使用算法"></a>CLOCK/NRU 最近未使用算法</h5><p>某页首次进入内存，u=1，若再次被访问u=1。当需要替换时，扫描缓冲区，查找u=0的页面置换，若遇到u=1则将其置0。</p>
+<h4 id="进程间通信方式"><a href="#进程间通信方式" class="headerlink" title="进程间通信方式"></a>进程间通信方式</h4><h5 id="共享存储"><a href="#共享存储" class="headerlink" title="共享存储"></a>共享存储</h5><p>通信进程间存在一块可以直接访问的共享空间（对共享空间读写需要互斥工具：P（通过）操作，V（释放）操作）</p>
+<h5 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h5><p>进程间数据交换以格式化的消息为单位（直接通信 or 间接通信：发送消息到中间实体）</p>
+<h5 id="管道通信"><a href="#管道通信" class="headerlink" title="管道通信"></a>管道通信</h5><p>管道指用于连接一个读进程和一个写进程以实现它们之间的一个共享文件（互斥、同步、确定对方存在）</p>
+<h4 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h4><p>指两个或两个以上进程在执行过程中因争夺资源而造成的一种互相等待现象，若无外力作用，它们都将无法继续执行。</p>
+<h5 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h5><p>系统资源不足、进程运行的顺序不合适、资源分配不当</p>
+<h5 id="产生死锁的必要条件"><a href="#产生死锁的必要条件" class="headerlink" title="产生死锁的必要条件"></a>产生死锁的必要条件</h5><ol>
+<li>互斥：进程在某段时间独占资源</li>
+<li>请求与保持：某进程因请求资源而阻塞时，对已获得的资源保持不放</li>
+<li>不剥夺：未使用完不剥夺资源</li>
+<li>循环等待：循环等待资源</li>
+</ol>
+<h5 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h5><p>打破上述必要条件中的一个或几个</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/Redis/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/03/Redis/" itemprop="url">Redis</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-03T21:30:11+08:00">
+                2018-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/coding/" itemprop="url" rel="index">
+                    <span itemprop="name">coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>redis的list的底层实现是一个<strong>双向链表</strong>，也可以使用它实现一个简单的消息队列，生产者push，消费者pop。</p>
+<p>hash，类似于python里面的dict，C++里面的unordered_map，Java里面的HashMap。底层实现为HashMap，可以用来存储用户的id及其信息（比如以json格式保存）。</p>
+<p>set的底层实现是一个value值为null的hashmap，它根据hash的方式快速去重。</p>
+<p>sorted set底层实现是hashmap + skiplist。为什么要用2个呢？当进行查询的时候，可以使用hashmap保证其<code>$O(1)$</code>级别的复杂度；而在进行更新操作时，如果只有hashmap，那么需要进行重排，时间复杂度为<code>$O(nlogn)$</code>，而如果加入跳跃表，那么只需要<code>$O(logn)$</code>的复杂度。所以结合使用。</p>
+<p>rdb/aof持久化</p>
+<p><strong>rdb:数据库状态（所有数据库中的所有键值对数据）和rdb文件相互转存，可以看做是快照。文件格式为二进制文件。</strong></p>
+<p>save会阻塞服务器进程，导致其不能处理其它任何命令请求；bgsave会派生出一个子进程去完成，父进程不受影响。可以设置bgsave自动执行的参数（保存条件，当任意一个条件满足，则自动执行），包括时间间隔和修改数。在redis服务器中则保存了上一次保存的时间戳lastsave和距离上次保存总计的修改次数dirty计数器。</p>
+<p><strong>aof:通过保存所有修改数据库的写命令请求来记录服务器的数据库状态。</strong></p>
+<p>aof文件中的所有命令都是以Redis命令请求协议的格式保存。命令请求会先保存到aof缓冲区里面，之后再定期写入并同步到aof文件中。</p>
+<p>Redis的发布/订阅功能</p>
+<p>可以用来订阅频道或是模式</p>
+<ol>
+<li>订阅频道使用的dict（字典），key保存频道，而value保存订阅它的客户端信息。</li>
+<li>订阅模式使用的list（链表），list里面保存了pubsubPattern结构，该结构里面有2个属性，一个是pattern，一个是client（只包含一个client）。</li>
+<li>publish命令会向频道的所有订阅者发消息，并向所有与该频道匹配的模式的订阅者发消息。</li>
+<li>pubsub的3个子命令，channels用来返回当前服务器被订阅的频道；numsub接受多个频道作为参数，并返回这些频道的订阅者数量；numpat返回该服务器所有被订阅模式的数量。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/mysql中的undo、redo/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/03/mysql中的undo、redo/" itemprop="url">mysql中的undo、redo</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-03T21:29:17+08:00">
+                2018-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/coding/" itemprop="url" rel="index">
+                    <span itemprop="name">coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>mysql中的日志文件分为undo log和redo log。</p>
+<p>undo日志记录的是数据修改之前的值，主要保证数据的一致性。因为当修改出现异常，可以用来回滚到之前的状态。</p>
+<p>undo日志分为2中类型，一种是<code>insert_undo</code>，记录插入的唯一键值；还有一种是<code>update_undo</code>，记录修改的唯一键值和修改之前的值。</p>
+<p>redo日志记录的是数据修改之后的值，主要保证数据的原子性和持久性。在数据库对数据做修改的时候，会把数据页从磁盘读到buffer pool里面，如果这时发生数据库重启，那么这些数据就无法同步到磁盘了。</p>
+<p>使用redo日志有2个好处</p>
+<ol>
+<li>在发生数据库重启（或crash）时，buffer pool的数据还没有刷新到磁盘，通过redo日志可以找到需要刷新到磁盘的记录。</li>
+<li>buffer pool刷新到磁盘是一个随机IO的过程，效率较差；而把buffer pool的数据记录到redo log是一个顺序IO，可以提高事务提交的速度。</li>
+</ol>
+<p>通过undo + redo的设计，使得IO性能得到提高。</p>
+<ol>
+<li>缓存到buffer区，批量写入日志（redo log buffer）</li>
+<li>并发事务共享redo log存储空间，所以其它未提交的事务日志也会被提交</li>
+<li>redo log只是顺序追加</li>
+</ol>
+<p>Mysql的InnoDB存储引擎使用的恢复策略：<strong>进行恢复时，重做所有的事务，包括未提交的和回滚的事务，然后再根据undo log回滚那些未提交的事务。</strong></p>
+<p>参考：<a href="http://www.cnblogs.com/xinysu/p/6555082.html" target="_blank" rel="noopener">http://www.cnblogs.com/xinysu/p/6555082.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/02/数据库事务四种隔离级别/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/02/数据库事务四种隔离级别/" itemprop="url">数据库事务四种隔离级别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-02T21:27:51+08:00">
+                2018-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/coding/" itemprop="url" rel="index">
+                    <span itemprop="name">coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>未授权读取（read uncommitted）</p>
+<p>授权读取（read committed）</p>
+<p>可重复读取（repeatable read）</p>
+<p>序列化（serializable）</p>
+<p>为什么会提出这四个概念，是因为在一个事务执行的过程中，可能出现以下几种情况：</p>
+<ol>
+<li>更新丢失：两个事务同时更新一行数据，一个事务对数据的更新把另外一个事务对数据的更新覆盖了。不能应对并发</li>
+<li>脏读：一个事务读取到了另外一个事务未提交的数据操作结果</li>
+<li>不可重复读：一个事务对同一行数据重复读取2次，但是得到了不同的结果</li>
+<li>虚读：事务T1读取了某一数据后，事务T2对其做了修改，当事务T1再次读该数据时得到了与第一次不同的值</li>
+<li>幻读：事务在操作的过程中进行2次查询，第一次查询到的结果包含了第一次查询中未出现的数据或者缺少了第一次查询中出现的数据。这是因为在两次查询过程中另外一个事务插入数据造成的</li>
+</ol>
+<p><strong>未授权读取（我在写，你就不能写，但是你可以读）就是一个事务可以读取另一个未提交事务的数据。</strong><br>如果一个事务已经开始写数据，则另外一个事务不允许同时进行写操作，但是允许其它事务读此行数据。该隔离级别可以通过“排他写锁”实现。<br>避免了更新丢失，却可能出现脏读。也就是说事务B读取到了事务A未提交的数据</p>
+<p><strong>授权读取（我在读，你可以读；但是我在写，如果还没有提交，你不能读）</strong><br>就是一个事务要等另一个事务提交后才能读取数据。读取数据的事务允许其它事务继续访问该行数据，但是未提交的写事务将会禁止其它事务访问该行。<br>避免了脏读，但是可能出现不可重复读。事务A事先读取了数据，事务B紧接着更新了数据，并提交了事务，而事务A再次读取该数据时，数据已经发生了变化。</p>
+<p><strong>可重复读取（我在读，你不能写，可以读）</strong><br>就是在开始读取数据（事务开启）时，不再允许修改操作读取数据的事务将会禁止写事务（但允许读事务），写事务则禁止任何其它的事务。避免了不可重复读和脏读，但是有时可能出现幻读。可以通过“共享读锁”和“排他写锁”实现。<br>重复读可以解决不可重复读问题。不可重复读对应的是修改，即UPDATE操作。但是可能还会有幻读问题。因为幻读问题对应的是插入INSERT操作，而不是UPDATE操作。</p>
+<p><strong>序列化，事务只能一个接着一个地执行，但不能并发执行。可以解决幻读问题</strong></p>
+<p>总结：对于大多数应用程序，可以优先考虑把数据库的隔离级别设置为read committed。可以避免脏读，而且有较好的并发性能。尽管可能导致不可重复读、幻读和第二类丢失更新这些并发问题。可以由应用程序采用悲观锁或乐观锁来控制。MySQL默认的隔离级别就是repeatable read。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/26/计算机思维/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/26/计算机思维/" itemprop="url">计算机思维</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-26T21:27:51+08:00">
+                2018-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/coding/" itemprop="url" rel="index">
+                    <span itemprop="name">coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！</p>
+<ol>
+<li>缓存思想：缓存思想特别重要，这是很多设计中必出现的，无论在操作系统层面还是具体应用层面。比如在内存和CPU之间有寄存器；比如在Redis中有缓存机制；Mybatis也有缓存机制，当某些记录很大，而且基本上不会变，且查询频率很高，那么利用缓存是明智的选择。消息队列</li>
+<li>Hash+链表、树形结构思想：说到hash一般会想到hashtable，hashmap等等，树形结构就更多了。共同点是，说到查找，它们是高频词汇。对于无序的东西，我们的查找时间复杂度是n级别的。所以为了优化，会采用2种措施，一种是建立索引，即hash表，计算key值，然后放到对应的位置，如果出现碰撞，通常是加个链表。这样复杂度可以控制在1级别的。凡事都有优缺点，虽然查询快了，但是它是无序的。而如果采用第二种措施，即用树形结构，比如二叉树（红黑树）、B+树等。基本是可以实现logn级别的，虽然慢一些，但其优点是有序。凡是涉及到查找，要想到它们！在ElasticSearch中有这些思想的存在（倒排索引，基于单词文档矩阵模型）。</li>
+<li>分布式思想：这个不用说了，当应用大了以后，必然出现。涉及到分布式，那么一定会涉及到同步、一致性等等问题。</li>
+<li>解耦思想：这个思想很重要，无论在什么地方都会体现，任何系统，都应当考虑到解耦。</li>
+<li>top-down思想：任何时候可以先从宏观整体考虑，然后再到具体的部分。递归是一种体现。</li>
+<li>主从思想：这一思想常常出现在分布式中</li>
+<li>DP思想：这个不用说，算法中最难以理解，也是最能解决复杂问题的一种思想。</li>
+<li>双倍扩容思想：对于一些动态容器，比如C++中的vector扩容，java中的hashmap扩容，Redis中的dict的rehash过程。多多少少有基于原来容量2倍来进行扩容的思想。</li>
+<li>拦截过滤思想</li>
+<li>注册通知（发布、通知）思想，反应器模式</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/18/IO模型/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/18/IO模型/" itemprop="url">IO模型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-18T21:35:51+08:00">
+                2018-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/coding/" itemprop="url" rel="index">
+                    <span itemprop="name">coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>关于5种I/O模型的理解</p>
+<p>以喝咖啡举例， 在网上点了咖啡粉外卖，要等外卖小哥送咖啡，然后泡咖啡，喝咖啡</p>
+<ol>
+<li>阻塞式I/O：一直站在家里等咖啡（其它什么事不做）送到，然后泡咖啡</li>
+<li>非阻塞式I/O：不停地给外卖小哥打电话（其它什么事不做），送到后泡咖啡</li>
+<li>IO多路复用：一开始和小哥说好，到了后打电话，同时站在家里等（于此同时，他还在等其它的外卖，也是什么事不做），一旦咖啡到了，就泡咖啡</li>
+<li>信号驱动式IO：干自己的事情，外卖小哥到了后打电话让你取咖啡，然后你泡咖啡</li>
+<li>异步IO：一直干自己的事情，整个事情都让女朋友来做，做好了通知自己过去喝</li>
+</ol>
+<p>前面3种提到的IO都是同步的，与之相对应的是异步IO。这是一个维度，还有一个是阻塞的维度。传统的是阻塞的IO，不管是C端还是S端，都是阻塞的。接着是非阻塞的IO，主要通过C端的轮询来实现。后面的多路复用，它也是非阻塞的，通过选择器和通道来实现。主要采用的是反应器（Reactor）模式。涉及到事件的注册和订阅。</p>
+<p>很早很早之前，Java的api只支持由本地系统套接字库提供的阻塞函数。阻塞体现在服务器端的监听过程，直到有新的连接，这时就建立一个双方通信的socket。接着它继续监听。其缺点是只能同时处理一个连接，要管理多个并发的客户端连接，需要开启多个线程。</p>
+<p>下面是核心的服务端代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ServerSocket serverSocket = new ServerSocket(8888);</span><br><span class="line">Socket socket = serverSocket.accept();</span><br><span class="line">BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));</span><br><span class="line">PrintWriter out = new PrintWriter(socket.getOutputStream(), true);</span><br><span class="line">String request, response;</span><br><span class="line">while ((request = in.readLine()) != null) &#123;</span><br><span class="line">    if (&quot;OK&quot;.equals(request)) &#123;</span><br><span class="line">        break;</span><br><span class="line">    &#125;</span><br><span class="line">    response = processRequest(request);</span><br><span class="line">    out.println(response);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/Peter-Dinklage演讲稿/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/Peter-Dinklage演讲稿/" itemprop="url">Peter Dinklage演讲稿</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T13:43:14+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/speech/" itemprop="url" rel="index">
+                    <span itemprop="name">speech</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Peter Dinklage – Actor</p>
+<p>Don’t be frightened! When a Bennington student, 10 minutes before you come up to the podium — and you’re amazed.</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/01/07/情书、天使爱美丽、心灵捕手影评/#more" rel="contents">
+            <a class="btn" href="/2018/05/22/Peter-Dinklage演讲稿/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -409,7 +1397,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/17/人类简史/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/13/B树和其变体/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -428,7 +1416,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/17/人类简史/" itemprop="url">人类简史</a></h1>
+                <a class="post-title-link" href="/2018/04/13/B树和其变体/" itemprop="url">B树和其变体</a></h1>
         
 
         <div class="post-meta">
@@ -440,162 +1428,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-17T12:18:32+08:00">
-                2017-12-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/reading/" itemprop="url" rel="index">
-                    <span itemprop="name">reading</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>作者语言诙谐，思路清晰，观点新颖。</li>
-<li>作者明显是达尔文进化论的铁粉，书中反复提到演化。除此之外，也同时强调基因和DNA的作用，这些是构成全书最核心的客观观点。</li>
-<li>作者在描述历史的不可逆性时，观点有点类似于惯性力的作用。当人们意识到走到了某个节点后，发现存在诟病，可是想恢复到之前已经无能为力。包括农业革命和后面的科学革命都这样。</li>
-<li>人类，准确说是智人，这个词太平常了，仅仅是无数物种之一而已。但是又太不平凡，因为目前智人统治着地球。</li>
-<li>从宇宙大爆炸后，先后出现的是物理学、化学、生物学、历史学…7万年前，认知革命开始，智人通过描述虚拟故事以及八卦，战胜了其它人属物种以及其它动植物物种。意识与虚构支撑着一切智人系统。</li>
-<li>农业革命发生在距今1.2万年前，这是最大的骗局。智人驯化了动植物，其实是被驯化了。智人们通过复制基因一代一代相传。通过金钱、帝国、宗教，不断向前发展。智人们不断扩张以巩固自己的疆土。通过探险殖民的方式打破了原始部落。</li>
-<li>科学革命发生在距今仅仅500年前，但是速度极其之快。科学、帝国、资本主义推动着历史的发展。</li>
-<li>这是一个由强者制定规则的世界，很多都是想象出来的东西，没有绝对的对错。认识自我才是最重要的。</li>
-<li>历史中很大的空白就是幸福感的研究，智人从无到有，再到现在，真的幸福了吗？</li>
-<li>我们已经强大到了接近神的地步了，然而我们最需要知道的是，后面我们要做什么。</li>
-<li>历史的发展总是必然性结合着偶然性一起的，谁都不能预测未来。我们还要经历很多个岔路口。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/22/零知识证明/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/22/零知识证明/" itemprop="url">零知识证明</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-22T13:42:06+08:00">
-                2017-10-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-13T21:01:00+08:00">
+                2018-04-13
               </time>
             
 
@@ -655,1147 +1489,306 @@
 
       
         
-          
-            <p>简单理解：</p>
-<p>零知识证明（Zero-knowledge proofs）</p>
-<p>零知识证明是一种特殊的交互式证明，其中证明者知道问题的答案，他需要向验证者证明“他知道答案”这一事实，但是要求验证者不能获得答案的任何信息。</p>
-<p>可以参考这样一个简单的例子。证明者和验证者都拿到了一个数独的题目，证明者知道一个解法，他可以采取如下这种零知识证明方法：他找出81张纸片，每一张纸片上写上1到9的一个数字，使得正好有9份写有从1到9的纸片。然后因为他知道答案，他可以把所有的纸片按照解法放在一个9乘9的方格内，使得满足数独的题目要求（每列、每行、每个九宫格都正好有1到9）。放好之后他把所有的纸片翻转，让没有字的一面朝上。这样验证者没办法看到纸片上的数字。接下来，验证者就验证数独的条件是否满足。比如他选一列，这时证明者就把这一列的纸片收集起来，把顺序任意打乱，然后把纸片翻过来，让验证者看到1到9的纸片都出现了。整个过程中验证者都无法得知每张纸片的位置，但是却能验证确实是1到9都出现了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/05/法语-英语-中文单词对照/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/05/法语-英语-中文单词对照/" itemprop="url">法语-英语-中文单词对照</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-05T13:22:32+08:00">
-                2017-01-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/language/" itemprop="url" rel="index">
-                    <span itemprop="name">language</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <table>
-<thead>
-<tr>
-<th>assez</th>
-<th>enough</th>
-<th>足够的</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>maintenant</td>
-<td>now</td>
-<td>现在</td>
-</tr>
-<tr>
-<td>inviter</td>
-<td>invite</td>
-<td>邀请</td>
-</tr>
-<tr>
-<td>immeuble</td>
-<td>building</td>
-<td>大楼</td>
-</tr>
-<tr>
-<td>écouter</td>
-<td>listen</td>
-<td>听</td>
-</tr>
-<tr>
-<td>vrai</td>
-<td>true</td>
-<td>真实的</td>
-</tr>
-<tr>
-<td>vouloir</td>
-<td>want</td>
-<td>想要，愿意</td>
-</tr>
-<tr>
-<td>courrier</td>
-<td>email</td>
-<td>邮件</td>
-</tr>
-<tr>
-<td>plaisir</td>
-<td>please</td>
-<td>愉快</td>
-</tr>
-<tr>
-<td>quelquefois</td>
-<td>sometimes</td>
-<td>有时</td>
-</tr>
-<tr>
-<td>prendre</td>
-<td>take</td>
-<td>拿，乘</td>
-</tr>
-<tr>
-<td>petit</td>
-<td>small</td>
-<td>小的</td>
-</tr>
-<tr>
-<td>ne plus</td>
-<td>not anymore</td>
-<td>不再</td>
-</tr>
-<tr>
-<td>abîmer</td>
-<td>destory</td>
-<td>损坏</td>
-</tr>
-<tr>
-<td>apercevior</td>
-<td>realise</td>
-<td>意识到</td>
-</tr>
-<tr>
-<td>dehors</td>
-<td>outside</td>
-<td>在外面</td>
-</tr>
-<tr>
-<td>allumer</td>
-<td>light</td>
-<td>点亮</td>
-</tr>
-<tr>
-<td>coucher</td>
-<td>sleep</td>
-<td>睡觉</td>
-</tr>
-<tr>
-<td>démonter</td>
-<td>disassembly</td>
-<td>拆卸</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/26/希腊人佐巴影评/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/26/希腊人佐巴影评/" itemprop="url">希腊人佐巴影评</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-26T22:02:54+08:00">
-                2016-12-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/movies/" itemprop="url" rel="index">
-                    <span itemprop="name">movies</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>佐巴，一个追求自由的人；生命就是麻烦，只有死人才没有烦扰；当你开心时，去跳舞吧！当你伤心的时候，还是去跳舞吧！</p>
-</li>
-<li><p>一个女人太美好，多半会遭到毁灭，在那个接近原始人性的环境下是这样，但放到现在未必成立。</p>
-</li>
-<li><p>做佐巴吧，真实的自己！</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/23/驴得水影评/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/23/驴得水影评/" itemprop="url">驴得水影评</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-23T22:01:01+08:00">
-                2016-12-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/movies/" itemprop="url" rel="index">
-                    <span itemprop="name">movies</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>上映了这么久，才在网上看了这部片，不得不说，这是一部很不错的电影，将喜与悲的演绎发挥到了极致，最大的喜剧莫过于悲剧，而最大的悲剧却是来源于喜剧的。</p>
-</li>
-<li><p>片中所有人最终都没有逃脱这样一个悲剧。这里面的佳佳是一个单纯善良、想揭露社会黑暗但最终败在了现实底下（爸爸被绑架）；铁南原本也是一个很正直的人，一心想得到佳佳的喜爱，最终也是败在了枪子弹下；而美国人就是想花钱最慈善，最后看到了那样的一个闹剧，说中国真不可思议（anyway，美国不也一样，只不过具体形式不一样而已）…而特派员作为教育部底下的高官，一心想贪图美国人的钱，为了这个，他什么都做得出来，还拿社会的无情、现实的残酷反过来去教育孙校长等人。孙校长，一个为了自己的教育梦想和金钱而死要面子、见风使舵的人，他为了“大局”什么都做得出来，只为了听从特派员，毕竟可以继续做校长办学校教育孩子并拿到钱。</p>
-</li>
-<li><p>最后要说的是比较复杂的三个人物，即老裴、一曼和铜匠：老裴喜欢一曼，爱钱是显而易见的、和孙校长一样，也是一个见风使舵，有心眼的，至始至终就是一个屈服于现实的人，从未反抗。自从一曼与铜匠睡了之后，他对一曼的情感经历从爱到恨的变化，最终变为对其冷漠；而铜匠作为一个比较单纯的人，被人利用，被一曼用感情欺骗，最终反过来想借用自己的独特的地位报复他们。不得不说，他在与一曼睡过之后，产生了感情，并受了校长的鼓舞，学习了很多知识，以致于后来想去美国深造。他想用知识给现实狠狠的一棒，从当时对一曼的憎恨可以看出。而这都是一种巧合，如果没有那样重要的地位（被美国人所望重），他也不会这样的。</p>
-</li>
-<li><p>最后说说一曼这个人物，其实很是矛盾的一个人：她性格使然的放荡使得她被拉到了一个很尴尬的地位，但是她也是一个屈服于现实的人，他为了学校的利益欺骗了铜匠，最后骂铜匠是牲口得见。她是一个美丽的人，心灵也是美，将大蒜屑看成雪花，可是她最大的危机就是自己的单纯，她因此受到了老裴的憎恨，咋一看他想想自己的心爱给自己带绿帽子确实不是滋味，他为了金钱可以服从现实，但是接受不了表面上爱情的背叛，他若真的很现实，为什么不把她的背叛看淡，继续演下去呢？当然，这也足以说明了，爱情在现实的面前多么不堪一击。所以他到底错了吗？很难说…只能说他很看重爱情，却又经不住现实对爱情的拷打，最后冷漠了一曼，哦，可怜的一曼，这个作死的女人，她唯一的错就是自己的放荡的性格，她值得同情，不值得去爱那两个谩骂自己的男人…她最后发疯再到自杀，获得了自由…</p>
-</li>
-<li><p>真正的悲剧是，在众多矛盾组成的矛盾串中，无论你删除哪一个矛盾节点，最终的悲剧还是无可避免的…</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/11/龙猫影评/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/11/龙猫影评/" itemprop="url">龙猫影评</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-11T21:59:56+08:00">
-                2016-12-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/movies/" itemprop="url" rel="index">
-                    <span itemprop="name">movies</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>太真实了，勾起了幼时的回忆，很治愈，看着很舒心。黄瓜、西红柿、茄子等，直接让我想起了童年时的夏日时光，也曾在菜园里面吃过黄瓜、西红柿。</p>
-</li>
-<li><p>等车的场景也让我回忆起来儿时在家门口等父亲回家时的情形，总之非常贴近生活，真实，唯美。夜晚的田地里面的蛙叫声也是亲切得不得了。</p>
-</li>
-<li><p>宫崎骏的作品总是带有奇妙的、与众不同的幻想，温馨浪漫、富有童趣。里面所要表现的都是和谐的、充满希望的元素。说白了就是，奇幻中让你体会到无比舒心的快乐，失望中（危急）又会让你感到无比强大的力量在帮助自己，看到希望。这可不可以理解为一种对生活本身的美好的寄托呢？而龙猫恰恰是其化身！</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/11/源代码影评/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/11/源代码影评/" itemprop="url">源代码影评</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-11T21:58:17+08:00">
-                2016-12-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/movies/" itemprop="url" rel="index">
-                    <span itemprop="name">movies</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>一个人死前可以存留8分钟的死前记忆，也就是最后的8分钟记忆片段，斯蒂芬是一个在空难中快要死的人，被一个源代码的科研组织用来执行任务。这个任务就是找出引爆列车的犯人（上午7点多一列列车在芝加哥站附近被恐怖分子引爆），为什么要执行呢，原因该犯人，也就是恐怖分子，声称会在6小时后进行第二次的爆炸袭击，如果能通过这个源代码实验找到犯人的信息，那么科研人员就可以将线索告诉警方，从而在6小时内抓住犯人，挽救更多的人。</p>
-</li>
-<li><p>而为什么要找斯蒂芬，是因为他与列车里面的一名遇难者在某些方面有最相似的地方（具体说法可以看电影），所以科研人员利用他进入到该死者的最后8分钟的记忆片段中（也就是一段脑电波，被保存在计算机中），所以斯蒂芬一次又一次地进出这个记忆片段，即一个虚拟的世界，去寻找犯人的线索。但需要注意的是，不管他在那个虚拟世界中做了什么，都不会影响过去发生的事情，也就是说，不会改变过去，那辆列车在过去被炸了这一已经发生了的事情是不能改变的。但他可以一次又一次地经历在列车爆炸前的8分钟，找到当时的线索，从而将线索告知科研人员，一个与他一直联系的Goodwin……</p>
-</li>
-<li><p>还需要注意的是，斯蒂芬所在的那个封闭空间，以及他自己全都是通过意识想象出来的，他其实是一个濒临死亡的人，只要切断那个实验的电源，那就真的gg了。</p>
-</li>
-<li><p>最后他成功了，找到了那个犯人。想想如果是你，你会一次又一次地被实验者来回穿梭而不厌倦吗？斯蒂芬此时已经很累了。但是他在与Goodwin的交流过程中以及虚拟世界中的女主相处中爱上了女主。他问及Goodwin有没有结婚等等问题与她拉近了距离，从而感动她，允许他再次进入虚拟世界，在8分钟后切断电源，让他死去，而在虚拟世界中，他将与女主永恒地在一起（也许只剩最后一分钟），时间定格。然后就什么也没有了，他本人死了，虚拟世界的8分钟也结束了，就像代码运行结束后一样，内存中什么也没有了…虽然这违背了Goodwin的上级的命令，即不关闭电源，继续让斯蒂芬执行后面的其它任务，而这就会对斯蒂芬的意识初始化，抹去他关于本次任务的所有记忆。</p>
-</li>
-<li><p>到这里本片应该就已经结束了，但是电影的最后一幕就很令人费解，其实我看了很多人的解释，都觉得有问题，或是自己理解不了，但我觉得既然是科幻片，无需用科学去理解或是去yy。我只想说说这部片的主题：源代码项目是对未来的构想，即可以从现实中的现在在不改变过去的情况下去改变将来（本片除了最后一幕所有的故事就是这样的），或许改变过去（因为在最后一幕，当Goodwin早上来到实验室的时候，此时还没有对史蒂芬进行实验，她收到了从虚拟世界中传过来的来自史蒂芬的信息，而此时新闻里却说一名犯人在列车中被抓，而他自己电话向警察自首….），也就是说，她回到了早上的时候，而一切的事情都与后来现实中发生的不一样（即列车爆炸，然后他们对史蒂芬进行实验，让其完成任务）。所以说不止是8分钟之前的事情，而是更久之前的时间，因此可以创造一个新的世界。至于她为什么会回到早上不去想象，还是说最后的这一幕就是一个幻想，类似于旁白，没有人参与其中？…Everything is gonna be ok!</p>
-</li>
-<li><p>如果你只有一分钟不到的生命，你会怎么做？ 我会让每秒都过得有意义。我会再吻你一次。If you have only the last one minute, what will you do? I will give you a kiss again!</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/11/精神分析引论/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/11/精神分析引论/" itemprop="url">精神分析引论</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-11T13:48:46+08:00">
-                2016-12-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/reading/" itemprop="url" rel="index">
-                    <span itemprop="name">reading</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>一个孩童总要先爱自己，才能学会牺牲一部分自我去关爱他人。即便他从一开始便表现出对某些人的喜爱，那也是因为他需要他们，不能离开他们，总之仍是出于自私的目的。直到后来，爱的冲动才脱离自私。人可以说是因为自私才学会关爱他人。</p>
-<p>今天终于看完了这本很厚的书，前面有关于失误行为和梦的部分看得比较认真，而后面关于精神分析由于其内容太过专业且相对前面示例较少、理论过多而看得比较粗略。</p>
-<p>首先前面两部分是为后面的精神分析做铺垫的，大致上讲的是潜意识和意识的知识，无论是失误行为还是梦，我的理解是对压抑在最深处的潜意识的一种释放，而这些潜意识与大脑中的意识是矛盾的、争锋相对的。而梦境又是很扭曲的，也是有过二级加工的，对一些内容进行过滤；不得不说，弗洛伊德的许多关于此方面的理论都与性挂钩，除此之外，他还很侧重对童年进行研究。比如他强调了儿童时的经历对成年后梦境以及一些精神官能症（比如歇斯底里症，强迫症，妄想症等等）的影响。而性更是与这些相结合起来了，在他的精神分析理论中，这些症状的产生往往是因为在性上面的失败，并强调一旦性方面得到了满足，这些症状便会消失。其中他提出了力比多这个概念，泛指一切身体器官的快感，包括性倒错者和儿童的性生活。精神分析学认为，力比多是一种本能，是一种力量，是人的心理现象发生的驱动力。力比多定理是指：一个人的力比多（性的欲望）是有限的，如果他/她将力比多用在一个人身上，那么用在另一个人身上的分量就会减少。他对症状的化解提出的观点是：将潜意识的东西移到意识中。由于水平有限，暂时的感受就是这些。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/06/数理统计复习/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/06/数理统计复习/" itemprop="url">数理统计复习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-06T20:24:13+08:00">
-                2016-12-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/coding/" itemprop="url" rel="index">
-                    <span itemprop="name">coding</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>复习笔记</p>
+          <p>B树和其变体是标准的文件组织方法，在绝大多数现代文件系统中得到了广泛的应用。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2016/12/06/数理统计复习/#more" rel="contents">
+            <a class="btn" href="/2018/04/13/B树和其变体/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/关于回溯法在排列和组合中的应用总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/10/关于回溯法在排列和组合中的应用总结/" itemprop="url">关于回溯法在排列和组合中的应用总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-10T14:34:00+08:00">
+                2018-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/coding/" itemprop="url" rel="index">
+                    <span itemprop="name">coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="关于回溯法在排列和组合中的应用总结"><a href="#关于回溯法在排列和组合中的应用总结" class="headerlink" title="关于回溯法在排列和组合中的应用总结"></a>关于回溯法在排列和组合中的应用总结</h4><p>下面是一段leetcode讨论区的原话：</p>
+<blockquote>
+<p>Backtracking can be solved always as follows:</p>
+<p>Pick a starting point.<br>while(Problem is not solved)<br>​    For each path from the starting point.<br>​        check if selected path is safe, if yes select it<br>​        and make recursive call to rest of the problem<br>​        before which undo the current move.<br>​    End For<br>If none of the move works out, return false, NO SOLUTON.</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/10/关于回溯法在排列和组合中的应用总结/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/virtualFunction/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/10/virtualFunction/" itemprop="url">关于C++中的析构函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-10T14:32:12+08:00">
+                2018-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/coding/" itemprop="url" rel="index">
+                    <span itemprop="name">coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="关于析构函数"><a href="#关于析构函数" class="headerlink" title="关于析构函数"></a>关于析构函数</h4><p>遇到跟析构函数相关的题目，总是做错。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/10/virtualFunction/#more" rel="contents">
               Read more &raquo;
             </a>
           </div>
@@ -1837,7 +1830,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1883,7 +1876,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1905,7 +1898,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">31</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1964,7 +1957,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
