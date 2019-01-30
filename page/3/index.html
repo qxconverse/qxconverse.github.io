@@ -262,6 +262,176 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/树遍历的非递归方式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/10/树遍历的非递归方式/" itemprop="url">树遍历的非递归方式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-10T21:34:34+08:00">
+                2018-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/coding/" itemprop="url" rel="index">
+                    <span itemprop="name">coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>对于先序遍历：</p>
+<ol>
+<li>当栈或是当前节点不为空，则进行下面的循环</li>
+<li>如果当前节点不会空，则访问该节点，并入栈，并将当前节点指向它的左节点，一直循环，直到当前节点为空</li>
+<li>此时说明走到了最左边，则获取栈顶节点，并弹出它，将当前节点设置为它的右节点</li>
+</ol>
+<p>对于中序遍历：<br>和先序遍历很像，唯一的区别是遍历左节点的时候不访问，而是在后面访问。具体可以这样思考：如果为先序遍历，那么遍历到某个节点时就立即访问；而中序遍历，由于始终要先访问当前节点的左节点，所以就只是先入栈。</p>
+<p>对于后序遍历：<br>由于要确保先访问左右节点，才能访问当前节点，所以要知道左右节点是否已经访问了，因此需要加一个prev，表示上一次访问的节点。有2种思路：<br>第一种思路：</p>
+<ol>
+<li>将根节点放入栈中，然后当栈不为空就一直循环</li>
+<li>首先获得栈顶节点作为当前节点，如果它的左右节点都为空，或者左右节点不都为空，但是它们之一刚刚被访问过了（即prev为其中之一），那么就可以保证了左右节点已经被访问过，这时可以访问当前节点，更新prev，并出栈</li>
+<li>否则不能访问当前节点（即左右不都为空，且prev为空或者prev不等于其中任意一个），要先访问左右节点，这时把左右节点按照先右后左的顺序入栈，这样访问时就是先左后右了</li>
+</ol>
+<p>第二种思路：</p>
+<ol>
+<li>当栈或是当前节点不为空，则进行下面的循环</li>
+<li>如果当前节点不会空，则并入栈，并将当前节点指向它的左节点，一直循环，直到当前节点为空</li>
+<li>这时栈顶节点没有左节点了，这时就看它有没有右节点，如果有的话，并且还没有访问，则设置当前节点为栈顶节点的右节点</li>
+<li>否则，说明右节点不存在或者已经访问过了，这时就可以访问该栈顶节点了，并更新prev和出栈</li>
+</ol>
+<p>层次遍历：最简单了</p>
+<ol>
+<li>把根节点放入一个队列</li>
+<li>当队列不为空，就循环下面的步骤</li>
+<li>首先获得队首节点，访问并出队列</li>
+<li>接着把队首节点的左右孩子依次放入队列的尾部，如果存在的话</li>
+</ol>
+<p>Python代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">def pre_order(root):</span><br><span class="line">    stack = []</span><br><span class="line">    cur = root</span><br><span class="line"></span><br><span class="line">    while cur or len(stack) != 0:</span><br><span class="line">        while cur:</span><br><span class="line">            print(cur.val)</span><br><span class="line">            stack.append(cur)</span><br><span class="line">            cur = cur.left</span><br><span class="line"></span><br><span class="line">        cur = stack.pop()</span><br><span class="line">        cur = cur.right</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def in_order(root):</span><br><span class="line">    stack = []</span><br><span class="line">    cur = root</span><br><span class="line"></span><br><span class="line">    while cur or len(stack) != 0:</span><br><span class="line">        while cur:</span><br><span class="line">            stack.append(cur)</span><br><span class="line">            cur = cur.left</span><br><span class="line"></span><br><span class="line">        cur = stack.pop()</span><br><span class="line">        print(cur.val)</span><br><span class="line">        cur = cur.right</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def post_order(root):</span><br><span class="line">    stack = []</span><br><span class="line">    cur = root</span><br><span class="line">    prev = None</span><br><span class="line"></span><br><span class="line">    while cur or len(stack) != 0:</span><br><span class="line">        while cur:</span><br><span class="line">            stack.append(cur)</span><br><span class="line">            cur = cur.left</span><br><span class="line"></span><br><span class="line">        top = stack[-1]</span><br><span class="line">        # 如果存在右节点，并且还没有访问，则设置当前节点为栈顶节点的右节点</span><br><span class="line">        if top.right and prev != top.right:</span><br><span class="line">            cur = top.right</span><br><span class="line">        else:</span><br><span class="line">            print(top.val)</span><br><span class="line">            prev = top</span><br><span class="line">            stack.pop()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def post_order2(root):</span><br><span class="line">    stack = []</span><br><span class="line">    prev = None</span><br><span class="line">    stack.append(root)</span><br><span class="line"></span><br><span class="line">    while len(stack) != 0:</span><br><span class="line">        cur = stack[-1]</span><br><span class="line">        # 如果左右节点都存在，那么只需要看prev是否是右节点即可，因为一定是先出左节点，后出右节点（入栈是反的原因）</span><br><span class="line">        # 那么什么时候回看prev是否是左节点呢？当右节点为空的时候！</span><br><span class="line">        if (not cur.left and not cur.right) or (prev and (prev == cur.left or prev == cur.right)):</span><br><span class="line">            print(cur.val)</span><br><span class="line">            prev = cur</span><br><span class="line">            stack.pop()</span><br><span class="line">        else:</span><br><span class="line">            if cur.right:</span><br><span class="line">                stack.append(cur.right)</span><br><span class="line">            if cur.left:</span><br><span class="line">                stack.append(cur.left)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def level_order(root):</span><br><span class="line">    queue = [root]</span><br><span class="line">    while len(queue) != 0:</span><br><span class="line">        # 取队首节点</span><br><span class="line">        top = queue[0]</span><br><span class="line">        print(top.val)</span><br><span class="line">        queue.pop(0)</span><br><span class="line">        if top.left:</span><br><span class="line">            queue.append(top.left)</span><br><span class="line">        if top.right:</span><br><span class="line">            queue.append(top.right)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/图的遍历/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -581,6 +751,164 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/Redis/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/03/Redis/" itemprop="url">Redis</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-03T21:30:11+08:00">
+                2018-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/coding/" itemprop="url" rel="index">
+                    <span itemprop="name">coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>redis的list的底层实现是一个<strong>双向链表</strong>，也可以使用它实现一个简单的消息队列，生产者push，消费者pop。</p>
+<p>hash，类似于python里面的dict，C++里面的unordered_map，Java里面的HashMap。底层实现为HashMap，可以用来存储用户的id及其信息（比如以json格式保存）。</p>
+<p>set的底层实现是一个value值为null的hashmap，它根据hash的方式快速去重。</p>
+<p>sorted set底层实现是hashmap + skiplist。为什么要用2个呢？当进行查询的时候，可以使用hashmap保证其<code>$O(1)$</code>级别的复杂度；而在进行更新操作时，如果只有hashmap，那么需要进行重排，时间复杂度为<code>$O(nlogn)$</code>，而如果加入跳跃表，那么只需要<code>$O(logn)$</code>的复杂度。所以结合使用。</p>
+<p>rdb/aof持久化</p>
+<p><strong>rdb:数据库状态（所有数据库中的所有键值对数据）和rdb文件相互转存，可以看做是快照。文件格式为二进制文件。</strong></p>
+<p>save会阻塞服务器进程，导致其不能处理其它任何命令请求；bgsave会派生出一个子进程去完成，父进程不受影响。可以设置bgsave自动执行的参数（保存条件，当任意一个条件满足，则自动执行），包括时间间隔和修改数。在redis服务器中则保存了上一次保存的时间戳lastsave和距离上次保存总计的修改次数dirty计数器。</p>
+<p><strong>aof:通过保存所有修改数据库的写命令请求来记录服务器的数据库状态。</strong></p>
+<p>aof文件中的所有命令都是以Redis命令请求协议的格式保存。命令请求会先保存到aof缓冲区里面，之后再定期写入并同步到aof文件中。</p>
+<p>Redis的发布/订阅功能</p>
+<p>可以用来订阅频道或是模式</p>
+<ol>
+<li>订阅频道使用的dict（字典），key保存频道，而value保存订阅它的客户端信息。</li>
+<li>订阅模式使用的list（链表），list里面保存了pubsubPattern结构，该结构里面有2个属性，一个是pattern，一个是client（只包含一个client）。</li>
+<li>publish命令会向频道的所有订阅者发消息，并向所有与该频道匹配的模式的订阅者发消息。</li>
+<li>pubsub的3个子命令，channels用来返回当前服务器被订阅的频道；numsub接受多个频道作为参数，并返回这些频道的订阅者数量；numpat返回该服务器所有被订阅模式的数量。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/计算机网络 and 操作系统/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -732,164 +1060,6 @@
 <li>循环等待：循环等待资源</li>
 </ol>
 <h5 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h5><p>打破上述必要条件中的一个或几个</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/Redis/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/03/Redis/" itemprop="url">Redis</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-03T21:30:11+08:00">
-                2018-09-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/coding/" itemprop="url" rel="index">
-                    <span itemprop="name">coding</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>redis的list的底层实现是一个<strong>双向链表</strong>，也可以使用它实现一个简单的消息队列，生产者push，消费者pop。</p>
-<p>hash，类似于python里面的dict，C++里面的unordered_map，Java里面的HashMap。底层实现为HashMap，可以用来存储用户的id及其信息（比如以json格式保存）。</p>
-<p>set的底层实现是一个value值为null的hashmap，它根据hash的方式快速去重。</p>
-<p>sorted set底层实现是hashmap + skiplist。为什么要用2个呢？当进行查询的时候，可以使用hashmap保证其<code>$O(1)$</code>级别的复杂度；而在进行更新操作时，如果只有hashmap，那么需要进行重排，时间复杂度为<code>$O(nlogn)$</code>，而如果加入跳跃表，那么只需要<code>$O(logn)$</code>的复杂度。所以结合使用。</p>
-<p>rdb/aof持久化</p>
-<p><strong>rdb:数据库状态（所有数据库中的所有键值对数据）和rdb文件相互转存，可以看做是快照。文件格式为二进制文件。</strong></p>
-<p>save会阻塞服务器进程，导致其不能处理其它任何命令请求；bgsave会派生出一个子进程去完成，父进程不受影响。可以设置bgsave自动执行的参数（保存条件，当任意一个条件满足，则自动执行），包括时间间隔和修改数。在redis服务器中则保存了上一次保存的时间戳lastsave和距离上次保存总计的修改次数dirty计数器。</p>
-<p><strong>aof:通过保存所有修改数据库的写命令请求来记录服务器的数据库状态。</strong></p>
-<p>aof文件中的所有命令都是以Redis命令请求协议的格式保存。命令请求会先保存到aof缓冲区里面，之后再定期写入并同步到aof文件中。</p>
-<p>Redis的发布/订阅功能</p>
-<p>可以用来订阅频道或是模式</p>
-<ol>
-<li>订阅频道使用的dict（字典），key保存频道，而value保存订阅它的客户端信息。</li>
-<li>订阅模式使用的list（链表），list里面保存了pubsubPattern结构，该结构里面有2个属性，一个是pattern，一个是client（只包含一个client）。</li>
-<li>publish命令会向频道的所有订阅者发消息，并向所有与该频道匹配的模式的订阅者发消息。</li>
-<li>pubsub的3个子命令，channels用来返回当前服务器被订阅的频道；numsub接受多个频道作为参数，并返回这些频道的订阅者数量；numpat返回该服务器所有被订阅模式的数量。</li>
-</ol>
 
           
         
@@ -1695,152 +1865,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/13/B树和其变体/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/13/B树和其变体/" itemprop="url">B树和其变体</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-13T21:01:00+08:00">
-                2018-04-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/coding/" itemprop="url" rel="index">
-                    <span itemprop="name">coding</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>B树和其变体是标准的文件组织方法，在绝大多数现代文件系统中得到了广泛的应用。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/13/B树和其变体/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1891,7 +1915,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1902,7 +1926,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
