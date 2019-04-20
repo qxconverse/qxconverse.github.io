@@ -262,6 +262,772 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/02/数据库事务四种隔离级别/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/02/数据库事务四种隔离级别/" itemprop="url">数据库事务四种隔离级别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-02T21:27:51+08:00">
+                2018-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>未授权读取（read uncommitted）</p>
+<p>授权读取（read committed）</p>
+<p>可重复读取（repeatable read）</p>
+<p>序列化（serializable）</p>
+<p>为什么会提出这四个概念，是因为在一个事务执行的过程中，可能出现以下几种情况：</p>
+<ol>
+<li>更新丢失：两个事务同时更新一行数据，一个事务对数据的更新把另外一个事务对数据的更新覆盖了。不能应对并发</li>
+<li>脏读：一个事务读取到了另外一个事务未提交的数据操作结果</li>
+<li>不可重复读：一个事务对同一行数据重复读取2次，但是得到了不同的结果</li>
+<li>虚读：事务T1读取了某一数据后，事务T2对其做了修改，当事务T1再次读该数据时得到了与第一次不同的值</li>
+<li>幻读：事务在操作的过程中进行2次查询，第一次查询到的结果包含了第一次查询中未出现的数据或者缺少了第一次查询中出现的数据。这是因为在两次查询过程中另外一个事务插入数据造成的</li>
+</ol>
+<p><strong>未授权读取（我在写，你就不能写，但是你可以读）就是一个事务可以读取另一个未提交事务的数据。</strong><br>如果一个事务已经开始写数据，则另外一个事务不允许同时进行写操作，但是允许其它事务读此行数据。该隔离级别可以通过“排他写锁”实现。<br>避免了更新丢失，却可能出现脏读。也就是说事务B读取到了事务A未提交的数据</p>
+<p><strong>授权读取（我在读，你可以读；但是我在写，如果还没有提交，你不能读）</strong><br>就是一个事务要等另一个事务提交后才能读取数据。读取数据的事务允许其它事务继续访问该行数据，但是未提交的写事务将会禁止其它事务访问该行。<br>避免了脏读，但是可能出现不可重复读。事务A事先读取了数据，事务B紧接着更新了数据，并提交了事务，而事务A再次读取该数据时，数据已经发生了变化。</p>
+<p><strong>可重复读取（我在读，你不能写，可以读）</strong><br>就是在开始读取数据（事务开启）时，不再允许修改操作读取数据的事务将会禁止写事务（但允许读事务），写事务则禁止任何其它的事务。避免了不可重复读和脏读，但是有时可能出现幻读。可以通过“共享读锁”和“排他写锁”实现。<br>重复读可以解决不可重复读问题。不可重复读对应的是修改，即UPDATE操作。但是可能还会有幻读问题。因为幻读问题对应的是插入INSERT操作，而不是UPDATE操作。</p>
+<p><strong>序列化，事务只能一个接着一个地执行，但不能并发执行。可以解决幻读问题</strong></p>
+<p>总结：对于大多数应用程序，可以优先考虑把数据库的隔离级别设置为read committed。可以避免脏读，而且有较好的并发性能。尽管可能导致不可重复读、幻读和第二类丢失更新这些并发问题。可以由应用程序采用悲观锁或乐观锁来控制。MySQL默认的隔离级别就是repeatable read。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/26/计算机思维/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/26/计算机思维/" itemprop="url">计算机思维</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-26T21:27:51+08:00">
+                2018-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！</p>
+<ol>
+<li>缓存思想：缓存思想特别重要，这是很多设计中必出现的，无论在操作系统层面还是具体应用层面。比如在内存和CPU之间有寄存器；比如在Redis中有缓存机制；Mybatis也有缓存机制，当某些记录很大，而且基本上不会变，且查询频率很高，那么利用缓存是明智的选择。消息队列</li>
+<li>Hash+链表、树形结构思想：说到hash一般会想到hashtable，hashmap等等，树形结构就更多了。共同点是，说到查找，它们是高频词汇。对于无序的东西，我们的查找时间复杂度是n级别的。所以为了优化，会采用2种措施，一种是建立索引，即hash表，计算key值，然后放到对应的位置，如果出现碰撞，通常是加个链表。这样复杂度可以控制在1级别的。凡事都有优缺点，虽然查询快了，但是它是无序的。而如果采用第二种措施，即用树形结构，比如二叉树（红黑树）、B+树等。基本是可以实现logn级别的，虽然慢一些，但其优点是有序。凡是涉及到查找，要想到它们！在ElasticSearch中有这些思想的存在（倒排索引，基于单词文档矩阵模型）。</li>
+<li>分布式思想：这个不用说了，当应用大了以后，必然出现。涉及到分布式，那么一定会涉及到同步、一致性等等问题。</li>
+<li>解耦思想：这个思想很重要，无论在什么地方都会体现，任何系统，都应当考虑到解耦。</li>
+<li>top-down思想：任何时候可以先从宏观整体考虑，然后再到具体的部分。递归是一种体现。</li>
+<li>主从思想：这一思想常常出现在分布式中</li>
+<li>DP思想：这个不用说，算法中最难以理解，也是最能解决复杂问题的一种思想。</li>
+<li>双倍扩容思想：对于一些动态容器，比如C++中的vector扩容，java中的hashmap扩容，Redis中的dict的rehash过程。多多少少有基于原来容量2倍来进行扩容的思想。</li>
+<li>拦截过滤思想</li>
+<li>注册通知（发布、通知）思想，反应器模式</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/18/IO模型/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/18/IO模型/" itemprop="url">IO模型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-18T21:35:51+08:00">
+                2018-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>关于5种I/O模型的理解</p>
+<p>以喝咖啡举例， 在网上点了咖啡粉外卖，要等外卖小哥送咖啡，然后泡咖啡，喝咖啡</p>
+<ol>
+<li>阻塞式I/O：一直站在家里等咖啡（其它什么事不做）送到，然后泡咖啡</li>
+<li>非阻塞式I/O：不停地给外卖小哥打电话（其它什么事不做），送到后泡咖啡</li>
+<li>IO多路复用：一开始和小哥说好，到了后打电话，同时站在家里等（于此同时，他还在等其它的外卖，也是什么事不做），一旦咖啡到了，就泡咖啡</li>
+<li>信号驱动式IO：干自己的事情，外卖小哥到了后打电话让你取咖啡，然后你泡咖啡</li>
+<li>异步IO：一直干自己的事情，整个事情都让女朋友来做，做好了通知自己过去喝</li>
+</ol>
+<p>前面3种提到的IO都是同步的，与之相对应的是异步IO。这是一个维度，还有一个是阻塞的维度。传统的是阻塞的IO，不管是C端还是S端，都是阻塞的。接着是非阻塞的IO，主要通过C端的轮询来实现。后面的多路复用，它也是非阻塞的，通过选择器和通道来实现。主要采用的是反应器（Reactor）模式。涉及到事件的注册和订阅。</p>
+<p>很早很早之前，Java的api只支持由本地系统套接字库提供的阻塞函数。阻塞体现在服务器端的监听过程，直到有新的连接，这时就建立一个双方通信的socket。接着它继续监听。其缺点是只能同时处理一个连接，要管理多个并发的客户端连接，需要开启多个线程。</p>
+<p>下面是核心的服务端代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ServerSocket serverSocket = <span class="keyword">new</span> ServerSocket(<span class="number">8888</span>);</span><br><span class="line">Socket socket = serverSocket.accept();</span><br><span class="line">BufferedReader in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</span><br><span class="line">PrintWriter out = <span class="keyword">new</span> PrintWriter(socket.getOutputStream(), <span class="keyword">true</span>);</span><br><span class="line">String request, response;</span><br><span class="line"><span class="keyword">while</span> ((request = in.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">"OK"</span>.equals(request)) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    response = processRequest(request);</span><br><span class="line">    out.println(response);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/Peter-Dinklage演讲稿/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/Peter-Dinklage演讲稿/" itemprop="url">Peter Dinklage演讲稿</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T13:43:14+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/演讲/" itemprop="url" rel="index">
+                    <span itemprop="name">演讲</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Peter Dinklage – Actor</p>
+<p>Don’t be frightened! When a Bennington student, 10 minutes before you come up to the podium — and you’re amazed.</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/22/Peter-Dinklage演讲稿/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/top-down思维/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/23/top-down思维/" itemprop="url">top-down思维</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T10:15:02+08:00">
+                2018-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/随想/" itemprop="url" rel="index">
+                    <span itemprop="name">随想</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>任何事情要养成先宏观再微观，先整体再局部，先一般再具体的思路。多年的沉痛经历告诉自己，这很重要，也是决定你能不能把事情做好的一个关键因素。这里把它称为top-down思维。</p>
+<p>最怕一上来就撸起袖子加油干，往往抓不到重点，得不偿失，花费最长的时间得到最低的成果。而你所见到的大佬们，都不会这样做。不管是企业管理，还是工程项目，还是个人工作计划，都会遵循top-down思维的。</p>
+<p>top-down思维的优点有很多，这里大致说几点：</p>
+<ol>
+<li>不管是自己还是他人，只想听大概的思路，如果一上来就具体，那么受众根本接受不了，请看下面的示例：</li>
+<li>这样可以看到整体的东西，方便做预测、规划</li>
+</ol>
+<p>关于这一点，有一个很好的例子，就是群面的时候，当面试官给出题目并要求在规定时间内给出一个结果的时候。总是要有一位同学带领大家，起到统筹的作用。其实他的任务很简单，就是告诉大家：我们的时间有多少（并且他要安排某个人计时），要讨论出什么东西。那么时间分配该怎样。而且对于讨论该给出的答案要包括哪几个小点。每位同学只能发言多久时间。最后由谁来总结汇报给面试官。</p>
+<p>看到没有，他做的就是从宏观上给出时间规划和任务安排。设想没有这个人，大家在底下，你一句，我一句，最后一定会乱套，而且结果还不一定能讨论出来！！（或是超时，或是统一不了结果）</p>
+<ol start="3">
+<li>有了宏观把控后，具体做的时候，就能理清思路，这个点应该出现在哪一个步骤，而不应该出现在哪个步骤。这样做起来更加自信高效。</li>
+</ol>
+<p>所以，一定要养成这个习惯，一定要逼迫自己这样做，因为真的极其重要！！！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/13/B树和其变体/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -983,747 +1749,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/13/布达佩斯大饭店、当幸福来敲门、月球影评/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/13/布达佩斯大饭店、当幸福来敲门、月球影评/" itemprop="url">布达佩斯大饭店、当幸福来敲门、月球影评</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-13T13:08:01+08:00">
-                2018-02-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/movie/" itemprop="url" rel="index">
-                    <span itemprop="name">电影</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="布达佩斯大饭店"><a href="#布达佩斯大饭店" class="headerlink" title="布达佩斯大饭店"></a>布达佩斯大饭店</h4><p>对称美！！！！！</p>
-<h4 id="当幸福来敲门"><a href="#当幸福来敲门" class="headerlink" title="当幸福来敲门"></a>当幸福来敲门</h4><p>哪怕生活处处与你作对，只要你坚持做任何一件事情，你也可以追求到幸福。</p>
-<h4 id="月球"><a href="#月球" class="headerlink" title="月球"></a>月球</h4><p>烧脑、很孤独的一部电影。。。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/06/新名字的故事/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/06/新名字的故事/" itemprop="url">新名字的故事</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-06T12:18:32+08:00">
-                2018-02-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/阅读/" itemprop="url" rel="index">
-                    <span itemprop="name">阅读</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>终于读完了这本书。虽然只是四部曲中的第二部，但是适合现在的我读。这一部讲的大概就是16-24左右的故事。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/06/新名字的故事/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/07/情书、天使爱美丽、心灵捕手影评/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/07/情书、天使爱美丽、心灵捕手影评/" itemprop="url">情书、天使爱美丽、心灵捕手影评</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-07T13:04:50+08:00">
-                2018-01-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/movie/" itemprop="url" rel="index">
-                    <span itemprop="name">电影</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="情书"><a href="#情书" class="headerlink" title="情书"></a>情书</h4><p>这部电影让我想到了 初恋，同样是日本的电影。</p>
-<p>女主真是美。很感人，遇到同名也是很有缘份的一件事。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/07/情书、天使爱美丽、心灵捕手影评/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/17/人类简史/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/17/人类简史/" itemprop="url">人类简史</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-17T12:18:32+08:00">
-                2017-12-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/阅读/" itemprop="url" rel="index">
-                    <span itemprop="name">阅读</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>作者语言诙谐，思路清晰，观点新颖。</li>
-<li>作者明显是达尔文进化论的铁粉，书中反复提到演化。除此之外，也同时强调基因和DNA的作用，这些是构成全书最核心的客观观点。</li>
-<li>作者在描述历史的不可逆性时，观点有点类似于惯性力的作用。当人们意识到走到了某个节点后，发现存在诟病，可是想恢复到之前已经无能为力。包括农业革命和后面的科学革命都这样。</li>
-<li>人类，准确说是智人，这个词太平常了，仅仅是无数物种之一而已。但是又太不平凡，因为目前智人统治着地球。</li>
-<li>从宇宙大爆炸后，先后出现的是物理学、化学、生物学、历史学…7万年前，认知革命开始，智人通过描述虚拟故事以及八卦，战胜了其它人属物种以及其它动植物物种。意识与虚构支撑着一切智人系统。</li>
-<li>农业革命发生在距今1.2万年前，这是最大的骗局。智人驯化了动植物，其实是被驯化了。智人们通过复制基因一代一代相传。通过金钱、帝国、宗教，不断向前发展。智人们不断扩张以巩固自己的疆土。通过探险殖民的方式打破了原始部落。</li>
-<li>科学革命发生在距今仅仅500年前，但是速度极其之快。科学、帝国、资本主义推动着历史的发展。</li>
-<li>这是一个由强者制定规则的世界，很多都是想象出来的东西，没有绝对的对错。认识自我才是最重要的。</li>
-<li>历史中很大的空白就是幸福感的研究，智人从无到有，再到现在，真的幸福了吗？</li>
-<li>我们已经强大到了接近神的地步了，然而我们最需要知道的是，后面我们要做什么。</li>
-<li>历史的发展总是必然性结合着偶然性一起的，谁都不能预测未来。我们还要经历很多个岔路口。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/22/零知识证明/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/22/零知识证明/" itemprop="url">零知识证明</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-22T13:42:06+08:00">
-                2017-10-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>简单理解：</p>
-<p>零知识证明（Zero-knowledge proofs）</p>
-<p>零知识证明是一种特殊的交互式证明，其中证明者知道问题的答案，他需要向验证者证明“他知道答案”这一事实，但是要求验证者不能获得答案的任何信息。</p>
-<p>可以参考这样一个简单的例子。证明者和验证者都拿到了一个数独的题目，证明者知道一个解法，他可以采取如下这种零知识证明方法：他找出81张纸片，每一张纸片上写上1到9的一个数字，使得正好有9份写有从1到9的纸片。然后因为他知道答案，他可以把所有的纸片按照解法放在一个9乘9的方格内，使得满足数独的题目要求（每列、每行、每个九宫格都正好有1到9）。放好之后他把所有的纸片翻转，让没有字的一面朝上。这样验证者没办法看到纸片上的数字。接下来，验证者就验证数独的条件是否满足。比如他选一列，这时证明者就把这一列的纸片收集起来，把顺序任意打乱，然后把纸片翻过来，让验证者看到1到9的纸片都出现了。整个过程中验证者都无法得知每张纸片的位置，但是却能验证确实是1到9都出现了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1769,7 +1799,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1780,7 +1810,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1791,7 +1821,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
