@@ -262,6 +262,687 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/08/WebApi的安全性/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/08/WebApi的安全性/" itemprop="url">WebApi的安全性</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-08T21:35:51+08:00">
+                2018-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>客户端调用：<code>http://api.xxx.com/getInfo?Id=value</code>，这种方式简单粗暴，在浏览器直接输入<code>http://api.xxx.com/getInfo?Id=value</code>，即可获取到相关的信息了，但是这样的方式会存在很严重的安全性问题，没有进行任何的验证，大家都可以通过这个方法获取到产品列表，导致信息泄露。</p>
+<ol>
+<li>如何验证调用者身份呢？</li>
+<li>如何防止参数被篡改呢？</li>
+<li>如何保证请求的唯一性？</li>
+<li>如何保证请求的唯一性，防止请求被恶意攻击呢？</li>
+</ol>
+<p>使用Token+签名认证（微信支付中有这种思想在里面）</p>
+<ol>
+<li>做一个认证服务，提供一个认证的WebApi，用户先访问它获取对应的Token</li>
+<li>用户拿着相应的Token以及请求的参数和服务器端提供的签名算法计算出签名后再去访问指定的Api</li>
+<li>服务器端每次接收到请求就获取对应用户的Token和请求参数，服务器端再次计算签名和客户端签名做对比，如果验证通过则正常访问相应的Api，验证失败则返回具体的失败信息。</li>
+</ol>
+<p>使用签名（签名算法+签名参数）</p>
+<ol>
+<li>给每个http请求添加一个签名，服务端来验证签名的合法性，如果签名合法则执行响应的操作，如果签名非法则直接拒绝请求。</li>
+<li>签名算法一般都使用Hash散列算法，常用的有MD5，SHA系列算法。这些算法可以根据不同的输入，计算出不同的结果，而且碰撞的概率很低。</li>
+<li>可以用Http请求的queryString然后加上时间戳还有随机数来作为签名的参数。</li>
+</ol>
+<p>WebApi跨域问题解决方案：CORS。什么是跨域问题？</p>
+<ol>
+<li>同源策略：出于安全考虑，浏览器会限制脚本中发起的跨站请求，浏览器要求JavaScript或Cookie只能访问同域下的内容。跨域问题的根本原因是浏览器的安全限制，默认禁止跨域的动态资源请求。</li>
+<li>正是由于这个原因，我们不同项目之间的调用就会被浏览器阻止。比如我们最常见的场景：WebApi作为数据服务层，它是一个单独的项目，我们的MVC项目作为Web的显示层，这个时候我们的MVC里面就需要调用WebApi里面的接口取数据展现在页面上。因为我们的WebApi和MVC是两个不同的项目，所以运行起来之后就存在上面说的跨域的问题。</li>
+</ol>
+<p>还有一篇更好的文章：<a href="https://www.cnblogs.com/codelir/p/5327462.html" target="_blank" rel="noopener">https://www.cnblogs.com/codelir/p/5327462.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/Redis/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/03/Redis/" itemprop="url">Redis</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-03T21:30:11+08:00">
+                2018-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>redis的list的底层实现是一个<strong>双向链表</strong>，也可以使用它实现一个简单的消息队列，生产者push，消费者pop。</p>
+<p>hash，类似于python里面的dict，C++里面的unordered_map，Java里面的HashMap。底层实现为HashMap，可以用来存储用户的id及其信息（比如以json格式保存）。</p>
+<p>set的底层实现是一个value值为null的hashmap，它根据hash的方式快速去重。</p>
+<p>sorted set底层实现是hashmap + skiplist。为什么要用2个呢？当进行查询的时候，可以使用hashmap保证其<code>$O(1)$</code>级别的复杂度；而在进行更新操作时，如果只有hashmap，那么需要进行重排，时间复杂度为<code>$O(nlogn)$</code>，而如果加入跳跃表，那么只需要<code>$O(logn)$</code>的复杂度。所以结合使用。</p>
+<p>rdb/aof持久化</p>
+<p><strong>rdb:数据库状态（所有数据库中的所有键值对数据）和rdb文件相互转存，可以看做是快照。文件格式为二进制文件。</strong></p>
+<p>save会阻塞服务器进程，导致其不能处理其它任何命令请求；bgsave会派生出一个子进程去完成，父进程不受影响。可以设置bgsave自动执行的参数（保存条件，当任意一个条件满足，则自动执行），包括时间间隔和修改数。在redis服务器中则保存了上一次保存的时间戳lastsave和距离上次保存总计的修改次数dirty计数器。</p>
+<p><strong>aof:通过保存所有修改数据库的写命令请求来记录服务器的数据库状态。</strong></p>
+<p>aof文件中的所有命令都是以Redis命令请求协议的格式保存。命令请求会先保存到aof缓冲区里面，之后再定期写入并同步到aof文件中。</p>
+<p>Redis的发布/订阅功能</p>
+<p>可以用来订阅频道或是模式</p>
+<ol>
+<li>订阅频道使用的dict（字典），key保存频道，而value保存订阅它的客户端信息。</li>
+<li>订阅模式使用的list（链表），list里面保存了pubsubPattern结构，该结构里面有2个属性，一个是pattern，一个是client（只包含一个client）。</li>
+<li>publish命令会向频道的所有订阅者发消息，并向所有与该频道匹配的模式的订阅者发消息。</li>
+<li>pubsub的3个子命令，channels用来返回当前服务器被订阅的频道；numsub接受多个频道作为参数，并返回这些频道的订阅者数量；numpat返回该服务器所有被订阅模式的数量。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/计算机网络 and 操作系统/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/03/计算机网络 and 操作系统/" itemprop="url">计算机网络与操作系统相关知识点</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-03T21:30:11+08:00">
+                2018-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3><h4 id="ISO7层网络模型"><a href="#ISO7层网络模型" class="headerlink" title="ISO7层网络模型"></a>ISO7层网络模型</h4><ol>
+<li>应用层：处理网络应用</li>
+<li>表示层：数据表示</li>
+<li>会话层：互联主机通信</li>
+<li>传输层：端到端链接（TCP/UDP协议）</li>
+<li>网络层：寻址和最短路径（IP协议）</li>
+<li>数据链路层：接入介质</li>
+<li>物理层：二进制传输</li>
+</ol>
+<p>5层无表示层和会话层</p>
+<h4 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h4><h5 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h5><p>SYN=1表示请求连接</p>
+<ol>
+<li>建立链接时C端发送SYN包到S端（SYN=1，seq=x），C端进入SYS_SENT状态</li>
+<li>S端在收到C端的SYN包以后必须确认C端的SYN包，所以发送（SYN=1，ACK=1，seq=y，ack=x+1）到C端，然后S端进入SYS_RCVD状态</li>
+<li>C端再收到S端发送的SYN和ACK包以后，向服务器发送ACK包（ACK=1，ack=y+1），然后C端进入ESTABLISHED状态，S端在收到C端的确认包后也进入ESTABLISHED状态</li>
+</ol>
+<h5 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h5><ol>
+<li>C端向S端发送释放链接请求，发送FIN=1，seq=x，发送完后进入FIN_WAIT_1状态</li>
+<li>S端在收到C端的请求后进入CLOSE_WAIT状态，然后发送给C端一个确认包（ACK=1，seq=x+1）。C端这时候不能再发送数据了，只能发送确认报文，C端在接受到S端发送的确认包以后进入FIN_WAIT_2状态</li>
+<li>当S端所有的数据都传完的时候，向C端发送释放链接报文（FIN=1，seq=y），发完之后自己进入LAST_WAIT状态</li>
+<li>C端收到S端的请求后，发送一个确认报文，自己进入TIME_WAIT状态，而不是立马关闭，因为C端发送的确认报文可能会丢失，丢失的话S端就会重传一个FIN，也就是释放连接报文，这个时候C端必须还没关闭。当S端接受到确认报文后，就进入CLOSE状态。但是由于上面所说原因，C端必须等待一定的时间才能够进入CLOSE状态。而这个等待的时间长度是2*msl（由于可能出现不可靠的连接，当C端发送确认后，可能S端没有收到，如果它没有收到，它就会再次发FIN，这时C端必须再次发送确认，因此C端不能急着关闭；而要等一段时间，如果这个时间S端没有消息过来，说明S端收到了确认，这时C端才能关闭）</li>
+</ol>
+<p>2倍报文最大生存时间，任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。等待2MSL时间主要目的是怕最后一个ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包。msl 30秒到2分钟</p>
+<p>为什么一个是三次，一个是四次；关键在于关闭连接时，当S端收到FIN后，它只能暂时确认，而不能同时FIN，因为它也许还要继续发数据给C端，因此造成了ACK和FIN不能同时发送过去。这样就多了一个流程。</p>
+<h5 id="握手攻击"><a href="#握手攻击" class="headerlink" title="握手攻击"></a>握手攻击</h5><p>DoS-拒绝服务攻击<br>TCP连接时，攻击者故意不完成三次握手，导致资源浪费</p>
+<p>解决方法：限制同时打开的SYN半连接数；缩短SYN半连接的TIME_OUT时间；启用防火墙</p>
+<h5 id="为什么是三次握手不是两次"><a href="#为什么是三次握手不是两次" class="headerlink" title="为什么是三次握手不是两次"></a>为什么是三次握手不是两次</h5><p>两次握手可能会发生死锁的情况。C端发送给S端一个请求，S端在收到后并发送确认（S端认为连接成功）。如果S端发送的确认丢失，C端会认为连接还未成功而忽略S端发送的任何数据。而S端会在发送数据超时后重发同样的分组，进而形成死锁。</p>
+<h4 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h4><p>用户数据报协议，无连接，面向报文，无阻塞控制，尽最大努力交付。</p>
+<h4 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h4><ol>
+<li>TCP是面向连接的，可靠的数据传输，而UDP是非面向连接的，不可靠的数据传输</li>
+<li>TCP的传输单位是TCP报文段，UDP则是用户数据报</li>
+<li>TCP注重安全，UDP传输更快</li>
+</ol>
+<h4 id="关于滑动窗口与拥塞控制"><a href="#关于滑动窗口与拥塞控制" class="headerlink" title="关于滑动窗口与拥塞控制"></a>关于滑动窗口与拥塞控制</h4><ol>
+<li>发送方和接受方都持有自己的窗口值</li>
+<li>慢开始：发送发从初始的cwnd=1，慢慢指数级增长</li>
+<li>当达到了ssthresh的值后，开始拥塞算法，即cwnd加法增长，每次+1</li>
+<li>当网络中出现拥塞时，设置ssthresh的值为发送拥塞窗口值的一半，并设置cwnd=1，再次慢开始</li>
+<li>快重传，接收方每次收到失序的报文后立即发出重复确认，发送方连续3次接收到重复确认时，立即重传。配合6使用</li>
+<li>快恢复，在4中，设置cwnd=ssthresh，并使用拥塞算法（加1）增长</li>
+</ol>
+<p>相关博客：<a href="https://blog.csdn.net/yechaodechuntian/article/details/25429143" target="_blank" rel="noopener">https://blog.csdn.net/yechaodechuntian/article/details/25429143</a></p>
+<h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><h4 id="页面调度算法"><a href="#页面调度算法" class="headerlink" title="页面调度算法"></a>页面调度算法</h4><h5 id="最佳置换算法"><a href="#最佳置换算法" class="headerlink" title="最佳置换算法"></a>最佳置换算法</h5><p>选择被淘汰的页面将是最长时间不会被访问的（无法预测）</p>
+<h5 id="先进先出算法"><a href="#先进先出算法" class="headerlink" title="先进先出算法"></a>先进先出算法</h5><p>优先淘汰最早进入内存的页面</p>
+<h5 id="最近最久未使用"><a href="#最近最久未使用" class="headerlink" title="最近最久未使用"></a>最近最久未使用</h5><p>选择最近最长时间未访问过的页面淘汰</p>
+<h5 id="CLOCK-NRU-最近未使用算法"><a href="#CLOCK-NRU-最近未使用算法" class="headerlink" title="CLOCK/NRU 最近未使用算法"></a>CLOCK/NRU 最近未使用算法</h5><p>某页首次进入内存，u=1，若再次被访问u=1。当需要替换时，扫描缓冲区，查找u=0的页面置换，若遇到u=1则将其置0。</p>
+<h4 id="进程间通信方式"><a href="#进程间通信方式" class="headerlink" title="进程间通信方式"></a>进程间通信方式</h4><h5 id="共享存储"><a href="#共享存储" class="headerlink" title="共享存储"></a>共享存储</h5><p>通信进程间存在一块可以直接访问的共享空间（对共享空间读写需要互斥工具：P（通过）操作，V（释放）操作）</p>
+<h5 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h5><p>进程间数据交换以格式化的消息为单位（直接通信 or 间接通信：发送消息到中间实体）</p>
+<h5 id="管道通信"><a href="#管道通信" class="headerlink" title="管道通信"></a>管道通信</h5><p>管道指用于连接一个读进程和一个写进程以实现它们之间的一个共享文件（互斥、同步、确定对方存在）</p>
+<h4 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h4><p>指两个或两个以上进程在执行过程中因争夺资源而造成的一种互相等待现象，若无外力作用，它们都将无法继续执行。</p>
+<h5 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h5><p>系统资源不足、进程运行的顺序不合适、资源分配不当</p>
+<h5 id="产生死锁的必要条件"><a href="#产生死锁的必要条件" class="headerlink" title="产生死锁的必要条件"></a>产生死锁的必要条件</h5><ol>
+<li>互斥：进程在某段时间独占资源</li>
+<li>请求与保持：某进程因请求资源而阻塞时，对已获得的资源保持不放</li>
+<li>不剥夺：未使用完不剥夺资源</li>
+<li>循环等待：循环等待资源</li>
+</ol>
+<h5 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h5><p>打破上述必要条件中的一个或几个</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/mysql中的undo、redo/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/03/mysql中的undo、redo/" itemprop="url">mysql中的undo、redo</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-03T21:29:17+08:00">
+                2018-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>mysql中的日志文件分为undo log和redo log。</p>
+<p>undo日志记录的是数据修改之前的值，主要保证数据的一致性。因为当修改出现异常，可以用来回滚到之前的状态。</p>
+<p>undo日志分为2中类型，一种是<code>insert_undo</code>，记录插入的唯一键值；还有一种是<code>update_undo</code>，记录修改的唯一键值和修改之前的值。</p>
+<p>redo日志记录的是数据修改之后的值，主要保证数据的原子性和持久性。在数据库对数据做修改的时候，会把数据页从磁盘读到buffer pool里面，如果这时发生数据库重启，那么这些数据就无法同步到磁盘了。</p>
+<p>使用redo日志有2个好处</p>
+<ol>
+<li>在发生数据库重启（或crash）时，buffer pool的数据还没有刷新到磁盘，通过redo日志可以找到需要刷新到磁盘的记录。</li>
+<li>buffer pool刷新到磁盘是一个随机IO的过程，效率较差；而把buffer pool的数据记录到redo log是一个顺序IO，可以提高事务提交的速度。</li>
+</ol>
+<p>通过undo + redo的设计，使得IO性能得到提高。</p>
+<ol>
+<li>缓存到buffer区，批量写入日志（redo log buffer）</li>
+<li>并发事务共享redo log存储空间，所以其它未提交的事务日志也会被提交</li>
+<li>redo log只是顺序追加</li>
+</ol>
+<p>Mysql的InnoDB存储引擎使用的恢复策略：<strong>进行恢复时，重做所有的事务，包括未提交的和回滚的事务，然后再根据undo log回滚那些未提交的事务。</strong></p>
+<p>参考：<a href="http://www.cnblogs.com/xinysu/p/6555082.html" target="_blank" rel="noopener">http://www.cnblogs.com/xinysu/p/6555082.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/02/数据库事务四种隔离级别/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1161,594 +1842,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/关于回溯法在排列和组合中的应用总结/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/10/关于回溯法在排列和组合中的应用总结/" itemprop="url">关于回溯法在排列和组合中的应用总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-10T14:34:00+08:00">
-                2018-04-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="关于回溯法在排列和组合中的应用总结"><a href="#关于回溯法在排列和组合中的应用总结" class="headerlink" title="关于回溯法在排列和组合中的应用总结"></a>关于回溯法在排列和组合中的应用总结</h4><p>下面是一段leetcode讨论区的原话：</p>
-<blockquote>
-<p>Backtracking can be solved always as follows:</p>
-<p>Pick a starting point.<br>while(Problem is not solved)<br>​    For each path from the starting point.<br>​        check if selected path is safe, if yes select it<br>​        and make recursive call to rest of the problem<br>​        before which undo the current move.<br>​    End For<br>If none of the move works out, return false, NO SOLUTON.</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/10/关于回溯法在排列和组合中的应用总结/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/virtualFunction/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/10/virtualFunction/" itemprop="url">关于C++中的析构函数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-10T14:32:12+08:00">
-                2018-04-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="关于析构函数"><a href="#关于析构函数" class="headerlink" title="关于析构函数"></a>关于析构函数</h4><p>遇到跟析构函数相关的题目，总是做错。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/10/virtualFunction/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/06/计算机视觉特征提取与图像处理总结/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/06/计算机视觉特征提取与图像处理总结/" itemprop="url">计算机视觉特征提取与图像处理总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-06T16:33:43+08:00">
-                2018-04-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="计算机视觉特征提取与图像处理总结"><a href="#计算机视觉特征提取与图像处理总结" class="headerlink" title="计算机视觉特征提取与图像处理总结"></a>计算机视觉特征提取与图像处理总结</h3><p>关于经典的计算机视觉这一块，简单地总结一下，罗列一些知识点，方便以后的再学习或是查阅。之所以称它为经典的，主要是因为里面都是些传统的方法，相较于最近几年才发展起来的深度学习方法而言。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/06/计算机视觉特征提取与图像处理总结/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/14/光圈、快门、感光度/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/14/光圈、快门、感光度/" itemprop="url">光圈、快门、感光度</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-14T21:46:59+08:00">
-                2018-02-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/photography/" itemprop="url" rel="index">
-                    <span itemprop="name">摄影</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在理解的光圈和快门的时候，拿眼睛做对比学习效果较好。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/14/光圈、快门、感光度/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1799,7 +1892,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1810,7 +1903,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1821,7 +1914,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
