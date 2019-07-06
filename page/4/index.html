@@ -262,6 +262,159 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/图的遍历/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/10/图的遍历/" itemprop="url">图的遍历</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-10T21:33:38+08:00">
+                2018-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>对于深度遍历，采用递归的解法很简单，如果使用栈来实现，那么思路是这样的：</p>
+<ol>
+<li>首先将需要遍历的节点放入栈里面，访问，并且设置已经访问</li>
+<li>当栈不为空的时候，按照下面的步骤：</li>
+<li>获取栈顶的节点（不能弹出），并获取它的邻居节点，开始计数，表示已经访问过的邻居节点的个数</li>
+<li>对于每个邻居节点，如果它没有被访问过，则入栈，并访问它，设置已经访问过，并立即退出循环（否则就没有深度往下走了）</li>
+<li>在遍历邻居节点的过程中，如果某个邻居被访问过了，则计数加一</li>
+<li>当计数器的值等于了邻居节点的个数，说明栈顶节点的邻居都访问过了，这时就可以让它出栈了</li>
+</ol>
+<p>Python代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">def dfs_stack(node):</span><br><span class="line">    visited = [0] * (N + 1)  #N代表图中点的个数</span><br><span class="line">    </span><br><span class="line">    stack = [node]</span><br><span class="line">    print(node)</span><br><span class="line">    visited[node] = 1</span><br><span class="line">    </span><br><span class="line">    while stack:</span><br><span class="line">        top = stack[-1]</span><br><span class="line">        neigbor_list = neigbor_info[top]</span><br><span class="line">        count = 0</span><br><span class="line">        for cur in neigbor_list:</span><br><span class="line">            if visited[cur] == 0:</span><br><span class="line">                stack.append(cur)</span><br><span class="line">                print(cur)</span><br><span class="line">                visited[cur] = 1</span><br><span class="line">            count += 1</span><br><span class="line">        </span><br><span class="line">        if count == len(neigbor_list):</span><br><span class="line">            stack.pop()</span><br><span class="line">            </span><br><span class="line">def dfs(node):</span><br><span class="line">    visited = [0] * (N + 1)</span><br><span class="line">    </span><br><span class="line">    def _dfs(cur):</span><br><span class="line">        print(cur)</span><br><span class="line">        for n in neigbor_info[cur]:</span><br><span class="line">            if visited[n] == 0:</span><br><span class="line">                visited[n] = 1</span><br><span class="line">                _dfs(n)</span><br><span class="line">    </span><br><span class="line">    _dfs(node)</span><br><span class="line">    </span><br><span class="line">def bfs(node):</span><br><span class="line">    visited = [0] * (N + 1)</span><br><span class="line">    </span><br><span class="line">    queue = [node]</span><br><span class="line">    visited[node] = 1</span><br><span class="line">    </span><br><span class="line">    while queue:</span><br><span class="line">        cur = queue.pop(0)</span><br><span class="line">        print(cur)</span><br><span class="line">        </span><br><span class="line">        for n in neigbor_info[cur]:</span><br><span class="line">            if visited[n] == 0:</span><br><span class="line">                queue.append(n)</span><br><span class="line">                visited[n] = 1</span><br><span class="line">                </span><br><span class="line">                </span><br><span class="line">def level_order(root):</span><br><span class="line">    queue = [root]</span><br><span class="line">    while queue:</span><br><span class="line">        # 取队首节点</span><br><span class="line">        top = queue.pop(0)</span><br><span class="line">        print(top.val)</span><br><span class="line">        </span><br><span class="line">        if top.left:</span><br><span class="line">            queue.append(top.left)</span><br><span class="line">        if top.right:</span><br><span class="line">            queue.append(top.right)</span><br></pre></td></tr></table></figure>
+<p>对比地来看，图的广度优先遍历，和数的层次遍历很像，唯一的区别是图中需要加上一个访问状态，而树不用。因为树是严格地从父节点向孩子节点走的，不会重复；而图不一样，可能会重复。除此之外的区别是，图的邻居节点有多个，而树的“邻居节点”其实就是它的孩子节点。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/pdca行为/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1709,160 +1862,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/top-down思维/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/23/top-down思维/" itemprop="url">top-down思维</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T10:15:02+08:00">
-                2018-04-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/随想/" itemprop="url" rel="index">
-                    <span itemprop="name">随想</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>任何事情要养成先宏观再微观，先整体再局部，先一般再具体的思路。多年的沉痛经历告诉自己，这很重要，也是决定你能不能把事情做好的一个关键因素。这里把它称为top-down思维。</p>
-<p>最怕一上来就撸起袖子加油干，往往抓不到重点，得不偿失，花费最长的时间得到最低的成果。而你所见到的大佬们，都不会这样做。不管是企业管理，还是工程项目，还是个人工作计划，都会遵循top-down思维的。</p>
-<p>top-down思维的优点有很多，这里大致说几点：</p>
-<ol>
-<li>不管是自己还是他人，只想听大概的思路，如果一上来就具体，那么受众根本接受不了，请看下面的示例：</li>
-<li>这样可以看到整体的东西，方便做预测、规划</li>
-</ol>
-<p>关于这一点，有一个很好的例子，就是群面的时候，当面试官给出题目并要求在规定时间内给出一个结果的时候。总是要有一位同学带领大家，起到统筹的作用。其实他的任务很简单，就是告诉大家：我们的时间有多少（并且他要安排某个人计时），要讨论出什么东西。那么时间分配该怎样。而且对于讨论该给出的答案要包括哪几个小点。每位同学只能发言多久时间。最后由谁来总结汇报给面试官。</p>
-<p>看到没有，他做的就是从宏观上给出时间规划和任务安排。设想没有这个人，大家在底下，你一句，我一句，最后一定会乱套，而且结果还不一定能讨论出来！！（或是超时，或是统一不了结果）</p>
-<ol start="3">
-<li>有了宏观把控后，具体做的时候，就能理清思路，这个点应该出现在哪一个步骤，而不应该出现在哪个步骤。这样做起来更加自信高效。</li>
-</ol>
-<p>所以，一定要养成这个习惯，一定要逼迫自己这样做，因为真的极其重要！！！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1913,7 +1912,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1924,7 +1923,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1935,7 +1934,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
