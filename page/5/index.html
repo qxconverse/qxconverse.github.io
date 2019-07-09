@@ -262,171 +262,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/7.25（rabbitmq）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/25/7.25（rabbitmq）/" itemprop="url">RabbitMQ的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-25T12:09:52+08:00">
-                2018-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>总结：在spring中使用Rabbit-MQ，比如有A（生产者）、B（消费者）两个独立的系统，它们之间需要通信。在A系统中需要调用B的类中某个函数，不需要重写很多冗余的代码，只需要传递关键信息给B就可以了。当然这是建立在A和B的耦合性不高的情况下的。假如A和B高耦合，那么可能会发生这样的情况：A想调用B，但是B在调用的时候又反过来涉及到A中的东西。所以这也从侧面反映了实现消息队列的优点：降低模块之间的耦合性。</p>
-<p>1.首先配置好rabbit-mq的一些基本信息，比如服务地址，端口号，用户名和密码。如下：在A、B中都需要配置，方便注入依赖。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#RabbitMQ nc060</span><br><span class="line">MQ_HOST=nc060</span><br><span class="line">MQ_PORT=5672</span><br><span class="line">#带负载的链接</span><br><span class="line">MQ_ADDRESSES=nc078x.corp.youdao.com:5670</span><br><span class="line">MQ_USER=fanyi</span><br><span class="line">MQ_PASSWORD=fanyi123outfox</span><br></pre></td></tr></table></figure>
-<p>2.接着定义交换机（exchange），队列（queue）和路由key（routingkey），其实这个只需要在A中配置就可以了，B只需要知道queue。如下（1，2步骤都是在application.properties文件中配置的）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#调用分单系统的MQ参数</span><br><span class="line">DS_CALL_EXCHANGE=dsCallExchange</span><br><span class="line">DS_CALL_QUEUE=dsCallQueue</span><br><span class="line">DS_CALL_ROUTINGKEY=dsCallRouting</span><br></pre></td></tr></table></figure>
-<p>3.编写生产者类DsCallHelper，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">package atranslate.api.common.utils;</span><br><span class="line"></span><br><span class="line">import com.rabbitmq.client.AMQP;</span><br><span class="line">import com.rabbitmq.client.Channel;</span><br><span class="line">import com.rabbitmq.client.MessageProperties;</span><br><span class="line">import net.sf.json.JSONObject;</span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line">import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;</span><br><span class="line">import org.springframework.amqp.rabbit.connection.Connection;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author qinxue</span><br><span class="line"> * @date 2018/7/24 19:35</span><br><span class="line"> */</span><br><span class="line">public class DsCallHelper &#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger LOG = LoggerFactory.getLogger(DsCallHelper.class);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * RabbitMQ连接池</span><br><span class="line">     */</span><br><span class="line">    private CachingConnectionFactory connectionFactory;</span><br><span class="line"></span><br><span class="line">    private Connection connection = null;</span><br><span class="line">    private Channel channel = null;</span><br><span class="line"></span><br><span class="line">    private String exchangeName;</span><br><span class="line">    private String routingKey;</span><br><span class="line">    private String queueName;</span><br><span class="line"></span><br><span class="line">    public void init() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            connection = connectionFactory.createConnection();</span><br><span class="line"></span><br><span class="line">            channel = connection.createChannel(false);</span><br><span class="line">            channel.exchangeDeclare(exchangeName, &quot;direct&quot;, true);</span><br><span class="line"></span><br><span class="line">            // 声明队列</span><br><span class="line">            // durable</span><br><span class="line">            // exclusive 队列是否私有，排他性</span><br><span class="line">            // autoDelete 最后一个消费者取消订阅，队列自动删除</span><br><span class="line">            // arguments</span><br><span class="line">            Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">            map.put(&quot;x-ha-policy&quot;, &quot;all&quot;);</span><br><span class="line">            channel.queueDeclare(queueName, true, false, false, map);</span><br><span class="line"></span><br><span class="line">            channel.queueBind(queueName, exchangeName, routingKey);</span><br><span class="line">            LOG.info(&quot;queueName is &quot; + queueName);</span><br><span class="line">            LOG.info(&quot;exchangeName is &quot; + exchangeName);</span><br><span class="line">            LOG.info(&quot;routingKey is &quot; + routingKey);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            LOG.error(&quot;Init RabbitMQ Connection Failed!&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 调用ds系统的译员接单</span><br><span class="line">     * @param orderId</span><br><span class="line">     * @param translatorId</span><br><span class="line">     */</span><br><span class="line">    public void send(long orderId, long translatorId) &#123;</span><br><span class="line">        JSONObject json = new JSONObject();</span><br><span class="line">        json.put(&quot;orderId&quot;, orderId);</span><br><span class="line">        json.put(&quot;translatorId&quot;, translatorId);</span><br><span class="line">        String message = json.toString();</span><br><span class="line">        LOG.info(&quot;message is &quot; + message);</span><br><span class="line">        try &#123;</span><br><span class="line">            byte[] bytes = message.getBytes(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">            // 投递模式为持久化，server重启消息不会丢失</span><br><span class="line">            AMQP.BasicProperties properties = MessageProperties.PERSISTENT_TEXT_PLAIN;</span><br><span class="line"></span><br><span class="line">            channel.basicPublish(exchangeName, routingKey, properties, bytes);</span><br><span class="line">            LOG.info(&quot;Send: &quot; + message);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            LOG.error(&quot;send: &quot; + message + &quot; failed!&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setExchangeName(String exchangeName) &#123;</span><br><span class="line">        this.exchangeName = exchangeName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setRoutingKey(String routingKey) &#123;</span><br><span class="line">        this.routingKey = routingKey;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setQueueName(String queueName) &#123;</span><br><span class="line">        this.queueName = queueName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setConnectionFactory(CachingConnectionFactory connectionFactory) &#123;</span><br><span class="line">        this.connectionFactory = connectionFactory;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>init函数进行mq的配置。后面的send函数发送消息。需要注意的是，通过依赖注入的变量一定要设置setter函数。</p>
-<p>4.接着在A的<code>servletConfig.web.xml</code>配置文件中加入相关的bean，配置连接池。这里就要用到地址、端口、用户和密码。并注入生产类：DsCallHelper。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> &lt;!-- start mq --&gt;</span><br><span class="line">    &lt;bean id=&quot;cachingConnectionFactory&quot; class=&quot;org.springframework.amqp.rabbit.connection.CachingConnectionFactory&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;addresses&quot; value=&quot;$&#123;MQ_ADDRESSES&#125;&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;username&quot; value=&quot;$&#123;MQ_USER&#125;&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;password&quot; value=&quot;$&#123;MQ_PASSWORD&#125;&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">&lt;!-- end mq --&gt;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">&lt;bean id=&quot;dsCallHelper&quot; class=&quot;atranslate.api.common.utils.DsCallHelper&quot; init-method=&quot;init&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;connectionFactory&quot; ref=&quot;cachingConnectionFactory&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;exchangeName&quot; value=&quot;$&#123;DS_CALL_EXCHANGE&#125;&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;routingKey&quot; value=&quot;$&#123;DS_CALL_ROUTINGKEY&#125;&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;queueName&quot; value=&quot;$&#123;DS_CALL_QUEUE&#125;&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
-<p>需要注意的是，<code>init-method</code>用于类的初始化方法。如果有初始化函数，就要写进去，不然会出现空指针异常。到这里，A（生产者）就写好了，需要与B通信，直接调用<code>DsCallHelper</code>里面的send方法。</p>
-<p>5.在B中，编写消费者类DsCallConsumer，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">package distribute.web.helper;</span><br><span class="line"></span><br><span class="line">import com.rabbitmq.client.*;</span><br><span class="line">import distribute.web.logic.DsOrderLogic;</span><br><span class="line">import net.sf.json.JSONObject;</span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.concurrent.TimeoutException;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author qinxue</span><br><span class="line"> * @date 2018/7/24 20:26</span><br><span class="line"> */</span><br><span class="line">public class DsCallConsumer &#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger LOG = LoggerFactory.getLogger(DsCallConsumer.class);</span><br><span class="line"></span><br><span class="line">    private ConnectionFactory connectionFactory = null;</span><br><span class="line"></span><br><span class="line">    private Connection connection = null;</span><br><span class="line">    private Channel channel = null;</span><br><span class="line">    private DsOrderLogic dsOrderLogic = null;</span><br><span class="line"></span><br><span class="line">    private final static String QUEUE_NAME = &quot;dsCallQueue&quot;;</span><br><span class="line"></span><br><span class="line">    public void init() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            connection = connectionFactory.newConnection();</span><br><span class="line">            channel = connection.createChannel();</span><br><span class="line">            // 声明队列</span><br><span class="line">            // durable</span><br><span class="line">            // exclusive 队列是否私有，排他性</span><br><span class="line">            // autoDelete 最后一个消费者取消订阅，队列自动删除</span><br><span class="line">            // arguments</span><br><span class="line">            channel.queueDeclare(QUEUE_NAME, true, false, false, null);</span><br><span class="line">            LOG.info(&quot;初始化rabbitmq，队列名为：&quot; + QUEUE_NAME);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            LOG.error(&quot;Init RabbitMQ Connection Failed!&quot;, e);</span><br><span class="line">        &#125; catch (TimeoutException e) &#123;</span><br><span class="line">            LOG.error(&quot;Init RabbitMQ Connection Failed!&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            LOG.info(&quot;等待消息...&quot;);</span><br><span class="line">            Consumer consumer = new DefaultConsumer(channel) &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)</span><br><span class="line">                        throws IOException &#123;</span><br><span class="line">                    String message = new String(body, &quot;UTF-8&quot;);</span><br><span class="line">                    LOG.debug(message);</span><br><span class="line">                    JSONObject result = JSONObject.fromObject(message);</span><br><span class="line">                    dsOrderLogic.acceptFastTask(result.getLong(&quot;orderId&quot;), result.getLong(&quot;translatorId&quot;));</span><br><span class="line">                    LOG.info(&quot;Received &apos;&quot; + message + &quot;&apos;&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line">            channel.basicConsume(QUEUE_NAME, true, consumer);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            LOG.error(&quot;Waiting Failed!&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setConnectionFactory(ConnectionFactory connectionFactory) &#123;</span><br><span class="line">        this.connectionFactory = connectionFactory;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setDsOrderLogic(DsOrderLogic dsOrderLogic) &#123;</span><br><span class="line">        this.dsOrderLogic = dsOrderLogic;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>同样要注意依赖注入相关的问题，这里有3点需要注意：</p>
-<ol>
-<li><code>channel.queueDeclare(QUEUE_NAME, true, false, false, null);</code>这句话要和A中的相关配置一致。</li>
-<li>可以看出这里确实只需要queue的信息，表示它只监听queue队列发来的消息，而具体的交换机和路由是生产者需要处理的问题。</li>
-<li>最重要的一点，下面的consumer定义一定要放在init函数里，不是单独写一个函数。这里用到了监听器模式的思想。在官网中是这样解释<code>DefaultConsumer</code>的，看作一个回调函数：<blockquote>
-<p>We’re about to tell the server to deliver us the messages from the queue. Since it will push us messages asynchronously, we provide a callback in the form of an object that will buffer the messages until we’re ready to use them. That is what a DefaultConsumer subclass does.</p>
-</blockquote>
-</li>
-</ol>
-<p>6.配置bean，注意init-method的问题。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> &lt;!-- start mq --&gt;</span><br><span class="line">&lt;bean id=&quot;connectionFactory&quot; class=&quot;com.rabbitmq.client.ConnectionFactory&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;host&quot; value=&quot;$&#123;hostAddress&#125;&quot;/&gt;</span><br><span class="line">    &lt;property name=&quot;port&quot; value=&quot;$&#123;hostPort&#125;&quot;/&gt;</span><br><span class="line">    &lt;property name=&quot;username&quot; value=&quot;$&#123;mqUserName&#125;&quot;/&gt;</span><br><span class="line">    &lt;property name=&quot;password&quot; value=&quot;$&#123;mqPassword&#125;&quot; /&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line">&lt;!-- end mq --&gt;</span><br><span class="line">...</span><br><span class="line">    </span><br><span class="line">&lt;bean id=&quot;dsCallConsumer&quot; class=&quot;distribute.web.helper.DsCallConsumer&quot; init-method=&quot;init&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;connectionFactory&quot; ref=&quot;connectionFactory&quot;/&gt;</span><br><span class="line">    &lt;property name=&quot;dsOrderLogic&quot; ref=&quot;dsOrderLogic&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/7.17（Git与SVN操作）/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1784,6 +1619,152 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/06/新名字的故事/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/06/新名字的故事/" itemprop="url">新名字的故事</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-06T12:18:32+08:00">
+                2018-02-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/阅读/" itemprop="url" rel="index">
+                    <span itemprop="name">阅读</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>终于读完了这本书。虽然只是四部曲中的第二部，但是适合现在的我读。这一部讲的大概就是16-24左右的故事。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/06/新名字的故事/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1834,7 +1815,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-count">71</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1856,7 +1837,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

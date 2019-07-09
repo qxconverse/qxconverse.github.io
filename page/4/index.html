@@ -262,176 +262,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/树遍历的非递归方式/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/10/树遍历的非递归方式/" itemprop="url">树遍历的非递归方式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-10T21:34:34+08:00">
-                2018-09-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>对于先序遍历：</p>
-<ol>
-<li>当栈或是当前节点不为空，则进行下面的循环</li>
-<li>如果当前节点不会空，则访问该节点，并入栈，并将当前节点指向它的左节点，一直循环，直到当前节点为空</li>
-<li>此时说明走到了最左边，则获取栈顶节点，并弹出它，将当前节点设置为它的右节点</li>
-</ol>
-<p>对于中序遍历：<br>和先序遍历很像，唯一的区别是遍历左节点的时候不访问，而是在后面访问。具体可以这样思考：如果为先序遍历，那么遍历到某个节点时就立即访问；而中序遍历，由于始终要先访问当前节点的左节点，所以就只是先入栈。</p>
-<p>对于后序遍历：<br>由于要确保先访问左右节点，才能访问当前节点，所以要知道左右节点是否已经访问了，因此需要加一个prev，表示上一次访问的节点。有2种思路：<br>第一种思路：</p>
-<ol>
-<li>将根节点放入栈中，然后当栈不为空就一直循环</li>
-<li>首先获得栈顶节点作为当前节点，如果它的左右节点都为空，或者左右节点不都为空，但是它们之一刚刚被访问过了（即prev为其中之一），那么就可以保证了左右节点已经被访问过，这时可以访问当前节点，更新prev，并出栈</li>
-<li>否则不能访问当前节点（即左右不都为空，且prev为空或者prev不等于其中任意一个），要先访问左右节点，这时把左右节点按照先右后左的顺序入栈，这样访问时就是先左后右了</li>
-</ol>
-<p>第二种思路：</p>
-<ol>
-<li>当栈或是当前节点不为空，则进行下面的循环</li>
-<li>如果当前节点不会空，则并入栈，并将当前节点指向它的左节点，一直循环，直到当前节点为空</li>
-<li>这时栈顶节点没有左节点了，这时就看它有没有右节点，如果有的话，并且还没有访问，则设置当前节点为栈顶节点的右节点</li>
-<li>否则，说明右节点不存在或者已经访问过了，这时就可以访问该栈顶节点了，并更新prev和出栈</li>
-</ol>
-<p>层次遍历：最简单了</p>
-<ol>
-<li>把根节点放入一个队列</li>
-<li>当队列不为空，就循环下面的步骤</li>
-<li>首先获得队首节点，访问并出队列</li>
-<li>接着把队首节点的左右孩子依次放入队列的尾部，如果存在的话</li>
-</ol>
-<p>Python代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">def pre_order(root):</span><br><span class="line">    stack = []</span><br><span class="line">    cur = root</span><br><span class="line"></span><br><span class="line">    while cur or len(stack) != 0:</span><br><span class="line">        while cur:</span><br><span class="line">            print(cur.val)</span><br><span class="line">            stack.append(cur)</span><br><span class="line">            cur = cur.left</span><br><span class="line"></span><br><span class="line">        cur = stack.pop()</span><br><span class="line">        cur = cur.right</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def in_order(root):</span><br><span class="line">    stack = []</span><br><span class="line">    cur = root</span><br><span class="line"></span><br><span class="line">    while cur or len(stack) != 0:</span><br><span class="line">        while cur:</span><br><span class="line">            stack.append(cur)</span><br><span class="line">            cur = cur.left</span><br><span class="line"></span><br><span class="line">        cur = stack.pop()</span><br><span class="line">        print(cur.val)</span><br><span class="line">        cur = cur.right</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def post_order(root):</span><br><span class="line">    stack = []</span><br><span class="line">    cur = root</span><br><span class="line">    prev = None</span><br><span class="line"></span><br><span class="line">    while cur or len(stack) != 0:</span><br><span class="line">        while cur:</span><br><span class="line">            stack.append(cur)</span><br><span class="line">            cur = cur.left</span><br><span class="line"></span><br><span class="line">        top = stack[-1]</span><br><span class="line">        # 如果存在右节点，并且还没有访问，则设置当前节点为栈顶节点的右节点</span><br><span class="line">        if top.right and prev != top.right:</span><br><span class="line">            cur = top.right</span><br><span class="line">        else:</span><br><span class="line">            print(top.val)</span><br><span class="line">            prev = top</span><br><span class="line">            stack.pop()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def post_order2(root):</span><br><span class="line">    stack = []</span><br><span class="line">    prev = None</span><br><span class="line">    stack.append(root)</span><br><span class="line"></span><br><span class="line">    while len(stack) != 0:</span><br><span class="line">        cur = stack[-1]</span><br><span class="line">        # 如果左右节点都存在，那么只需要看prev是否是右节点即可，因为一定是先出左节点，后出右节点（入栈是反的原因）</span><br><span class="line">        # 那么什么时候回看prev是否是左节点呢？当右节点为空的时候！</span><br><span class="line">        if (not cur.left and not cur.right) or (prev and (prev == cur.left or prev == cur.right)):</span><br><span class="line">            print(cur.val)</span><br><span class="line">            prev = cur</span><br><span class="line">            stack.pop()</span><br><span class="line">        else:</span><br><span class="line">            if cur.right:</span><br><span class="line">                stack.append(cur.right)</span><br><span class="line">            if cur.left:</span><br><span class="line">                stack.append(cur.left)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def level_order(root):</span><br><span class="line">    queue = [root]</span><br><span class="line">    while len(queue) != 0:</span><br><span class="line">        # 取队首节点</span><br><span class="line">        top = queue[0]</span><br><span class="line">        print(top.val)</span><br><span class="line">        queue.pop(0)</span><br><span class="line">        if top.left:</span><br><span class="line">            queue.append(top.left)</span><br><span class="line">        if top.right:</span><br><span class="line">            queue.append(top.right)</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/图的遍历/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -918,164 +748,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/Redis/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/03/Redis/" itemprop="url">Redis</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-03T21:30:11+08:00">
-                2018-09-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>redis的list的底层实现是一个<strong>双向链表</strong>，也可以使用它实现一个简单的消息队列，生产者push，消费者pop。</p>
-<p>hash，类似于python里面的dict，C++里面的unordered_map，Java里面的HashMap。底层实现为HashMap，可以用来存储用户的id及其信息（比如以json格式保存）。</p>
-<p>set的底层实现是一个value值为null的hashmap，它根据hash的方式快速去重。</p>
-<p>sorted set底层实现是hashmap + skiplist。为什么要用2个呢？当进行查询的时候，可以使用hashmap保证其<code>$O(1)$</code>级别的复杂度；而在进行更新操作时，如果只有hashmap，那么需要进行重排，时间复杂度为<code>$O(nlogn)$</code>，而如果加入跳跃表，那么只需要<code>$O(logn)$</code>的复杂度。所以结合使用。</p>
-<p>rdb/aof持久化</p>
-<p><strong>rdb:数据库状态（所有数据库中的所有键值对数据）和rdb文件相互转存，可以看做是快照。文件格式为二进制文件。</strong></p>
-<p>save会阻塞服务器进程，导致其不能处理其它任何命令请求；bgsave会派生出一个子进程去完成，父进程不受影响。可以设置bgsave自动执行的参数（保存条件，当任意一个条件满足，则自动执行），包括时间间隔和修改数。在redis服务器中则保存了上一次保存的时间戳lastsave和距离上次保存总计的修改次数dirty计数器。</p>
-<p><strong>aof:通过保存所有修改数据库的写命令请求来记录服务器的数据库状态。</strong></p>
-<p>aof文件中的所有命令都是以Redis命令请求协议的格式保存。命令请求会先保存到aof缓冲区里面，之后再定期写入并同步到aof文件中。</p>
-<p>Redis的发布/订阅功能</p>
-<p>可以用来订阅频道或是模式</p>
-<ol>
-<li>订阅频道使用的dict（字典），key保存频道，而value保存订阅它的客户端信息。</li>
-<li>订阅模式使用的list（链表），list里面保存了pubsubPattern结构，该结构里面有2个属性，一个是pattern，一个是client（只包含一个client）。</li>
-<li>publish命令会向频道的所有订阅者发消息，并向所有与该频道匹配的模式的订阅者发消息。</li>
-<li>pubsub的3个子命令，channels用来返回当前服务器被订阅的频道；numsub接受多个频道作为参数，并返回这些频道的订阅者数量；numpat返回该服务器所有被订阅模式的数量。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/计算机网络 and 操作系统/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1227,6 +899,164 @@
 <li>循环等待：循环等待资源</li>
 </ol>
 <h5 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h5><p>打破上述必要条件中的一个或几个</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/Redis/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/03/Redis/" itemprop="url">Redis</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-03T21:30:11+08:00">
+                2018-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>redis的list的底层实现是一个<strong>双向链表</strong>，也可以使用它实现一个简单的消息队列，生产者push，消费者pop。</p>
+<p>hash，类似于python里面的dict，C++里面的unordered_map，Java里面的HashMap。底层实现为HashMap，可以用来存储用户的id及其信息（比如以json格式保存）。</p>
+<p>set的底层实现是一个value值为null的hashmap，它根据hash的方式快速去重。</p>
+<p>sorted set底层实现是hashmap + skiplist。为什么要用2个呢？当进行查询的时候，可以使用hashmap保证其<code>$O(1)$</code>级别的复杂度；而在进行更新操作时，如果只有hashmap，那么需要进行重排，时间复杂度为<code>$O(nlogn)$</code>，而如果加入跳跃表，那么只需要<code>$O(logn)$</code>的复杂度。所以结合使用。</p>
+<p>rdb/aof持久化</p>
+<p><strong>rdb:数据库状态（所有数据库中的所有键值对数据）和rdb文件相互转存，可以看做是快照。文件格式为二进制文件。</strong></p>
+<p>save会阻塞服务器进程，导致其不能处理其它任何命令请求；bgsave会派生出一个子进程去完成，父进程不受影响。可以设置bgsave自动执行的参数（保存条件，当任意一个条件满足，则自动执行），包括时间间隔和修改数。在redis服务器中则保存了上一次保存的时间戳lastsave和距离上次保存总计的修改次数dirty计数器。</p>
+<p><strong>aof:通过保存所有修改数据库的写命令请求来记录服务器的数据库状态。</strong></p>
+<p>aof文件中的所有命令都是以Redis命令请求协议的格式保存。命令请求会先保存到aof缓冲区里面，之后再定期写入并同步到aof文件中。</p>
+<p>Redis的发布/订阅功能</p>
+<p>可以用来订阅频道或是模式</p>
+<ol>
+<li>订阅频道使用的dict（字典），key保存频道，而value保存订阅它的客户端信息。</li>
+<li>订阅模式使用的list（链表），list里面保存了pubsubPattern结构，该结构里面有2个属性，一个是pattern，一个是client（只包含一个client）。</li>
+<li>publish命令会向频道的所有订阅者发消息，并向所有与该频道匹配的模式的订阅者发消息。</li>
+<li>pubsub的3个子命令，channels用来返回当前服务器被订阅的频道；numsub接受多个频道作为参数，并返回这些频道的订阅者数量；numpat返回该服务器所有被订阅模式的数量。</li>
+</ol>
 
           
         
@@ -1885,6 +1715,171 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/7.25（rabbitmq）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/25/7.25（rabbitmq）/" itemprop="url">RabbitMQ的使用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-25T12:09:52+08:00">
+                2018-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>总结：在spring中使用Rabbit-MQ，比如有A（生产者）、B（消费者）两个独立的系统，它们之间需要通信。在A系统中需要调用B的类中某个函数，不需要重写很多冗余的代码，只需要传递关键信息给B就可以了。当然这是建立在A和B的耦合性不高的情况下的。假如A和B高耦合，那么可能会发生这样的情况：A想调用B，但是B在调用的时候又反过来涉及到A中的东西。所以这也从侧面反映了实现消息队列的优点：降低模块之间的耦合性。</p>
+<p>1.首先配置好rabbit-mq的一些基本信息，比如服务地址，端口号，用户名和密码。如下：在A、B中都需要配置，方便注入依赖。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#RabbitMQ nc060</span><br><span class="line">MQ_HOST=nc060</span><br><span class="line">MQ_PORT=5672</span><br><span class="line">#带负载的链接</span><br><span class="line">MQ_ADDRESSES=nc078x.corp.youdao.com:5670</span><br><span class="line">MQ_USER=fanyi</span><br><span class="line">MQ_PASSWORD=fanyi123outfox</span><br></pre></td></tr></table></figure>
+<p>2.接着定义交换机（exchange），队列（queue）和路由key（routingkey），其实这个只需要在A中配置就可以了，B只需要知道queue。如下（1，2步骤都是在application.properties文件中配置的）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#调用分单系统的MQ参数</span><br><span class="line">DS_CALL_EXCHANGE=dsCallExchange</span><br><span class="line">DS_CALL_QUEUE=dsCallQueue</span><br><span class="line">DS_CALL_ROUTINGKEY=dsCallRouting</span><br></pre></td></tr></table></figure>
+<p>3.编写生产者类DsCallHelper，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">package atranslate.api.common.utils;</span><br><span class="line"></span><br><span class="line">import com.rabbitmq.client.AMQP;</span><br><span class="line">import com.rabbitmq.client.Channel;</span><br><span class="line">import com.rabbitmq.client.MessageProperties;</span><br><span class="line">import net.sf.json.JSONObject;</span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line">import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;</span><br><span class="line">import org.springframework.amqp.rabbit.connection.Connection;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author qinxue</span><br><span class="line"> * @date 2018/7/24 19:35</span><br><span class="line"> */</span><br><span class="line">public class DsCallHelper &#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger LOG = LoggerFactory.getLogger(DsCallHelper.class);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * RabbitMQ连接池</span><br><span class="line">     */</span><br><span class="line">    private CachingConnectionFactory connectionFactory;</span><br><span class="line"></span><br><span class="line">    private Connection connection = null;</span><br><span class="line">    private Channel channel = null;</span><br><span class="line"></span><br><span class="line">    private String exchangeName;</span><br><span class="line">    private String routingKey;</span><br><span class="line">    private String queueName;</span><br><span class="line"></span><br><span class="line">    public void init() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            connection = connectionFactory.createConnection();</span><br><span class="line"></span><br><span class="line">            channel = connection.createChannel(false);</span><br><span class="line">            channel.exchangeDeclare(exchangeName, &quot;direct&quot;, true);</span><br><span class="line"></span><br><span class="line">            // 声明队列</span><br><span class="line">            // durable</span><br><span class="line">            // exclusive 队列是否私有，排他性</span><br><span class="line">            // autoDelete 最后一个消费者取消订阅，队列自动删除</span><br><span class="line">            // arguments</span><br><span class="line">            Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">            map.put(&quot;x-ha-policy&quot;, &quot;all&quot;);</span><br><span class="line">            channel.queueDeclare(queueName, true, false, false, map);</span><br><span class="line"></span><br><span class="line">            channel.queueBind(queueName, exchangeName, routingKey);</span><br><span class="line">            LOG.info(&quot;queueName is &quot; + queueName);</span><br><span class="line">            LOG.info(&quot;exchangeName is &quot; + exchangeName);</span><br><span class="line">            LOG.info(&quot;routingKey is &quot; + routingKey);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            LOG.error(&quot;Init RabbitMQ Connection Failed!&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 调用ds系统的译员接单</span><br><span class="line">     * @param orderId</span><br><span class="line">     * @param translatorId</span><br><span class="line">     */</span><br><span class="line">    public void send(long orderId, long translatorId) &#123;</span><br><span class="line">        JSONObject json = new JSONObject();</span><br><span class="line">        json.put(&quot;orderId&quot;, orderId);</span><br><span class="line">        json.put(&quot;translatorId&quot;, translatorId);</span><br><span class="line">        String message = json.toString();</span><br><span class="line">        LOG.info(&quot;message is &quot; + message);</span><br><span class="line">        try &#123;</span><br><span class="line">            byte[] bytes = message.getBytes(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">            // 投递模式为持久化，server重启消息不会丢失</span><br><span class="line">            AMQP.BasicProperties properties = MessageProperties.PERSISTENT_TEXT_PLAIN;</span><br><span class="line"></span><br><span class="line">            channel.basicPublish(exchangeName, routingKey, properties, bytes);</span><br><span class="line">            LOG.info(&quot;Send: &quot; + message);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            LOG.error(&quot;send: &quot; + message + &quot; failed!&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setExchangeName(String exchangeName) &#123;</span><br><span class="line">        this.exchangeName = exchangeName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setRoutingKey(String routingKey) &#123;</span><br><span class="line">        this.routingKey = routingKey;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setQueueName(String queueName) &#123;</span><br><span class="line">        this.queueName = queueName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setConnectionFactory(CachingConnectionFactory connectionFactory) &#123;</span><br><span class="line">        this.connectionFactory = connectionFactory;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>init函数进行mq的配置。后面的send函数发送消息。需要注意的是，通过依赖注入的变量一定要设置setter函数。</p>
+<p>4.接着在A的<code>servletConfig.web.xml</code>配置文件中加入相关的bean，配置连接池。这里就要用到地址、端口、用户和密码。并注入生产类：DsCallHelper。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> &lt;!-- start mq --&gt;</span><br><span class="line">    &lt;bean id=&quot;cachingConnectionFactory&quot; class=&quot;org.springframework.amqp.rabbit.connection.CachingConnectionFactory&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;addresses&quot; value=&quot;$&#123;MQ_ADDRESSES&#125;&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;username&quot; value=&quot;$&#123;MQ_USER&#125;&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;password&quot; value=&quot;$&#123;MQ_PASSWORD&#125;&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">&lt;!-- end mq --&gt;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">&lt;bean id=&quot;dsCallHelper&quot; class=&quot;atranslate.api.common.utils.DsCallHelper&quot; init-method=&quot;init&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;connectionFactory&quot; ref=&quot;cachingConnectionFactory&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;exchangeName&quot; value=&quot;$&#123;DS_CALL_EXCHANGE&#125;&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;routingKey&quot; value=&quot;$&#123;DS_CALL_ROUTINGKEY&#125;&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;queueName&quot; value=&quot;$&#123;DS_CALL_QUEUE&#125;&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，<code>init-method</code>用于类的初始化方法。如果有初始化函数，就要写进去，不然会出现空指针异常。到这里，A（生产者）就写好了，需要与B通信，直接调用<code>DsCallHelper</code>里面的send方法。</p>
+<p>5.在B中，编写消费者类DsCallConsumer，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">package distribute.web.helper;</span><br><span class="line"></span><br><span class="line">import com.rabbitmq.client.*;</span><br><span class="line">import distribute.web.logic.DsOrderLogic;</span><br><span class="line">import net.sf.json.JSONObject;</span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.concurrent.TimeoutException;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author qinxue</span><br><span class="line"> * @date 2018/7/24 20:26</span><br><span class="line"> */</span><br><span class="line">public class DsCallConsumer &#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger LOG = LoggerFactory.getLogger(DsCallConsumer.class);</span><br><span class="line"></span><br><span class="line">    private ConnectionFactory connectionFactory = null;</span><br><span class="line"></span><br><span class="line">    private Connection connection = null;</span><br><span class="line">    private Channel channel = null;</span><br><span class="line">    private DsOrderLogic dsOrderLogic = null;</span><br><span class="line"></span><br><span class="line">    private final static String QUEUE_NAME = &quot;dsCallQueue&quot;;</span><br><span class="line"></span><br><span class="line">    public void init() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            connection = connectionFactory.newConnection();</span><br><span class="line">            channel = connection.createChannel();</span><br><span class="line">            // 声明队列</span><br><span class="line">            // durable</span><br><span class="line">            // exclusive 队列是否私有，排他性</span><br><span class="line">            // autoDelete 最后一个消费者取消订阅，队列自动删除</span><br><span class="line">            // arguments</span><br><span class="line">            channel.queueDeclare(QUEUE_NAME, true, false, false, null);</span><br><span class="line">            LOG.info(&quot;初始化rabbitmq，队列名为：&quot; + QUEUE_NAME);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            LOG.error(&quot;Init RabbitMQ Connection Failed!&quot;, e);</span><br><span class="line">        &#125; catch (TimeoutException e) &#123;</span><br><span class="line">            LOG.error(&quot;Init RabbitMQ Connection Failed!&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            LOG.info(&quot;等待消息...&quot;);</span><br><span class="line">            Consumer consumer = new DefaultConsumer(channel) &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)</span><br><span class="line">                        throws IOException &#123;</span><br><span class="line">                    String message = new String(body, &quot;UTF-8&quot;);</span><br><span class="line">                    LOG.debug(message);</span><br><span class="line">                    JSONObject result = JSONObject.fromObject(message);</span><br><span class="line">                    dsOrderLogic.acceptFastTask(result.getLong(&quot;orderId&quot;), result.getLong(&quot;translatorId&quot;));</span><br><span class="line">                    LOG.info(&quot;Received &apos;&quot; + message + &quot;&apos;&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line">            channel.basicConsume(QUEUE_NAME, true, consumer);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            LOG.error(&quot;Waiting Failed!&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setConnectionFactory(ConnectionFactory connectionFactory) &#123;</span><br><span class="line">        this.connectionFactory = connectionFactory;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setDsOrderLogic(DsOrderLogic dsOrderLogic) &#123;</span><br><span class="line">        this.dsOrderLogic = dsOrderLogic;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同样要注意依赖注入相关的问题，这里有3点需要注意：</p>
+<ol>
+<li><code>channel.queueDeclare(QUEUE_NAME, true, false, false, null);</code>这句话要和A中的相关配置一致。</li>
+<li>可以看出这里确实只需要queue的信息，表示它只监听queue队列发来的消息，而具体的交换机和路由是生产者需要处理的问题。</li>
+<li>最重要的一点，下面的consumer定义一定要放在init函数里，不是单独写一个函数。这里用到了监听器模式的思想。在官网中是这样解释<code>DefaultConsumer</code>的，看作一个回调函数：<blockquote>
+<p>We’re about to tell the server to deliver us the messages from the queue. Since it will push us messages asynchronously, we provide a callback in the form of an object that will buffer the messages until we’re ready to use them. That is what a DefaultConsumer subclass does.</p>
+</blockquote>
+</li>
+</ol>
+<p>6.配置bean，注意init-method的问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> &lt;!-- start mq --&gt;</span><br><span class="line">&lt;bean id=&quot;connectionFactory&quot; class=&quot;com.rabbitmq.client.ConnectionFactory&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;host&quot; value=&quot;$&#123;hostAddress&#125;&quot;/&gt;</span><br><span class="line">    &lt;property name=&quot;port&quot; value=&quot;$&#123;hostPort&#125;&quot;/&gt;</span><br><span class="line">    &lt;property name=&quot;username&quot; value=&quot;$&#123;mqUserName&#125;&quot;/&gt;</span><br><span class="line">    &lt;property name=&quot;password&quot; value=&quot;$&#123;mqPassword&#125;&quot; /&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line">&lt;!-- end mq --&gt;</span><br><span class="line">...</span><br><span class="line">    </span><br><span class="line">&lt;bean id=&quot;dsCallConsumer&quot; class=&quot;distribute.web.helper.DsCallConsumer&quot; init-method=&quot;init&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;connectionFactory&quot; ref=&quot;connectionFactory&quot;/&gt;</span><br><span class="line">    &lt;property name=&quot;dsOrderLogic&quot; ref=&quot;dsOrderLogic&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1935,7 +1930,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">72</span>
+                  <span class="site-state-item-count">71</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1957,7 +1952,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
