@@ -262,492 +262,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/图的遍历/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/10/图的遍历/" itemprop="url">图的遍历</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-10T21:33:38+08:00">
-                2018-09-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>对于深度遍历，采用递归的解法很简单，如果使用栈来实现，那么思路是这样的：</p>
-<ol>
-<li>首先将需要遍历的节点放入栈里面，访问，并且设置已经访问</li>
-<li>当栈不为空的时候，按照下面的步骤：</li>
-<li>获取栈顶的节点（不能弹出），并获取它的邻居节点，开始计数，表示已经访问过的邻居节点的个数</li>
-<li>对于每个邻居节点，如果它没有被访问过，则入栈，并访问它，设置已经访问过，并立即退出循环（否则就没有深度往下走了）</li>
-<li>在遍历邻居节点的过程中，如果某个邻居被访问过了，则计数加一</li>
-<li>当计数器的值等于了邻居节点的个数，说明栈顶节点的邻居都访问过了，这时就可以让它出栈了</li>
-</ol>
-<p>Python代码如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">def dfs_stack(node):</span><br><span class="line">    visited = [0] * (N + 1)  #N代表图中点的个数</span><br><span class="line">    </span><br><span class="line">    stack = [node]</span><br><span class="line">    print(node)</span><br><span class="line">    visited[node] = 1</span><br><span class="line">    </span><br><span class="line">    while stack:</span><br><span class="line">        top = stack[-1]</span><br><span class="line">        neigbor_list = neigbor_info[top]</span><br><span class="line">        count = 0</span><br><span class="line">        for cur in neigbor_list:</span><br><span class="line">            if visited[cur] == 0:</span><br><span class="line">                stack.append(cur)</span><br><span class="line">                print(cur)</span><br><span class="line">                visited[cur] = 1</span><br><span class="line">            count += 1</span><br><span class="line">        </span><br><span class="line">        if count == len(neigbor_list):</span><br><span class="line">            stack.pop()</span><br><span class="line">            </span><br><span class="line">def dfs(node):</span><br><span class="line">    visited = [0] * (N + 1)</span><br><span class="line">    </span><br><span class="line">    def _dfs(cur):</span><br><span class="line">        print(cur)</span><br><span class="line">        for n in neigbor_info[cur]:</span><br><span class="line">            if visited[n] == 0:</span><br><span class="line">                visited[n] = 1</span><br><span class="line">                _dfs(n)</span><br><span class="line">    </span><br><span class="line">    _dfs(node)</span><br><span class="line">    </span><br><span class="line">def bfs(node):</span><br><span class="line">    visited = [0] * (N + 1)</span><br><span class="line">    </span><br><span class="line">    queue = [node]</span><br><span class="line">    visited[node] = 1</span><br><span class="line">    </span><br><span class="line">    while queue:</span><br><span class="line">        cur = queue.pop(0)</span><br><span class="line">        print(cur)</span><br><span class="line">        </span><br><span class="line">        for n in neigbor_info[cur]:</span><br><span class="line">            if visited[n] == 0:</span><br><span class="line">                queue.append(n)</span><br><span class="line">                visited[n] = 1</span><br><span class="line">                </span><br><span class="line">                </span><br><span class="line">def level_order(root):</span><br><span class="line">    queue = [root]</span><br><span class="line">    while queue:</span><br><span class="line">        # 取队首节点</span><br><span class="line">        top = queue.pop(0)</span><br><span class="line">        print(top.val)</span><br><span class="line">        </span><br><span class="line">        if top.left:</span><br><span class="line">            queue.append(top.left)</span><br><span class="line">        if top.right:</span><br><span class="line">            queue.append(top.right)</span><br></pre></td></tr></table></figure>
-<p>对比地来看，图的广度优先遍历，和数的层次遍历很像，唯一的区别是图中需要加上一个访问状态，而树不用。因为树是严格地从父节点向孩子节点走的，不会重复；而图不一样，可能会重复。除此之外的区别是，图的邻居节点有多个，而树的“邻居节点”其实就是它的孩子节点。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/10/pdca行为/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/10/pdca行为/" itemprop="url">pdca循环</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-10T10:15:02+08:00">
-                2018-09-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/随想/" itemprop="url" rel="index">
-                    <span itemprop="name">随想</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>任何事情都可以分为pdca四个环节，并且螺旋上升不断解决问题并完成任务。</p>
-<p>参考网站：<a href="https://zh.wikipedia.org/wiki/PDCA" target="_blank" rel="noopener">https://zh.wikipedia.org/wiki/PDCA</a></p>
-<p>也就是计划-&gt;执行-&gt;检查-&gt;（act/adjust）调整，其中的调整可以理解为进行沟通等等。</p>
-<p>计划：做规划，并分析方案的可行性、分析所需要的时间等</p>
-<p>执行：具体的实践、完成任务</p>
-<p>检查：可以看作是保证质量的一种行为</p>
-<p>调整：通过沟通或是合作来分析任务完成的情况、任务中的需要改进的地方等等</p>
-<p>要形成好的闭环思维，而不是恶性的闭环思维。比如熬夜这样的行为就是恶性的</p>
-<p>“闭环”的理论根据是“PDCA循环”，由美国质量管理专家休哈特博士提出，被广泛用于现代企业管理中。</p>
-<p>“PDCA循环”将管理分为四个阶段：</p>
-<p>计划（Plan）</p>
-<p>执行（Do）</p>
-<p>检查（Check）</p>
-<p>行动（Act）</p>
-<p>这四个过程不是运行一次就结束，而是周而复始地进行。</p>
-<p>Check（检查）、Communicate（沟通）、Clean （清理）、Control（控制）。</p>
-<p>时刻让任务涉及的双方知道各自手中任务的完成状况，这不仅是对彼此的督促，对于任务本身来讲，一次沟通就是一次检查点（checkpoint）。</p>
-<p>曾在朋友圈看到HR吐槽，最让人“恨得牙根直痒痒”的，是悄无声息把事情搞砸了的人。</p>
-<p>企业管理中，存在一种5W2H分析法，也叫七问分析法。</p>
-<p>what, why, who, where, when, how, how much(耗费成本)</p>
-<p>在开始一项任务前，最重要的是搞清任务的关键以及需求，从而明确什么可以优先，会遇到什么问题，有哪些事项一定要注意……先形成一轮自我可控的闭环思考。</p>
-<p>有始有终的闭环，是生活的一份智慧。</p>
-<p>我们每个人都生存在很多恶性闭环中，比如由拖延导致的熬夜。</p>
-<p>拖延症 → 无法完成任务 → 不得不熬夜 → 第二天精神不济 → 无法完成任务 → 继续熬夜……</p>
-<p>这是因为缺乏正向闭环能力中，最核心的一条：建立检查点，对上一个阶段好坏进行总结，把控改进方向。</p>
-<p>睡眠就是一个检查点，需要正向的反馈。发现因为熬夜精力不佳，任务被搁置，那就在熬夜这一环进行总结改变。精力充沛，第二天才有可能弥补没有做完的工作，从而终止拖延。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/08/WebApi的安全性/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/08/WebApi的安全性/" itemprop="url">WebApi的安全性</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-08T21:35:51+08:00">
-                2018-09-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>客户端调用：<code>http://api.xxx.com/getInfo?Id=value</code>，这种方式简单粗暴，在浏览器直接输入<code>http://api.xxx.com/getInfo?Id=value</code>，即可获取到相关的信息了，但是这样的方式会存在很严重的安全性问题，没有进行任何的验证，大家都可以通过这个方法获取到产品列表，导致信息泄露。</p>
-<ol>
-<li>如何验证调用者身份呢？</li>
-<li>如何防止参数被篡改呢？</li>
-<li>如何保证请求的唯一性？</li>
-<li>如何保证请求的唯一性，防止请求被恶意攻击呢？</li>
-</ol>
-<p>使用Token+签名认证（微信支付中有这种思想在里面）</p>
-<ol>
-<li>做一个认证服务，提供一个认证的WebApi，用户先访问它获取对应的Token</li>
-<li>用户拿着相应的Token以及请求的参数和服务器端提供的签名算法计算出签名后再去访问指定的Api</li>
-<li>服务器端每次接收到请求就获取对应用户的Token和请求参数，服务器端再次计算签名和客户端签名做对比，如果验证通过则正常访问相应的Api，验证失败则返回具体的失败信息。</li>
-</ol>
-<p>使用签名（签名算法+签名参数）</p>
-<ol>
-<li>给每个http请求添加一个签名，服务端来验证签名的合法性，如果签名合法则执行响应的操作，如果签名非法则直接拒绝请求。</li>
-<li>签名算法一般都使用Hash散列算法，常用的有MD5，SHA系列算法。这些算法可以根据不同的输入，计算出不同的结果，而且碰撞的概率很低。</li>
-<li>可以用Http请求的queryString然后加上时间戳还有随机数来作为签名的参数。</li>
-</ol>
-<p>WebApi跨域问题解决方案：CORS。什么是跨域问题？</p>
-<ol>
-<li>同源策略：出于安全考虑，浏览器会限制脚本中发起的跨站请求，浏览器要求JavaScript或Cookie只能访问同域下的内容。跨域问题的根本原因是浏览器的安全限制，默认禁止跨域的动态资源请求。</li>
-<li>正是由于这个原因，我们不同项目之间的调用就会被浏览器阻止。比如我们最常见的场景：WebApi作为数据服务层，它是一个单独的项目，我们的MVC项目作为Web的显示层，这个时候我们的MVC里面就需要调用WebApi里面的接口取数据展现在页面上。因为我们的WebApi和MVC是两个不同的项目，所以运行起来之后就存在上面说的跨域的问题。</li>
-</ol>
-<p>还有一篇更好的文章：<a href="https://www.cnblogs.com/codelir/p/5327462.html" target="_blank" rel="noopener">https://www.cnblogs.com/codelir/p/5327462.html</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/Redis/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1880,11 +1394,503 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/7.17（Git与SVN操作）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/17/7.17（Git与SVN操作）/" itemprop="url">Git与SVN相关的操作</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-17T12:09:52+08:00">
+                2018-07-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Git的学习"><a href="#Git的学习" class="headerlink" title="Git的学习"></a>Git的学习</h4><p>git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1ftc4lc8wldj30cq06iaa8.jpg" alt=""></p>
+<p>先手动删除文件，然后使用<code>git rm &lt;file&gt;</code>和<code>git add &lt;file&gt;</code>效果是一样的。</p>
+<p>切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。</p>
+<p>Git鼓励大量使用分支：</p>
+<p>查看分支：<code>git branch</code></p>
+<p>创建分支：<code>git branch &lt;name&gt;</code></p>
+<p>切换分支：<code>git checkout &lt;name&gt;</code></p>
+<p>创建+切换分支：<code>git checkout -b &lt;name&gt;</code></p>
+<p>合并某分支到当前分支：<code>git merge &lt;name&gt;</code></p>
+<p>删除分支：<code>git branch -d &lt;name&gt;</code></p>
+<p>合并分支时，加上<code>--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。</p>
+<p>在本地新建一个分支，并在远程创建一个一样的分支。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">本地：新建分支，并修改，push</span><br><span class="line">qx:hts-ds XFade$ git checkout -b fanyiedit</span><br><span class="line">Switched to a new branch &apos;fanyiedit&apos;</span><br><span class="line">...</span><br><span class="line">qx:hts-ds XFade$ git push -u origin fanyiedit</span><br><span class="line">Counting objects: 8, done.</span><br><span class="line">Delta compression using up to 4 threads.</span><br><span class="line">Compressing objects: 100% (7/7), done.</span><br><span class="line">Writing objects: 100% (8/8), 770 bytes | 770.00 KiB/s, done.</span><br><span class="line">Total 8 (delta 4), reused 0 (delta 0)</span><br><span class="line">To https://gitlab.corp.youdao.com/translator-dev/hts-ds.git</span><br><span class="line"> * [new branch]      fanyiedit -&gt; fanyiedit</span><br><span class="line">Branch &apos;fanyiedit&apos; set up to track remote branch &apos;fanyiedit&apos; from &apos;origin&apos;.</span><br><span class="line"></span><br><span class="line">远端：</span><br><span class="line">[qinxue@nc060 hts-ds]$ git fetch</span><br><span class="line">...</span><br><span class="line">[qinxue@nc060 hts-ds]$ git checkout -b fanyiedit origin/fanyiedit</span><br><span class="line">Branch fanyiedit set up to track remote branch fanyiedit from origin.</span><br></pre></td></tr></table></figure>
+<p>新建分支的时候，一定要注意是在哪个分支上建立的，以防有些更新不到。之前在multiFile分支上创建了fanyiedit的分支，但是发现里面有些功能和官网的不一致，后来发现是因为master上新加了些功能，而这些功能不在multiFile分支里面。所以重新从master上新建了一个分支fanyi-edit，并把fanyiedit分支merge到里面。具体过程如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git checkout master</span><br><span class="line">Switched to branch &apos;master&apos;</span><br><span class="line">Your branch is behind &apos;origin/master&apos; by 82 commits, and can be fast-forwarded.</span><br><span class="line">  (use &quot;git pull&quot; to update your local branch)</span><br><span class="line">  </span><br><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git pull</span><br><span class="line">Updating da16794..0f67219</span><br><span class="line">Fast-forward</span><br><span class="line"> conf/dubbo.properties                                                                    |   10 +-</span><br><span class="line"> conf/dubbo.properties.online                                                             |    9 +-</span><br><span class="line"> conf/sem/mail/dailyReport.vm                                                             |   53 ---</span><br><span class="line"> conf/sem/mail/weeklyReport.vm</span><br><span class="line"> ...</span><br><span class="line"> </span><br><span class="line"> XFade@qx:~/IdeaProjects/hts-ds$ git br</span><br><span class="line">  fanyiedit</span><br><span class="line">* master</span><br><span class="line">  multiFile</span><br><span class="line">  </span><br><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git checkout -b fanyi-edit</span><br><span class="line">Switched to a new branch &apos;fanyi-edit&apos;</span><br><span class="line"></span><br><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git br</span><br><span class="line">* fanyi-edit</span><br><span class="line">  fanyiedit</span><br><span class="line">  master</span><br><span class="line">  multiFile</span><br><span class="line">  </span><br><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git merge fanyiedit</span><br><span class="line">Auto-merging web/WEB-INF/servletConfig.web.xml</span><br><span class="line">CONFLICT (content): Merge conflict in web/WEB-INF/servletConfig.web.xml</span><br><span class="line">Auto-merging src/resources/application.properties.online</span><br><span class="line">CONFLICT (content): Merge conflict in src/resources/application.properties.online</span><br><span class="line">Auto-merging src/resources/application.properties</span><br><span class="line">CONFLICT (content): Merge conflict in src/resources/application.properties</span><br><span class="line">Auto-merging ivy.xml</span><br><span class="line">CONFLICT (content): Merge conflict in ivy.xml</span><br><span class="line">Automatic merge failed; fix conflicts and then commit the result.</span><br><span class="line">这里需要解决冲突</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git add .</span><br><span class="line"></span><br><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git ci -m &quot;git merge fanyiedit时处理冲突文件&quot;</span><br><span class="line">[fanyi-edit 4b74e47] git merge fanyiedit时处理冲突文件</span><br><span class="line"></span><br><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git push -u origin fanyi-edit</span><br><span class="line">Counting objects: 16, done.</span><br><span class="line">Delta compression using up to 4 threads.</span><br><span class="line">Compressing objects: 100% (15/15), done.</span><br><span class="line">Writing objects: 100% (16/16), 2.04 KiB | 1.02 MiB/s, done.</span><br><span class="line">Total 16 (delta 8), reused 0 (delta 0)</span><br><span class="line">To https://gitlab.corp.youdao.com/translator-dev/hts-ds.git</span><br><span class="line"> * [new branch]      fanyi-edit -&gt; fanyi-edit</span><br><span class="line">Branch &apos;fanyi-edit&apos; set up to track remote branch &apos;fanyi-edit&apos; from &apos;origin&apos;.</span><br><span class="line"></span><br><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git pull</span><br><span class="line">Already up to date.</span><br><span class="line"></span><br><span class="line">远程那边类似上面的</span><br></pre></td></tr></table></figure></p>
+<p>在实际开发中，我们应该按照几个基本原则进行分支管理：</p>
+<p>首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；我们每个人都有自己的分支，时不时地往dev分支上合并就可以了。</p>
+<p>所以，团队合作的分支看起来就像这样：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1ftcnvtf2m5j30du03ha9w.jpg" alt=""></p>
+<p>当修改完bug分支后，要及时地在master上删除该分支，如果切换到dev分支上再删除bug分支，就会报错。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1ftcoziu48vj31kw0qrqaz.jpg" alt=""></p>
+<p>通常涉及到多个人开发，比如A和B。B从github上clone了项目。并且新建并切换到dev分支了。</p>
+<p>这个时候A（你）和B（你的小伙伴）对同一个文件进行了修改，发生了冲突。假设B先push了，而你后面想push，就会发生错误。所以可以先pull一下。pull也可能失败，原因是没有指定本地dev分支与远程origin/dev分支的链接，根据提示，设置dev和origin/dev的链接：<br><code>git branch --set-upstream-to=origin/dev dev</code></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1ftcprja97fj31ce0i8dkz.jpg" alt=""></p>
+<p>这回pull成功，但是合并有冲突，需要手动解决，解决的方法和分支管理中的解决冲突完全一样。解决后，add，ci,再push。这样就完美解决了冲突。</p>
+<p>这时B如果要再次编辑，首先需要pull一下。然后再进行后续操作。如果他不pull，push后有冲突，那么解决方法同上A所做的。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1ftcpq38ngij31c60k07a1.jpg" alt=""></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1ftcpqd42tmj31kw0hzn2o.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1ftcq45la4qj31hs0tu7ec.jpg" alt=""></p>
+<p>git中对比2个版本之间的改动，比如下面的例子</p>
+<p> <code>git diff e065320 6280833 --stat</code><br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">src/main/java/com/hts/config/NosConfig.java            | 14 ++++++--------</span><br><span class="line">src/main/java/com/hts/monitor/NosFileCacheHandler.java |  4 ++++</span><br><span class="line">src/main/java/com/hts/monitor/RetryService.java        | 15 +++++++++------</span><br><span class="line">3 files changed, 19 insertions(+), 14 deletions(-)</span><br></pre></td></tr></table></figure></p>
+<p> git重新建立一个branch的操作</p>
+<p><img src="http://pavgwqw80.bkt.clouddn.com/blog/180709/e30b1Di0cH.png?imageslim" alt="mark"></p>
+<p>push的操作：<code>git push -u origin multiFile</code></p>
+<p>在远程中：<code>git branch --set-upstream-to=origin/multiFile multiFile</code></p>
+<p>这样就可以pull了。然后再<code>ant clean &amp;&amp; ant restart-resin</code>，就可以重新启动项目了。</p>
+<p>在add之前，查看修改了哪些代码，很实用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD (filename)</span><br></pre></td></tr></table></figure>
+<p>修改了冲突后，记得add，commit，pull然后再push</p>
+<p>在pull的时候，如果本地有修改过的，那么可以强制恢复到上一次提交的位置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">[qinxue@nc060 fanyi-terminology]$ git pull</span><br><span class="line">Enter passphrase for key &apos;/home/qinxue/.ssh/id_rsa&apos;:</span><br><span class="line">Updating 4c85ec5..d1b9d01</span><br><span class="line">error: Your local changes to the following files would be overwritten by merge:</span><br><span class="line">	src/main/resources/bootstrap.properties</span><br><span class="line">Please, commit your changes or stash them before you can merge.</span><br><span class="line">Aborting</span><br><span class="line">[qinxue@nc060 fanyi-terminology]$ git reset --hard</span><br><span class="line">HEAD is now at 4c85ec5 :MOD:测试批量上传术语的功能</span><br><span class="line">[qinxue@nc060 fanyi-terminology]$ git pull</span><br><span class="line">Enter passphrase for key &apos;/home/qinxue/.ssh/id_rsa&apos;:</span><br><span class="line">Updating 4c85ec5..d1b9d01</span><br><span class="line">Fast-forward</span><br><span class="line"> .gitignore                                                 |   2 +</span><br><span class="line"> .mvn/wrapper/maven-wrapper.jar                             | Bin 47610 -&gt; 0 bytes</span><br><span class="line"> .mvn/wrapper/maven-wrapper.properties                      |   1 -</span><br><span class="line"> build.gradle                                               | 139 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span><br><span class="line"> gradle/wrapper/gradle-wrapper.jar                          | Bin 0 -&gt; 54413 bytes</span><br><span class="line"> gradle/wrapper/gradle-wrapper.properties                   |   5 ++</span><br><span class="line"> gradlew.sh                                                 | 172 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span><br><span class="line"> mvnw.sh                                                    | 191 ----------------------------------------------------------------------------</span><br><span class="line"> pom.xml                                                    | 250 ----------------------------------------------------------------------------------------------------</span><br><span class="line"> readme.md                                                  |  39 ++++++++++------</span><br><span class="line"> run/service.sh                                             |   2 +-</span><br><span class="line"> run/unitTest.sh                                            |   3 --</span><br><span class="line"> settings.gradle                                            |   1 +</span><br><span class="line"> src/main/java/com/hts/common/config/BaseConfig.java        |  32 +++++++++++++</span><br><span class="line"> src/main/java/com/hts/common/config/HtsBeansConfig.java    | 212 ------------------------------------------------------------------------------------</span><br><span class="line"> src/main/java/com/hts/common/utils/ExcelUtils.java         |  21 ++++-----</span><br><span class="line"> src/main/java/com/hts/controller/BaseController.java       |   6 ++-</span><br><span class="line"> src/main/java/com/hts/controller/IndexController.java      |   2 +-</span><br><span class="line"> src/main/java/com/hts/controller/TermController.java       |  13 ++++--</span><br><span class="line"> src/main/java/com/hts/logic/BaseLogic.java                 |   6 ++-</span><br><span class="line"> src/main/java/com/hts/logic/TerminologyLogic.java          |   2 +-</span><br><span class="line"> src/main/java/com/hts/storage/IUserTermLibraryStorage.java |   2 +</span><br><span class="line"> src/main/resources/bootstrap-prod.properties               |  34 ++++++++++++--</span><br><span class="line"> src/main/resources/bootstrap.properties                    |  32 +++++++++++--</span><br><span class="line"> src/main/resources/config/dubbo-consumer.xml               |  22 +++++++++</span><br><span class="line"> 25 files changed, 487 insertions(+), 702 deletions(-)</span><br><span class="line"> delete mode 100644 .mvn/wrapper/maven-wrapper.jar</span><br><span class="line"> delete mode 100644 .mvn/wrapper/maven-wrapper.properties</span><br><span class="line"> create mode 100644 build.gradle</span><br><span class="line"> create mode 100644 gradle/wrapper/gradle-wrapper.jar</span><br><span class="line"> create mode 100644 gradle/wrapper/gradle-wrapper.properties</span><br><span class="line"> create mode 100755 gradlew.sh</span><br><span class="line"> delete mode 100755 mvnw.sh</span><br><span class="line"> delete mode 100644 pom.xml</span><br><span class="line"> delete mode 100644 run/unitTest.sh</span><br><span class="line"> create mode 100644 settings.gradle</span><br><span class="line"> create mode 100644 src/main/java/com/hts/common/config/BaseConfig.java</span><br><span class="line"> delete mode 100644 src/main/java/com/hts/common/config/HtsBeansConfig.java</span><br><span class="line"> create mode 100644 src/main/resources/config/dubbo-consumer.xml</span><br></pre></td></tr></table></figure></p>
+<p>有些资源文件，如果不在js里面设定了，那么就在css里面。</p>
+<p>查看log，并且对比两个版本的代码差别，并输出到指定文件。然后传输到本地。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">svn log -l 100 --stop-on-copy</span><br><span class="line"></span><br><span class="line">svn diff -r 616043:616137 &gt;qinxue.diff</span><br><span class="line"></span><br><span class="line">sz qinxue.diff </span><br><span class="line"></span><br><span class="line">svn checkout xxx/2.0.6xx --username=qinxue --password=111220Qinxue! 2.0.6xx</span><br></pre></td></tr></table></figure>
+<p>关于svn的一些操作：</p>
+<p><code>svn info</code></p>
+<p><code>svn copy</code>，用于新建分支</p>
+<p><img src="http://pavgwqw80.bkt.clouddn.com/blog/180703/E4jGfkGImi.png?imageslim" alt="mark"></p>
+<p><code>svn sw</code>，切换分支</p>
+<p><img src="http://pavgwqw80.bkt.clouddn.com/blog/180703/J0BFC75Kbk.png?imageslim" alt="mark"></p>
+<p>上传文件到linux的命令：<code>rz</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/Peter-Dinklage演讲稿/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/Peter-Dinklage演讲稿/" itemprop="url">Peter Dinklage演讲稿</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T13:43:14+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/演讲/" itemprop="url" rel="index">
+                    <span itemprop="name">演讲</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Peter Dinklage – Actor</p>
+<p>Don’t be frightened! When a Bennington student, 10 minutes before you come up to the podium — and you’re amazed.</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/05/22/Peter-Dinklage演讲稿/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/top-down思维/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/23/top-down思维/" itemprop="url">top-down思维</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T10:15:02+08:00">
+                2018-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/随想/" itemprop="url" rel="index">
+                    <span itemprop="name">随想</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>任何事情要养成先宏观再微观，先整体再局部，先一般再具体的思路。多年的沉痛经历告诉自己，这很重要，也是决定你能不能把事情做好的一个关键因素。这里把它称为top-down思维。</p>
+<p>最怕一上来就撸起袖子加油干，往往抓不到重点，得不偿失，花费最长的时间得到最低的成果。而你所见到的大佬们，都不会这样做。不管是企业管理，还是工程项目，还是个人工作计划，都会遵循top-down思维的。</p>
+<p>top-down思维的优点有很多，这里大致说几点：</p>
+<ol>
+<li>不管是自己还是他人，只想听大概的思路，如果一上来就具体，那么受众根本接受不了，请看下面的示例：</li>
+<li>这样可以看到整体的东西，方便做预测、规划</li>
+</ol>
+<p>关于这一点，有一个很好的例子，就是群面的时候，当面试官给出题目并要求在规定时间内给出一个结果的时候。总是要有一位同学带领大家，起到统筹的作用。其实他的任务很简单，就是告诉大家：我们的时间有多少（并且他要安排某个人计时），要讨论出什么东西。那么时间分配该怎样。而且对于讨论该给出的答案要包括哪几个小点。每位同学只能发言多久时间。最后由谁来总结汇报给面试官。</p>
+<p>看到没有，他做的就是从宏观上给出时间规划和任务安排。设想没有这个人，大家在底下，你一句，我一句，最后一定会乱套，而且结果还不一定能讨论出来！！（或是超时，或是统一不了结果）</p>
+<ol start="3">
+<li>有了宏观把控后，具体做的时候，就能理清思路，这个点应该出现在哪一个步骤，而不应该出现在哪个步骤。这样做起来更加自信高效。</li>
+</ol>
+<p>所以，一定要养成这个习惯，一定要逼迫自己这样做，因为真的极其重要！！！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1930,7 +1936,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1941,7 +1947,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1952,7 +1958,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
