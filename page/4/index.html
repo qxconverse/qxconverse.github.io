@@ -262,6 +262,517 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/08/WebApi的安全性/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/08/WebApi的安全性/" itemprop="url">WebApi的安全性</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-08T21:35:51+08:00">
+                2018-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>客户端调用：<code>http://api.xxx.com/getInfo?Id=value</code>，这种方式简单粗暴，在浏览器直接输入<code>http://api.xxx.com/getInfo?Id=value</code>，即可获取到相关的信息了，但是这样的方式会存在很严重的安全性问题，没有进行任何的验证，大家都可以通过这个方法获取到产品列表，导致信息泄露。</p>
+<ol>
+<li>如何验证调用者身份呢？</li>
+<li>如何防止参数被篡改呢？</li>
+<li>如何保证请求的唯一性？</li>
+<li>如何保证请求的唯一性，防止请求被恶意攻击呢？</li>
+</ol>
+<p>使用Token+签名认证（微信支付中有这种思想在里面）</p>
+<ol>
+<li>做一个认证服务，提供一个认证的WebApi，用户先访问它获取对应的Token</li>
+<li>用户拿着相应的Token以及请求的参数和服务器端提供的签名算法计算出签名后再去访问指定的Api</li>
+<li>服务器端每次接收到请求就获取对应用户的Token和请求参数，服务器端再次计算签名和客户端签名做对比，如果验证通过则正常访问相应的Api，验证失败则返回具体的失败信息。</li>
+</ol>
+<p>使用签名（签名算法+签名参数）</p>
+<ol>
+<li>给每个http请求添加一个签名，服务端来验证签名的合法性，如果签名合法则执行响应的操作，如果签名非法则直接拒绝请求。</li>
+<li>签名算法一般都使用Hash散列算法，常用的有MD5，SHA系列算法。这些算法可以根据不同的输入，计算出不同的结果，而且碰撞的概率很低。</li>
+<li>可以用Http请求的queryString然后加上时间戳还有随机数来作为签名的参数。</li>
+</ol>
+<p>WebApi跨域问题解决方案：CORS。什么是跨域问题？</p>
+<ol>
+<li>同源策略：出于安全考虑，浏览器会限制脚本中发起的跨站请求，浏览器要求JavaScript或Cookie只能访问同域下的内容。跨域问题的根本原因是浏览器的安全限制，默认禁止跨域的动态资源请求。</li>
+<li>正是由于这个原因，我们不同项目之间的调用就会被浏览器阻止。比如我们最常见的场景：WebApi作为数据服务层，它是一个单独的项目，我们的MVC项目作为Web的显示层，这个时候我们的MVC里面就需要调用WebApi里面的接口取数据展现在页面上。因为我们的WebApi和MVC是两个不同的项目，所以运行起来之后就存在上面说的跨域的问题。</li>
+</ol>
+<p>还有一篇更好的文章：<a href="https://www.cnblogs.com/codelir/p/5327462.html" target="_blank" rel="noopener">https://www.cnblogs.com/codelir/p/5327462.html</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/07/Synchronized和Lock/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/07/Synchronized和Lock/" itemprop="url">Synchronized和Lock的区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-07T13:48:46+08:00">
+                2018-09-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Synchronized的底层实现是一个monitor锁（监视器锁）。每一个对象都有一个监视器锁。主要方法为monitorenter/monitorexit，每个monitor都有一个进入数的概念，当进入数为0时，线程可以获得该对象的锁。当有其它线程占用了monitor，该线程只能阻塞直到进入数为0，才可以重新尝试获取monitor的所有权。</p>
+<p>synchronized和lock的区别：</p>
+<ol>
+<li>前者依赖于JVM，属于关键字，而Lock（一般使用reentrantlock，多个线程必须要使用一个reentrantlock才会生效）是基于Java语言的，属于并发包里面的一个类。</li>
+<li>前者是悲观锁（独占锁），其它线程会阻塞直到有个线程释放锁。而后者是乐观锁，它主要内容使用的是CAS操作。同时可以在等待的过程中中断。</li>
+<li>前者无法获取锁的状态，而后者可以。</li>
+<li>前者是独占锁，而后者可以是独占，也可以是共享的（比如读写锁中的读锁）</li>
+<li>前者是非公平锁，后者默认也是非公平锁，但是可以设置成公平的。</li>
+</ol>
+<p>关于AQS：<a href="https://mubu.com/edit/1FdAd7oAEG" target="_blank" rel="noopener">https://mubu.com/edit/1FdAd7oAEG</a></p>
+<p>AQS是Lock的核心，叫做抽象队列同步器，里面维持了一个线程阻塞队列存放阻塞了的线程，有一个state变量，用于同步线程之间的共享状态，通过volatile和CAS保证其原子性和可见性。</p>
+<p>参考博客：<a href="https://blog.csdn.net/u012403290/article/details/64910926" target="_blank" rel="noopener">https://blog.csdn.net/u012403290/article/details/64910926</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/07/java中锁的分类/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/07/java中锁的分类/" itemprop="url">Java中锁的分类</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-07T13:48:46+08:00">
+                2018-09-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>公平锁、非公平锁</p>
+<ol>
+<li>公平锁：按照申请锁的顺序来获取锁</li>
+<li>非公平锁：多个线程获取锁的顺序并不是按照申请锁的顺序，有可能后申请的线程比先申请的线程优先获取锁。有可能，会造成优先级反转或者饥饿现象</li>
+<li>ReentrantLock，可以是公平的，也可以是非公平的。默认为非公平。Synchronized，非公平锁</li>
+</ol>
+<p>可重入锁</p>
+<ol>
+<li>又名递归锁，指在同一个线程在外层方法获取锁的时候，在进入内层方法会自动获取锁</li>
+</ol>
+<p>独享锁、共享锁</p>
+<ol>
+<li>独享锁：该锁一次只能被一个线程所持有</li>
+<li>共享锁：该锁可以被多个线程所持有</li>
+<li>ReentrantLock，为独享锁。但是ReadWriteLock，其读锁是共享锁，而写锁是独享锁。读锁的共享锁保证了并发读是非常高效的；读写，写写的过程是互斥的</li>
+<li>Synchronized，为独享锁</li>
+</ol>
+<p>互斥锁、读写锁</p>
+<ol>
+<li>上面讲的独享锁、共享锁是一种广义的说法，互斥锁、读写锁是具体的实现</li>
+<li>互斥锁在Java中的具体实现：ReentrantLock</li>
+<li>读写锁在Java中的具体实现：ReadWriteLock</li>
+</ol>
+<p>乐观锁、悲观锁</p>
+<ol>
+<li>不是具体的锁，而是指看待并发同步的角度</li>
+<li>悲观锁认为，不加锁的并发操作一定会出现问题</li>
+<li>乐观锁认为，不加锁的并发操作是没有事情的</li>
+<li>悲观锁适合写操作非常多的场景，乐观锁适合读操作非常多的场景，不加锁会带来大量的性能提升</li>
+<li>悲观锁在Java中的使用，就是利用各种锁</li>
+<li>乐观锁在Java中的使用，是无锁编程，常常采用的是CAS算法，典型的例子就是原子类，通过CAS自旋实现原子操作的更新</li>
+</ol>
+<p>分段锁</p>
+<ol>
+<li>是一种锁的设计，并不是具体的锁</li>
+<li>ConcurrentHashMap的并发就是通过分段锁的形式来实现高效的并发操作</li>
+<li>ConcurrentHashMap中的分段锁称为Segment，其继承自ReentrantLock，它类似于HashMap的结构，内部拥有一个Entry数组，数组中的每个元素又是一个链表</li>
+<li>put的时候，不是对整个hashmap进行加锁，而是先通过hashcode来知道它要放在哪一个分段中，然后对这个分段进行加锁。所以当多线程put的时候，只要不是放在一个分段中，就实现了真正的并行插入</li>
+<li>在统计size的时候，就要获取hashmap的全局信息，这时需要获取所有分段的锁才能统计</li>
+</ol>
+<p>偏向锁、轻量级锁、重量级锁（锁的升级）</p>
+<ol>
+<li>锁的状态，针对Synchronized</li>
+<li>偏向锁是指一段同步代码一直被一个线程所访问，那么该线程会自动获取锁。降低获取锁的代价</li>
+<li>轻量级锁是指当锁是偏向锁的时候，被另一个线程所访问，偏向锁就会升级为轻量级锁，其他线程会通过自旋的形式尝试获取锁，不会阻塞，提高性能</li>
+<li>重量级锁是指当锁为轻量级锁的时候，另一个线程虽然是自旋，但自旋不会一直持续下去，当自旋一定次数的时候，还没有获取到锁，就会进入阻塞，该锁膨胀为重量级锁。重量级锁会让其他申请的线程进入阻塞，性能降低</li>
+</ol>
+<p>自旋锁（忙等待）</p>
+<ol>
+<li>在Java中，自旋锁是指尝试获取锁的线程不会立即阻塞，而是采用循环的方式去尝试获取锁，这样的好处是减少线程上下文切换的消耗，缺点是循环会消耗CPU</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/Redis/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1089,6 +1600,174 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/20/zookeeper/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/20/zookeeper/" itemprop="url">zookeeper知识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-20T13:48:46+08:00">
+                2018-08-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>zk是一个分布式协调服务。</p>
+<p>对比在进程内的协调、同步机制等等，而zk是基于分布式系统的，说白了就是有很多个机器。每一个机器类比之前进程里面的每一个线程。分布式显然问题更多一些，最主要的就是网络的不可靠性。</p>
+<p>zk可以做的事情包括：对配置信息的管理，名字服务，提供分布式同步，集群管理。</p>
+<ol>
+<li>配置管理：因为涉及到多台机器，每台机器都要有这样的配置，而且配置文件比较多。这时就可以使用zk服务，它使用Zab这种一致性协议来提供一致性。</li>
+<li>名字服务：提供统一的入口来维护各个服务的名字。</li>
+<li>分布式锁：某个时刻只让一台机器去干活，当这台机器出现问题时，就释放锁，给其它机器（服务）。这种设计思想很普遍，在HBase、Redis（选举新的master）中都有涉及，叫做LeaderElection（leader选举）。</li>
+<li>集群管理：集群中的节点要对其内部的变化做出相应的对策。而且当消费者访问某个服务时，就要有服务发现的机制。Dubbo就是采用zk作为服务发现的底层实现。Kafka消息队列也是采用zk作为Consumer的上下线管理。</li>
+</ol>
+<p>zk的启动过程：首先会解析配置文件，接着会初始化ServerCnxnFactory，这个是用来接收客户端连接的，说白了就是一个Tcp Server。zk中有2种实现tcp server的方法，一个是用Java原生的NIO方式，一个是使用Netty。多路复用的IO模型，一个典型的Reactor模型。创建几个SelectorThread处理具体的数据读取和写出。然后就是创建一个AcceptThread线程接收客户端的连接。后面是主要的过程</p>
+<ol>
+<li>初始化FileTxnSnapLog</li>
+<li>初始化ZKDatabase</li>
+<li>初始化决议validator</li>
+<li>leader选举，这一步非常重要也是zk里面最精华的部分（FastLeaderElection方式，每个集群中的节点都有一个状态looking、following、observing、leading，具体的选举过程可以参考:<a href="https://www.cnblogs.com/yuyijq/p/4116365.html）" target="_blank" rel="noopener">https://www.cnblogs.com/yuyijq/p/4116365.html）</a></li>
+</ol>
+<p>zookeeper的核心算法是Raft协议，主要用于模拟集群，其主要有3种角色：</p>
+<ol>
+<li>Leader</li>
+<li>Follower</li>
+<li>Candidate</li>
+</ol>
+<p>其实整个的选举过程类似于狼人杀中的选举警长。当然这个要更加复杂些。有一个很重要的概念叫做任期（Term）</p>
+<p>今天终于理解了心跳信息是个什么东西，原来当选举完成后，leader会定期给所有的follower发送心跳信息维持其统治，如果follower一段时间没有收到心跳，那么可以认为leader已经挂掉了。。。这时就会重新选举，任期加一。</p>
+<p>Redis的集群数据库的设计原理很它很相似，说白了。这些是共通的，要联系起来记忆消化。</p>
+<p>当客户端在发送数据给leader后，这时数据属于未提交的状态。首先leader会把数据发给所有的follower等待它们的确认，一旦有超过半数节点给出确认接收的消息后，leader再给客户端发送确认消息，接着再给每个follower节点发送消息表示该数据已经提交了。整个过程很依赖于一致性。即保证所有节点的数据的一致性。</p>
+<p>分布式架构的消息通信方式，主要有基于RPC的和基于消息队列的，还有基于一般的Http请求的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/18/IO模型/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1229,668 +1908,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/7.25（rabbitmq）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/25/7.25（rabbitmq）/" itemprop="url">RabbitMQ的使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-25T12:09:52+08:00">
-                2018-07-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>总结：在spring中使用Rabbit-MQ，比如有A（生产者）、B（消费者）两个独立的系统，它们之间需要通信。在A系统中需要调用B的类中某个函数，不需要重写很多冗余的代码，只需要传递关键信息给B就可以了。当然这是建立在A和B的耦合性不高的情况下的。假如A和B高耦合，那么可能会发生这样的情况：A想调用B，但是B在调用的时候又反过来涉及到A中的东西。所以这也从侧面反映了实现消息队列的优点：降低模块之间的耦合性。</p>
-<p>1.首先配置好rabbit-mq的一些基本信息，比如服务地址，端口号，用户名和密码。如下：在A、B中都需要配置，方便注入依赖。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#RabbitMQ nc060</span><br><span class="line">MQ_HOST=nc060</span><br><span class="line">MQ_PORT=5672</span><br><span class="line">#带负载的链接</span><br><span class="line">MQ_ADDRESSES=nc078x.corp.youdao.com:5670</span><br><span class="line">MQ_USER=fanyi</span><br><span class="line">MQ_PASSWORD=fanyi123outfox</span><br></pre></td></tr></table></figure>
-<p>2.接着定义交换机（exchange），队列（queue）和路由key（routingkey），其实这个只需要在A中配置就可以了，B只需要知道queue。如下（1，2步骤都是在application.properties文件中配置的）：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#调用分单系统的MQ参数</span><br><span class="line">DS_CALL_EXCHANGE=dsCallExchange</span><br><span class="line">DS_CALL_QUEUE=dsCallQueue</span><br><span class="line">DS_CALL_ROUTINGKEY=dsCallRouting</span><br></pre></td></tr></table></figure>
-<p>3.编写生产者类DsCallHelper，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">package atranslate.api.common.utils;</span><br><span class="line"></span><br><span class="line">import com.rabbitmq.client.AMQP;</span><br><span class="line">import com.rabbitmq.client.Channel;</span><br><span class="line">import com.rabbitmq.client.MessageProperties;</span><br><span class="line">import net.sf.json.JSONObject;</span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line">import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;</span><br><span class="line">import org.springframework.amqp.rabbit.connection.Connection;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author qinxue</span><br><span class="line"> * @date 2018/7/24 19:35</span><br><span class="line"> */</span><br><span class="line">public class DsCallHelper &#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger LOG = LoggerFactory.getLogger(DsCallHelper.class);</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * RabbitMQ连接池</span><br><span class="line">     */</span><br><span class="line">    private CachingConnectionFactory connectionFactory;</span><br><span class="line"></span><br><span class="line">    private Connection connection = null;</span><br><span class="line">    private Channel channel = null;</span><br><span class="line"></span><br><span class="line">    private String exchangeName;</span><br><span class="line">    private String routingKey;</span><br><span class="line">    private String queueName;</span><br><span class="line"></span><br><span class="line">    public void init() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            connection = connectionFactory.createConnection();</span><br><span class="line"></span><br><span class="line">            channel = connection.createChannel(false);</span><br><span class="line">            channel.exchangeDeclare(exchangeName, &quot;direct&quot;, true);</span><br><span class="line"></span><br><span class="line">            // 声明队列</span><br><span class="line">            // durable</span><br><span class="line">            // exclusive 队列是否私有，排他性</span><br><span class="line">            // autoDelete 最后一个消费者取消订阅，队列自动删除</span><br><span class="line">            // arguments</span><br><span class="line">            Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">            map.put(&quot;x-ha-policy&quot;, &quot;all&quot;);</span><br><span class="line">            channel.queueDeclare(queueName, true, false, false, map);</span><br><span class="line"></span><br><span class="line">            channel.queueBind(queueName, exchangeName, routingKey);</span><br><span class="line">            LOG.info(&quot;queueName is &quot; + queueName);</span><br><span class="line">            LOG.info(&quot;exchangeName is &quot; + exchangeName);</span><br><span class="line">            LOG.info(&quot;routingKey is &quot; + routingKey);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            LOG.error(&quot;Init RabbitMQ Connection Failed!&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 调用ds系统的译员接单</span><br><span class="line">     * @param orderId</span><br><span class="line">     * @param translatorId</span><br><span class="line">     */</span><br><span class="line">    public void send(long orderId, long translatorId) &#123;</span><br><span class="line">        JSONObject json = new JSONObject();</span><br><span class="line">        json.put(&quot;orderId&quot;, orderId);</span><br><span class="line">        json.put(&quot;translatorId&quot;, translatorId);</span><br><span class="line">        String message = json.toString();</span><br><span class="line">        LOG.info(&quot;message is &quot; + message);</span><br><span class="line">        try &#123;</span><br><span class="line">            byte[] bytes = message.getBytes(&quot;UTF-8&quot;);</span><br><span class="line"></span><br><span class="line">            // 投递模式为持久化，server重启消息不会丢失</span><br><span class="line">            AMQP.BasicProperties properties = MessageProperties.PERSISTENT_TEXT_PLAIN;</span><br><span class="line"></span><br><span class="line">            channel.basicPublish(exchangeName, routingKey, properties, bytes);</span><br><span class="line">            LOG.info(&quot;Send: &quot; + message);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            LOG.error(&quot;send: &quot; + message + &quot; failed!&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setExchangeName(String exchangeName) &#123;</span><br><span class="line">        this.exchangeName = exchangeName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setRoutingKey(String routingKey) &#123;</span><br><span class="line">        this.routingKey = routingKey;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setQueueName(String queueName) &#123;</span><br><span class="line">        this.queueName = queueName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setConnectionFactory(CachingConnectionFactory connectionFactory) &#123;</span><br><span class="line">        this.connectionFactory = connectionFactory;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>init函数进行mq的配置。后面的send函数发送消息。需要注意的是，通过依赖注入的变量一定要设置setter函数。</p>
-<p>4.接着在A的<code>servletConfig.web.xml</code>配置文件中加入相关的bean，配置连接池。这里就要用到地址、端口、用户和密码。并注入生产类：DsCallHelper。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> &lt;!-- start mq --&gt;</span><br><span class="line">    &lt;bean id=&quot;cachingConnectionFactory&quot; class=&quot;org.springframework.amqp.rabbit.connection.CachingConnectionFactory&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;addresses&quot; value=&quot;$&#123;MQ_ADDRESSES&#125;&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;username&quot; value=&quot;$&#123;MQ_USER&#125;&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;password&quot; value=&quot;$&#123;MQ_PASSWORD&#125;&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">&lt;!-- end mq --&gt;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">&lt;bean id=&quot;dsCallHelper&quot; class=&quot;atranslate.api.common.utils.DsCallHelper&quot; init-method=&quot;init&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;connectionFactory&quot; ref=&quot;cachingConnectionFactory&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;exchangeName&quot; value=&quot;$&#123;DS_CALL_EXCHANGE&#125;&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;routingKey&quot; value=&quot;$&#123;DS_CALL_ROUTINGKEY&#125;&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;queueName&quot; value=&quot;$&#123;DS_CALL_QUEUE&#125;&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
-<p>需要注意的是，<code>init-method</code>用于类的初始化方法。如果有初始化函数，就要写进去，不然会出现空指针异常。到这里，A（生产者）就写好了，需要与B通信，直接调用<code>DsCallHelper</code>里面的send方法。</p>
-<p>5.在B中，编写消费者类DsCallConsumer，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">package distribute.web.helper;</span><br><span class="line"></span><br><span class="line">import com.rabbitmq.client.*;</span><br><span class="line">import distribute.web.logic.DsOrderLogic;</span><br><span class="line">import net.sf.json.JSONObject;</span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.concurrent.TimeoutException;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author qinxue</span><br><span class="line"> * @date 2018/7/24 20:26</span><br><span class="line"> */</span><br><span class="line">public class DsCallConsumer &#123;</span><br><span class="line"></span><br><span class="line">    private static final Logger LOG = LoggerFactory.getLogger(DsCallConsumer.class);</span><br><span class="line"></span><br><span class="line">    private ConnectionFactory connectionFactory = null;</span><br><span class="line"></span><br><span class="line">    private Connection connection = null;</span><br><span class="line">    private Channel channel = null;</span><br><span class="line">    private DsOrderLogic dsOrderLogic = null;</span><br><span class="line"></span><br><span class="line">    private final static String QUEUE_NAME = &quot;dsCallQueue&quot;;</span><br><span class="line"></span><br><span class="line">    public void init() &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            connection = connectionFactory.newConnection();</span><br><span class="line">            channel = connection.createChannel();</span><br><span class="line">            // 声明队列</span><br><span class="line">            // durable</span><br><span class="line">            // exclusive 队列是否私有，排他性</span><br><span class="line">            // autoDelete 最后一个消费者取消订阅，队列自动删除</span><br><span class="line">            // arguments</span><br><span class="line">            channel.queueDeclare(QUEUE_NAME, true, false, false, null);</span><br><span class="line">            LOG.info(&quot;初始化rabbitmq，队列名为：&quot; + QUEUE_NAME);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            LOG.error(&quot;Init RabbitMQ Connection Failed!&quot;, e);</span><br><span class="line">        &#125; catch (TimeoutException e) &#123;</span><br><span class="line">            LOG.error(&quot;Init RabbitMQ Connection Failed!&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            LOG.info(&quot;等待消息...&quot;);</span><br><span class="line">            Consumer consumer = new DefaultConsumer(channel) &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body)</span><br><span class="line">                        throws IOException &#123;</span><br><span class="line">                    String message = new String(body, &quot;UTF-8&quot;);</span><br><span class="line">                    LOG.debug(message);</span><br><span class="line">                    JSONObject result = JSONObject.fromObject(message);</span><br><span class="line">                    dsOrderLogic.acceptFastTask(result.getLong(&quot;orderId&quot;), result.getLong(&quot;translatorId&quot;));</span><br><span class="line">                    LOG.info(&quot;Received &apos;&quot; + message + &quot;&apos;&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line">            channel.basicConsume(QUEUE_NAME, true, consumer);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            LOG.error(&quot;Waiting Failed!&quot;, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setConnectionFactory(ConnectionFactory connectionFactory) &#123;</span><br><span class="line">        this.connectionFactory = connectionFactory;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setDsOrderLogic(DsOrderLogic dsOrderLogic) &#123;</span><br><span class="line">        this.dsOrderLogic = dsOrderLogic;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>同样要注意依赖注入相关的问题，这里有3点需要注意：</p>
-<ol>
-<li><code>channel.queueDeclare(QUEUE_NAME, true, false, false, null);</code>这句话要和A中的相关配置一致。</li>
-<li>可以看出这里确实只需要queue的信息，表示它只监听queue队列发来的消息，而具体的交换机和路由是生产者需要处理的问题。</li>
-<li>最重要的一点，下面的consumer定义一定要放在init函数里，不是单独写一个函数。这里用到了监听器模式的思想。在官网中是这样解释<code>DefaultConsumer</code>的，看作一个回调函数：<blockquote>
-<p>We’re about to tell the server to deliver us the messages from the queue. Since it will push us messages asynchronously, we provide a callback in the form of an object that will buffer the messages until we’re ready to use them. That is what a DefaultConsumer subclass does.</p>
-</blockquote>
-</li>
-</ol>
-<p>6.配置bean，注意init-method的问题。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> &lt;!-- start mq --&gt;</span><br><span class="line">&lt;bean id=&quot;connectionFactory&quot; class=&quot;com.rabbitmq.client.ConnectionFactory&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;host&quot; value=&quot;$&#123;hostAddress&#125;&quot;/&gt;</span><br><span class="line">    &lt;property name=&quot;port&quot; value=&quot;$&#123;hostPort&#125;&quot;/&gt;</span><br><span class="line">    &lt;property name=&quot;username&quot; value=&quot;$&#123;mqUserName&#125;&quot;/&gt;</span><br><span class="line">    &lt;property name=&quot;password&quot; value=&quot;$&#123;mqPassword&#125;&quot; /&gt;</span><br><span class="line">&lt;/bean&gt;</span><br><span class="line">&lt;!-- end mq --&gt;</span><br><span class="line">...</span><br><span class="line">    </span><br><span class="line">&lt;bean id=&quot;dsCallConsumer&quot; class=&quot;distribute.web.helper.DsCallConsumer&quot; init-method=&quot;init&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;connectionFactory&quot; ref=&quot;connectionFactory&quot;/&gt;</span><br><span class="line">    &lt;property name=&quot;dsOrderLogic&quot; ref=&quot;dsOrderLogic&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/7.17（Git与SVN操作）/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/17/7.17（Git与SVN操作）/" itemprop="url">Git与SVN相关的操作</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-17T12:09:52+08:00">
-                2018-07-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Git的学习"><a href="#Git的学习" class="headerlink" title="Git的学习"></a>Git的学习</h4><p>git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1ftc4lc8wldj30cq06iaa8.jpg" alt=""></p>
-<p>先手动删除文件，然后使用<code>git rm &lt;file&gt;</code>和<code>git add &lt;file&gt;</code>效果是一样的。</p>
-<p>切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。</p>
-<p>Git鼓励大量使用分支：</p>
-<p>查看分支：<code>git branch</code></p>
-<p>创建分支：<code>git branch &lt;name&gt;</code></p>
-<p>切换分支：<code>git checkout &lt;name&gt;</code></p>
-<p>创建+切换分支：<code>git checkout -b &lt;name&gt;</code></p>
-<p>合并某分支到当前分支：<code>git merge &lt;name&gt;</code></p>
-<p>删除分支：<code>git branch -d &lt;name&gt;</code></p>
-<p>合并分支时，加上<code>--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。</p>
-<p>在本地新建一个分支，并在远程创建一个一样的分支。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">本地：新建分支，并修改，push</span><br><span class="line">qx:hts-ds XFade$ git checkout -b fanyiedit</span><br><span class="line">Switched to a new branch &apos;fanyiedit&apos;</span><br><span class="line">...</span><br><span class="line">qx:hts-ds XFade$ git push -u origin fanyiedit</span><br><span class="line">Counting objects: 8, done.</span><br><span class="line">Delta compression using up to 4 threads.</span><br><span class="line">Compressing objects: 100% (7/7), done.</span><br><span class="line">Writing objects: 100% (8/8), 770 bytes | 770.00 KiB/s, done.</span><br><span class="line">Total 8 (delta 4), reused 0 (delta 0)</span><br><span class="line">To https://gitlab.corp.youdao.com/translator-dev/hts-ds.git</span><br><span class="line"> * [new branch]      fanyiedit -&gt; fanyiedit</span><br><span class="line">Branch &apos;fanyiedit&apos; set up to track remote branch &apos;fanyiedit&apos; from &apos;origin&apos;.</span><br><span class="line"></span><br><span class="line">远端：</span><br><span class="line">[qinxue@nc060 hts-ds]$ git fetch</span><br><span class="line">...</span><br><span class="line">[qinxue@nc060 hts-ds]$ git checkout -b fanyiedit origin/fanyiedit</span><br><span class="line">Branch fanyiedit set up to track remote branch fanyiedit from origin.</span><br></pre></td></tr></table></figure>
-<p>新建分支的时候，一定要注意是在哪个分支上建立的，以防有些更新不到。之前在multiFile分支上创建了fanyiedit的分支，但是发现里面有些功能和官网的不一致，后来发现是因为master上新加了些功能，而这些功能不在multiFile分支里面。所以重新从master上新建了一个分支fanyi-edit，并把fanyiedit分支merge到里面。具体过程如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git checkout master</span><br><span class="line">Switched to branch &apos;master&apos;</span><br><span class="line">Your branch is behind &apos;origin/master&apos; by 82 commits, and can be fast-forwarded.</span><br><span class="line">  (use &quot;git pull&quot; to update your local branch)</span><br><span class="line">  </span><br><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git pull</span><br><span class="line">Updating da16794..0f67219</span><br><span class="line">Fast-forward</span><br><span class="line"> conf/dubbo.properties                                                                    |   10 +-</span><br><span class="line"> conf/dubbo.properties.online                                                             |    9 +-</span><br><span class="line"> conf/sem/mail/dailyReport.vm                                                             |   53 ---</span><br><span class="line"> conf/sem/mail/weeklyReport.vm</span><br><span class="line"> ...</span><br><span class="line"> </span><br><span class="line"> XFade@qx:~/IdeaProjects/hts-ds$ git br</span><br><span class="line">  fanyiedit</span><br><span class="line">* master</span><br><span class="line">  multiFile</span><br><span class="line">  </span><br><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git checkout -b fanyi-edit</span><br><span class="line">Switched to a new branch &apos;fanyi-edit&apos;</span><br><span class="line"></span><br><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git br</span><br><span class="line">* fanyi-edit</span><br><span class="line">  fanyiedit</span><br><span class="line">  master</span><br><span class="line">  multiFile</span><br><span class="line">  </span><br><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git merge fanyiedit</span><br><span class="line">Auto-merging web/WEB-INF/servletConfig.web.xml</span><br><span class="line">CONFLICT (content): Merge conflict in web/WEB-INF/servletConfig.web.xml</span><br><span class="line">Auto-merging src/resources/application.properties.online</span><br><span class="line">CONFLICT (content): Merge conflict in src/resources/application.properties.online</span><br><span class="line">Auto-merging src/resources/application.properties</span><br><span class="line">CONFLICT (content): Merge conflict in src/resources/application.properties</span><br><span class="line">Auto-merging ivy.xml</span><br><span class="line">CONFLICT (content): Merge conflict in ivy.xml</span><br><span class="line">Automatic merge failed; fix conflicts and then commit the result.</span><br><span class="line">这里需要解决冲突</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git add .</span><br><span class="line"></span><br><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git ci -m &quot;git merge fanyiedit时处理冲突文件&quot;</span><br><span class="line">[fanyi-edit 4b74e47] git merge fanyiedit时处理冲突文件</span><br><span class="line"></span><br><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git push -u origin fanyi-edit</span><br><span class="line">Counting objects: 16, done.</span><br><span class="line">Delta compression using up to 4 threads.</span><br><span class="line">Compressing objects: 100% (15/15), done.</span><br><span class="line">Writing objects: 100% (16/16), 2.04 KiB | 1.02 MiB/s, done.</span><br><span class="line">Total 16 (delta 8), reused 0 (delta 0)</span><br><span class="line">To https://gitlab.corp.youdao.com/translator-dev/hts-ds.git</span><br><span class="line"> * [new branch]      fanyi-edit -&gt; fanyi-edit</span><br><span class="line">Branch &apos;fanyi-edit&apos; set up to track remote branch &apos;fanyi-edit&apos; from &apos;origin&apos;.</span><br><span class="line"></span><br><span class="line">XFade@qx:~/IdeaProjects/hts-ds$ git pull</span><br><span class="line">Already up to date.</span><br><span class="line"></span><br><span class="line">远程那边类似上面的</span><br></pre></td></tr></table></figure></p>
-<p>在实际开发中，我们应该按照几个基本原则进行分支管理：</p>
-<p>首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；我们每个人都有自己的分支，时不时地往dev分支上合并就可以了。</p>
-<p>所以，团队合作的分支看起来就像这样：</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1ftcnvtf2m5j30du03ha9w.jpg" alt=""></p>
-<p>当修改完bug分支后，要及时地在master上删除该分支，如果切换到dev分支上再删除bug分支，就会报错。</p>
-<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1ftcoziu48vj31kw0qrqaz.jpg" alt=""></p>
-<p>通常涉及到多个人开发，比如A和B。B从github上clone了项目。并且新建并切换到dev分支了。</p>
-<p>这个时候A（你）和B（你的小伙伴）对同一个文件进行了修改，发生了冲突。假设B先push了，而你后面想push，就会发生错误。所以可以先pull一下。pull也可能失败，原因是没有指定本地dev分支与远程origin/dev分支的链接，根据提示，设置dev和origin/dev的链接：<br><code>git branch --set-upstream-to=origin/dev dev</code></p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1ftcprja97fj31ce0i8dkz.jpg" alt=""></p>
-<p>这回pull成功，但是合并有冲突，需要手动解决，解决的方法和分支管理中的解决冲突完全一样。解决后，add，ci,再push。这样就完美解决了冲突。</p>
-<p>这时B如果要再次编辑，首先需要pull一下。然后再进行后续操作。如果他不pull，push后有冲突，那么解决方法同上A所做的。</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1ftcpq38ngij31c60k07a1.jpg" alt=""></p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1ftcpqd42tmj31kw0hzn2o.jpg" alt=""></p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1ftcq45la4qj31hs0tu7ec.jpg" alt=""></p>
-<p>git中对比2个版本之间的改动，比如下面的例子</p>
-<p> <code>git diff e065320 6280833 --stat</code><br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">src/main/java/com/hts/config/NosConfig.java            | 14 ++++++--------</span><br><span class="line">src/main/java/com/hts/monitor/NosFileCacheHandler.java |  4 ++++</span><br><span class="line">src/main/java/com/hts/monitor/RetryService.java        | 15 +++++++++------</span><br><span class="line">3 files changed, 19 insertions(+), 14 deletions(-)</span><br></pre></td></tr></table></figure></p>
-<p> git重新建立一个branch的操作</p>
-<p><img src="http://pavgwqw80.bkt.clouddn.com/blog/180709/e30b1Di0cH.png?imageslim" alt="mark"></p>
-<p>push的操作：<code>git push -u origin multiFile</code></p>
-<p>在远程中：<code>git branch --set-upstream-to=origin/multiFile multiFile</code></p>
-<p>这样就可以pull了。然后再<code>ant clean &amp;&amp; ant restart-resin</code>，就可以重新启动项目了。</p>
-<p>在add之前，查看修改了哪些代码，很实用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD (filename)</span><br></pre></td></tr></table></figure>
-<p>修改了冲突后，记得add，commit，pull然后再push</p>
-<p>在pull的时候，如果本地有修改过的，那么可以强制恢复到上一次提交的位置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">[qinxue@nc060 fanyi-terminology]$ git pull</span><br><span class="line">Enter passphrase for key &apos;/home/qinxue/.ssh/id_rsa&apos;:</span><br><span class="line">Updating 4c85ec5..d1b9d01</span><br><span class="line">error: Your local changes to the following files would be overwritten by merge:</span><br><span class="line">	src/main/resources/bootstrap.properties</span><br><span class="line">Please, commit your changes or stash them before you can merge.</span><br><span class="line">Aborting</span><br><span class="line">[qinxue@nc060 fanyi-terminology]$ git reset --hard</span><br><span class="line">HEAD is now at 4c85ec5 :MOD:测试批量上传术语的功能</span><br><span class="line">[qinxue@nc060 fanyi-terminology]$ git pull</span><br><span class="line">Enter passphrase for key &apos;/home/qinxue/.ssh/id_rsa&apos;:</span><br><span class="line">Updating 4c85ec5..d1b9d01</span><br><span class="line">Fast-forward</span><br><span class="line"> .gitignore                                                 |   2 +</span><br><span class="line"> .mvn/wrapper/maven-wrapper.jar                             | Bin 47610 -&gt; 0 bytes</span><br><span class="line"> .mvn/wrapper/maven-wrapper.properties                      |   1 -</span><br><span class="line"> build.gradle                                               | 139 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span><br><span class="line"> gradle/wrapper/gradle-wrapper.jar                          | Bin 0 -&gt; 54413 bytes</span><br><span class="line"> gradle/wrapper/gradle-wrapper.properties                   |   5 ++</span><br><span class="line"> gradlew.sh                                                 | 172 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++</span><br><span class="line"> mvnw.sh                                                    | 191 ----------------------------------------------------------------------------</span><br><span class="line"> pom.xml                                                    | 250 ----------------------------------------------------------------------------------------------------</span><br><span class="line"> readme.md                                                  |  39 ++++++++++------</span><br><span class="line"> run/service.sh                                             |   2 +-</span><br><span class="line"> run/unitTest.sh                                            |   3 --</span><br><span class="line"> settings.gradle                                            |   1 +</span><br><span class="line"> src/main/java/com/hts/common/config/BaseConfig.java        |  32 +++++++++++++</span><br><span class="line"> src/main/java/com/hts/common/config/HtsBeansConfig.java    | 212 ------------------------------------------------------------------------------------</span><br><span class="line"> src/main/java/com/hts/common/utils/ExcelUtils.java         |  21 ++++-----</span><br><span class="line"> src/main/java/com/hts/controller/BaseController.java       |   6 ++-</span><br><span class="line"> src/main/java/com/hts/controller/IndexController.java      |   2 +-</span><br><span class="line"> src/main/java/com/hts/controller/TermController.java       |  13 ++++--</span><br><span class="line"> src/main/java/com/hts/logic/BaseLogic.java                 |   6 ++-</span><br><span class="line"> src/main/java/com/hts/logic/TerminologyLogic.java          |   2 +-</span><br><span class="line"> src/main/java/com/hts/storage/IUserTermLibraryStorage.java |   2 +</span><br><span class="line"> src/main/resources/bootstrap-prod.properties               |  34 ++++++++++++--</span><br><span class="line"> src/main/resources/bootstrap.properties                    |  32 +++++++++++--</span><br><span class="line"> src/main/resources/config/dubbo-consumer.xml               |  22 +++++++++</span><br><span class="line"> 25 files changed, 487 insertions(+), 702 deletions(-)</span><br><span class="line"> delete mode 100644 .mvn/wrapper/maven-wrapper.jar</span><br><span class="line"> delete mode 100644 .mvn/wrapper/maven-wrapper.properties</span><br><span class="line"> create mode 100644 build.gradle</span><br><span class="line"> create mode 100644 gradle/wrapper/gradle-wrapper.jar</span><br><span class="line"> create mode 100644 gradle/wrapper/gradle-wrapper.properties</span><br><span class="line"> create mode 100755 gradlew.sh</span><br><span class="line"> delete mode 100755 mvnw.sh</span><br><span class="line"> delete mode 100644 pom.xml</span><br><span class="line"> delete mode 100644 run/unitTest.sh</span><br><span class="line"> create mode 100644 settings.gradle</span><br><span class="line"> create mode 100644 src/main/java/com/hts/common/config/BaseConfig.java</span><br><span class="line"> delete mode 100644 src/main/java/com/hts/common/config/HtsBeansConfig.java</span><br><span class="line"> create mode 100644 src/main/resources/config/dubbo-consumer.xml</span><br></pre></td></tr></table></figure></p>
-<p>有些资源文件，如果不在js里面设定了，那么就在css里面。</p>
-<p>查看log，并且对比两个版本的代码差别，并输出到指定文件。然后传输到本地。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">svn log -l 100 --stop-on-copy</span><br><span class="line"></span><br><span class="line">svn diff -r 616043:616137 &gt;qinxue.diff</span><br><span class="line"></span><br><span class="line">sz qinxue.diff </span><br><span class="line"></span><br><span class="line">svn checkout xxx/2.0.6xx --username=qinxue --password=111220Qinxue! 2.0.6xx</span><br></pre></td></tr></table></figure>
-<p>关于svn的一些操作：</p>
-<p><code>svn info</code></p>
-<p><code>svn copy</code>，用于新建分支</p>
-<p><img src="http://pavgwqw80.bkt.clouddn.com/blog/180703/E4jGfkGImi.png?imageslim" alt="mark"></p>
-<p><code>svn sw</code>，切换分支</p>
-<p><img src="http://pavgwqw80.bkt.clouddn.com/blog/180703/J0BFC75Kbk.png?imageslim" alt="mark"></p>
-<p>上传文件到linux的命令：<code>rz</code></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/22/Peter-Dinklage演讲稿/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/22/Peter-Dinklage演讲稿/" itemprop="url">Peter Dinklage演讲稿</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T13:43:14+08:00">
-                2018-05-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/演讲/" itemprop="url" rel="index">
-                    <span itemprop="name">演讲</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Peter Dinklage – Actor</p>
-<p>Don’t be frightened! When a Bennington student, 10 minutes before you come up to the podium — and you’re amazed.</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/22/Peter-Dinklage演讲稿/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/top-down思维/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/23/top-down思维/" itemprop="url">top-down思维</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T10:15:02+08:00">
-                2018-04-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/随想/" itemprop="url" rel="index">
-                    <span itemprop="name">随想</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>任何事情要养成先宏观再微观，先整体再局部，先一般再具体的思路。多年的沉痛经历告诉自己，这很重要，也是决定你能不能把事情做好的一个关键因素。这里把它称为top-down思维。</p>
-<p>最怕一上来就撸起袖子加油干，往往抓不到重点，得不偿失，花费最长的时间得到最低的成果。而你所见到的大佬们，都不会这样做。不管是企业管理，还是工程项目，还是个人工作计划，都会遵循top-down思维的。</p>
-<p>top-down思维的优点有很多，这里大致说几点：</p>
-<ol>
-<li>不管是自己还是他人，只想听大概的思路，如果一上来就具体，那么受众根本接受不了，请看下面的示例：</li>
-<li>这样可以看到整体的东西，方便做预测、规划</li>
-</ol>
-<p>关于这一点，有一个很好的例子，就是群面的时候，当面试官给出题目并要求在规定时间内给出一个结果的时候。总是要有一位同学带领大家，起到统筹的作用。其实他的任务很简单，就是告诉大家：我们的时间有多少（并且他要安排某个人计时），要讨论出什么东西。那么时间分配该怎样。而且对于讨论该给出的答案要包括哪几个小点。每位同学只能发言多久时间。最后由谁来总结汇报给面试官。</p>
-<p>看到没有，他做的就是从宏观上给出时间规划和任务安排。设想没有这个人，大家在底下，你一句，我一句，最后一定会乱套，而且结果还不一定能讨论出来！！（或是超时，或是统一不了结果）</p>
-<ol start="3">
-<li>有了宏观把控后，具体做的时候，就能理清思路，这个点应该出现在哪一个步骤，而不应该出现在哪个步骤。这样做起来更加自信高效。</li>
-</ol>
-<p>所以，一定要养成这个习惯，一定要逼迫自己这样做，因为真的极其重要！！！</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1936,7 +1958,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-count">73</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1958,7 +1980,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

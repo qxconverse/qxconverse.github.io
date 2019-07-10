@@ -83,7 +83,7 @@
 <meta name="keywords" content="版本控制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git与SVN相关的操作">
-<meta property="og:url" content="http://yoursite.com/2018/07/17/7.17（Git与SVN操作）/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/07/17/Git与SVN操作/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
 <meta property="og:description" content="Git的学习git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。  先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支：">
 <meta property="og:locale" content="default">
@@ -94,10 +94,7 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1ftcpq38ngij31c60k07a1.jpg">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1ftcpqd42tmj31kw0hzn2o.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1ftcq45la4qj31hs0tu7ec.jpg">
-<meta property="og:image" content="http://pavgwqw80.bkt.clouddn.com/blog/180709/e30b1Di0cH.png?imageslim">
-<meta property="og:image" content="http://pavgwqw80.bkt.clouddn.com/blog/180703/E4jGfkGImi.png?imageslim">
-<meta property="og:image" content="http://pavgwqw80.bkt.clouddn.com/blog/180703/J0BFC75Kbk.png?imageslim">
-<meta property="og:updated_time" content="2019-07-07T06:15:08.052Z">
+<meta property="og:updated_time" content="2019-07-10T16:03:01.927Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git与SVN相关的操作">
 <meta name="twitter:description" content="Git的学习git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。  先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支：">
@@ -131,7 +128,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/17/7.17（Git与SVN操作）/">
+  <link rel="canonical" href="http://yoursite.com/2018/07/17/Git与SVN操作/">
 
 
 
@@ -274,7 +271,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/7.17（Git与SVN操作）/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/Git与SVN操作/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -395,7 +392,6 @@
 <p>git中对比2个版本之间的改动，比如下面的例子</p>
 <p> <code>git diff e065320 6280833 --stat</code><br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">src/main/java/com/hts/config/NosConfig.java            | 14 ++++++--------</span><br><span class="line">src/main/java/com/hts/monitor/NosFileCacheHandler.java |  4 ++++</span><br><span class="line">src/main/java/com/hts/monitor/RetryService.java        | 15 +++++++++------</span><br><span class="line">3 files changed, 19 insertions(+), 14 deletions(-)</span><br></pre></td></tr></table></figure></p>
 <p> git重新建立一个branch的操作</p>
-<p><img src="http://pavgwqw80.bkt.clouddn.com/blog/180709/e30b1Di0cH.png?imageslim" alt="mark"></p>
 <p>push的操作：<code>git push -u origin multiFile</code></p>
 <p>在远程中：<code>git branch --set-upstream-to=origin/multiFile multiFile</code></p>
 <p>这样就可以pull了。然后再<code>ant clean &amp;&amp; ant restart-resin</code>，就可以重新启动项目了。</p>
@@ -409,10 +405,9 @@
 <p>关于svn的一些操作：</p>
 <p><code>svn info</code></p>
 <p><code>svn copy</code>，用于新建分支</p>
-<p><img src="http://pavgwqw80.bkt.clouddn.com/blog/180703/E4jGfkGImi.png?imageslim" alt="mark"></p>
 <p><code>svn sw</code>，切换分支</p>
-<p><img src="http://pavgwqw80.bkt.clouddn.com/blog/180703/J0BFC75Kbk.png?imageslim" alt="mark"></p>
 <p>上传文件到linux的命令：<code>rz</code></p>
+<p>解决git pull/push每次都需要输入密码问题：<a href="https://blog.csdn.net/nongweiyilady/article/details/77772602" target="_blank" rel="noopener">https://blog.csdn.net/nongweiyilady/article/details/77772602</a></p>
 
       
     </div>
@@ -453,7 +448,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/25/7.25（rabbitmq）/" rel="prev" title="RabbitMQ的使用">
+              <a href="/2018/07/25/rabbitmq知识点/" rel="prev" title="RabbitMQ的使用">
                 RabbitMQ的使用 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -532,7 +527,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">67</span>
+                  <span class="site-state-item-count">73</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -554,7 +549,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
