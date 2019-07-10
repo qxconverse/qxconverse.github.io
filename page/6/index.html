@@ -262,6 +262,799 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/13/B树和其变体/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/13/B树和其变体/" itemprop="url">B树和其变体</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-13T21:01:00+08:00">
+                2018-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>B树和其变体是标准的文件组织方法，在绝大多数现代文件系统中得到了广泛的应用。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/13/B树和其变体/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/关于回溯法在排列和组合中的应用总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/10/关于回溯法在排列和组合中的应用总结/" itemprop="url">关于回溯法在排列和组合中的应用总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-10T14:34:00+08:00">
+                2018-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="关于回溯法在排列和组合中的应用总结"><a href="#关于回溯法在排列和组合中的应用总结" class="headerlink" title="关于回溯法在排列和组合中的应用总结"></a>关于回溯法在排列和组合中的应用总结</h4><p>下面是一段leetcode讨论区的原话：</p>
+<blockquote>
+<p>Backtracking can be solved always as follows:</p>
+<p>Pick a starting point.<br>while(Problem is not solved)<br>​    For each path from the starting point.<br>​        check if selected path is safe, if yes select it<br>​        and make recursive call to rest of the problem<br>​        before which undo the current move.<br>​    End For<br>If none of the move works out, return false, NO SOLUTON.</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/10/关于回溯法在排列和组合中的应用总结/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/virtualFunction/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/10/virtualFunction/" itemprop="url">关于C++中的析构函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-10T14:32:12+08:00">
+                2018-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="关于析构函数"><a href="#关于析构函数" class="headerlink" title="关于析构函数"></a>关于析构函数</h4><p>遇到跟析构函数相关的题目，总是做错。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/10/virtualFunction/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/06/计算机视觉特征提取与图像处理总结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/06/计算机视觉特征提取与图像处理总结/" itemprop="url">计算机视觉特征提取与图像处理总结</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-06T16:33:43+08:00">
+                2018-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="计算机视觉特征提取与图像处理总结"><a href="#计算机视觉特征提取与图像处理总结" class="headerlink" title="计算机视觉特征提取与图像处理总结"></a>计算机视觉特征提取与图像处理总结</h3><p>关于经典的计算机视觉这一块，简单地总结一下，罗列一些知识点，方便以后的再学习或是查阅。之所以称它为经典的，主要是因为里面都是些传统的方法，相较于最近几年才发展起来的深度学习方法而言。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/06/计算机视觉特征提取与图像处理总结/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/06/面试常见问题/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/06/面试常见问题/" itemprop="url">面试常见问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-06T13:48:46+08:00">
+                2018-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>算法题常见的思路：</p>
+<ol>
+<li>用双指针（甚至多指针）（比如头尾逼近）</li>
+<li>想到二分的思想</li>
+<li>想到patition的思想（快排里的）</li>
+<li>想到用空间换时间</li>
+<li>想到用哈希table（比如用数组构造，或是调用unordered_set或unordered_map）</li>
+<li>想到用查找表（比如map/set等一系列的）</li>
+<li>想到用动态规划或贪心算法</li>
+<li>想到用回朔法</li>
+</ol>
+<p>若结点的存储地址与其关键字值之间存在某种对应关系，则这种存储结构为散列存储。<br>散列存储：散列存储，又称hash存储，是一种力图将数据元素的存储位置与关键码之间建立确定对应关系的查找技术。<br>基本思想：由节点的关键码值决定节点的存储地址。散列技术除了可以用于查找外，还可以用于存储。</p>
+<p>特点：<br>散列是数组存储方式的一种发展，相比数组，散列的数据访问速度要高于数组，因为可以依据存储数据的部分内容找到数据在数组中的存储位置，进而能够快速实现数据的访问，理想的散列访问速度是非常迅速的，而不像在数组中的遍历过程，采用存储数组中内容的部分元素作为映射函数的输入，映射函数的输出就是存储数据的位置，这样的访问速度就省去了遍历数组的实现，因此时间复杂度可以认为为O(1)，而数组遍历的时间复杂度为O(n)。</p>
+<p>1.排序算法的思考方式</p>
+<p><img src="http://img.blog.csdn.net/20180327172535147?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>SVM和Logistic回归的比较：（1）经典的SVM，直接输出类别，不给出后验概率；（2）Logistic回归，会给出属于哪一个类别的后验概率；（3）比较重点是二者目标函数的异同。</p>
+<p>SVR回归区别于传统的回归，在计算模型输出和真实输出之前的差别时，可以容忍小部分的偏差\epsilon。</p>
+<p>逻辑回归模型参数的求解，一般通过极大似然估计，也就得到了logloss。至于logloss，个人觉得有一个稍微有点物理意义的解释：可以把logloss分解成真实分布的熵+真实分布与预测分布的相对熵（KL散度），前半部分是固定的，所以最小化logloss相当于在最小化真实分布与预测分布之间的差异。</p>
+<p>bagging是并行式集成学习方法的最著名的代表。</p>
+<p>m个样本的数据集可放回随机取出一个样本放入采样集。m次采样中，含有m个样本的采样集。采样出T个含有m个训练样本的采样集。基于每一个采样集，训练出一个基学习器。再将这些结合起来。</p>
+<p>与标准adaboost只适用于二分类任务不同，bagging能不经修改地用于多分类、回归等任务。</p>
+<p>Bagging 是 Bootstrap Aggregating 的简称，意思就是再取样 (Bootstrap) 然后在每个样本上训练出来的模型取平均，所以是降低模型的 variance. Bagging 比如 Random Forest 这种先天并行的算法都有这个效果。</p>
+<p>Boosting 则是迭代算法，每一次迭代都根据上一次迭代的预测结果对样本进行加权，所以随着迭代不断进行，误差会越来越小，所以模型的 bias 会不断降低。这种算法无法并行，例子比如 Adaptive Boosting.</p>
+<p>1.总结极大似然估计和最大后验估计</p>
+<p>2.朴素贝叶斯分类</p>
+<p>3，线性回归</p>
+<p>4，svr回归</p>
+<p>5.pca，lpa</p>
+<p>算法面试常问的问题：</p>
+<p>1.服务器：Linux，shell</p>
+<p>2.数据库，存储系统：数据库</p>
+<p>3.C/C++代码功底</p>
+<p>4.网络编程（计算机网络）</p>
+<p>5.多线程、并发（操作系统）</p>
+<p>6.云计算，分布式（重点）</p>
+<p>7.机器学习、深度学习</p>
+<p>8.python语言，opencv，计算机视觉</p>
+<p>9.算法及数据结构</p>
+<p>推荐算法熟悉么？答：只知道基于内容的推荐和协同过滤。你提到了关联规则， 关联规则具体你知道哪些算法？：Apriori和FP-Growth</p>
+<p>k-means大概是怎么回事？答：最大化簇间距离，最小化簇内距离</p>
+<p>银行家算法  </p>
+<p>   死锁条件  </p>
+<p>   计算机网络：（竟然还被问了网络。。。感觉自己只能一直说。。。对不起，这些事本科时学的，现在忘光了。。。但是面试官仿佛听不到一样一直往死里问我。。。T^T）  </p>
+<p>   从上到下说出网络有哪些层，每层具体应用？  </p>
+<p>   浏览器是哪一层的？  </p>
+<p>   动态协议和静态协议有哪些？</p>
+<p>数据结构：  </p>
+<p>   1。最大子序列和：一串序列，找出和最大的子序列：用一个变量储存第i位之前最大的和，碰到新的数字进行相应的加减法， 一旦这个变量小于0就置为0。  </p>
+<p>   2。平衡二叉树是怎么回事，介绍一下  </p>
+<p>   3。链表中有环怎么找？两个指针  </p>
+<p>   4。海量数据中找中位数（数据有100G,内存只有1G）：利用外部排序确定，或者可以用两个堆</p>
+<p>对于海量数据的情况，一定要想到分治法，即不断地二分划分，这样的算法复杂度就是O(\log n)。而且还要想到用位来操作。很多算法问题也会用到。这是一个你在想不出用什么方法的时候最有可能利用的方法。</p>
+<p>当然也要想到用桶排序。</p>
+<p>SVM处理多分类问题<br>SVM是一个二分类器，处理多分类问题时，常用的策略有：“一对一”（One vs. One, 简称OvO）、“一对其余”（One vs. Rest, 简称OvR）和“多对多”（Many vs. Many，简称MvM）。<br>OvO：对于给定数据集D=(xi,yi),(x2,y2),…,(xm,ym),yi∈C1,C2,…,CN。OvO将这N个类别两两配对，从而产生N(N−1)/2 个二分类任务。测试阶段，新样本将同时提交给所有分类器，于是我们可得到N(N−1)/2 个分类结果，最终把被预测得最多的类别作为最终分类结果。<br>OvR：每次将一个类的样例作为正例，所有其他类的样例作为反例来训练N个分类器。在预测时选择置信度最大的类别作为分类结果。<br>MvM：每次将若干个类作为正类，若干个其他类作为反类。 </p>
+<p>堆排序、快速排序、希尔排序、直接选择排序不是稳定的排序算法，而基数排序、冒泡排序、直接插入排序、折半插入排序、归并排序是稳定的排序算法。</p>
+<ol>
+<li><p>在每一个链表中取出第一个值，然后把它们放在一个大小为N的数组里，然后把这个数组当成heap建成小(大)根堆。此步骤的时间复杂度为<code>$O(N)$</code></p>
+</li>
+<li><p>取出堆中的最小值(也是数组的第一个值), 然后把该最小值所处的链表的下一个值放在数组的第一个位置。如果链表中有一个已经为空（元素已经都被取出），则改变heap的大小。此步骤的时间复杂度为<code>$O(logN)$</code>.</p>
+</li>
+<li><p>不断的重复步骤二，直到所有的链表都为空。</p>
+</li>
+</ol>
+<p>最终的时间复杂度为：<code>$(O(N)+O(N*logN))*M$</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/14/光圈、快门、感光度/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -961,1464 +1754,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/22/零知识证明/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/22/零知识证明/" itemprop="url">零知识证明</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-22T13:42:06+08:00">
-                2017-10-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>简单理解：</p>
-<p>零知识证明（Zero-knowledge proofs）</p>
-<p>零知识证明是一种特殊的交互式证明，其中证明者知道问题的答案，他需要向验证者证明“他知道答案”这一事实，但是要求验证者不能获得答案的任何信息。</p>
-<p>可以参考这样一个简单的例子。证明者和验证者都拿到了一个数独的题目，证明者知道一个解法，他可以采取如下这种零知识证明方法：他找出81张纸片，每一张纸片上写上1到9的一个数字，使得正好有9份写有从1到9的纸片。然后因为他知道答案，他可以把所有的纸片按照解法放在一个9乘9的方格内，使得满足数独的题目要求（每列、每行、每个九宫格都正好有1到9）。放好之后他把所有的纸片翻转，让没有字的一面朝上。这样验证者没办法看到纸片上的数字。接下来，验证者就验证数独的条件是否满足。比如他选一列，这时证明者就把这一列的纸片收集起来，把顺序任意打乱，然后把纸片翻过来，让验证者看到1到9的纸片都出现了。整个过程中验证者都无法得知每张纸片的位置，但是却能验证确实是1到9都出现了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/05/法语总结/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/05/法语总结/" itemprop="url">法语总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-05T13:22:32+08:00">
-                2017-01-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/人文艺术/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="1-作主语的人称代词"><a href="#1-作主语的人称代词" class="headerlink" title="1.作主语的人称代词"></a>1.作主语的人称代词</h4><table>
-<thead>
-<tr>
-<th>单数</th>
-<th></th>
-<th>复数</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>je</td>
-<td>我</td>
-<td>nous</td>
-<td>我们</td>
-</tr>
-<tr>
-<td>tu</td>
-<td>你，您</td>
-<td>vous</td>
-<td>你们</td>
-</tr>
-<tr>
-<td>il</td>
-<td>他</td>
-<td>ils</td>
-<td>他们</td>
-</tr>
-<tr>
-<td>elle</td>
-<td>她</td>
-<td>elles</td>
-<td>她们</td>
-</tr>
-</tbody>
-</table>
-<h4 id="2-etre的动词变位"><a href="#2-etre的动词变位" class="headerlink" title="2.être的动词变位"></a>2.être的动词变位</h4><table>
-<thead>
-<tr>
-<th style="text-align:center"></th>
-<th style="text-align:center"></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">je suis</td>
-<td style="text-align:center">nous sommes</td>
-</tr>
-<tr>
-<td style="text-align:center">tu es</td>
-<td style="text-align:center">vous êtes</td>
-</tr>
-<tr>
-<td style="text-align:center">il est</td>
-<td style="text-align:center">ils sont</td>
-</tr>
-<tr>
-<td style="text-align:center">elle est</td>
-<td style="text-align:center">elles sont</td>
-</tr>
-</tbody>
-</table>
-<h4 id="3-avoir的动词变位"><a href="#3-avoir的动词变位" class="headerlink" title="3.avoir的动词变位"></a>3.avoir的动词变位</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>j’ai</td>
-<td>nous avons</td>
-</tr>
-<tr>
-<td>tu as</td>
-<td>vous avez</td>
-</tr>
-<tr>
-<td>il a</td>
-<td>ils ont</td>
-</tr>
-<tr>
-<td>elle a</td>
-<td>elles ont</td>
-</tr>
-</tbody>
-</table>
-<h4 id="4-venir的动词变位"><a href="#4-venir的动词变位" class="headerlink" title="4.venir的动词变位"></a>4.venir的动词变位</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>je viens</td>
-<td>nous venons</td>
-</tr>
-<tr>
-<td>tu viens</td>
-<td>vous venez</td>
-</tr>
-<tr>
-<td>il vient</td>
-<td>ils viennent</td>
-</tr>
-<tr>
-<td>elle vient</td>
-<td>elles viennent</td>
-</tr>
-</tbody>
-</table>
-<h4 id="5-aller的动词变位"><a href="#5-aller的动词变位" class="headerlink" title="5.aller的动词变位"></a>5.aller的动词变位</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>je vais</td>
-<td>nous allons</td>
-</tr>
-<tr>
-<td>tu vas</td>
-<td>vous allez</td>
-</tr>
-<tr>
-<td>il va</td>
-<td>ils vont</td>
-</tr>
-<tr>
-<td>elle va</td>
-<td>elles vont</td>
-</tr>
-</tbody>
-</table>
-<h4 id="6-主有形容词"><a href="#6-主有形容词" class="headerlink" title="6.主有形容词"></a>6.主有形容词</h4><table>
-<thead>
-<tr>
-<th>阳单</th>
-<th>阴单</th>
-<th>复数</th>
-<th>解释</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>mon</td>
-<td>ma</td>
-<td>mes</td>
-<td>我的</td>
-</tr>
-<tr>
-<td>ton</td>
-<td>ta</td>
-<td>tes</td>
-<td>你的</td>
-</tr>
-<tr>
-<td>son</td>
-<td>sa</td>
-<td>ses</td>
-<td>他（她）的</td>
-</tr>
-<tr>
-<td>notre</td>
-<td>notre</td>
-<td>nos</td>
-<td>我们的</td>
-</tr>
-<tr>
-<td>votre</td>
-<td>votre</td>
-<td>vos</td>
-<td>你们的</td>
-</tr>
-<tr>
-<td>leur</td>
-<td>leur</td>
-<td>leurs</td>
-<td>他（她）们的</td>
-</tr>
-</tbody>
-</table>
-<h4 id="7-直陈式现在时，动词的变位，以parler的变位为例"><a href="#7-直陈式现在时，动词的变位，以parler的变位为例" class="headerlink" title="7.直陈式现在时，动词的变位，以parler的变位为例"></a>7.直陈式现在时，动词的变位，以parler的变位为例</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>je par<strong>le</strong></td>
-<td>nous parl<strong>ons</strong></td>
-</tr>
-<tr>
-<td>tu parl<strong>es</strong></td>
-<td>vous parl<strong>ez</strong></td>
-</tr>
-<tr>
-<td>il parl<strong>e</strong></td>
-<td>ils parl<strong>ent</strong></td>
-</tr>
-<tr>
-<td>elle parl<strong>e</strong></td>
-<td>elles parl<strong>ent</strong></td>
-</tr>
-</tbody>
-</table>
-<h4 id="8-vouloir的动词变位（want，想、愿望）"><a href="#8-vouloir的动词变位（want，想、愿望）" class="headerlink" title="8.vouloir的动词变位（want，想、愿望）"></a>8.vouloir的动词变位（want，想、愿望）</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>je veux</td>
-<td>nous voulons</td>
-</tr>
-<tr>
-<td>tu veux</td>
-<td>vous voulez</td>
-</tr>
-<tr>
-<td>il veut</td>
-<td>ils veulent</td>
-</tr>
-<tr>
-<td>elle veut</td>
-<td>elles veulent</td>
-</tr>
-</tbody>
-</table>
-<h4 id="9-devenir的动词变位（become，成为、变成）"><a href="#9-devenir的动词变位（become，成为、变成）" class="headerlink" title="9.devenir的动词变位（become，成为、变成）"></a>9.devenir的动词变位（become，成为、变成）</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>je deviens</td>
-<td>nous devenons</td>
-</tr>
-<tr>
-<td>tu deviens</td>
-<td>vous devenez</td>
-</tr>
-<tr>
-<td>il devient</td>
-<td>ils deviennent</td>
-</tr>
-<tr>
-<td>elle devient</td>
-<td>elles deviennent</td>
-</tr>
-</tbody>
-</table>
-<h4 id="10-指示形容词"><a href="#10-指示形容词" class="headerlink" title="10.指示形容词"></a>10.指示形容词</h4><table>
-<thead>
-<tr>
-<th></th>
-<th>阳</th>
-<th></th>
-<th>阴</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>单数</td>
-<td>ce roman</td>
-<td>这本小说</td>
-<td>cette chaise</td>
-<td>这把椅子</td>
-</tr>
-<tr>
-<td></td>
-<td>cet hôtel</td>
-<td>这家旅馆</td>
-<td>cette usine</td>
-<td>这家工厂</td>
-</tr>
-<tr>
-<td>复数</td>
-<td>ces romans</td>
-<td>这些小说</td>
-<td>ces chaises</td>
-<td>这些椅子</td>
-</tr>
-<tr>
-<td></td>
-<td>cet hôtels</td>
-<td>这些旅馆</td>
-<td>ces usines</td>
-<td>这些工厂</td>
-</tr>
-</tbody>
-</table>
-<h4 id="11-重读人称代词"><a href="#11-重读人称代词" class="headerlink" title="11.重读人称代词"></a>11.重读人称代词</h4><table>
-<thead>
-<tr>
-<th>单数</th>
-<th></th>
-<th>复数</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>moi</td>
-<td>我</td>
-<td>nous</td>
-<td>我们</td>
-</tr>
-<tr>
-<td>toi</td>
-<td>你</td>
-<td>vous</td>
-<td>你们，您们</td>
-</tr>
-<tr>
-<td>lui</td>
-<td>他</td>
-<td>eux</td>
-<td>他们</td>
-</tr>
-<tr>
-<td>elle</td>
-<td>她</td>
-<td>elles</td>
-<td>她们</td>
-</tr>
-</tbody>
-</table>
-<h4 id="12-pouvoir（can，能够）的动词变位"><a href="#12-pouvoir（can，能够）的动词变位" class="headerlink" title="12.pouvoir（can，能够）的动词变位"></a>12.pouvoir（can，能够）的动词变位</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>je peux</td>
-<td>nous pouvons</td>
-</tr>
-<tr>
-<td>tu peux</td>
-<td>vous pouvez</td>
-</tr>
-<tr>
-<td>il peut</td>
-<td>ils peuvent</td>
-</tr>
-</tbody>
-</table>
-<h4 id="13-voir（look，看，看望）的动词变位"><a href="#13-voir（look，看，看望）的动词变位" class="headerlink" title="13.voir（look，看，看望）的动词变位"></a>13.voir（look，看，看望）的动词变位</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>je vois</td>
-<td>nous voyons</td>
-</tr>
-<tr>
-<td>tu vois</td>
-<td>vous voyez</td>
-</tr>
-<tr>
-<td>il voit</td>
-<td>ils voient</td>
-</tr>
-</tbody>
-</table>
-<h4 id="14-缩合冠词"><a href="#14-缩合冠词" class="headerlink" title="14.缩合冠词"></a>14.缩合冠词</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>de + le = du</td>
-<td>de + les = des</td>
-</tr>
-<tr>
-<td>à + le = au</td>
-<td>à + les = aux</td>
-</tr>
-</tbody>
-</table>
-<h4 id="15-devoir的动词变位（should，应该）"><a href="#15-devoir的动词变位（should，应该）" class="headerlink" title="15.devoir的动词变位（should，应该）"></a>15.devoir的动词变位（should，应该）</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>je dois</td>
-<td>nous devons</td>
-</tr>
-<tr>
-<td>tu dois</td>
-<td>vous devez</td>
-</tr>
-<tr>
-<td>il doit</td>
-<td>ils doivent</td>
-</tr>
-</tbody>
-</table>
-<h4 id="16-savoir的动词变位（know，知道）"><a href="#16-savoir的动词变位（know，知道）" class="headerlink" title="16.savoir的动词变位（know，知道）"></a>16.savoir的动词变位（know，知道）</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>je sais</td>
-<td>nous savons</td>
-</tr>
-<tr>
-<td>tu sais</td>
-<td>vous savez</td>
-</tr>
-<tr>
-<td>il sait</td>
-<td>ils savent</td>
-</tr>
-</tbody>
-</table>
-<h4 id="17-作直接宾语的人称代词"><a href="#17-作直接宾语的人称代词" class="headerlink" title="17.作直接宾语的人称代词"></a>17.作直接宾语的人称代词</h4><table>
-<thead>
-<tr>
-<th>me    我</th>
-<th>nous    我们</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>te    你</td>
-<td>vous    你们，您</td>
-</tr>
-<tr>
-<td>le    他（它）</td>
-<td>les    他们，她们，它们</td>
-</tr>
-<tr>
-<td>la    她（它）</td>
-</tr>
-</tbody>
-</table>
-<h4 id="18-自反人称代词"><a href="#18-自反人称代词" class="headerlink" title="18.自反人称代词"></a>18.自反人称代词</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>je me lave</td>
-<td>nous nous lavons</td>
-</tr>
-<tr>
-<td>tu te laves</td>
-<td>vous vous lavez</td>
-</tr>
-<tr>
-<td>il se lave</td>
-<td>ils se lavent</td>
-</tr>
-<tr>
-<td>elle se lave</td>
-<td>elles se lavent</td>
-</tr>
-</tbody>
-</table>
-<h4 id="19-作间接宾语的人称代词"><a href="#19-作间接宾语的人称代词" class="headerlink" title="19.作间接宾语的人称代词"></a>19.作间接宾语的人称代词</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>me (m’)    我</td>
-<td>nous    我们</td>
-</tr>
-<tr>
-<td>te (t’)    你</td>
-<td>vous    你们，您</td>
-</tr>
-<tr>
-<td>lui    他，她，它</td>
-<td>leur    他们，她们，它们</td>
-</tr>
-</tbody>
-</table>
-<h4 id="20-esperer（hope，希望）"><a href="#20-esperer（hope，希望）" class="headerlink" title="20.espérer（hope，希望）"></a>20.espérer（hope，希望）</h4><table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>j’espère</td>
-<td>nous espérons</td>
-</tr>
-<tr>
-<td>tu espères</td>
-<td>vous espérez</td>
-</tr>
-<tr>
-<td>il espère</td>
-<td>ils espèrent</td>
-</tr>
-</tbody>
-</table>
-<h4 id="21-过去分词"><a href="#21-过去分词" class="headerlink" title="21.过去分词"></a>21.过去分词</h4><p>可以与助动词（avoir，être）结合在一起，构成法语的复合时态。</p>
-<p>第一组动词：词根加é</p>
-<p>第二组动词：词根加i</p>
-<p>第三组动词变化不规则，需要逐个记忆。例如：</p>
-<table>
-<thead>
-<tr>
-<th>动词不定式</th>
-<th>过去分词</th>
-<th>动词不定式</th>
-<th>过去分词</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>aller</td>
-<td>allé</td>
-<td>mettre</td>
-<td>mis</td>
-</tr>
-<tr>
-<td>apprendre</td>
-<td>appris</td>
-<td>partir</td>
-<td>parti</td>
-</tr>
-<tr>
-<td>attendre</td>
-<td>attendu</td>
-<td>pleuvoir</td>
-<td>plu</td>
-</tr>
-<tr>
-<td>avoir</td>
-<td>eu</td>
-<td>pouvoir</td>
-<td>pu</td>
-</tr>
-<tr>
-<td>comprendre</td>
-<td>compris</td>
-<td>prendre</td>
-<td>pris</td>
-</tr>
-<tr>
-<td>devoir</td>
-<td>dû</td>
-<td>recevoir</td>
-<td>reçu</td>
-</tr>
-<tr>
-<td>dire</td>
-<td>dit</td>
-<td>savoir</td>
-<td>su</td>
-</tr>
-<tr>
-<td>écrire</td>
-<td>écrit</td>
-<td>sortir</td>
-<td>sorti</td>
-</tr>
-<tr>
-<td>être</td>
-<td>été</td>
-<td>suivre</td>
-<td>suivi</td>
-</tr>
-<tr>
-<td>faire</td>
-<td>fait</td>
-<td>venir</td>
-<td>venu</td>
-</tr>
-<tr>
-<td>falloir</td>
-<td>fallu</td>
-<td>voir</td>
-<td>vu</td>
-</tr>
-<tr>
-<td>lire</td>
-<td>lu</td>
-<td>vouloir</td>
-<td>voulu</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/05/法语-英语-中文单词对照/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/01/05/法语-英语-中文单词对照/" itemprop="url">法语-英语-中文单词对照</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-05T13:22:32+08:00">
-                2017-01-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/语言/" itemprop="url" rel="index">
-                    <span itemprop="name">语言</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <table>
-<thead>
-<tr>
-<th>assez</th>
-<th>enough</th>
-<th>足够的</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>maintenant</td>
-<td>now</td>
-<td>现在</td>
-</tr>
-<tr>
-<td>inviter</td>
-<td>invite</td>
-<td>邀请</td>
-</tr>
-<tr>
-<td>immeuble</td>
-<td>building</td>
-<td>大楼</td>
-</tr>
-<tr>
-<td>écouter</td>
-<td>listen</td>
-<td>听</td>
-</tr>
-<tr>
-<td>vrai</td>
-<td>true</td>
-<td>真实的</td>
-</tr>
-<tr>
-<td>vouloir</td>
-<td>want</td>
-<td>想要，愿意</td>
-</tr>
-<tr>
-<td>courrier</td>
-<td>email</td>
-<td>邮件</td>
-</tr>
-<tr>
-<td>plaisir</td>
-<td>please</td>
-<td>愉快</td>
-</tr>
-<tr>
-<td>quelquefois</td>
-<td>sometimes</td>
-<td>有时</td>
-</tr>
-<tr>
-<td>prendre</td>
-<td>take</td>
-<td>拿，乘</td>
-</tr>
-<tr>
-<td>petit</td>
-<td>small</td>
-<td>小的</td>
-</tr>
-<tr>
-<td>ne plus</td>
-<td>not anymore</td>
-<td>不再</td>
-</tr>
-<tr>
-<td>abîmer</td>
-<td>destory</td>
-<td>损坏</td>
-</tr>
-<tr>
-<td>apercevior</td>
-<td>realise</td>
-<td>意识到</td>
-</tr>
-<tr>
-<td>dehors</td>
-<td>outside</td>
-<td>在外面</td>
-</tr>
-<tr>
-<td>allumer</td>
-<td>light</td>
-<td>点亮</td>
-</tr>
-<tr>
-<td>coucher</td>
-<td>sleep</td>
-<td>睡觉</td>
-</tr>
-<tr>
-<td>démonter</td>
-<td>disassembly</td>
-<td>拆卸</td>
-</tr>
-</tbody>
-</table>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/26/希腊人佐巴影评/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/26/希腊人佐巴影评/" itemprop="url">希腊人佐巴影评</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-26T22:02:54+08:00">
-                2016-12-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/人文艺术/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>佐巴，一个追求自由的人；生命就是麻烦，只有死人才没有烦扰；当你开心时，去跳舞吧！当你伤心的时候，还是去跳舞吧！</p>
-</li>
-<li><p>一个女人太美好，多半会遭到毁灭，在那个接近原始人性的环境下是这样，但放到现在未必成立。</p>
-</li>
-<li><p>做佐巴吧，真实的自己！</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/23/驴得水影评/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/12/23/驴得水影评/" itemprop="url">驴得水影评</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-23T22:01:01+08:00">
-                2016-12-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/人文艺术/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><p>上映了这么久，才在网上看了这部片，不得不说，这是一部很不错的电影，将喜与悲的演绎发挥到了极致，最大的喜剧莫过于悲剧，而最大的悲剧却是来源于喜剧的。</p>
-</li>
-<li><p>片中所有人最终都没有逃脱这样一个悲剧。这里面的佳佳是一个单纯善良、想揭露社会黑暗但最终败在了现实底下（爸爸被绑架）；铁南原本也是一个很正直的人，一心想得到佳佳的喜爱，最终也是败在了枪子弹下；而美国人就是想花钱最慈善，最后看到了那样的一个闹剧，说中国真不可思议（anyway，美国不也一样，只不过具体形式不一样而已）…而特派员作为教育部底下的高官，一心想贪图美国人的钱，为了这个，他什么都做得出来，还拿社会的无情、现实的残酷反过来去教育孙校长等人。孙校长，一个为了自己的教育梦想和金钱而死要面子、见风使舵的人，他为了“大局”什么都做得出来，只为了听从特派员，毕竟可以继续做校长办学校教育孩子并拿到钱。</p>
-</li>
-<li><p>最后要说的是比较复杂的三个人物，即老裴、一曼和铜匠：老裴喜欢一曼，爱钱是显而易见的、和孙校长一样，也是一个见风使舵，有心眼的，至始至终就是一个屈服于现实的人，从未反抗。自从一曼与铜匠睡了之后，他对一曼的情感经历从爱到恨的变化，最终变为对其冷漠；而铜匠作为一个比较单纯的人，被人利用，被一曼用感情欺骗，最终反过来想借用自己的独特的地位报复他们。不得不说，他在与一曼睡过之后，产生了感情，并受了校长的鼓舞，学习了很多知识，以致于后来想去美国深造。他想用知识给现实狠狠的一棒，从当时对一曼的憎恨可以看出。而这都是一种巧合，如果没有那样重要的地位（被美国人所望重），他也不会这样的。</p>
-</li>
-<li><p>最后说说一曼这个人物，其实很是矛盾的一个人：她性格使然的放荡使得她被拉到了一个很尴尬的地位，但是她也是一个屈服于现实的人，他为了学校的利益欺骗了铜匠，最后骂铜匠是牲口得见。她是一个美丽的人，心灵也是美，将大蒜屑看成雪花，可是她最大的危机就是自己的单纯，她因此受到了老裴的憎恨，咋一看他想想自己的心爱给自己带绿帽子确实不是滋味，他为了金钱可以服从现实，但是接受不了表面上爱情的背叛，他若真的很现实，为什么不把她的背叛看淡，继续演下去呢？当然，这也足以说明了，爱情在现实的面前多么不堪一击。所以他到底错了吗？很难说…只能说他很看重爱情，却又经不住现实对爱情的拷打，最后冷漠了一曼，哦，可怜的一曼，这个作死的女人，她唯一的错就是自己的放荡的性格，她值得同情，不值得去爱那两个谩骂自己的男人…她最后发疯再到自杀，获得了自由…</p>
-</li>
-<li><p>真正的悲剧是，在众多矛盾组成的矛盾串中，无论你删除哪一个矛盾节点，最终的悲剧还是无可避免的…</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2469,7 +1804,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">73</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
