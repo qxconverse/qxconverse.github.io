@@ -87,12 +87,12 @@
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
 <meta property="og:description" content="数组中重复的数字：使数组中的每个数字处于其索引的位置（n个数，区间[0,n-1]） 同3（但是不能改变数组）：二分法：O(nlogn)（n+1个数，区间[1,n]），对数字区间进行划分，而不是对数组区间划分 替换空格：先让出空间，然后把前面的往后移（联想到插入排序），要两个都想（从前往后、从后往前，哪个好用哪个） 从尾到头打印链表：栈和递归要联系在一起（DFS，包括它）栈递归 重建二叉树：递归实">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://note.youdao.com/yws/res/8704/WEBRESOURCE8e8f3f4f8d854b7118286cf9d71d158e">
-<meta property="og:updated_time" content="2019-02-14T02:27:03.102Z">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4yovx2yrhj30m70pi3zi.jpg">
+<meta property="og:updated_time" content="2019-07-13T16:45:05.654Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="剑指Offer解题思路">
 <meta name="twitter:description" content="数组中重复的数字：使数组中的每个数字处于其索引的位置（n个数，区间[0,n-1]） 同3（但是不能改变数组）：二分法：O(nlogn)（n+1个数，区间[1,n]），对数字区间进行划分，而不是对数组区间划分 替换空格：先让出空间，然后把前面的往后移（联想到插入排序），要两个都想（从前往后、从后往前，哪个好用哪个） 从尾到头打印链表：栈和递归要联系在一起（DFS，包括它）栈递归 重建二叉树：递归实">
-<meta name="twitter:image" content="http://note.youdao.com/yws/res/8704/WEBRESOURCE8e8f3f4f8d854b7118286cf9d71d158e">
+<meta name="twitter:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4yovx2yrhj30m70pi3zi.jpg">
 
 
 
@@ -356,7 +356,7 @@
       
         <ol>
 <li>数组中重复的数字：使数组中的每个数字处于其索引的位置（n个数，区间[0,n-1]）</li>
-<li>同3（但是不能改变数组）：二分法：O(nlogn)（n+1个数，区间[1,n]），对数字区间进行划分，而不是对数组区间划分</li>
+<li>同3（但是不能改变数组）：二分法：<code>O(nlogn)</code>（n+1个数，区间[1,n]），对数字区间进行划分，而不是对数组区间划分</li>
 <li>替换空格：先让出空间，然后把前面的往后移（联想到插入排序），要两个都想（从前往后、从后往前，哪个好用哪个）</li>
 <li>从尾到头打印链表：栈和递归要联系在一起（DFS，包括它）<br>栈<br>递归</li>
 <li>重建二叉树：递归实现<br>步骤<br>从前序遍历中找第一个<br>找到该数字在中序遍历中的位置<br>划分成左右子树并递归<br>补充：递归（DFS，前中后序遍历），层次遍历（队列实现）</li>
@@ -372,7 +372,7 @@
 <li>暂无</li>
 <li>删除链表的节点。把它的值复制到它前面一个节点，然后再操作（联想到5），还要考虑到各种特殊情况<br>补充：凡是与链表相关的题目都要考虑特殊情况，如删除的是第一个节点，如传入的是不是空指针，如链表是否只有一个节点</li>
 <li>暂无</li>
-<li>类似的题目：字符串转double数值<br>代码如下：<br><img src="http://note.youdao.com/yws/res/8704/WEBRESOURCE8e8f3f4f8d854b7118286cf9d71d158e" alt="7c750085-f733-4085-89e9-624aeec8ebd5-951466.jpg"></li>
+<li>类似的题目：字符串转double数值<br>代码如下：<br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4yovx2yrhj30m70pi3zi.jpg" alt="7c750085-f733-4085-89e9-624aeec8ebd5-951466"></li>
 <li>调整数值顺序使得奇数位于偶数前面（采用双指针方法，首尾各一个）</li>
 <li>链表中的倒数第k个节点（采用双指针，一个先移动）</li>
 <li>链表中环的入口节点（一个走一步，另一个走两步…）</li>
@@ -393,7 +393,7 @@
 <li>字符串的排列（回溯法）</li>
 <li>数组中出现次数超过一半的数字（利用快排中partition函数，这种算法可以找到数组中任意第k大的数字）</li>
 <li>最小的k个数<br>类似于39的思路，缺点是要改变数组<br>采用最大堆，nlogk的复杂度，适合海量数据<br>补充：找最小的k个数，用最大堆；找最大的k个数，用最小堆</li>
-<li>数据流中的中位数<br>使用最大、最小堆来实现。C++中，priority_queue可以实现优先队列，其中less<int>为最大堆（默认的），greater<int>为最小堆</int></int></li>
+<li>数据流中的中位数<br>使用最大、最小堆来实现。C++中，priority_queue可以实现优先队列，其中<code>less&lt;int&gt;</code>为最大堆（默认的），<code>greater&lt;int&gt;</code>为最小堆</li>
 <li>连续子数组的最大和（动态规划）关键看前面的所有和，如果小于等于0，则抛弃；否则加进去。</li>
 <li>暂无</li>
 <li>暂无</li>
@@ -403,7 +403,7 @@
 <li>最长不含重复字符的子字符串（动态规划）</li>
 <li></li>
 <li>第一次只出现一次的字符（利用HashTable，可简单使用数组实现）</li>
-<li>数组中的逆序对（归并排序的拓展，O(nlogn)）</li>
+<li>数组中的逆序对（归并排序的拓展，<code>O(nlogn)</code>）</li>
 <li>两个链表的第一个公共节点（每当遇到链表中需要逆着进行时，就要想到栈）（或者类似于22）</li>
 <li>在排序数组中查找数字（类似问题为：有序数组中查找某个数字第一次出现的地方）二分法</li>
 <li>二叉搜索树中的第K大节点（利用中序遍历）</li>
