@@ -87,13 +87,13 @@
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
 <meta property="og:description" content="Git的学习git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。 先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支： 查">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1ftcpq38ngij31c60k07a1.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1ftcpqd42tmj31kw0hzn2o.jpg">
-<meta property="og:updated_time" content="2019-07-13T16:33:37.658Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4yp9pai9oj31c60k0qc0.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g4yp9yk6nmj31kw0hz46a.jpg">
+<meta property="og:updated_time" content="2019-07-13T16:57:45.914Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git与SVN相关的操作">
 <meta name="twitter:description" content="Git的学习git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。 先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支： 查">
-<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1ftcpq38ngij31c60k07a1.jpg">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4yp9pai9oj31c60k0qc0.jpg">
 
 
 
@@ -377,8 +377,8 @@
 <p>这个时候A（你）和B（你的小伙伴）对同一个文件进行了修改，发生了冲突。假设B先push了，而你后面想push，就会发生错误。所以可以先pull一下。pull也可能失败，原因是没有指定本地dev分支与远程origin/dev分支的链接，根据提示，设置dev和origin/dev的链接：<br><code>git branch --set-upstream-to=origin/dev dev</code></p>
 <p>这回pull成功，但是合并有冲突，需要手动解决，解决的方法和分支管理中的解决冲突完全一样。解决后，add，ci,再push。这样就完美解决了冲突。</p>
 <p>这时B如果要再次编辑，首先需要pull一下。然后再进行后续操作。如果他不pull，push后有冲突，那么解决方法同上A所做的。</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1ftcpq38ngij31c60k07a1.jpg" alt=""></p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1ftcpqd42tmj31kw0hzn2o.jpg" alt=""></p>
+<p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4yp9pai9oj31c60k0qc0.jpg" alt="006tNc79ly1ftcpq38ngij31c60k07a1"></p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g4yp9yk6nmj31kw0hz46a.jpg" alt="006tNc79ly1ftcpqd42tmj31kw0hzn2o"></p>
 <p>git中对比2个版本之间的改动，比如下面的例子</p>
 <p> <code>git diff e065320 6280833 --stat</code><br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">src/main/java/com/hts/config/NosConfig.java            | 14 ++++++--------</span><br><span class="line">src/main/java/com/hts/monitor/NosFileCacheHandler.java |  4 ++++</span><br><span class="line">src/main/java/com/hts/monitor/RetryService.java        | 15 +++++++++------</span><br><span class="line">3 files changed, 19 insertions(+), 14 deletions(-)</span><br></pre></td></tr></table></figure></p>
 <p> git重新建立一个branch的操作</p>
