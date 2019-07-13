@@ -79,26 +79,21 @@
 
 
 
-<meta name="description" content="Git的学习git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。  先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支：">
+<meta name="description" content="Git的学习git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。 先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支： 查">
 <meta name="keywords" content="版本控制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git与SVN相关的操作">
 <meta property="og:url" content="http://yoursite.com/2018/07/17/Git与SVN操作/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="Git的学习git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。  先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支：">
+<meta property="og:description" content="Git的学习git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。 先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支： 查">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1ftc4lc8wldj30cq06iaa8.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1ftcnvtf2m5j30du03ha9w.jpg">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1ftcoziu48vj31kw0qrqaz.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1ftcprja97fj31ce0i8dkz.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1ftcpq38ngij31c60k07a1.jpg">
 <meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1ftcpqd42tmj31kw0hzn2o.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1ftcq45la4qj31hs0tu7ec.jpg">
-<meta property="og:updated_time" content="2019-07-10T16:03:01.927Z">
+<meta property="og:updated_time" content="2019-07-13T16:33:37.658Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git与SVN相关的操作">
-<meta name="twitter:description" content="Git的学习git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。  先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支：">
-<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1ftc4lc8wldj30cq06iaa8.jpg">
+<meta name="twitter:description" content="Git的学习git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。 先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支： 查">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1ftcpq38ngij31c60k07a1.jpg">
 
 
 
@@ -361,7 +356,6 @@
 
       
         <h4 id="Git的学习"><a href="#Git的学习" class="headerlink" title="Git的学习"></a>Git的学习</h4><p>git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1ftc4lc8wldj30cq06iaa8.jpg" alt=""></p>
 <p>先手动删除文件，然后使用<code>git rm &lt;file&gt;</code>和<code>git add &lt;file&gt;</code>效果是一样的。</p>
 <p>切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。</p>
 <p>Git鼓励大量使用分支：</p>
@@ -378,17 +372,13 @@
 <p>在实际开发中，我们应该按照几个基本原则进行分支管理：</p>
 <p>首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；我们每个人都有自己的分支，时不时地往dev分支上合并就可以了。</p>
 <p>所以，团队合作的分支看起来就像这样：</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1ftcnvtf2m5j30du03ha9w.jpg" alt=""></p>
 <p>当修改完bug分支后，要及时地在master上删除该分支，如果切换到dev分支上再删除bug分支，就会报错。</p>
-<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1ftcoziu48vj31kw0qrqaz.jpg" alt=""></p>
 <p>通常涉及到多个人开发，比如A和B。B从github上clone了项目。并且新建并切换到dev分支了。</p>
 <p>这个时候A（你）和B（你的小伙伴）对同一个文件进行了修改，发生了冲突。假设B先push了，而你后面想push，就会发生错误。所以可以先pull一下。pull也可能失败，原因是没有指定本地dev分支与远程origin/dev分支的链接，根据提示，设置dev和origin/dev的链接：<br><code>git branch --set-upstream-to=origin/dev dev</code></p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1ftcprja97fj31ce0i8dkz.jpg" alt=""></p>
 <p>这回pull成功，但是合并有冲突，需要手动解决，解决的方法和分支管理中的解决冲突完全一样。解决后，add，ci,再push。这样就完美解决了冲突。</p>
 <p>这时B如果要再次编辑，首先需要pull一下。然后再进行后续操作。如果他不pull，push后有冲突，那么解决方法同上A所做的。</p>
 <p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1ftcpq38ngij31c60k07a1.jpg" alt=""></p>
 <p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1ftcpqd42tmj31kw0hzn2o.jpg" alt=""></p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1ftcq45la4qj31hs0tu7ec.jpg" alt=""></p>
 <p>git中对比2个版本之间的改动，比如下面的例子</p>
 <p> <code>git diff e065320 6280833 --stat</code><br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">src/main/java/com/hts/config/NosConfig.java            | 14 ++++++--------</span><br><span class="line">src/main/java/com/hts/monitor/NosFileCacheHandler.java |  4 ++++</span><br><span class="line">src/main/java/com/hts/monitor/RetryService.java        | 15 +++++++++------</span><br><span class="line">3 files changed, 19 insertions(+), 14 deletions(-)</span><br></pre></td></tr></table></figure></p>
 <p> git重新建立一个branch的操作</p>
@@ -527,7 +517,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">83</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -549,7 +539,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

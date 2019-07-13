@@ -1444,11 +1444,11 @@
 <li>想到用回朔法</li>
 </ol>
 <p>若结点的存储地址与其关键字值之间存在某种对应关系，则这种存储结构为散列存储。<br>散列存储：散列存储，又称hash存储，是一种力图将数据元素的存储位置与关键码之间建立确定对应关系的查找技术。<br>基本思想：由节点的关键码值决定节点的存储地址。散列技术除了可以用于查找外，还可以用于存储。</p>
-<p>特点：<br>散列是数组存储方式的一种发展，相比数组，散列的数据访问速度要高于数组，因为可以依据存储数据的部分内容找到数据在数组中的存储位置，进而能够快速实现数据的访问，理想的散列访问速度是非常迅速的，而不像在数组中的遍历过程，采用存储数组中内容的部分元素作为映射函数的输入，映射函数的输出就是存储数据的位置，这样的访问速度就省去了遍历数组的实现，因此时间复杂度可以认为为O(1)，而数组遍历的时间复杂度为O(n)。</p>
+<p>特点：<br>散列是数组存储方式的一种发展，相比数组，散列的数据访问速度要高于数组，因为可以依据存储数据的部分内容找到数据在数组中的存储位置，进而能够快速实现数据的访问，理想的散列访问速度是非常迅速的，而不像在数组中的遍历过程，采用存储数组中内容的部分元素作为映射函数的输入，映射函数的输出就是存储数据的位置，这样的访问速度就省去了遍历数组的实现，因此时间复杂度可以认为为<code>O(1)</code>，而数组遍历的时间复杂度为<code>O(n)</code>。</p>
 <p>1.排序算法的思考方式</p>
 <p><img src="http://img.blog.csdn.net/20180327172535147?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXhjb252ZXJzZQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 <p>SVM和Logistic回归的比较：（1）经典的SVM，直接输出类别，不给出后验概率；（2）Logistic回归，会给出属于哪一个类别的后验概率；（3）比较重点是二者目标函数的异同。</p>
-<p>SVR回归区别于传统的回归，在计算模型输出和真实输出之前的差别时，可以容忍小部分的偏差\epsilon。</p>
+<p>SVR回归区别于传统的回归，在计算模型输出和真实输出之前的差别时，可以容忍小部分的偏差$\epsilon$。</p>
 <p>逻辑回归模型参数的求解，一般通过极大似然估计，也就得到了logloss。至于logloss，个人觉得有一个稍微有点物理意义的解释：可以把logloss分解成真实分布的熵+真实分布与预测分布的相对熵（KL散度），前半部分是固定的，所以最小化logloss相当于在最小化真实分布与预测分布之间的差异。</p>
 <p>bagging是并行式集成学习方法的最著名的代表。</p>
 <p>m个样本的数据集可放回随机取出一个样本放入采样集。m次采样中，含有m个样本的采样集。采样出T个含有m个训练样本的采样集。基于每一个采样集，训练出一个基学习器。再将这些结合起来。</p>
@@ -1485,7 +1485,7 @@
 <p>   4。海量数据中找中位数（数据有100G,内存只有1G）：利用外部排序确定，或者可以用两个堆</p>
 <p>对于海量数据的情况，一定要想到分治法，即不断地二分划分，这样的算法复杂度就是O(\log n)。而且还要想到用位来操作。很多算法问题也会用到。这是一个你在想不出用什么方法的时候最有可能利用的方法。</p>
 <p>当然也要想到用桶排序。</p>
-<p>SVM处理多分类问题<br>SVM是一个二分类器，处理多分类问题时，常用的策略有：“一对一”（One vs. One, 简称OvO）、“一对其余”（One vs. Rest, 简称OvR）和“多对多”（Many vs. Many，简称MvM）。<br>OvO：对于给定数据集D=(xi,yi),(x2,y2),…,(xm,ym),yi∈C1,C2,…,CN。OvO将这N个类别两两配对，从而产生N(N−1)/2 个二分类任务。测试阶段，新样本将同时提交给所有分类器，于是我们可得到N(N−1)/2 个分类结果，最终把被预测得最多的类别作为最终分类结果。<br>OvR：每次将一个类的样例作为正例，所有其他类的样例作为反例来训练N个分类器。在预测时选择置信度最大的类别作为分类结果。<br>MvM：每次将若干个类作为正类，若干个其他类作为反类。 </p>
+<p>SVM处理多分类问题<br>SVM是一个二分类器，处理多分类问题时，常用的策略有：“一对一”（One vs. One, 简称OvO）、“一对其余”（One vs. Rest, 简称OvR）和“多对多”（Many vs. Many，简称MvM）。<br>OvO：对于给定数据集$D=(xi,yi),(x2,y2),…,(xm,ym),yi∈C1,C2,…,CN$。OvO将这N个类别两两配对，从而产生$N(N−1)/2$ 个二分类任务。测试阶段，新样本将同时提交给所有分类器，于是我们可得到$N(N−1)/2$ 个分类结果，最终把被预测得最多的类别作为最终分类结果。<br>OvR：每次将一个类的样例作为正例，所有其他类的样例作为反例来训练N个分类器。在预测时选择置信度最大的类别作为分类结果。<br>MvM：每次将若干个类作为正类，若干个其他类作为反类。 </p>
 <p>堆排序、快速排序、希尔排序、直接选择排序不是稳定的排序算法，而基数排序、冒泡排序、直接插入排序、折半插入排序、归并排序是稳定的排序算法。</p>
 <ol>
 <li><p>在每一个链表中取出第一个值，然后把它们放在一个大小为N的数组里，然后把这个数组当成heap建成小(大)根堆。此步骤的时间复杂度为<code>$O(N)$</code></p>
@@ -1495,7 +1495,7 @@
 <li><p>不断的重复步骤二，直到所有的链表都为空。</p>
 </li>
 </ol>
-<p>最终的时间复杂度为：<code>$(O(N)+O(N*logN))*M$</code></p>
+<p>最终的时间复杂度为：$(O(N)+O(N<em>logN))</em>M$</p>
 
           
         
@@ -1690,7 +1690,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/13/布达佩斯大饭店、当幸福来敲门、月球影评/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/06/新名字的故事/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -1709,7 +1709,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/13/布达佩斯大饭店、当幸福来敲门、月球影评/" itemprop="url">布达佩斯大饭店、当幸福来敲门、月球影评</a></h1>
+                <a class="post-title-link" href="/2018/02/06/新名字的故事/" itemprop="url">新名字的故事</a></h1>
         
 
         <div class="post-meta">
@@ -1721,8 +1721,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-13T13:08:01+08:00">
-                2018-02-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-06T12:18:32+08:00">
+                2018-02-06
               </time>
             
 
@@ -1731,6 +1731,28 @@
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/人文艺术/" itemprop="url" rel="index">
+                    <span itemprop="name">人文艺术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -1760,9 +1782,14 @@
 
       
         
-          
-            
-          
+          <p>终于读完了这本书。虽然只是四部曲中的第二部，但是适合现在的我读。这一部讲的大概就是16-24左右的故事。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/06/新名字的故事/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1846,7 +1873,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">83</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1868,7 +1895,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
