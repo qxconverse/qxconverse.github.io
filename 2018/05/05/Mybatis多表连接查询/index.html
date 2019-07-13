@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,Mybatis,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="首先在之前建好的数据库mybatis中新建6个表，关系如下（图中没有显示表与表具体的关系，比如一对多，多对多。只是画了箭头，表示有依赖关系）。表blog代表博客，它由某位作者（表author）所写，博客中有很多的文章（表post），每篇文章有零或多条的评论（表comment）和标签（表tag），而表post_tag里面存有文章和标签的id（多对多的关系）。 具体的字段描述如下：  表中的数据如下：">
+<meta name="keywords" content="Java,Mybatis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mybatis多表连接查询">
+<meta property="og:url" content="http://yoursite.com/2018/05/05/Mybatis多表连接查询/index.html">
+<meta property="og:site_name" content="Xxqin&#39;s Blog">
+<meta property="og:description" content="首先在之前建好的数据库mybatis中新建6个表，关系如下（图中没有显示表与表具体的关系，比如一对多，多对多。只是画了箭头，表示有依赖关系）。表blog代表博客，它由某位作者（表author）所写，博客中有很多的文章（表post），每篇文章有零或多条的评论（表comment）和标签（表tag），而表post_tag里面存有文章和标签的id（多对多的关系）。 具体的字段描述如下：  表中的数据如下：">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIwNDEzODgzMD93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIwNDQ0NTI2MD93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTAwMTQzND93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTAyNjQ1OT93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTA0NTMxND93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTA1NzE2OT93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTExNTA3Nz93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTEwNzA2Mz93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIwNTA1OTQ2MD93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA">
+<meta property="og:updated_time" content="2019-07-13T15:57:37.178Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mybatis多表连接查询">
+<meta name="twitter:description" content="首先在之前建好的数据库mybatis中新建6个表，关系如下（图中没有显示表与表具体的关系，比如一对多，多对多。只是画了箭头，表示有依赖关系）。表blog代表博客，它由某位作者（表author）所写，博客中有很多的文章（表post），每篇文章有零或多条的评论（表comment）和标签（表tag），而表post_tag里面存有文章和标签的id（多对多的关系）。 具体的字段描述如下：  表中的数据如下：">
+<meta name="twitter:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIwNDEzODgzMD93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/05/Mybatis多表连接查询/">
+
+
+
+
+
+  <title>Mybatis多表连接查询 | Xxqin's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xxqin's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/05/Mybatis多表连接查询/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mybatis多表连接查询</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-05T21:18:22+08:00">
+                2018-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>首先在之前建好的数据库<code>mybatis</code>中新建6个表，关系如下（图中没有显示表与表具体的关系，比如一对多，多对多。只是画了箭头，表示有依赖关系）。表<code>blog</code>代表博客，它由某位作者（表<code>author</code>）所写，博客中有很多的文章（表<code>post</code>），每篇文章有零或多条的评论（表<code>comment</code>）和标签（表<code>tag</code>），而表<code>post_tag</code>里面存有文章和标签的<code>id</code>（多对多的关系）。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIwNDEzODgzMD93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+<p>具体的字段描述如下：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIwNDQ0NTI2MD93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+<p>表中的数据如下：<br>表<code>author</code></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTAwMTQzND93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+<p>表<code>blog</code></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTAyNjQ1OT93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+<p>表<code>tag</code></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTA0NTMxND93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+<p>表<code>post</code></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTA1NzE2OT93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+<p>表<code>post_tag</code></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTExNTA3Nz93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+<p>表<code>comment</code></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTEwNzA2Mz93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+<p>在项目中新建实体类：<br>1.<code>Author.java</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package cn.edu.cqu.domains;</span><br><span class="line"></span><br><span class="line">public class Author &#123;</span><br><span class="line">  private int id;</span><br><span class="line">  private String username;</span><br><span class="line">  private String password;</span><br><span class="line">  private String email;</span><br><span class="line"></span><br><span class="line">  public int getId() &#123;</span><br><span class="line">    return id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setId(int id) &#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public String getUsername() &#123;</span><br><span class="line">    return username;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setUsername(String username) &#123;</span><br><span class="line">    this.username = username;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public String getPassword() &#123;</span><br><span class="line">    return password;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setPassword(String password) &#123;</span><br><span class="line">    this.password = password;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public String getEmail() &#123;</span><br><span class="line">    return email;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setEmail(String email) &#123;</span><br><span class="line">    this.email = email;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.<code>Blog.java</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">package cn.edu.cqu.domains;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class Blog &#123;</span><br><span class="line">  private Integer id;</span><br><span class="line">  private String title;</span><br><span class="line">  </span><br><span class="line">//  事实上，这个地方的authorId可以不需要了，因为有Author类了。</span><br><span class="line">//  private String authorId;</span><br><span class="line"></span><br><span class="line">  //为了连表查询</span><br><span class="line">  private Author author;</span><br><span class="line">  private List&lt;Post&gt; posts;</span><br><span class="line"></span><br><span class="line">  public Blog(Integer id) &#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public List&lt;Post&gt; getPosts() &#123;</span><br><span class="line">    return posts;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setPosts(List&lt;Post&gt; posts) &#123;</span><br><span class="line">    this.posts = posts;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public Integer getId() &#123;</span><br><span class="line">    return id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setId(Integer id) &#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public String getTitle() &#123;</span><br><span class="line">    return title;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setTitle(String title) &#123;</span><br><span class="line">    this.title = title;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">//  public String getAuthorId() &#123;</span><br><span class="line">//    return authorId;</span><br><span class="line">//  &#125;</span><br><span class="line">//</span><br><span class="line">//  public void setAuthorId(String authorId) &#123;</span><br><span class="line">//    this.authorId = authorId;</span><br><span class="line">//  &#125;</span><br><span class="line"></span><br><span class="line">  public Author getAuthor() &#123;</span><br><span class="line">    return author;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setAuthor(Author author) &#123;</span><br><span class="line">    this.author = author;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.<code>Tag.java</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package cn.edu.cqu.domains;</span><br><span class="line"></span><br><span class="line">public class Tag &#123;</span><br><span class="line">  private Integer id;</span><br><span class="line">  private String name;</span><br><span class="line"></span><br><span class="line">  public Integer getId() &#123;</span><br><span class="line">    return id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setId(Integer id) &#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public String getName() &#123;</span><br><span class="line">    return name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setName(String name) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4.<code>PostTag.java</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">package cn.edu.cqu.domains;</span><br><span class="line"></span><br><span class="line">public class PostTag &#123;</span><br><span class="line">  private Integer id;</span><br><span class="line">  </span><br><span class="line">//  同上，不需要</span><br><span class="line">//  private Integer postId;</span><br><span class="line">//  private Integer tagId;</span><br><span class="line"></span><br><span class="line">  public Integer getId() &#123;</span><br><span class="line">    return id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setId(Integer id) &#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">//  public Integer getPostId() &#123;</span><br><span class="line">//    return postId;</span><br><span class="line">//  &#125;</span><br><span class="line">//</span><br><span class="line">//  public void setPostId(Integer postId) &#123;</span><br><span class="line">//    this.postId = postId;</span><br><span class="line">//  &#125;</span><br><span class="line">//</span><br><span class="line">//  public Integer getTagId() &#123;</span><br><span class="line">//    return tagId;</span><br><span class="line">//  &#125;</span><br><span class="line">//</span><br><span class="line">//  public void setTagId(Integer tagId) &#123;</span><br><span class="line">//    this.tagId = tagId;</span><br><span class="line">//  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5.<code>Post.java</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">package cn.edu.cqu.domains;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class Post &#123;</span><br><span class="line">  private Integer id;</span><br><span class="line">  </span><br><span class="line">//  因为类Blog里面有List&lt;Post&gt; posts了。</span><br><span class="line">//  private Integer blogId;</span><br><span class="line">  private String subject;</span><br><span class="line">  private String body;</span><br><span class="line"></span><br><span class="line">  //为了连表查询，一篇文章有很多评论，可以有很多标签，故用List存储。</span><br><span class="line">  private Author author;</span><br><span class="line">  private List&lt;Comment&gt; comments;</span><br><span class="line">  private List&lt;Tag&gt; tags;</span><br><span class="line"></span><br><span class="line">  public Integer getId() &#123;</span><br><span class="line">    return id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setId(Integer id) &#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">//  public Integer getBlogId() &#123;</span><br><span class="line">//    return blogId;</span><br><span class="line">//  &#125;</span><br><span class="line">//</span><br><span class="line">//  public void setBlogId(Integer blogId) &#123;</span><br><span class="line">//    this.blogId = blogId;</span><br><span class="line">//  &#125;</span><br><span class="line">//</span><br><span class="line"></span><br><span class="line">  public String getSubject() &#123;</span><br><span class="line">    return subject;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setSubject(String subject) &#123;</span><br><span class="line">    this.subject = subject;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public String getBody() &#123;</span><br><span class="line">    return body;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setBody(String body) &#123;</span><br><span class="line">    this.body = body;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public Author getAuthor() &#123;</span><br><span class="line">    return author;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setAuthor(Author author) &#123;</span><br><span class="line">    this.author = author;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public List&lt;Comment&gt; getComments() &#123;</span><br><span class="line">    return comments;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setComments(List&lt;Comment&gt; comments) &#123;</span><br><span class="line">    this.comments = comments;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public List&lt;Tag&gt; getTags() &#123;</span><br><span class="line">    return tags;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setTags(List&lt;Tag&gt; tags) &#123;</span><br><span class="line">    this.tags = tags;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>6.<code>Comment.java</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">package cn.edu.cqu.domains;</span><br><span class="line"></span><br><span class="line">public class Comment &#123;</span><br><span class="line">  private Integer id;</span><br><span class="line">//  同上的解释  </span><br><span class="line">//  private Integer postId;</span><br><span class="line">  private String comment;</span><br><span class="line"></span><br><span class="line">  public Integer getId() &#123;</span><br><span class="line">    return id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setId(Integer id) &#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">//  public Integer getPostId() &#123;</span><br><span class="line">//    return postId;</span><br><span class="line">//  &#125;</span><br><span class="line">//</span><br><span class="line">//  public void setPostId(Integer postId) &#123;</span><br><span class="line">//    this.postId = postId;</span><br><span class="line">//  &#125;</span><br><span class="line"></span><br><span class="line">  public String getComment() &#123;</span><br><span class="line">    return comment;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setComment(String comment) &#123;</span><br><span class="line">    this.comment = comment;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在<code>mybatis-config.xml</code>中配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE configuration</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties resource=&quot;config.properties&quot;&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 全局配置参数，需要时再设置 --&gt;</span><br><span class="line">    &lt;!-- 一个配置完整的settings元素的示例如下 --&gt;</span><br><span class="line">    &lt;settings&gt;</span><br><span class="line">        &lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;lazyLoadingEnabled&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;multipleResultSetsEnabled&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;useColumnLabel&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;useGeneratedKeys&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;autoMappingBehavior&quot; value=&quot;PARTIAL&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;defaultExecutorType&quot; value=&quot;SIMPLE&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;defaultStatementTimeout&quot; value=&quot;25&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;defaultFetchSize&quot; value=&quot;100&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;safeRowBoundsEnabled&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;localCacheScope&quot; value=&quot;SESSION&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;jdbcTypeForNull&quot; value=&quot;OTHER&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;lazyLoadTriggerMethods&quot; value=&quot;equals,clone,hashCode,toString&quot;/&gt;</span><br><span class="line">    &lt;/settings&gt;</span><br><span class="line"></span><br><span class="line">    &lt;typeAliases&gt;</span><br><span class="line">        &lt;!-- 类型别名是为Java类型设置一个短的名字。它只和XML配置有关，</span><br><span class="line">        存在的意义仅在于用来减少类完全限定名的冗余 --&gt;</span><br><span class="line">        &lt;!-- 针对单个别名定义 type：类型的路径，类名不能写错，alias：别名 --&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;cn.edu.cqu.domains.User&quot; alias=&quot;user&quot; /&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;cn.edu.cqu.domains.Location&quot; alias=&quot;location&quot; /&gt;</span><br><span class="line"></span><br><span class="line">		&lt;!-- 这里就是我们定义的6个类，及其别名 --&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;cn.edu.cqu.domains.Author&quot; alias=&quot;author&quot; /&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;cn.edu.cqu.domains.Blog&quot; alias=&quot;blog&quot; /&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;cn.edu.cqu.domains.Post&quot; alias=&quot;post&quot; /&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;cn.edu.cqu.domains.Comment&quot; alias=&quot;comment&quot; /&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;cn.edu.cqu.domains.Tag&quot; alias=&quot;tag&quot; /&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;cn.edu.cqu.domains.PostTag&quot; alias=&quot;postTag&quot; /&gt;</span><br><span class="line">    &lt;/typeAliases&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--尽管可以配置多个环境，每个 SqlSessionFactory 实例只能选择其一。</span><br><span class="line">    每个数据库对应一个 SqlSessionFactory 实例--&gt;</span><br><span class="line">    &lt;!-- 如果你正在使用 Spring + MyBatis，则没有必要配置事务管理器，</span><br><span class="line">    因为 Spring 模块会使用自带的管理器来覆盖前面的配置。 --&gt;</span><br><span class="line">    &lt;environments default=&quot;development&quot;&gt;</span><br><span class="line">        &lt;environment id=&quot;development&quot;&gt;</span><br><span class="line">            &lt;!-- JDBC – 这个配置就是直接使用了 JDBC 的提交和回滚设置，它依赖于从数据源得到的连接来管理事务作用域。</span><br><span class="line">            使用jdbc事务管理，事务控制由mybatis --&gt;</span><br><span class="line">            &lt;transactionManager type=&quot;JDBC&quot; /&gt;</span><br><span class="line">            &lt;!-- 数据库连接池，由mybatis管理 --&gt;</span><br><span class="line">            &lt;!--有三种内建的数据源类型（也就是 type=”[UNPOOLED|POOLED|JNDI]”）--&gt;</span><br><span class="line">            &lt;dataSource type=&quot;POOLED&quot;&gt;</span><br><span class="line">                &lt;property name=&quot;driver&quot; value=&quot;$&#123;jdbc.driver&#125;&quot; /&gt;</span><br><span class="line">                &lt;property name=&quot;url&quot; value=&quot;$&#123;jdbc.url&#125;&quot; /&gt;</span><br><span class="line">                &lt;property name=&quot;username&quot; value=&quot;$&#123;jdbc.username&#125;&quot; /&gt;</span><br><span class="line">                &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot; /&gt;</span><br><span class="line">            &lt;/dataSource&gt;</span><br><span class="line">        &lt;/environment&gt;</span><br><span class="line">    &lt;/environments&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- 映射器 --&gt;</span><br><span class="line">    &lt;mappers&gt;</span><br><span class="line">        &lt;!--通过resource方法一次加载一个映射文件 --&gt;</span><br><span class="line">        &lt;!--注意这里的路径和xml文件 --&gt;</span><br><span class="line">        &lt;mapper resource=&quot;mappers/user.xml&quot; /&gt;</span><br><span class="line">        &lt;mapper resource=&quot;mappers/location.xml&quot; /&gt;</span><br><span class="line">		&lt;!--由于实验中只关于blog的查询，故暂时只需要写一个 --&gt;</span><br><span class="line">        &lt;mapper resource=&quot;mappers/blog.xml&quot; /&gt;</span><br><span class="line">        &lt;!-- 批量加载mapper 指定mapper接口的包名，mybatis自动扫描包下边所有mapper接口进行加载 --&gt;</span><br><span class="line">        &lt;!-- 遵循一些规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录 --&gt;</span><br><span class="line">        &lt;!-- 中 上边规范的前提是：使用的是mapper代理方法</span><br><span class="line">        &lt;package name=&quot;mappers&quot; /&gt;--&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/mappers&gt;</span><br><span class="line"></span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<p>最精彩的部分在<code>blog.xml</code>中，其内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</span><br><span class="line">&lt;mapper namespace=&quot;blog&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;resultMap id=&quot;detailedBlogResultMap&quot; type=&quot;Blog&quot;&gt;</span><br><span class="line">	    &lt;!-- 类Blog中必须要有包含一个参数的构造函数，参数为id，即主键名 --&gt;</span><br><span class="line">        &lt;constructor&gt;</span><br><span class="line">            &lt;idArg column=&quot;blog_id&quot; javaType=&quot;int&quot;/&gt;</span><br><span class="line">        &lt;/constructor&gt;</span><br><span class="line">        &lt;result property=&quot;title&quot; column=&quot;blog_title&quot;/&gt;</span><br><span class="line">        &lt;!-- 一个博客只属于一个作者，故使用association --&gt;</span><br><span class="line">        &lt;association property=&quot;author&quot; javaType=&quot;Author&quot;&gt;</span><br><span class="line">            &lt;id property=&quot;id&quot; column=&quot;author_id&quot;/&gt;</span><br><span class="line">            &lt;!-- 获取到用户的用户名，密码，email --&gt;</span><br><span class="line">            &lt;result property=&quot;username&quot; column=&quot;author_username&quot;/&gt;</span><br><span class="line">            &lt;result property=&quot;password&quot; column=&quot;author_password&quot;/&gt;</span><br><span class="line">            &lt;result property=&quot;email&quot; column=&quot;author_email&quot;/&gt;</span><br><span class="line">        &lt;/association&gt;</span><br><span class="line">        &lt;!-- 一个博客有很多文章，故使用collection --&gt;</span><br><span class="line">        &lt;collection property=&quot;posts&quot; ofType=&quot;Post&quot;&gt;</span><br><span class="line">            &lt;id property=&quot;id&quot; column=&quot;post_id&quot;/&gt;</span><br><span class="line">            &lt;!-- 获取到文章的标题和内容 --&gt;</span><br><span class="line">            &lt;result property=&quot;subject&quot; column=&quot;post_subject&quot;/&gt;</span><br><span class="line">            &lt;result property=&quot;body&quot; column=&quot;post_body&quot;/&gt;</span><br><span class="line">            &lt;!-- 一篇文章只有一个作者，故使用association --&gt;</span><br><span class="line">            &lt;association property=&quot;author&quot; javaType=&quot;Author&quot;/&gt;</span><br><span class="line">            &lt;!-- 一篇文章有很多评论，故使用collection --&gt;</span><br><span class="line">            &lt;collection property=&quot;comments&quot; ofType=&quot;Comment&quot;&gt;</span><br><span class="line">                &lt;id property=&quot;id&quot; column=&quot;comment_id&quot;/&gt;</span><br><span class="line">                &lt;!-- 获取到评论的内容 --&gt;</span><br><span class="line">                &lt;result property=&quot;comment&quot; column=&quot;comment_text&quot;/&gt;</span><br><span class="line">            &lt;/collection&gt;</span><br><span class="line">            &lt;!-- 一篇文章有很多标签，故使用collection --&gt;</span><br><span class="line">            &lt;collection property=&quot;tags&quot; ofType=&quot;Tag&quot; &gt;</span><br><span class="line">                &lt;id property=&quot;id&quot; column=&quot;tag_id&quot;/&gt;</span><br><span class="line">                &lt;!-- 获取到标签的内容 --&gt;</span><br><span class="line">                &lt;result property=&quot;name&quot; column=&quot;tag_name&quot;/&gt;</span><br><span class="line">            &lt;/collection&gt;</span><br><span class="line">        &lt;/collection&gt;</span><br><span class="line">    &lt;/resultMap&gt;</span><br><span class="line"></span><br><span class="line">    &lt;select id=&quot;selectBlogDetails&quot; resultMap=&quot;detailedBlogResultMap&quot;&gt;</span><br><span class="line">        select</span><br><span class="line">        B.id as blog_id,</span><br><span class="line">        B.title as blog_title,</span><br><span class="line">        B.author_id as blog_author_id,</span><br><span class="line">        A.id as author_id,</span><br><span class="line">        A.username as author_username,</span><br><span class="line">        A.password as author_password,</span><br><span class="line">        A.email as author_email,</span><br><span class="line">        P.id as post_id,</span><br><span class="line">        P.blog_id as post_blog_id,</span><br><span class="line">        P.subject as post_subject,</span><br><span class="line">        P.body as post_body,</span><br><span class="line">        C.id as comment_id,</span><br><span class="line">        C.post_id as comment_post_id,</span><br><span class="line">        C.comment as comment_text,</span><br><span class="line">        T.id as tag_id,</span><br><span class="line">        T.name as tag_name</span><br><span class="line">        from blog B</span><br><span class="line">        left outer join author A on B.author_id = A.id</span><br><span class="line">        left outer join post P on B.id = P.blog_id</span><br><span class="line">        left outer join comment C on P.id = C.post_id</span><br><span class="line">        left outer join post_tag PT on PT.post_id = P.id</span><br><span class="line">        left outer join tag T on PT.tag_id = T.id</span><br><span class="line">        where B.id = #&#123;id&#125;</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line"></span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure></p>
+<p>测试代码如下<code>BlogTest.java</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">import cn.edu.cqu.domains.*;</span><br><span class="line">import org.apache.ibatis.io.Resources;</span><br><span class="line">import org.apache.ibatis.session.SqlSession;</span><br><span class="line">import org.apache.ibatis.session.SqlSessionFactory;</span><br><span class="line">import org.apache.ibatis.session.SqlSessionFactoryBuilder;</span><br><span class="line">import org.junit.Test;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStream;</span><br><span class="line"></span><br><span class="line">public class BlogTest &#123;</span><br><span class="line"></span><br><span class="line">  public SqlSessionFactory getSqlSessionFactory() throws IOException &#123;</span><br><span class="line">    String resource = &quot;mybatis-config.xml&quot;;</span><br><span class="line">    // 得到配置文件流</span><br><span class="line">    InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">    // 创建会话工厂，传入mybatis的配置文件信息</span><br><span class="line">    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line">    return sqlSessionFactory;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Test</span><br><span class="line">  public void selectBlogDetailsTest() throws IOException &#123;</span><br><span class="line">    // 通过工厂得到SqlSession</span><br><span class="line">    SqlSession sqlSession = this.getSqlSessionFactory().openSession();</span><br><span class="line">    </span><br><span class="line">    //查询博客id为1的博客的所有信息</span><br><span class="line">    Blog blog = sqlSession.selectOne(&quot;blog.selectBlogDetails&quot;, 1);</span><br><span class="line"></span><br><span class="line">    System.out.println(&quot;Blog的id为：&quot; + blog.getId());</span><br><span class="line">    System.out.println(&quot;Blog的标题为：&quot; + blog.getTitle());</span><br><span class="line">    System.out.println(&quot;Blog的作者为：&quot; + blog.getAuthor().getUsername());</span><br><span class="line"></span><br><span class="line">    System.out.println(&quot;博主的文章如下：&quot;);</span><br><span class="line">    for (Post p : blog.getPosts()) &#123;</span><br><span class="line">      System.out.println(&quot;------------------------------------------------------------------------&quot;);</span><br><span class="line">      //System.out.println(&quot;文章id为：&quot; + p.getId());</span><br><span class="line">      System.out.println(&quot;|主题：&quot; + p.getSubject());</span><br><span class="line">      System.out.println(&quot;|内容：&quot; + p.getBody());</span><br><span class="line">      System.out.print(&quot;|标签：&quot; );</span><br><span class="line">      for (Tag tag : p.getTags()) &#123;</span><br><span class="line">        System.out.print(tag.getName() + &quot; &quot;);</span><br><span class="line">      &#125;</span><br><span class="line">      System.out.println();</span><br><span class="line">      System.out.println(&quot;|评论：&quot;);</span><br><span class="line">      for (Comment c : p.getComments()) &#123;</span><br><span class="line">        System.out.println(&quot;|&quot; + c.getComment());</span><br><span class="line">      &#125;</span><br><span class="line">      System.out.println(&quot;------------------------------------------------------------------------&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sqlSession.close();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>查询结果如下：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIwNTA1OTQ2MD93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/Mybatis/" rel="tag"># Mybatis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/23/top-down思维/" rel="next" title="top-down思维">
+                <i class="fa fa-chevron-left"></i> top-down思维
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/18/基于Spring的控制反转与依赖注入的简单实现/" rel="prev" title="基于Spring的控制反转与依赖注入的简单实现">
+                基于Spring的控制反转与依赖注入的简单实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">qin xue</p>
+              <p class="site-description motion-element" itemprop="description">现在就要幸福</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/qxconverse" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xqconver@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qxconverse/" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qin xue</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+
+</body>
+</html>

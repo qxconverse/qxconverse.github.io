@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="深度学习,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="第九章 卷积神经网络（CNN）本章不按照书本的顺序讲，但是会涉及到书本的大多数内容:-） 特别鸣谢吴恩达大佬的视频课程:-）视频课程传送门 1.深度学习的主要领域计算机视觉、语音识别、自然语言处理、推荐系统等。随着数据量巨规模的增大，这些领域在发生很大的变化。而在计算机视觉领域，我们更多要用到卷积神经网络。那么卷积神经网络能做些什么呢？（以下用CNN代替卷积神经网络） 2.计算机视觉中常见的问题图">
+<meta name="keywords" content="深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="卷积神经网络（CNN）">
+<meta property="og:url" content="http://yoursite.com/2017/11/06/卷积神经网络（CNN）/index.html">
+<meta property="og:site_name" content="Xxqin&#39;s Blog">
+<meta property="og:description" content="第九章 卷积神经网络（CNN）本章不按照书本的顺序讲，但是会涉及到书本的大多数内容:-） 特别鸣谢吴恩达大佬的视频课程:-）视频课程传送门 1.深度学习的主要领域计算机视觉、语音识别、自然语言处理、推荐系统等。随着数据量巨规模的增大，这些领域在发生很大的变化。而在计算机视觉领域，我们更多要用到卷积神经网络。那么卷积神经网络能做些什么呢？（以下用CNN代替卷积神经网络） 2.计算机视觉中常见的问题图">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYyOTU5OTM3">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMDE5NDI1">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMDM1NDgx">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMDQ4OTQy">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMTA1NDgz">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMTE2NjA1">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMTM2ODI5">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMjAxMTk0">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMjE4NjQ5">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMjMxMjI5">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMjUyMjc4">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMzExMzgw">
+<meta property="og:updated_time" content="2019-07-13T15:57:48.819Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="卷积神经网络（CNN）">
+<meta name="twitter:description" content="第九章 卷积神经网络（CNN）本章不按照书本的顺序讲，但是会涉及到书本的大多数内容:-） 特别鸣谢吴恩达大佬的视频课程:-）视频课程传送门 1.深度学习的主要领域计算机视觉、语音识别、自然语言处理、推荐系统等。随着数据量巨规模的增大，这些领域在发生很大的变化。而在计算机视觉领域，我们更多要用到卷积神经网络。那么卷积神经网络能做些什么呢？（以下用CNN代替卷积神经网络） 2.计算机视觉中常见的问题图">
+<meta name="twitter:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYyOTU5OTM3">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/11/06/卷积神经网络（CNN）/">
+
+
+
+
+
+  <title>卷积神经网络（CNN） | Xxqin's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xxqin's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/06/卷积神经网络（CNN）/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">卷积神经网络（CNN）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-06T16:33:43+08:00">
+                2017-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="第九章-卷积神经网络（CNN）"><a href="#第九章-卷积神经网络（CNN）" class="headerlink" title="第九章 卷积神经网络（CNN）"></a>第九章 卷积神经网络（CNN）</h3><p><strong>本章不按照书本的顺序讲，但是会涉及到书本的大多数内容:-）</strong></p>
+<p><strong>特别鸣谢吴恩达大佬的视频课程:-）</strong><a href="http://mooc.study.163.com/learn/deeplearning_ai-2001281004?tid=2001392030#/learn/content" target="_blank" rel="noopener">视频课程传送门</a></p>
+<h4 id="1-深度学习的主要领域"><a href="#1-深度学习的主要领域" class="headerlink" title="1.深度学习的主要领域"></a>1.深度学习的主要领域</h4><p>计算机视觉、语音识别、自然语言处理、推荐系统等。随着数据量巨规模的增大，这些领域在发生很大的变化。而在计算机视觉领域，我们更多要用到卷积神经网络。那么卷积神经网络能做些什么呢？（以下用CNN代替卷积神经网络）</p>
+<h4 id="2-计算机视觉中常见的问题"><a href="#2-计算机视觉中常见的问题" class="headerlink" title="2.计算机视觉中常见的问题"></a>2.计算机视觉中常见的问题</h4><p>图像分类、目标检测、图像风格转换（前面两个大家应该比较熟悉）等问题都可以利用CNN来解决。当然还有很多其它的计算机视觉方向可以使用CNN。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYyOTU5OTM3" alt="这里写图片描述"></p>
+<h4 id="3-既然名字叫CNN，那为什么要卷积呢？什么是卷积操作？"><a href="#3-既然名字叫CNN，那为什么要卷积呢？什么是卷积操作？" class="headerlink" title="3.既然名字叫CNN，那为什么要卷积呢？什么是卷积操作？"></a>3.既然名字叫CNN，那为什么要卷积呢？什么是卷积操作？</h4><p>想想我们之前怎么做的？</p>
+<p>一般的神经网络，我们都是全部连接。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMDE5NDI1" alt="这里写图片描述"></p>
+<p>想象这样的一个网络，如果第一层的输入有3000个节点（神经元），而第二层（隐藏层）有1000个节点，那么连接的数目会达到300万。也就有300万个权重。而如果是对于一张比较大的图像来说，就会更多。</p>
+<p>于是就引入了卷积操作，其主要思想在于：<strong>参数共享、稀疏连接</strong>，在讲完了基础知识后，会总结这两个主要特性，相信大家对其理解会更加深入。</p>
+<h4 id="4-边缘检测问题"><a href="#4-边缘检测问题" class="headerlink" title="4.边缘检测问题"></a>4.边缘检测问题</h4><p>什么是边缘检测？CNN之前是怎么做的？其实边缘检测也是特征提取的一种，在利用CNN之前，一般都是手动去设计提取特征的算法。比如设计一个卷积核（也叫作算子）。比如sobel算子等。</p>
+<p>下面看垂直边缘检测的示意图。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMDM1NDgx" alt="这里写图片描述"><br>这个算子可以检测到垂直边缘。那么现在的问题是，我们可以不用手动设置这里面的值，而是通过BP算法学习到。也就是说学习到类似于边缘的特征，当然还有其它的很多无法命名的特征。这个就是<strong>从数据中学习</strong>的例子。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMDQ4OTQy" alt="这里写图片描述"></p>
+<h4 id="5-Padding卷积"><a href="#5-Padding卷积" class="headerlink" title="5.Padding卷积"></a>5.Padding卷积</h4><p>从上面的例子可以看到，6$\times$6的图像通过3$\times$3的算子（卷积核或filter）卷积后变成了4$\times$4的特征图（也叫作特征映射）。</p>
+<p>我们会发现<strong>图像越来越小</strong>，而且<strong>丢失掉一些信息</strong>（因为边缘点很少被卷积到），基于这两个问题，需要进行padding操作。</p>
+<p>示例padding操作。</p>
+<ul>
+<li>Valid Convolutions</li>
+<li>Same Convolutions</li>
+</ul>
+<h4 id="6-Strided卷积"><a href="#6-Strided卷积" class="headerlink" title="6.Strided卷积"></a>6.Strided卷积</h4><p>那么刚刚我们只是一步一步地移动，如果每次移动多步呢？</p>
+<p>因此就引入了stride（步长）的概念。</p>
+<p>但需要注意的是，在加入了padding后，<strong>卷积核在向右或向下移动的过程中不能越界</strong>。所以下面给出总结：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMTA1NDgz" alt="这里写图片描述"></p>
+<h4 id="7-多维度、多卷积核进行卷积"><a href="#7-多维度、多卷积核进行卷积" class="headerlink" title="7.多维度、多卷积核进行卷积"></a>7.多维度、多卷积核进行卷积</h4><p>我们知道，现实中的图像往往更多是RGB格式的，不仅仅是2D的。而上面的示例都是在二维平面上进行的。</p>
+<p>当引入到多维（比如在这里就是3维，即3个channel）后，卷积操作就会做一点点的改变。这时一张图像（或卷积核或特征映射）可以表示成这样的一个张量:</p>
+<p><strong>(m, height, width, channels)</strong>，比如5张32$\times$32大小的RGB图像可以表示成<strong>(5, 32, 32, 3)</strong>，再比如，由50个卷积核操作后大小为28$\times$28的特征映射可以表示为<strong>(1, 28, 28, 50)</strong>。再比如，10个大小为3$\times$3的3维度的卷积核可以表示为<strong>(10, 3, 3, 3)</strong></p>
+<p>具体看示例。</p>
+<p><strong>通过使用多个不同的核，这样我们可以学习到多个特征</strong>。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMTE2NjA1" alt="这里写图片描述"></p>
+<h4 id="8-单层卷积网络"><a href="#8-单层卷积网络" class="headerlink" title="8.单层卷积网络"></a>8.单层卷积网络</h4><p>看示例。</p>
+<p>问题：如果有10个卷积核，其大小为$3\times3\times3$，那么一共有多少个参数？</p>
+<p>共有$(3\times 3\times 3 + 1) \times 10 = 280$个参数，其中1代表偏置。</p>
+<p>这里可以看出，<strong>不管图像有多大，参数个数是不变的，当核的尺寸和个数确定下来后</strong>。</p>
+<p>总结：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMTM2ODI5" alt="这里写图片描述"></p>
+<h4 id="9-卷积网络示例"><a href="#9-卷积网络示例" class="headerlink" title="9.卷积网络示例"></a>9.卷积网络示例</h4><p>画图示例</p>
+<p>通常在一个卷积网络中，包含3个类型：</p>
+<ul>
+<li>Convolution（Conv）卷积</li>
+<li>Pooling（Pool）池化</li>
+<li>Fully connected（FC）全连接</li>
+</ul>
+<h4 id="10-池化"><a href="#10-池化" class="headerlink" title="10.池化"></a>10.池化</h4><p>池化函数使用某一个位置的相邻输出的总体统计特征来代替网络在该位置的输出。</p>
+<p>常见的池化有两种</p>
+<ul>
+<li>Max Pooling</li>
+<li>Average Pooling</li>
+</ul>
+<p>画图示例</p>
+<p>需要注意的是，<strong>池化操作是分别独立地在每一个Channel里面运算，而且往往Max池化更常见。</strong></p>
+<p><strong>而且池化层中是不会学习任何参数的。</strong></p>
+<p>对池化层的总结。</p>
+<p>举例子，LeNet-5网络</p>
+<h4 id="11-为什么会使用卷积"><a href="#11-为什么会使用卷积" class="headerlink" title="11.为什么会使用卷积"></a>11.为什么会使用卷积</h4><p>想想如果使用全连接会是怎样。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMjAxMTk0" alt="这里写图片描述"></p>
+<p>回想之前提到的两个关键词：<strong>参数共享</strong>、<strong>系数连接</strong>，这两个特性就是CNN的精髓。下面的一段文字，是我之前对CNN的理解。大概是说的一个道理。</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMjE4NjQ5" alt="这里写图片描述"></p>
+<p>那么我们看看如何用CNN来进行深度学习：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMjMxMjI5" alt="这里写图片描述"></p>
+<p><strong>我们的目的就是让数据来学习参数，而不是通过手工去设计参数以获得特征。这就是为什么深度学习也叫作特征学习的原因。</strong></p>
+<h4 id="12-常见网络的简单分析"><a href="#12-常见网络的简单分析" class="headerlink" title="12.常见网络的简单分析"></a>12.常见网络的简单分析</h4><p>那么到目前为止，我们对CNN有了一个初步的认识了，至少可以看懂很多论文了。我们可以去分析一些经典的网络比如</p>
+<ul>
+<li><strong>LeNet-5</strong>     <strong>Lécun Y, Bottou L, Bengio Y, et al. Gradient-based learning applied to document recognition[J]. Proceedings of the IEEE, 1998, 86(11):2278-2324.</strong></li>
+<li><strong>AlexNet</strong>     <strong>Krizhevsky A, Sutskever I, Hinton G E. ImageNet classification with deep convolutional neural networks[C]// International Conference on Neural Information Processing Systems. Curran Associates Inc. 2012:1097-1105.</strong></li>
+<li><strong>VGG     Simonyan K, Zisserman A. Very Deep Convolutional Networks for Large-Scale Image Recognition[J]. Computer Science, 2014.</strong></li>
+</ul>
+<p>以及一些比较新的网络，如残差网络：</p>
+<p><strong>He K, Zhang X, Ren S, et al. Deep Residual Learning for Image Recognition[J]. 2015:770-778.</strong></p>
+<p>对这些网络进行分析。</p>
+<h4 id="13-迁移学习"><a href="#13-迁移学习" class="headerlink" title="13.迁移学习"></a>13.迁移学习</h4><p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMjUyMjc4" alt="这里写图片描述"></p>
+<p>其主要的思想是我们可以<strong>利用别人训练好的模型（即权重）来作为我们自己的初始权重。</strong>拿分类作为一个例子：</p>
+<p>第一种情况：当我们的数据集很少的时候，可以将网络冻结（即在训练的过程中，不再学习参数，直接使用现成的参数），这可以把它理解为一个函数。我们要做的就是更改后面的输出分类。比如从1000个分类，改成3个分类，利用Softmax输出层。</p>
+<p>第二种情况：我们的数据不多，可以冻结前面的一部分，而在后面加入一些自己的网络结构设计，再训练，分类。</p>
+<p>第三种情况：我们的数据很多，那么我们完全使用这个模型来训练。（不冻结任何的网络部分）。</p>
+<h4 id="14-数据增强"><a href="#14-数据增强" class="headerlink" title="14.数据增强"></a>14.数据增强</h4><p>数据增强前面第7章有提到过，这里举一些常见的例子：</p>
+<ul>
+<li>镜像</li>
+<li>随机裁剪</li>
+<li>旋转</li>
+<li>色彩位移（Color shifting）</li>
+<li>PCA Color Augmentation（网上有现成的代码）</li>
+</ul>
+<h4 id="15-计算机视觉的现状"><a href="#15-计算机视觉的现状" class="headerlink" title="15.计算机视觉的现状"></a>15.计算机视觉的现状</h4><p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMzExMzgw" alt="这里写图片描述"></p>
+<h4 id="16-目标检测及人脸识别（选讲）"><a href="#16-目标检测及人脸识别（选讲）" class="headerlink" title="16.目标检测及人脸识别（选讲）"></a>16.目标检测及人脸识别（选讲）</h4><p>如果时间足够，可以提一下，当然也可以去吴恩达的视频里看。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/22/零知识证明/" rel="next" title="零知识证明">
+                <i class="fa fa-chevron-left"></i> 零知识证明
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/17/人类简史/" rel="prev" title="人类简史">
+                人类简史 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">qin xue</p>
+              <p class="site-description motion-element" itemprop="description">现在就要幸福</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/qxconverse" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xqconver@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qxconverse/" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第九章-卷积神经网络（CNN）"><span class="nav-number">1.</span> <span class="nav-text">第九章 卷积神经网络（CNN）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-深度学习的主要领域"><span class="nav-number">1.1.</span> <span class="nav-text">1.深度学习的主要领域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-计算机视觉中常见的问题"><span class="nav-number">1.2.</span> <span class="nav-text">2.计算机视觉中常见的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-既然名字叫CNN，那为什么要卷积呢？什么是卷积操作？"><span class="nav-number">1.3.</span> <span class="nav-text">3.既然名字叫CNN，那为什么要卷积呢？什么是卷积操作？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-边缘检测问题"><span class="nav-number">1.4.</span> <span class="nav-text">4.边缘检测问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Padding卷积"><span class="nav-number">1.5.</span> <span class="nav-text">5.Padding卷积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Strided卷积"><span class="nav-number">1.6.</span> <span class="nav-text">6.Strided卷积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-多维度、多卷积核进行卷积"><span class="nav-number">1.7.</span> <span class="nav-text">7.多维度、多卷积核进行卷积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-单层卷积网络"><span class="nav-number">1.8.</span> <span class="nav-text">8.单层卷积网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-卷积网络示例"><span class="nav-number">1.9.</span> <span class="nav-text">9.卷积网络示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-池化"><span class="nav-number">1.10.</span> <span class="nav-text">10.池化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-为什么会使用卷积"><span class="nav-number">1.11.</span> <span class="nav-text">11.为什么会使用卷积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-常见网络的简单分析"><span class="nav-number">1.12.</span> <span class="nav-text">12.常见网络的简单分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-迁移学习"><span class="nav-number">1.13.</span> <span class="nav-text">13.迁移学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-数据增强"><span class="nav-number">1.14.</span> <span class="nav-text">14.数据增强</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-计算机视觉的现状"><span class="nav-number">1.15.</span> <span class="nav-text">15.计算机视觉的现状</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#16-目标检测及人脸识别（选讲）"><span class="nav-number">1.16.</span> <span class="nav-text">16.目标检测及人脸识别（选讲）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qin xue</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+
+</body>
+</html>

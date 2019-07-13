@@ -262,6 +262,495 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/18/基于Spring的控制反转与依赖注入的简单实现/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/18/基于Spring的控制反转与依赖注入的简单实现/" itemprop="url">基于Spring的控制反转与依赖注入的简单实现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-18T20:18:02+08:00">
+                2018-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>看了Martin Fowler大牛的关于IOC与DI的<a href="https://www.martinfowler.com/articles/injection.html" target="_blank" rel="noopener">文章</a>，就自己动手基于Spring实现了一下。<br>这里的<code>MovieFinderImpl</code>类其实就是后面的<code>ColonMovieFinder</code>类，总体的思想，就是把<code>MovieFinderImpl</code>注入到<code>MovieLister</code>中，而这些都由<code>Assembler</code>来完成，具体指Spring中的IoC容器。<br><img src="https://img-blog.csdn.net/20180518203204278?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F4Y29udmVyc2U=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>1.在Idea中新建一个Maven项目</p>
+<p>2.配置pom.xml文件，主要是Spring和slf4j日志的配置，Spring框架支持setter的依赖注入，而且开发者更偏好这种，而不是构造函数方式的依赖注入</p>
+<blockquote>
+<p>The Spring framework is a wide ranging framework for enterprise Java development. It includes abstraction layers for transactions, persistence frameworks, web application development and JDBC. Like PicoContainer it supports both constructor and setter injection, but its developers tend to prefer setter injection. —— Martin Fowler</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;</span><br><span class="line">         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">         xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line"></span><br><span class="line">    &lt;groupId&gt;xqcv&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;xqcv&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.0-SNAPSHOT&lt;/version&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;java-version&gt;1.8&lt;/java-version&gt;</span><br><span class="line">        &lt;org.springframework-version&gt;4.1.0.RELEASE&lt;/org.springframework-version&gt;</span><br><span class="line">        &lt;org.slf4j-version&gt;1.6.6&lt;/org.slf4j-version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;!-- Spring --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-context&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;org.springframework-version&#125;&lt;/version&gt;</span><br><span class="line">            &lt;exclusions&gt;</span><br><span class="line">                &lt;!-- Exclude Commons Logging in favor of SLF4j --&gt;</span><br><span class="line">                &lt;exclusion&gt;</span><br><span class="line">                    &lt;groupId&gt;commons-logging&lt;/groupId&gt;</span><br><span class="line">                    &lt;artifactId&gt;commons-logging&lt;/artifactId&gt;</span><br><span class="line">                &lt;/exclusion&gt;</span><br><span class="line">            &lt;/exclusions&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;org.springframework-version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-test&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;org.springframework-version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-orm&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;org.springframework-version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">        &lt;!-- Logging --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;org.slf4j-version&#125;&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;jcl-over-slf4j&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;org.slf4j-version&#125;&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;$&#123;org.slf4j-version&#125;&lt;/version&gt;</span><br><span class="line">            &lt;scope&gt;runtime&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
+<p>3.编写<code>Movie.java</code>文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public class Movie &#123;</span><br><span class="line">  private int id;</span><br><span class="line">  private String director;</span><br><span class="line">  private String title;</span><br><span class="line"></span><br><span class="line">  public Movie(int id, String director, String title) &#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">    this.director = director;</span><br><span class="line">    this.title = title;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public int getId() &#123;</span><br><span class="line">    return id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setId(int id) &#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public String getDirector() &#123;</span><br><span class="line">    return director;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setDirector(String director) &#123;</span><br><span class="line">    this.director = director;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public String getTitle() &#123;</span><br><span class="line">    return title;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setTitle(String title) &#123;</span><br><span class="line">    this.title = title;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Override</span><br><span class="line">  public String toString() &#123;</span><br><span class="line">    return &quot;Movie&#123;&quot; +</span><br><span class="line">            &quot;id=&quot; + id +</span><br><span class="line">            &quot;, director=&apos;&quot; + director + &apos;\&apos;&apos; +</span><br><span class="line">            &quot;, title=&apos;&quot; + title + &apos;\&apos;&apos; +</span><br><span class="line">            &apos;&#125;&apos;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4.编写<code>MovieFinder</code>接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public interface MovieFinder &#123;</span><br><span class="line">  List findAll();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5.编写<code>ColonMovieFinder</code>类，需要实现<code>findAll</code>函数，即从txt文件中读取出所有电影的信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">import java.io.*;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class ColonMovieFinder implements MovieFinder &#123;</span><br><span class="line">  private String filename;</span><br><span class="line"></span><br><span class="line">  public void setFilename(String filename) &#123;</span><br><span class="line">    this.filename = filename;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private void readTxtToList(List&lt;Movie&gt; movies) &#123;</span><br><span class="line">    File file = new File(Thread.currentThread().getContextClassLoader().getResource(filename).getPath());</span><br><span class="line">    InputStreamReader reader;</span><br><span class="line">    try &#123;</span><br><span class="line">      reader = new InputStreamReader(new FileInputStream(file));</span><br><span class="line">      BufferedReader br = new BufferedReader(reader);</span><br><span class="line">      String line;</span><br><span class="line">      while ((line = br.readLine()) != null) &#123;</span><br><span class="line">        movies.add(new Movie(Integer.valueOf(line.split(&quot;\t&quot;)[0]),</span><br><span class="line">                line.split(&quot;\t&quot;)[1], line.split(&quot;\t&quot;)[2]));</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">      e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public List findAll() &#123;</span><br><span class="line">    List&lt;Movie&gt; movies = new ArrayList&lt;Movie&gt;();</span><br><span class="line">    readTxtToList(movies);</span><br><span class="line">    return movies;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>6.这是<code>movies1.txt</code>文件，每一行是一条电影的信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1	Sergio Leone	AAA</span><br><span class="line">2	Sergio Leone	BBB</span><br><span class="line">3	Jake Roller	CCC</span><br><span class="line">4	Howard Td	DDD</span><br></pre></td></tr></table></figure></p>
+<p>7.实现<code>MovieLister</code>类，<strong><code>MovieFinder</code>即为<code>MovieLister</code>的依赖</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import java.util.Iterator;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class MovieLister &#123;</span><br><span class="line">  private MovieFinder finder;</span><br><span class="line"></span><br><span class="line">  public void setFinder(MovieFinder finder) &#123;</span><br><span class="line">    this.finder = finder;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public Movie[] moviesDirectedBy(String arg) &#123;</span><br><span class="line">    List allMovies = finder.findAll();</span><br><span class="line">    for (Iterator it = allMovies.iterator(); it.hasNext();) &#123;</span><br><span class="line">      Movie movie = (Movie) it.next();</span><br><span class="line">      if (!movie.getDirector().equals(arg)) it.remove();</span><br><span class="line">    &#125;</span><br><span class="line">    return (Movie[]) allMovies.toArray(new Movie[allMovies.size()]);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>8.编写<code>spring.xml</code>文件，核心在这个地方，<strong>所谓IoC Container的配置指的就是这个地方，Spring底层实现好了，所有只需要在这里配置，就不用在代码中手工写new了</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans:beans xmlns=&quot;http://www.springframework.org/schema/mvc&quot;</span><br><span class="line">			 xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">			 xmlns:beans=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">			 xsi:schemaLocation=&quot;http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd</span><br><span class="line">		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;</span><br><span class="line">		</span><br><span class="line">	&lt;!--把ColonMovieFinder注入到MovieLister类--&gt;</span><br><span class="line">	&lt;beans:bean id=&quot;MovieFinder&quot; class=&quot;ColonMovieFinder&quot;&gt;</span><br><span class="line">		&lt;beans:property name=&quot;filename&quot;&gt;</span><br><span class="line">			&lt;beans:value&gt;movies1.txt&lt;/beans:value&gt;</span><br><span class="line">		&lt;/beans:property&gt;</span><br><span class="line">	&lt;/beans:bean&gt;</span><br><span class="line"></span><br><span class="line">	&lt;beans:bean id=&quot;MovieLister&quot; class=&quot;MovieLister&quot;&gt;</span><br><span class="line">		&lt;beans:property name=&quot;finder&quot;&gt;</span><br><span class="line">			&lt;beans:ref bean=&quot;MovieFinder&quot;/&gt;</span><br><span class="line">		&lt;/beans:property&gt;</span><br><span class="line">	&lt;/beans:bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;/beans:beans&gt;</span><br></pre></td></tr></table></figure>
+<p>9.编写最后的测试文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import org.springframework.context.ApplicationContext;</span><br><span class="line">import org.springframework.context.support.FileSystemXmlApplicationContext;</span><br><span class="line"></span><br><span class="line">public class Test &#123;</span><br><span class="line">  public static void main(String[] args) &#123;</span><br><span class="line">    ApplicationContext ctx = new FileSystemXmlApplicationContext(&quot;classpath:spring.xml&quot;);</span><br><span class="line">    </span><br><span class="line">    //如果没有spring.xml里面的注入配置，就需要这样写，所以这样代码就复杂了许多</span><br><span class="line">//    ColonMovieFinder finder = new ColonMovieFinder();</span><br><span class="line">//    finder.setFilename(&quot;movies1.txt&quot;);</span><br><span class="line">//    MovieLister lister = new MovieLister();</span><br><span class="line">//    lister.setFinder(finder);</span><br><span class="line"></span><br><span class="line">    MovieLister lister = (MovieLister) ctx.getBean(&quot;MovieLister&quot;);</span><br><span class="line">    Movie[] movies = lister.moviesDirectedBy(&quot;Sergio Leone&quot;);</span><br><span class="line">    for (Movie m : movies) &#123;</span><br><span class="line">      System.out.println(m.toString());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最终的运行结果如下：<br><img src="https://img-blog.csdn.net/20180518201649589?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F4Y29udmVyc2U=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+<p>附上整个项目的结构<br><img src="https://img-blog.csdn.net/20180518200034367?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3F4Y29udmVyc2U=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/05/Mybatis多表连接查询/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/05/Mybatis多表连接查询/" itemprop="url">Mybatis多表连接查询</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-05T21:18:22+08:00">
+                2018-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>首先在之前建好的数据库<code>mybatis</code>中新建6个表，关系如下（图中没有显示表与表具体的关系，比如一对多，多对多。只是画了箭头，表示有依赖关系）。表<code>blog</code>代表博客，它由某位作者（表<code>author</code>）所写，博客中有很多的文章（表<code>post</code>），每篇文章有零或多条的评论（表<code>comment</code>）和标签（表<code>tag</code>），而表<code>post_tag</code>里面存有文章和标签的<code>id</code>（多对多的关系）。<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIwNDEzODgzMD93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+<p>具体的字段描述如下：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIwNDQ0NTI2MD93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+<p>表中的数据如下：<br>表<code>author</code></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTAwMTQzND93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+<p>表<code>blog</code></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTAyNjQ1OT93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+<p>表<code>tag</code></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTA0NTMxND93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+<p>表<code>post</code></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTA1NzE2OT93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+<p>表<code>post_tag</code></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTExNTA3Nz93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+<p>表<code>comment</code></p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIxMTEwNzA2Mz93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+<p>在项目中新建实体类：<br>1.<code>Author.java</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package cn.edu.cqu.domains;</span><br><span class="line"></span><br><span class="line">public class Author &#123;</span><br><span class="line">  private int id;</span><br><span class="line">  private String username;</span><br><span class="line">  private String password;</span><br><span class="line">  private String email;</span><br><span class="line"></span><br><span class="line">  public int getId() &#123;</span><br><span class="line">    return id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setId(int id) &#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public String getUsername() &#123;</span><br><span class="line">    return username;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setUsername(String username) &#123;</span><br><span class="line">    this.username = username;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public String getPassword() &#123;</span><br><span class="line">    return password;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setPassword(String password) &#123;</span><br><span class="line">    this.password = password;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public String getEmail() &#123;</span><br><span class="line">    return email;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setEmail(String email) &#123;</span><br><span class="line">    this.email = email;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.<code>Blog.java</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">package cn.edu.cqu.domains;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class Blog &#123;</span><br><span class="line">  private Integer id;</span><br><span class="line">  private String title;</span><br><span class="line">  </span><br><span class="line">//  事实上，这个地方的authorId可以不需要了，因为有Author类了。</span><br><span class="line">//  private String authorId;</span><br><span class="line"></span><br><span class="line">  //为了连表查询</span><br><span class="line">  private Author author;</span><br><span class="line">  private List&lt;Post&gt; posts;</span><br><span class="line"></span><br><span class="line">  public Blog(Integer id) &#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public List&lt;Post&gt; getPosts() &#123;</span><br><span class="line">    return posts;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setPosts(List&lt;Post&gt; posts) &#123;</span><br><span class="line">    this.posts = posts;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public Integer getId() &#123;</span><br><span class="line">    return id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setId(Integer id) &#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public String getTitle() &#123;</span><br><span class="line">    return title;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setTitle(String title) &#123;</span><br><span class="line">    this.title = title;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">//  public String getAuthorId() &#123;</span><br><span class="line">//    return authorId;</span><br><span class="line">//  &#125;</span><br><span class="line">//</span><br><span class="line">//  public void setAuthorId(String authorId) &#123;</span><br><span class="line">//    this.authorId = authorId;</span><br><span class="line">//  &#125;</span><br><span class="line"></span><br><span class="line">  public Author getAuthor() &#123;</span><br><span class="line">    return author;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setAuthor(Author author) &#123;</span><br><span class="line">    this.author = author;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.<code>Tag.java</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package cn.edu.cqu.domains;</span><br><span class="line"></span><br><span class="line">public class Tag &#123;</span><br><span class="line">  private Integer id;</span><br><span class="line">  private String name;</span><br><span class="line"></span><br><span class="line">  public Integer getId() &#123;</span><br><span class="line">    return id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setId(Integer id) &#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public String getName() &#123;</span><br><span class="line">    return name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setName(String name) &#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>4.<code>PostTag.java</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">package cn.edu.cqu.domains;</span><br><span class="line"></span><br><span class="line">public class PostTag &#123;</span><br><span class="line">  private Integer id;</span><br><span class="line">  </span><br><span class="line">//  同上，不需要</span><br><span class="line">//  private Integer postId;</span><br><span class="line">//  private Integer tagId;</span><br><span class="line"></span><br><span class="line">  public Integer getId() &#123;</span><br><span class="line">    return id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setId(Integer id) &#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">//  public Integer getPostId() &#123;</span><br><span class="line">//    return postId;</span><br><span class="line">//  &#125;</span><br><span class="line">//</span><br><span class="line">//  public void setPostId(Integer postId) &#123;</span><br><span class="line">//    this.postId = postId;</span><br><span class="line">//  &#125;</span><br><span class="line">//</span><br><span class="line">//  public Integer getTagId() &#123;</span><br><span class="line">//    return tagId;</span><br><span class="line">//  &#125;</span><br><span class="line">//</span><br><span class="line">//  public void setTagId(Integer tagId) &#123;</span><br><span class="line">//    this.tagId = tagId;</span><br><span class="line">//  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5.<code>Post.java</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">package cn.edu.cqu.domains;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public class Post &#123;</span><br><span class="line">  private Integer id;</span><br><span class="line">  </span><br><span class="line">//  因为类Blog里面有List&lt;Post&gt; posts了。</span><br><span class="line">//  private Integer blogId;</span><br><span class="line">  private String subject;</span><br><span class="line">  private String body;</span><br><span class="line"></span><br><span class="line">  //为了连表查询，一篇文章有很多评论，可以有很多标签，故用List存储。</span><br><span class="line">  private Author author;</span><br><span class="line">  private List&lt;Comment&gt; comments;</span><br><span class="line">  private List&lt;Tag&gt; tags;</span><br><span class="line"></span><br><span class="line">  public Integer getId() &#123;</span><br><span class="line">    return id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setId(Integer id) &#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">//  public Integer getBlogId() &#123;</span><br><span class="line">//    return blogId;</span><br><span class="line">//  &#125;</span><br><span class="line">//</span><br><span class="line">//  public void setBlogId(Integer blogId) &#123;</span><br><span class="line">//    this.blogId = blogId;</span><br><span class="line">//  &#125;</span><br><span class="line">//</span><br><span class="line"></span><br><span class="line">  public String getSubject() &#123;</span><br><span class="line">    return subject;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setSubject(String subject) &#123;</span><br><span class="line">    this.subject = subject;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public String getBody() &#123;</span><br><span class="line">    return body;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setBody(String body) &#123;</span><br><span class="line">    this.body = body;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public Author getAuthor() &#123;</span><br><span class="line">    return author;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setAuthor(Author author) &#123;</span><br><span class="line">    this.author = author;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public List&lt;Comment&gt; getComments() &#123;</span><br><span class="line">    return comments;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setComments(List&lt;Comment&gt; comments) &#123;</span><br><span class="line">    this.comments = comments;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public List&lt;Tag&gt; getTags() &#123;</span><br><span class="line">    return tags;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setTags(List&lt;Tag&gt; tags) &#123;</span><br><span class="line">    this.tags = tags;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>6.<code>Comment.java</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">package cn.edu.cqu.domains;</span><br><span class="line"></span><br><span class="line">public class Comment &#123;</span><br><span class="line">  private Integer id;</span><br><span class="line">//  同上的解释  </span><br><span class="line">//  private Integer postId;</span><br><span class="line">  private String comment;</span><br><span class="line"></span><br><span class="line">  public Integer getId() &#123;</span><br><span class="line">    return id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setId(Integer id) &#123;</span><br><span class="line">    this.id = id;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">//  public Integer getPostId() &#123;</span><br><span class="line">//    return postId;</span><br><span class="line">//  &#125;</span><br><span class="line">//</span><br><span class="line">//  public void setPostId(Integer postId) &#123;</span><br><span class="line">//    this.postId = postId;</span><br><span class="line">//  &#125;</span><br><span class="line"></span><br><span class="line">  public String getComment() &#123;</span><br><span class="line">    return comment;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  public void setComment(String comment) &#123;</span><br><span class="line">    this.comment = comment;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在<code>mybatis-config.xml</code>中配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE configuration</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line"></span><br><span class="line">    &lt;properties resource=&quot;config.properties&quot;&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- 全局配置参数，需要时再设置 --&gt;</span><br><span class="line">    &lt;!-- 一个配置完整的settings元素的示例如下 --&gt;</span><br><span class="line">    &lt;settings&gt;</span><br><span class="line">        &lt;setting name=&quot;cacheEnabled&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;lazyLoadingEnabled&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;multipleResultSetsEnabled&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;useColumnLabel&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;useGeneratedKeys&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;autoMappingBehavior&quot; value=&quot;PARTIAL&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;defaultExecutorType&quot; value=&quot;SIMPLE&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;defaultStatementTimeout&quot; value=&quot;25&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;defaultFetchSize&quot; value=&quot;100&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;safeRowBoundsEnabled&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;localCacheScope&quot; value=&quot;SESSION&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;jdbcTypeForNull&quot; value=&quot;OTHER&quot;/&gt;</span><br><span class="line">        &lt;setting name=&quot;lazyLoadTriggerMethods&quot; value=&quot;equals,clone,hashCode,toString&quot;/&gt;</span><br><span class="line">    &lt;/settings&gt;</span><br><span class="line"></span><br><span class="line">    &lt;typeAliases&gt;</span><br><span class="line">        &lt;!-- 类型别名是为Java类型设置一个短的名字。它只和XML配置有关，</span><br><span class="line">        存在的意义仅在于用来减少类完全限定名的冗余 --&gt;</span><br><span class="line">        &lt;!-- 针对单个别名定义 type：类型的路径，类名不能写错，alias：别名 --&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;cn.edu.cqu.domains.User&quot; alias=&quot;user&quot; /&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;cn.edu.cqu.domains.Location&quot; alias=&quot;location&quot; /&gt;</span><br><span class="line"></span><br><span class="line">		&lt;!-- 这里就是我们定义的6个类，及其别名 --&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;cn.edu.cqu.domains.Author&quot; alias=&quot;author&quot; /&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;cn.edu.cqu.domains.Blog&quot; alias=&quot;blog&quot; /&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;cn.edu.cqu.domains.Post&quot; alias=&quot;post&quot; /&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;cn.edu.cqu.domains.Comment&quot; alias=&quot;comment&quot; /&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;cn.edu.cqu.domains.Tag&quot; alias=&quot;tag&quot; /&gt;</span><br><span class="line">        &lt;typeAlias type=&quot;cn.edu.cqu.domains.PostTag&quot; alias=&quot;postTag&quot; /&gt;</span><br><span class="line">    &lt;/typeAliases&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--尽管可以配置多个环境，每个 SqlSessionFactory 实例只能选择其一。</span><br><span class="line">    每个数据库对应一个 SqlSessionFactory 实例--&gt;</span><br><span class="line">    &lt;!-- 如果你正在使用 Spring + MyBatis，则没有必要配置事务管理器，</span><br><span class="line">    因为 Spring 模块会使用自带的管理器来覆盖前面的配置。 --&gt;</span><br><span class="line">    &lt;environments default=&quot;development&quot;&gt;</span><br><span class="line">        &lt;environment id=&quot;development&quot;&gt;</span><br><span class="line">            &lt;!-- JDBC – 这个配置就是直接使用了 JDBC 的提交和回滚设置，它依赖于从数据源得到的连接来管理事务作用域。</span><br><span class="line">            使用jdbc事务管理，事务控制由mybatis --&gt;</span><br><span class="line">            &lt;transactionManager type=&quot;JDBC&quot; /&gt;</span><br><span class="line">            &lt;!-- 数据库连接池，由mybatis管理 --&gt;</span><br><span class="line">            &lt;!--有三种内建的数据源类型（也就是 type=”[UNPOOLED|POOLED|JNDI]”）--&gt;</span><br><span class="line">            &lt;dataSource type=&quot;POOLED&quot;&gt;</span><br><span class="line">                &lt;property name=&quot;driver&quot; value=&quot;$&#123;jdbc.driver&#125;&quot; /&gt;</span><br><span class="line">                &lt;property name=&quot;url&quot; value=&quot;$&#123;jdbc.url&#125;&quot; /&gt;</span><br><span class="line">                &lt;property name=&quot;username&quot; value=&quot;$&#123;jdbc.username&#125;&quot; /&gt;</span><br><span class="line">                &lt;property name=&quot;password&quot; value=&quot;$&#123;jdbc.password&#125;&quot; /&gt;</span><br><span class="line">            &lt;/dataSource&gt;</span><br><span class="line">        &lt;/environment&gt;</span><br><span class="line">    &lt;/environments&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!-- 映射器 --&gt;</span><br><span class="line">    &lt;mappers&gt;</span><br><span class="line">        &lt;!--通过resource方法一次加载一个映射文件 --&gt;</span><br><span class="line">        &lt;!--注意这里的路径和xml文件 --&gt;</span><br><span class="line">        &lt;mapper resource=&quot;mappers/user.xml&quot; /&gt;</span><br><span class="line">        &lt;mapper resource=&quot;mappers/location.xml&quot; /&gt;</span><br><span class="line">		&lt;!--由于实验中只关于blog的查询，故暂时只需要写一个 --&gt;</span><br><span class="line">        &lt;mapper resource=&quot;mappers/blog.xml&quot; /&gt;</span><br><span class="line">        &lt;!-- 批量加载mapper 指定mapper接口的包名，mybatis自动扫描包下边所有mapper接口进行加载 --&gt;</span><br><span class="line">        &lt;!-- 遵循一些规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录 --&gt;</span><br><span class="line">        &lt;!-- 中 上边规范的前提是：使用的是mapper代理方法</span><br><span class="line">        &lt;package name=&quot;mappers&quot; /&gt;--&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/mappers&gt;</span><br><span class="line"></span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<p>最精彩的部分在<code>blog.xml</code>中，其内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper</span><br><span class="line">        PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</span><br><span class="line">&lt;mapper namespace=&quot;blog&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;resultMap id=&quot;detailedBlogResultMap&quot; type=&quot;Blog&quot;&gt;</span><br><span class="line">	    &lt;!-- 类Blog中必须要有包含一个参数的构造函数，参数为id，即主键名 --&gt;</span><br><span class="line">        &lt;constructor&gt;</span><br><span class="line">            &lt;idArg column=&quot;blog_id&quot; javaType=&quot;int&quot;/&gt;</span><br><span class="line">        &lt;/constructor&gt;</span><br><span class="line">        &lt;result property=&quot;title&quot; column=&quot;blog_title&quot;/&gt;</span><br><span class="line">        &lt;!-- 一个博客只属于一个作者，故使用association --&gt;</span><br><span class="line">        &lt;association property=&quot;author&quot; javaType=&quot;Author&quot;&gt;</span><br><span class="line">            &lt;id property=&quot;id&quot; column=&quot;author_id&quot;/&gt;</span><br><span class="line">            &lt;!-- 获取到用户的用户名，密码，email --&gt;</span><br><span class="line">            &lt;result property=&quot;username&quot; column=&quot;author_username&quot;/&gt;</span><br><span class="line">            &lt;result property=&quot;password&quot; column=&quot;author_password&quot;/&gt;</span><br><span class="line">            &lt;result property=&quot;email&quot; column=&quot;author_email&quot;/&gt;</span><br><span class="line">        &lt;/association&gt;</span><br><span class="line">        &lt;!-- 一个博客有很多文章，故使用collection --&gt;</span><br><span class="line">        &lt;collection property=&quot;posts&quot; ofType=&quot;Post&quot;&gt;</span><br><span class="line">            &lt;id property=&quot;id&quot; column=&quot;post_id&quot;/&gt;</span><br><span class="line">            &lt;!-- 获取到文章的标题和内容 --&gt;</span><br><span class="line">            &lt;result property=&quot;subject&quot; column=&quot;post_subject&quot;/&gt;</span><br><span class="line">            &lt;result property=&quot;body&quot; column=&quot;post_body&quot;/&gt;</span><br><span class="line">            &lt;!-- 一篇文章只有一个作者，故使用association --&gt;</span><br><span class="line">            &lt;association property=&quot;author&quot; javaType=&quot;Author&quot;/&gt;</span><br><span class="line">            &lt;!-- 一篇文章有很多评论，故使用collection --&gt;</span><br><span class="line">            &lt;collection property=&quot;comments&quot; ofType=&quot;Comment&quot;&gt;</span><br><span class="line">                &lt;id property=&quot;id&quot; column=&quot;comment_id&quot;/&gt;</span><br><span class="line">                &lt;!-- 获取到评论的内容 --&gt;</span><br><span class="line">                &lt;result property=&quot;comment&quot; column=&quot;comment_text&quot;/&gt;</span><br><span class="line">            &lt;/collection&gt;</span><br><span class="line">            &lt;!-- 一篇文章有很多标签，故使用collection --&gt;</span><br><span class="line">            &lt;collection property=&quot;tags&quot; ofType=&quot;Tag&quot; &gt;</span><br><span class="line">                &lt;id property=&quot;id&quot; column=&quot;tag_id&quot;/&gt;</span><br><span class="line">                &lt;!-- 获取到标签的内容 --&gt;</span><br><span class="line">                &lt;result property=&quot;name&quot; column=&quot;tag_name&quot;/&gt;</span><br><span class="line">            &lt;/collection&gt;</span><br><span class="line">        &lt;/collection&gt;</span><br><span class="line">    &lt;/resultMap&gt;</span><br><span class="line"></span><br><span class="line">    &lt;select id=&quot;selectBlogDetails&quot; resultMap=&quot;detailedBlogResultMap&quot;&gt;</span><br><span class="line">        select</span><br><span class="line">        B.id as blog_id,</span><br><span class="line">        B.title as blog_title,</span><br><span class="line">        B.author_id as blog_author_id,</span><br><span class="line">        A.id as author_id,</span><br><span class="line">        A.username as author_username,</span><br><span class="line">        A.password as author_password,</span><br><span class="line">        A.email as author_email,</span><br><span class="line">        P.id as post_id,</span><br><span class="line">        P.blog_id as post_blog_id,</span><br><span class="line">        P.subject as post_subject,</span><br><span class="line">        P.body as post_body,</span><br><span class="line">        C.id as comment_id,</span><br><span class="line">        C.post_id as comment_post_id,</span><br><span class="line">        C.comment as comment_text,</span><br><span class="line">        T.id as tag_id,</span><br><span class="line">        T.name as tag_name</span><br><span class="line">        from blog B</span><br><span class="line">        left outer join author A on B.author_id = A.id</span><br><span class="line">        left outer join post P on B.id = P.blog_id</span><br><span class="line">        left outer join comment C on P.id = C.post_id</span><br><span class="line">        left outer join post_tag PT on PT.post_id = P.id</span><br><span class="line">        left outer join tag T on PT.tag_id = T.id</span><br><span class="line">        where B.id = #&#123;id&#125;</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line"></span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure></p>
+<p>测试代码如下<code>BlogTest.java</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">import cn.edu.cqu.domains.*;</span><br><span class="line">import org.apache.ibatis.io.Resources;</span><br><span class="line">import org.apache.ibatis.session.SqlSession;</span><br><span class="line">import org.apache.ibatis.session.SqlSessionFactory;</span><br><span class="line">import org.apache.ibatis.session.SqlSessionFactoryBuilder;</span><br><span class="line">import org.junit.Test;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStream;</span><br><span class="line"></span><br><span class="line">public class BlogTest &#123;</span><br><span class="line"></span><br><span class="line">  public SqlSessionFactory getSqlSessionFactory() throws IOException &#123;</span><br><span class="line">    String resource = &quot;mybatis-config.xml&quot;;</span><br><span class="line">    // 得到配置文件流</span><br><span class="line">    InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">    // 创建会话工厂，传入mybatis的配置文件信息</span><br><span class="line">    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line">    return sqlSessionFactory;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  @Test</span><br><span class="line">  public void selectBlogDetailsTest() throws IOException &#123;</span><br><span class="line">    // 通过工厂得到SqlSession</span><br><span class="line">    SqlSession sqlSession = this.getSqlSessionFactory().openSession();</span><br><span class="line">    </span><br><span class="line">    //查询博客id为1的博客的所有信息</span><br><span class="line">    Blog blog = sqlSession.selectOne(&quot;blog.selectBlogDetails&quot;, 1);</span><br><span class="line"></span><br><span class="line">    System.out.println(&quot;Blog的id为：&quot; + blog.getId());</span><br><span class="line">    System.out.println(&quot;Blog的标题为：&quot; + blog.getTitle());</span><br><span class="line">    System.out.println(&quot;Blog的作者为：&quot; + blog.getAuthor().getUsername());</span><br><span class="line"></span><br><span class="line">    System.out.println(&quot;博主的文章如下：&quot;);</span><br><span class="line">    for (Post p : blog.getPosts()) &#123;</span><br><span class="line">      System.out.println(&quot;------------------------------------------------------------------------&quot;);</span><br><span class="line">      //System.out.println(&quot;文章id为：&quot; + p.getId());</span><br><span class="line">      System.out.println(&quot;|主题：&quot; + p.getSubject());</span><br><span class="line">      System.out.println(&quot;|内容：&quot; + p.getBody());</span><br><span class="line">      System.out.print(&quot;|标签：&quot; );</span><br><span class="line">      for (Tag tag : p.getTags()) &#123;</span><br><span class="line">        System.out.print(tag.getName() + &quot; &quot;);</span><br><span class="line">      &#125;</span><br><span class="line">      System.out.println();</span><br><span class="line">      System.out.println(&quot;|评论：&quot;);</span><br><span class="line">      for (Comment c : p.getComments()) &#123;</span><br><span class="line">        System.out.println(&quot;|&quot; + c.getComment());</span><br><span class="line">      &#125;</span><br><span class="line">      System.out.println(&quot;------------------------------------------------------------------------&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sqlSession.close();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>查询结果如下：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9pbWctYmxvZy5jc2RuLm5ldC8yMDE4MDUwNTIwNTA1OTQ2MD93YXRlcm1hcmsvMi90ZXh0L0x5OWliRzluTG1OelpHNHVibVYwTDNGNFkyOXVkbVZ5YzJVPS9mb250LzVhNkw1TDJUL2ZvbnRzaXplLzQwMC9maWxsL0kwSkJRa0ZDTUE9PS9kaXNzb2x2ZS83MC9ncmF2aXR5L1NvdXRoRWFzdA" alt="这里写图片描述"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/top-down思维/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/23/top-down思维/" itemprop="url">top-down思维</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T10:15:02+08:00">
+                2018-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/随想/" itemprop="url" rel="index">
+                    <span itemprop="name">随想</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>任何事情要养成先宏观再微观，先整体再局部，先一般再具体的思路。多年的沉痛经历告诉自己，这很重要，也是决定你能不能把事情做好的一个关键因素。这里把它称为top-down思维。</p>
+<p>最怕一上来就撸起袖子加油干，往往抓不到重点，得不偿失，花费最长的时间得到最低的成果。而你所见到的大佬们，都不会这样做。不管是企业管理，还是工程项目，还是个人工作计划，都会遵循top-down思维的。</p>
+<p>top-down思维的优点有很多，这里大致说几点：</p>
+<ol>
+<li>不管是自己还是他人，只想听大概的思路，如果一上来就具体，那么受众根本接受不了，请看下面的示例：</li>
+<li>这样可以看到整体的东西，方便做预测、规划</li>
+</ol>
+<p>关于这一点，有一个很好的例子，就是群面的时候，当面试官给出题目并要求在规定时间内给出一个结果的时候。总是要有一位同学带领大家，起到统筹的作用。其实他的任务很简单，就是告诉大家：我们的时间有多少（并且他要安排某个人计时），要讨论出什么东西。那么时间分配该怎样。而且对于讨论该给出的答案要包括哪几个小点。每位同学只能发言多久时间。最后由谁来总结汇报给面试官。</p>
+<p>看到没有，他做的就是从宏观上给出时间规划和任务安排。设想没有这个人，大家在底下，你一句，我一句，最后一定会乱套，而且结果还不一定能讨论出来！！（或是超时，或是统一不了结果）</p>
+<ol start="3">
+<li>有了宏观把控后，具体做的时候，就能理清思路，这个点应该出现在哪一个步骤，而不应该出现在哪个步骤。这样做起来更加自信高效。</li>
+</ol>
+<p>所以，一定要养成这个习惯，一定要逼迫自己这样做，因为真的极其重要！！！</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/13/B树和其变体/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1307,458 +1796,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/06/新名字的故事/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/06/新名字的故事/" itemprop="url">新名字的故事</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-06T12:18:32+08:00">
-                2018-02-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/人文艺术/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>终于读完了这本书。虽然只是四部曲中的第二部，但是适合现在的我读。这一部讲的大概就是16-24左右的故事。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/06/新名字的故事/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/07/情书、天使爱美丽、心灵捕手影评/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/07/情书、天使爱美丽、心灵捕手影评/" itemprop="url">情书、天使爱美丽、心灵捕手影评</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-07T13:04:50+08:00">
-                2018-01-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/人文艺术/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="情书"><a href="#情书" class="headerlink" title="情书"></a>情书</h4><p>这部电影让我想到了 初恋，同样是日本的电影。</p>
-<p>女主真是美。很感人，遇到同名也是很有缘份的一件事。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/07/情书、天使爱美丽、心灵捕手影评/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/17/人类简史/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/17/人类简史/" itemprop="url">人类简史</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-17T12:18:32+08:00">
-                2017-12-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/人文艺术/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>作者语言诙谐，思路清晰，观点新颖。</li>
-<li>作者明显是达尔文进化论的铁粉，书中反复提到演化。除此之外，也同时强调基因和DNA的作用，这些是构成全书最核心的客观观点。</li>
-<li>作者在描述历史的不可逆性时，观点有点类似于惯性力的作用。当人们意识到走到了某个节点后，发现存在诟病，可是想恢复到之前已经无能为力。包括农业革命和后面的科学革命都这样。</li>
-<li>人类，准确说是智人，这个词太平常了，仅仅是无数物种之一而已。但是又太不平凡，因为目前智人统治着地球。</li>
-<li>从宇宙大爆炸后，先后出现的是物理学、化学、生物学、历史学…7万年前，认知革命开始，智人通过描述虚拟故事以及八卦，战胜了其它人属物种以及其它动植物物种。意识与虚构支撑着一切智人系统。</li>
-<li>农业革命发生在距今1.2万年前，这是最大的骗局。智人驯化了动植物，其实是被驯化了。智人们通过复制基因一代一代相传。通过金钱、帝国、宗教，不断向前发展。智人们不断扩张以巩固自己的疆土。通过探险殖民的方式打破了原始部落。</li>
-<li>科学革命发生在距今仅仅500年前，但是速度极其之快。科学、帝国、资本主义推动着历史的发展。</li>
-<li>这是一个由强者制定规则的世界，很多都是想象出来的东西，没有绝对的对错。认识自我才是最重要的。</li>
-<li>历史中很大的空白就是幸福感的研究，智人从无到有，再到现在，真的幸福了吗？</li>
-<li>我们已经强大到了接近神的地步了，然而我们最需要知道的是，后面我们要做什么。</li>
-<li>历史的发展总是必然性结合着偶然性一起的，谁都不能预测未来。我们还要经历很多个岔路口。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1804,7 +1846,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">78</span>
+                  <span class="site-state-item-count">87</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1826,7 +1868,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
