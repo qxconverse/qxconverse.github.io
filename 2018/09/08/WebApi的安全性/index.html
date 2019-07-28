@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Web安全,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="现在就要幸福">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="客户端调用：http://api.xxx.com/getInfo?Id=value，这种方式简单粗暴，在浏览器直接输入http://api.xxx.com/getInfo?Id=value，即可获取到相关的信息了，但是这样的方式会存在很严重的安全性问题，没有进行任何的验证，大家都可以通过这个方法获取到产品列表，导致信息泄露。  如何验证调用者身份呢？ 如何防止参数被篡改呢？ 如何保证请求的唯一性？">
+<meta name="keywords" content="Web安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebApi的安全性">
+<meta property="og:url" content="http://yoursite.com/2018/09/08/WebApi的安全性/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="现在就要幸福">
+<meta property="og:description" content="客户端调用：http://api.xxx.com/getInfo?Id=value，这种方式简单粗暴，在浏览器直接输入http://api.xxx.com/getInfo?Id=value，即可获取到相关的信息了，但是这样的方式会存在很严重的安全性问题，没有进行任何的验证，大家都可以通过这个方法获取到产品列表，导致信息泄露。  如何验证调用者身份呢？ 如何防止参数被篡改呢？ 如何保证请求的唯一性？">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-11-24T11:25:20.013Z">
+<meta property="og:updated_time" content="2019-02-14T02:27:30.151Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
-<meta name="twitter:description" content="现在就要幸福">
+<meta name="twitter:title" content="WebApi的安全性">
+<meta name="twitter:description" content="客户端调用：http://api.xxx.com/getInfo?Id=value，这种方式简单粗暴，在浏览器直接输入http://api.xxx.com/getInfo?Id=value，即可获取到相关的信息了，但是这样的方式会存在很严重的安全性问题，没有进行任何的验证，大家都可以通过这个方法获取到产品列表，导致信息泄露。  如何验证调用者身份呢？ 如何防止参数被篡改呢？ 如何保证请求的唯一性？">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/">
+  <link rel="canonical" href="http://yoursite.com/2018/09/08/WebApi的安全性/">
 
 
 
 
 
-  <title>tags | Xxqin's Blog</title>
+  <title>WebApi的安全性 | Xxqin's Blog</title>
   
 
 
@@ -250,40 +251,194 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/08/WebApi的安全性/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">tags</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                5 tags in total
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/Web安全/" style="font-size: 30px; color: #111">Web安全</a> <a href="/tags/操作系统/" style="font-size: 12px; color: #ccc">操作系统</a> <a href="/tags/数据结构/" style="font-size: 30px; color: #111">数据结构</a> <a href="/tags/算法/" style="font-size: 30px; color: #111">算法</a> <a href="/tags/计算机基础/" style="font-size: 30px; color: #111">计算机基础</a>
-            </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">WebApi的安全性</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-08T21:35:51+08:00">
+                2018-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>客户端调用：<code>http://api.xxx.com/getInfo?Id=value</code>，这种方式简单粗暴，在浏览器直接输入<code>http://api.xxx.com/getInfo?Id=value</code>，即可获取到相关的信息了，但是这样的方式会存在很严重的安全性问题，没有进行任何的验证，大家都可以通过这个方法获取到产品列表，导致信息泄露。</p>
+<ol>
+<li>如何验证调用者身份呢？</li>
+<li>如何防止参数被篡改呢？</li>
+<li>如何保证请求的唯一性？</li>
+<li>如何保证请求的唯一性，防止请求被恶意攻击呢？</li>
+</ol>
+<p>使用Token+签名认证（微信支付中有这种思想在里面）</p>
+<ol>
+<li>做一个认证服务，提供一个认证的WebApi，用户先访问它获取对应的Token</li>
+<li>用户拿着相应的Token以及请求的参数和服务器端提供的签名算法计算出签名后再去访问指定的Api</li>
+<li>服务器端每次接收到请求就获取对应用户的Token和请求参数，服务器端再次计算签名和客户端签名做对比，如果验证通过则正常访问相应的Api，验证失败则返回具体的失败信息。</li>
+</ol>
+<p>使用签名（签名算法+签名参数）</p>
+<ol>
+<li>给每个http请求添加一个签名，服务端来验证签名的合法性，如果签名合法则执行响应的操作，如果签名非法则直接拒绝请求。</li>
+<li>签名算法一般都使用Hash散列算法，常用的有MD5，SHA系列算法。这些算法可以根据不同的输入，计算出不同的结果，而且碰撞的概率很低。</li>
+<li>可以用Http请求的queryString然后加上时间戳还有随机数来作为签名的参数。</li>
+</ol>
+<p>WebApi跨域问题解决方案：CORS。什么是跨域问题？</p>
+<ol>
+<li>同源策略：出于安全考虑，浏览器会限制脚本中发起的跨站请求，浏览器要求JavaScript或Cookie只能访问同域下的内容。跨域问题的根本原因是浏览器的安全限制，默认禁止跨域的动态资源请求。</li>
+<li>正是由于这个原因，我们不同项目之间的调用就会被浏览器阻止。比如我们最常见的场景：WebApi作为数据服务层，它是一个单独的项目，我们的MVC项目作为Web的显示层，这个时候我们的MVC里面就需要调用WebApi里面的接口取数据展现在页面上。因为我们的WebApi和MVC是两个不同的项目，所以运行起来之后就存在上面说的跨域的问题。</li>
+</ol>
+<p>还有一篇更好的文章：<a href="https://www.cnblogs.com/codelir/p/5327462.html" target="_blank" rel="noopener">https://www.cnblogs.com/codelir/p/5327462.html</a></p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web安全/" rel="tag"># Web安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/26/计算机思维/" rel="next" title="计算机思维">
+                <i class="fa fa-chevron-left"></i> 计算机思维
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/09/OAuth2/" rel="prev" title="计算机思维">
+                计算机思维 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
