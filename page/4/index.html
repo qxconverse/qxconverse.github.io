@@ -262,179 +262,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/09/OAuth2/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/09/OAuth2/" itemprop="url">计算机思维</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-09T21:27:51+08:00">
-                2018-09-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>OAuth2是一个关于授权的开放网络标准。</p>
-<p>里面的角色主要包括：</p>
-<ol>
-<li>资源所有者（用户）</li>
-<li>用户代理（可以看作是浏览器）</li>
-<li>第三方app（客户端）</li>
-<li>Http服务提供商</li>
-<li>认证服务器</li>
-<li>资源服务器，它与认证服务器可以是一台机器或是不同的机器</li>
-</ol>
-<p>OAuth2在客户端与服务提供商之间加了一个授权层。</p>
-<p>具体步骤如下：</p>
-<ol>
-<li>客户端向用户发送一个认证请求</li>
-<li>用户给客户端授权</li>
-<li>客户端凭借上一步获得的授权，向认证服务器申请令牌</li>
-<li>认证服务器对客户端认证确认无误后，返回给客户端Access Token（令牌）</li>
-<li>客户端凭借令牌向资源服务器申请访问资源</li>
-<li>资源服务器将受保护的资源发送给客户端</li>
-</ol>
-<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g5fx73k59lj30la0bfjre.jpg" alt="bg2014051203"></p>
-<p>最关键的步骤是B，即用户如何给客户端授权，最常用的是授权码模式。</p>
-<p>具体步骤如下：</p>
-<ol>
-<li>用户访问客户端，客户端将用户导向认证服务器</li>
-<li>用户选择是否给客户端授权</li>
-<li>假设用户给予了授权，认证服务器将用户导向客户端事先设置好的重定向URI，并附上一个授权码</li>
-<li>客户端收到授权码，附上早先的”重定向URI”，向认证服务器申请令牌，这一步是在客户端的后台完成的，用户无法感知到</li>
-<li>认证服务器核对了授权码和重定向URI，确认无误后，向客户端返回访问令牌</li>
-</ol>
-<p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g5fx79tin5j30l80epq2u.jpg" alt="2"></p>
-<p>具体的参考博客：<a href="http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/08/WebApi的安全性/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -553,159 +380,6 @@
 <li>正是由于这个原因，我们不同项目之间的调用就会被浏览器阻止。比如我们最常见的场景：WebApi作为数据服务层，它是一个单独的项目，我们的MVC项目作为Web的显示层，这个时候我们的MVC里面就需要调用WebApi里面的接口取数据展现在页面上。因为我们的WebApi和MVC是两个不同的项目，所以运行起来之后就存在上面说的跨域的问题。</li>
 </ol>
 <p>还有一篇更好的文章：<a href="https://www.cnblogs.com/codelir/p/5327462.html" target="_blank" rel="noopener">https://www.cnblogs.com/codelir/p/5327462.html</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/07/Synchronized和Lock/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/07/Synchronized和Lock/" itemprop="url">Synchronized和Lock的区别</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-07T13:48:46+08:00">
-                2018-09-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Synchronized的底层实现是一个monitor锁（监视器锁）。每一个对象都有一个监视器锁。主要方法为monitorenter/monitorexit，每个monitor都有一个进入数的概念，当进入数为0时，线程可以获得该对象的锁。当有其它线程占用了monitor，该线程只能阻塞直到进入数为0，才可以重新尝试获取monitor的所有权。</p>
-<p>synchronized和lock的区别：</p>
-<ol>
-<li>前者依赖于JVM，属于关键字，而Lock（一般使用reentrantlock，多个线程必须要使用一个reentrantlock才会生效）是基于Java语言的，属于并发包里面的一个类。</li>
-<li>前者是悲观锁（独占锁），其它线程会阻塞直到有个线程释放锁。而后者是乐观锁，它主要内容使用的是CAS操作。同时可以在等待的过程中中断。</li>
-<li>前者无法获取锁的状态，而后者可以。</li>
-<li>前者是独占锁，而后者可以是独占，也可以是共享的（比如读写锁中的读锁）</li>
-<li>前者是非公平锁，后者默认也是非公平锁，但是可以设置成公平的。</li>
-</ol>
-<p>关于AQS：<a href="https://mubu.com/edit/1FdAd7oAEG" target="_blank" rel="noopener">https://mubu.com/edit/1FdAd7oAEG</a></p>
-<p>AQS是Lock的核心，叫做抽象队列同步器，里面维持了一个线程阻塞队列存放阻塞了的线程，有一个state变量，用于同步线程之间的共享状态，通过volatile和CAS保证其原子性和可见性。</p>
-<p>参考博客：<a href="https://blog.csdn.net/u012403290/article/details/64910926" target="_blank" rel="noopener">https://blog.csdn.net/u012403290/article/details/64910926</a></p>
 
           
         
@@ -946,6 +620,317 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/07/Synchronized和Lock/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/07/Synchronized和Lock/" itemprop="url">Synchronized和Lock的区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-07T13:48:46+08:00">
+                2018-09-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Synchronized的底层实现是一个monitor锁（监视器锁）。每一个对象都有一个监视器锁。主要方法为monitorenter/monitorexit，每个monitor都有一个进入数的概念，当进入数为0时，线程可以获得该对象的锁。当有其它线程占用了monitor，该线程只能阻塞直到进入数为0，才可以重新尝试获取monitor的所有权。</p>
+<p>synchronized和lock的区别：</p>
+<ol>
+<li>前者依赖于JVM，属于关键字，而Lock（一般使用reentrantlock，多个线程必须要使用一个reentrantlock才会生效）是基于Java语言的，属于并发包里面的一个类。</li>
+<li>前者是悲观锁（独占锁），其它线程会阻塞直到有个线程释放锁。而后者是乐观锁，它主要内容使用的是CAS操作。同时可以在等待的过程中中断。</li>
+<li>前者无法获取锁的状态，而后者可以。</li>
+<li>前者是独占锁，而后者可以是独占，也可以是共享的（比如读写锁中的读锁）</li>
+<li>前者是非公平锁，后者默认也是非公平锁，但是可以设置成公平的。</li>
+</ol>
+<p>关于AQS：<a href="https://mubu.com/edit/1FdAd7oAEG" target="_blank" rel="noopener">https://mubu.com/edit/1FdAd7oAEG</a></p>
+<p>AQS是Lock的核心，叫做抽象队列同步器，里面维持了一个线程阻塞队列存放阻塞了的线程，有一个state变量，用于同步线程之间的共享状态，通过volatile和CAS保证其原子性和可见性。</p>
+<p>参考博客：<a href="https://blog.csdn.net/u012403290/article/details/64910926" target="_blank" rel="noopener">https://blog.csdn.net/u012403290/article/details/64910926</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/Redis/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/03/Redis/" itemprop="url">Redis</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-03T21:30:11+08:00">
+                2018-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>redis的list的底层实现是一个<strong>双向链表</strong>，也可以使用它实现一个简单的消息队列，生产者push，消费者pop。</p>
+<p>hash，类似于python里面的dict，C++里面的unordered_map，Java里面的HashMap。底层实现为HashMap，可以用来存储用户的id及其信息（比如以json格式保存）。</p>
+<p>set的底层实现是一个value值为null的hashmap，它根据hash的方式快速去重。</p>
+<p>sorted set底层实现是hashmap + skiplist。为什么要用2个呢？当进行查询的时候，可以使用hashmap保证其<code>$O(1)$</code>级别的复杂度；而在进行更新操作时，如果只有hashmap，那么需要进行重排，时间复杂度为<code>$O(nlogn)$</code>，而如果加入跳跃表，那么只需要<code>$O(logn)$</code>的复杂度。所以结合使用。</p>
+<p>rdb/aof持久化</p>
+<p><strong>rdb:数据库状态（所有数据库中的所有键值对数据）和rdb文件相互转存，可以看做是快照。文件格式为二进制文件。</strong></p>
+<p>save会阻塞服务器进程，导致其不能处理其它任何命令请求；bgsave会派生出一个子进程去完成，父进程不受影响。可以设置bgsave自动执行的参数（保存条件，当任意一个条件满足，则自动执行），包括时间间隔和修改数。在redis服务器中则保存了上一次保存的时间戳lastsave和距离上次保存总计的修改次数dirty计数器。</p>
+<p><strong>aof:通过保存所有修改数据库的写命令请求来记录服务器的数据库状态。</strong></p>
+<p>aof文件中的所有命令都是以Redis命令请求协议的格式保存。命令请求会先保存到aof缓冲区里面，之后再定期写入并同步到aof文件中。</p>
+<p>Redis的发布/订阅功能</p>
+<p>可以用来订阅频道或是模式</p>
+<ol>
+<li>订阅频道使用的dict（字典），key保存频道，而value保存订阅它的客户端信息。</li>
+<li>订阅模式使用的list（链表），list里面保存了pubsubPattern结构，该结构里面有2个属性，一个是pattern，一个是client（只包含一个client）。</li>
+<li>publish命令会向频道的所有订阅者发消息，并向所有与该频道匹配的模式的订阅者发消息。</li>
+<li>pubsub的3个子命令，channels用来返回当前服务器被订阅的频道；numsub接受多个频道作为参数，并返回这些频道的订阅者数量；numpat返回该服务器所有被订阅模式的数量。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/计算机网络 and 操作系统/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1097,164 +1082,6 @@
 <li>循环等待：循环等待资源</li>
 </ol>
 <h5 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h5><p>打破上述必要条件中的一个或几个</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/Redis/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/03/Redis/" itemprop="url">Redis</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-03T21:30:11+08:00">
-                2018-09-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>redis的list的底层实现是一个<strong>双向链表</strong>，也可以使用它实现一个简单的消息队列，生产者push，消费者pop。</p>
-<p>hash，类似于python里面的dict，C++里面的unordered_map，Java里面的HashMap。底层实现为HashMap，可以用来存储用户的id及其信息（比如以json格式保存）。</p>
-<p>set的底层实现是一个value值为null的hashmap，它根据hash的方式快速去重。</p>
-<p>sorted set底层实现是hashmap + skiplist。为什么要用2个呢？当进行查询的时候，可以使用hashmap保证其<script type="math/tex">O(1)</script>级别的复杂度；而在进行更新操作时，如果只有hashmap，那么需要进行重排，时间复杂度为<script type="math/tex">O(nlogn)</script>，而如果加入跳跃表，那么只需要<script type="math/tex">O(logn)</script>的复杂度。所以结合使用。</p>
-<p>rdb/aof持久化</p>
-<p><strong>rdb:数据库状态（所有数据库中的所有键值对数据）和rdb文件相互转存，可以看做是快照。文件格式为二进制文件。</strong></p>
-<p>save会阻塞服务器进程，导致其不能处理其它任何命令请求；bgsave会派生出一个子进程去完成，父进程不受影响。可以设置bgsave自动执行的参数（保存条件，当任意一个条件满足，则自动执行），包括时间间隔和修改数。在redis服务器中则保存了上一次保存的时间戳lastsave和距离上次保存总计的修改次数dirty计数器。</p>
-<p><strong>aof:通过保存所有修改数据库的写命令请求来记录服务器的数据库状态。</strong></p>
-<p>aof文件中的所有命令都是以Redis命令请求协议的格式保存。命令请求会先保存到aof缓冲区里面，之后再定期写入并同步到aof文件中。</p>
-<p>Redis的发布/订阅功能</p>
-<p>可以用来订阅频道或是模式</p>
-<ol>
-<li>订阅频道使用的dict（字典），key保存频道，而value保存订阅它的客户端信息。</li>
-<li>订阅模式使用的list（链表），list里面保存了pubsubPattern结构，该结构里面有2个属性，一个是pattern，一个是client（只包含一个client）。</li>
-<li>publish命令会向频道的所有订阅者发消息，并向所有与该频道匹配的模式的订阅者发消息。</li>
-<li>pubsub的3个子命令，channels用来返回当前服务器被订阅的频道；numsub接受多个频道作为参数，并返回这些频道的订阅者数量；numpat返回该服务器所有被订阅模式的数量。</li>
-</ol>
 
           
         
@@ -1893,6 +1720,158 @@
 <p>Redis的集群数据库的设计原理很它很相似，说白了。这些是共通的，要联系起来记忆消化。</p>
 <p>当客户端在发送数据给leader后，这时数据属于未提交的状态。首先leader会把数据发给所有的follower等待它们的确认，一旦有超过半数节点给出确认接收的消息后，leader再给客户端发送确认消息，接着再给每个follower节点发送消息表示该数据已经提交了。整个过程很依赖于一致性。即保证所有节点的数据的一致性。</p>
 <p>分布式架构的消息通信方式，主要有基于RPC的和基于消息队列的，还有基于一般的Http请求的。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/18/IO模型/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/18/IO模型/" itemprop="url">IO模型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-18T21:35:51+08:00">
+                2018-08-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="关于5种I-O模型的理解"><a href="#关于5种I-O模型的理解" class="headerlink" title="关于5种I/O模型的理解"></a>关于5种I/O模型的理解</h4><p>以喝咖啡举例， 在网上点了咖啡粉外卖，要等外卖小哥送咖啡，然后泡咖啡，喝咖啡</p>
+<ol>
+<li>阻塞式I/O：一直站在家里等咖啡（其它什么事不做）送到，然后泡咖啡</li>
+<li>非阻塞式I/O：不停地给外卖小哥打电话（其它什么事不做），送到后泡咖啡</li>
+<li>IO多路复用：一开始和小哥说好，到了后打电话，同时站在家里等（于此同时，他还在等其它的外卖，也是什么事不做），一旦咖啡到了，就泡咖啡</li>
+<li>信号驱动式IO：干自己的事情，外卖小哥到了后打电话让你取咖啡，然后你泡咖啡</li>
+<li>异步IO：一直干自己的事情，整个事情都让女朋友来做，做好了通知自己过去喝</li>
+</ol>
+<p>前面3种提到的IO都是同步的，与之相对应的是异步IO。这是一个维度，还有一个是阻塞的维度。传统的是阻塞的IO，不管是C端还是S端，都是阻塞的。接着是非阻塞的IO，主要通过C端的轮询来实现。后面的多路复用，它也是非阻塞的，通过选择器和通道来实现。主要采用的是反应器（Reactor）模式。涉及到事件的注册和订阅。</p>
+<p>很早很早之前，Java的api只支持由本地系统套接字库提供的阻塞函数。阻塞体现在服务器端的监听过程，直到有新的连接，这时就建立一个双方通信的socket。接着它继续监听。其缺点是只能同时处理一个连接，要管理多个并发的客户端连接，需要开启多个线程。</p>
+<p>下面是核心的服务端代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ServerSocket serverSocket = <span class="keyword">new</span> ServerSocket(<span class="number">8888</span>);</span><br><span class="line">Socket socket = serverSocket.accept();</span><br><span class="line">BufferedReader in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</span><br><span class="line">PrintWriter out = <span class="keyword">new</span> PrintWriter(socket.getOutputStream(), <span class="keyword">true</span>);</span><br><span class="line">String request, response;</span><br><span class="line"><span class="keyword">while</span> ((request = in.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">"OK"</span>.equals(request)) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    response = processRequest(request);</span><br><span class="line">    out.println(response);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
           
         
