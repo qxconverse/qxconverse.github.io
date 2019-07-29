@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/java中的单例模式/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/Java中的序列化/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -291,7 +291,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/17/java中的单例模式/" itemprop="url">Java中的单例模式</a></h1>
+                <a class="post-title-link" href="/2018/08/17/Java中的序列化/" itemprop="url">Java中的序列化</a></h1>
         
 
         <div class="post-meta">
@@ -357,7 +357,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  157
+                  92
                 </span>
               
 
@@ -396,23 +396,13 @@
       
         
           
-            <p>参考博客：<a href="http://cantellow.iteye.com/blog/838473" target="_blank" rel="noopener">http://cantellow.iteye.com/blog/838473</a></p>
-<p>单例模式的优缺点及使用场景：<a href="http://www.cnblogs.com/damsoft/p/6105122.html" target="_blank" rel="noopener">http://www.cnblogs.com/damsoft/p/6105122.html</a></p>
-<p>优点：</p>
+            <p>Java中的序列化和反序列化（以字节流的形式传播）的优点在于：</p>
 <ol>
-<li>避免对共享资源的多重占用</li>
-<li>节约系统资源</li>
-<li>对唯一实例的受控访问</li>
-<li>可以控制实例的数目</li>
+<li>可以持久化</li>
+<li>便于网络间的通信</li>
 </ol>
-<p>缺点：</p>
-<ol>
-<li>职责过重，违反了“单一职责原则”</li>
-<li>单例模式中没有抽象层，不方便扩展</li>
-<li>可能会导致内存溢出</li>
-<li>周期过长，可能被垃圾回收</li>
-</ol>
-<p> 一般采用饿汉式，若对资源十分在意可以采用静态内部类，不建议采用懒汉式及双重检测 </p>
+<p>Java中使用ObjectOutputStream类里面的writeObject将对象序列化为字节序列，而ObjectInputStream类里面的readObject将字节序列反序列化为对象。</p>
+<p>但是声明为static和transient的成员数据不能实例化。</p>
 
           
         
@@ -461,7 +451,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/mybatis相关/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/浏览器访问网页的整个流程/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -480,7 +470,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/17/mybatis相关/" itemprop="url">Mybatis相关</a></h1>
+                <a class="post-title-link" href="/2018/08/17/浏览器访问网页的整个流程/" itemprop="url">浏览器访问网页的流程</a></h1>
         
 
         <div class="post-meta">
@@ -546,7 +536,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  94
+                  0
                 </span>
               
 
@@ -585,12 +575,193 @@
       
         
           
-            <p>mybatis中<code>#</code>和<code>$</code>的区别</p>
-<p><code>#</code>会进行预编译，按照类型匹配的，用于变量替换。</p>
-<p><code>$</code>不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它</p>
-<p>如果两个都可以用，最好用#</p>
-<p>select的时候一定要加resultType或者resultMap，否则报错</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&gt;</span><br><span class="line">    xxx</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+            <p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5fxc5ye7jj30mv0olgoz.jpg" alt="TIM截图20181105110628"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/Java abstract class和interface/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/17/Java abstract class和interface/" itemprop="url">Java抽象类和接口的区别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-17T13:48:46+08:00">
+                2018-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  251
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>两者的共同点：</p>
+<ol>
+<li>都可以实现抽象化，都不能实例化</li>
+<li>interface的实现类以及abstract class的子类都需要实现已经声明的抽象方法</li>
+</ol>
+<p>区别：</p>
+<ol>
+<li>一个类可以实现多个interface，而只能继承一个抽象类</li>
+<li>interface强调特定功能的实现，而abstract class强调所属关系，所以interface设计思想是like-a，而abstract class的设计思想是is-a</li>
+<li>interface不能有自己的私有变量和方法，而abstract class可以有</li>
+<li>interface里面的所有方法都是抽象方法，实现类必须实现，而abstract class的子类可以有选择地实现。具体是，abstract class中的类不都是抽象方法，抽象方法子类必须实现，而非抽象方法，它自己实现。而且对于抽象方法，子类可以选择继续让它抽象，由该子类的子类去实现，这是该子类必须也声明为abstract class。</li>
+</ol>
+<p>参考博客：<a href="https://blog.csdn.net/b271737818/article/details/3950245" target="_blank" rel="noopener">https://blog.csdn.net/b271737818/article/details/3950245</a></p>
+
           
         
       
@@ -775,6 +946,7 @@
 <p>但凡涉及到内存，首先就要想到堆和栈。毕竟从本科的时候起，老师们就开始一直灌输这些了。什么栈溢出，堆溢出。其实，说白了，就是递归的深度超过了一定的数目，和内存不够分配了。一个说的是纵向，一个是横线。类比于算法中的广度优先与深度优先，深度优先搜索使用的一定是栈，因为涉及到递归；而广度优先搜索使用到的是队列，它涉及到堆。</p>
 <p>仔细思考一下，在C/C++中，是否记得一般的运行时局部变量是存放在栈中的，而程序员申请的空间是存放在堆中的。堆位于地址较高的地方，而栈位于较低的地方。一样的啊！！！Java也是这个套路，虚拟机栈和本地方法栈就是为此服务的，只不过一个给Java方法服务，而另外一个给本地方法（Native）服务！</p>
 <p>其实宏观地可以结合算法和数据结构以及计算机体系来理解这些，如下：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -795,10 +967,11 @@
 <td>堆区（内存中非连续）</td>
 <td>广度优先搜索</td>
 <td>堆（heap），优先队列（基于堆）</td>
-<td>—-</td>
+<td>——</td>
 </tr>
 </tbody>
 </table>
+</div>
 <p>看到了吧，其实并没有想象中的那么难以记忆，关键在于总结和联想！！</p>
 <p>再来看看垃圾回收机制吧！</p>
 <p>垃圾回收说白了就是针对堆的，仔细想想，java中所有的对象都是存放在堆中的，所以这个地方是最需要进行垃圾回收的。这个时候就要问自己几个问题，第一，什么时候要回收？第二，怎么回收？<br>关于垃圾回收的方法主要有3种：</p>
@@ -862,7 +1035,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/浏览器访问网页的整个流程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/Git与SVN操作/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -881,7 +1054,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/17/浏览器访问网页的整个流程/" itemprop="url">浏览器访问网页的流程</a></h1>
+                <a class="post-title-link" href="/2018/07/17/Git与SVN操作/" itemprop="url">Git与SVN相关的操作</a></h1>
         
 
         <div class="post-meta">
@@ -893,8 +1066,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-17T13:48:46+08:00">
-                2018-08-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T12:09:52+08:00">
+                2018-07-17
               </time>
             
 
@@ -947,7 +1120,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0
+                  845
                 </span>
               
 
@@ -963,7 +1136,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  3
                 </span>
               
             </div>
@@ -986,7 +1159,38 @@
       
         
           
-            <p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5fxc5ye7jj30mv0olgoz.jpg" alt="TIM截图20181105110628"></p>
+            <h4 id="Git的学习"><a href="#Git的学习" class="headerlink" title="Git的学习"></a>Git的学习</h4><p>git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。</p>
+<p>先手动删除文件，然后使用<code>git rm &lt;file&gt;</code>和<code>git add &lt;file&gt;</code>效果是一样的。</p>
+<p>切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。</p>
+<p>Git鼓励大量使用分支：</p>
+<p>查看分支：<code>git branch</code></p>
+<p>创建分支：<code>git branch &lt;name&gt;</code></p>
+<p>切换分支：<code>git checkout &lt;name&gt;</code></p>
+<p>创建+切换分支：<code>git checkout -b &lt;name&gt;</code></p>
+<p>合并某分支到当前分支：<code>git merge &lt;name&gt;</code></p>
+<p>删除分支：<code>git branch -d &lt;name&gt;</code></p>
+<p>合并分支时，加上<code>--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。</p>
+<p>新建分支的时候，一定要注意是在哪个分支上建立的。</p>
+<p>在实际开发中，我们应该按照几个基本原则进行分支管理：</p>
+<p>首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；我们每个人都有自己的分支，时不时地往dev分支上合并就可以了。</p>
+<p>所以，团队合作的分支看起来就像这样：</p>
+<p>当修改完bug分支后，要及时地在master上删除该分支，如果切换到dev分支上再删除bug分支，就会报错。</p>
+<p>通常涉及到多个人开发，比如A和B。B从github上clone了项目。并且新建并切换到dev分支了。</p>
+<p>这个时候A（你）和B（你的小伙伴）对同一个文件进行了修改，发生了冲突。假设B先push了，而你后面想push，就会发生错误。所以可以先pull一下。pull也可能失败，原因是没有指定本地dev分支与远程origin/dev分支的链接，根据提示，设置dev和origin/dev的链接：<br><code>git branch --set-upstream-to=origin/dev dev</code></p>
+<p>这回pull成功，但是合并有冲突，需要手动解决，解决的方法和分支管理中的解决冲突完全一样。解决后，add，ci,再push。这样就完美解决了冲突。</p>
+<p>这时B如果要再次编辑，首先需要pull一下。然后再进行后续操作。如果他不pull，push后有冲突，那么解决方法同上A所做的。</p>
+<p>git中对比2个版本之间的改动，比如下面的例子</p>
+<p> <code>git diff xxx1 xxx2 --stat</code></p>
+<p>在add之前，查看修改了哪些代码，很实用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD (filename)</span><br></pre></td></tr></table></figure>
+<p>修改了冲突后，记得add，commit，pull然后再push</p>
+<p>在pull的时候，如果本地有修改过的，那么可以强制恢复到上一次提交的位置。</p>
+<p>关于svn的一些操作：</p>
+<p><code>svn info</code></p>
+<p><code>svn copy</code>，用于新建分支</p>
+<p><code>svn sw</code>，切换分支</p>
+<p>上传文件到linux的命令：<code>rz</code></p>
+<p>解决git pull/push每次都需要输入密码问题：<a href="https://blog.csdn.net/nongweiyilady/article/details/77772602" target="_blank" rel="noopener">https://blog.csdn.net/nongweiyilady/article/details/77772602</a></p>
 
           
         
@@ -1399,210 +1603,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/Git与SVN操作/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/17/Git与SVN操作/" itemprop="url">Git与SVN相关的操作</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T12:09:52+08:00">
-                2018-07-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  845
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Git的学习"><a href="#Git的学习" class="headerlink" title="Git的学习"></a>Git的学习</h4><p>git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。</p>
-<p>先手动删除文件，然后使用<code>git rm &lt;file&gt;</code>和<code>git add &lt;file&gt;</code>效果是一样的。</p>
-<p>切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。</p>
-<p>Git鼓励大量使用分支：</p>
-<p>查看分支：<code>git branch</code></p>
-<p>创建分支：<code>git branch &lt;name&gt;</code></p>
-<p>切换分支：<code>git checkout &lt;name&gt;</code></p>
-<p>创建+切换分支：<code>git checkout -b &lt;name&gt;</code></p>
-<p>合并某分支到当前分支：<code>git merge &lt;name&gt;</code></p>
-<p>删除分支：<code>git branch -d &lt;name&gt;</code></p>
-<p>合并分支时，加上<code>--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。</p>
-<p>新建分支的时候，一定要注意是在哪个分支上建立的。</p>
-<p>在实际开发中，我们应该按照几个基本原则进行分支管理：</p>
-<p>首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；我们每个人都有自己的分支，时不时地往dev分支上合并就可以了。</p>
-<p>所以，团队合作的分支看起来就像这样：</p>
-<p>当修改完bug分支后，要及时地在master上删除该分支，如果切换到dev分支上再删除bug分支，就会报错。</p>
-<p>通常涉及到多个人开发，比如A和B。B从github上clone了项目。并且新建并切换到dev分支了。</p>
-<p>这个时候A（你）和B（你的小伙伴）对同一个文件进行了修改，发生了冲突。假设B先push了，而你后面想push，就会发生错误。所以可以先pull一下。pull也可能失败，原因是没有指定本地dev分支与远程origin/dev分支的链接，根据提示，设置dev和origin/dev的链接：<br><code>git branch --set-upstream-to=origin/dev dev</code></p>
-<p>这回pull成功，但是合并有冲突，需要手动解决，解决的方法和分支管理中的解决冲突完全一样。解决后，add，ci,再push。这样就完美解决了冲突。</p>
-<p>这时B如果要再次编辑，首先需要pull一下。然后再进行后续操作。如果他不pull，push后有冲突，那么解决方法同上A所做的。</p>
-<p>git中对比2个版本之间的改动，比如下面的例子</p>
-<p> <code>git diff xxx1 xxx2 --stat</code></p>
-<p>在add之前，查看修改了哪些代码，很实用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD (filename)</span><br></pre></td></tr></table></figure>
-<p>修改了冲突后，记得add，commit，pull然后再push</p>
-<p>在pull的时候，如果本地有修改过的，那么可以强制恢复到上一次提交的位置。</p>
-<p>关于svn的一些操作：</p>
-<p><code>svn info</code></p>
-<p><code>svn copy</code>，用于新建分支</p>
-<p><code>svn sw</code>，切换分支</p>
-<p>上传文件到linux的命令：<code>rz</code></p>
-<p>解决git pull/push每次都需要输入密码问题：<a href="https://blog.csdn.net/nongweiyilady/article/details/77772602" target="_blank" rel="noopener">https://blog.csdn.net/nongweiyilady/article/details/77772602</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/top-down思维/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1736,7 +1736,7 @@
 </ol>
 <p>关于这一点，有一个很好的例子，就是群面的时候，当面试官给出题目并要求在规定时间内给出一个结果的时候。总是要有一位同学带领大家，起到统筹的作用。其实他的任务很简单，就是告诉大家：我们的时间有多少（并且他要安排某个人计时），要讨论出什么东西。那么时间分配该怎样。而且对于讨论该给出的答案要包括哪几个小点。每位同学只能发言多久时间。最后由谁来总结汇报给面试官。</p>
 <p>看到没有，他做的就是从宏观上给出时间规划和任务安排。设想没有这个人，大家在底下，你一句，我一句，最后一定会乱套，而且结果还不一定能讨论出来！！（或是超时，或是统一不了结果）</p>
-<ol start="3">
+<ol>
 <li>有了宏观把控后，具体做的时候，就能理清思路，这个点应该出现在哪一个步骤，而不应该出现在哪个步骤。这样做起来更加自信高效。</li>
 </ol>
 <p>所以，一定要养成这个习惯，一定要逼迫自己这样做，因为真的极其重要！！！</p>

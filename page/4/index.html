@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/07/Synchronized和Lock/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/07/java中锁的分类/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -291,7 +291,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/07/Synchronized和Lock/" itemprop="url">Synchronized和Lock的区别</a></h1>
+                <a class="post-title-link" href="/2018/09/07/java中锁的分类/" itemprop="url">Java中锁的分类</a></h1>
         
 
         <div class="post-meta">
@@ -357,7 +357,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  377
+                  949
                 </span>
               
 
@@ -373,7 +373,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  3
                 </span>
               
             </div>
@@ -396,18 +396,57 @@
       
         
           
-            <p>Synchronized的底层实现是一个monitor锁（监视器锁）。每一个对象都有一个监视器锁。主要方法为monitorenter/monitorexit，每个monitor都有一个进入数的概念，当进入数为0时，线程可以获得该对象的锁。当有其它线程占用了monitor，该线程只能阻塞直到进入数为0，才可以重新尝试获取monitor的所有权。</p>
-<p>synchronized和lock的区别：</p>
+            <p>公平锁、非公平锁</p>
 <ol>
-<li>前者依赖于JVM，属于关键字，而Lock（一般使用reentrantlock，多个线程必须要使用一个reentrantlock才会生效）是基于Java语言的，属于并发包里面的一个类。</li>
-<li>前者是悲观锁（独占锁），其它线程会阻塞直到有个线程释放锁。而后者是乐观锁，它主要内容使用的是CAS操作。同时可以在等待的过程中中断。</li>
-<li>前者无法获取锁的状态，而后者可以。</li>
-<li>前者是独占锁，而后者可以是独占，也可以是共享的（比如读写锁中的读锁）</li>
-<li>前者是非公平锁，后者默认也是非公平锁，但是可以设置成公平的。</li>
+<li>公平锁：按照申请锁的顺序来获取锁</li>
+<li>非公平锁：多个线程获取锁的顺序并不是按照申请锁的顺序，有可能后申请的线程比先申请的线程优先获取锁。有可能，会造成优先级反转或者饥饿现象</li>
+<li>ReentrantLock，可以是公平的，也可以是非公平的。默认为非公平。Synchronized，非公平锁</li>
 </ol>
-<p>关于AQS：<a href="https://mubu.com/edit/1FdAd7oAEG" target="_blank" rel="noopener">https://mubu.com/edit/1FdAd7oAEG</a></p>
-<p>AQS是Lock的核心，叫做抽象队列同步器，里面维持了一个线程阻塞队列存放阻塞了的线程，有一个state变量，用于同步线程之间的共享状态，通过volatile和CAS保证其原子性和可见性。</p>
-<p>参考博客：<a href="https://blog.csdn.net/u012403290/article/details/64910926" target="_blank" rel="noopener">https://blog.csdn.net/u012403290/article/details/64910926</a></p>
+<p>可重入锁</p>
+<ol>
+<li>又名递归锁，指在同一个线程在外层方法获取锁的时候，在进入内层方法会自动获取锁</li>
+</ol>
+<p>独享锁、共享锁</p>
+<ol>
+<li>独享锁：该锁一次只能被一个线程所持有</li>
+<li>共享锁：该锁可以被多个线程所持有</li>
+<li>ReentrantLock，为独享锁。但是ReadWriteLock，其读锁是共享锁，而写锁是独享锁。读锁的共享锁保证了并发读是非常高效的；读写，写写的过程是互斥的</li>
+<li>Synchronized，为独享锁</li>
+</ol>
+<p>互斥锁、读写锁</p>
+<ol>
+<li>上面讲的独享锁、共享锁是一种广义的说法，互斥锁、读写锁是具体的实现</li>
+<li>互斥锁在Java中的具体实现：ReentrantLock</li>
+<li>读写锁在Java中的具体实现：ReadWriteLock</li>
+</ol>
+<p>乐观锁、悲观锁</p>
+<ol>
+<li>不是具体的锁，而是指看待并发同步的角度</li>
+<li>悲观锁认为，不加锁的并发操作一定会出现问题</li>
+<li>乐观锁认为，不加锁的并发操作是没有事情的</li>
+<li>悲观锁适合写操作非常多的场景，乐观锁适合读操作非常多的场景，不加锁会带来大量的性能提升</li>
+<li>悲观锁在Java中的使用，就是利用各种锁</li>
+<li>乐观锁在Java中的使用，是无锁编程，常常采用的是CAS算法，典型的例子就是原子类，通过CAS自旋实现原子操作的更新</li>
+</ol>
+<p>分段锁</p>
+<ol>
+<li>是一种锁的设计，并不是具体的锁</li>
+<li>ConcurrentHashMap的并发就是通过分段锁的形式来实现高效的并发操作</li>
+<li>ConcurrentHashMap中的分段锁称为Segment，其继承自ReentrantLock，它类似于HashMap的结构，内部拥有一个Entry数组，数组中的每个元素又是一个链表</li>
+<li>put的时候，不是对整个hashmap进行加锁，而是先通过hashcode来知道它要放在哪一个分段中，然后对这个分段进行加锁。所以当多线程put的时候，只要不是放在一个分段中，就实现了真正的并行插入</li>
+<li>在统计size的时候，就要获取hashmap的全局信息，这时需要获取所有分段的锁才能统计</li>
+</ol>
+<p>偏向锁、轻量级锁、重量级锁（锁的升级）</p>
+<ol>
+<li>锁的状态，针对Synchronized</li>
+<li>偏向锁是指一段同步代码一直被一个线程所访问，那么该线程会自动获取锁。降低获取锁的代价</li>
+<li>轻量级锁是指当锁是偏向锁的时候，被另一个线程所访问，偏向锁就会升级为轻量级锁，其他线程会通过自旋的形式尝试获取锁，不会阻塞，提高性能</li>
+<li>重量级锁是指当锁为轻量级锁的时候，另一个线程虽然是自旋，但自旋不会一直持续下去，当自旋一定次数的时候，还没有获取到锁，就会进入阻塞，该锁膨胀为重量级锁。重量级锁会让其他申请的线程进入阻塞，性能降低</li>
+</ol>
+<p>自旋锁（忙等待）</p>
+<ol>
+<li>在Java中，自旋锁是指尝试获取锁的线程不会立即阻塞，而是采用循环的方式去尝试获取锁，这样的好处是减少线程上下文切换的消耗，缺点是循环会消耗CPU</li>
+</ol>
 
           
         
@@ -771,7 +810,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  644
+                  643
                 </span>
               
 
@@ -813,7 +852,7 @@
             <p>redis的list的底层实现是一个<strong>双向链表</strong>，也可以使用它实现一个简单的消息队列，生产者push，消费者pop。</p>
 <p>hash，类似于python里面的dict，C++里面的unordered_map，Java里面的HashMap。底层实现为HashMap，可以用来存储用户的id及其信息（比如以json格式保存）。</p>
 <p>set的底层实现是一个value值为null的hashmap，它根据hash的方式快速去重。</p>
-<p>sorted set底层实现是hashmap + skiplist。为什么要用2个呢？当进行查询的时候，可以使用hashmap保证其<code>$O(1)$</code>级别的复杂度；而在进行更新操作时，如果只有hashmap，那么需要进行重排，时间复杂度为<code>$O(nlogn)$</code>，而如果加入跳跃表，那么只需要<code>$O(logn)$</code>的复杂度。所以结合使用。</p>
+<p>sorted set底层实现是hashmap + skiplist。为什么要用2个呢？当进行查询的时候，可以使用hashmap保证其<script type="math/tex">O(1)</script>级别的复杂度；而在进行更新操作时，如果只有hashmap，那么需要进行重排，时间复杂度为<script type="math/tex">O(nlogn)</script>，而如果加入跳跃表，那么只需要<script type="math/tex">O(logn)</script>的复杂度。所以结合使用。</p>
 <p>rdb/aof持久化</p>
 <p><strong>rdb:数据库状态（所有数据库中的所有键值对数据）和rdb文件相互转存，可以看做是快照。文件格式为二进制文件。</strong></p>
 <p>save会阻塞服务器进程，导致其不能处理其它任何命令请求；bgsave会派生出一个子进程去完成，父进程不受影响。可以设置bgsave自动执行的参数（保存条件，当任意一个条件满足，则自动执行），包括时间间隔和修改数。在redis服务器中则保存了上一次保存的时间戳lastsave和距离上次保存总计的修改次数dirty计数器。</p>
@@ -1820,7 +1859,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/Java abstract class和interface/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/mybatis相关/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -1839,7 +1878,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/17/Java abstract class和interface/" itemprop="url">Java抽象类和接口的区别</a></h1>
+                <a class="post-title-link" href="/2018/08/17/mybatis相关/" itemprop="url">Mybatis相关</a></h1>
         
 
         <div class="post-meta">
@@ -1905,7 +1944,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  251
+                  94
                 </span>
               
 
@@ -1944,20 +1983,12 @@
       
         
           
-            <p>两者的共同点：</p>
-<ol>
-<li>都可以实现抽象化，都不能实例化</li>
-<li>interface的实现类以及abstract class的子类都需要实现已经声明的抽象方法</li>
-</ol>
-<p>区别：</p>
-<ol>
-<li>一个类可以实现多个interface，而只能继承一个抽象类</li>
-<li>interface强调特定功能的实现，而abstract class强调所属关系，所以interface设计思想是like-a，而abstract class的设计思想是is-a</li>
-<li>interface不能有自己的私有变量和方法，而abstract class可以有</li>
-<li>interface里面的所有方法都是抽象方法，实现类必须实现，而abstract class的子类可以有选择地实现。具体是，abstract class中的类不都是抽象方法，抽象方法子类必须实现，而非抽象方法，它自己实现。而且对于抽象方法，子类可以选择继续让它抽象，由该子类的子类去实现，这是该子类必须也声明为abstract class。</li>
-</ol>
-<p>参考博客：<a href="https://blog.csdn.net/b271737818/article/details/3950245" target="_blank" rel="noopener">https://blog.csdn.net/b271737818/article/details/3950245</a></p>
-
+            <p>mybatis中<code>#</code>和<code>$</code>的区别</p>
+<p><code>#</code>会进行预编译，按照类型匹配的，用于变量替换。</p>
+<p><code>$</code>不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它</p>
+<p>如果两个都可以用，最好用#</p>
+<p>select的时候一定要加resultType或者resultMap，否则报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&gt;</span><br><span class="line">    xxx</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -2005,7 +2036,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/Java中的序列化/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/java中的单例模式/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -2024,7 +2055,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/17/Java中的序列化/" itemprop="url">Java中的序列化</a></h1>
+                <a class="post-title-link" href="/2018/08/17/java中的单例模式/" itemprop="url">Java中的单例模式</a></h1>
         
 
         <div class="post-meta">
@@ -2090,7 +2121,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  92
+                  157
                 </span>
               
 
@@ -2129,13 +2160,23 @@
       
         
           
-            <p>Java中的序列化和反序列化（以字节流的形式传播）的优点在于：</p>
+            <p>参考博客：<a href="http://cantellow.iteye.com/blog/838473" target="_blank" rel="noopener">http://cantellow.iteye.com/blog/838473</a></p>
+<p>单例模式的优缺点及使用场景：<a href="http://www.cnblogs.com/damsoft/p/6105122.html" target="_blank" rel="noopener">http://www.cnblogs.com/damsoft/p/6105122.html</a></p>
+<p>优点：</p>
 <ol>
-<li>可以持久化</li>
-<li>便于网络间的通信</li>
+<li>避免对共享资源的多重占用</li>
+<li>节约系统资源</li>
+<li>对唯一实例的受控访问</li>
+<li>可以控制实例的数目</li>
 </ol>
-<p>Java中使用ObjectOutputStream类里面的writeObject将对象序列化为字节序列，而ObjectInputStream类里面的readObject将字节序列反序列化为对象。</p>
-<p>但是声明为static和transient的成员数据不能实例化。</p>
+<p>缺点：</p>
+<ol>
+<li>职责过重，违反了“单一职责原则”</li>
+<li>单例模式中没有抽象层，不方便扩展</li>
+<li>可能会导致内存溢出</li>
+<li>周期过长，可能被垃圾回收</li>
+</ol>
+<p> 一般采用饿汉式，若对资源十分在意可以采用静态内部类，不建议采用懒汉式及双重检测 </p>
 
           
         
