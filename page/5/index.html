@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh">
+<html class="theme-next mist use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -85,7 +85,7 @@
 <meta property="og:url" content="http://yoursite.com/page/5/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
 <meta property="og:description" content="现在就要幸福">
-<meta property="og:locale" content="zh">
+<meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Xxqin&#39;s Blog">
 <meta name="twitter:description" content="现在就要幸福">
@@ -104,7 +104,7 @@
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
-      author: 'Author'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -136,7 +136,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/java虚拟机/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/mybatis相关/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -291,7 +291,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/17/java虚拟机/" itemprop="url">Java虚拟机</a></h1>
+                <a class="post-title-link" href="/2018/08/17/mybatis相关/" itemprop="url">Mybatis相关</a></h1>
         
 
         <div class="post-meta">
@@ -301,9 +301,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-17T13:48:46+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-17T13:48:46+08:00">
                 2018-08-17
               </time>
             
@@ -322,7 +322,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -354,9 +354,554 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                  <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="Words count in article">
+                <span title="字数统计">
+                  94
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>mybatis中<code>#</code>和<code>$</code>的区别</p>
+<p><code>#</code>会进行预编译，按照类型匹配的，用于变量替换。</p>
+<p><code>$</code>不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它</p>
+<p>如果两个都可以用，最好用#</p>
+<p>select的时候一定要加resultType或者resultMap，否则报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&gt;</span><br><span class="line">    xxx</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/java中的单例模式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/17/java中的单例模式/" itemprop="url">Java中的单例模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-17T13:48:46+08:00">
+                2018-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  157
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考博客：<a href="http://cantellow.iteye.com/blog/838473" target="_blank" rel="noopener">http://cantellow.iteye.com/blog/838473</a></p>
+<p>单例模式的优缺点及使用场景：<a href="http://www.cnblogs.com/damsoft/p/6105122.html" target="_blank" rel="noopener">http://www.cnblogs.com/damsoft/p/6105122.html</a></p>
+<p>优点：</p>
+<ol>
+<li>避免对共享资源的多重占用</li>
+<li>节约系统资源</li>
+<li>对唯一实例的受控访问</li>
+<li>可以控制实例的数目</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>职责过重，违反了“单一职责原则”</li>
+<li>单例模式中没有抽象层，不方便扩展</li>
+<li>可能会导致内存溢出</li>
+<li>周期过长，可能被垃圾回收</li>
+</ol>
+<p> 一般采用饿汉式，若对资源十分在意可以采用静态内部类，不建议采用懒汉式及双重检测 </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/Java中的序列化/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/17/Java中的序列化/" itemprop="url">Java中的序列化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-17T13:48:46+08:00">
+                2018-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  92
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Java中的序列化和反序列化（以字节流的形式传播）的优点在于：</p>
+<ol>
+<li>可以持久化</li>
+<li>便于网络间的通信</li>
+</ol>
+<p>Java中使用ObjectOutputStream类里面的writeObject将对象序列化为字节序列，而ObjectInputStream类里面的readObject将字节序列反序列化为对象。</p>
+<p>但是声明为static和transient的成员数据不能实例化。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/java虚拟机/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/17/java虚拟机/" itemprop="url">Java虚拟机</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-17T13:48:46+08:00">
+                2018-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
                   943
                 </span>
               
@@ -370,9 +915,9 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="Reading time">
+                <span title="阅读时长">
                   3
                 </span>
               
@@ -496,7 +1041,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/浏览器访问网页的整个流程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/python相关的/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -515,7 +1060,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/17/浏览器访问网页的整个流程/" itemprop="url">浏览器访问网页的流程</a></h1>
+                <a class="post-title-link" href="/2018/07/17/python相关的/" itemprop="url">python相关的</a></h1>
         
 
         <div class="post-meta">
@@ -525,10 +1070,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-17T13:48:46+08:00">
-                2018-08-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T12:09:52+08:00">
+                2018-07-17
               </time>
             
 
@@ -546,7 +1091,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -578,10 +1123,10 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                  <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="Words count in article">
-                  0
+                <span title="字数统计">
+                  289
                 </span>
               
 
@@ -594,9 +1139,9 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="Reading time">
+                <span title="阅读时长">
                   1
                 </span>
               
@@ -620,375 +1165,15 @@
       
         
           
-            <p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5fxc5ye7jj30mv0olgoz.jpg" alt="TIM截图20181105110628"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/java中的单例模式/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/17/java中的单例模式/" itemprop="url">Java中的单例模式</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-17T13:48:46+08:00">
-                2018-08-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  157
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>参考博客：<a href="http://cantellow.iteye.com/blog/838473" target="_blank" rel="noopener">http://cantellow.iteye.com/blog/838473</a></p>
-<p>单例模式的优缺点及使用场景：<a href="http://www.cnblogs.com/damsoft/p/6105122.html" target="_blank" rel="noopener">http://www.cnblogs.com/damsoft/p/6105122.html</a></p>
-<p>优点：</p>
-<ol>
-<li>避免对共享资源的多重占用</li>
-<li>节约系统资源</li>
-<li>对唯一实例的受控访问</li>
-<li>可以控制实例的数目</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>职责过重，违反了“单一职责原则”</li>
-<li>单例模式中没有抽象层，不方便扩展</li>
-<li>可能会导致内存溢出</li>
-<li>周期过长，可能被垃圾回收</li>
-</ol>
-<p> 一般采用饿汉式，若对资源十分在意可以采用静态内部类，不建议采用懒汉式及双重检测 </p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/Java中的序列化/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/17/Java中的序列化/" itemprop="url">Java中的序列化</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-17T13:48:46+08:00">
-                2018-08-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  92
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Java中的序列化和反序列化（以字节流的形式传播）的优点在于：</p>
-<ol>
-<li>可以持久化</li>
-<li>便于网络间的通信</li>
-</ol>
-<p>Java中使用ObjectOutputStream类里面的writeObject将对象序列化为字节序列，而ObjectInputStream类里面的readObject将字节序列反序列化为对象。</p>
-<p>但是声明为static和transient的成员数据不能实例化。</p>
+            <h4 id="mac下安装opencv3"><a href="#mac下安装opencv3" class="headerlink" title="mac下安装opencv3"></a>mac下安装opencv3</h4><p>一开始用的brew，但是给我下了py2.7和py3.7，而我的python是anaconda3.5，所以干脆用conda安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XFade@qx:~$ conda install -c menpo opencv3</span><br></pre></td></tr></table></figure>
+<p>这样就可以<code>import cv2</code>了</p>
+<h4 id="mac下安装tensorflow"><a href="#mac下安装tensorflow" class="headerlink" title="mac下安装tensorflow"></a>mac下安装tensorflow</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">XFade@qx:~$ conda info --envs</span><br><span class="line">XFade@qx:~$ conda create -n tensorflow python=3.5</span><br><span class="line">XFade@qx:~$ conda info --envs</span><br></pre></td></tr></table></figure>
+<p>后面安装完成后，需要在环境中使用才行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">XFade@qx:~$ source activate tensorflow</span><br><span class="line">(tensorflow) XFade@qx:~$ python</span><br><span class="line">Python 3.5.4 |Continuum Analytics, Inc.| (default, Aug 14 2017, 12:43:10)</span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.57)] on darwin</span><br><span class="line">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span><br><span class="line">&gt;&gt;&gt; import tensorflow as tf</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">// 激活环境</span><br><span class="line">$ source activate tensorflow</span><br><span class="line">// 关闭环境</span><br><span class="line">$ source deactivate</span><br></pre></td></tr></table></figure>
+<p>参考文章：<a href="https://www.jianshu.com/p/d54546ab315e" target="_blank" rel="noopener">https://www.jianshu.com/p/d54546ab315e</a></p>
+<p>当激活了这个环境后，之前安装的很多库就用不了了，只能用该环境下的包。</p>
+<h4 id="python的lambda操作"><a href="#python的lambda操作" class="headerlink" title="python的lambda操作"></a>python的lambda操作</h4><p>按照2个标准来排序，<code>lambda x: [-x[0], x[1]]</code>表示按照第一个数降序，按照第二个数升序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">people = [[9, 0], [7, 0], [1, 9], [3, 0], [2, 7], [5, 3], [6, 0], [3, 4], [6, 2], [5, 2]]</span><br><span class="line">people.sort(key=lambda x: [-x[0], x[1]])</span><br><span class="line"># output</span><br><span class="line"># [[9, 0], [7, 0], [6, 0], [6, 2], [5, 2], [5, 3], [3, 0], [3, 4], [2, 7], [1, 9]]</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -1066,9 +1251,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-17T12:09:52+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T12:09:52+08:00">
                 2018-07-17
               </time>
             
@@ -1087,7 +1272,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -1119,9 +1304,9 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                  <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="Words count in article">
+                <span title="字数统计">
                   437
                 </span>
               
@@ -1135,9 +1320,9 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="Reading time">
+                <span title="阅读时长">
                   1
                 </span>
               
@@ -1220,187 +1405,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/python相关的/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/17/python相关的/" itemprop="url">python相关的</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-17T12:09:52+08:00">
-                2018-07-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  289
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="mac下安装opencv3"><a href="#mac下安装opencv3" class="headerlink" title="mac下安装opencv3"></a>mac下安装opencv3</h4><p>一开始用的brew，但是给我下了py2.7和py3.7，而我的python是anaconda3.5，所以干脆用conda安装。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XFade@qx:~$ conda install -c menpo opencv3</span><br></pre></td></tr></table></figure>
-<p>这样就可以<code>import cv2</code>了</p>
-<h4 id="mac下安装tensorflow"><a href="#mac下安装tensorflow" class="headerlink" title="mac下安装tensorflow"></a>mac下安装tensorflow</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">XFade@qx:~$ conda info --envs</span><br><span class="line">XFade@qx:~$ conda create -n tensorflow python=3.5</span><br><span class="line">XFade@qx:~$ conda info --envs</span><br></pre></td></tr></table></figure>
-<p>后面安装完成后，需要在环境中使用才行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">XFade@qx:~$ source activate tensorflow</span><br><span class="line">(tensorflow) XFade@qx:~$ python</span><br><span class="line">Python 3.5.4 |Continuum Analytics, Inc.| (default, Aug 14 2017, 12:43:10)</span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.57)] on darwin</span><br><span class="line">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span><br><span class="line">&gt;&gt;&gt; import tensorflow as tf</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">// 激活环境</span><br><span class="line">$ source activate tensorflow</span><br><span class="line">// 关闭环境</span><br><span class="line">$ source deactivate</span><br></pre></td></tr></table></figure>
-<p>参考文章：<a href="https://www.jianshu.com/p/d54546ab315e" target="_blank" rel="noopener">https://www.jianshu.com/p/d54546ab315e</a></p>
-<p>当激活了这个环境后，之前安装的很多库就用不了了，只能用该环境下的包。</p>
-<h4 id="python的lambda操作"><a href="#python的lambda操作" class="headerlink" title="python的lambda操作"></a>python的lambda操作</h4><p>按照2个标准来排序，<code>lambda x: [-x[0], x[1]]</code>表示按照第一个数降序，按照第二个数升序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">people = [[9, 0], [7, 0], [1, 9], [3, 0], [2, 7], [5, 3], [6, 0], [3, 4], [6, 2], [5, 2]]</span><br><span class="line">people.sort(key=lambda x: [-x[0], x[1]])</span><br><span class="line"># output</span><br><span class="line"># [[9, 0], [7, 0], [6, 0], [6, 2], [5, 2], [5, 3], [3, 0], [3, 4], [2, 7], [1, 9]]</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/Git与SVN操作/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1430,9 +1434,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-17T12:09:52+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T12:09:52+08:00">
                 2018-07-17
               </time>
             
@@ -1451,7 +1455,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -1483,9 +1487,9 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                  <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="Words count in article">
+                <span title="字数统计">
                   845
                 </span>
               
@@ -1499,9 +1503,9 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="Reading time">
+                <span title="阅读时长">
                   3
                 </span>
               
@@ -1634,9 +1638,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-23T10:15:02+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-23T10:15:02+08:00">
                 2018-04-23
               </time>
             
@@ -1655,7 +1659,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -1687,9 +1691,9 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                  <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="Words count in article">
+                <span title="字数统计">
                   544
                 </span>
               
@@ -1703,9 +1707,9 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="Reading time">
+                <span title="阅读时长">
                   1
                 </span>
               
@@ -1819,9 +1823,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-13T21:01:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-13T21:01:00+08:00">
                 2018-04-13
               </time>
             
@@ -1840,7 +1844,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -1872,9 +1876,9 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                  <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="Words count in article">
+                <span title="字数统计">
                   1k
                 </span>
               
@@ -1888,9 +1892,9 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="Reading time">
+                <span title="阅读时长">
                   3
                 </span>
               
@@ -1917,7 +1921,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/04/13/B树和其变体/#more" rel="contents">
-              Read more &raquo;
+              阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -1996,9 +2000,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-10T14:34:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-10T14:34:00+08:00">
                 2018-04-10
               </time>
             
@@ -2017,7 +2021,7 @@
                 <i class="fa fa-folder-o"></i>
               </span>
               
-                <span class="post-meta-item-text">In</span>
+                <span class="post-meta-item-text">分类于</span>
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
@@ -2049,9 +2053,9 @@
                   <i class="fa fa-file-word-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                  <span class="post-meta-item-text">字数统计&#58;</span>
                 
-                <span title="Words count in article">
+                <span title="字数统计">
                   1.2k
                 </span>
               
@@ -2065,9 +2069,9 @@
                   <i class="fa fa-clock-o"></i>
                 </span>
                 
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
-                <span title="Reading time">
+                <span title="阅读时长">
                   6
                 </span>
               
@@ -2098,7 +2102,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/04/10/关于回溯法在排列和组合中的应用总结/#more" rel="contents">
-              Read more &raquo;
+              阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -2174,6 +2178,8 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="qin xue">
+            
               <p class="site-author-name" itemprop="name">qin xue</p>
               <p class="site-description motion-element" itemprop="description">现在就要幸福</p>
           </div>
@@ -2186,7 +2192,7 @@
                 <a href="/archives">
               
                   <span class="site-state-item-count">74</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
@@ -2197,7 +2203,7 @@
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
                   <span class="site-state-item-count">8</span>
-                  <span class="site-state-item-name">categories</span>
+                  <span class="site-state-item-name">分类</span>
                 </a>
               </div>
             
@@ -2208,7 +2214,7 @@
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">48</span>
-                  <span class="site-state-item-name">tags</span>
+                  <span class="site-state-item-name">标签</span>
                 </a>
               </div>
             
@@ -2285,7 +2291,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -2293,7 +2299,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
 
 
 
