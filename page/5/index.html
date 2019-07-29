@@ -230,22 +230,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-hahah">
+        <li class="menu-item menu-item-自定义页面">
           <a href="/hahaa/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            hahah
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-schedule">
-          <a href="/schedule/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>
-            
-            Schedule
+            自定义页面
           </a>
         </li>
       
@@ -282,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/Java中的序列化/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/java虚拟机/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -301,7 +291,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/17/Java中的序列化/" itemprop="url">Java中的序列化</a></h1>
+                <a class="post-title-link" href="/2018/08/17/java虚拟机/" itemprop="url">Java虚拟机</a></h1>
         
 
         <div class="post-meta">
@@ -375,13 +365,58 @@
       
         
           
-            <p>Java中的序列化和反序列化（以字节流的形式传播）的优点在于：</p>
+            <p>java内存模型：<br>java虚拟机是一个虚拟的环境，占据着一部分主机的内存。也就是说这是一个中间桥梁，java在运行时不是在赤裸裸的内存上进行的，而是在虚拟机上。</p>
+<p>这个区域主要分为2大类。一个是线程隔离的，一个是线程共享的。而它们的生命周期也与此有关。一类是随着虚拟机进程的，而另一类是随着线程的。也就是说线程没了，它也就没了。</p>
+<p>一共有5个区域，其实记忆的时候可以类比C/C++中的堆和栈。好！那么这5个区域分别为：</p>
 <ol>
-<li>可以持久化</li>
-<li>便于网络间的通信</li>
+<li>程序计数区（线程隔离）</li>
+<li>Java虚拟机栈（栈，线程隔离）</li>
+<li>本地方法栈（栈，线程隔离）</li>
+<li>Java堆（堆，线程共享）</li>
+<li>方法区（堆，线程共享）</li>
 </ol>
-<p>Java中使用ObjectOutputStream类里面的writeObject将对象序列化为字节序列，而ObjectInputStream类里面的readObject将字节序列反序列化为对象。</p>
-<p>但是声明为static和transient的成员数据不能实例化。</p>
+<p>但凡涉及到内存，首先就要想到堆和栈。毕竟从本科的时候起，老师们就开始一直灌输这些了。什么栈溢出，堆溢出。其实，说白了，就是递归的深度超过了一定的数目，和内存不够分配了。一个说的是纵向，一个是横线。类比于算法中的广度优先与深度优先，深度优先搜索使用的一定是栈，因为涉及到递归；而广度优先搜索使用到的是队列，它涉及到堆。</p>
+<p>仔细思考一下，在C/C++中，是否记得一般的运行时局部变量是存放在栈中的，而程序员申请的空间是存放在堆中的。堆位于地址较高的地方，而栈位于较低的地方。一样的啊！！！Java也是这个套路，虚拟机栈和本地方法栈就是为此服务的，只不过一个给Java方法服务，而另外一个给本地方法（Native）服务！</p>
+<p>其实宏观地可以结合算法和数据结构以及计算机体系来理解这些，如下：</p>
+<table>
+<thead>
+<tr>
+<th>计算机体系</th>
+<th>算法</th>
+<th>数据结构</th>
+<th>计算机思想</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>栈区（内存中连续）</td>
+<td>深度优先搜索</td>
+<td>栈（stack）</td>
+<td>递归</td>
+</tr>
+<tr>
+<td>堆区（内存中非连续）</td>
+<td>广度优先搜索</td>
+<td>堆（heap），优先队列（基于堆）</td>
+<td>—-</td>
+</tr>
+</tbody>
+</table>
+<p>看到了吧，其实并没有想象中的那么难以记忆，关键在于总结和联想！！</p>
+<p>再来看看垃圾回收机制吧！</p>
+<p>垃圾回收说白了就是针对堆的，仔细想想，java中所有的对象都是存放在堆中的，所以这个地方是最需要进行垃圾回收的。这个时候就要问自己几个问题，第一，什么时候要回收？第二，怎么回收？<br>关于垃圾回收的方法主要有3种：</p>
+<ol>
+<li>标记-清理（先标记，然后清理）缺点是容易造成碎片</li>
+<li>复制（分为2个区域，每次把存活的对象移动到另外一个区，然后一次性清除当前区的对象）</li>
+<li>标记-整理（先标记，然后整理，也就是说把存活的移动到区域的某一端，然后清理掉端外面的即可）</li>
+</ol>
+<p>目前最流行的当然是综合的方法，新生代中的对象几乎都很短命，复制成本低，所以用方法2；而老年代中放的是长命的对象，往往比较大，所以用方法1或3。</p>
+<p>好了，有了垃圾回收的方法，那么就要问了，对象放在上面地方呢？有以下3个策略。</p>
+<ol>
+<li>对象优先放在Eden区</li>
+<li>大对象放在老年代</li>
+<li>长期存活的对象将进入老年代（注意这里有个对象年龄的概念，年龄达到一定程度即可进入老年代）</li>
+</ol>
 
           
         
@@ -430,7 +465,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/mybatis相关/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/Java abstract class和interface/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -449,7 +484,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/17/mybatis相关/" itemprop="url">Mybatis相关</a></h1>
+                <a class="post-title-link" href="/2018/08/17/Java abstract class和interface/" itemprop="url">Java抽象类和接口的区别</a></h1>
         
 
         <div class="post-meta">
@@ -523,12 +558,20 @@
       
         
           
-            <p>mybatis中<code>#</code>和<code>$</code>的区别</p>
-<p><code>#</code>会进行预编译，按照类型匹配的，用于变量替换。</p>
-<p><code>$</code>不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它</p>
-<p>如果两个都可以用，最好用#</p>
-<p>select的时候一定要加resultType或者resultMap，否则报错</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&gt;</span><br><span class="line">    xxx</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+            <p>两者的共同点：</p>
+<ol>
+<li>都可以实现抽象化，都不能实例化</li>
+<li>interface的实现类以及abstract class的子类都需要实现已经声明的抽象方法</li>
+</ol>
+<p>区别：</p>
+<ol>
+<li>一个类可以实现多个interface，而只能继承一个抽象类</li>
+<li>interface强调特定功能的实现，而abstract class强调所属关系，所以interface设计思想是like-a，而abstract class的设计思想是is-a</li>
+<li>interface不能有自己的私有变量和方法，而abstract class可以有</li>
+<li>interface里面的所有方法都是抽象方法，实现类必须实现，而abstract class的子类可以有选择地实现。具体是，abstract class中的类不都是抽象方法，抽象方法子类必须实现，而非抽象方法，它自己实现。而且对于抽象方法，子类可以选择继续让它抽象，由该子类的子类去实现，这是该子类必须也声明为abstract class。</li>
+</ol>
+<p>参考博客：<a href="https://blog.csdn.net/b271737818/article/details/3950245" target="_blank" rel="noopener">https://blog.csdn.net/b271737818/article/details/3950245</a></p>
+
           
         
       
@@ -718,7 +761,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/java虚拟机/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/mybatis相关/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -737,7 +780,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/17/java虚拟机/" itemprop="url">Java虚拟机</a></h1>
+                <a class="post-title-link" href="/2018/08/17/mybatis相关/" itemprop="url">Mybatis相关</a></h1>
         
 
         <div class="post-meta">
@@ -811,61 +854,12 @@
       
         
           
-            <p>java内存模型：<br>java虚拟机是一个虚拟的环境，占据着一部分主机的内存。也就是说这是一个中间桥梁，java在运行时不是在赤裸裸的内存上进行的，而是在虚拟机上。</p>
-<p>这个区域主要分为2大类。一个是线程隔离的，一个是线程共享的。而它们的生命周期也与此有关。一类是随着虚拟机进程的，而另一类是随着线程的。也就是说线程没了，它也就没了。</p>
-<p>一共有5个区域，其实记忆的时候可以类比C/C++中的堆和栈。好！那么这5个区域分别为：</p>
-<ol>
-<li>程序计数区（线程隔离）</li>
-<li>Java虚拟机栈（栈，线程隔离）</li>
-<li>本地方法栈（栈，线程隔离）</li>
-<li>Java堆（堆，线程共享）</li>
-<li>方法区（堆，线程共享）</li>
-</ol>
-<p>但凡涉及到内存，首先就要想到堆和栈。毕竟从本科的时候起，老师们就开始一直灌输这些了。什么栈溢出，堆溢出。其实，说白了，就是递归的深度超过了一定的数目，和内存不够分配了。一个说的是纵向，一个是横线。类比于算法中的广度优先与深度优先，深度优先搜索使用的一定是栈，因为涉及到递归；而广度优先搜索使用到的是队列，它涉及到堆。</p>
-<p>仔细思考一下，在C/C++中，是否记得一般的运行时局部变量是存放在栈中的，而程序员申请的空间是存放在堆中的。堆位于地址较高的地方，而栈位于较低的地方。一样的啊！！！Java也是这个套路，虚拟机栈和本地方法栈就是为此服务的，只不过一个给Java方法服务，而另外一个给本地方法（Native）服务！</p>
-<p>其实宏观地可以结合算法和数据结构以及计算机体系来理解这些，如下：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th>计算机体系</th>
-<th>算法</th>
-<th>数据结构</th>
-<th>计算机思想</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>栈区（内存中连续）</td>
-<td>深度优先搜索</td>
-<td>栈（stack）</td>
-<td>递归</td>
-</tr>
-<tr>
-<td>堆区（内存中非连续）</td>
-<td>广度优先搜索</td>
-<td>堆（heap），优先队列（基于堆）</td>
-<td>——</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>看到了吧，其实并没有想象中的那么难以记忆，关键在于总结和联想！！</p>
-<p>再来看看垃圾回收机制吧！</p>
-<p>垃圾回收说白了就是针对堆的，仔细想想，java中所有的对象都是存放在堆中的，所以这个地方是最需要进行垃圾回收的。这个时候就要问自己几个问题，第一，什么时候要回收？第二，怎么回收？<br>关于垃圾回收的方法主要有3种：</p>
-<ol>
-<li>标记-清理（先标记，然后清理）缺点是容易造成碎片</li>
-<li>复制（分为2个区域，每次把存活的对象移动到另外一个区，然后一次性清除当前区的对象）</li>
-<li>标记-整理（先标记，然后整理，也就是说把存活的移动到区域的某一端，然后清理掉端外面的即可）</li>
-</ol>
-<p>目前最流行的当然是综合的方法，新生代中的对象几乎都很短命，复制成本低，所以用方法2；而老年代中放的是长命的对象，往往比较大，所以用方法1或3。</p>
-<p>好了，有了垃圾回收的方法，那么就要问了，对象放在上面地方呢？有以下3个策略。</p>
-<ol>
-<li>对象优先放在Eden区</li>
-<li>大对象放在老年代</li>
-<li>长期存活的对象将进入老年代（注意这里有个对象年龄的概念，年龄达到一定程度即可进入老年代）</li>
-</ol>
-
+            <p>mybatis中<code>#</code>和<code>$</code>的区别</p>
+<p><code>#</code>会进行预编译，按照类型匹配的，用于变量替换。</p>
+<p><code>$</code>不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它</p>
+<p>如果两个都可以用，最好用#</p>
+<p>select的时候一定要加resultType或者resultMap，否则报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&gt;</span><br><span class="line">    xxx</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -1188,7 +1182,7 @@
 </ol>
 <p>关于这一点，有一个很好的例子，就是群面的时候，当面试官给出题目并要求在规定时间内给出一个结果的时候。总是要有一位同学带领大家，起到统筹的作用。其实他的任务很简单，就是告诉大家：我们的时间有多少（并且他要安排某个人计时），要讨论出什么东西。那么时间分配该怎样。而且对于讨论该给出的答案要包括哪几个小点。每位同学只能发言多久时间。最后由谁来总结汇报给面试官。</p>
 <p>看到没有，他做的就是从宏观上给出时间规划和任务安排。设想没有这个人，大家在底下，你一句，我一句，最后一定会乱套，而且结果还不一定能讨论出来！！（或是超时，或是统一不了结果）</p>
-<ol>
+<ol start="3">
 <li>有了宏观把控后，具体做的时候，就能理清思路，这个点应该出现在哪一个步骤，而不应该出现在哪个步骤。这样做起来更加自信高效。</li>
 </ol>
 <p>所以，一定要养成这个习惯，一定要逼迫自己这样做，因为真的极其重要！！！</p>
@@ -1831,9 +1825,9 @@
 <p>SVM处理多分类问题<br>SVM是一个二分类器，处理多分类问题时，常用的策略有：“一对一”（One vs. One, 简称OvO）、“一对其余”（One vs. Rest, 简称OvR）和“多对多”（Many vs. Many，简称MvM）。<br>OvO：对于给定数据集$D=(xi,yi),(x2,y2),…,(xm,ym),yi∈C1,C2,…,CN$。OvO将这N个类别两两配对，从而产生$N(N−1)/2$ 个二分类任务。测试阶段，新样本将同时提交给所有分类器，于是我们可得到$N(N−1)/2$ 个分类结果，最终把被预测得最多的类别作为最终分类结果。<br>OvR：每次将一个类的样例作为正例，所有其他类的样例作为反例来训练N个分类器。在预测时选择置信度最大的类别作为分类结果。<br>MvM：每次将若干个类作为正类，若干个其他类作为反类。 </p>
 <p>堆排序、快速排序、希尔排序、直接选择排序不是稳定的排序算法，而基数排序、冒泡排序、直接插入排序、折半插入排序、归并排序是稳定的排序算法。</p>
 <ol>
-<li><p>在每一个链表中取出第一个值，然后把它们放在一个大小为N的数组里，然后把这个数组当成heap建成小(大)根堆。此步骤的时间复杂度为<script type="math/tex">O(N)</script></p>
+<li><p>在每一个链表中取出第一个值，然后把它们放在一个大小为N的数组里，然后把这个数组当成heap建成小(大)根堆。此步骤的时间复杂度为<code>$O(N)$</code></p>
 </li>
-<li><p>取出堆中的最小值(也是数组的第一个值), 然后把该最小值所处的链表的下一个值放在数组的第一个位置。如果链表中有一个已经为空（元素已经都被取出），则改变heap的大小。此步骤的时间复杂度为<script type="math/tex">O(logN)</script>.</p>
+<li><p>取出堆中的最小值(也是数组的第一个值), 然后把该最小值所处的链表的下一个值放在数组的第一个位置。如果链表中有一个已经为空（元素已经都被取出），则改变heap的大小。此步骤的时间复杂度为<code>$O(logN)$</code>.</p>
 </li>
 <li><p>不断的重复步骤二，直到所有的链表都为空。</p>
 </li>
@@ -1934,7 +1928,7 @@
               
               
               <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
+                <a href="/hahah/index.html">
                   <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
