@@ -272,837 +272,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/07/java中锁的分类/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/07/java中锁的分类/" itemprop="url">Java中锁的分类</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-07T13:48:46+08:00">
-                2018-09-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  949
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>公平锁、非公平锁</p>
-<ol>
-<li>公平锁：按照申请锁的顺序来获取锁</li>
-<li>非公平锁：多个线程获取锁的顺序并不是按照申请锁的顺序，有可能后申请的线程比先申请的线程优先获取锁。有可能，会造成优先级反转或者饥饿现象</li>
-<li>ReentrantLock，可以是公平的，也可以是非公平的。默认为非公平。Synchronized，非公平锁</li>
-</ol>
-<p>可重入锁</p>
-<ol>
-<li>又名递归锁，指在同一个线程在外层方法获取锁的时候，在进入内层方法会自动获取锁</li>
-</ol>
-<p>独享锁、共享锁</p>
-<ol>
-<li>独享锁：该锁一次只能被一个线程所持有</li>
-<li>共享锁：该锁可以被多个线程所持有</li>
-<li>ReentrantLock，为独享锁。但是ReadWriteLock，其读锁是共享锁，而写锁是独享锁。读锁的共享锁保证了并发读是非常高效的；读写，写写的过程是互斥的</li>
-<li>Synchronized，为独享锁</li>
-</ol>
-<p>互斥锁、读写锁</p>
-<ol>
-<li>上面讲的独享锁、共享锁是一种广义的说法，互斥锁、读写锁是具体的实现</li>
-<li>互斥锁在Java中的具体实现：ReentrantLock</li>
-<li>读写锁在Java中的具体实现：ReadWriteLock</li>
-</ol>
-<p>乐观锁、悲观锁</p>
-<ol>
-<li>不是具体的锁，而是指看待并发同步的角度</li>
-<li>悲观锁认为，不加锁的并发操作一定会出现问题</li>
-<li>乐观锁认为，不加锁的并发操作是没有事情的</li>
-<li>悲观锁适合写操作非常多的场景，乐观锁适合读操作非常多的场景，不加锁会带来大量的性能提升</li>
-<li>悲观锁在Java中的使用，就是利用各种锁</li>
-<li>乐观锁在Java中的使用，是无锁编程，常常采用的是CAS算法，典型的例子就是原子类，通过CAS自旋实现原子操作的更新</li>
-</ol>
-<p>分段锁</p>
-<ol>
-<li>是一种锁的设计，并不是具体的锁</li>
-<li>ConcurrentHashMap的并发就是通过分段锁的形式来实现高效的并发操作</li>
-<li>ConcurrentHashMap中的分段锁称为Segment，其继承自ReentrantLock，它类似于HashMap的结构，内部拥有一个Entry数组，数组中的每个元素又是一个链表</li>
-<li>put的时候，不是对整个hashmap进行加锁，而是先通过hashcode来知道它要放在哪一个分段中，然后对这个分段进行加锁。所以当多线程put的时候，只要不是放在一个分段中，就实现了真正的并行插入</li>
-<li>在统计size的时候，就要获取hashmap的全局信息，这时需要获取所有分段的锁才能统计</li>
-</ol>
-<p>偏向锁、轻量级锁、重量级锁（锁的升级）</p>
-<ol>
-<li>锁的状态，针对Synchronized</li>
-<li>偏向锁是指一段同步代码一直被一个线程所访问，那么该线程会自动获取锁。降低获取锁的代价</li>
-<li>轻量级锁是指当锁是偏向锁的时候，被另一个线程所访问，偏向锁就会升级为轻量级锁，其他线程会通过自旋的形式尝试获取锁，不会阻塞，提高性能</li>
-<li>重量级锁是指当锁为轻量级锁的时候，另一个线程虽然是自旋，但自旋不会一直持续下去，当自旋一定次数的时候，还没有获取到锁，就会进入阻塞，该锁膨胀为重量级锁。重量级锁会让其他申请的线程进入阻塞，性能降低</li>
-</ol>
-<p>自旋锁（忙等待）</p>
-<ol>
-<li>在Java中，自旋锁是指尝试获取锁的线程不会立即阻塞，而是采用循环的方式去尝试获取锁，这样的好处是减少线程上下文切换的消耗，缺点是循环会消耗CPU</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/计算机网络 and 操作系统/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/03/计算机网络 and 操作系统/" itemprop="url">计算机网络与操作系统相关知识点</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-03T21:30:11+08:00">
-                2018-09-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.7k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  5
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h3><h4 id="ISO7层网络模型"><a href="#ISO7层网络模型" class="headerlink" title="ISO7层网络模型"></a>ISO7层网络模型</h4><ol>
-<li>应用层：处理网络应用</li>
-<li>表示层：数据表示</li>
-<li>会话层：互联主机通信</li>
-<li>传输层：端到端链接（TCP/UDP协议）</li>
-<li>网络层：寻址和最短路径（IP协议）</li>
-<li>数据链路层：接入介质</li>
-<li>物理层：二进制传输</li>
-</ol>
-<p>5层无表示层和会话层</p>
-<h4 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h4><h5 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h5><p>SYN=1表示请求连接</p>
-<ol>
-<li>建立链接时C端发送SYN包到S端（SYN=1，seq=x），C端进入SYS_SENT状态</li>
-<li>S端在收到C端的SYN包以后必须确认C端的SYN包，所以发送（SYN=1，ACK=1，seq=y，ack=x+1）到C端，然后S端进入SYS_RCVD状态</li>
-<li>C端再收到S端发送的SYN和ACK包以后，向服务器发送ACK包（ACK=1，ack=y+1），然后C端进入ESTABLISHED状态，S端在收到C端的确认包后也进入ESTABLISHED状态</li>
-</ol>
-<h5 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h5><ol>
-<li>C端向S端发送释放链接请求，发送FIN=1，seq=x，发送完后进入FIN_WAIT_1状态</li>
-<li>S端在收到C端的请求后进入CLOSE_WAIT状态，然后发送给C端一个确认包（ACK=1，seq=x+1）。C端这时候不能再发送数据了，只能发送确认报文，C端在接受到S端发送的确认包以后进入FIN_WAIT_2状态</li>
-<li>当S端所有的数据都传完的时候，向C端发送释放链接报文（FIN=1，seq=y），发完之后自己进入LAST_WAIT状态</li>
-<li>C端收到S端的请求后，发送一个确认报文，自己进入TIME_WAIT状态，而不是立马关闭，因为C端发送的确认报文可能会丢失，丢失的话S端就会重传一个FIN，也就是释放连接报文，这个时候C端必须还没关闭。当S端接受到确认报文后，就进入CLOSE状态。但是由于上面所说原因，C端必须等待一定的时间才能够进入CLOSE状态。而这个等待的时间长度是2*msl（由于可能出现不可靠的连接，当C端发送确认后，可能S端没有收到，如果它没有收到，它就会再次发FIN，这时C端必须再次发送确认，因此C端不能急着关闭；而要等一段时间，如果这个时间S端没有消息过来，说明S端收到了确认，这时C端才能关闭）</li>
-</ol>
-<p>2倍报文最大生存时间，任何报文在网络上存在的最长时间，超过这个时间报文将被丢弃。等待2MSL时间主要目的是怕最后一个ACK包对方没收到，那么对方在超时后将重发第三次握手的FIN包。msl 30秒到2分钟</p>
-<p>为什么一个是三次，一个是四次；关键在于关闭连接时，当S端收到FIN后，它只能暂时确认，而不能同时FIN，因为它也许还要继续发数据给C端，因此造成了ACK和FIN不能同时发送过去。这样就多了一个流程。</p>
-<h5 id="握手攻击"><a href="#握手攻击" class="headerlink" title="握手攻击"></a>握手攻击</h5><p>DoS-拒绝服务攻击<br>TCP连接时，攻击者故意不完成三次握手，导致资源浪费</p>
-<p>解决方法：限制同时打开的SYN半连接数；缩短SYN半连接的TIME_OUT时间；启用防火墙</p>
-<h5 id="为什么是三次握手不是两次"><a href="#为什么是三次握手不是两次" class="headerlink" title="为什么是三次握手不是两次"></a>为什么是三次握手不是两次</h5><p>两次握手可能会发生死锁的情况。C端发送给S端一个请求，S端在收到后并发送确认（S端认为连接成功）。如果S端发送的确认丢失，C端会认为连接还未成功而忽略S端发送的任何数据。而S端会在发送数据超时后重发同样的分组，进而形成死锁。</p>
-<h4 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h4><p>用户数据报协议，无连接，面向报文，无阻塞控制，尽最大努力交付。</p>
-<h4 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h4><ol>
-<li>TCP是面向连接的，可靠的数据传输，而UDP是非面向连接的，不可靠的数据传输</li>
-<li>TCP的传输单位是TCP报文段，UDP则是用户数据报</li>
-<li>TCP注重安全，UDP传输更快</li>
-</ol>
-<h4 id="关于滑动窗口与拥塞控制"><a href="#关于滑动窗口与拥塞控制" class="headerlink" title="关于滑动窗口与拥塞控制"></a>关于滑动窗口与拥塞控制</h4><ol>
-<li>发送方和接受方都持有自己的窗口值</li>
-<li>慢开始：发送发从初始的cwnd=1，慢慢指数级增长</li>
-<li>当达到了ssthresh的值后，开始拥塞算法，即cwnd加法增长，每次+1</li>
-<li>当网络中出现拥塞时，设置ssthresh的值为发送拥塞窗口值的一半，并设置cwnd=1，再次慢开始</li>
-<li>快重传，接收方每次收到失序的报文后立即发出重复确认，发送方连续3次接收到重复确认时，立即重传。配合6使用</li>
-<li>快恢复，在4中，设置cwnd=ssthresh，并使用拥塞算法（加1）增长</li>
-</ol>
-<p>相关博客：<a href="https://blog.csdn.net/yechaodechuntian/article/details/25429143" target="_blank" rel="noopener">https://blog.csdn.net/yechaodechuntian/article/details/25429143</a></p>
-<h3 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h3><h4 id="页面调度算法"><a href="#页面调度算法" class="headerlink" title="页面调度算法"></a>页面调度算法</h4><h5 id="最佳置换算法"><a href="#最佳置换算法" class="headerlink" title="最佳置换算法"></a>最佳置换算法</h5><p>选择被淘汰的页面将是最长时间不会被访问的（无法预测）</p>
-<h5 id="先进先出算法"><a href="#先进先出算法" class="headerlink" title="先进先出算法"></a>先进先出算法</h5><p>优先淘汰最早进入内存的页面</p>
-<h5 id="最近最久未使用"><a href="#最近最久未使用" class="headerlink" title="最近最久未使用"></a>最近最久未使用</h5><p>选择最近最长时间未访问过的页面淘汰</p>
-<h5 id="CLOCK-NRU-最近未使用算法"><a href="#CLOCK-NRU-最近未使用算法" class="headerlink" title="CLOCK/NRU 最近未使用算法"></a>CLOCK/NRU 最近未使用算法</h5><p>某页首次进入内存，u=1，若再次被访问u=1。当需要替换时，扫描缓冲区，查找u=0的页面置换，若遇到u=1则将其置0。</p>
-<h4 id="进程间通信方式"><a href="#进程间通信方式" class="headerlink" title="进程间通信方式"></a>进程间通信方式</h4><h5 id="共享存储"><a href="#共享存储" class="headerlink" title="共享存储"></a>共享存储</h5><p>通信进程间存在一块可以直接访问的共享空间（对共享空间读写需要互斥工具：P（通过）操作，V（释放）操作）</p>
-<h5 id="消息传递"><a href="#消息传递" class="headerlink" title="消息传递"></a>消息传递</h5><p>进程间数据交换以格式化的消息为单位（直接通信 or 间接通信：发送消息到中间实体）</p>
-<h5 id="管道通信"><a href="#管道通信" class="headerlink" title="管道通信"></a>管道通信</h5><p>管道指用于连接一个读进程和一个写进程以实现它们之间的一个共享文件（互斥、同步、确定对方存在）</p>
-<h4 id="死锁"><a href="#死锁" class="headerlink" title="死锁"></a>死锁</h4><p>指两个或两个以上进程在执行过程中因争夺资源而造成的一种互相等待现象，若无外力作用，它们都将无法继续执行。</p>
-<h5 id="产生原因"><a href="#产生原因" class="headerlink" title="产生原因"></a>产生原因</h5><p>系统资源不足、进程运行的顺序不合适、资源分配不当</p>
-<h5 id="产生死锁的必要条件"><a href="#产生死锁的必要条件" class="headerlink" title="产生死锁的必要条件"></a>产生死锁的必要条件</h5><ol>
-<li>互斥：进程在某段时间独占资源</li>
-<li>请求与保持：某进程因请求资源而阻塞时，对已获得的资源保持不放</li>
-<li>不剥夺：未使用完不剥夺资源</li>
-<li>循环等待：循环等待资源</li>
-</ol>
-<h5 id="死锁预防"><a href="#死锁预防" class="headerlink" title="死锁预防"></a>死锁预防</h5><p>打破上述必要条件中的一个或几个</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/Redis/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/03/Redis/" itemprop="url">Redis</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-03T21:30:11+08:00">
-                2018-09-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  644
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>redis的list的底层实现是一个<strong>双向链表</strong>，也可以使用它实现一个简单的消息队列，生产者push，消费者pop。</p>
-<p>hash，类似于python里面的dict，C++里面的unordered_map，Java里面的HashMap。底层实现为HashMap，可以用来存储用户的id及其信息（比如以json格式保存）。</p>
-<p>set的底层实现是一个value值为null的hashmap，它根据hash的方式快速去重。</p>
-<p>sorted set底层实现是hashmap + skiplist。为什么要用2个呢？当进行查询的时候，可以使用hashmap保证其<code>$O(1)$</code>级别的复杂度；而在进行更新操作时，如果只有hashmap，那么需要进行重排，时间复杂度为<code>$O(nlogn)$</code>，而如果加入跳跃表，那么只需要<code>$O(logn)$</code>的复杂度。所以结合使用。</p>
-<p>rdb/aof持久化</p>
-<p><strong>rdb:数据库状态（所有数据库中的所有键值对数据）和rdb文件相互转存，可以看做是快照。文件格式为二进制文件。</strong></p>
-<p>save会阻塞服务器进程，导致其不能处理其它任何命令请求；bgsave会派生出一个子进程去完成，父进程不受影响。可以设置bgsave自动执行的参数（保存条件，当任意一个条件满足，则自动执行），包括时间间隔和修改数。在redis服务器中则保存了上一次保存的时间戳lastsave和距离上次保存总计的修改次数dirty计数器。</p>
-<p><strong>aof:通过保存所有修改数据库的写命令请求来记录服务器的数据库状态。</strong></p>
-<p>aof文件中的所有命令都是以Redis命令请求协议的格式保存。命令请求会先保存到aof缓冲区里面，之后再定期写入并同步到aof文件中。</p>
-<p>Redis的发布/订阅功能</p>
-<p>可以用来订阅频道或是模式</p>
-<ol>
-<li>订阅频道使用的dict（字典），key保存频道，而value保存订阅它的客户端信息。</li>
-<li>订阅模式使用的list（链表），list里面保存了pubsubPattern结构，该结构里面有2个属性，一个是pattern，一个是client（只包含一个client）。</li>
-<li>publish命令会向频道的所有订阅者发消息，并向所有与该频道匹配的模式的订阅者发消息。</li>
-<li>pubsub的3个子命令，channels用来返回当前服务器被订阅的频道；numsub接受多个频道作为参数，并返回这些频道的订阅者数量；numpat返回该服务器所有被订阅模式的数量。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/mysql中的undo、redo/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/03/mysql中的undo、redo/" itemprop="url">mysql中的undo、redo</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-03T21:29:17+08:00">
-                2018-09-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  412
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>mysql中的日志文件分为undo log和redo log。</p>
-<p>undo日志记录的是数据修改之前的值，主要保证数据的一致性。因为当修改出现异常，可以用来回滚到之前的状态。</p>
-<p>undo日志分为2中类型，一种是<code>insert_undo</code>，记录插入的唯一键值；还有一种是<code>update_undo</code>，记录修改的唯一键值和修改之前的值。</p>
-<p>redo日志记录的是数据修改之后的值，主要保证数据的原子性和持久性。在数据库对数据做修改的时候，会把数据页从磁盘读到buffer pool里面，如果这时发生数据库重启，那么这些数据就无法同步到磁盘了。</p>
-<p>使用redo日志有2个好处</p>
-<ol>
-<li>在发生数据库重启（或crash）时，buffer pool的数据还没有刷新到磁盘，通过redo日志可以找到需要刷新到磁盘的记录。</li>
-<li>buffer pool刷新到磁盘是一个随机IO的过程，效率较差；而把buffer pool的数据记录到redo log是一个顺序IO，可以提高事务提交的速度。</li>
-</ol>
-<p>通过undo + redo的设计，使得IO性能得到提高。</p>
-<ol>
-<li>缓存到buffer区，批量写入日志（redo log buffer）</li>
-<li>并发事务共享redo log存储空间，所以其它未提交的事务日志也会被提交</li>
-<li>redo log只是顺序追加</li>
-</ol>
-<p>Mysql的InnoDB存储引擎使用的恢复策略：<strong>进行恢复时，重做所有的事务，包括未提交的和回滚的事务，然后再根据undo log回滚那些未提交的事务。</strong></p>
-<p>参考：<a href="http://www.cnblogs.com/xinysu/p/6555082.html" target="_blank" rel="noopener">http://www.cnblogs.com/xinysu/p/6555082.html</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/02/数据库事务四种隔离级别/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1859,6 +1028,545 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/浏览器访问网页的整个流程/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/17/浏览器访问网页的整个流程/" itemprop="url">浏览器访问网页的流程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-17T13:48:46+08:00">
+                2018-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  0
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5fxc5ye7jj30mv0olgoz.jpg" alt="TIM截图20181105110628"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/java中的单例模式/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/17/java中的单例模式/" itemprop="url">Java中的单例模式</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-17T13:48:46+08:00">
+                2018-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  157
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考博客：<a href="http://cantellow.iteye.com/blog/838473" target="_blank" rel="noopener">http://cantellow.iteye.com/blog/838473</a></p>
+<p>单例模式的优缺点及使用场景：<a href="http://www.cnblogs.com/damsoft/p/6105122.html" target="_blank" rel="noopener">http://www.cnblogs.com/damsoft/p/6105122.html</a></p>
+<p>优点：</p>
+<ol>
+<li>避免对共享资源的多重占用</li>
+<li>节约系统资源</li>
+<li>对唯一实例的受控访问</li>
+<li>可以控制实例的数目</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>职责过重，违反了“单一职责原则”</li>
+<li>单例模式中没有抽象层，不方便扩展</li>
+<li>可能会导致内存溢出</li>
+<li>周期过长，可能被垃圾回收</li>
+</ol>
+<p> 一般采用饿汉式，若对资源十分在意可以采用静态内部类，不建议采用懒汉式及双重检测 </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/mybatis相关/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/17/mybatis相关/" itemprop="url">Mybatis相关</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-17T13:48:46+08:00">
+                2018-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  94
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>mybatis中<code>#</code>和<code>$</code>的区别</p>
+<p><code>#</code>会进行预编译，按照类型匹配的，用于变量替换。</p>
+<p><code>$</code>不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它</p>
+<p>如果两个都可以用，最好用#</p>
+<p>select的时候一定要加resultType或者resultMap，否则报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&gt;</span><br><span class="line">    xxx</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/Java abstract class和interface/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1996,6 +1704,185 @@
 <li>interface里面的所有方法都是抽象方法，实现类必须实现，而abstract class的子类可以有选择地实现。具体是，abstract class中的类不都是抽象方法，抽象方法子类必须实现，而非抽象方法，它自己实现。而且对于抽象方法，子类可以选择继续让它抽象，由该子类的子类去实现，这是该子类必须也声明为abstract class。</li>
 </ol>
 <p>参考博客：<a href="https://blog.csdn.net/b271737818/article/details/3950245" target="_blank" rel="noopener">https://blog.csdn.net/b271737818/article/details/3950245</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/Java中的序列化/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/17/Java中的序列化/" itemprop="url">Java中的序列化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-17T13:48:46+08:00">
+                2018-08-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  92
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Java中的序列化和反序列化（以字节流的形式传播）的优点在于：</p>
+<ol>
+<li>可以持久化</li>
+<li>便于网络间的通信</li>
+</ol>
+<p>Java中使用ObjectOutputStream类里面的writeObject将对象序列化为字节序列，而ObjectInputStream类里面的readObject将字节序列反序列化为对象。</p>
+<p>但是声明为static和transient的成员数据不能实例化。</p>
 
           
         
@@ -2259,7 +2146,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2307,7 +2194,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">74</span>
+                  <span class="site-state-item-count">65</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2318,7 +2205,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2329,7 +2216,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2402,7 +2289,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">56.7k</span>
+    <span title="Site words total count">56.8k</span>
   
 </div>
 
