@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="">
+<html class="theme-next mist use-motion" lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -86,7 +86,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/08/17/java虚拟机/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
 <meta property="og:description" content="java内存模型：java虚拟机是一个虚拟的环境，占据着一部分主机的内存。也就是说这是一个中间桥梁，java在运行时不是在赤裸裸的内存上进行的，而是在虚拟机上。 这个区域主要分为2大类。一个是线程隔离的，一个是线程共享的。而它们的生命周期也与此有关。一类是随着虚拟机进程的，而另一类是随着线程的。也就是说线程没了，它也就没了。 一共有5个区域，其实记忆的时候可以类比C/C++中的堆和栈。好！那么这5">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="zh">
 <meta property="og:updated_time" content="2019-07-10T16:00:07.362Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java虚拟机">
@@ -138,7 +138,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh">
 
   
   
@@ -411,7 +411,6 @@
 <p>但凡涉及到内存，首先就要想到堆和栈。毕竟从本科的时候起，老师们就开始一直灌输这些了。什么栈溢出，堆溢出。其实，说白了，就是递归的深度超过了一定的数目，和内存不够分配了。一个说的是纵向，一个是横线。类比于算法中的广度优先与深度优先，深度优先搜索使用的一定是栈，因为涉及到递归；而广度优先搜索使用到的是队列，它涉及到堆。</p>
 <p>仔细思考一下，在C/C++中，是否记得一般的运行时局部变量是存放在栈中的，而程序员申请的空间是存放在堆中的。堆位于地址较高的地方，而栈位于较低的地方。一样的啊！！！Java也是这个套路，虚拟机栈和本地方法栈就是为此服务的，只不过一个给Java方法服务，而另外一个给本地方法（Native）服务！</p>
 <p>其实宏观地可以结合算法和数据结构以及计算机体系来理解这些，如下：</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -432,11 +431,10 @@
 <td>堆区（内存中非连续）</td>
 <td>广度优先搜索</td>
 <td>堆（heap），优先队列（基于堆）</td>
-<td>——</td>
+<td>—-</td>
 </tr>
 </tbody>
 </table>
-</div>
 <p>看到了吧，其实并没有想象中的那么难以记忆，关键在于总结和联想！！</p>
 <p>再来看看垃圾回收机制吧！</p>
 <p>垃圾回收说白了就是针对堆的，仔细想想，java中所有的对象都是存放在堆中的，所以这个地方是最需要进行垃圾回收的。这个时候就要问自己几个问题，第一，什么时候要回收？第二，怎么回收？<br>关于垃圾回收的方法主要有3种：</p>
@@ -484,8 +482,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/17/Java中的序列化/" rel="next" title="Java中的序列化">
-                <i class="fa fa-chevron-left"></i> Java中的序列化
+              <a href="/2018/07/17/Git与SVN操作/" rel="next" title="Git与SVN相关的操作">
+                <i class="fa fa-chevron-left"></i> Git与SVN相关的操作
               </a>
             
           </div>
@@ -494,8 +492,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/17/java中的单例模式/" rel="prev" title="Java中的单例模式">
-                Java中的单例模式 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/17/Java abstract class和interface/" rel="prev" title="Java抽象类和接口的区别">
+                Java抽象类和接口的区别 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="">
+<html class="theme-next mist use-motion" lang="zh">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -86,7 +86,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/04/06/面试常见问题/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
 <meta property="og:description" content="算法题常见的思路：  用双指针（甚至多指针）（比如头尾逼近） 想到二分的思想 想到patition的思想（快排里的） 想到用空间换时间 想到用哈希table（比如用数组构造，或是调用unordered_set或unordered_map） 想到用查找表（比如map/set等一系列的） 想到用动态规划或贪心算法 想到用回朔法  若结点的存储地址与其关键字值之间存在某种对应关系，则这种存储结构为散列存">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="zh">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g5fy3sx82dj30pi0ejq76.jpg">
 <meta property="og:updated_time" content="2019-07-28T14:57:56.972Z">
 <meta name="twitter:card" content="summary">
@@ -140,7 +140,7 @@
 
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh">
 
   
   
@@ -456,9 +456,9 @@
 <p>SVM处理多分类问题<br>SVM是一个二分类器，处理多分类问题时，常用的策略有：“一对一”（One vs. One, 简称OvO）、“一对其余”（One vs. Rest, 简称OvR）和“多对多”（Many vs. Many，简称MvM）。<br>OvO：对于给定数据集$D=(xi,yi),(x2,y2),…,(xm,ym),yi∈C1,C2,…,CN$。OvO将这N个类别两两配对，从而产生$N(N−1)/2$ 个二分类任务。测试阶段，新样本将同时提交给所有分类器，于是我们可得到$N(N−1)/2$ 个分类结果，最终把被预测得最多的类别作为最终分类结果。<br>OvR：每次将一个类的样例作为正例，所有其他类的样例作为反例来训练N个分类器。在预测时选择置信度最大的类别作为分类结果。<br>MvM：每次将若干个类作为正类，若干个其他类作为反类。 </p>
 <p>堆排序、快速排序、希尔排序、直接选择排序不是稳定的排序算法，而基数排序、冒泡排序、直接插入排序、折半插入排序、归并排序是稳定的排序算法。</p>
 <ol>
-<li><p>在每一个链表中取出第一个值，然后把它们放在一个大小为N的数组里，然后把这个数组当成heap建成小(大)根堆。此步骤的时间复杂度为<script type="math/tex">O(N)</script></p>
+<li><p>在每一个链表中取出第一个值，然后把它们放在一个大小为N的数组里，然后把这个数组当成heap建成小(大)根堆。此步骤的时间复杂度为<code>$O(N)$</code></p>
 </li>
-<li><p>取出堆中的最小值(也是数组的第一个值), 然后把该最小值所处的链表的下一个值放在数组的第一个位置。如果链表中有一个已经为空（元素已经都被取出），则改变heap的大小。此步骤的时间复杂度为<script type="math/tex">O(logN)</script>.</p>
+<li><p>取出堆中的最小值(也是数组的第一个值), 然后把该最小值所处的链表的下一个值放在数组的第一个位置。如果链表中有一个已经为空（元素已经都被取出），则改变heap的大小。此步骤的时间复杂度为<code>$O(logN)$</code>.</p>
 </li>
 <li><p>不断的重复步骤二，直到所有的链表都为空。</p>
 </li>
