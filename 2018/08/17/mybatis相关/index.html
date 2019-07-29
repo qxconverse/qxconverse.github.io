@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Java,面试,">
+  <meta name="keywords" content="Java,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="mybatis中#和$的区别 #会进行预编译，按照类型匹配的，用于变量替换。 $不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它 如果两个都可以用，最好用# select的时候一定要加resultType或者resultMap，否则报错 123&amp;lt;select id=&amp;quot;xxx&amp;quot; resultType=&amp;quot;int&amp;quot;&amp;gt;    xxx&amp;lt;/">
-<meta name="keywords" content="Java,面试">
+<meta name="description" content="mybatis中#和$的区别 #会进行预编译，按照类型匹配的，用于变量替换。 $不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它 如果两个都可以用，最好用# select的时候一定要加resultType或者resultMap，否则报错 123&amp;lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&amp;gt;    xxx&amp;lt;/select&amp;gt;">
+<meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mybatis相关">
 <meta property="og:url" content="http://yoursite.com/2018/08/17/mybatis相关/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="mybatis中#和$的区别 #会进行预编译，按照类型匹配的，用于变量替换。 $不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它 如果两个都可以用，最好用# select的时候一定要加resultType或者resultMap，否则报错 123&amp;lt;select id=&amp;quot;xxx&amp;quot; resultType=&amp;quot;int&amp;quot;&amp;gt;    xxx&amp;lt;/">
+<meta property="og:description" content="mybatis中#和$的区别 #会进行预编译，按照类型匹配的，用于变量替换。 $不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它 如果两个都可以用，最好用# select的时候一定要加resultType或者resultMap，否则报错 123&amp;lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&amp;gt;    xxx&amp;lt;/select&amp;gt;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-28T14:41:11.519Z">
+<meta property="og:updated_time" content="2019-07-29T16:11:27.503Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis相关">
-<meta name="twitter:description" content="mybatis中#和$的区别 #会进行预编译，按照类型匹配的，用于变量替换。 $不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它 如果两个都可以用，最好用# select的时候一定要加resultType或者resultMap，否则报错 123&amp;lt;select id=&amp;quot;xxx&amp;quot; resultType=&amp;quot;int&amp;quot;&amp;gt;    xxx&amp;lt;/">
+<meta name="twitter:description" content="mybatis中#和$的区别 #会进行预编译，按照类型匹配的，用于变量替换。 $不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它 如果两个都可以用，最好用# select的时候一定要加resultType或者resultMap，否则报错 123&amp;lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&amp;gt;    xxx&amp;lt;/select&amp;gt;">
 
 
 
@@ -361,7 +361,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  94
+                  90
                 </span>
               
 
@@ -403,7 +403,7 @@
 <p><code>$</code>不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它</p>
 <p>如果两个都可以用，最好用#</p>
 <p>select的时候一定要加resultType或者resultMap，否则报错</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&gt;</span><br><span class="line">    xxx</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"xxx"</span> <span class="attr">resultType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    xxx</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -422,8 +422,6 @@
           
             <a href="/tags/Java/" rel="tag"># Java</a>
           
-            <a href="/tags/面试/" rel="tag"># 面试</a>
-          
         </div>
       
 
@@ -435,8 +433,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/17/Java abstract class和interface/" rel="next" title="Java抽象类和接口的区别">
-                <i class="fa fa-chevron-left"></i> Java抽象类和接口的区别
+              <a href="/2018/08/17/java虚拟机/" rel="next" title="Java虚拟机">
+                <i class="fa fa-chevron-left"></i> Java虚拟机
               </a>
             
           </div>
@@ -445,8 +443,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/17/java中的单例模式/" rel="prev" title="Java中的单例模式">
-                Java中的单例模式 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/18/IO模型/" rel="prev" title="IO模型">
+                IO模型 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -517,7 +515,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -528,7 +526,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -539,7 +537,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -612,7 +610,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">56.8k</span>
+    <span title="Site words total count">48.5k</span>
   
 </div>
 

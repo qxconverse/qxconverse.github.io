@@ -272,7 +272,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/Git与SVN操作/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/23/韭菜炒蛋的蛋是同桌上的宫保鸡丁上的鸡下的蛋的概率/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -291,7 +291,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/17/Git与SVN操作/" itemprop="url">Git与SVN相关的操作</a></h1>
+                <a class="post-title-link" href="/2016/12/23/韭菜炒蛋的蛋是同桌上的宫保鸡丁上的鸡下的蛋的概率/" itemprop="url">韭菜炒蛋的蛋是同桌上的宫保鸡丁上的鸡下的蛋的概率</a></h1>
         
 
         <div class="post-meta">
@@ -303,8 +303,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T12:09:52+08:00">
-                2018-07-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-23T10:15:02+08:00">
+                2016-12-23
               </time>
             
 
@@ -326,8 +326,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
+                  <a href="/categories/随想/" itemprop="url" rel="index">
+                    <span itemprop="name">随想</span>
                   </a>
                 </span>
 
@@ -357,211 +357,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  845
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Git的学习"><a href="#Git的学习" class="headerlink" title="Git的学习"></a>Git的学习</h4><p>git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。</p>
-<p>先手动删除文件，然后使用<code>git rm &lt;file&gt;</code>和<code>git add &lt;file&gt;</code>效果是一样的。</p>
-<p>切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。</p>
-<p>Git鼓励大量使用分支：</p>
-<p>查看分支：<code>git branch</code></p>
-<p>创建分支：<code>git branch &lt;name&gt;</code></p>
-<p>切换分支：<code>git checkout &lt;name&gt;</code></p>
-<p>创建+切换分支：<code>git checkout -b &lt;name&gt;</code></p>
-<p>合并某分支到当前分支：<code>git merge &lt;name&gt;</code></p>
-<p>删除分支：<code>git branch -d &lt;name&gt;</code></p>
-<p>合并分支时，加上<code>--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。</p>
-<p>新建分支的时候，一定要注意是在哪个分支上建立的。</p>
-<p>在实际开发中，我们应该按照几个基本原则进行分支管理：</p>
-<p>首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；我们每个人都有自己的分支，时不时地往dev分支上合并就可以了。</p>
-<p>所以，团队合作的分支看起来就像这样：</p>
-<p>当修改完bug分支后，要及时地在master上删除该分支，如果切换到dev分支上再删除bug分支，就会报错。</p>
-<p>通常涉及到多个人开发，比如A和B。B从github上clone了项目。并且新建并切换到dev分支了。</p>
-<p>这个时候A（你）和B（你的小伙伴）对同一个文件进行了修改，发生了冲突。假设B先push了，而你后面想push，就会发生错误。所以可以先pull一下。pull也可能失败，原因是没有指定本地dev分支与远程origin/dev分支的链接，根据提示，设置dev和origin/dev的链接：<br><code>git branch --set-upstream-to=origin/dev dev</code></p>
-<p>这回pull成功，但是合并有冲突，需要手动解决，解决的方法和分支管理中的解决冲突完全一样。解决后，add，ci,再push。这样就完美解决了冲突。</p>
-<p>这时B如果要再次编辑，首先需要pull一下。然后再进行后续操作。如果他不pull，push后有冲突，那么解决方法同上A所做的。</p>
-<p>git中对比2个版本之间的改动，比如下面的例子</p>
-<p> <code>git diff xxx1 xxx2 --stat</code></p>
-<p>在add之前，查看修改了哪些代码，很实用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD (filename)</span><br></pre></td></tr></table></figure>
-<p>修改了冲突后，记得add，commit，pull然后再push</p>
-<p>在pull的时候，如果本地有修改过的，那么可以强制恢复到上一次提交的位置。</p>
-<p>关于svn的一些操作：</p>
-<p><code>svn info</code></p>
-<p><code>svn copy</code>，用于新建分支</p>
-<p><code>svn sw</code>，切换分支</p>
-<p>上传文件到linux的命令：<code>rz</code></p>
-<p>解决git pull/push每次都需要输入密码问题：<a href="https://blog.csdn.net/nongweiyilady/article/details/77772602" target="_blank" rel="noopener">https://blog.csdn.net/nongweiyilady/article/details/77772602</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/python相关的/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/17/python相关的/" itemprop="url">python相关的</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T12:09:52+08:00">
-                2018-07-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  289
+                  190
                 </span>
               
 
@@ -600,15 +396,7 @@
       
         
           
-            <h4 id="mac下安装opencv3"><a href="#mac下安装opencv3" class="headerlink" title="mac下安装opencv3"></a>mac下安装opencv3</h4><p>一开始用的brew，但是给我下了py2.7和py3.7，而我的python是anaconda3.5，所以干脆用conda安装。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XFade@qx:~$ conda install -c menpo opencv3</span><br></pre></td></tr></table></figure>
-<p>这样就可以<code>import cv2</code>了</p>
-<h4 id="mac下安装tensorflow"><a href="#mac下安装tensorflow" class="headerlink" title="mac下安装tensorflow"></a>mac下安装tensorflow</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">XFade@qx:~$ conda info --envs</span><br><span class="line">XFade@qx:~$ conda create -n tensorflow python=3.5</span><br><span class="line">XFade@qx:~$ conda info --envs</span><br></pre></td></tr></table></figure>
-<p>后面安装完成后，需要在环境中使用才行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">XFade@qx:~$ source activate tensorflow</span><br><span class="line">(tensorflow) XFade@qx:~$ python</span><br><span class="line">Python 3.5.4 |Continuum Analytics, Inc.| (default, Aug 14 2017, 12:43:10)</span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.57)] on darwin</span><br><span class="line">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span><br><span class="line">&gt;&gt;&gt; import tensorflow as tf</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">// 激活环境</span><br><span class="line">$ source activate tensorflow</span><br><span class="line">// 关闭环境</span><br><span class="line">$ source deactivate</span><br></pre></td></tr></table></figure>
-<p>参考文章：<a href="https://www.jianshu.com/p/d54546ab315e" target="_blank" rel="noopener">https://www.jianshu.com/p/d54546ab315e</a></p>
-<p>当激活了这个环境后，之前安装的很多库就用不了了，只能用该环境下的包。</p>
-<h4 id="python的lambda操作"><a href="#python的lambda操作" class="headerlink" title="python的lambda操作"></a>python的lambda操作</h4><p>按照2个标准来排序，<code>lambda x: [-x[0], x[1]]</code>表示按照第一个数降序，按照第二个数升序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">people = [[9, 0], [7, 0], [1, 9], [3, 0], [2, 7], [5, 3], [6, 0], [3, 4], [6, 2], [5, 2]]</span><br><span class="line">people.sort(key=lambda x: [-x[0], x[1]])</span><br><span class="line"># output</span><br><span class="line"># [[9, 0], [7, 0], [6, 0], [6, 2], [5, 2], [5, 3], [3, 0], [3, 4], [2, 7], [1, 9]]</span><br></pre></td></tr></table></figure></p>
+            <p>一只母鸡从破蛋后开始下蛋的时间为5个月；<br>一只母鸡的平均寿命为4年；<br>一只母鸡平均每天下蛋数目为2个；<br>一个养殖场每平方米平均养母鸡数为8只；<br>假设你在重庆吃饭，某个养鸡厂有100平方米；<br>假设饭店买的母鸡与鸡蛋在同一个卖家买的，此卖家就是开养鸡场的，公鸡除外；<br>假设鸡厂长每天会挑20只母鸡出来卖；<br>因此吃到的韭菜炒蛋的蛋是同桌上的宫保鸡丁上的鸡下的蛋的概率为$\frac{1}{2}\times\frac{43}{48}\times\frac{20}{800}\times\frac{2}{1600}\times\frac{1}{1599=}\frac{8.75}{1000000000}$，即十亿分之9。</p>
 
           
         
@@ -657,7 +445,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/linux常用的操作命令/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/11/影评/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -676,7 +464,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/17/linux常用的操作命令/" itemprop="url">Linux常用命令</a></h1>
+                <a class="post-title-link" href="/2016/12/11/影评/" itemprop="url">影评</a></h1>
         
 
         <div class="post-meta">
@@ -688,8 +476,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T12:09:52+08:00">
-                2018-07-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-11T21:58:17+08:00">
+                2016-12-11
               </time>
             
 
@@ -711,8 +499,543 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
+                  <a href="/categories/art/" itemprop="url" rel="index">
+                    <span itemprop="name">人文艺术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="源代码-2016-12-11"><a href="#源代码-2016-12-11" class="headerlink" title="源代码(2016-12-11)"></a>源代码(2016-12-11)</h4><ol>
+<li><p>一个人死前可以存留8分钟的死前记忆，也就是最后的8分钟记忆片段，斯蒂芬是一个在空难中快要死的人，被一个源代码的科研组织用来执行任务。这个任务就是找出引爆列车的犯人（上午7点多一列列车在芝加哥站附近被恐怖分子引爆），为什么要执行呢，原因该犯人，也就是恐怖分子，声称会在6小时后进行第二次的爆炸袭击，如果能通过这个源代码实验找到犯人的信息，那么科研人员就可以将线索告诉警方，从而在6小时内抓住犯人，挽救更多的人。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/12/11/影评/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </li></ol></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/11/读书笔记/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/12/11/读书笔记/" itemprop="url">读书笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-11T13:48:46+08:00">
+                2016-12-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/art/" itemprop="url" rel="index">
+                    <span itemprop="name">人文艺术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="精神分析引论-2016-12-11"><a href="#精神分析引论-2016-12-11" class="headerlink" title="精神分析引论 (2016-12-11)"></a>精神分析引论 (2016-12-11)</h4><p>一个孩童总要先爱自己，才能学会牺牲一部分自我去关爱他人。即便他从一开始便表现出对某些人的喜爱，那也是因为他需要他们，不能离开他们，总之仍是出于自私的目的。直到后来，爱的冲动才脱离自私。人可以说是因为自私才学会关爱他人。</p>
+<p>今天终于看完了这本很厚的书，前面有关于失误行为和梦的部分看得比较认真，而后面关于精神分析由于其内容太过专业且相对前面示例较少、理论过多而看得比较粗略。</p>
+<p>首先前面两部分是为后面的精神分析做铺垫的，大致上讲的是潜意识和意识的知识，无论是失误行为还是梦，我的理解是对压抑在最深处的潜意识的一种释放，而这些潜意识与大脑中的意识是矛盾的、争锋相对的。而梦境又是很扭曲的，也是有过二级加工的，对一些内容进行过滤；不得不说，弗洛伊德的许多关于此方面的理论都与性挂钩，除此之外，他还很侧重对童年进行研究。比如他强调了儿童时的经历对成年后梦境以及一些精神官能症（比如歇斯底里症，强迫症，妄想症等等）的影响。而性更是与这些相结合起来了，在他的精神分析理论中，这些症状的产生往往是因为在性上面的失败，并强调一旦性方面得到了满足，这些症状便会消失。其中他提出了力比多这个概念，泛指一切身体器官的快感，包括性倒错者和儿童的性生活。精神分析学认为，力比多是一种本能，是一种力量，是人的心理现象发生的驱动力。力比多定理是指：一个人的力比多（性的欲望）是有限的，如果他/她将力比多用在一个人身上，那么用在另一个人身上的分量就会减少。他对症状的化解提出的观点是：将潜意识的东西移到意识中。由于水平有限，暂时的感受就是这些。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/12/11/读书笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/10/22/心理学效应/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/22/心理学效应/" itemprop="url">心理学效应</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-22T13:34:26+08:00">
+                2016-10-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/art/" itemprop="url" rel="index">
+                    <span itemprop="name">人文艺术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  17
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="蝴蝶效应"><a href="#蝴蝶效应" class="headerlink" title="蝴蝶效应"></a>蝴蝶效应</h4><p>上个世纪70年代，美国一个名叫洛伦兹的气象学家在解释空气系统理论时说，亚马逊雨林一只蝴蝶翅膀偶尔振动，也许两周后就会引起美国得克萨斯州的一场龙卷风。　</p>
+<p>蝴蝶效应是说，初始条件十分微小的变化经过不断放大，对其未来状态会造成极其巨大的差别。有些小事可以糊涂，有些小事如经系统放大，则对一个组织、一个国家来说是很重要的，就不能糊涂。  </p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/10/22/心理学效应/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/26/博弈论概念/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/26/博弈论概念/" itemprop="url">博弈论概念</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-26T13:31:34+08:00">
+                2016-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/art/" itemprop="url" rel="index">
+                    <span itemprop="name">人文艺术</span>
                   </a>
                 </span>
 
@@ -781,17 +1104,20 @@
       
         
           
-            <p>查看磁盘的使用情况</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df -h 文件夹名</span><br><span class="line"></span><br><span class="line">du --max-depth=1 -h</span><br><span class="line"></span><br><span class="line">du -sh 文件夹名</span><br></pre></td></tr></table></figure>
-<p>cp用来复制文件或目录，-r -R 递归复制该目录及其子目录内容，-f  不询问而强制复制</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">scp用于在Linux服务器之间复制文件和目录</span><br><span class="line">-v  详细显示输出的具体情况</span><br><span class="line">-r  递归复制整个目录</span><br><span class="line">从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，不然识别不了。</span><br><span class="line">其实可以这样记忆，看以哪个为中心。不管是从远端复制到本地，还是把本地的复制到远端，都在本地操作（主角为本地）。</span><br><span class="line"></span><br><span class="line">scp xxx@xxxxxxx:远程路径 本地路径</span><br></pre></td></tr></table></figure>
-<p>diff 查看两个文件的不同</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff qinxue qinxue.txt &gt; diff-qinxue.txt</span><br></pre></td></tr></table></figure>
-<p>0代表标准输入，1代表标准输出，2代表错误输出，&gt;代表重定向，grep (global search regular expression(RE) and print out the line）代表全面搜索正则表达式并把行打印出来。|代表管道，将前面一个指令传出的正确输出信息传递给下一个命令，作为标准的输入。注意，它具有单向性，也叫半双工管道。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">du --max-depth=1 -h . 1&gt;/home/qinxue/info.txt 2&gt;/home/qinxue/error.txt</span><br><span class="line">du --max-depth=1 -h . 1&gt;/home/qinxue/info.txt 2&gt;/dev/null </span><br><span class="line">du --max-depth=1 -h . 2&gt;/dev/null </span><br><span class="line">du --max-depth=1 -h . 2&gt;/dev/null | grep qinxue</span><br></pre></td></tr></table></figure>
-<p>mac下用不了<code>--max-depth=1</code>，可以直接用<code>-d 1</code>。</p>
-<p>交互式Shell命令，连接服务器，当出现密码的提示时，自动输入。省去了手动输入的麻烦。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/expect</span><br><span class="line">set timeout 30</span><br><span class="line">spawn ssh xx@xxxxxx</span><br><span class="line">expect &quot;password:&quot;</span><br><span class="line">send &quot;xxxxxx\r&quot;</span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
+            <ol>
+<li><p>局中人：在一场竞赛或博弈中，每一个有决策权的参与者成为一个局中人。只有两个局中人的博弈现象称为“两人博弈”,而多于两个局中人的博弈称为 “多人博弈”。 </p>
+</li>
+<li><p>策略：一局博弈中，每个局中人都有选择实际可行的完整的行动方案，即方案不是某阶段的行动方案，而是指导整个行动的一个方案，一个局中人的一个可行的自始至终全局筹划的一个行动方案，称为这个局中人的一个策略。如果在一个博弈中局中人都总共有有限个策略，则称为“有限博弈”，否则称为“无限博弈”。 </p>
+</li>
+<li><p>得失：一局博弈结局时的结果称为得失。每个局中人在一局博弈结束时的得失，不仅与该局中人自身所选择的策略有关，而且与全局中人所取定的一组策略有关。所以，一局博弈结束时每个局中人的“得失”是全体局中人所取定的一组策略的函数，通常称为支付（payoff）函数。 </p>
+</li>
+<li><p>对于博弈参与者来说，存在着一博弈结果 。</p>
+</li>
+<li><p>博弈涉及到均衡：均衡是平衡的意思，在经济学中，均衡意即相关量处于稳定值。在供求关系中，某一商品市场如果在某一价格下，想以此价格买此商品的人均能买到，而想卖的人均能卖出，此时我们就说，该商品的供求达到了均衡。所谓纳什均衡，它是一稳定的博弈结果。</p>
+</li>
+</ol>
+<p>囚徒困境模型</p>
+<p>智猪模型</p>
 
           
         
@@ -840,7 +1166,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/top-down思维/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/13/墨菲定律/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -859,7 +1185,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/23/top-down思维/" itemprop="url">top-down思维</a></h1>
+                <a class="post-title-link" href="/2016/09/13/墨菲定律/" itemprop="url">墨菲定律</a></h1>
         
 
         <div class="post-meta">
@@ -871,8 +1197,362 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-23T10:15:02+08:00">
-                2018-04-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-13T13:28:55+08:00">
+                2016-09-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/art/" itemprop="url" rel="index">
+                    <span itemprop="name">人文艺术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>它源于1949年，一名叫墨菲的美国空军上尉工程师，发现：假定你把一片干面包掉在地毯上，这片面包的两面均可能着地。但假定你把一片一面涂有一层果酱的面包掉在地毯上，常常是带有果酱的一面落在地毯上（麻烦）。换一种说法：如果某件事有可能变坏的话，这种可能就会成为现实。这就是墨菲法则。它的适用范围非常广泛，它揭示的了一种独特的社会及自然现象。它的极端表述是：如果坏事有可能发生，不管这种可能性有多小，它总会发生，并造成最大可能的破坏。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/09/13/墨菲定律/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/05/22/《董小姐》英文翻译/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/05/22/《董小姐》英文翻译/" itemprop="url">《董小姐》英文翻译</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-05-22T10:15:02+08:00">
+                2014-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/art/" itemprop="url" rel="index">
+                    <span itemprop="name">人文艺术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  715
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>最近我对《董小姐》这首歌曲颇有感触，于是打算将它翻译成英文。尽管网上早有了英文版翻译，而且有一些写的非常棒的！我还是决定创作一个粗浅的版本，与大家分享、交流。关于这首歌的主题，流传有很多版本，有人说是写爱情的，也有人说是写朋友间感情的，这些并不重要。在此，我只是简单地将它翻译成英文。如有雷同，纯属巧合。。。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2014/05/22/《董小姐》英文翻译/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/03/22/关于社交网络的感悟/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/03/22/关于社交网络的感悟/" itemprop="url">关于社交网络的感悟</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2014-03-22T10:15:02+08:00">
+                2014-03-22
               </time>
             
 
@@ -925,7 +1605,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  544
+                  1.3k
                 </span>
               
 
@@ -941,7 +1621,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  4
                 </span>
               
             </div>
@@ -963,1090 +1643,17 @@
 
       
         
-          <p>任何事情要养成先宏观再微观，先整体再局部，先一般再具体的思路。多年的沉痛经历告诉自己，这很重要，也是决定你能不能把事情做好的一个关键因素。这里把它称为top-down思维。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/23/top-down思维/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/13/B树和其变体/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/13/B树和其变体/" itemprop="url">B树和其变体</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-13T21:01:00+08:00">
-                2018-04-13
-              </time>
-            
-
-            
-
-            
-          </span>
+          
+            <p>这是一个人人渴望在网络世界中获得存在感的时代！每天，我们都扮演着许许多多的共享与被共享的角色！这些都是我们习以为常，感觉微不足道的事件。我们每天都在不自觉地接受他人的动态和发布我们自己的动态，通过网络社交平台（最典型的是QQ空间）。空间就是我们驻扎在网络虚拟世界中的家，这是一个用大数据堆砌而成的并以时间为轴线的时空。我们每天都在经营着它的建设。数据与时间就是我们的付出，人气与存在感便是我们的收获。这样，我们就不难理解我们日常的“强迫症”了：早上起来第一件事就是登上手机QQ，接着排队买早餐、上课、课间休息、吃饭、睡觉前等随时随地，只要是无聊之时就会刷空间，打发无聊。其内容要么是见闻所感，要么是自嘲人艰，要么是吐槽社会，要么是爆料嗅事，要么是喜大普奔，要么是炫耀生活，要么是转载幽默，要么是感慨人生。。。。。。总之就是感情大杂烩！</p>
+<p>看来（可能有点武断），手机、电脑都是这个时代极具威力的“杀猪刀”，如果运用不当！它们在无声无息中带走我们的青春。手机成了白天的朋友，电脑成了夜晚的伙伴，于是床铺成了清晨的伴侣。。。。。。</p>
+<p>手机、电脑最大的诱惑之一乃是社交平台，现实中我们恐惧与他人交往，因此只能通过虚拟的方式去与Ta们沟通。这并非是一件坏事（毕竟加快了沟通的效率），但是这一切却导致了我们这代人的胆怯与萎靡！</p>
+<p>我们每天渴望着嗅事、笑话，渴望着别人的赞与评论，我们更惊喜于神回复（正所谓语不惊人死不休）！也许这是一种积极乐观的心态，可是稍加分析，便可发现这是掩饰与逃避。要知道，这一切的素材都来源于现实世界，加工却是通过网络，网络是一个宽松自由的工具，可以完成我们在现实中不能完成的事情，我们追求网络中的幽默来减压，这来自现实生活的压力，而不是在现实中减压。说起来，网络只是一个桥梁，不是完全与现实不搭界的东西，这在另一方面又能反映现代社会的高压力环境了。反过来，我们又常常将网络上的表现运用到现实生活中。。。。。。</p>
+<p>这是一个用“吐槽妙语”来渲染感情的时代，我们日常交际用语中表达情感的仅仅局限于那些少个别的词或句子。这些词句诞生于网络，传播于网络，可又来源于现实，而后又在现实中传播！这些词语太多太多，可以反映了一个时代的特征了。比如，“我和我的小伙伴们都惊呆了！”，“土豪，我们做朋友吧？”，“累觉不爱”，“人艰不拆”，“放弃治疗”，“不明觉厉”，“待我长发及腰”，“神马都是浮云”，“正能量”，“逗比”，“基友”，“貌似”，“话说”“操”等等，只要你稍微关注网络，特别是社交、论坛这一块的话，你会知道很多内涵的！似乎我们所有感情都可以用那些词句表达出来。不过，话说回来，那些词也够高度概括的了，就好似C++里面的类，经过继承与派生，都能成就你语言表达的多态性。还有一些神回复，你会发现它们是多么地全能完美！</p>
+<p>可是，长期下去，我们的词汇量越来越少，沟通能力也会逐日下降，往往是一个群体，一代人同时受害的。因为任何一个个体倘若不以那样的方式沟通，就会被其他人所排斥。于是，我们发现，这是一个集体“掉节操”的时代，也就并不稀奇了！</p>
+<p>随着时代的发展，人类越来越懒，很多事都依赖于人工智能。电脑以及其中的多数软件便能提供这些。于是在网络社交平台上，我们的“程序猿”与一些网络大神已经为我们设计了很多固定的话语与表情来表达一连串的感情。就比如QQ里面的一个“（抠鼻）”就能表达巨量的感情。于是，我们常常用表情来交流，这样就显得委婉、贴切、卖萌多了！可是苦闷的事情也来了，倘若跟异性交流，如果对于你的很长的、正经肺腑的话语，她总是以一个表情来打发的话，那么，你就是一个悲剧的人了。</p>
+<p>本文仅仅针对于网络社交平台而做的浅谈，不针对其它的。更没有针对某些人或是群体，毕竟我的生活也离不开这些。。。。。</p>
 
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>B树和其变体是标准的文件组织方法，在绝大多数现代文件系统中得到了广泛的应用。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/13/B树和其变体/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/10/关于回溯法在排列和组合中的应用总结/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/10/关于回溯法在排列和组合中的应用总结/" itemprop="url">关于回溯法在排列和组合中的应用总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-10T14:34:00+08:00">
-                2018-04-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.2k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  6
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="关于回溯法在排列和组合中的应用总结"><a href="#关于回溯法在排列和组合中的应用总结" class="headerlink" title="关于回溯法在排列和组合中的应用总结"></a>关于回溯法在排列和组合中的应用总结</h4><p>下面是一段leetcode讨论区的原话：</p>
-<blockquote>
-<p>Backtracking can be solved always as follows:</p>
-<p>Pick a starting point.<br>while(Problem is not solved)<br>​    For each path from the starting point.<br>​        check if selected path is safe, if yes select it<br>​        and make recursive call to rest of the problem<br>​        before which undo the current move.<br>​    End For<br>If none of the move works out, return false, NO SOLUTON.</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/10/关于回溯法在排列和组合中的应用总结/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/06/计算机视觉特征提取与图像处理总结/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/06/计算机视觉特征提取与图像处理总结/" itemprop="url">计算机视觉特征提取与图像处理总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-06T16:33:43+08:00">
-                2018-04-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  3.1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  10
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="计算机视觉特征提取与图像处理总结"><a href="#计算机视觉特征提取与图像处理总结" class="headerlink" title="计算机视觉特征提取与图像处理总结"></a>计算机视觉特征提取与图像处理总结</h3><p>关于经典的计算机视觉这一块，简单地总结一下，罗列一些知识点，方便以后的再学习或是查阅。之所以称它为经典的，主要是因为里面都是些传统的方法，相较于最近几年才发展起来的深度学习方法而言。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/06/计算机视觉特征提取与图像处理总结/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/06/面试常见问题/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/06/面试常见问题/" itemprop="url">面试常见问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-06T13:48:46+08:00">
-                2018-04-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.9k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  6
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>算法题常见的思路：</p>
-<ol>
-<li>用双指针（甚至多指针）（比如头尾逼近）</li>
-<li>想到二分的思想</li>
-<li>想到patition的思想（快排里的）</li>
-<li>想到用空间换时间</li>
-<li>想到用哈希table（比如用数组构造，或是调用unordered_set或unordered_map）</li>
-<li>想到用查找表（比如map/set等一系列的）</li>
-<li>想到用动态规划或贪心算法</li>
-<li>想到用回朔法</li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/04/06/面试常见问题/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/14/光圈、快门、感光度/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/14/光圈、快门、感光度/" itemprop="url">光圈、快门、感光度</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-14T21:46:59+08:00">
-                2018-02-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/art/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  821
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在理解的光圈和快门的时候，拿眼睛做对比学习效果较好。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/14/光圈、快门、感光度/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/06/新名字的故事/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/06/新名字的故事/" itemprop="url">新名字的故事</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-06T12:18:32+08:00">
-                2018-02-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/art/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  843
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>终于读完了这本书。虽然只是四部曲中的第二部，但是适合现在的我读。这一部讲的大概就是16-24左右的故事。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/06/新名字的故事/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
         
       
     </div>
@@ -2084,7 +1691,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
   </nav>
 
 
@@ -2132,7 +1739,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2143,7 +1750,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2154,7 +1761,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2227,7 +1834,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">56.8k</span>
+    <span title="Site words total count">48.5k</span>
   
 </div>
 

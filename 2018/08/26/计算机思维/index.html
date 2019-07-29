@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！  缓存思想：缓存思想特别重要，这是很多设计中必出现的，无论在操作系统层面还是具体应用层面。比如在内存和CPU之间有寄存器；比如在Redis中有缓存机制；Mybatis也有缓存机制，当某些记录很大，而且基本上不会变，且查询频率很高，那么利用缓存是明智的选择。消息队列 Hash+链表、树形结构思想：说到h">
+<meta name="description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！">
 <meta name="keywords" content="计算机基础">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机思维">
 <meta property="og:url" content="http://yoursite.com/2018/08/26/计算机思维/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！  缓存思想：缓存思想特别重要，这是很多设计中必出现的，无论在操作系统层面还是具体应用层面。比如在内存和CPU之间有寄存器；比如在Redis中有缓存机制；Mybatis也有缓存机制，当某些记录很大，而且基本上不会变，且查询频率很高，那么利用缓存是明智的选择。消息队列 Hash+链表、树形结构思想：说到h">
+<meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-14T02:26:33.144Z">
+<meta property="og:updated_time" content="2019-07-29T15:50:51.447Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机思维">
-<meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！  缓存思想：缓存思想特别重要，这是很多设计中必出现的，无论在操作系统层面还是具体应用层面。比如在内存和CPU之间有寄存器；比如在Redis中有缓存机制；Mybatis也有缓存机制，当某些记录很大，而且基本上不会变，且查询频率很高，那么利用缓存是明智的选择。消息队列 Hash+链表、树形结构思想：说到h">
+<meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！">
 
 
 
@@ -399,6 +399,7 @@
 
       
         <p>在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！</p>
+<a id="more"></a>
 <ol>
 <li>缓存思想：缓存思想特别重要，这是很多设计中必出现的，无论在操作系统层面还是具体应用层面。比如在内存和CPU之间有寄存器；比如在Redis中有缓存机制；Mybatis也有缓存机制，当某些记录很大，而且基本上不会变，且查询频率很高，那么利用缓存是明智的选择。消息队列</li>
 <li>Hash+链表、树形结构思想：说到hash一般会想到hashtable，hashmap等等，树形结构就更多了。共同点是，说到查找，它们是高频词汇。对于无序的东西，我们的查找时间复杂度是n级别的。所以为了优化，会采用2种措施，一种是建立索引，即hash表，计算key值，然后放到对应的位置，如果出现碰撞，通常是加个链表。这样复杂度可以控制在1级别的。凡事都有优缺点，虽然查询快了，但是它是无序的。而如果采用第二种措施，即用树形结构，比如二叉树（红黑树）、B+树等。基本是可以实现logn级别的，虽然慢一些，但其优点是有序。凡是涉及到查找，要想到它们！在ElasticSearch中有这些思想的存在（倒排索引，基于单词文档矩阵模型）。</li>
@@ -441,8 +442,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/20/zookeeper/" rel="next" title="zookeeper知识">
-                <i class="fa fa-chevron-left"></i> zookeeper知识
+              <a href="/2018/08/18/IO模型/" rel="next" title="IO模型">
+                <i class="fa fa-chevron-left"></i> IO模型
               </a>
             
           </div>
@@ -523,7 +524,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -534,7 +535,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -545,7 +546,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -618,7 +619,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">56.8k</span>
+    <span title="Site words total count">48.5k</span>
   
 </div>
 

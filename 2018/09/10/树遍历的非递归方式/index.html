@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="对于先序遍历：  当栈或是当前节点不为空，则进行下面的循环 如果当前节点不会空，则访问该节点，并入栈，并将当前节点指向它的左节点，一直循环，直到当前节点为空 此时说明走到了最左边，则获取栈顶节点，并弹出它，将当前节点设置为它的右节点  对于中序遍历：和先序遍历很像，唯一的区别是遍历左节点的时候不访问，而是在后面访问。具体可以这样思考：如果为先序遍历，那么遍历到某个节点时就立即访问；而中序遍历，由于">
+<meta name="description" content="先序遍历： 当栈或是当前节点不为空，则进行下面的循环 如果当前节点不会空，则访问该节点，并入栈，并将当前节点指向它的左节点，一直循环，直到当前节点为空 此时说明走到了最左边，则获取栈顶节点，并弹出它，将当前节点设置为它的右节点">
 <meta name="keywords" content="算法,数据结构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="树遍历的非递归方式">
 <meta property="og:url" content="http://yoursite.com/2018/09/10/树遍历的非递归方式/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="对于先序遍历：  当栈或是当前节点不为空，则进行下面的循环 如果当前节点不会空，则访问该节点，并入栈，并将当前节点指向它的左节点，一直循环，直到当前节点为空 此时说明走到了最左边，则获取栈顶节点，并弹出它，将当前节点设置为它的右节点  对于中序遍历：和先序遍历很像，唯一的区别是遍历左节点的时候不访问，而是在后面访问。具体可以这样思考：如果为先序遍历，那么遍历到某个节点时就立即访问；而中序遍历，由于">
+<meta property="og:description" content="先序遍历： 当栈或是当前节点不为空，则进行下面的循环 如果当前节点不会空，则访问该节点，并入栈，并将当前节点指向它的左节点，一直循环，直到当前节点为空 此时说明走到了最左边，则获取栈顶节点，并弹出它，将当前节点设置为它的右节点">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-02-14T02:27:36.960Z">
+<meta property="og:updated_time" content="2019-07-29T15:51:19.178Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="树遍历的非递归方式">
-<meta name="twitter:description" content="对于先序遍历：  当栈或是当前节点不为空，则进行下面的循环 如果当前节点不会空，则访问该节点，并入栈，并将当前节点指向它的左节点，一直循环，直到当前节点为空 此时说明走到了最左边，则获取栈顶节点，并弹出它，将当前节点设置为它的右节点  对于中序遍历：和先序遍历很像，唯一的区别是遍历左节点的时候不访问，而是在后面访问。具体可以这样思考：如果为先序遍历，那么遍历到某个节点时就立即访问；而中序遍历，由于">
+<meta name="twitter:description" content="先序遍历： 当栈或是当前节点不为空，则进行下面的循环 如果当前节点不会空，则访问该节点，并入栈，并将当前节点指向它的左节点，一直循环，直到当前节点为空 此时说明走到了最左边，则获取栈顶节点，并弹出它，将当前节点设置为它的右节点">
 
 
 
@@ -361,7 +361,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  969
+                  963
                 </span>
               
 
@@ -398,14 +398,14 @@
       
 
       
-        <p>对于先序遍历：</p>
-<ol>
+        <h4 id="先序遍历："><a href="#先序遍历：" class="headerlink" title="先序遍历："></a>先序遍历：</h4><ol>
 <li>当栈或是当前节点不为空，则进行下面的循环</li>
 <li>如果当前节点不会空，则访问该节点，并入栈，并将当前节点指向它的左节点，一直循环，直到当前节点为空</li>
 <li>此时说明走到了最左边，则获取栈顶节点，并弹出它，将当前节点设置为它的右节点</li>
 </ol>
-<p>对于中序遍历：<br>和先序遍历很像，唯一的区别是遍历左节点的时候不访问，而是在后面访问。具体可以这样思考：如果为先序遍历，那么遍历到某个节点时就立即访问；而中序遍历，由于始终要先访问当前节点的左节点，所以就只是先入栈。</p>
-<p>对于后序遍历：<br>由于要确保先访问左右节点，才能访问当前节点，所以要知道左右节点是否已经访问了，因此需要加一个prev，表示上一次访问的节点。有2种思路：<br>第一种思路：</p>
+<a id="more"></a>
+<h4 id="中序遍历："><a href="#中序遍历：" class="headerlink" title="中序遍历："></a>中序遍历：</h4><p>和先序遍历很像，唯一的区别是遍历左节点的时候不访问，而是在后面访问。具体可以这样思考：如果为先序遍历，那么遍历到某个节点时就立即访问；而中序遍历，由于始终要先访问当前节点的左节点，所以就只是先入栈。</p>
+<h4 id="后序遍历："><a href="#后序遍历：" class="headerlink" title="后序遍历："></a>后序遍历：</h4><p>由于要确保先访问左右节点，才能访问当前节点，所以要知道左右节点是否已经访问了，因此需要加一个prev，表示上一次访问的节点。有2种思路：<br>第一种思路：</p>
 <ol>
 <li>将根节点放入栈中，然后当栈不为空就一直循环</li>
 <li>首先获得栈顶节点作为当前节点，如果它的左右节点都为空，或者左右节点不都为空，但是它们之一刚刚被访问过了（即prev为其中之一），那么就可以保证了左右节点已经被访问过，这时可以访问当前节点，更新prev，并出栈</li>
@@ -523,8 +523,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -541,7 +550,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -552,7 +561,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -563,7 +572,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -609,6 +618,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#先序遍历："><span class="nav-number">1.</span> <span class="nav-text">先序遍历：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#中序遍历："><span class="nav-number">2.</span> <span class="nav-text">中序遍历：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后序遍历："><span class="nav-number">3.</span> <span class="nav-text">后序遍历：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -636,7 +661,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">56.8k</span>
+    <span title="Site words total count">48.5k</span>
   
 </div>
 

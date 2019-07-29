@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="3-24第一讲：密码学基础 区块链中密码学的核心概念：hash和签名 hash，它有三个重要的特性：collision resistance, hiding, puzzle friendly，目前用SHA-256（secure hash algorithm） 碰撞抵制：很难找到x,y使得h(x)=h(y)hiding: x-&amp;gt;h(x)容易，但是h(x)-&amp;gt;x难puzzle friend">
+<meta name="description" content="密码学基础区块链中密码学的核心概念：hash和签名 hash，它有三个重要的特性：collision resistance, hiding, puzzle friendly，目前用SHA-256（secure hash algorithm） 碰撞抵制：很难找到$x,y$，使得$h(x)=h(y)$hiding: $x\rightarrow h(x)$容易，但是$h(x)\rightarrow x$">
 <meta name="keywords" content="区块链">
 <meta property="og:type" content="article">
 <meta property="og:title" content="区块链基础知识">
 <meta property="og:url" content="http://yoursite.com/2019/04/09/区块链基础/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="3-24第一讲：密码学基础 区块链中密码学的核心概念：hash和签名 hash，它有三个重要的特性：collision resistance, hiding, puzzle friendly，目前用SHA-256（secure hash algorithm） 碰撞抵制：很难找到x,y使得h(x)=h(y)hiding: x-&amp;gt;h(x)容易，但是h(x)-&amp;gt;x难puzzle friend">
+<meta property="og:description" content="密码学基础区块链中密码学的核心概念：hash和签名 hash，它有三个重要的特性：collision resistance, hiding, puzzle friendly，目前用SHA-256（secure hash algorithm） 碰撞抵制：很难找到$x,y$，使得$h(x)=h(y)$hiding: $x\rightarrow h(x)$容易，但是$h(x)\rightarrow x$">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-28T15:03:10.104Z">
+<meta property="og:updated_time" content="2019-07-29T15:49:21.280Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="区块链基础知识">
-<meta name="twitter:description" content="3-24第一讲：密码学基础 区块链中密码学的核心概念：hash和签名 hash，它有三个重要的特性：collision resistance, hiding, puzzle friendly，目前用SHA-256（secure hash algorithm） 碰撞抵制：很难找到x,y使得h(x)=h(y)hiding: x-&amp;gt;h(x)容易，但是h(x)-&amp;gt;x难puzzle friend">
+<meta name="twitter:description" content="密码学基础区块链中密码学的核心概念：hash和签名 hash，它有三个重要的特性：collision resistance, hiding, puzzle friendly，目前用SHA-256（secure hash algorithm） 碰撞抵制：很难找到$x,y$，使得$h(x)=h(y)$hiding: $x\rightarrow h(x)$容易，但是$h(x)\rightarrow x$">
 
 
 
@@ -398,16 +398,14 @@
       
 
       
-        <h4 id="3-24"><a href="#3-24" class="headerlink" title="3-24"></a>3-24</h4><p>第一讲：密码学基础</p>
-<p>区块链中密码学的核心概念：hash和签名</p>
+        <h4 id="密码学基础"><a href="#密码学基础" class="headerlink" title="密码学基础"></a>密码学基础</h4><p>区块链中密码学的核心概念：hash和签名</p>
 <p>hash，它有三个重要的特性：collision resistance, hiding, puzzle friendly，目前用SHA-256（secure hash algorithm）</p>
-<p>碰撞抵制：很难找到x,y使得h(x)=h(y)<br>hiding: x-&gt;h(x)容易，但是h(x)-&gt;x难<br>puzzle friendly：其分布难以控制</p>
+<p>碰撞抵制：很难找到$x,y$，使得$h(x)=h(y)$<br>hiding: $x\rightarrow h(x)$容易，但是$h(x)\rightarrow x$难<br>puzzle friendly：其分布难以控制</p>
 <p>比如sealed envelope，A方发布消息，B方接受消息。hiding可以保证B方很难破解消息，而碰撞抵制可以防止A方进行篡改。这个签名过的消息则保存在可信的第三方。</p>
-<p>在密码学中，分为对称加密与非对称加密。非对称加密中，包含有公钥与私钥(public key, private key)。pk加密，sk解密。需要注意的是用的是同一人的pk和sk。而签名正好相反，sk签名，pk验证。</p>
+<p>在密码学中，分为对称加密与非对称加密。非对称加密中，包含有公钥与私钥$(public key, private key)$。pk加密，sk解密。需要注意的是用的是同一人的pk和sk。而签名正好相反，sk签名，pk验证。</p>
 <p>区块链中，发送消息，通常是先hash，然后再签名。</p>
 <a id="more"></a>
-<h4 id="3-25"><a href="#3-25" class="headerlink" title="3-25"></a>3-25</h4><p>第二讲：数据结构</p>
-<p>比特币中的一个数据结构是区块链</p>
+<h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><p>比特币中的一个数据结构是区块链</p>
 <p>重要概念：hash指针，除了包含地址，还包含结构体的hash值（为的是防篡改）</p>
 <p>区块链是使用了hash指针的链表（linked list）</p>
 <p>某个区块里面的hash指针的取值为，前面整个区块的内容和它里面的指针一起hash得到的结果。</p>
@@ -418,8 +416,7 @@
 <p>每个区块分为块头和块身，block header和block body。block header只记录root hash，而具体的交易记录在block body中。</p>
 <p>merkle proof，是一连串的merkle路径，其可以证明merkle tree中包含了某个交易。（复杂度logn）</p>
 <p>sorted merkle tree（对交易块取hash值，并排序），用于不存在证明（这样的复杂度还是logn）。比特币中因为不需要不存在证明，所以不是用排序merkle tree</p>
-<h4 id="3-26"><a href="#3-26" class="headerlink" title="3-26"></a>3-26</h4><p>第三讲 协议</p>
-<p>比特币的共识机制</p>
+<h4 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h4><p>比特币的共识机制</p>
 <p>普通的数字货币的问题：</p>
 <p>双花攻击</p>
 <p>double spending attack</p>
@@ -435,7 +432,7 @@
 <p>bitcoin script</p>
 <p>每个区块分为块头和块身</p>
 <p>block header: version, hash of previous block header, merkle root hash, target, nonce</p>
-<p>H(block header) &lt;= target</p>
+<p>$H(block header) &lt;= target$</p>
 <p>hash的值是针对block header的</p>
 <p>block body: transaction list</p>
 <p>节点分为：full node和light node</p>
@@ -463,8 +460,7 @@
 <p>解puzzle，来获得记账权，没有捷径（puzzle friendly），只能一个nonce一个nonce地计算。</p>
 <p>争夺记账权的过程称为挖矿（mining）</p>
 <p>每一个区块都是被挖出来的。</p>
-<h4 id="4-1"><a href="#4-1" class="headerlink" title="4.1"></a>4.1</h4><p>第四讲 实现</p>
-<p>transaction-based ledger 基于交易的账本（隐私保护好）</p>
+<h4 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h4><p>transaction-based ledger 基于交易的账本（隐私保护好）</p>
 <p>需要说明币的来源和去处，没有账户的概念</p>
 <p>UTXO: unspent transaction output</p>
 <p>每个交易有多个输入和多个输出</p>
@@ -491,18 +487,16 @@
 <p>irrevocable ledger</p>
 <p>zero confirmation（交易发生了，但还没有往区块链里面写 ） </p>
 <p>self mining（挖好了先藏着，然后一下全部发出去，前提是算力足够强）</p>
-<h4 id="4-2"><a href="#4-2" class="headerlink" title="4-2"></a>4-2</h4><p>比特币网络、挖矿难度</p>
-<p>设计原则：简单 鲁棒 而不高效</p>
+<h4 id="比特币网络、挖矿难度"><a href="#比特币网络、挖矿难度" class="headerlink" title="比特币网络、挖矿难度"></a>比特币网络、挖矿难度</h4><p>设计原则：简单 鲁棒 而不高效</p>
 <p>比特币中所有的节点都是对等的</p>
 <p>应用层：bitcoin blockchain</p>
 <p>网络层：P2P Overlay network</p>
 <p>每个区块的最大限制为1M</p>
 <p>挖矿难度</p>
-<p>H(block header) &lt;= target</p>
+<p>$H(block header) &lt;= target$</p>
 <p>target越小，越难</p>
 <p>Hash使用的是SHA-256</p>
-<p>2^256</p>
-<p>difficulty = difficulty_1_target / target</p>
+<p>$2^{256}$</p>
 <p>如果挖矿的时间设置得过短，可能会出现很多分叉</p>
 <p>网络延迟过大，分叉情形更加容易出现</p>
 <p>51% attack危害很大</p>
@@ -514,8 +508,7 @@
 <p>由于nbits的存在，恶意节点如果故意不调，会不被接受</p>
 <p>Hash Rate，算力</p>
 <p>挖矿难度与算力增长都大致呈指数级增长</p>
-<h4 id="4-4"><a href="#4-4" class="headerlink" title="4-4"></a>4-4</h4><p>挖矿</p>
-<p>全节点与轻节点</p>
+<h4 id="挖矿"><a href="#挖矿" class="headerlink" title="挖矿"></a>挖矿</h4><p>全节点与轻节点</p>
 <p>是否一致在线</p>
 <p>是否保存整个区块链</p>
 <p>比特币网络中，大多数都是轻节点</p>
@@ -530,8 +523,7 @@
 <p>根据矿工的share计算工作量</p>
 <p>矿池带来的危害，使得51%攻击容易了</p>
 <p>分叉攻击、boycott攻击</p>
-<h4 id="4-5"><a href="#4-5" class="headerlink" title="4-5"></a>4-5</h4><p>比特币的脚本语言</p>
-<p>就是一个栈，基于栈的脚本语言</p>
+<h4 id="比特币的脚本语言"><a href="#比特币的脚本语言" class="headerlink" title="比特币的脚本语言"></a>比特币的脚本语言</h4><p>就是一个栈，基于栈的脚本语言</p>
 <p>唯一能访问的内存空间为栈</p>
 <p>·locktime什么时候生效</p>
 <p>交易产生的时间，区块产生的时间</p>
@@ -549,8 +541,7 @@
 <p>第四种形式：proof of burn</p>
 <p>销毁比特币的情况</p>
 <p>发布交易不需要记账权，发布区块链需要记账权</p>
-<h4 id="4-6"><a href="#4-6" class="headerlink" title="4-6"></a>4-6</h4><p>比特币中的分叉</p>
-<p>fork</p>
+<h4 id="比特币中的分叉"><a href="#比特币中的分叉" class="headerlink" title="比特币中的分叉"></a>比特币中的分叉</h4><p>fork</p>
 <pre><code>state fork 有分歧而产生的分叉
 
     forking attack
@@ -568,8 +559,7 @@ protocol fork 比特币协议发生了变化
         对协议加一些限制，使得在新的协议中不再合法，比如1M-&gt;0.5M，属于临时性的分叉。旧节点认为合法，新节点认为非法的。反之，新节点认为合法的，旧节点也认为合法的，所以旧节点会自动合并进去。旧节点如果不更新，会挖很多无用的块（浪费时间）。还有一个例子，出现了coinbase域，可以作为extra nonce（不止8字节）。本来nonce只有4bytes。手机上app里面的基本上都是轻节点。UTXO组成一个merkle tree，其根hash值放入到coinbase。（只要拥有半数以上算力节点更新了，就不会出现永久性分叉）
 </code></pre><p>判断是软硬分叉，核心看新和旧相互是否认可为合法的。</p>
 <p>P2SH（pay to script hash，后来加进去的）属于软分叉</p>
-<h4 id="4-8"><a href="#4-8" class="headerlink" title="4-8"></a>4-8</h4><p>回答（提问，巩固知识）</p>
-<p>转账时，不要求收款人在线。该交易只需要记录就可以。</p>
+<h4 id="回答（提问，巩固知识）"><a href="#回答（提问，巩固知识）" class="headerlink" title="回答（提问，巩固知识）"></a>回答（提问，巩固知识）</h4><p>转账时，不要求收款人在线。该交易只需要记录就可以。</p>
 <p>创建账户时，其它节点都不知道，第一次转账后才会通知其它节点。</p>
 <p>私钥丢失了，由于去中心化，没办法找回密码，账户里面的钱就没有了，永远取不出来了。</p>
 <p>如果私钥泄露了，可以把钱转到另外的安全账户上。公私钥一旦生成就不能更改了，所以只能重新创建一个账号。</p>
@@ -578,8 +568,7 @@ protocol fork 比特币协议发生了变化
 <p>coinbase tx（发布的区块中有一个铸币交易，A为挖到的人）   ——&gt; A，如果要偷答案，就会导致coinbase tx变化，这样根hash值就会变，这样原来找到</p>
 <p> 事先不需要知道哪个矿工获得交易费，一个交易会有很多个输入与输出，当total inputs &gt; total outputs时，差值作为交易费。哪个矿工挖到了，就可以计算出交易费。</p>
 <p>每天产生的区块数目差不多的，交易数目的变化主要取决于每个区块中包含的交易数目。</p>
-<h4 id="4-9"><a href="#4-9" class="headerlink" title="4-9"></a>4-9</h4><p>bitcoin and anonymity</p>
-<p>与隐私保护有关</p>
+<h4 id="bitcoin-and-anonymity"><a href="#bitcoin-and-anonymity" class="headerlink" title="bitcoin and anonymity"></a>bitcoin and anonymity</h4><p>与隐私保护有关</p>
 <p>pseudonymity（一种假的匿名）</p>
 <p>比特币的匿名性比真实货币差，比电子银行好。</p>
 <p>影响比特币匿名性的：</p>
@@ -592,11 +581,11 @@ protocol fork 比特币协议发生了变化
 <p>匿名性不好的本质：公开的，不可篡改的</p>
 <p>零知识证明：</p>
 <p>同态隐藏</p>
-<p> x!=y, E(x)!=E(y)</p>
-<p>E(x)-&gt;x很难</p>
+<p>$ x\neq y, E(x)\neq E(y)$</p>
+<p>$E(x)\rightarrow x$很难</p>
 <p>给定E(x)和E(y)，很容易计算出某些关于x,y的加密函数值</p>
-<p>同态加法：E(x)、E(y) -&gt; E(x+y)</p>
-<p>同态乘法：E(x)、E(y) -&gt; E(xy)</p>
+<p>同态加法：$E(x)、E(y) \rightarrow  E(x+y)$</p>
+<p>同态乘法：$E(x)、E(y) \rightarrow E(xy)$</p>
 <p>盲签</p>
 <p>具有更好的匿名性：零币和零钞（匿名性来源于密码学保证，它们都不主流）</p>
 <p>思考：</p>
@@ -739,7 +728,7 @@ protocol fork 比特币协议发生了变化
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -750,7 +739,7 @@ protocol fork 比特币协议发生了变化
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -761,7 +750,7 @@ protocol fork 比特币协议发生了变化
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -816,7 +805,7 @@ protocol fork 比特币协议发生了变化
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-24"><span class="nav-number">1.</span> <span class="nav-text">3-24</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-25"><span class="nav-number">2.</span> <span class="nav-text">3-25</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-26"><span class="nav-number">3.</span> <span class="nav-text">3-26</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1"><span class="nav-number">4.</span> <span class="nav-text">4.1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2"><span class="nav-number">5.</span> <span class="nav-text">4-2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4"><span class="nav-number">6.</span> <span class="nav-text">4-4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-5"><span class="nav-number">7.</span> <span class="nav-text">4-5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-6"><span class="nav-number">8.</span> <span class="nav-text">4-6</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-8"><span class="nav-number">9.</span> <span class="nav-text">4-8</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-9"><span class="nav-number">10.</span> <span class="nav-text">4-9</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#密码学基础"><span class="nav-number">1.</span> <span class="nav-text">密码学基础</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据结构"><span class="nav-number">2.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#协议"><span class="nav-number">3.</span> <span class="nav-text">协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现"><span class="nav-number">4.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比特币网络、挖矿难度"><span class="nav-number">5.</span> <span class="nav-text">比特币网络、挖矿难度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#挖矿"><span class="nav-number">6.</span> <span class="nav-text">挖矿</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比特币的脚本语言"><span class="nav-number">7.</span> <span class="nav-text">比特币的脚本语言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比特币中的分叉"><span class="nav-number">8.</span> <span class="nav-text">比特币中的分叉</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#回答（提问，巩固知识）"><span class="nav-number">9.</span> <span class="nav-text">回答（提问，巩固知识）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#bitcoin-and-anonymity"><span class="nav-number">10.</span> <span class="nav-text">bitcoin and anonymity</span></a></li></ol></div>
             
 
           </div>
@@ -850,7 +839,7 @@ protocol fork 比特币协议发生了变化
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">56.8k</span>
+    <span title="Site words total count">48.5k</span>
   
 </div>
 
