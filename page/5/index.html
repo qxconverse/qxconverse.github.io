@@ -230,12 +230,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-自定义页面">
-          <a href="/hahaa/" rel="section">
+        <li class="menu-item menu-item-人文艺术">
+          <a href="/categories/人文艺术" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
-            自定义页面
+            人文艺术
           </a>
         </li>
       
@@ -465,7 +465,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/Java abstract class和interface/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/mybatis相关/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -484,7 +484,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/17/Java abstract class和interface/" itemprop="url">Java抽象类和接口的区别</a></h1>
+                <a class="post-title-link" href="/2018/08/17/mybatis相关/" itemprop="url">Mybatis相关</a></h1>
         
 
         <div class="post-meta">
@@ -558,20 +558,12 @@
       
         
           
-            <p>两者的共同点：</p>
-<ol>
-<li>都可以实现抽象化，都不能实例化</li>
-<li>interface的实现类以及abstract class的子类都需要实现已经声明的抽象方法</li>
-</ol>
-<p>区别：</p>
-<ol>
-<li>一个类可以实现多个interface，而只能继承一个抽象类</li>
-<li>interface强调特定功能的实现，而abstract class强调所属关系，所以interface设计思想是like-a，而abstract class的设计思想是is-a</li>
-<li>interface不能有自己的私有变量和方法，而abstract class可以有</li>
-<li>interface里面的所有方法都是抽象方法，实现类必须实现，而abstract class的子类可以有选择地实现。具体是，abstract class中的类不都是抽象方法，抽象方法子类必须实现，而非抽象方法，它自己实现。而且对于抽象方法，子类可以选择继续让它抽象，由该子类的子类去实现，这是该子类必须也声明为abstract class。</li>
-</ol>
-<p>参考博客：<a href="https://blog.csdn.net/b271737818/article/details/3950245" target="_blank" rel="noopener">https://blog.csdn.net/b271737818/article/details/3950245</a></p>
-
+            <p>mybatis中<code>#</code>和<code>$</code>的区别</p>
+<p><code>#</code>会进行预编译，按照类型匹配的，用于变量替换。</p>
+<p><code>$</code>不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它</p>
+<p>如果两个都可以用，最好用#</p>
+<p>select的时候一定要加resultType或者resultMap，否则报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&gt;</span><br><span class="line">    xxx</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
           
         
       
@@ -761,7 +753,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/mybatis相关/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/Java中的序列化/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -780,7 +772,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/17/mybatis相关/" itemprop="url">Mybatis相关</a></h1>
+                <a class="post-title-link" href="/2018/08/17/Java中的序列化/" itemprop="url">Java中的序列化</a></h1>
         
 
         <div class="post-meta">
@@ -854,12 +846,14 @@
       
         
           
-            <p>mybatis中<code>#</code>和<code>$</code>的区别</p>
-<p><code>#</code>会进行预编译，按照类型匹配的，用于变量替换。</p>
-<p><code>$</code>不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它</p>
-<p>如果两个都可以用，最好用#</p>
-<p>select的时候一定要加resultType或者resultMap，否则报错</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&gt;</span><br><span class="line">    xxx</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+            <p>Java中的序列化和反序列化（以字节流的形式传播）的优点在于：</p>
+<ol>
+<li>可以持久化</li>
+<li>便于网络间的通信</li>
+</ol>
+<p>Java中使用ObjectOutputStream类里面的writeObject将对象序列化为字节序列，而ObjectInputStream类里面的readObject将字节序列反序列化为对象。</p>
+<p>但是声明为static和transient的成员数据不能实例化。</p>
+
           
         
       
