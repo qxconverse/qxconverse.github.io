@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Git的学习git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。 先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支： 查">
+<meta name="description" content="Git的基础知识git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。 先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支：">
 <meta name="keywords" content="版本控制">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git与SVN相关的操作">
-<meta property="og:url" content="http://yoursite.com/2018/07/17/Git与SVN操作/index.html">
+<meta property="og:title" content="Git相关的操作">
+<meta property="og:url" content="http://yoursite.com/2018/07/17/Git操作/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="Git的学习git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。 先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支： 查">
+<meta property="og:description" content="Git的基础知识git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。 先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-29T06:16:11.889Z">
+<meta property="og:updated_time" content="2019-10-08T12:03:43.985Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git与SVN相关的操作">
-<meta name="twitter:description" content="Git的学习git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。 先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支： 查">
+<meta name="twitter:title" content="Git相关的操作">
+<meta name="twitter:description" content="Git的基础知识git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。 先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支：">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/17/Git与SVN操作/">
+  <link rel="canonical" href="http://yoursite.com/2018/07/17/Git操作/">
 
 
 
 
 
-  <title>Git与SVN相关的操作 | Xxqin's Blog</title>
+  <title>Git相关的操作 | Xxqin's Blog</title>
   
 
 
@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/Git与SVN操作/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/Git操作/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -300,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Git与SVN相关的操作</h1>
+          <h1 class="post-title" itemprop="name headline">Git相关的操作</h1>
         
 
         <div class="post-meta">
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  845
+                  1.1k
                 </span>
               
 
@@ -408,7 +408,7 @@
       
 
       
-        <h4 id="Git的学习"><a href="#Git的学习" class="headerlink" title="Git的学习"></a>Git的学习</h4><p>git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。</p>
+        <h4 id="Git的基础知识"><a href="#Git的基础知识" class="headerlink" title="Git的基础知识"></a>Git的基础知识</h4><p>git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。</p>
 <p>先手动删除文件，然后使用<code>git rm &lt;file&gt;</code>和<code>git add &lt;file&gt;</code>效果是一样的。</p>
 <p>切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。</p>
 <p>Git鼓励大量使用分支：</p>
@@ -434,12 +434,21 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD (filename)</span><br></pre></td></tr></table></figure>
 <p>修改了冲突后，记得add，commit，pull然后再push</p>
 <p>在pull的时候，如果本地有修改过的，那么可以强制恢复到上一次提交的位置。</p>
-<p>关于svn的一些操作：</p>
-<p><code>svn info</code></p>
-<p><code>svn copy</code>，用于新建分支</p>
-<p><code>svn sw</code>，切换分支</p>
+<p>修改了代码后，想去掉修改：<code>git co.</code></p>
+<p>修改了代码后，add了，但想撤回：<code>git reset HEAD .</code></p>
+<p>修改了代码后，add/commit了，但想撤回：<code>git reset —hard xxxxxxxxx</code></p>
 <p>上传文件到linux的命令：<code>rz</code></p>
 <p>解决git pull/push每次都需要输入密码问题：<a href="https://blog.csdn.net/nongweiyilady/article/details/77772602" target="_blank" rel="noopener">https://blog.csdn.net/nongweiyilady/article/details/77772602</a></p>
+<h4 id="Git最佳实践："><a href="#Git最佳实践：" class="headerlink" title="Git最佳实践："></a>Git最佳实践：</h4><ol>
+<li>要经常提交（细粒度地提交）</li>
+<li>将功能分成很多小块，每次全部完成某个小块时再提交，不要还没完成就提交</li>
+<li>如果没完成，而需要切换分支或pull操作，可以先stash一下</li>
+<li>提交（commit）之前要确保已有的代码测试通过，且不影响到其它代码</li>
+<li>提交message要说明，为何变更以及和之前的区别，用现在时态</li>
+<li>版本控制与备份有区别，应当遵循前面5条实践规则，而不要仅仅把它当做备份的工具</li>
+<li>要经常使用branch，比如开发的新特性分支、修改的bug分支等等</li>
+<li>工作流程的规则要保持一致，至少要和团队一致</li>
+</ol>
 
       
     </div>
@@ -470,8 +479,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/23/top-down思维/" rel="next" title="top-down思维">
-                <i class="fa fa-chevron-left"></i> top-down思维
+              <a href="/2018/07/17/linux常用的操作命令/" rel="next" title="Linux常用命令">
+                <i class="fa fa-chevron-left"></i> Linux常用命令
               </a>
             
           </div>
@@ -480,8 +489,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/17/linux常用的操作命令/" rel="prev" title="Linux常用命令">
-                Linux常用命令 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/17/python相关的/" rel="prev" title="python相关的">
+                python相关的 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -561,7 +570,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -638,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Git的学习"><span class="nav-number">1.</span> <span class="nav-text">Git的学习</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Git的基础知识"><span class="nav-number">1.</span> <span class="nav-text">Git的基础知识</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Git最佳实践："><span class="nav-number">2.</span> <span class="nav-text">Git最佳实践：</span></a></li></ol></div>
             
 
           </div>
@@ -672,7 +681,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">48.5k</span>
+    <span title="Site words total count">49.2k</span>
   
 </div>
 
