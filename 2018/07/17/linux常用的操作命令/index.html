@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
 <meta property="og:description" content="查看磁盘的使用情况 12345df -h 文件夹名du --max-depth=1 -hdu -sh 文件夹名 cp用来复制文件或目录，-r -R 递归复制该目录及其子目录内容，-f  不询问而强制复制 1234567scp用于在Linux服务器之间复制文件和目录-v  详细显示输出的具体情况-r  递归复制整个目录从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-29T06:16:56.299Z">
+<meta property="og:updated_time" content="2019-10-31T12:22:00.508Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令">
 <meta name="twitter:description" content="查看磁盘的使用情况 12345df -h 文件夹名du --max-depth=1 -hdu -sh 文件夹名 cp用来复制文件或目录，-r -R 递归复制该目录及其子目录内容，-f  不询问而强制复制 1234567scp用于在Linux服务器之间复制文件和目录-v  详细显示输出的具体情况-r  递归复制整个目录从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，">
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  437
+                  451
                 </span>
               
 
@@ -419,6 +419,7 @@
 <p>mac下用不了<code>--max-depth=1</code>，可以直接用<code>-d 1</code>。</p>
 <p>交互式Shell命令，连接服务器，当出现密码的提示时，自动输入。省去了手动输入的麻烦。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/expect</span><br><span class="line">set timeout 30</span><br><span class="line">spawn ssh xx@xxxxxx</span><br><span class="line">expect &quot;password:&quot;</span><br><span class="line">send &quot;xxxxxx\r&quot;</span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;&#123;print $2&#125;&apos; a.txt | sort | uniq &gt; b.txt</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -449,8 +450,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/17/Git操作/" rel="next" title="Git相关的操作">
-                <i class="fa fa-chevron-left"></i> Git相关的操作
+              <a href="/2018/04/23/top-down思维/" rel="next" title="top-down思维">
+                <i class="fa fa-chevron-left"></i> top-down思维
               </a>
             
           </div>
@@ -459,8 +460,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/17/mybatis相关/" rel="prev" title="Mybatis相关">
-                Mybatis相关 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/17/Git操作/" rel="prev" title="Git相关的操作">
+                Git相关的操作 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
