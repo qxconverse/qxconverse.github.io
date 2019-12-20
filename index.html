@@ -435,10 +435,191 @@
 <p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga37k2fg5vj30um0cbwh4.jpg" alt="WeChatWorkScreenshot_c1ec2580-6763-4d8d-964d-04a191bd83be"></p>
 <p>等SpringBoot项目启动完成后，访问地址：<code>http://localhost:8888/user/getAll</code>，由于该接口内部会调用UserController类中的某个方法。从日志中可以看出，已经完成了探针操作，即输出了调用该方法的耗时。</p>
 <p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga387w7jfuj30rv016q2y.jpg" alt="image-20191220153658872"></p>
-<h4 id="附：遇到的坑"><a href="#附：遇到的坑" class="headerlink" title="附：遇到的坑"></a>附：遇到的坑</h4><p>在进行javaagent的实践时，一开始<code>mvn package</code>打出的agent包，在执行探针命令后，发现transformer类中的代码执行到<code>ClassPool pool = ClassPool.getDefault();</code>时就没有下文了。最后意识到，可能是因为jar包中没有javassist的依赖，所以找不到ClassPool类。这个问题隐藏很深，因为没有任何报错。后来依据这篇博文<a href="https://www.jianshu.com/p/9c284ed187e0，" target="_blank" rel="noopener">https://www.jianshu.com/p/9c284ed187e0，</a> 在pom文件中加入<code>maven-assembly-plugin</code>， 这样就可以将依赖包javassist打入jar包了。</p>
+<h4 id="附：遇到的坑"><a href="#附：遇到的坑" class="headerlink" title="附：遇到的坑"></a>附：遇到的坑</h4><p>在进行javaagent的实践时，一开始<code>mvn package</code>打出的agent包，在执行探针命令后，发现transformer类中的代码执行到<code>ClassPool pool = ClassPool.getDefault();</code>时就没有下文了。最后意识到，可能是因为jar包中没有javassist的依赖，所以找不到ClassPool类。这个问题隐藏很深，因为没有任何报错。后来依据这篇博文<a href="https://www.jianshu.com/p/9c284ed187e0" target="_blank" rel="noopener">https://www.jianshu.com/p/9c284ed187e0</a> ，在pom文件中加入<code>maven-assembly-plugin</code>， 这样就可以将依赖包javassist打入jar包了。</p>
 <p>后来遇到了无法加载类的问题，参考这篇博客解决了：<a href="https://www.kagura.me/dev/20190923102501.html" target="_blank" rel="noopener">https://www.kagura.me/dev/20190923102501.html</a></p>
 <p>如果遇到<code>&quot;Invalid constant type 18”</code>的问题，则需要替换依赖版本，javassist要改成3.20版本</p>
 <p>最后遇到的问题<code>javassist Type top (current frame, locals[2]) is not assignable to long</code>，参考了这篇博客解决了，原来是加入的代码问题：<a href="https://stackoverflow.com/questions/34223471/how-to-get-arround-java-lang-verrifyerror" target="_blank" rel="noopener">https://stackoverflow.com/questions/34223471/how-to-get-arround-java-lang-verrifyerror</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/在gitlab项目中添加CI的过程/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/11/在gitlab项目中添加CI的过程/" itemprop="url">在Gitlab项目中添加CI的过程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-11T15:23:52+08:00">
+                2019-12-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  230
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="在gitlab项目中添加CI的过程"><a href="#在gitlab项目中添加CI的过程" class="headerlink" title="在gitlab项目中添加CI的过程"></a>在gitlab项目中添加CI的过程</h4><h5 id="在机器上安装好Docker"><a href="#在机器上安装好Docker" class="headerlink" title="在机器上安装好Docker"></a>在机器上安装好Docker</h5><h5 id="获取gitlab-runner并且运行"><a href="#获取gitlab-runner并且运行" class="headerlink" title="获取gitlab-runner并且运行"></a>获取gitlab-runner并且运行</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name gitlab-runner --restart always \</span><br><span class="line">  -v /srv/gitlab-runner/config:/etc/gitlab-runner \</span><br><span class="line">  -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">  gitlab/gitlab-runner:latest</span><br></pre></td></tr></table></figure>
+<h5 id="进入到项目的CI设置界面，查看下面2个配置参数"><a href="#进入到项目的CI设置界面，查看下面2个配置参数" class="headerlink" title="进入到项目的CI设置界面，查看下面2个配置参数"></a>进入到项目的CI设置界面，查看下面2个配置参数</h5><ol>
+<li>Specify the following URL during the Runner setup: <code>xxx</code></li>
+<li>Use the following registration token during setup: <code>xxx</code></li>
+</ol>
+<p>分别用于下面的url、registration-token的参数配置</p>
+<h5 id="注册runner"><a href="#注册runner" class="headerlink" title="注册runner"></a>注册runner</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register \</span><br><span class="line">  --non-interactive \</span><br><span class="line">  --executor <span class="string">"docker"</span> \</span><br><span class="line">  --docker-image xxx \</span><br><span class="line">  --url <span class="string">"xxx"</span> \</span><br><span class="line">  --registration-token <span class="string">"xxx"</span> \</span><br><span class="line">  --description <span class="string">"docker-runner"</span> \</span><br><span class="line">  --tag-list <span class="string">"xxx"</span> \</span><br><span class="line">  --run-untagged=<span class="string">"true"</span> \</span><br><span class="line">  --locked=<span class="string">"false"</span> \</span><br><span class="line">  --access-level=<span class="string">"not_protected"</span></span><br></pre></td></tr></table></figure>
+<p>注意：其中的xxx是需要根据实际情况进行配置的，包括镜像名称、注册token、标签等，其中后两者可在gitlab项目的CI/CD配置中进行配置</p>
+<p>其中的docker-image可以使用官方默认的，也可以自己生成镜像以适应不同的需求</p>
 
           
         
@@ -1094,6 +1275,179 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/20/监控/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/20/监控/" itemprop="url">监控</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-20T12:09:52+08:00">
+                2019-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  8
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h4><p>red原则：rate error duration</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/15/线程池错误/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1449,7 +1803,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/09/区块链基础/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/06/密码学相关/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -1468,7 +1822,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/09/区块链基础/" itemprop="url">区块链基础知识</a></h1>
+                <a class="post-title-link" href="/2019/08/06/密码学相关/" itemprop="url">密码学相关</a></h1>
         
 
         <div class="post-meta">
@@ -1480,8 +1834,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-09T13:48:46+08:00">
-                2019-04-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-06T12:09:52+08:00">
+                2019-08-06
               </time>
             
 
@@ -1534,368 +1888,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3.7k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  13
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="密码学基础"><a href="#密码学基础" class="headerlink" title="密码学基础"></a>密码学基础</h4><p>区块链中密码学的核心概念：hash和签名</p>
-<p>hash，它有三个重要的特性：collision resistance, hiding, puzzle friendly，目前用SHA-256（secure hash algorithm）</p>
-<p>碰撞抵制：很难找到$x,y$，使得$h(x)=h(y)$<br>hiding: $x\rightarrow h(x)$容易，但是$h(x)\rightarrow x$难<br>puzzle friendly：其分布难以控制</p>
-<p>比如sealed envelope，A方发布消息，B方接受消息。hiding可以保证B方很难破解消息，而碰撞抵制可以防止A方进行篡改。这个签名过的消息则保存在可信的第三方。</p>
-<p>在密码学中，分为对称加密与非对称加密。非对称加密中，包含有公钥与私钥$(public key, private key)$。pk加密，sk解密。需要注意的是用的是同一人的pk和sk。而签名正好相反，sk签名，pk验证。</p>
-<p>区块链中，发送消息，通常是先hash，然后再签名。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/04/09/区块链基础/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/02/经济学记录/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/02/经济学记录/" itemprop="url">经济学记录</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-02T10:15:02+08:00">
-                2019-04-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/art/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.2k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>GNP</p>
-<p>GNP(国民生产总值)与GDP(国内生产总值)都是作为国民收入核算的指标，现在多数国家较多的使用GDP指标。 GNP是与所谓国民原则联系在一起，GDP是与所谓国土原则联系在一起。</p>
-<p>GNP与GDP的关系: GNP=GDP+对外要素收入净额，对外要素收入净额表示本国生产要素在其他国家获得的收入减去本国付给外国生产要素在本国获得的收入。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/04/02/经济学记录/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/27/证件照制作/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/27/证件照制作/" itemprop="url">证件照的制作</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-27T10:15:02+08:00">
-                2019-03-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/art/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  324
+                  114
                 </span>
               
 
@@ -1934,14 +1927,28 @@
       
         
           
-            <h4 id="如何简单地进行证件照的制作？"><a href="#如何简单地进行证件照的制作？" class="headerlink" title="如何简单地进行证件照的制作？"></a>如何简单地进行证件照的制作？</h4><ol>
-<li>使用单反拍摄原照（最好带三脚架），选择好合适的背景颜色（比如白色）</li>
-<li>将图像传到电脑，用ps打开裁剪，如果是一寸，则选择比例为5：7（准确大小为2.5 × 3.5 cm）；如果是二寸，则比例按照（3.5 × 5.3cm）的标准，分辨率选择300像素/英寸。注意点：如果不需要准确的大小，按照比例裁剪就可以，这时图像大一些，打印出来清晰点。</li>
-<li>如果照片背景不是适合的，则使用智能套索工具选择背景，并替换为合适的颜色。</li>
-<li>如果照片需要美白，则先选择command键不放同时点RGB通道，得到RGB通道高光选区，接着新建一个图层，在图层填充白色，如果发现皮肤过于太白，将图层的不透明度调节到合适的。具体教程参考：<a href="https://jingyan.baidu.com/article/48206aeae60025216bd6b35d.html。" target="_blank" rel="noopener">https://jingyan.baidu.com/article/48206aeae60025216bd6b35d.html。</a></li>
-<li>如果不想自己ps修图（比如痘痘、斑纹等细节），可以把照片传入手机，用强大的美图软件搞定。</li>
-<li>将最终的照片打印出来即可，可以买一个小型专业的打印机，调到证件照模式。</li>
-</ol>
+            <table>
+<thead>
+<tr>
+<th>A</th>
+<th>B</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>报文-&gt;Hash算法（比如MD5，SHA256）生成摘要-&gt;私钥（A的）签名</td>
+<td>使用公钥（A的）验证</td>
+<td>A想把签名的消息发给B</td>
+</tr>
+<tr>
+<td>使用公钥（B的）加密</td>
+<td>使用私钥（B的）解密</td>
+<td>A想把加密的消息发给B，让B知道是什么消息</td>
+</tr>
+</tbody>
+</table>
+<p>数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性）</p>
 
           
         
@@ -1990,7 +1997,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/18/生活小窍门/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/06/Nginx相关/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -2009,7 +2016,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/18/生活小窍门/" itemprop="url">生活小窍门</a></h1>
+                <a class="post-title-link" href="/2019/08/06/Nginx相关/" itemprop="url">Nginx相关</a></h1>
         
 
         <div class="post-meta">
@@ -2021,8 +2028,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-18T12:09:52+08:00">
-                2019-01-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-06T12:09:52+08:00">
+                2019-08-06
               </time>
             
 
@@ -2044,8 +2051,8 @@
               
               
                 <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
                   </a>
                 </span>
 
@@ -2075,7 +2082,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  450
+                  98
                 </span>
               
 
@@ -2113,32 +2120,11 @@
 
       
         
-          <ol>
-<li>去紫外线强的地方，一定要涂防晒霜！！比如冬天去高山滑雪</li>
-<li>被晒伤了，可以涂芦荟胶进行修复，而且可以用冷水敷在脸上，不要用热毛巾敷在脸上</li>
-<li>买了的不合身的衣服可以拿到裁缝店里面修一下</li>
-<li>咳嗽的时候，不妨试试冰糖雪梨，把梨切成片，加入冰糖，并煮沸</li>
-<li>坚果富含维生素b</li>
-<li>洗两次脸，第一次温水加洗面奶，第二次冷水</li>
-<li>脸上多油是由于体内湿气重、皮脂腺分泌旺盛</li>
-<li>体内激素，油，脂肪，糖，压力，情绪不稳定，睡眠都会影响脸上的皮肤</li>
-<li>含酒精的东西，比如酒精消毒液，花露水等不能通过安检，因其属于易燃液体</li>
-<li>刀具用品也不能通过安检</li>
-<li>坐飞机坐后排靠窗的位置，可以看到更多的景色</li>
-<li>醉酒、缺觉、分心会影响到前额皮质</li>
-<li>多巴胺和上瘾行为有关</li>
-<li>焦虑、愤怒、抑郁和孤独都与较低的心率变异度和较差的自控力有关</li>
-<li>还有一些减轻压力、保持健康的方法，比如锻炼、保证良好睡眠、保证健康饮食、和朋友家人共度美好时光、参加宗教活动，都能增强身体的意志力储备</li>
-<li>如果你觉得自己没有时间和精力去处理“我想要”做的事，那就把它安排在你意志力最强的时候做</li>
-</ol>
-<hr>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/01/18/生活小窍门/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
+          
+            <h4 id="Nginx相关"><a href="#Nginx相关" class="headerlink" title="Nginx相关"></a>Nginx相关</h4><p>499是nginx自定义的一个状态码，其含义为“client has closed connection”。这很有可能是因为服务器端处理的时间过长，客户端“不耐烦”了。要解决此问题，就需要在程序上面做些优化了。</p>
+<p>大量的429错误，即在一定的时间内用户发送了太多的请求，即超出了“频次限制”。</p>
+
+          
         
       
     </div>
@@ -2176,7 +2162,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2224,7 +2210,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2246,7 +2232,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2319,7 +2305,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">51.1k</span>
+    <span title="Site words total count">53.4k</span>
   
 </div>
 

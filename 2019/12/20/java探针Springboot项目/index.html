@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1ga36ws1ybsj309e08vjrq.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1ga37k2fg5vj30um0cbwh4.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1ga387w7jfuj30rv016q2y.jpg">
-<meta property="og:updated_time" content="2019-12-20T12:44:52.180Z">
+<meta property="og:updated_time" content="2019-12-20T12:52:30.340Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java探针SpringBoot项目">
 <meta name="twitter:description" content="Java探针SpringBoot项目通过本博客，您能完成的目标是  创建一个javaagent项目，并打包成探针包（agent包） 监控已有的SpringBoot项目某个类下所有方法的执行时间  需要的环境  Idea开发环境 javassist依赖包 SpringBoot web项目  javaagent项目创建一个maven项目，其目录结构如下：  核心为MyAgent类和MyTransfor">
@@ -441,7 +441,7 @@
 <p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga37k2fg5vj30um0cbwh4.jpg" alt="WeChatWorkScreenshot_c1ec2580-6763-4d8d-964d-04a191bd83be"></p>
 <p>等SpringBoot项目启动完成后，访问地址：<code>http://localhost:8888/user/getAll</code>，由于该接口内部会调用UserController类中的某个方法。从日志中可以看出，已经完成了探针操作，即输出了调用该方法的耗时。</p>
 <p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga387w7jfuj30rv016q2y.jpg" alt="image-20191220153658872"></p>
-<h4 id="附：遇到的坑"><a href="#附：遇到的坑" class="headerlink" title="附：遇到的坑"></a>附：遇到的坑</h4><p>在进行javaagent的实践时，一开始<code>mvn package</code>打出的agent包，在执行探针命令后，发现transformer类中的代码执行到<code>ClassPool pool = ClassPool.getDefault();</code>时就没有下文了。最后意识到，可能是因为jar包中没有javassist的依赖，所以找不到ClassPool类。这个问题隐藏很深，因为没有任何报错。后来依据这篇博文<a href="https://www.jianshu.com/p/9c284ed187e0，" target="_blank" rel="noopener">https://www.jianshu.com/p/9c284ed187e0，</a> 在pom文件中加入<code>maven-assembly-plugin</code>， 这样就可以将依赖包javassist打入jar包了。</p>
+<h4 id="附：遇到的坑"><a href="#附：遇到的坑" class="headerlink" title="附：遇到的坑"></a>附：遇到的坑</h4><p>在进行javaagent的实践时，一开始<code>mvn package</code>打出的agent包，在执行探针命令后，发现transformer类中的代码执行到<code>ClassPool pool = ClassPool.getDefault();</code>时就没有下文了。最后意识到，可能是因为jar包中没有javassist的依赖，所以找不到ClassPool类。这个问题隐藏很深，因为没有任何报错。后来依据这篇博文<a href="https://www.jianshu.com/p/9c284ed187e0" target="_blank" rel="noopener">https://www.jianshu.com/p/9c284ed187e0</a> ，在pom文件中加入<code>maven-assembly-plugin</code>， 这样就可以将依赖包javassist打入jar包了。</p>
 <p>后来遇到了无法加载类的问题，参考这篇博客解决了：<a href="https://www.kagura.me/dev/20190923102501.html" target="_blank" rel="noopener">https://www.kagura.me/dev/20190923102501.html</a></p>
 <p>如果遇到<code>&quot;Invalid constant type 18”</code>的问题，则需要替换依赖版本，javassist要改成3.20版本</p>
 <p>最后遇到的问题<code>javassist Type top (current frame, locals[2]) is not assignable to long</code>，参考了这篇博客解决了，原来是加入的代码问题：<a href="https://stackoverflow.com/questions/34223471/how-to-get-arround-java-lang-verrifyerror" target="_blank" rel="noopener">https://stackoverflow.com/questions/34223471/how-to-get-arround-java-lang-verrifyerror</a></p>
@@ -475,8 +475,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/09/awk的使用/" rel="next" title="awk的使用">
-                <i class="fa fa-chevron-left"></i> awk的使用
+              <a href="/2019/12/11/在gitlab项目中添加CI的过程/" rel="next" title="在Gitlab项目中添加CI的过程">
+                <i class="fa fa-chevron-left"></i> 在Gitlab项目中添加CI的过程
               </a>
             
           </div>
@@ -567,7 +567,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -589,7 +589,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -678,7 +678,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">51.1k</span>
+    <span title="Site words total count">53.4k</span>
   
 </div>
 

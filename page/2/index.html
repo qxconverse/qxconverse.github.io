@@ -282,6 +282,1612 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/02/Spring相关/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/02/Spring相关/" itemprop="url">SpringBoot相关</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-02T12:09:52+08:00">
+                2019-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  897
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="SpringBoot相关"><a href="#SpringBoot相关" class="headerlink" title="SpringBoot相关"></a>SpringBoot相关</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Description:</span><br><span class="line"></span><br><span class="line">Field threadPoolTaskExecutor in xxqin.task.AsyncTask required a single bean, but 2 were found:</span><br><span class="line">	- mailSendTaskAsyncPool: defined by method &apos;mailSendTaskAsyncPool&apos; in class path resource [xxqin/config/ThreadPoolConfig.class]</span><br><span class="line">	- messageSendTaskAsyncPool: defined by method &apos;messageSendTaskAsyncPool&apos; in class path resource [xxqin/config/ThreadPoolConfig.class]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Action:</span><br><span class="line"></span><br><span class="line">Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed</span><br></pre></td></tr></table></figure>
+<p>关于线程池的使用</p>
+<ol>
+<li>配置线程池，在应用入口或是该配置类上加上@EnableAsync注解。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建线程池</span></span><br><span class="line"><span class="comment">     * 用于手动创建的线程</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ThreadPoolTaskExecutor <span class="title">mailSendTaskAsyncPool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ThreadPoolTaskExecutor executor = <span class="keyword">new</span> ThreadPoolTaskExecutor();</span><br><span class="line">        executor.setCorePoolSize(config.getCorePoolSize());</span><br><span class="line">        executor.setMaxPoolSize(config.getMaxPoolSize());</span><br><span class="line">        executor.setQueueCapacity(config.getQueueCapacity());</span><br><span class="line">        executor.setKeepAliveSeconds(config.getKeepAliveSeconds());</span><br><span class="line">        executor.setThreadNamePrefix(<span class="string">"mail-task-"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// CALLER_RUNS：不在新线程中执行任务，而是由调用者所在的线程来执行</span></span><br><span class="line">        executor.setRejectedExecutionHandler(<span class="keyword">new</span> ThreadPoolExecutor.CallerRunsPolicy());</span><br><span class="line">        executor.initialize();</span><br><span class="line">        <span class="keyword">return</span> executor;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>使用的时候，第一种方式，加上@Async注解，并且指定某个线程池的名字（函数里面直接写调用的逻辑），否则会使用主应用的线程池。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Async</span>(<span class="string">"mailSendTaskAsyncPool"</span>)</span><br><span class="line"><span class="meta">@Scheduled</span>(cron = <span class="string">"0/10 0/1 * * * ? "</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMail</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    logger.info(<span class="string">"send email..."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>第二种方法，加上ThreadPoolTaskExecutor类型的变量，并通过@Qualifier指定某个线程池的名字，并且在函数里面要通过调用该变量的execute方法来执行任务，否则会使用主应用的线程池。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="meta">@Qualifier</span>(<span class="string">"messageSendTaskAsyncPool"</span>)</span><br><span class="line"><span class="keyword">private</span> ThreadPoolTaskExecutor threadPoolTaskExecutor;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">@Scheduled</span>(cron = <span class="string">"0/10 0/1 * * * ? "</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMail</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    threadPoolTaskExecutor.execute(() -&gt; &#123;</span><br><span class="line">        logger.info(<span class="string">"send email..."</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>推荐使用第二种方法，可以在函数里面具体某个地方调用，而不需要把要执行的动作单独写成一个函数。</p>
+<p>需要注意的是，线程池的使用和任务调度是2个不同的东西。可以单独使用任务调度的。或是单独使用线程池。</p>
+<p>countdownlatch的使用</p>
+<ol>
+<li>设置需要计数的个数</li>
+<li>接着设置多个线程跑任务，每个任务跑完后，调用countDown方法。</li>
+<li>此时立即开始调用await方法，让主线程一直等着一段时间。</li>
+<li>如果所有的任务在那段时间内完成了，就继续主线程，此时await返回一个true。同时getCount返回0；</li>
+<li>如果在这段时间内未完成所有的任务，则不会继续等待了，继续执行主线程，此时await返回false，同时getCount返回还剩余的任务数。</li>
+</ol>
+<p>isEmpty和isBlank的区别</p>
+<p>RequestMappingHandlerMapping的类，它可以获取到所有的映射</p>
+<p>表情符号存储</p>
+<ol>
+<li>直接进行字符串拼接</li>
+<li>先转base64编码</li>
+</ol>
+<p>资源：内存/cpu、磁盘IO，网络IO</p>
+<p>木桶原理——性能瓶颈<br>amdahl定律</p>
+<p>排查法：</p>
+<ol>
+<li>cpu idle     top 1/top -p pid H/ </li>
+<li>mem 可用内存  free -m</li>
+<li>disk  df -h /  iostate</li>
+<li>connection tcp连接数</li>
+</ol>
+<p>jvm工具：jstat/jstack</p>
+<p>提高性能的技术</p>
+<ol>
+<li>缓冲（消费系统、redis缓存）</li>
+<li>“池”化、比如线程池、Http连接池、Dubbo连接池、数据库连接池、模型（比如机器学习的模型等）连接池等   池的内存泄漏：httpclient最大连接数；池的连接泄漏、http非200的时候，httpclient不会自动释放，可以finally手动释放或升级httpclient</li>
+<li>重量资源提前加载</li>
+<li>代码优化</li>
+<li>线程池的使用、读写分离锁代替独占锁</li>
+<li>并行代替串行、负载均衡、空间时间相互换</li>
+</ol>
+<p>redis如何管理key? try catch和for循环的位置</p>
+<p>N为CPU的个数<br>cpu密集型、io密集型应用线程池设置的大小，分别为N+1、2N+1</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">org.apache.catalina.connector.ClientAbortException: java.io.IOException: Broken pipe</span><br><span class="line">由于各种原因，客户端断开了连接，这时，服务器再向已经断开连接的客户端写数据时就发生了broken pipe异常</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/31/数据库的一些操作/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/31/数据库的一些操作/" itemprop="url">数据库的一些操作</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-31T12:09:52+08:00">
+                2019-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  95
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="数据库的一些操作"><a href="#数据库的一些操作" class="headerlink" title="数据库的一些操作"></a>数据库的一些操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;character%&apos;;</span><br><span class="line">select length(&apos;aa&apos;);</span><br><span class="line"></span><br><span class="line">ALTER DATABASE</span><br><span class="line">    database_name</span><br><span class="line">    CHARACTER SET = utf8mb4</span><br><span class="line">    COLLATE = utf8mb4_unicode_ci;</span><br><span class="line"></span><br><span class="line">ALTER TABLE</span><br><span class="line">    table_name</span><br><span class="line">    CONVERT TO CHARACTER SET utf8mb4</span><br><span class="line">    COLLATE utf8mb4_unicode_ci;</span><br><span class="line"></span><br><span class="line">ALTER TABLE</span><br><span class="line">    table_name</span><br><span class="line">    CHANGE column_name column_name</span><br><span class="line">    data_type</span><br><span class="line">    CHARACTER SET utf8mb4</span><br><span class="line">    COLLATE utf8mb4_unicode_ci;</span><br><span class="line"></span><br><span class="line">alter table xxx change column_name column_name varchar(20) character set utf8mb4;</span><br><span class="line">show create table xxx\G</span><br><span class="line">show table status from xxx\G</span><br></pre></td></tr></table></figure>
+<p>Collation的概念是字符比较的规则，每种字符集都会有其默认的Collation。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/30/http的请求的一些细节/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/30/http的请求的一些细节/" itemprop="url">Maven相关</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-30T12:09:52+08:00">
+                2019-07-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  450
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="http的请求的一些细节"><a href="#http的请求的一些细节" class="headerlink" title="http的请求的一些细节"></a>http的请求的一些细节</h4><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>示例</th>
+<th>详解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Request URL</td>
+<td>xxx</td>
+<td>请求的URL</td>
+</tr>
+<tr>
+<td>Request Method</td>
+<td>GET</td>
+<td>请求的方法</td>
+</tr>
+<tr>
+<td>Status Code</td>
+<td>200</td>
+<td>状态码</td>
+</tr>
+<tr>
+<td>Remote Address</td>
+<td>xxx</td>
+<td>远程地址（服务器地址）</td>
+</tr>
+<tr>
+<td>Referrer Policy</td>
+<td>no-referrer-when-downgrade</td>
+<td>Referrer策略，可参考<a href="https://www.cnblogs.com/amyzhu/p/9716493.html" target="_blank" rel="noopener">博客</a></td>
+</tr>
+<tr>
+<td>-</td>
+<td>Response Headers</td>
+<td></td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json;charset=UTF-8</td>
+<td>响应的内容类型以及编码</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>Tue, 30 Jul 2019 10:30:54 GMT</td>
+<td>响应的时间</td>
+</tr>
+<tr>
+<td>Transfer-Encoding</td>
+<td>chunked</td>
+<td>传输编码形式，chunked表示数据以一系列分块的形式进行发送</td>
+</tr>
+<tr>
+<td>-</td>
+<td>Request Headers</td>
+<td></td>
+</tr>
+<tr>
+<td>Host</td>
+<td>xxx</td>
+<td>服务器的域名</td>
+</tr>
+<tr>
+<td>Connection</td>
+<td>keep-alive</td>
+<td>决定当前的事务完成后，是否会关闭网络连接。keep-alive表示网络连接是持久的，不会关闭，对同一个服务器的请求可以继续在该连接上完成。</td>
+</tr>
+<tr>
+<td>Pragma</td>
+<td>no-cache</td>
+<td></td>
+</tr>
+<tr>
+<td>Cache-Control</td>
+<td>no-cache</td>
+<td>缓存机制</td>
+</tr>
+<tr>
+<td>X-Requested-With</td>
+<td>XMLHttpRequest</td>
+<td>XMLHttpRequest表示为Ajax请求（异步）</td>
+</tr>
+<tr>
+<td>User-Agent</td>
+<td>xxx</td>
+<td>识别发起请求的用户代理软件的应用类型、操作系统、软件开发商以及版本号</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>application/json</td>
+<td>用于指示资源的MIME类型</td>
+</tr>
+<tr>
+<td>Accept</td>
+<td><code>*/*</code></td>
+<td>告知客户端可以处理的内容类型</td>
+</tr>
+<tr>
+<td>Referer</td>
+<td>xxx</td>
+<td>当前请求页面的来源页面的地址</td>
+</tr>
+<tr>
+<td>Accept-Encoding</td>
+<td>gzip, deflate</td>
+<td>客户端能够理解的内容编码方式</td>
+</tr>
+<tr>
+<td>Accept-Language</td>
+<td>zh-CN,zh;q=0.9,fr;q=0.8,zh-TW;q=0.7,en;q=0.6</td>
+<td>允许客户端声明它可以理解的自然语言</td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>xxx</td>
+<td>服务器发送到用户浏览器并保存在本地的一小块数据，它会在浏览器下次向同一服务器再发起请求时被携带并发送到服务器上。</td>
+</tr>
+</tbody>
+</table>
+<p>Access-Control-Allow-Origin: 对于不需具备凭证（credentials）的请求，服务器会以<code>*</code>作为通配符，从而允许所有域都具有访问资源的权限。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/09/Maven相关/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/09/Maven相关/" itemprop="url">Maven相关</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-09T12:09:52+08:00">
+                2019-07-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  214
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Maven的相关知识"><a href="#Maven的相关知识" class="headerlink" title="Maven的相关知识"></a>Maven的相关知识</h4><p>通常会在本地仓库和远程中央仓库之间搭建一个公司级别的中间仓库，首先会从中间仓库获取，否则，再从远程中央仓库获取。</p>
+<p>Nexus是一个常用的仓库管理器。</p>
+<p>项目中在setting.xml文件里配置自己的中间仓库。</p>
+<p>exclusions的使用：因为存在依赖传递的规则，B依赖A，但是在B项目中不需要A中的某个jar包，则使用此标签。</p>
+<p>dependencyManagement和dependencies的区别，参考地址：<a href="https://www.cnblogs.com/myhappylife/p/5872070.html" target="_blank" rel="noopener">https://www.cnblogs.com/myhappylife/p/5872070.html</a></p>
+<p>maven中的packaging标签，项目的打包类型：pom、jar、war，packing默认是jar类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line">父类型都为pom类型</span><br><span class="line">&lt;packaging&gt;jar&lt;/packaging&gt;</span><br><span class="line">内部调用或者是作服务使用</span><br><span class="line">&lt;packaging&gt;war&lt;/packaging&gt;</span><br><span class="line">需要部署的项目</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/09/区块链基础/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/09/区块链基础/" itemprop="url">区块链基础知识</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-09T13:48:46+08:00">
+                2019-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="密码学基础"><a href="#密码学基础" class="headerlink" title="密码学基础"></a>密码学基础</h4><p>区块链中密码学的核心概念：hash和签名</p>
+<p>hash，它有三个重要的特性：collision resistance, hiding, puzzle friendly，目前用SHA-256（secure hash algorithm）</p>
+<p>碰撞抵制：很难找到$x,y$，使得$h(x)=h(y)$<br>hiding: $x\rightarrow h(x)$容易，但是$h(x)\rightarrow x$难<br>puzzle friendly：其分布难以控制</p>
+<p>比如sealed envelope，A方发布消息，B方接受消息。hiding可以保证B方很难破解消息，而碰撞抵制可以防止A方进行篡改。这个签名过的消息则保存在可信的第三方。</p>
+<p>在密码学中，分为对称加密与非对称加密。非对称加密中，包含有公钥与私钥$(public key, private key)$。pk加密，sk解密。需要注意的是用的是同一人的pk和sk。而签名正好相反，sk签名，pk验证。</p>
+<p>区块链中，发送消息，通常是先hash，然后再签名。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/09/区块链基础/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/02/经济学记录/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/02/经济学记录/" itemprop="url">经济学记录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-02T10:15:02+08:00">
+                2019-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/art/" itemprop="url" rel="index">
+                    <span itemprop="name">人文艺术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>GNP</p>
+<p>GNP(国民生产总值)与GDP(国内生产总值)都是作为国民收入核算的指标，现在多数国家较多的使用GDP指标。 GNP是与所谓国民原则联系在一起，GDP是与所谓国土原则联系在一起。</p>
+<p>GNP与GDP的关系: GNP=GDP+对外要素收入净额，对外要素收入净额表示本国生产要素在其他国家获得的收入减去本国付给外国生产要素在本国获得的收入。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/04/02/经济学记录/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/27/证件照制作/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/27/证件照制作/" itemprop="url">证件照的制作</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-27T10:15:02+08:00">
+                2019-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/art/" itemprop="url" rel="index">
+                    <span itemprop="name">人文艺术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  324
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="如何简单地进行证件照的制作？"><a href="#如何简单地进行证件照的制作？" class="headerlink" title="如何简单地进行证件照的制作？"></a>如何简单地进行证件照的制作？</h4><ol>
+<li>使用单反拍摄原照（最好带三脚架），选择好合适的背景颜色（比如白色）</li>
+<li>将图像传到电脑，用ps打开裁剪，如果是一寸，则选择比例为5：7（准确大小为2.5 × 3.5 cm）；如果是二寸，则比例按照（3.5 × 5.3cm）的标准，分辨率选择300像素/英寸。注意点：如果不需要准确的大小，按照比例裁剪就可以，这时图像大一些，打印出来清晰点。</li>
+<li>如果照片背景不是适合的，则使用智能套索工具选择背景，并替换为合适的颜色。</li>
+<li>如果照片需要美白，则先选择command键不放同时点RGB通道，得到RGB通道高光选区，接着新建一个图层，在图层填充白色，如果发现皮肤过于太白，将图层的不透明度调节到合适的。具体教程参考：<a href="https://jingyan.baidu.com/article/48206aeae60025216bd6b35d.html。" target="_blank" rel="noopener">https://jingyan.baidu.com/article/48206aeae60025216bd6b35d.html。</a></li>
+<li>如果不想自己ps修图（比如痘痘、斑纹等细节），可以把照片传入手机，用强大的美图软件搞定。</li>
+<li>将最终的照片打印出来即可，可以买一个小型专业的打印机，调到证件照模式。</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/18/生活小窍门/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/18/生活小窍门/" itemprop="url">生活小窍门</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-18T12:09:52+08:00">
+                2019-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/life/" itemprop="url" rel="index">
+                    <span itemprop="name">生活</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  450
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <ol>
+<li>去紫外线强的地方，一定要涂防晒霜！！比如冬天去高山滑雪</li>
+<li>被晒伤了，可以涂芦荟胶进行修复，而且可以用冷水敷在脸上，不要用热毛巾敷在脸上</li>
+<li>买了的不合身的衣服可以拿到裁缝店里面修一下</li>
+<li>咳嗽的时候，不妨试试冰糖雪梨，把梨切成片，加入冰糖，并煮沸</li>
+<li>坚果富含维生素b</li>
+<li>洗两次脸，第一次温水加洗面奶，第二次冷水</li>
+<li>脸上多油是由于体内湿气重、皮脂腺分泌旺盛</li>
+<li>体内激素，油，脂肪，糖，压力，情绪不稳定，睡眠都会影响脸上的皮肤</li>
+<li>含酒精的东西，比如酒精消毒液，花露水等不能通过安检，因其属于易燃液体</li>
+<li>刀具用品也不能通过安检</li>
+<li>坐飞机坐后排靠窗的位置，可以看到更多的景色</li>
+<li>醉酒、缺觉、分心会影响到前额皮质</li>
+<li>多巴胺和上瘾行为有关</li>
+<li>焦虑、愤怒、抑郁和孤独都与较低的心率变异度和较差的自控力有关</li>
+<li>还有一些减轻压力、保持健康的方法，比如锻炼、保证良好睡眠、保证健康饮食、和朋友家人共度美好时光、参加宗教活动，都能增强身体的意志力储备</li>
+<li>如果你觉得自己没有时间和精力去处理“我想要”做的事，那就把它安排在你意志力最强的时候做</li>
+</ol>
+<hr>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/18/生活小窍门/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/06/狼人杀经验/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -651,1699 +2257,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/01/入选豆瓣250和IMDB250的电影/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/01/01/入选豆瓣250和IMDB250的电影/" itemprop="url">入选豆瓣250和IMDB250的电影</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-01T10:15:02+08:00">
-                2019-01-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/art/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  455
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>肖申克的救赎</li>
-<li>辛德勒的名单</li>
-<li>教父</li>
-<li>阿甘正传</li>
-<li>这个杀手不太冷</li>
-<li>蝙蝠侠：黑暗骑士</li>
-<li>美丽人生</li>
-<li>十二怒汉</li>
-<li>盗梦空间</li>
-<li>千与千寻</li>
-<li>指环王3：王者无敌</li>
-<li>教父2</li>
-<li>搏击俱乐部</li>
-<li>机器人总动员</li>
-<li>低俗小说</li>
-<li>天堂电影院</li>
-<li>星际穿越</li>
-<li>触不可及</li>
-<li>飞越疯人院</li>
-<li>指环王1</li>
-<li>指环王2</li>
-<li>黑客帝国</li>
-<li>七宗罪</li>
-<li>三傻大闹宝莱坞</li>
-<li>沉默的羔羊</li>
-<li>窃听风暴</li>
-<li>钢琴家</li>
-<li>拯救大兵瑞恩</li>
-<li>控方证人</li>
-<li>狮子王</li>
-<li>摔跤吧！爸爸</li>
-<li>致命魔术</li>
-<li>摩登时代</li>
-<li>美国往事</li>
-<li>天使爱美丽</li>
-<li>勇敢的心</li>
-<li>幽灵公主</li>
-<li>黄金三镖客</li>
-<li>上帝之城</li>
-<li>七武士</li>
-<li>龙猫</li>
-<li>楚门的世界</li>
-<li>乱世佳人</li>
-<li>飞屋环游记</li>
-<li>忠犬八公的故事</li>
-<li>两杆大烟枪</li>
-<li>记忆碎片</li>
-<li>非常嫌疑犯</li>
-<li>卡萨布兰卡</li>
-<li>萤火虫之墓</li>
-<li>哈尔的移动城堡</li>
-<li>惊魂记</li>
-<li>天空之城</li>
-<li>绿里奇迹</li>
-<li>美丽心灵</li>
-<li>城市之光</li>
-<li>终结者2</li>
-<li>梦之安魂曲</li>
-<li>卢旺达饭店</li>
-<li>发条橙</li>
-<li>罗生门</li>
-<li>谍影重重3</li>
-<li>蝙蝠侠：黑暗骑士崛起</li>
-<li>玩具总动员3</li>
-<li>加勒比海盗</li>
-<li>怪兽电力公司</li>
-<li>无耻混蛋</li>
-<li>美国丽人</li>
-<li>驯龙高手</li>
-<li>雨中曲</li>
-<li>第六感</li>
-<li>被解救的姜戈</li>
-<li>寻梦环游记</li>
-<li>地球上的星星</li>
-<li>一次别离</li>
-<li>狩猎</li>
-<li>勇士</li>
-<li>你的名字</li>
-<li>血战钢锯岭</li>
-<li>猜火车</li>
-<li>爆裂鼓手</li>
-<li>消失的爱人</li>
-<li>心灵捕手</li>
-<li>爱在黎明破晓前</li>
-<li>杀人回忆</li>
-<li>哈利波特与死亡圣器（下）</li>
-<li>荒野生存</li>
-<li>布达佩斯大饭店</li>
-<li>猫鼠游戏</li>
-<li>星球大战2</li>
-<li>好家伙</li>
-<li>星球大战</li>
-<li>生活多美好</li>
-<li>西部往事</li>
-<li>美国X档案</li>
-<li>夺宝奇兵</li>
-<li>后窗</li>
-<li>无间道风云</li>
-<li>回到未来</li>
-<li>现代启示录</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/27/辩论常见的漏洞以及招数/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/27/辩论常见的漏洞以及招数/" itemprop="url">辩论常见的漏洞以及招数</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-27T18:51:49+08:00">
-                2018-12-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/art/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  549
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <ol>
-<li>以少数案例说明一个道理</li>
-<li>以多数案例代表全部</li>
-<li>偷换概念</li>
-<li>抓住对方的一点，反过来说</li>
-<li>挑清无关的东西，即不管做B还是做C，A都会发生</li>
-<li>以故事切入</li>
-</ol>
-<p>（有待补充）</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/27/辩论常见的漏洞以及招数/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/27/奇葩说第一季观后感/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/27/奇葩说第一季观后感/" itemprop="url">奇葩说感想</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-27T15:52:35+08:00">
-                2018-12-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/art/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.8k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  6
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="一"><a href="#一" class="headerlink" title="一."></a>一.</h4><p>记得还上大学的时候，我只是对这个节目的名称有印象，倒退回去那时应该是大二。现在来讲，我很后悔当初没有看这个节目，而原因仅仅是我一向不喜欢看综艺节目，以为那些里面只有娱乐，没有多少有用的东西。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/27/奇葩说第一季观后感/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/22/美食人生/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/22/美食人生/" itemprop="url">美食人生</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-22T15:16:45+08:00">
-                2018-12-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  459
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>最近在看梁实秋的雅舍谈吃，勾起了我的兴趣，很多菜都不知道，而且很多菜从小吃到大，但是从来没有看过这样描述的津津有味。很早就想自己能够做出很多好吃的。烹饪不光是女人们的事情，也不是厨师们的事情，而是我们每个人的事情。烹饪是一门艺术，更是一样可以让人感觉到乐趣的事情。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/22/美食人生/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/22/钢琴相关/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/22/钢琴相关/" itemprop="url">钢琴学习</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-22T10:15:02+08:00">
-                2018-12-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/art/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="学习记录"><a href="#学习记录" class="headerlink" title="学习记录"></a>学习记录</h3><style>
-table th:first-of-type {
-    width: 50px;
-}
-table th:nth-of-type(2) {
-    width: 120px;
-}
-</style>
-
-
-
-<table>
-<thead>
-<tr>
-<th>次数</th>
-<th>日期</th>
-<th style="text-align:center">内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>2018-12-22</td>
-<td style="text-align:center">今天开始了第一次的钢琴课，还是很期待能够很好地学下去。</td>
-</tr>
-<tr>
-<td>2</td>
-<td>2018-12-29</td>
-<td style="text-align:center">这次需要做的有很多，一定要缓解自己的紧张（因为问题都是由它引起的），练得多了可能就不那么容易紧张了吧。肌肉太紧绷了感觉。</td>
-</tr>
-<tr>
-<td>3</td>
-<td>2019-01-05</td>
-<td style="text-align:center">需要注意：抬指时手臂不要动 慢一点，一定要正确抬指，节奏正确，识谱能力依然需要提高，作业：练习布谷鸟，谱号11 练习连弹，之前所有的谱子都可以 练习高八度弹奏，谱号44</td>
-</tr>
-<tr>
-<td>4</td>
-<td>2019-01-13</td>
-<td style="text-align:center">双手协调能力好一些了。但是抬指还是要练。</td>
-</tr>
-<tr>
-<td>5</td>
-<td>2019-01-19</td>
-<td style="text-align:center">主要教了音阶，寒假之前要多多练习</td>
-</tr>
-<tr>
-<td>6</td>
-<td>2019-03-02</td>
-<td style="text-align:center">双手协调性练习</td>
-</tr>
-<tr>
-<td>7</td>
-<td>2019-03-09</td>
-<td style="text-align:center">音阶提速练习</td>
-</tr>
-<tr>
-<td>8</td>
-<td>2019-03-23</td>
-<td style="text-align:center">练习曲谱</td>
-</tr>
-<tr>
-<td>9</td>
-<td>2019-03-30</td>
-<td style="text-align:center">练习曲谱</td>
-</tr>
-<tr>
-<td>10</td>
-<td>2019-04-06</td>
-<td style="text-align:center">练习曲谱，提速音阶，练习抬手，单手抬等</td>
-</tr>
-<tr>
-<td>11</td>
-<td>2019-04-13</td>
-<td style="text-align:center">学习弹奏《燃情岁月》，踏板的作用是使得弹出的音更具连贯性，但不能一直踩着，否则会出现混音</td>
-</tr>
-<tr>
-<td>12</td>
-<td>2019-04-20</td>
-<td style="text-align:center">继续讲解书上的曲子</td>
-</tr>
-<tr>
-<td>13</td>
-<td>2019-04-21</td>
-<td style="text-align:center">讲解书中剩余重要的部分</td>
-</tr>
-</tbody>
-</table>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/22/钢琴相关/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/11/年度读书清单/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/11/年度读书清单/" itemprop="url">年度读书清单</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-11T10:48:46+08:00">
-                2018-12-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/art/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  135
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>2016年</p>
-<ol>
-<li>乌合之众：大众心理研究</li>
-<li>从0到1</li>
-<li>广岛之恋</li>
-<li>情人</li>
-<li>心理学入门</li>
-<li>挪威的森林</li>
-<li>不能承受的生命之轻</li>
-<li>月亮与六便士</li>
-<li>精神分析引论</li>
-<li>得米安：彷徨少年时</li>
-<li>局外人</li>
-<li>刺猬的优雅</li>
-</ol>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/11/年度读书清单/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/19/设计模式相关/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/19/设计模式相关/" itemprop="url">设计模式相关</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-19T21:27:51+08:00">
-                2018-11-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  319
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>创建型模式：对类的实例化过程进行了抽象，使得对象的创建和使用解耦</p>
-<p>结构型模式：将类和对象结合在一起，形成更大的结构</p>
-<p>行为型模式：在不同的对象之间划分责任和算法的抽象化</p>
-<p>抽象工厂模式：抽象工厂、抽象产品，具体工厂创建具体产品的实例。达到实例化不同产品的目的</p>
-<p>单例模式：一个类只有一个实例，关键要定义一个私有的构造函数，一个私有的实例，一个公有的获取实例的方法</p>
-<p>适配器模式：解决接口不兼容的问题，类似于电源适配器</p>
-<p>外观模式：通过重新组合类或程序单元，对外提供统一的接口/界面，要联想到Controller里面的各种Dao或Service，就是这种思想！！</p>
-<p>代理模式：让代理去做一些事情，相当于一个中介的角色，处于客户和目标对象之间</p>
-<p>观察者模式：建立一种对象之间的依赖关系，当被观察者发生变化，会通知所有的观察者</p>
-<p>策略模式：根据环境或条件的不同，选择不同的策略</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/14/剑指Offer解题思路/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/14/剑指Offer解题思路/" itemprop="url">剑指Offer解题思路</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-14T21:35:51+08:00">
-                2018-09-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.9k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  6
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-<ol>
-<li>数组中重复的数字：使数组中的每个数字处于其索引的位置（n个数，区间[0,n-1]）</li>
-<li>同3（但是不能改变数组）：二分法：<code>O(nlogn)</code>（n+1个数，区间[1,n]），对数字区间进行划分，而不是对数组区间划分</li>
-<li>替换空格：先让出空间，然后把前面的往后移（联想到插入排序），要两个都想（从前往后、从后往前，哪个好用哪个）</li>
-<li>从尾到头打印链表：栈和递归要联系在一起（DFS，包括它）<br>栈<br>递归</li>
-<li>重建二叉树：递归实现<br>步骤<br>从前序遍历中找第一个<br>找到该数字在中序遍历中的位置<br>划分成左右子树并递归<br>补充：递归（DFS，前中后序遍历），层次遍历（队列实现）</li>
-<li>二叉树的下一个节点（按照中序遍历）<br>一个节点有右子树，那么要找右子树最左的子节点（联想到BST的删除节点）<br>没有右子树，且其为父节点的左子节点，那么直接找父节点<br>没有右子树，且其为父节点的右子节点，那么一直找父节点到该节点为其父节点的左子节点</li>
-<li>两个栈实现队列<br>每次入队，则如S1<br>每次出队，则出S2，如果S2为空，则把S1拿出去<br>补充：两个队列实现栈<br>循环利用两个队列，每次入栈，则入非空的那个队列<br>每次出栈，则把非空队列放到另外一个空队列，只留一个直接出了</li>
-<li>斐波那契数列（用DP来替代递归，即自底向上，且带有记忆性）</li>
-<li>旋转数组的最小数字：二分法<br>两个指针分别指首尾，只需要比较中间的数字<br>如果它处于前面的递增子数组，则它大于等于第一个指针所指元素，故把第一个指针指向中间<br>…</li>
-<li>回溯法（矩阵中的路径）：很多题目都可以利用回溯法解决</li>
-<li>机器人运动范围</li>
-<li>剪绳子（动态规划与贪心算法）</li>
-<li>二进制中1的个数（位运算）<br>一个数减去1和它自身做与运算，可以把最右边（最低位）的1去掉</li>
-<li>数值的整数次方（递归调用，利用公式）</li>
-<li>暂无</li>
-<li>删除链表的节点。把它的值复制到它前面一个节点，然后再操作（联想到5），还要考虑到各种特殊情况<br>补充：凡是与链表相关的题目都要考虑特殊情况，如删除的是第一个节点，如传入的是不是空指针，如链表是否只有一个节点</li>
-<li>暂无</li>
-<li>类似的题目：字符串转double数值<br>代码如下：<br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4yovx2yrhj30m70pi3zi.jpg" alt="7c750085-f733-4085-89e9-624aeec8ebd5-951466"></li>
-<li>调整数值顺序使得奇数位于偶数前面（采用双指针方法，首尾各一个）</li>
-<li>链表中的倒数第k个节点（采用双指针，一个先移动）</li>
-<li>链表中环的入口节点（一个走一步，另一个走两步…）</li>
-<li>反转链表（3指针问题）：分别指向当前节点、当前的前一个节点、当前的后一个节点</li>
-<li>合并两个排序的链表<br>类似于归并排序<br>采用递归的方法</li>
-<li>树的子结构（递归，要考虑好终止条件）</li>
-<li>二叉树的镜像<br>步骤<br>确保节点不为空，且左右节点不为空<br>交换左右两个节点<br>递归求解左右两个节点为根节点的情况</li>
-<li>对称的二叉树（递归）<br>步骤<br>左右节点是否为空<br>左右节点的值是否相等<br>左右两个分别是不是对称的（递归）</li>
-<li>暂无</li>
-<li>包含min函数的栈<br>使用一个辅助栈，其顶部始终保存最小的数，且其大小时刻与数据栈一样大。如果新来的数小于最小值，则把它放入辅助栈；否则依然把其顶部的元素放进去</li>
-<li>栈的压入、弹出序列<br>先用两个指针指向两个数组的头部，然后不停地入栈，每次入栈后看出栈的数组的指针指向数字是否等于栈顶元素。如果等于，则一直出栈到不等为止</li>
-<li>从上到下打印二叉树：层次遍历，使用队列（BFS）</li>
-<li>二叉搜索树的后序遍历序列（类似于重建二叉树，以最后一个点划分，前面的一些数小于它，后面的大于它，递归）</li>
-<li>二叉树中和为某一值的路径（回溯法，因为是前序遍历，所以先处理当前节点的值，首先把它加入总和之中，并放入数组，然后判断是不是为目标和。整个过程只需要一个数组）</li>
-<li>复杂链表的复制</li>
-<li>二叉搜索树与双向链表（用到左子树的最大值，右子树的最小值的思想，并且是递归的过程）</li>
-<li>序列化二叉树</li>
-<li>字符串的排列（回溯法）</li>
-<li>数组中出现次数超过一半的数字（利用快排中partition函数，这种算法可以找到数组中任意第k大的数字）</li>
-<li>最小的k个数<br>类似于39的思路，缺点是要改变数组<br>采用最大堆，nlogk的复杂度，适合海量数据<br>补充：找最小的k个数，用最大堆；找最大的k个数，用最小堆</li>
-<li>数据流中的中位数<br>使用最大、最小堆来实现。C++中，priority_queue可以实现优先队列，其中<code>less&lt;int&gt;</code>为最大堆（默认的），<code>greater&lt;int&gt;</code>为最小堆</li>
-<li>连续子数组的最大和（动态规划）关键看前面的所有和，如果小于等于0，则抛弃；否则加进去。</li>
-<li>暂无</li>
-<li>暂无</li>
-<li>把数组排成最小的数（定义新的大小比较关系，并利用它排序）</li>
-<li>暂无</li>
-<li>礼物的最大价值（动态规划）</li>
-<li>最长不含重复字符的子字符串（动态规划）</li>
-<li></li>
-<li>第一次只出现一次的字符（利用HashTable，可简单使用数组实现）</li>
-<li>数组中的逆序对（归并排序的拓展，<code>O(nlogn)</code>）</li>
-<li>两个链表的第一个公共节点（每当遇到链表中需要逆着进行时，就要想到栈）（或者类似于22）</li>
-<li>在排序数组中查找数字（类似问题为：有序数组中查找某个数字第一次出现的地方）二分法</li>
-<li>二叉搜索树中的第K大节点（利用中序遍历）</li>
-<li>二叉树的深度（最长的从根到叶子节点的路径的长度）</li>
-<li>数组中数字出现的次数（异或的运算）</li>
-<li>和为S的两个数字<br>前提为有序<br>双指针问题，分别指向头尾<br>补充：和为S的连续正数序列（分别指向最小和最大，初始时分别指向第一个和第二个）</li>
-<li>翻转字符串（先翻转整个的，再翻转局部的）左旋字符串（先局部，后整体）</li>
-<li>队列的最大值<br>滑动窗口的最大值<br>加一个额外的deque，用来保存有可能是滑动窗口最大值的数字的下标。如果已有的数字小于待存入的数字，那么把这些数字全部从尾部删除；如果队列头部的数字已经从窗口里滑出，那么滑出的数字也需要从队列的头部删除。否则就把存入的数字放到队列的尾部。</li>
-<li>暂无</li>
-<li>暂无</li>
-<li>暂无</li>
-<li>暂无</li>
-<li>暂无</li>
-<li>暂无</li>
-<li>暂无</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2391,7 +2309,7 @@ table th:nth-of-type(2) {
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2413,7 +2331,7 @@ table th:nth-of-type(2) {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2486,7 +2404,7 @@ table th:nth-of-type(2) {
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">51.1k</span>
+    <span title="Site words total count">53.4k</span>
   
 </div>
 
