@@ -349,6 +349,17 @@
 
           
             
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/12/20/java探针Springboot项目/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2019/12/20/java探针Springboot项目/" class="cy_cmt_count" data-xid="2019/12/20/java探针Springboot项目/" itemprop="commentsCount"></span>
+                </a>
+              
+            
           
 
           
@@ -391,7 +402,7 @@
 
           
 
-        </div>
+        </span></div>
       </header>
     
 
@@ -433,9 +444,9 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -javaagent:target/agent-1.0-SNAPSHOT-jar-with-dependencies.jar -jar target/qx_music-1.0-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
 <p>执行后效果如下，可以看到，在执行时，首先执行agent包里面premian的方法，打印出日志：<code>This is a  agent</code>，接着才会启动SpringBoot项目，在启动的同时，agent会遍历所有的包，当发现了UserController类后，输出日志，并执行加入代码的逻辑。</p>
 <p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga37k2fg5vj30um0cbwh4.jpg" alt="WeChatWorkScreenshot_c1ec2580-6763-4d8d-964d-04a191bd83be"></p>
-<p>等SpringBoot项目启动完成后，访问地址：<a href="http://localhost:8888/user/getAll，由于该接口内部会调用UserController类中的某个方法。从日志中可以看出，已经完成了探针操作，即输出了调用该方法的耗时。" target="_blank" rel="noopener">http://localhost:8888/user/getAll，由于该接口内部会调用UserController类中的某个方法。从日志中可以看出，已经完成了探针操作，即输出了调用该方法的耗时。</a></p>
+<p>等SpringBoot项目启动完成后，访问地址：<code>http://localhost:8888/user/getAll</code>，由于该接口内部会调用UserController类中的某个方法。从日志中可以看出，已经完成了探针操作，即输出了调用该方法的耗时。</p>
 <p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga387w7jfuj30rv016q2y.jpg" alt="image-20191220153658872"></p>
-<h4 id="附：遇到的坑"><a href="#附：遇到的坑" class="headerlink" title="附：遇到的坑"></a>附：遇到的坑</h4><p>在进行javaagent的实践时，一开始<code>mvn package</code>打出的agent包，在执行探针命令后，发现transformer类中的代码执行到<code>ClassPool pool = ClassPool.getDefault();</code>时就没有下文了。最后意识到，可能是因为jar包中没有javassist的依赖，所以找不到ClassPool类。这个问题隐藏很深，因为没有任何报错。后来依据这篇博文<a href="https://www.jianshu.com/p/9c284ed187e0，在pom文件中加入`maven-assembly-plugin`，这样就可以将依赖包javassist打入jar包了。" target="_blank" rel="noopener">https://www.jianshu.com/p/9c284ed187e0，在pom文件中加入`maven-assembly-plugin`，这样就可以将依赖包javassist打入jar包了。</a></p>
+<h4 id="附：遇到的坑"><a href="#附：遇到的坑" class="headerlink" title="附：遇到的坑"></a>附：遇到的坑</h4><p>在进行javaagent的实践时，一开始<code>mvn package</code>打出的agent包，在执行探针命令后，发现transformer类中的代码执行到<code>ClassPool pool = ClassPool.getDefault();</code>时就没有下文了。最后意识到，可能是因为jar包中没有javassist的依赖，所以找不到ClassPool类。这个问题隐藏很深，因为没有任何报错。后来依据这篇博文<a href="https://www.jianshu.com/p/9c284ed187e0，在pom文件中加入`maven-assembly-plugin`，" target="_blank" rel="noopener">https://www.jianshu.com/p/9c284ed187e0，在pom文件中加入`maven-assembly-plugin`，</a> 这样就可以将依赖包javassist打入jar包了。</p>
 <p>后来遇到了无法加载类的问题，参考这篇博客解决了：<a href="https://www.kagura.me/dev/20190923102501.html" target="_blank" rel="noopener">https://www.kagura.me/dev/20190923102501.html</a></p>
 <p>如果遇到<code>&quot;Invalid constant type 18”</code>的问题，则需要替换依赖版本，javassist要改成3.20版本</p>
 <p>最后遇到的问题<code>javassist Type top (current frame, locals[2]) is not assignable to long</code>，参考了这篇博客解决了，原来是加入的代码问题：<a href="https://stackoverflow.com/questions/34223471/how-to-get-arround-java-lang-verrifyerror" target="_blank" rel="noopener">https://stackoverflow.com/questions/34223471/how-to-get-arround-java-lang-verrifyerror</a></p>
@@ -554,6 +565,17 @@
 
           
             
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/10/09/awk的使用/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2019/10/09/awk的使用/" class="cy_cmt_count" data-xid="2019/10/09/awk的使用/" itemprop="commentsCount"></span>
+                </a>
+              
+            
           
 
           
@@ -596,7 +618,7 @@
 
           
 
-        </div>
+        </span></div>
       </header>
     
 
@@ -614,203 +636,6 @@
             <p>awk命令的使用说明见下图：</p>
 <p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7rpj6zuioj31000i0mz5.jpg" alt="awk"></p>
 <p>参考博客：<a href="http://www.zsythink.net/archives/1336/" target="_blank" rel="noopener">http://www.zsythink.net/archives/1336/</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/08/关于制作PPT的经验/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/08/关于制作PPT的经验/" itemprop="url">PPT制作经验</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-08T20:07:39+08:00">
-                2019-10-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/art/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  269
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>制作ppt的几点经验</p>
-<ol>
-<li><p>字体要统一，可以分成几大类，比如一级标题、正文等等字体</p>
-</li>
-<li><p>字体大小要统一，比如一级标题、二级标题、正文、说明、图例等等几类字体大小</p>
-</li>
-<li><p>字体样式要统一、比如哪些地方加粗、哪些地方标什么颜色等等</p>
-</li>
-<li><p>字体颜色要统一、比如什么地方用黑色、什么地方用白色、淡蓝色等等</p>
-</li>
-<li><p>背景和前景颜色要能明显区分，浅色背景配深色前景，深色背景配浅色前景（比如形状、或字体）</p>
-</li>
-<li><p>每一页的文字要控制在能够让观众3秒内阅读（扫视）完的数量级别</p>
-</li>
-<li><p>每一页只讲一样东西，配以图片等</p>
-</li>
-<li><p>对于重点的词句，应当加粗显示、或换一个较大的字体大小</p>
-</li>
-<li><p>多用各种图来表示列表</p>
-</li>
-<li><p>当要表示某种组成关系的时候，画框架图</p>
-</li>
-<li><p>当要表示某种次序关系的时候，画时序图或流程图</p>
-</li>
-</ol>
 
           
         
@@ -926,6 +751,17 @@
 
           
             
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/10/08/DataSource之Druid/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2019/10/08/DataSource之Druid/" class="cy_cmt_count" data-xid="2019/10/08/DataSource之Druid/" itemprop="commentsCount"></span>
+                </a>
+              
+            
           
 
           
@@ -968,7 +804,7 @@
 
           
 
-        </div>
+        </span></div>
       </header>
     
 
@@ -1094,6 +930,214 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/08/关于制作PPT的经验/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/08/关于制作PPT的经验/" itemprop="url">PPT制作经验</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-08T20:07:39+08:00">
+                2019-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/art/" itemprop="url" rel="index">
+                    <span itemprop="name">人文艺术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/10/08/关于制作PPT的经验/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2019/10/08/关于制作PPT的经验/" class="cy_cmt_count" data-xid="2019/10/08/关于制作PPT的经验/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  269
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </span></div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>制作ppt的几点经验</p>
+<ol>
+<li><p>字体要统一，可以分成几大类，比如一级标题、正文等等字体</p>
+</li>
+<li><p>字体大小要统一，比如一级标题、二级标题、正文、说明、图例等等几类字体大小</p>
+</li>
+<li><p>字体样式要统一、比如哪些地方加粗、哪些地方标什么颜色等等</p>
+</li>
+<li><p>字体颜色要统一、比如什么地方用黑色、什么地方用白色、淡蓝色等等</p>
+</li>
+<li><p>背景和前景颜色要能明显区分，浅色背景配深色前景，深色背景配浅色前景（比如形状、或字体）</p>
+</li>
+<li><p>每一页的文字要控制在能够让观众3秒内阅读（扫视）完的数量级别</p>
+</li>
+<li><p>每一页只讲一样东西，配以图片等</p>
+</li>
+<li><p>对于重点的词句，应当加粗显示、或换一个较大的字体大小</p>
+</li>
+<li><p>多用各种图来表示列表</p>
+</li>
+<li><p>当要表示某种组成关系的时候，画框架图</p>
+</li>
+<li><p>当要表示某种次序关系的时候，画时序图或流程图</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/15/线程池错误/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1161,6 +1205,17 @@
 
           
             
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/09/15/线程池错误/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2019/09/15/线程池错误/" class="cy_cmt_count" data-xid="2019/09/15/线程池错误/" itemprop="commentsCount"></span>
+                </a>
+              
+            
           
 
           
@@ -1203,7 +1258,7 @@
 
           
 
-        </div>
+        </span></div>
       </header>
     
 
@@ -1342,6 +1397,17 @@
 
           
             
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/08/17/cas单点登录/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2019/08/17/cas单点登录/" class="cy_cmt_count" data-xid="2019/08/17/cas单点登录/" itemprop="commentsCount"></span>
+                </a>
+              
+            
           
 
           
@@ -1384,7 +1450,7 @@
 
           
 
-        </div>
+        </span></div>
       </header>
     
 
@@ -1516,6 +1582,17 @@
 
           
             
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/04/09/区块链基础/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2019/04/09/区块链基础/" class="cy_cmt_count" data-xid="2019/04/09/区块链基础/" itemprop="commentsCount"></span>
+                </a>
+              
+            
           
 
           
@@ -1558,7 +1635,7 @@
 
           
 
-        </div>
+        </span></div>
       </header>
     
 
@@ -1698,6 +1775,17 @@
 
           
             
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/04/02/经济学记录/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2019/04/02/经济学记录/" class="cy_cmt_count" data-xid="2019/04/02/经济学记录/" itemprop="commentsCount"></span>
+                </a>
+              
+            
           
 
           
@@ -1740,7 +1828,7 @@
 
           
 
-        </div>
+        </span></div>
       </header>
     
 
@@ -1877,6 +1965,17 @@
 
           
             
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/03/27/证件照制作/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2019/03/27/证件照制作/" class="cy_cmt_count" data-xid="2019/03/27/证件照制作/" itemprop="commentsCount"></span>
+                </a>
+              
+            
           
 
           
@@ -1919,7 +2018,7 @@
 
           
 
-        </div>
+        </span></div>
       </header>
     
 
@@ -2057,6 +2156,17 @@
 
           
             
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2019/01/18/生活小窍门/#SOHUCS" itemprop="discussionUrl">
+                  <span id="url::http://yoursite.com/2019/01/18/生活小窍门/" class="cy_cmt_count" data-xid="2019/01/18/生活小窍门/" itemprop="commentsCount"></span>
+                </a>
+              
+            
           
 
           
@@ -2099,7 +2209,7 @@
 
           
 
-        </div>
+        </span></div>
       </header>
     
 
@@ -2488,6 +2598,10 @@
 
 
 
+
+  
+    <script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cyuAWP3Bm"></script>
+  
 
 
 
