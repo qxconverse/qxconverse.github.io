@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="监控red原则：rate error duration">
+<meta name="description" content="监控相关red原则：rate error duration 123rate(http_server_requests_seconds_sum&amp;#123;xxx&amp;#125;[1h])sum(logback_events_total&amp;#123;xxx&amp;#125; - logback_events_total&amp;#123;xxx&amp;#125; offset 1m)rate(http_server_reque">
 <meta name="keywords" content="监控">
 <meta property="og:type" content="article">
 <meta property="og:title" content="监控">
 <meta property="og:url" content="http://yoursite.com/2019/09/20/监控/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="监控red原则：rate error duration">
+<meta property="og:description" content="监控相关red原则：rate error duration 123rate(http_server_requests_seconds_sum&amp;#123;xxx&amp;#125;[1h])sum(logback_events_total&amp;#123;xxx&amp;#125; - logback_events_total&amp;#123;xxx&amp;#125; offset 1m)rate(http_server_reque">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-20T13:34:49.180Z">
+<meta property="og:updated_time" content="2019-12-21T13:35:46.784Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="监控">
-<meta name="twitter:description" content="监控red原则：rate error duration">
+<meta name="twitter:description" content="监控相关red原则：rate error duration 123rate(http_server_requests_seconds_sum&amp;#123;xxx&amp;#125;[1h])sum(logback_events_total&amp;#123;xxx&amp;#125; - logback_events_total&amp;#123;xxx&amp;#125; offset 1m)rate(http_server_reque">
 
 
 
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  8
+                  257
                 </span>
               
 
@@ -408,7 +408,17 @@
       
 
       
-        <h4 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h4><p>red原则：rate error duration</p>
+        <h4 id="监控相关"><a href="#监控相关" class="headerlink" title="监控相关"></a>监控相关</h4><p>red原则：rate error duration</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rate(http_server_requests_seconds_sum&#123;xxx&#125;[1h])</span><br><span class="line">sum(logback_events_total&#123;xxx&#125; - logback_events_total&#123;xxx&#125; offset 1m)</span><br><span class="line">rate(http_server_requests_seconds_sum[1m])/rate(http_server_requests_seconds_count[1m])</span><br></pre></td></tr></table></figure>
+<p>node_load1 : 指1分钟内cpu平均负载，同样cpu_load5指5分钟内cpu平均负载，cpu_load15指15分钟内cpu平均负载</p>
+<p>标准化日志示例：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"server"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"requestId"</span>: <span class="string">"9ab57e713a17470e8bc8e46c64404246"</span>,</span><br><span class="line"> <span class="attr">"clientIp"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"loglevel"</span>: <span class="string">"ERROR"</span>,</span><br><span class="line"> <span class="attr">"description"</span>: <span class="string">"请求超时或被客户端关闭"</span>,</span><br><span class="line"> <span class="attr">"methodName"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"requestParams"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"urlPath"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"timestamp"</span>: <span class="string">"2019-10-12T15:16:43.208+08:00"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>dubbo自定义filter，完成prometheus监控的插入</p>
+<p>KafkaConsumerMetrics这个类里面暴露了Kafka消费者的指标</p>
+<p>prometheus在spring项目中的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">management:</span><br><span class="line">  endpoints:</span><br><span class="line">    web:</span><br><span class="line">      exposure:</span><br><span class="line">        include: &apos;*&apos;</span><br><span class="line">    jmx:</span><br><span class="line">      exposure:</span><br><span class="line">        include: &apos;*&apos;</span><br><span class="line">    shutdown:</span><br><span class="line">      enabled: false</span><br><span class="line">  health:</span><br><span class="line">      redis:</span><br><span class="line">        enabled: false</span><br><span class="line">  metrics:</span><br><span class="line">    distribution:</span><br><span class="line">      percentiles-histogram[http.server.requests]: true</span><br><span class="line">      sla[http.server.requests]: 50ms</span><br><span class="line">  security:</span><br><span class="line">    enabled: false</span><br></pre></td></tr></table></figure>
+<p>稳定性分析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SELECT request_path, </span><br><span class="line">count(request_path) as request_count,</span><br><span class="line">sum(case when http_status = 499 then 1 else 0 end) as count_499,</span><br><span class="line">sum(case when http_status = 499 then 1 else 0 end) / count(request_path)) as ratio_499,</span><br><span class="line">sum(case when http_status like &quot;5%&quot; then 1 else 0 end) as count_5xx,</span><br><span class="line">sum(case when http_status like &quot;5%&quot; then 1 else 0 end) / count(request_path)) as ratio_5xx,</span><br><span class="line">(sum(request_time) / count(request_path)) as avg_request_time</span><br><span class="line">FROM xxx</span><br><span class="line">WHERE xxx</span><br><span class="line">group by request_path</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -449,8 +459,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/10/08/DataSource之Druid/" rel="prev" title="Druid连接池">
-                Druid连接池 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/10/08/关于制作PPT的经验/" rel="prev" title="PPT制作经验">
+                PPT制作经验 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -535,7 +545,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -557,7 +567,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -612,7 +622,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#监控"><span class="nav-number">1.</span> <span class="nav-text">监控</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#监控相关"><span class="nav-number">1.</span> <span class="nav-text">监控相关</span></a></li></ol></div>
             
 
           </div>
@@ -646,7 +656,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">53.4k</span>
+    <span title="Site words total count">61.5k</span>
   
 </div>
 

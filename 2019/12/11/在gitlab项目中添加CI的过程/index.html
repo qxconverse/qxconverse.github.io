@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
 <meta property="og:description" content="在gitlab项目中添加CI的过程在机器上安装好Docker获取gitlab-runner并且运行1234docker run -d --name gitlab-runner --restart always \  -v /srv/gitlab-runner/config:/etc/gitlab-runner \  -v /var/run/docker.sock:/var/run/docker.s">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-20T12:56:21.695Z">
+<meta property="og:updated_time" content="2019-12-21T13:57:57.364Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Gitlab项目中添加CI的过程">
 <meta name="twitter:description" content="在gitlab项目中添加CI的过程在机器上安装好Docker获取gitlab-runner并且运行1234docker run -d --name gitlab-runner --restart always \  -v /srv/gitlab-runner/config:/etc/gitlab-runner \  -v /var/run/docker.sock:/var/run/docker.s">
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  230
+                  277
                 </span>
               
 
@@ -416,8 +416,10 @@
 <p>分别用于下面的url、registration-token的参数配置</p>
 <h5 id="注册runner"><a href="#注册runner" class="headerlink" title="注册runner"></a>注册runner</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register \</span><br><span class="line">  --non-interactive \</span><br><span class="line">  --executor <span class="string">"docker"</span> \</span><br><span class="line">  --docker-image xxx \</span><br><span class="line">  --url <span class="string">"xxx"</span> \</span><br><span class="line">  --registration-token <span class="string">"xxx"</span> \</span><br><span class="line">  --description <span class="string">"docker-runner"</span> \</span><br><span class="line">  --tag-list <span class="string">"xxx"</span> \</span><br><span class="line">  --run-untagged=<span class="string">"true"</span> \</span><br><span class="line">  --locked=<span class="string">"false"</span> \</span><br><span class="line">  --access-level=<span class="string">"not_protected"</span></span><br></pre></td></tr></table></figure>
 <p>注意：其中的xxx是需要根据实际情况进行配置的，包括镜像名称、注册token、标签等，其中后两者可在gitlab项目的CI/CD配置中进行配置</p>
+<p>mac中要用/Users/Shared来替换/srv</p>
 <p>其中的docker-image可以使用官方默认的，也可以自己生成镜像以适应不同的需求</p>
-
+<p>Gitlab api相关，具体可以看Gitlab api官网</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LrofPvaBLcL7zjLVznSd</span><br><span class="line"></span><br><span class="line">http://xxx/api/v4/projects?private_token=xxx</span><br><span class="line"></span><br><span class="line">curl --header &quot;PRIVATE-TOKEN: xxx&quot; http://xxx/api/v4/projects/8005/repository/files/xxx?ref=master</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -447,8 +449,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/09/awk的使用/" rel="next" title="awk的使用">
-                <i class="fa fa-chevron-left"></i> awk的使用
+              <a href="/2019/10/15/Docker相关/" rel="next" title="Docker相关">
+                <i class="fa fa-chevron-left"></i> Docker相关
               </a>
             
           </div>
@@ -543,7 +545,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -565,7 +567,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -654,7 +656,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">53.4k</span>
+    <span title="Site words total count">61.5k</span>
   
 </div>
 

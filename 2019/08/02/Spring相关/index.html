@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="SpringBoot相关12345678910Description:Field threadPoolTaskExecutor in xxqin.task.AsyncTask required a single bean, but 2 were found:	- mailSendTaskAsyncPool: defined by method &amp;apos;mailSendTaskAsyncPool">
+<meta name="description" content="Spring相关12345678910Description:Field threadPoolTaskExecutor in xxqin.task.AsyncTask required a single bean, but 2 were found:	- mailSendTaskAsyncPool: defined by method &amp;apos;mailSendTaskAsyncPool&amp;apo">
 <meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot相关">
 <meta property="og:url" content="http://yoursite.com/2019/08/02/Spring相关/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="SpringBoot相关12345678910Description:Field threadPoolTaskExecutor in xxqin.task.AsyncTask required a single bean, but 2 were found:	- mailSendTaskAsyncPool: defined by method &amp;apos;mailSendTaskAsyncPool">
+<meta property="og:description" content="Spring相关12345678910Description:Field threadPoolTaskExecutor in xxqin.task.AsyncTask required a single bean, but 2 were found:	- mailSendTaskAsyncPool: defined by method &amp;apos;mailSendTaskAsyncPool&amp;apo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-20T13:33:02.722Z">
+<meta property="og:updated_time" content="2019-12-21T15:04:16.397Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot相关">
-<meta name="twitter:description" content="SpringBoot相关12345678910Description:Field threadPoolTaskExecutor in xxqin.task.AsyncTask required a single bean, but 2 were found:	- mailSendTaskAsyncPool: defined by method &amp;apos;mailSendTaskAsyncPool">
+<meta name="twitter:description" content="Spring相关12345678910Description:Field threadPoolTaskExecutor in xxqin.task.AsyncTask required a single bean, but 2 were found:	- mailSendTaskAsyncPool: defined by method &amp;apos;mailSendTaskAsyncPool&amp;apo">
 
 
 
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  897
+                  6k
                 </span>
               
 
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  22
                 </span>
               
             </div>
@@ -408,7 +408,7 @@
       
 
       
-        <h4 id="SpringBoot相关"><a href="#SpringBoot相关" class="headerlink" title="SpringBoot相关"></a>SpringBoot相关</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Description:</span><br><span class="line"></span><br><span class="line">Field threadPoolTaskExecutor in xxqin.task.AsyncTask required a single bean, but 2 were found:</span><br><span class="line">	- mailSendTaskAsyncPool: defined by method &apos;mailSendTaskAsyncPool&apos; in class path resource [xxqin/config/ThreadPoolConfig.class]</span><br><span class="line">	- messageSendTaskAsyncPool: defined by method &apos;messageSendTaskAsyncPool&apos; in class path resource [xxqin/config/ThreadPoolConfig.class]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Action:</span><br><span class="line"></span><br><span class="line">Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed</span><br></pre></td></tr></table></figure>
+        <h4 id="Spring相关"><a href="#Spring相关" class="headerlink" title="Spring相关"></a>Spring相关</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Description:</span><br><span class="line"></span><br><span class="line">Field threadPoolTaskExecutor in xxqin.task.AsyncTask required a single bean, but 2 were found:</span><br><span class="line">	- mailSendTaskAsyncPool: defined by method &apos;mailSendTaskAsyncPool&apos; in class path resource [xxqin/config/ThreadPoolConfig.class]</span><br><span class="line">	- messageSendTaskAsyncPool: defined by method &apos;messageSendTaskAsyncPool&apos; in class path resource [xxqin/config/ThreadPoolConfig.class]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Action:</span><br><span class="line"></span><br><span class="line">Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed</span><br></pre></td></tr></table></figure>
 <p>关于线程池的使用</p>
 <ol>
 <li>配置线程池，在应用入口或是该配置类上加上@EnableAsync注解。</li>
@@ -460,7 +460,143 @@
 </ol>
 <p>redis如何管理key? try catch和for循环的位置</p>
 <p>N为CPU的个数<br>cpu密集型、io密集型应用线程池设置的大小，分别为N+1、2N+1</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">org.apache.catalina.connector.ClientAbortException: java.io.IOException: Broken pipe</span><br><span class="line">由于各种原因，客户端断开了连接，这时，服务器再向已经断开连接的客户端写数据时就发生了broken pipe异常</span><br></pre></td></tr></table></figure>
+<p>org.apache.catalina.connector.ClientAbortException: java.io.IOException: Broken pipe<br>由于各种原因，客户端断开了连接，这时，服务器再向已经断开连接的客户端写数据时就发生了broken pipe异常</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public List&lt;Map&lt;String, String&gt;&gt; getRequestMappingInfo() &#123;</span><br><span class="line">    Map&lt;RequestMappingInfo, HandlerMethod&gt; map = requestMappingHandlerMapping.getHandlerMethods();</span><br><span class="line">    List&lt;Map&lt;String, String&gt;&gt; mappingInfo = Lists.newArrayList();</span><br><span class="line">    for (Map.Entry&lt;RequestMappingInfo, HandlerMethod&gt; m : map.entrySet()) &#123;</span><br><span class="line">        Map&lt;String, String&gt; map1 = Maps.newHashMap();</span><br><span class="line">        PatternsRequestCondition p = m.getKey().getPatternsCondition();</span><br><span class="line">        HandlerMethod method = m.getValue();</span><br><span class="line">        map1.put(&quot;className&quot;, method.getMethod().getDeclaringClass().getName());</span><br><span class="line">        map1.put(&quot;method&quot;, method.getMethod().getName());</span><br><span class="line">        for (String url : p.getPatterns()) &#123;</span><br><span class="line">            map1.put(&quot;url&quot;, url);</span><br><span class="line">        &#125;</span><br><span class="line">        mappingInfo.add(map1);</span><br><span class="line">    &#125;</span><br><span class="line">    return mappingInfo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>(分层异常处理规约)在DAO层，产生的异常类型有很多，无法用细粒度的异常进 行 catch，使用 catch(Exception e)方式，并 throw new DAOException(e)，不需要打印日志，因 为日志在 Manager/Service 层一定需要捕获并打印到日志文件中去，如果同台服务器再打日 志，浪费性能和存储。 总结就是，dao层不需要打日志，仅仅把异常扔出去就可以，应为后面的Service会负责打日志。</p>
+<p>热部署工具<br>spring-boot-dev-tools</p>
+<p>打包插件</p>
+<p>DispatcherServlet在第一次访问接口时加载<br>@Lazy，可以让controller懒加载</p>
+<p>Spring 4.x 支持条件注解<br>@Conditional</p>
+<p>什么样的要交给IoC容器</p>
+<p>@Autowire，按类型匹配<br>@Resource，根据bean的名称，如果找不到，就根据类型</p>
+<p>BeanDefinition，会判断是否懒加载、是否单例等等</p>
+<p>什么是钩子</p>
+<p>了解，InitializingBean，可以让某个类实现它，不用加@Component等</p>
+<p>@Configuration<br>里面配置各种@Bean的方法。</p>
+<p>AOP的几种实现手段</p>
+<ol>
+<li>框架预留扩展钩子，Filter/HandlerInterceptor/DubboFilter</li>
+<li>编译器纺入 .java-&gt;.class : lombok/aspectJ</li>
+<li>运行时-类加载期（java agent）：ketrace(分布式追踪链路)/dkimi</li>
+<li>运行时-执行期（动态代理）：后置初始化时，会判断，有没有需要创建动态代理类</li>
+</ol>
+<p>spring-boot-starter实例</p>
+<p>在调用api接口，要小心参数为空字符的情况，特别是该参数要拿去查询数据库。为空可能就会查到全部。</p>
+<p>类似于mybatis里面，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxx!=null and xxx!=“”。空字符</span><br></pre></td></tr></table></figure></p>
+<p>考虑接口的超时</p>
+<p>关于昨天的线上故障，因为线程池达到最大的线程数量。而大数据那边服务崩了后，就一直没有回应，我们调用时没有设置超时断开，导致所有线程都阻塞着，从而出现线上故障。</p>
+<p>tomcat线程池设置</p>
+<p>写代码时，必须做到每一小块的单元测试，保证无误；再一步步地往下写。不然代码多了，很难找到容易出错的地方。</p>
+<p>切换为junit5: <a href="https://spring.io/projects/spring-framework#learn" target="_blank" rel="noopener">https://spring.io/projects/spring-framework#learn</a></p>
+<p>如何需要对特定角色的用户进行过滤，可以采用拦截器的方式，自定义一个继承自HandlerInterceptor的类，重写其中的preHandle、postHandle和afterCompletion的方法。</p>
+<p>starter jar包里面可以实现注入，这样在项目中就可以直接作为参数传进来了。</p>
+<p>bean是有IoC容器管理的对象</p>
+<p>ApplicationContext接口代表了IoC容器</p>
+<p>自定义Constraint注解进行验证，通过@Constraint(validatedBy = xxx.class)的方式</p>
+<p>自定义Interceptor，通过实现HandlerInterceptor的方式，实现其中的preHandle、postHandle和afterCompletion方法。可以拦截一些请求。</p>
+<p>自定义Filter，实现过滤的功能</p>
+<p>spring security中</p>
+<p>remember me<br>如果勾选了，关闭浏览器后，再次登录，也可以访问<br>如果不勾选，关闭浏览器后，需要再次登录</p>
+<p>说明session一旦在关闭浏览器后就生效了</p>
+<p><code>web.xml</code>中Filter，Listener，Servlet的区别：</p>
+<p>Servlet是基本的服务端程序，他来自接口Servlet，接口中有方法service。</p>
+<p>Listener是监听器，用于监听Servlet，他是基于观察者模式的，他的核心接口是ServletContextListener，继承自EventListener。</p>
+<p>Filter是过滤器，用于过滤到servlet的request，它使用户可以改变一个request和修改一个response。Filter 不是一个servlet，它不能产生一个response，它能够在一个request到达servlet之前预处理request，也可以在离开servlet时处理response。换种说法，filter其实是一个“servlet chaining”(servlet 链)。</p>
+<p>如果一个请求，同时调用到这三个，则执行顺序是：Listener，Filter，Servlet。</p>
+<p>设计模式中观察者模式与监听模式的区别：</p>
+<p>监听器模式：事件源经过事件的封装传给监听器，当事件源触发事件后，监听器接收到事件对象可以回调事件的方法</p>
+<p>观察者模式：观察者(Observer)相当于事件监听者，被观察者(Observable)相当于事件源和事件，执行逻辑时通知observer即可触发oberver的update,同时可传被观察者和参数</p>
+<p>具体参考：<a href="https://www.cnblogs.com/jackson-zhangjiang/p/7784694.html" target="_blank" rel="noopener">https://www.cnblogs.com/jackson-zhangjiang/p/7784694.html</a></p>
+<p>关于过滤器和拦截器的区别：<a href="https://blog.csdn.net/xiaoyaotan_111/article/details/53817918" target="_blank" rel="noopener">https://blog.csdn.net/xiaoyaotan_111/article/details/53817918</a></p>
+<p>filter依赖于servlet容器。在实现上基于函数回调，可以对几乎所有请求进行过滤，但是缺点是一个过滤器实例只能在容器初始化时调用一次。</p>
+<p>拦截器依赖于web框架，在SpringMVC中就是依赖于SpringMVC框架。在实现上基于Java的反射机制，属于面向切面编程（AOP）的一种运用。</p>
+<p>反映在代码配置中，filter是在web.xml里面配置的，而拦截器是在spring相关的配置中的。</p>
+<p>Servlet的监听器Listener是实现了javax.servlet.ServletContextListener接口的服务器端程序，它和filter一样也是随web应用的启动而启动，只初始化一次，随web应用的停止而销毁。主要作用是：做一些初始化的内容添加工作、设置一些基本的内容、比如一些参数或者是一些固定的对象等等。例如利用监听器对数据库连接池DataSource的初始化。监听器对象可以在事情发生前、发生后可以做一些必要的处理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public void init() throws IOException &#123;</span><br><span class="line">        Runtime.getRuntime().addShutdownHook(new Thread() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p><code>Runtime.getRuntime().addShutdownHook(shutdownHook);</code>这个方法的意思就是在jvm中增加一个关闭的钩子，当jvm关闭的时候，会执行系统中已经设置的所有通过方法addShutdownHook添加的钩子，当系统执行完这些钩子后，jvm才会关闭。所以这些钩子可以在jvm关闭的时候进行内存清理、对象销毁等操作。</p>
+<p>此处用到了并发同步机制。关于java中的synchronized的知识点：<a href="https://blog.csdn.net/luoweifu/article/details/46613015" target="_blank" rel="noopener">https://blog.csdn.net/luoweifu/article/details/46613015</a> ，它是一个同步锁。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public synchronized void close() &#123;</span><br><span class="line">        if (pw != null) &#123;</span><br><span class="line">            pw.close();</span><br><span class="line">            pw = null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>A. 无论synchronized关键字加在方法上还是对象上，如果它作用的对象是非静态的，则它取得的锁是对象；如果synchronized作用的对象是一个静态方法或一个类，则它取得的锁是对类，该类所有的对象同一把锁。</p>
+<p>B. 每个对象只有一个锁（lock）与之相关联，谁拿到这个锁谁就可以运行它所控制的那段代码。</p>
+<p>C. 实现同步是要很大的系统开销作为代价的，甚至可能造成死锁，所以尽量避免无谓的同步控制。</p>
+<p>在发送邮件的类中，使用到了线程池，线程池的submit方法的参数为一个Runnable的类，该类为内部类。这样就实现了并发的邮件发送。</p>
+<p>ReentrantReadWriteLock允许多个读线程同时访问，但不允许写线程和读线程、写线程和写线程同时访问。相对于排他锁，提高了并发性。在实际应用中，大部分情况下对共享数据（如缓存）的访问都是读操作远多于写操作，这时ReentrantReadWriteLock能够提供比排他锁更好的并发性和吞吐量。具体参考：<a href="https://www.cnblogs.com/zaizhoumo/p/7782941.html" target="_blank" rel="noopener">https://www.cnblogs.com/zaizhoumo/p/7782941.html</a></p>
+<p>ReentrantReadWriteLock支持以下功能：</p>
+<p>1）支持公平和非公平的获取锁的方式；</p>
+<p>2）支持可重入。读线程在获取了读锁后还可以获取读锁；写线程在获取了写锁之后既可以再次获取写锁又可以获取读锁；</p>
+<p>3）还允许从写入锁降级为读取锁，其实现方式是：先获取写入锁，然后获取读取锁，最后释放写入锁。但是，从读取锁升级到写入锁是不允许的；</p>
+<p>4）读取锁和写入锁都支持锁获取期间的中断；</p>
+<p>5）Condition支持。仅写入锁提供了一个 Conditon 实现；读取锁不支持 Conditon ，readLock().newCondition() 会抛出 UnsupportedOperationException。 　　　　 </p>
+<p>在TranslatorHelper中涉及到的并发。需要加锁来操作。</p>
+<p>关于静态代码块 静态代码块:在java中使用static关键字声明的代码块。静态块用于初始化类，为类的属性初始化。每个静态代码块只会执行一次。由于JVM在加载类时会执行静态代码块，所以静态代码块先于主方法执行。如果类中包含多个静态代码块，那么将按照”先定义的代码先执行，后定义的代码后执行”。</p>
+<p>执行顺序：静态代码块 &gt; mian方法 &gt; 构造代码块 &gt; 构造方法。 其中静态代码块只执行一次。构造代码块在每次创建对象是都会执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">try 尝试</span><br><span class="line">&#123;</span><br><span class="line">　　需要被检测异常的代码</span><br><span class="line">&#125;</span><br><span class="line">catch（异常类 变量）</span><br><span class="line">&#123;</span><br><span class="line">　　处理异常的代码</span><br><span class="line">&#125;</span><br><span class="line">catch（异常类 变量）</span><br><span class="line">&#123;</span><br><span class="line">　　处理异常的代码</span><br><span class="line">　　return; 退出整个方法，但finally依旧执行。</span><br><span class="line">　　System.exit(0); 退出java虚拟机，只有这种情况finally不会执行。</span><br><span class="line">&#125;</span><br><span class="line">finally 最终化</span><br><span class="line">&#123;</span><br><span class="line">　　一定会被执行的代码，除了上面提到的一种情况。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在springboot中，有时service注入到controller里面失败，是因为Application入口类的问题，在扫描时，它会自动扫描与它同目录或是子目录里面的bean，所以最好不要把它放到controller包里面，这样不会扫描到service底下的类。直接把它放到与controller、service平级的目录下。</p>
+<p>泛型擦除：<a href="https://blog.csdn.net/briblue/article/details/76736356" target="_blank" rel="noopener">https://blog.csdn.net/briblue/article/details/76736356</a></p>
+<p>当涉及到组件整合的时候，往往会出现问题，最主要的原因是版本的不兼容。</p>
+<p>在SpringBoot的配置中，如果不加下面的，是无法启动Tomcat的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>1.getInputStream方法可以得到一个输入流，客户端的Socket对象上的getInputStream方法得到输入流其实就是从服务器端发回的数据。</p>
+<p>2.getOutputStream方法得到的是一个输出流，客户端的Socket对象上的getOutputStream方法得到的输出流其实就是发送给服务器端的数据。</p>
+<p>最近做文件下载的实验，踩到一个坑，如果使用ajax的方式下载（不管是get，还是post），那么虽然后台没有任何错误信息，还是下载不了，浏览器不会下载。当然如果直接通过a标签设置href就可以了（使用的是get），找了原因，原来：</p>
+<blockquote>
+<p>ajax方式下载文件时无法触发浏览器打开保存文件对话框，也就无法将下载的文件保存到硬盘上！原因：ajax方式请求的数据只能存放在javascipt内存空间，可以通过javascript访问，但是无法保存到硬盘，因为javascript不能直接和硬盘交互，否则将是一个安全问题。</p>
+</blockquote>
+<p>所以可以采用模拟表单提交的方式实现post传递数据。</p>
+<p>获取文档的contentType，可以使用jdk7自带的<code>Files.probeContentType(Paths.get(inputValue))</code>，使用MagicMatch有一些坑，比如无法识别txt等文件。</p>
+<p>swagger遇到的坑</p>
+<p>一开始的application.properties文件中通过这个来加载静态文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.mvc.static-path-pattern=/static/**</span><br></pre></td></tr></table></figure>
+<p>按照过程来会遇到404的错误。在网上找了很多解决方案，大多数都是这样，让swagger的配置类继承WebMvcConfigurationSupport类。重写addResourceHandlers方法。代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public void addResourceHandlers(ResourceHandlerRegistry registry) &#123;</span><br><span class="line">        registry.addResourceHandler(&quot;swagger-ui.html&quot;)</span><br><span class="line">        .addResourceLocations(&quot;classpath:/META-INF/resources/&quot;);</span><br><span class="line">        registry.addResourceHandler(&quot;/webjars*&quot;)</span><br><span class="line">        .addResourceLocations(&quot;classpath:/META-INF/resources/webjars/&quot;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这样确实解决了swagger-ui.html访问不了的问题。但是对于我的应用来说，就是拆了西墙补东墙。因为项目中有很多的界面需要加载静态文件，所以这样一改，其它界面就加载不出静态文件了。</p>
+<p>于是我加上了这句：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">registry.addResourceHandler(&quot;/**&quot;).addResourceLocations(&quot;classpath:/static/&quot;);</span><br></pre></td></tr></table></figure>
+<p>这样和之前一样，没什么变化。其它界面还是加载不出来。后来查到资料，发现这样写它只能遍历到static文件底下。而我的静态资源在static底下分了类，比如js,css,img等等。所以应该改成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">registry.addResourceHandler(&quot;/static/**&quot;).addResourceLocations(&quot;classpath:/static/&quot;);</span><br></pre></td></tr></table></figure>
+<p>这样发现其它的界面确实加载出来了。但是swagger-ui.html的资源文件加载不出来了（能访问，不是404）。这就很冲突了。因为它这边直接放在static底下没有分类的文件夹，而我的有。</p>
+<p>后来改成这样就可以了：思路很简单，原来的静态文件还是通过<code>/static/**</code>来加载<code>classpath:/static/</code>，swagger的则通过<code>/**</code>来加载<code>classpath:/META-INF/resources/</code>，加载的路径也不一样的。之前搞混淆了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    public void addResourceHandlers(ResourceHandlerRegistry registry) &#123;</span><br><span class="line">        registry.addResourceHandler(&quot;/**&quot;).addResourceLocations(&quot;classpath:/META-INF/resources/&quot;);</span><br><span class="line">        registry.addResourceHandler(&quot;/static/**&quot;).addResourceLocations(&quot;classpath:/static/&quot;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>在项目中关于http response，一般这样写：包括返回普通文本，返回html，返回json。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">response.setContentType(&quot;text/plain;charset=utf-8&quot;);</span><br><span class="line">response.getWriter().write(content);</span><br></pre></td></tr></table></figure>
+<p>可以看到唯一的区别在于setContentType里面的内容不同，而一致的是都是通过</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.getWriter().write(xxx);</span><br></pre></td></tr></table></figure>
+<p>来写数据到response。</p>
+<p>考虑幂等性。分布式 高并发 必须要考虑到这一点，不然会出现隐患，你可以了解一下 幂等性。比如用户在下单的时候，点击一次，后台接受请求并处理成功了，但是由于网络原因这个响应没有到达用户那儿，用户以为下单不成功，又点击一次。按照现在的设计，就会有两笔单子了。又或者接单，虽然我们会检验状态，但是更完美的做法是，如果司机接单成功了再次点击接单，此时还是直接返回成功。这就是幂等性，重复请求应该得到相同结果。</p>
+<p>微服务正确的姿势，不同的微服务应该使用不同的数据库，这样才能完全解耦，独立部署</p>
+<p>个redislock具体怎么实现的呢？相当于把锁的信息放进redis里面，有其它操作相同订单的时候，就会去查，如果依然锁着，就不能操作，对吧</p>
+<p>RequestParam和PathVariable的区别：<br>前者从URL中提取请求的参数比如问号后面的。而后者从URI中提取参数。</p>
+<p>比如对于<code>http://localhost:8080/shop/order/1001/receipts?date=12-05-2017</code>。@RequestParam提取date参数而@PathVariable提取出orderId 即”1001”。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(value=&quot;/order/&#123;orderId&#125;/receipts&quot;, method = RequestMethod.GET)</span><br><span class="line">public List listUsersInvoices(@PathVariable(&quot;orderId&quot;) int order, @RequestParam(value = &quot;date&quot;, required = false) Date dateOrNull) &#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>一个方法里面只能有一个RequestBody，但是可以一个RequestBody后面再加一些RequestParam。</p>
+<p>关于它们可以参考博客：<a href="https://stackoverflow.com/questions/11291933/requestbody-and-responsebody-annotations-in-spring" target="_blank" rel="noopener">https://stackoverflow.com/questions/11291933/requestbody-and-responsebody-annotations-in-spring</a></p>
+<p>出现redis的问题，用这个。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Caused by: io.lettuce.core.RedisCommandExecutionException: MISCONF Redis is configured to save RDB snapshots, but it is currently not able to persist on disk. Commands that may modify the data set are disabled, because this instance is configured to report errors during writes if RDB snapshotting fails (stop-writes-on-bgsave-error option). Please check the Redis logs for details about the RDB error.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">config set stop-writes-on-bgsave-error no</span><br></pre></td></tr></table></figure></p>
+<p>在restful风格的请求中，PathVariable里面的变量如果包含中文（更一般地，特殊字符），就无法请求，也就是出现400错误，说明与后台没有任何关系。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xxx/app/city/name/上海</span><br></pre></td></tr></table></figure>
+<p>但如果给上海用url编码过后，就可以了。附上编码网址：<a href="http://www.bejson.com/enc/urlencode/" target="_blank" rel="noopener">http://www.bejson.com/enc/urlencode/</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xxx/app/city/name/%E4%B8%8A%E6%B5%B7</span><br></pre></td></tr></table></figure></p>
+<p>在前端，从后台获取选择框里面的选择数据。</p>
+<p>requestbody的一个重要的用法是方法中接受一个类参数，在请求参数的时候content-type使用application/json格式的数据。而不是一般的表单数据。</p>
+<p>在postman中，则要选择raw，application/json格式。</p>
+<p>字符集utf8mb4 general_ci ，可以显示emoji</p>
+<p>idea安装一个lombok插件</p>
+<p>每个oauth资源服务器都有client-id 和client-secret，这个东西，数据库里面也必须有对应的</p>
+<p>mybatisplus 自带插件的，逻辑删除</p>
+<p>单表查询，可以直接用条件构造器QueryWrapper查询，省点事，虽然写xml效率会高一点，不过这不是性能瓶颈的地方</p>
+<p>oss单独做一个基础功能</p>
+<p>对于连表查询：订单详情，新建一个orderVO，里面包含所有订单相关的信息，比如order本身，carTypeVO 查询的时候，根据id查到order，然后再根据order里面的外键id查其它信息，就不用自己写xml，多几次查询不碍事，如果列表或者分页查询，就不能这样了，因为查询次数太多，但是查询单个数据 这样做就可以  多一次查询最多也就多个几十ms，列表分页查询的时候，就尽量从业务上去避免这种操作</p>
+<p>一个请求包含的操作最好都写在一个service里面，方便事物管理和缓存，比如删除订单，连带订单详情也要一起删除，就在orderService里写一个方法，包含订单和详情的两个操作，然后可以用mapper去完成删除。</p>
+<p>gmtUpdate 可以不用设置，这个字段数据库会自动更新的，前提是在数据库中指明新增的默认值和更新值</p>
+<p>Customer Driver 这两个信息返回前端的时候，用VO类返回，排除不需要显示的字段，比如密码</p>
+<p>有时为了减少连表查询的麻烦，可以存在冗余字段</p>
+<p>dto中需要什么字段就加什么字段，如果我们修改，只允许修改一个字段a，但是添加的时候可以添加多个字段 a/b/c， 但是修改的时候把a/b/c都加上去，最后结果会不会把a/b/c都修改了，一个接口对应一个DTO，最好的做法是允许用户改哪些，就在对应的dto加入哪些字段。</p>
+<p>access_token 存在redis，每次都要拿access_token去auth认证，auth在redis查找</p>
+<p><a href="https://blog.csdn.net/u013815546/article/details/76898524" target="_blank" rel="noopener">https://blog.csdn.net/u013815546/article/details/76898524</a></p>
+<p>登陆成功后之后，把accesstoken 放在header里面</p>
+<p>在开发的时候，可以使用远程数据库，方便统一开发。数据库可以分为dev和线上版本</p>
+<p>想象一下，我发布订单，然后取消的同时，你是司机又接了单，怎么办？还有就是 多个司机 一起去接这个单。单机部署，用sychronized同步就行。但是在分布式环境下，sychronized就失效了，因为它只是在代码层面上做同步，所以要么用分布式锁，redis，zookeeper都可以实现，要么用mysql的行锁，但是后者效率很低</p>
+<p>错误提示信息清晰一点，因为会显示在app上，要说明原因；打日志的时候也说明原因，同时把用户信息也打印出来方便查询</p>
+<p>要注意一个问题哦，我们在分页查询的时候，管理系统是通过表单方式上传请求的，所以接口上不需要加@RequestBody，直接写实体类就可以接收参数；但是app这边是通过<code>application/json</code> 方式来请求数据的，所以必须加@RequestBody。网页本来就是表单形式请求的，不过我们可以通过修改Content-type来修改，page后面加一个实体类，表示的是查询条件，如果没有条件，那么这个实体对象就是空的。</p>
+<p>查询订单详情的时候，需要传orderId，用pathvariable就可以<br>springsecurity通过验证后，可以把认证的信息保存在session里面，当用户session还在，就不需要再做校验了；而当session不在了，就返回给前端消息，前端跳转到登录授权页面就可以了。</p>
+
       
     </div>
     
@@ -490,8 +626,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/31/数据库的一些操作/" rel="next" title="数据库的一些操作">
-                <i class="fa fa-chevron-left"></i> 数据库的一些操作
+              <a href="/2019/07/31/数据库的一些操作/" rel="next" title="数据库相关">
+                <i class="fa fa-chevron-left"></i> 数据库相关
               </a>
             
           </div>
@@ -500,8 +636,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/06/Nginx相关/" rel="prev" title="Nginx相关">
-                Nginx相关 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/06/密码学相关/" rel="prev" title="密码学相关">
+                密码学相关 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -586,7 +722,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -608,7 +744,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -663,7 +799,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SpringBoot相关"><span class="nav-number">1.</span> <span class="nav-text">SpringBoot相关</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring相关"><span class="nav-number">1.</span> <span class="nav-text">Spring相关</span></a></li></ol></div>
             
 
           </div>
@@ -697,7 +833,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">53.4k</span>
+    <span title="Site words total count">61.5k</span>
   
 </div>
 

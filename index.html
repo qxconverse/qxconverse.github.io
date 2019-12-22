@@ -572,7 +572,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  230
+                  277
                 </span>
               
 
@@ -619,7 +619,362 @@
 <p>分别用于下面的url、registration-token的参数配置</p>
 <h5 id="注册runner"><a href="#注册runner" class="headerlink" title="注册runner"></a>注册runner</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register \</span><br><span class="line">  --non-interactive \</span><br><span class="line">  --executor <span class="string">"docker"</span> \</span><br><span class="line">  --docker-image xxx \</span><br><span class="line">  --url <span class="string">"xxx"</span> \</span><br><span class="line">  --registration-token <span class="string">"xxx"</span> \</span><br><span class="line">  --description <span class="string">"docker-runner"</span> \</span><br><span class="line">  --tag-list <span class="string">"xxx"</span> \</span><br><span class="line">  --run-untagged=<span class="string">"true"</span> \</span><br><span class="line">  --locked=<span class="string">"false"</span> \</span><br><span class="line">  --access-level=<span class="string">"not_protected"</span></span><br></pre></td></tr></table></figure>
 <p>注意：其中的xxx是需要根据实际情况进行配置的，包括镜像名称、注册token、标签等，其中后两者可在gitlab项目的CI/CD配置中进行配置</p>
+<p>mac中要用/Users/Shared来替换/srv</p>
 <p>其中的docker-image可以使用官方默认的，也可以自己生成镜像以适应不同的需求</p>
+<p>Gitlab api相关，具体可以看Gitlab api官网</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LrofPvaBLcL7zjLVznSd</span><br><span class="line"></span><br><span class="line">http://xxx/api/v4/projects?private_token=xxx</span><br><span class="line"></span><br><span class="line">curl --header &quot;PRIVATE-TOKEN: xxx&quot; http://xxx/api/v4/projects/8005/repository/files/xxx?ref=master</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/15/Docker相关/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/15/Docker相关/" itemprop="url">Docker相关</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-15T12:09:52+08:00">
+                2019-10-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  40
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Docker相关"><a href="#Docker相关" class="headerlink" title="Docker相关"></a>Docker相关</h4><p>开发机安装docker：<br><a href="http://docs.intra.ke.com/notice/applyrdvmep.html" target="_blank" rel="noopener">http://docs.intra.ke.com/notice/applyrdvmep.html</a><br><a href="https://www.cnblogs.com/qinxu/p/10032176.html" target="_blank" rel="noopener">https://www.cnblogs.com/qinxu/p/10032176.html</a></p>
+<p>docker中：</p>
+<ol>
+<li>命名空间控制软件</li>
+<li>控制组控制硬件</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/10/云计算相关/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/10/云计算相关/" itemprop="url">云计算相关</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-10T12:09:52+08:00">
+                2019-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  183
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="云计算相关"><a href="#云计算相关" class="headerlink" title="云计算相关"></a>云计算相关</h4><p>阅读关于IaaS、PaaS/SaaS相关的知识点</p>
+<p>我的理解是，从云计算服务角色来看，就是提供东西的多少：SaaS，不给你提供任何东西，成品给你；PaaS，给你提供少量东西，剩下大部分自己做；IaaS，给你提供大多数东西，你可以自由发挥剩下的部分。从用户角色来看，就是获得东西的多少：SaaS，获得全部成品，自己不用劳神；PaaS，获得部分原材料，自己要劳神；IaaS，获得全部原材料，完全自己做。</p>
+<p>SOA的概念：面向服务的架构，我的理解是，它是微服务等很多流行框架的基础思想</p>
 
           
         
@@ -795,203 +1150,6 @@
             <p>awk命令的使用说明见下图：</p>
 <p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7rpj6zuioj31000i0mz5.jpg" alt="awk"></p>
 <p>参考博客：<a href="http://www.zsythink.net/archives/1336/" target="_blank" rel="noopener">http://www.zsythink.net/archives/1336/</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/08/关于制作PPT的经验/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/08/关于制作PPT的经验/" itemprop="url">PPT制作经验</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-08T20:07:39+08:00">
-                2019-10-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/art/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  269
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>制作ppt的几点经验</p>
-<ol>
-<li><p>字体要统一，可以分成几大类，比如一级标题、正文等等字体</p>
-</li>
-<li><p>字体大小要统一，比如一级标题、二级标题、正文、说明、图例等等几类字体大小</p>
-</li>
-<li><p>字体样式要统一、比如哪些地方加粗、哪些地方标什么颜色等等</p>
-</li>
-<li><p>字体颜色要统一、比如什么地方用黑色、什么地方用白色、淡蓝色等等</p>
-</li>
-<li><p>背景和前景颜色要能明显区分，浅色背景配深色前景，深色背景配浅色前景（比如形状、或字体）</p>
-</li>
-<li><p>每一页的文字要控制在能够让观众3秒内阅读（扫视）完的数量级别</p>
-</li>
-<li><p>每一页只讲一样东西，配以图片等</p>
-</li>
-<li><p>对于重点的词句，应当加粗显示、或换一个较大的字体大小</p>
-</li>
-<li><p>多用各种图来表示列表</p>
-</li>
-<li><p>当要表示某种组成关系的时候，画框架图</p>
-</li>
-<li><p>当要表示某种次序关系的时候，画时序图或流程图</p>
-</li>
-</ol>
 
           
         
@@ -1275,6 +1433,204 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/08/关于制作PPT的经验/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/08/关于制作PPT的经验/" itemprop="url">PPT制作经验</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-08T20:07:39+08:00">
+                2019-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/art/" itemprop="url" rel="index">
+                    <span itemprop="name">人文艺术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  278
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>制作ppt的几点经验</p>
+<ol>
+<li><p>字体要统一，可以分成几大类，比如一级标题、正文等等字体</p>
+</li>
+<li><p>字体大小要统一，比如一级标题、二级标题、正文、说明、图例等等几类字体大小</p>
+</li>
+<li><p>字体样式要统一、比如哪些地方加粗、哪些地方标什么颜色等等</p>
+</li>
+<li><p>字体颜色要统一、比如什么地方用黑色、什么地方用白色、淡蓝色等等</p>
+</li>
+<li><p>背景和前景颜色要能明显区分，浅色背景配深色前景，深色背景配浅色前景（比如形状、或字体）</p>
+</li>
+<li><p>每一页的文字要控制在能够让观众3秒内阅读（扫视）完的数量级别</p>
+</li>
+<li><p>每一页只讲一样东西，配以图片等</p>
+</li>
+<li><p>对于重点的词句，应当加粗显示、或换一个较大的字体大小</p>
+</li>
+<li><p>多用各种图来表示列表</p>
+</li>
+<li><p>当要表示某种组成关系的时候，画框架图</p>
+</li>
+<li><p>当要表示某种次序关系的时候，画时序图或流程图</p>
+</li>
+</ol>
+<p>讲ppt时一定要有互动</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/20/监控/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1360,7 +1716,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  8
+                  257
                 </span>
               
 
@@ -1399,7 +1755,17 @@
       
         
           
-            <h4 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h4><p>red原则：rate error duration</p>
+            <h4 id="监控相关"><a href="#监控相关" class="headerlink" title="监控相关"></a>监控相关</h4><p>red原则：rate error duration</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rate(http_server_requests_seconds_sum&#123;xxx&#125;[1h])</span><br><span class="line">sum(logback_events_total&#123;xxx&#125; - logback_events_total&#123;xxx&#125; offset 1m)</span><br><span class="line">rate(http_server_requests_seconds_sum[1m])/rate(http_server_requests_seconds_count[1m])</span><br></pre></td></tr></table></figure>
+<p>node_load1 : 指1分钟内cpu平均负载，同样cpu_load5指5分钟内cpu平均负载，cpu_load15指15分钟内cpu平均负载</p>
+<p>标准化日志示例：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"server"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"requestId"</span>: <span class="string">"9ab57e713a17470e8bc8e46c64404246"</span>,</span><br><span class="line"> <span class="attr">"clientIp"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"loglevel"</span>: <span class="string">"ERROR"</span>,</span><br><span class="line"> <span class="attr">"description"</span>: <span class="string">"请求超时或被客户端关闭"</span>,</span><br><span class="line"> <span class="attr">"methodName"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"requestParams"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"urlPath"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"timestamp"</span>: <span class="string">"2019-10-12T15:16:43.208+08:00"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>dubbo自定义filter，完成prometheus监控的插入</p>
+<p>KafkaConsumerMetrics这个类里面暴露了Kafka消费者的指标</p>
+<p>prometheus在spring项目中的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">management:</span><br><span class="line">  endpoints:</span><br><span class="line">    web:</span><br><span class="line">      exposure:</span><br><span class="line">        include: &apos;*&apos;</span><br><span class="line">    jmx:</span><br><span class="line">      exposure:</span><br><span class="line">        include: &apos;*&apos;</span><br><span class="line">    shutdown:</span><br><span class="line">      enabled: false</span><br><span class="line">  health:</span><br><span class="line">      redis:</span><br><span class="line">        enabled: false</span><br><span class="line">  metrics:</span><br><span class="line">    distribution:</span><br><span class="line">      percentiles-histogram[http.server.requests]: true</span><br><span class="line">      sla[http.server.requests]: 50ms</span><br><span class="line">  security:</span><br><span class="line">    enabled: false</span><br></pre></td></tr></table></figure>
+<p>稳定性分析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SELECT request_path, </span><br><span class="line">count(request_path) as request_count,</span><br><span class="line">sum(case when http_status = 499 then 1 else 0 end) as count_499,</span><br><span class="line">sum(case when http_status = 499 then 1 else 0 end) / count(request_path)) as ratio_499,</span><br><span class="line">sum(case when http_status like &quot;5%&quot; then 1 else 0 end) as count_5xx,</span><br><span class="line">sum(case when http_status like &quot;5%&quot; then 1 else 0 end) / count(request_path)) as ratio_5xx,</span><br><span class="line">(sum(request_time) / count(request_path)) as avg_request_time</span><br><span class="line">FROM xxx</span><br><span class="line">WHERE xxx</span><br><span class="line">group by request_path</span><br></pre></td></tr></table></figure>
 
           
         
@@ -1714,7 +2080,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  10
+                  367
                 </span>
               
 
@@ -1755,374 +2121,25 @@
           
             <p>cas单点登录的分析图示：</p>
 <p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7t60ewr8bj30u01daafn.jpg" alt="cas"></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/06/密码学相关/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/06/密码学相关/" itemprop="url">密码学相关</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-06T12:09:52+08:00">
-                2019-08-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  114
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <table>
-<thead>
-<tr>
-<th>A</th>
-<th>B</th>
-<th>备注</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>报文-&gt;Hash算法（比如MD5，SHA256）生成摘要-&gt;私钥（A的）签名</td>
-<td>使用公钥（A的）验证</td>
-<td>A想把签名的消息发给B</td>
-</tr>
-<tr>
-<td>使用公钥（B的）加密</td>
-<td>使用私钥（B的）解密</td>
-<td>A想把加密的消息发给B，让B知道是什么消息</td>
-</tr>
-</tbody>
-</table>
-<p>数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性）</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/06/Nginx相关/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/06/Nginx相关/" itemprop="url">Nginx相关</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-06T12:09:52+08:00">
-                2019-08-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  98
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="Nginx相关"><a href="#Nginx相关" class="headerlink" title="Nginx相关"></a>Nginx相关</h4><p>499是nginx自定义的一个状态码，其含义为“client has closed connection”。这很有可能是因为服务器端处理的时间过长，客户端“不耐烦”了。要解决此问题，就需要在程序上面做些优化了。</p>
-<p>大量的429错误，即在一定的时间内用户发送了太多的请求，即超出了“频次限制”。</p>
+<p>在项目的代码里面，有如下的配置，即进行单点登录时的cas服务器为<code>xxx</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">shiro:</span><br><span class="line">  casLoginServerUrlPrefix: xxx</span><br><span class="line">  casLogoutServerUrlPrefix: xxx</span><br><span class="line">  casTicketValidatorServerUrlPrefix: xxx</span><br><span class="line">  server: yyy</span><br><span class="line">  shiroSessionKeyPre: &apos;kkk&apos;</span><br><span class="line">  shiroSessionExpireSeconds: 3600</span><br><span class="line">  globalSessionTimeoutSeconds: 3600</span><br></pre></td></tr></table></figure>
+<p>启动项目后，访问yyy，未登录，所以跳转到cas服务器上xxx/login?service=yyy/shiro-cas<code>，展示出登录界面。输入用户名和密码后，以post请求调用了</code>authentication/authenticate`的方法。</p>
+<p>post请求的数据如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;mainAuthMethodName&quot;: &quot;username-password&quot;,</span><br><span class="line">	&quot;credential&quot;: &#123;</span><br><span class="line">		&quot;username&quot;: &quot;1000003718&quot;,</span><br><span class="line">		&quot;password&quot;: &quot;xxx&quot;,</span><br><span class="line">		&quot;encodeVersion&quot;: &quot;2&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;context&quot;: &#123;</span><br><span class="line">		&quot;deviceId&quot;: &quot;default&quot;,</span><br><span class="line">		&quot;sign&quot;: &quot;default&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;version&quot;: &quot;2.0&quot;,</span><br><span class="line">	&quot;accountSystem&quot;: &quot;employee&quot;,</span><br><span class="line">	&quot;service&quot;: &quot;yyy/shiro-cas&quot;,</span><br><span class="line">	&quot;loginTicketId&quot;: &quot;xxx&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中credential（凭据）中即包含了用户名和密码（经过加密的，每次不一样）。</p>
+<p>cas服务器返回的数据包含了ticket。</p>
+<p>接着调用项目中的<code>shiro-cas?ticket=ttt</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Request URL: yyy/shiro-cas?ticket=ttt</span><br></pre></td></tr></table></figure>
+<p>项目代码在类<code>PcShiroCasRealm</code>中，其登录认证的逻辑如下：</p>
+<ol>
+<li>获取到token，其中包含ticket，userId和isRememberMe。此时只有ticket不为空</li>
+<li>与cas服务器进行ticket的认证</li>
+<li>认证成功后，获取到principle（用户相关的信息，用户名等）</li>
+<li>根据用户名去数据库查询用户</li>
+<li>将token中的userId和isRememberMe设置好</li>
+<li>将用户信息保存到session中，cookies的设置</li>
+</ol>
+<p>认证成功后，进行授权，并展示出首页。</p>
 
           
         
@@ -2210,7 +2227,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2232,7 +2249,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2305,7 +2322,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">53.4k</span>
+    <span title="Site words total count">61.5k</span>
   
 </div>
 

@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 A想把签名的消息发给B   使用公钥（B的）加密 使用私钥（B的）解密 A想把加密的消息发给B，让B知道是什么消息    数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性）">
+<meta name="description" content="A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 A想把签名的消息发给B   使用公钥（B的）加密 使用私钥（B的）解密 A想把加密的消息发给B，让B知道是什么消息    数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） ssh / https 的区别 https证书 rsa">
 <meta name="keywords" content="密码学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="密码学相关">
 <meta property="og:url" content="http://yoursite.com/2019/08/06/密码学相关/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 A想把签名的消息发给B   使用公钥（B的）加密 使用私钥（B的）解密 A想把加密的消息发给B，让B知道是什么消息    数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性）">
+<meta property="og:description" content="A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 A想把签名的消息发给B   使用公钥（B的）加密 使用私钥（B的）解密 A想把加密的消息发给B，让B知道是什么消息    数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） ssh / https 的区别 https证书 rsa">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-20T13:24:23.132Z">
+<meta property="og:updated_time" content="2019-12-21T14:39:12.758Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="密码学相关">
-<meta name="twitter:description" content="A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 A想把签名的消息发给B   使用公钥（B的）加密 使用私钥（B的）解密 A想把加密的消息发给B，让B知道是什么消息    数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性）">
+<meta name="twitter:description" content="A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 A想把签名的消息发给B   使用公钥（B的）加密 使用私钥（B的）解密 A想把加密的消息发给B，让B知道是什么消息    数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） ssh / https 的区别 https证书 rsa">
 
 
 
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  114
+                  314
                 </span>
               
 
@@ -430,6 +430,17 @@
 </tbody>
 </table>
 <p>数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性）</p>
+<p>ssh / https 的区别</p>
+<p>https证书</p>
+<p>rsa非对称加密 + hash摘要 = 数字签名</p>
+<p>对于放在gitlab上的代码，使用https的方式来clone，这样就省去了配置ssh的私钥和公钥的步骤。说白了，只要涉及到ssh协议的传输，那么一定会需要公钥和私钥的，所以，gitlab相关的git操作和连接远程服务器都要用。</p>
+<p>mac上terminal通过ssh连接远程linux服务器的方法：</p>
+<ol>
+<li>首先需要加入ssh的公钥和私钥，把两个文件拷贝到.ssh文件夹底下</li>
+<li>通过命令<code>ssh-add .ssh/id_rsa_xxx</code>加入，输入密码后即可加入秘钥公钥</li>
+<li>然后就可以通过命令<code>ssh -p 22 xxx@xxx</code>连接上了</li>
+</ol>
+<p>连接远程数据库使用<code>mysql -h hostname -P port -u username -p</code></p>
 
       
     </div>
@@ -460,8 +471,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/06/Nginx相关/" rel="next" title="Nginx相关">
-                <i class="fa fa-chevron-left"></i> Nginx相关
+              <a href="/2019/08/02/Spring相关/" rel="next" title="SpringBoot相关">
+                <i class="fa fa-chevron-left"></i> SpringBoot相关
               </a>
             
           </div>
@@ -470,8 +481,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/17/cas单点登录/" rel="prev" title="CAS单点登录示意图">
-                CAS单点登录示意图 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/06/Nginx相关/" rel="prev" title="Nginx相关">
+                Nginx相关 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -547,7 +558,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -569,7 +580,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -642,7 +653,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">53.4k</span>
+    <span title="Site words total count">61.5k</span>
   
 </div>
 

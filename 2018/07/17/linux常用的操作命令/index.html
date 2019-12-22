@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
 <meta property="og:description" content="查看磁盘的使用情况 12345df -h 文件夹名du --max-depth=1 -hdu -sh 文件夹名 cp用来复制文件或目录，-r -R 递归复制该目录及其子目录内容，-f  不询问而强制复制 1234567scp用于在Linux服务器之间复制文件和目录-v  详细显示输出的具体情况-r  递归复制整个目录从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-31T12:22:00.508Z">
+<meta property="og:updated_time" content="2019-12-21T14:26:19.115Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令">
 <meta name="twitter:description" content="查看磁盘的使用情况 12345df -h 文件夹名du --max-depth=1 -hdu -sh 文件夹名 cp用来复制文件或目录，-r -R 递归复制该目录及其子目录内容，-f  不询问而强制复制 1234567scp用于在Linux服务器之间复制文件和目录-v  详细显示输出的具体情况-r  递归复制整个目录从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，">
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  451
+                  618
                 </span>
               
 
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -420,6 +420,12 @@
 <p>交互式Shell命令，连接服务器，当出现密码的提示时，自动输入。省去了手动输入的麻烦。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/expect</span><br><span class="line">set timeout 30</span><br><span class="line">spawn ssh xx@xxxxxx</span><br><span class="line">expect &quot;password:&quot;</span><br><span class="line">send &quot;xxxxxx\r&quot;</span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;&#123;print $2&#125;&apos; a.txt | sort | uniq &gt; b.txt</span><br></pre></td></tr></table></figure>
+<p>重启linux服务器：reboot</p>
+<p>强制关闭谷歌浏览器，关闭其它的也类似<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep username |grep chrome</span><br><span class="line">kill -9 chrome主进程的pid</span><br></pre></td></tr></table></figure></p>
+<p>关于打包的指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//打包 tar</span><br><span class="line">tar -cvf text.tar * //-v表示进度，text.tar是压缩文件名，*表示所有文件</span><br><span class="line">//解压</span><br><span class="line">tar -xvf text.tar</span><br><span class="line">//压缩 gzip</span><br><span class="line">gzip text.tar</span><br><span class="line">//解压</span><br><span class="line">gzip -d xxx.tar.gz</span><br><span class="line">//比较实用的</span><br><span class="line">tar -zcvf text.tar.gz * //打包</span><br><span class="line">tar -zxvf text.tar.gz //解压</span><br><span class="line">tar -zxvf text.tar.gz -c text/  //解压到指定路径</span><br></pre></td></tr></table></figure>
+<p>查看某个文件的尾部<code>tail -f xxx</code></p>
+<p>在vim中查找关键字，首先切换到命令行模式，然后<code>/keyword</code>，回车，接着可以通过<code>n</code>一个一个查</p>
 
       
     </div>
@@ -450,8 +456,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/17/python相关的/" rel="next" title="python相关的">
-                <i class="fa fa-chevron-left"></i> python相关的
+              <a href="/2018/04/23/top-down思维/" rel="next" title="top-down思维">
+                <i class="fa fa-chevron-left"></i> top-down思维
               </a>
             
           </div>
@@ -537,7 +543,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -559,7 +565,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">45</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -632,7 +638,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">53.4k</span>
+    <span title="Site words total count">61.5k</span>
   
 </div>
 
