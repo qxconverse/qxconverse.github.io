@@ -572,7 +572,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  277
+                  318
                 </span>
               
 
@@ -611,18 +611,211 @@
       
         
           
-            <h4 id="在gitlab项目中添加CI的过程"><a href="#在gitlab项目中添加CI的过程" class="headerlink" title="在gitlab项目中添加CI的过程"></a>在gitlab项目中添加CI的过程</h4><h5 id="在机器上安装好Docker"><a href="#在机器上安装好Docker" class="headerlink" title="在机器上安装好Docker"></a>在机器上安装好Docker</h5><h5 id="获取gitlab-runner并且运行"><a href="#获取gitlab-runner并且运行" class="headerlink" title="获取gitlab-runner并且运行"></a>获取gitlab-runner并且运行</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name gitlab-runner --restart always \</span><br><span class="line">  -v /srv/gitlab-runner/config:/etc/gitlab-runner \</span><br><span class="line">  -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">  gitlab/gitlab-runner:latest</span><br></pre></td></tr></table></figure>
-<h5 id="进入到项目的CI设置界面，查看下面2个配置参数"><a href="#进入到项目的CI设置界面，查看下面2个配置参数" class="headerlink" title="进入到项目的CI设置界面，查看下面2个配置参数"></a>进入到项目的CI设置界面，查看下面2个配置参数</h5><ol>
+            <h4 id="在Gitlab项目中添加CI的过程"><a href="#在Gitlab项目中添加CI的过程" class="headerlink" title="在Gitlab项目中添加CI的过程"></a>在Gitlab项目中添加CI的过程</h4><h5 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h5><h5 id="获取gitlab-runner"><a href="#获取gitlab-runner" class="headerlink" title="获取gitlab-runner"></a>获取gitlab-runner</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name gitlab-runner --restart always \</span><br><span class="line">  -v /srv/gitlab-runner/config:/etc/gitlab-runner \</span><br><span class="line">  -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">  gitlab/gitlab-runner:latest</span><br></pre></td></tr></table></figure>
+<p>进入到项目的CI设置界面，查看下面2个配置参数</p>
+<ol>
 <li>Specify the following URL during the Runner setup: <code>xxx</code></li>
 <li>Use the following registration token during setup: <code>xxx</code></li>
 </ol>
 <p>分别用于下面的url、registration-token的参数配置</p>
 <h5 id="注册runner"><a href="#注册runner" class="headerlink" title="注册runner"></a>注册runner</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register \</span><br><span class="line">  --non-interactive \</span><br><span class="line">  --executor <span class="string">"docker"</span> \</span><br><span class="line">  --docker-image xxx \</span><br><span class="line">  --url <span class="string">"xxx"</span> \</span><br><span class="line">  --registration-token <span class="string">"xxx"</span> \</span><br><span class="line">  --description <span class="string">"docker-runner"</span> \</span><br><span class="line">  --tag-list <span class="string">"xxx"</span> \</span><br><span class="line">  --run-untagged=<span class="string">"true"</span> \</span><br><span class="line">  --locked=<span class="string">"false"</span> \</span><br><span class="line">  --access-level=<span class="string">"not_protected"</span></span><br></pre></td></tr></table></figure>
-<p>注意：其中的xxx是需要根据实际情况进行配置的，包括镜像名称、注册token、标签等，其中后两者可在gitlab项目的CI/CD配置中进行配置</p>
-<p>mac中要用/Users/Shared来替换/srv</p>
-<p>其中的docker-image可以使用官方默认的，也可以自己生成镜像以适应不同的需求</p>
+<p>注意：</p>
+<ol>
+<li>其中的xxx是需要根据实际情况进行配置的，包括镜像名称、注册token、标签等，其中后两者可在gitlab项目的CI/CD配置中进行配置；其中的docker-image可以使用官方默认的，也可以自己生成镜像以适应不同的需求</li>
+<li>在mac中要用/Users/Shared来替换/srv</li>
+</ol>
 <p>Gitlab api相关，具体可以看Gitlab api官网</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LrofPvaBLcL7zjLVznSd</span><br><span class="line"></span><br><span class="line">http://xxx/api/v4/projects?private_token=xxx</span><br><span class="line"></span><br><span class="line">curl --header &quot;PRIVATE-TOKEN: xxx&quot; http://xxx/api/v4/projects/8005/repository/files/xxx?ref=master</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://xxx/api/v4/projects?private_token=xxx</span><br><span class="line"></span><br><span class="line">curl --header &quot;PRIVATE-TOKEN: xxx&quot; http://xxx/api/v4/projects/project_id/repository/files/xxx?ref=master</span><br></pre></td></tr></table></figure>
+<p>Git提交时的hook相关，参考：<a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks" target="_blank" rel="noopener">https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks</a></p>
+<p>添加git的hook时，遇到的问题</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp .git/hooks/pre-commit /tmp/pre-commit</span><br><span class="line"></span><br><span class="line">tr -d '\r' &lt; /tmp/pre-commit &gt; .git/hooks/pre-commit</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/sonarqube的搭建/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/11/sonarqube的搭建/" itemprop="url">代码检测sonarqube</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-11T15:23:52+08:00">
+                2019-12-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  205
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="sonarqube的搭建"><a href="#sonarqube的搭建" class="headerlink" title="sonarqube的搭建"></a>sonarqube的搭建</h4><h5 id="下载sonarqube，版本自己选择"><a href="#下载sonarqube，版本自己选择" class="headerlink" title="下载sonarqube，版本自己选择"></a>下载sonarqube，版本自己选择</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull sonarqube</span><br></pre></td></tr></table></figure>
+<p>下载中文插件 注意：与sonarqube之间的版本问题</p>
+<h5 id="创建docker镜像"><a href="#创建docker镜像" class="headerlink" title="创建docker镜像"></a>创建docker镜像</h5><p>创建Dockerfile文件：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FROM sonarqube:7.5-community</span><br><span class="line">ADD sonar-l10n-zh-plugin-1.25.jar /opt/sonarqube/extensions/plugins/</span><br></pre></td></tr></table></figure>
+<p>然后执行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t sonarqube-zh .</span><br></pre></td></tr></table></figure>
+<h5 id="创建数据库（为了持久化）"><a href="#创建数据库（为了持久化）" class="headerlink" title="创建数据库（为了持久化）"></a>创建数据库（为了持久化）</h5><p>下载postgres数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull postgres</span><br></pre></td></tr></table></figure>
+<h5 id="运行数据库"><a href="#运行数据库" class="headerlink" title="运行数据库"></a>运行数据库</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --restart=always --name postgresqldb -d -v /root/postgresql/data:/var/lib/postgresql/data -p 5432:5432 postgres</span><br></pre></td></tr></table></figure>
+<p>配置数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">进入容器创建数据库</span></span><br><span class="line">docker exec -it postgresqldb /bin/bash</span><br><span class="line">su postgres #切换到postgres用户</span><br><span class="line">createuser -P -s -e sonar #创建sonar用户</span><br><span class="line">psql #连接数据库</span><br><span class="line">create database sonar owner=sonar #创建sonar数据库</span><br></pre></td></tr></table></figure>
+<h5 id="运行sonarqube"><a href="#运行sonarqube" class="headerlink" title="运行sonarqube"></a>运行sonarqube</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name sq --link postgresqldb -e SONARQUBE_JDBC_URL=jdbc:postgresql://postgresqldb:5432/sonar -p 9000:9000 -d sonarqube-zh</span><br></pre></td></tr></table></figure>
+<p>手动在项目中执行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mvn sonar:sonar \</span><br><span class="line"> -Dsonar.host.url=xxx \</span><br><span class="line"> -Dsonar.login=xxx</span><br></pre></td></tr></table></figure>
+
           
         
       
@@ -1023,7 +1216,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/09/awk的使用/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/09/linux常用的操作命令/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -1042,7 +1235,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/10/09/awk的使用/" itemprop="url">awk的使用</a></h1>
+                <a class="post-title-link" href="/2019/10/09/linux常用的操作命令/" itemprop="url">Linux常用命令</a></h1>
         
 
         <div class="post-meta">
@@ -1108,7 +1301,206 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  21
+                  699
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>查看磁盘的使用情况</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df -h 文件夹名</span><br><span class="line">du --max-depth=1 -h</span><br><span class="line">du -sh 文件夹名</span><br></pre></td></tr></table></figure>
+<p>cp用来复制文件或目录，<code>-r/-R</code> 递归复制该目录及其子目录内容，<code>-f</code> 表示不询问而强制复制</p>
+<p>scp用于在Linux服务器之间复制文件和目录</p>
+<p>从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，不然识别不了。其实可以这样记忆，看以哪个为中心。不管是从远端复制到本地，还是把本地的复制到远端，都在本地操作（主角为本地）。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-v  详细显示输出的具体情况</span><br><span class="line">-r  递归复制整个目录</span><br><span class="line">scp xxx@xxxxxxx:远程路径 本地路径</span><br></pre></td></tr></table></figure>
+<p>diff：查看两个文件的不同</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff f1 f2 &gt; diff.txt</span><br></pre></td></tr></table></figure>
+<p>0代表标准输入，1代表标准输出，2代表错误输出，&gt;代表重定向，grep (global search regular expression(RE) and print out the line）代表全面搜索正则表达式并把行打印出来。|代表管道，将前面一个指令传出的正确输出信息传递给下一个命令，作为标准的输入。注意，它具有单向性，也叫半双工管道。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">du --max-depth=1 -h . 1&gt;/home/qinxue/info.txt 2&gt;/home/qinxue/error.txt</span><br><span class="line">du --max-depth=1 -h . 1&gt;/home/qinxue/info.txt 2&gt;/dev/null </span><br><span class="line">du --max-depth=1 -h . 2&gt;/dev/null </span><br><span class="line">du --max-depth=1 -h . 2&gt;/dev/null | grep qinxue</span><br></pre></td></tr></table></figure>
+<p>mac下用不了<code>--max-depth=1</code>，可以直接用<code>-d 1</code>。</p>
+<p>交互式Shell命令，连接服务器，当出现密码的提示时，自动输入。省去了手动输入的麻烦。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/expect</span></span><br><span class="line">set timeout 30</span><br><span class="line">spawn ssh xx@xxxxxx</span><br><span class="line">expect "password:"</span><br><span class="line">send "xxxxxx\r"</span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
+<p>awk命令的使用说明见下图：</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7rpj6zuioj31000i0mz5.jpg" alt="awk"></p>
+<p>参考博客：<a href="http://www.zsythink.net/archives/1336/" target="_blank" rel="noopener">http://www.zsythink.net/archives/1336/</a></p>
+<p>示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk '&#123;print $2&#125;' a.txt | sort | uniq &gt; b.txt</span><br></pre></td></tr></table></figure>
+<p>重启linux服务器：reboot</p>
+<p>强制关闭谷歌浏览器，关闭其它的也类似<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep 用户名 |grep chrome</span><br><span class="line">kill -9 chrome主进程的pid</span><br></pre></td></tr></table></figure></p>
+<p>关于打包的指令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//打包 tar</span><br><span class="line">tar -cvf text.tar * //-v表示进度，text.tar是压缩文件名，*表示所有文件</span><br><span class="line">//解压</span><br><span class="line">tar -xvf text.tar</span><br><span class="line">//压缩 gzip</span><br><span class="line">gzip text.tar</span><br><span class="line">//解压</span><br><span class="line">gzip -d xxx.tar.gz</span><br><span class="line">//比较实用的</span><br><span class="line">tar -zcvf text.tar.gz * //打包</span><br><span class="line">tar -zxvf text.tar.gz //解压</span><br><span class="line">tar -zxvf text.tar.gz -c text/  //解压到指定路径</span><br></pre></td></tr></table></figure>
+<p>在vim中查找关键字，首先切换到命令行模式，然后<code>/keyword</code>，回车，接着可以通过<code>n</code>一个一个查</p>
+<p>查找某个文件夹下java文件代码的行数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wc -l `find xxx/ -name "*.java"`</span><br></pre></td></tr></table></figure>
+<p>远程连接的机器上运行jar包，使其输出到指定文件，关闭窗口不停止运行；关键命令为nohup</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar xxx.jar &gt; log.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/08/关于制作PPT的经验/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/08/关于制作PPT的经验/" itemprop="url">PPT制作经验</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-08T20:07:39+08:00">
+                2019-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/art/" itemprop="url" rel="index">
+                    <span itemprop="name">人文艺术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  278
                 </span>
               
 
@@ -1147,9 +1539,32 @@
       
         
           
-            <p>awk命令的使用说明见下图：</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7rpj6zuioj31000i0mz5.jpg" alt="awk"></p>
-<p>参考博客：<a href="http://www.zsythink.net/archives/1336/" target="_blank" rel="noopener">http://www.zsythink.net/archives/1336/</a></p>
+            <p>制作ppt的几点经验</p>
+<ol>
+<li><p>字体要统一，可以分成几大类，比如一级标题、正文等等字体</p>
+</li>
+<li><p>字体大小要统一，比如一级标题、二级标题、正文、说明、图例等等几类字体大小</p>
+</li>
+<li><p>字体样式要统一、比如哪些地方加粗、哪些地方标什么颜色等等</p>
+</li>
+<li><p>字体颜色要统一、比如什么地方用黑色、什么地方用白色、淡蓝色等等</p>
+</li>
+<li><p>背景和前景颜色要能明显区分，浅色背景配深色前景，深色背景配浅色前景（比如形状、或字体）</p>
+</li>
+<li><p>每一页的文字要控制在能够让观众3秒内阅读（扫视）完的数量级别</p>
+</li>
+<li><p>每一页只讲一样东西，配以图片等</p>
+</li>
+<li><p>对于重点的词句，应当加粗显示、或换一个较大的字体大小</p>
+</li>
+<li><p>多用各种图来表示列表</p>
+</li>
+<li><p>当要表示某种组成关系的时候，画框架图</p>
+</li>
+<li><p>当要表示某种次序关系的时候，画时序图或流程图</p>
+</li>
+</ol>
+<p>讲ppt时一定要有互动</p>
 
           
         
@@ -1433,204 +1848,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/08/关于制作PPT的经验/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/08/关于制作PPT的经验/" itemprop="url">PPT制作经验</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-08T20:07:39+08:00">
-                2019-10-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/art/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  278
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>制作ppt的几点经验</p>
-<ol>
-<li><p>字体要统一，可以分成几大类，比如一级标题、正文等等字体</p>
-</li>
-<li><p>字体大小要统一，比如一级标题、二级标题、正文、说明、图例等等几类字体大小</p>
-</li>
-<li><p>字体样式要统一、比如哪些地方加粗、哪些地方标什么颜色等等</p>
-</li>
-<li><p>字体颜色要统一、比如什么地方用黑色、什么地方用白色、淡蓝色等等</p>
-</li>
-<li><p>背景和前景颜色要能明显区分，浅色背景配深色前景，深色背景配浅色前景（比如形状、或字体）</p>
-</li>
-<li><p>每一页的文字要控制在能够让观众3秒内阅读（扫视）完的数量级别</p>
-</li>
-<li><p>每一页只讲一样东西，配以图片等</p>
-</li>
-<li><p>对于重点的词句，应当加粗显示、或换一个较大的字体大小</p>
-</li>
-<li><p>多用各种图来表示列表</p>
-</li>
-<li><p>当要表示某种组成关系的时候，画框架图</p>
-</li>
-<li><p>当要表示某种次序关系的时候，画时序图或流程图</p>
-</li>
-</ol>
-<p>讲ppt时一定要有互动</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/20/监控/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1716,7 +1933,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  257
+                  1.1k
                 </span>
               
 
@@ -1732,7 +1949,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  5
                 </span>
               
             </div>
@@ -1755,17 +1972,258 @@
       
         
           
-            <h4 id="监控相关"><a href="#监控相关" class="headerlink" title="监控相关"></a>监控相关</h4><p>red原则：rate error duration</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rate(http_server_requests_seconds_sum&#123;xxx&#125;[1h])</span><br><span class="line">sum(logback_events_total&#123;xxx&#125; - logback_events_total&#123;xxx&#125; offset 1m)</span><br><span class="line">rate(http_server_requests_seconds_sum[1m])/rate(http_server_requests_seconds_count[1m])</span><br></pre></td></tr></table></figure>
+            <h4 id="监控相关"><a href="#监控相关" class="headerlink" title="监控相关"></a>监控相关</h4><h5 id="red原则"><a href="#red原则" class="headerlink" title="red原则"></a>red原则</h5><ol>
+<li>rate </li>
+<li>error</li>
+<li>duration</li>
+</ol>
+<h5 id="prometheus指标详解"><a href="#prometheus指标详解" class="headerlink" title="prometheus指标详解"></a>prometheus指标详解</h5><table>
+<thead>
+<tr>
+<th style="text-align:left">指标名</th>
+<th style="text-align:left">简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">jvm_gc_pause_seconds</td>
+<td style="text-align:left">Time spent in GC pauseGC耗时</td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_gc_pause_seconds_max</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_gc_memory_promoted_bytes_total</td>
+<td style="text-align:left">Count of positive increases in the size of the old generation memory pool before GC to after GCGC时，老年代分配的内存空间</td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_gc_memory_allocated_bytes_total</td>
+<td style="text-align:left">Incremented for an increase in the size of the young generation memory pool after one GC to before the nextGC时，年轻代分配的内存空间</td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_gc_live_data_size_bytes</td>
+<td style="text-align:left">Size of old generation memory pool after a full GCFullGC时，老年代的内存空间</td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_gc_max_data_size_bytes</td>
+<td style="text-align:left">Max size of old generation memory poolGC时，老年代的最大内存空间</td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_gc_concurrent_phase_time_seconds</td>
+<td style="text-align:left">Time spent in concurrent phase</td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_gc_concurrent_phase_time_seconds_max</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_classes_unloaded_total</td>
+<td style="text-align:left">The total number of classes unloaded since the Java virtual machine has started executionJVM启动后未加载的classes数</td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_classes_loaded</td>
+<td style="text-align:left">The number of classes that are currently loaded in the Java virtual machineJVM当前加载的classes数</td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_memory_used_bytes</td>
+<td style="text-align:left">The amount of used memoryJVM已用内存</td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_memory_committed_bytes</td>
+<td style="text-align:left">The amount of memory in bytes that is committed for the Java virtual machine to useJVM可用内存</td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_memory_max_bytes</td>
+<td style="text-align:left">The maximum amount of memory in bytes that can be used for memory managemenJVM最大内存</td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_threads_live</td>
+<td style="text-align:left">The current number of live threads including both daemon and non-daemon threadsJVM当前活跃线程数</td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_threads_peak</td>
+<td style="text-align:left">The peak live thread count since the Java virtual machine started or peak was resetJVM峰值线程数</td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_threads_daemon</td>
+<td style="text-align:left">The current number of live daemon threadsJVM守护线程数</td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_buffer_count</td>
+<td style="text-align:left">An estimate of the number of buffers in the poolJVM当前缓冲区数</td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_buffer_total_capacity_bytes</td>
+<td style="text-align:left">An estimate of the total capacity of the buffers in this poolJVM缓冲区总容量</td>
+</tr>
+<tr>
+<td style="text-align:left">jvm_buffer_memory_used_bytes</td>
+<td style="text-align:left">An estimate of the memory that the Java virtual machine is using for this buffer poolJVM缓冲区已用内存</td>
+</tr>
+<tr>
+<td style="text-align:left">process_start_time_seconds</td>
+<td style="text-align:left">The start time of the Java virtual machineJVM启动时长</td>
+</tr>
+<tr>
+<td style="text-align:left">process_cpu_usage</td>
+<td style="text-align:left">The “recent cpu usage” for the Java Virtual Machine process当前进程CPU使用率</td>
+</tr>
+<tr>
+<td style="text-align:left">process_uptime_seconds</td>
+<td style="text-align:left">The uptime of the Java virtual machine应用已运行时间</td>
+</tr>
+<tr>
+<td style="text-align:left">tomcat_threads_currenttomcat</td>
+<td style="text-align:left">tomcat_global_request_secondstomcat当前线程数，包括守护线程</td>
+</tr>
+<tr>
+<td style="text-align:left">tomcat_threads_config_max</td>
+<td style="text-align:left">tomcat配置的线程最大数</td>
+</tr>
+<tr>
+<td style="text-align:left">tomcat_threads_busy</td>
+<td style="text-align:left">tomcat繁忙线程数</td>
+</tr>
+<tr>
+<td style="text-align:left">tomcat_global_request_max_seconds</td>
+<td style="text-align:left">request最长时间</td>
+</tr>
+<tr>
+<td style="text-align:left">tomcat_global_error_total</td>
+<td style="text-align:left">tomcat全局错误总数</td>
+</tr>
+<tr>
+<td style="text-align:left">tomcat_global_sent_bytes_total</td>
+<td style="text-align:left">tomcat全局发送的字节总数</td>
+</tr>
+<tr>
+<td style="text-align:left">tomcat_global_request_seconds</td>
+<td style="text-align:left">tomcat全局请求总时长</td>
+</tr>
+<tr>
+<td style="text-align:left">tomcat_global_received_bytes_total</td>
+<td style="text-align:left">全局接收到的总字节数</td>
+</tr>
+<tr>
+<td style="text-align:left">tomcat_servlet_error_total</td>
+<td style="text-align:left">servlet发生错误总数</td>
+</tr>
+<tr>
+<td style="text-align:left">tomcat_servlet_request_seconds</td>
+<td style="text-align:left">servlet请求总次数和总时长</td>
+</tr>
+<tr>
+<td style="text-align:left">tomcat_servlet_request_max_seconds</td>
+<td style="text-align:left">servlet请求最长时间</td>
+</tr>
+<tr>
+<td style="text-align:left">tomcat_cache_hit_total</td>
+<td style="text-align:left">tomcat缓存命中次数</td>
+</tr>
+<tr>
+<td style="text-align:left">tomcat_cache_access_total</td>
+<td style="text-align:left">tomcat读取缓存次数</td>
+</tr>
+<tr>
+<td style="text-align:left">tomcat_sessions_created</td>
+<td style="text-align:left">已创建tomcat会话数量</td>
+</tr>
+<tr>
+<td style="text-align:left">[http_server_requests_seconds_count</td>
+<td style="text-align:left">http请求数</td>
+</tr>
+<tr>
+<td style="text-align:left">http_server_requests_seconds_sum</td>
+<td style="text-align:left">http请求时长</td>
+</tr>
+<tr>
+<td style="text-align:left">http_server_requests_seconds</td>
+<td style="text-align:left">http请求的总次数与总时长</td>
+</tr>
+<tr>
+<td style="text-align:left">http_server_requests_seconds_max</td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">http_client_requests_seconds_max</td>
+<td style="text-align:left">http请求最大响应时间</td>
+</tr>
+<tr>
+<td style="text-align:left">system_cpu_usage</td>
+<td style="text-align:left">The “recent cpu usage” for the whole system系统CPU使用率</td>
+</tr>
+<tr>
+<td style="text-align:left">system_cpu_count</td>
+<td style="text-align:left">The number of processors available to the Java virtual machineCPU数量</td>
+</tr>
+<tr>
+<td style="text-align:left">system_load_average_1m</td>
+<td style="text-align:left">The sum of the number of runnable entities queued to available processors and the number of runnable entities running on the available processors averaged over a period of time</td>
+</tr>
+<tr>
+<td style="text-align:left">process_files_open</td>
+<td style="text-align:left">The open file descriptor count当前打开句柄数</td>
+</tr>
+<tr>
+<td style="text-align:left">process_files_max</td>
+<td style="text-align:left">The maximum file descriptor count允许最大句柄数</td>
+</tr>
+<tr>
+<td style="text-align:left">node_memory_MemTotal_bytes</td>
+<td style="text-align:left"><code>Memory information field MemTotal_bytes.</code>内存总容量</td>
+</tr>
+<tr>
+<td style="text-align:left">node_memory_MemAvailable_bytes</td>
+<td style="text-align:left"><code>Memory information field MemAvailable_bytes.</code>可用内存容量</td>
+</tr>
+<tr>
+<td style="text-align:left">node_memory_MemFree_bytes</td>
+<td style="text-align:left"><code>Memory information field MemFree_bytes.</code>空闲内存容量</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>node_filesystem_free_bytes</code></td>
+<td style="text-align:left"><code>Filesystem free space in bytes.</code>文件系统可用空间</td>
+</tr>
+<tr>
+<td style="text-align:left">node_filesystem_size_bytes</td>
+<td style="text-align:left"><code>Filesystem size in bytes.</code>文件系统大小</td>
+</tr>
+<tr>
+<td style="text-align:left">node_filesystem_avail_bytes</td>
+<td style="text-align:left"><code>Filesystem space available to non-root users in bytes.</code>非根用户可用的文件系统空间</td>
+</tr>
+<tr>
+<td style="text-align:left">projectlogback_events_total</td>
+<td style="text-align:left">Number of error level events that made it to the logslogback中日志的总数目</td>
+</tr>
+<tr>
+<td style="text-align:left">log4j2_events_total</td>
+<td style="text-align:left">Number of fatal level log events致命级别日志事件数</td>
+</tr>
+</tbody>
+</table>
 <p>node_load1 : 指1分钟内cpu平均负载，同样cpu_load5指5分钟内cpu平均负载，cpu_load15指15分钟内cpu平均负载</p>
-<p>标准化日志示例：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"server"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"requestId"</span>: <span class="string">"9ab57e713a17470e8bc8e46c64404246"</span>,</span><br><span class="line"> <span class="attr">"clientIp"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"loglevel"</span>: <span class="string">"ERROR"</span>,</span><br><span class="line"> <span class="attr">"description"</span>: <span class="string">"请求超时或被客户端关闭"</span>,</span><br><span class="line"> <span class="attr">"methodName"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"requestParams"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"urlPath"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"timestamp"</span>: <span class="string">"2019-10-12T15:16:43.208+08:00"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>dubbo自定义filter，完成prometheus监控的插入</p>
-<p>KafkaConsumerMetrics这个类里面暴露了Kafka消费者的指标</p>
-<p>prometheus在spring项目中的配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">management:</span><br><span class="line">  endpoints:</span><br><span class="line">    web:</span><br><span class="line">      exposure:</span><br><span class="line">        include: &apos;*&apos;</span><br><span class="line">    jmx:</span><br><span class="line">      exposure:</span><br><span class="line">        include: &apos;*&apos;</span><br><span class="line">    shutdown:</span><br><span class="line">      enabled: false</span><br><span class="line">  health:</span><br><span class="line">      redis:</span><br><span class="line">        enabled: false</span><br><span class="line">  metrics:</span><br><span class="line">    distribution:</span><br><span class="line">      percentiles-histogram[http.server.requests]: true</span><br><span class="line">      sla[http.server.requests]: 50ms</span><br><span class="line">  security:</span><br><span class="line">    enabled: false</span><br></pre></td></tr></table></figure>
-<p>稳定性分析</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SELECT request_path, </span><br><span class="line">count(request_path) as request_count,</span><br><span class="line">sum(case when http_status = 499 then 1 else 0 end) as count_499,</span><br><span class="line">sum(case when http_status = 499 then 1 else 0 end) / count(request_path)) as ratio_499,</span><br><span class="line">sum(case when http_status like &quot;5%&quot; then 1 else 0 end) as count_5xx,</span><br><span class="line">sum(case when http_status like &quot;5%&quot; then 1 else 0 end) / count(request_path)) as ratio_5xx,</span><br><span class="line">(sum(request_time) / count(request_path)) as avg_request_time</span><br><span class="line">FROM xxx</span><br><span class="line">WHERE xxx</span><br><span class="line">group by request_path</span><br></pre></td></tr></table></figure>
+<h5 id="标准化日志示例"><a href="#标准化日志示例" class="headerlink" title="标准化日志示例"></a>标准化日志示例</h5><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"server"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"requestId"</span>: <span class="string">"9ab57e713a17470e8bc8e46c64404246"</span>,</span><br><span class="line"> <span class="attr">"clientIp"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"loglevel"</span>: <span class="string">"ERROR"</span>,</span><br><span class="line"> <span class="attr">"description"</span>: <span class="string">"请求超时或被客户端关闭"</span>,</span><br><span class="line"> <span class="attr">"methodName"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"requestParams"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"urlPath"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"timestamp"</span>: <span class="string">"2019-10-12T15:16:43.208+08:00"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="SpringBoot项目中prometheus配置示例"><a href="#SpringBoot项目中prometheus配置示例" class="headerlink" title="SpringBoot项目中prometheus配置示例"></a>SpringBoot项目中prometheus配置示例</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management:</span></span><br><span class="line"><span class="attr">  endpoints:</span></span><br><span class="line"><span class="attr">    web:</span></span><br><span class="line"><span class="attr">      exposure:</span></span><br><span class="line"><span class="attr">        include:</span> <span class="string">'*'</span></span><br><span class="line"><span class="attr">    jmx:</span></span><br><span class="line"><span class="attr">      exposure:</span></span><br><span class="line"><span class="attr">        include:</span> <span class="string">'*'</span></span><br><span class="line"><span class="attr">    shutdown:</span></span><br><span class="line"><span class="attr">      enabled:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  health:</span></span><br><span class="line"><span class="attr">      redis:</span></span><br><span class="line"><span class="attr">        enabled:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  metrics:</span></span><br><span class="line"><span class="attr">    distribution:</span></span><br><span class="line">      <span class="string">percentiles-histogram[http.server.requests]:</span> <span class="literal">true</span></span><br><span class="line">      <span class="string">sla[http.server.requests]:</span> <span class="number">50</span><span class="string">ms</span></span><br><span class="line"><span class="attr">  security:</span></span><br><span class="line"><span class="attr">    enabled:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<h5 id="稳定性分析"><a href="#稳定性分析" class="headerlink" title="稳定性分析"></a>稳定性分析</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SELECT request_path, </span><br><span class="line">count(request_path) as request_count,</span><br><span class="line">sum(case when http_status = 499 then 1 else 0 end) as count_499,</span><br><span class="line">sum(case when http_status = 499 then 1 else 0 end) / count(request_path)) as ratio_499,</span><br><span class="line">sum(case when http_status like &quot;5%&quot; then 1 else 0 end) as count_5xx,</span><br><span class="line">sum(case when http_status like &quot;5%&quot; then 1 else 0 end) / count(request_path)) as ratio_5xx,</span><br><span class="line">(sum(request_time) / count(request_path)) as avg_request_time</span><br><span class="line">FROM xxx</span><br><span class="line">WHERE xxx</span><br><span class="line">group by request_path</span><br></pre></td></tr></table></figure>
+<h5 id="在机器上部署prometheus全家桶"><a href="#在机器上部署prometheus全家桶" class="headerlink" title="在机器上部署prometheus全家桶"></a>在机器上部署prometheus全家桶</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run --name=prometheus -d -p 9090:9090 -v /Users/XFade/prometheus/server/prometheus.yml:/etc/prometheus/prometheus.yml -v /Users/XFade/prometheus/server/rules.yml:/etc/prometheus/rules.yml  prom/prometheus:v2.14.0 --config.file=/etc/prometheus/prometheus.yml --web.enable-lifecycle</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker run -d --name=pushgateway -p 9091:9091 prom/pushgateway</span><br><span class="line"></span><br><span class="line">注意容器里的路径要写对，即/etc/alertmanager/alertmanager.yml</span><br><span class="line">docker run -d -p 9093:9093 -v /Users/XFade/prometheus/server/alertmanager.yml:/etc/alertmanager/alertmanager.yml --name alertmanager prom/alertmanager</span><br></pre></td></tr></table></figure>
+<h5 id="系统故障排查需要考虑的因素"><a href="#系统故障排查需要考虑的因素" class="headerlink" title="系统故障排查需要考虑的因素"></a>系统故障排查需要考虑的因素</h5><ol>
+<li>内存</li>
+<li>CPU</li>
+<li>磁盘IO</li>
+<li>网络IO</li>
+</ol>
+<p>木桶原理——性能瓶颈</p>
+<p>amdahl定律</p>
+<p>排查法：</p>
+<ol>
+<li>cpu idle     top 1/top -p pid H/ </li>
+<li>mem 可用内存  free -m</li>
+<li>disk  df -h /  iostate</li>
+<li>connection tcp连接数</li>
+</ol>
+<p>jvm工具：jstat/jstack</p>
 
           
         
@@ -1982,199 +2440,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/17/cas单点登录/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/08/17/cas单点登录/" itemprop="url">CAS单点登录示意图</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-17T12:09:52+08:00">
-                2019-08-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  367
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>cas单点登录的分析图示：</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7t60ewr8bj30u01daafn.jpg" alt="cas"></p>
-<p>在项目的代码里面，有如下的配置，即进行单点登录时的cas服务器为<code>xxx</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">shiro:</span><br><span class="line">  casLoginServerUrlPrefix: xxx</span><br><span class="line">  casLogoutServerUrlPrefix: xxx</span><br><span class="line">  casTicketValidatorServerUrlPrefix: xxx</span><br><span class="line">  server: yyy</span><br><span class="line">  shiroSessionKeyPre: &apos;kkk&apos;</span><br><span class="line">  shiroSessionExpireSeconds: 3600</span><br><span class="line">  globalSessionTimeoutSeconds: 3600</span><br></pre></td></tr></table></figure>
-<p>启动项目后，访问yyy，未登录，所以跳转到cas服务器上xxx/login?service=yyy/shiro-cas<code>，展示出登录界面。输入用户名和密码后，以post请求调用了</code>authentication/authenticate`的方法。</p>
-<p>post请求的数据如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;mainAuthMethodName&quot;: &quot;username-password&quot;,</span><br><span class="line">	&quot;credential&quot;: &#123;</span><br><span class="line">		&quot;username&quot;: &quot;1000003718&quot;,</span><br><span class="line">		&quot;password&quot;: &quot;xxx&quot;,</span><br><span class="line">		&quot;encodeVersion&quot;: &quot;2&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;context&quot;: &#123;</span><br><span class="line">		&quot;deviceId&quot;: &quot;default&quot;,</span><br><span class="line">		&quot;sign&quot;: &quot;default&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;version&quot;: &quot;2.0&quot;,</span><br><span class="line">	&quot;accountSystem&quot;: &quot;employee&quot;,</span><br><span class="line">	&quot;service&quot;: &quot;yyy/shiro-cas&quot;,</span><br><span class="line">	&quot;loginTicketId&quot;: &quot;xxx&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其中credential（凭据）中即包含了用户名和密码（经过加密的，每次不一样）。</p>
-<p>cas服务器返回的数据包含了ticket。</p>
-<p>接着调用项目中的<code>shiro-cas?ticket=ttt</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Request URL: yyy/shiro-cas?ticket=ttt</span><br></pre></td></tr></table></figure>
-<p>项目代码在类<code>PcShiroCasRealm</code>中，其登录认证的逻辑如下：</p>
-<ol>
-<li>获取到token，其中包含ticket，userId和isRememberMe。此时只有ticket不为空</li>
-<li>与cas服务器进行ticket的认证</li>
-<li>认证成功后，获取到principle（用户相关的信息，用户名等）</li>
-<li>根据用户名去数据库查询用户</li>
-<li>将token中的userId和isRememberMe设置好</li>
-<li>将用户信息保存到session中，cookies的设置</li>
-</ol>
-<p>认证成功后，进行授权，并展示出首页。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2322,7 +2587,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">61.5k</span>
+    <span title="Site words total count">62.4k</span>
   
 </div>
 

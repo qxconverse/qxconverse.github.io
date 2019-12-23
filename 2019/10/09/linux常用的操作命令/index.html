@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="查看磁盘的使用情况 12345df -h 文件夹名du --max-depth=1 -hdu -sh 文件夹名 cp用来复制文件或目录，-r -R 递归复制该目录及其子目录内容，-f  不询问而强制复制 1234567scp用于在Linux服务器之间复制文件和目录-v  详细显示输出的具体情况-r  递归复制整个目录从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，">
+<meta name="description" content="查看磁盘的使用情况 123df -h 文件夹名du --max-depth=1 -hdu -sh 文件夹名 cp用来复制文件或目录，-r/-R 递归复制该目录及其子目录内容，-f 表示不询问而强制复制 scp用于在Linux服务器之间复制文件和目录 从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，不然识别不了。其实可以这样记忆，看以哪个为中心。不管是从远端复制到本">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux常用命令">
-<meta property="og:url" content="http://yoursite.com/2018/07/17/linux常用的操作命令/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/10/09/linux常用的操作命令/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="查看磁盘的使用情况 12345df -h 文件夹名du --max-depth=1 -hdu -sh 文件夹名 cp用来复制文件或目录，-r -R 递归复制该目录及其子目录内容，-f  不询问而强制复制 1234567scp用于在Linux服务器之间复制文件和目录-v  详细显示输出的具体情况-r  递归复制整个目录从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，">
+<meta property="og:description" content="查看磁盘的使用情况 123df -h 文件夹名du --max-depth=1 -hdu -sh 文件夹名 cp用来复制文件或目录，-r/-R 递归复制该目录及其子目录内容，-f 表示不询问而强制复制 scp用于在Linux服务器之间复制文件和目录 从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，不然识别不了。其实可以这样记忆，看以哪个为中心。不管是从远端复制到本">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-21T14:26:19.115Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7rpj6zuioj31000i0mz5.jpg">
+<meta property="og:updated_time" content="2019-12-23T02:54:23.810Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令">
-<meta name="twitter:description" content="查看磁盘的使用情况 12345df -h 文件夹名du --max-depth=1 -hdu -sh 文件夹名 cp用来复制文件或目录，-r -R 递归复制该目录及其子目录内容，-f  不询问而强制复制 1234567scp用于在Linux服务器之间复制文件和目录-v  详细显示输出的具体情况-r  递归复制整个目录从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，">
+<meta name="twitter:description" content="查看磁盘的使用情况 123df -h 文件夹名du --max-depth=1 -hdu -sh 文件夹名 cp用来复制文件或目录，-r/-R 递归复制该目录及其子目录内容，-f 表示不询问而强制复制 scp用于在Linux服务器之间复制文件和目录 从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，不然识别不了。其实可以这样记忆，看以哪个为中心。不管是从远端复制到本">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7rpj6zuioj31000i0mz5.jpg">
 
 
 
@@ -120,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/17/linux常用的操作命令/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/09/linux常用的操作命令/">
 
 
 
@@ -283,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/linux常用的操作命令/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/09/linux常用的操作命令/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -312,8 +314,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T12:09:52+08:00">
-                2018-07-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-09T09:50:39+08:00">
+                2019-10-09
               </time>
             
 
@@ -371,7 +373,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  618
+                  699
                 </span>
               
 
@@ -409,23 +411,32 @@
 
       
         <p>查看磁盘的使用情况</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df -h 文件夹名</span><br><span class="line"></span><br><span class="line">du --max-depth=1 -h</span><br><span class="line"></span><br><span class="line">du -sh 文件夹名</span><br></pre></td></tr></table></figure>
-<p>cp用来复制文件或目录，-r -R 递归复制该目录及其子目录内容，-f  不询问而强制复制</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">scp用于在Linux服务器之间复制文件和目录</span><br><span class="line">-v  详细显示输出的具体情况</span><br><span class="line">-r  递归复制整个目录</span><br><span class="line">从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，不然识别不了。</span><br><span class="line">其实可以这样记忆，看以哪个为中心。不管是从远端复制到本地，还是把本地的复制到远端，都在本地操作（主角为本地）。</span><br><span class="line"></span><br><span class="line">scp xxx@xxxxxxx:远程路径 本地路径</span><br></pre></td></tr></table></figure>
-<p>diff 查看两个文件的不同</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff qinxue qinxue.txt &gt; diff-qinxue.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df -h 文件夹名</span><br><span class="line">du --max-depth=1 -h</span><br><span class="line">du -sh 文件夹名</span><br></pre></td></tr></table></figure>
+<p>cp用来复制文件或目录，<code>-r/-R</code> 递归复制该目录及其子目录内容，<code>-f</code> 表示不询问而强制复制</p>
+<p>scp用于在Linux服务器之间复制文件和目录</p>
+<p>从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，不然识别不了。其实可以这样记忆，看以哪个为中心。不管是从远端复制到本地，还是把本地的复制到远端，都在本地操作（主角为本地）。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-v  详细显示输出的具体情况</span><br><span class="line">-r  递归复制整个目录</span><br><span class="line">scp xxx@xxxxxxx:远程路径 本地路径</span><br></pre></td></tr></table></figure>
+<p>diff：查看两个文件的不同</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff f1 f2 &gt; diff.txt</span><br></pre></td></tr></table></figure>
 <p>0代表标准输入，1代表标准输出，2代表错误输出，&gt;代表重定向，grep (global search regular expression(RE) and print out the line）代表全面搜索正则表达式并把行打印出来。|代表管道，将前面一个指令传出的正确输出信息传递给下一个命令，作为标准的输入。注意，它具有单向性，也叫半双工管道。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">du --max-depth=1 -h . 1&gt;/home/qinxue/info.txt 2&gt;/home/qinxue/error.txt</span><br><span class="line">du --max-depth=1 -h . 1&gt;/home/qinxue/info.txt 2&gt;/dev/null </span><br><span class="line">du --max-depth=1 -h . 2&gt;/dev/null </span><br><span class="line">du --max-depth=1 -h . 2&gt;/dev/null | grep qinxue</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">du --max-depth=1 -h . 1&gt;/home/qinxue/info.txt 2&gt;/home/qinxue/error.txt</span><br><span class="line">du --max-depth=1 -h . 1&gt;/home/qinxue/info.txt 2&gt;/dev/null </span><br><span class="line">du --max-depth=1 -h . 2&gt;/dev/null </span><br><span class="line">du --max-depth=1 -h . 2&gt;/dev/null | grep qinxue</span><br></pre></td></tr></table></figure>
 <p>mac下用不了<code>--max-depth=1</code>，可以直接用<code>-d 1</code>。</p>
 <p>交互式Shell命令，连接服务器，当出现密码的提示时，自动输入。省去了手动输入的麻烦。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/expect</span><br><span class="line">set timeout 30</span><br><span class="line">spawn ssh xx@xxxxxx</span><br><span class="line">expect &quot;password:&quot;</span><br><span class="line">send &quot;xxxxxx\r&quot;</span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;&#123;print $2&#125;&apos; a.txt | sort | uniq &gt; b.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/expect</span></span><br><span class="line">set timeout 30</span><br><span class="line">spawn ssh xx@xxxxxx</span><br><span class="line">expect "password:"</span><br><span class="line">send "xxxxxx\r"</span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
+<p>awk命令的使用说明见下图：</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7rpj6zuioj31000i0mz5.jpg" alt="awk"></p>
+<p>参考博客：<a href="http://www.zsythink.net/archives/1336/" target="_blank" rel="noopener">http://www.zsythink.net/archives/1336/</a></p>
+<p>示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk '&#123;print $2&#125;' a.txt | sort | uniq &gt; b.txt</span><br></pre></td></tr></table></figure>
 <p>重启linux服务器：reboot</p>
-<p>强制关闭谷歌浏览器，关闭其它的也类似<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep username |grep chrome</span><br><span class="line">kill -9 chrome主进程的pid</span><br></pre></td></tr></table></figure></p>
+<p>强制关闭谷歌浏览器，关闭其它的也类似<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep 用户名 |grep chrome</span><br><span class="line">kill -9 chrome主进程的pid</span><br></pre></td></tr></table></figure></p>
 <p>关于打包的指令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//打包 tar</span><br><span class="line">tar -cvf text.tar * //-v表示进度，text.tar是压缩文件名，*表示所有文件</span><br><span class="line">//解压</span><br><span class="line">tar -xvf text.tar</span><br><span class="line">//压缩 gzip</span><br><span class="line">gzip text.tar</span><br><span class="line">//解压</span><br><span class="line">gzip -d xxx.tar.gz</span><br><span class="line">//比较实用的</span><br><span class="line">tar -zcvf text.tar.gz * //打包</span><br><span class="line">tar -zxvf text.tar.gz //解压</span><br><span class="line">tar -zxvf text.tar.gz -c text/  //解压到指定路径</span><br></pre></td></tr></table></figure>
-<p>查看某个文件的尾部<code>tail -f xxx</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//打包 tar</span><br><span class="line">tar -cvf text.tar * //-v表示进度，text.tar是压缩文件名，*表示所有文件</span><br><span class="line">//解压</span><br><span class="line">tar -xvf text.tar</span><br><span class="line">//压缩 gzip</span><br><span class="line">gzip text.tar</span><br><span class="line">//解压</span><br><span class="line">gzip -d xxx.tar.gz</span><br><span class="line">//比较实用的</span><br><span class="line">tar -zcvf text.tar.gz * //打包</span><br><span class="line">tar -zxvf text.tar.gz //解压</span><br><span class="line">tar -zxvf text.tar.gz -c text/  //解压到指定路径</span><br></pre></td></tr></table></figure>
 <p>在vim中查找关键字，首先切换到命令行模式，然后<code>/keyword</code>，回车，接着可以通过<code>n</code>一个一个查</p>
+<p>查找某个文件夹下java文件代码的行数</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wc -l `find xxx/ -name "*.java"`</span><br></pre></td></tr></table></figure>
+<p>远程连接的机器上运行jar包，使其输出到指定文件，关闭窗口不停止运行；关键命令为nohup</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar xxx.jar &gt; log.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -456,8 +467,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/04/23/top-down思维/" rel="next" title="top-down思维">
-                <i class="fa fa-chevron-left"></i> top-down思维
+              <a href="/2019/10/08/关于制作PPT的经验/" rel="next" title="PPT制作经验">
+                <i class="fa fa-chevron-left"></i> PPT制作经验
               </a>
             
           </div>
@@ -466,8 +477,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/17/Git操作/" rel="prev" title="Git相关的操作">
-                Git相关的操作 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/10/10/云计算相关/" rel="prev" title="云计算相关">
+                云计算相关 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -638,7 +649,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">61.5k</span>
+    <span title="Site words total count">62.4k</span>
   
 </div>
 

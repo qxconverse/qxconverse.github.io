@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 A想把签名的消息发给B   使用公钥（B的）加密 使用私钥（B的）解密 A想把加密的消息发给B，让B知道是什么消息    数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） ssh / https 的区别 https证书 rsa">
+<meta name="description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密    A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加密">
 <meta name="keywords" content="密码学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="密码学相关">
 <meta property="og:url" content="http://yoursite.com/2019/08/06/密码学相关/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 A想把签名的消息发给B   使用公钥（B的）加密 使用私钥（B的）解密 A想把加密的消息发给B，让B知道是什么消息    数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） ssh / https 的区别 https证书 rsa">
+<meta property="og:description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密    A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加密">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-21T14:39:12.758Z">
+<meta property="og:updated_time" content="2019-12-23T03:18:09.582Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="密码学相关">
-<meta name="twitter:description" content="A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 A想把签名的消息发给B   使用公钥（B的）加密 使用私钥（B的）解密 A想把加密的消息发给B，让B知道是什么消息    数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） ssh / https 的区别 https证书 rsa">
+<meta name="twitter:description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密    A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加密">
 
 
 
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  314
+                  352
                 </span>
               
 
@@ -408,7 +408,11 @@
       
 
       
-        <table>
+        <h4 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h4><p>数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性）</p>
+<p>rsa非对称加密 + hash摘要 = 数字签名</p>
+<p><strong>对于摘要：私钥签名、公钥验证</strong></p>
+<p><strong>对于加密：公钥加密、私钥解密</strong></p>
+<table>
 <thead>
 <tr>
 <th>A</th>
@@ -420,27 +424,29 @@
 <tr>
 <td>报文-&gt;Hash算法（比如MD5，SHA256）生成摘要-&gt;私钥（A的）签名</td>
 <td>使用公钥（A的）验证</td>
-<td>A想把签名的消息发给B</td>
+<td>摘要部分：A想把签名的消息发给B</td>
 </tr>
 <tr>
 <td>使用公钥（B的）加密</td>
 <td>使用私钥（B的）解密</td>
-<td>A想把加密的消息发给B，让B知道是什么消息</td>
+<td>加密部分：A想把加密的消息发给B，让B知道是什么消息</td>
 </tr>
 </tbody>
 </table>
-<p>数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性）</p>
-<p>ssh / https 的区别</p>
-<p>https证书</p>
-<p>rsa非对称加密 + hash摘要 = 数字签名</p>
-<p>对于放在gitlab上的代码，使用https的方式来clone，这样就省去了配置ssh的私钥和公钥的步骤。说白了，只要涉及到ssh协议的传输，那么一定会需要公钥和私钥的，所以，gitlab相关的git操作和连接远程服务器都要用。</p>
-<p>mac上terminal通过ssh连接远程linux服务器的方法：</p>
+<h4 id="ssh相关"><a href="#ssh相关" class="headerlink" title="ssh相关"></a>ssh相关</h4><p>对于放在Gitlab上的代码，使用https的方式来clone，这样就省去了配置ssh的私钥和公钥的步骤。说白了，只要涉及到ssh协议的传输，那么一定会需要公钥和私钥的，所以，Gitlab相关的Git操作和连接远程服务器都要用。</p>
+<p>Mac上terminal通过ssh连接远程Linux服务器的方法：</p>
 <ol>
-<li>首先需要加入ssh的公钥和私钥，把两个文件拷贝到.ssh文件夹底下</li>
-<li>通过命令<code>ssh-add .ssh/id_rsa_xxx</code>加入，输入密码后即可加入秘钥公钥</li>
-<li>然后就可以通过命令<code>ssh -p 22 xxx@xxx</code>连接上了</li>
+<li>生成公、私钥</li>
 </ol>
-<p>连接远程数据库使用<code>mysql -h hostname -P port -u username -p</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "xxx"</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>其中私钥放在自己的电脑<code>~/.ssh</code>目录</p>
+</li>
+<li><p>将公钥放到远程服务器的<code>.ssh/authorized_keys</code>文件里面</p>
+</li>
+<li>如果为了更加方便地登录，新建config文件，内容如下。就可以使用<code>ssh xxx</code>直接登录。</li>
+</ol>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host xxx</span><br><span class="line">HostName  远程服务器IP</span><br><span class="line">User 远程连接使用的账号</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -540,8 +546,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -626,6 +641,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#数字签名"><span class="nav-number">1.</span> <span class="nav-text">数字签名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ssh相关"><span class="nav-number">2.</span> <span class="nav-text">ssh相关</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -653,7 +684,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">61.5k</span>
+    <span title="Site words total count">62.4k</span>
   
 </div>
 

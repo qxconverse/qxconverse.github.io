@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
 <meta property="og:description" content="redis的list的底层实现是一个双向链表，也可以使用它实现一个简单的消息队列，生产者push，消费者pop。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-29T15:51:37.080Z">
+<meta property="og:updated_time" content="2019-12-23T02:56:40.547Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis">
 <meta name="twitter:description" content="redis的list的底层实现是一个双向链表，也可以使用它实现一个简单的消息队列，生产者push，消费者pop。">
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  644
+                  958
                 </span>
               
 
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -426,6 +426,8 @@
 <li>publish命令会向频道的所有订阅者发消息，并向所有与该频道匹配的模式的订阅者发消息。</li>
 <li>pubsub的3个子命令，channels用来返回当前服务器被订阅的频道；numsub接受多个频道作为参数，并返回这些频道的订阅者数量；numpat返回该服务器所有被订阅模式的数量。</li>
 </ol>
+<p>java项目中Redis相关的配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">spring.redis.cluster.max-redirects= # 集群从节点转发的数量. </span><br><span class="line">spring.redis.cluster.nodes= # 集群节点，逗号分隔. </span><br><span class="line">spring.redis.database=0 # 使用的缓存索引编号. </span><br><span class="line">spring.redis.url= # 连接URL，如: redis://user:password@example.com:6379 </span><br><span class="line">spring.redis.host=localhost # 主机. </span><br><span class="line">spring.redis.jedis.pool.max-active=8 # 连接池的最大活动连接数量. </span><br><span class="line">spring.redis.jedis.pool.max-idle=8 # 连接池的最大空闲连接数量. </span><br><span class="line">spring.redis.jedis.pool.max-wait=-1ms # 连接池分配连接的等待时间. </span><br><span class="line">spring.redis.jedis.pool.min-idle=0 # 最小空闲连接数量. </span><br><span class="line">spring.redis.lettuce.pool.max-active=8 # 连接池最大活动连接数量. </span><br><span class="line">spring.redis.lettuce.pool.max-idle=8 # 连接池最大空闲连接数量，负数表示不限制. </span><br><span class="line">spring.redis.lettuce.pool.max-wait=-1ms # 连接池分配连接的最大等待时间，负数表示无限等待不超时. </span><br><span class="line">spring.redis.lettuce.pool.min-idle=0 # 连接池最小空闲连接数量. </span><br><span class="line">spring.redis.lettuce.shutdown-timeout=100ms # 关机超时时间. </span><br><span class="line">spring.redis.password= # Redis服务器的密码 </span><br><span class="line">spring.redis.port=6379 # Redis服务器端口.</span><br><span class="line">spring.redis.sentinel.master= # Redis主服务器地址. </span><br><span class="line">spring.redis.sentinel.nodes= # 逗号分隔的键值对形式的服务器列表. </span><br><span class="line">spring.redis.ssl=false # 是否启用SSL连接.</span><br><span class="line">spring.redis.timeout= # 连接超时</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -638,7 +640,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">61.5k</span>
+    <span title="Site words total count">62.4k</span>
   
 </div>
 

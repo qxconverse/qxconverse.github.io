@@ -282,6 +282,183 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/03/Redis/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/03/Redis/" itemprop="url">Redis</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-03T21:30:11+08:00">
+                2018-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  958
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>redis的list的底层实现是一个<strong>双向链表</strong>，也可以使用它实现一个简单的消息队列，生产者push，消费者pop。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/03/Redis/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/02/数据库事务四种隔离级别/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -823,7 +1000,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/mybatis相关/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/浏览器访问网页的整个流程/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -842,7 +1019,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/17/mybatis相关/" itemprop="url">Mybatis相关</a></h1>
+                <a class="post-title-link" href="/2018/08/17/浏览器访问网页的整个流程/" itemprop="url">浏览器访问网页的流程</a></h1>
         
 
         <div class="post-meta">
@@ -908,7 +1085,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  90
+                  0
                 </span>
               
 
@@ -947,12 +1124,8 @@
       
         
           
-            <p>mybatis中<code>#</code>和<code>$</code>的区别</p>
-<p><code>#</code>会进行预编译，按照类型匹配的，用于变量替换。</p>
-<p><code>$</code>不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它</p>
-<p>如果两个都可以用，最好用#</p>
-<p>select的时候一定要加resultType或者resultMap，否则报错</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"xxx"</span> <span class="attr">resultType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    xxx</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+            <p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5fxc5ye7jj30mv0olgoz.jpg" alt="TIM截图20181105110628"></p>
+
           
         
       
@@ -1177,7 +1350,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/浏览器访问网页的整个流程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/17/mybatis相关/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -1196,7 +1369,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/08/17/浏览器访问网页的整个流程/" itemprop="url">浏览器访问网页的流程</a></h1>
+                <a class="post-title-link" href="/2018/08/17/mybatis相关/" itemprop="url">Mybatis相关</a></h1>
         
 
         <div class="post-meta">
@@ -1262,7 +1435,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0
+                  90
                 </span>
               
 
@@ -1301,8 +1474,12 @@
       
         
           
-            <p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g5fxc5ye7jj30mv0olgoz.jpg" alt="TIM截图20181105110628"></p>
-
+            <p>mybatis中<code>#</code>和<code>$</code>的区别</p>
+<p><code>#</code>会进行预编译，按照类型匹配的，用于变量替换。</p>
+<p><code>$</code>不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它</p>
+<p>如果两个都可以用，最好用#</p>
+<p>select的时候一定要加resultType或者resultMap，否则报错</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"xxx"</span> <span class="attr">resultType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    xxx</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
           
         
       
@@ -1504,187 +1681,6 @@
 <ol start="3">
 <li>这样就可以访问了，注意服务名<code>xxx</code>要换成小写访问！！！</li>
 </ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/python相关的/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/17/python相关的/" itemprop="url">python相关的</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-17T12:09:52+08:00">
-                2018-07-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  289
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="mac下安装opencv3"><a href="#mac下安装opencv3" class="headerlink" title="mac下安装opencv3"></a>mac下安装opencv3</h4><p>一开始用的brew，但是给我下了py2.7和py3.7，而我的python是anaconda3.5，所以干脆用conda安装。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XFade@qx:~$ conda install -c menpo opencv3</span><br></pre></td></tr></table></figure>
-<p>这样就可以<code>import cv2</code>了</p>
-<h4 id="mac下安装tensorflow"><a href="#mac下安装tensorflow" class="headerlink" title="mac下安装tensorflow"></a>mac下安装tensorflow</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">XFade@qx:~$ conda info --envs</span><br><span class="line">XFade@qx:~$ conda create -n tensorflow python=3.5</span><br><span class="line">XFade@qx:~$ conda info --envs</span><br></pre></td></tr></table></figure>
-<p>后面安装完成后，需要在环境中使用才行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">XFade@qx:~$ source activate tensorflow</span><br><span class="line">(tensorflow) XFade@qx:~$ python</span><br><span class="line">Python 3.5.4 |Continuum Analytics, Inc.| (default, Aug 14 2017, 12:43:10)</span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.57)] on darwin</span><br><span class="line">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span><br><span class="line">&gt;&gt;&gt; import tensorflow as tf</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">// 激活环境</span><br><span class="line">$ source activate tensorflow</span><br><span class="line">// 关闭环境</span><br><span class="line">$ source deactivate</span><br></pre></td></tr></table></figure>
-<p>参考文章：<a href="https://www.jianshu.com/p/d54546ab315e" target="_blank" rel="noopener">https://www.jianshu.com/p/d54546ab315e</a></p>
-<p>当激活了这个环境后，之前安装的很多库就用不了了，只能用该环境下的包。</p>
-<h4 id="python的lambda操作"><a href="#python的lambda操作" class="headerlink" title="python的lambda操作"></a>python的lambda操作</h4><p>按照2个标准来排序，<code>lambda x: [-x[0], x[1]]</code>表示按照第一个数降序，按照第二个数升序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">people = [[9, 0], [7, 0], [1, 9], [3, 0], [2, 7], [5, 3], [6, 0], [3, 4], [6, 2], [5, 2]]</span><br><span class="line">people.sort(key=lambda x: [-x[0], x[1]])</span><br><span class="line"># output</span><br><span class="line"># [[9, 0], [7, 0], [6, 0], [6, 2], [5, 2], [5, 3], [3, 0], [3, 4], [2, 7], [1, 9]]</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -1962,7 +1958,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/linux常用的操作命令/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/17/python相关的/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qin xue">
@@ -1981,7 +1977,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/17/linux常用的操作命令/" itemprop="url">Linux常用命令</a></h1>
+                <a class="post-title-link" href="/2018/07/17/python相关的/" itemprop="url">python相关的</a></h1>
         
 
         <div class="post-meta">
@@ -2047,7 +2043,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  618
+                  284
                 </span>
               
 
@@ -2063,7 +2059,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  1
                 </span>
               
             </div>
@@ -2086,24 +2082,15 @@
       
         
           
-            <p>查看磁盘的使用情况</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">df -h 文件夹名</span><br><span class="line"></span><br><span class="line">du --max-depth=1 -h</span><br><span class="line"></span><br><span class="line">du -sh 文件夹名</span><br></pre></td></tr></table></figure>
-<p>cp用来复制文件或目录，-r -R 递归复制该目录及其子目录内容，-f  不询问而强制复制</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">scp用于在Linux服务器之间复制文件和目录</span><br><span class="line">-v  详细显示输出的具体情况</span><br><span class="line">-r  递归复制整个目录</span><br><span class="line">从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，不然识别不了。</span><br><span class="line">其实可以这样记忆，看以哪个为中心。不管是从远端复制到本地，还是把本地的复制到远端，都在本地操作（主角为本地）。</span><br><span class="line"></span><br><span class="line">scp xxx@xxxxxxx:远程路径 本地路径</span><br></pre></td></tr></table></figure>
-<p>diff 查看两个文件的不同</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff qinxue qinxue.txt &gt; diff-qinxue.txt</span><br></pre></td></tr></table></figure>
-<p>0代表标准输入，1代表标准输出，2代表错误输出，&gt;代表重定向，grep (global search regular expression(RE) and print out the line）代表全面搜索正则表达式并把行打印出来。|代表管道，将前面一个指令传出的正确输出信息传递给下一个命令，作为标准的输入。注意，它具有单向性，也叫半双工管道。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">du --max-depth=1 -h . 1&gt;/home/qinxue/info.txt 2&gt;/home/qinxue/error.txt</span><br><span class="line">du --max-depth=1 -h . 1&gt;/home/qinxue/info.txt 2&gt;/dev/null </span><br><span class="line">du --max-depth=1 -h . 2&gt;/dev/null </span><br><span class="line">du --max-depth=1 -h . 2&gt;/dev/null | grep qinxue</span><br></pre></td></tr></table></figure>
-<p>mac下用不了<code>--max-depth=1</code>，可以直接用<code>-d 1</code>。</p>
-<p>交互式Shell命令，连接服务器，当出现密码的提示时，自动输入。省去了手动输入的麻烦。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/expect</span><br><span class="line">set timeout 30</span><br><span class="line">spawn ssh xx@xxxxxx</span><br><span class="line">expect &quot;password:&quot;</span><br><span class="line">send &quot;xxxxxx\r&quot;</span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;&#123;print $2&#125;&apos; a.txt | sort | uniq &gt; b.txt</span><br></pre></td></tr></table></figure>
-<p>重启linux服务器：reboot</p>
-<p>强制关闭谷歌浏览器，关闭其它的也类似<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep username |grep chrome</span><br><span class="line">kill -9 chrome主进程的pid</span><br></pre></td></tr></table></figure></p>
-<p>关于打包的指令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//打包 tar</span><br><span class="line">tar -cvf text.tar * //-v表示进度，text.tar是压缩文件名，*表示所有文件</span><br><span class="line">//解压</span><br><span class="line">tar -xvf text.tar</span><br><span class="line">//压缩 gzip</span><br><span class="line">gzip text.tar</span><br><span class="line">//解压</span><br><span class="line">gzip -d xxx.tar.gz</span><br><span class="line">//比较实用的</span><br><span class="line">tar -zcvf text.tar.gz * //打包</span><br><span class="line">tar -zxvf text.tar.gz //解压</span><br><span class="line">tar -zxvf text.tar.gz -c text/  //解压到指定路径</span><br></pre></td></tr></table></figure>
-<p>查看某个文件的尾部<code>tail -f xxx</code></p>
-<p>在vim中查找关键字，首先切换到命令行模式，然后<code>/keyword</code>，回车，接着可以通过<code>n</code>一个一个查</p>
+            <h4 id="mac下安装opencv3"><a href="#mac下安装opencv3" class="headerlink" title="mac下安装opencv3"></a>mac下安装opencv3</h4><p>一开始用的brew，但是给我下了py2.7和py3.7，而我的python是anaconda3.5，所以干脆用conda安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ conda install -c menpo opencv3</span><br></pre></td></tr></table></figure>
+<p>这样就可以<code>import cv2</code>了</p>
+<h4 id="mac下安装tensorflow"><a href="#mac下安装tensorflow" class="headerlink" title="mac下安装tensorflow"></a>mac下安装tensorflow</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ conda info --envs</span><br><span class="line">$ conda create -n tensorflow python=3.5</span><br><span class="line">$ conda info --envs</span><br></pre></td></tr></table></figure>
+<p>后面安装完成后，需要在环境中使用才行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ source activate tensorflow</span><br><span class="line">(tensorflow) XFade@qx:~$ python</span><br><span class="line">Python 3.5.4 |Continuum Analytics, Inc.| (default, Aug 14 2017, 12:43:10)</span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.57)] on darwin</span><br><span class="line">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span><br><span class="line">&gt;&gt;&gt; import tensorflow as tf</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">// 激活环境</span><br><span class="line">$ source activate tensorflow</span><br><span class="line">// 关闭环境</span><br><span class="line">$ source deactivate</span><br></pre></td></tr></table></figure>
+<p>参考文章：<a href="https://www.jianshu.com/p/d54546ab315e" target="_blank" rel="noopener">https://www.jianshu.com/p/d54546ab315e</a></p>
+<p>当激活了这个环境后，之前安装的很多库就用不了了，只能用该环境下的包。</p>
+<h4 id="python的lambda操作"><a href="#python的lambda操作" class="headerlink" title="python的lambda操作"></a>python的lambda操作</h4><p>按照2个标准来排序，<code>lambda x: [-x[0], x[1]]</code>表示按照第一个数降序，按照第二个数升序<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">people = [[9, 0], [7, 0], [1, 9], [3, 0], [2, 7], [5, 3], [6, 0], [3, 4], [6, 2], [5, 2]]</span><br><span class="line">people.sort(key=lambda x: [-x[0], x[1]])</span><br><span class="line"># output</span><br><span class="line"># [[9, 0], [7, 0], [6, 0], [6, 2], [5, 2], [5, 3], [3, 0], [3, 4], [2, 7], [1, 9]]</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -2286,7 +2273,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">61.5k</span>
+    <span title="Site words total count">62.4k</span>
   
 </div>
 

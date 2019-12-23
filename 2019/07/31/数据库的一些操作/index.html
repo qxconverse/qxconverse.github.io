@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="数据库相关1234567891011121314151617181920212223show variables like &amp;apos;character%&amp;apos;;select length(&amp;apos;aa&amp;apos;);ALTER DATABASE    database_name    CHARACTER SET = utf8mb4    COLLATE = utf8mb4_unico">
+<meta name="description" content="数据库相关可以通过length函数查看字符串中字符的数目 1select length(&amp;apos;aa&amp;apos;); 变更数据库、表的字符集 123456789101112131415161718show variables like &amp;apos;character%&amp;apos;;ALTER DATABASE    database_name    CHARACTER SET = utf8mb">
 <meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库相关">
 <meta property="og:url" content="http://yoursite.com/2019/07/31/数据库的一些操作/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="数据库相关1234567891011121314151617181920212223show variables like &amp;apos;character%&amp;apos;;select length(&amp;apos;aa&amp;apos;);ALTER DATABASE    database_name    CHARACTER SET = utf8mb4    COLLATE = utf8mb4_unico">
+<meta property="og:description" content="数据库相关可以通过length函数查看字符串中字符的数目 1select length(&amp;apos;aa&amp;apos;); 变更数据库、表的字符集 123456789101112131415161718show variables like &amp;apos;character%&amp;apos;;ALTER DATABASE    database_name    CHARACTER SET = utf8mb">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-21T13:50:27.663Z">
+<meta property="og:updated_time" content="2019-12-23T05:23:13.139Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库相关">
-<meta name="twitter:description" content="数据库相关1234567891011121314151617181920212223show variables like &amp;apos;character%&amp;apos;;select length(&amp;apos;aa&amp;apos;);ALTER DATABASE    database_name    CHARACTER SET = utf8mb4    COLLATE = utf8mb4_unico">
+<meta name="twitter:description" content="数据库相关可以通过length函数查看字符串中字符的数目 1select length(&amp;apos;aa&amp;apos;); 变更数据库、表的字符集 123456789101112131415161718show variables like &amp;apos;character%&amp;apos;;ALTER DATABASE    database_name    CHARACTER SET = utf8mb">
 
 
 
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  209
+                  347
                 </span>
               
 
@@ -408,11 +408,23 @@
       
 
       
-        <h4 id="数据库相关"><a href="#数据库相关" class="headerlink" title="数据库相关"></a>数据库相关</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;character%&apos;;</span><br><span class="line">select length(&apos;aa&apos;);</span><br><span class="line"></span><br><span class="line">ALTER DATABASE</span><br><span class="line">    database_name</span><br><span class="line">    CHARACTER SET = utf8mb4</span><br><span class="line">    COLLATE = utf8mb4_unicode_ci;</span><br><span class="line"></span><br><span class="line">ALTER TABLE</span><br><span class="line">    table_name</span><br><span class="line">    CONVERT TO CHARACTER SET utf8mb4</span><br><span class="line">    COLLATE utf8mb4_unicode_ci;</span><br><span class="line"></span><br><span class="line">ALTER TABLE</span><br><span class="line">    table_name</span><br><span class="line">    CHANGE column_name column_name</span><br><span class="line">    data_type</span><br><span class="line">    CHARACTER SET utf8mb4</span><br><span class="line">    COLLATE utf8mb4_unicode_ci;</span><br><span class="line"></span><br><span class="line">alter table xxx change column_name column_name varchar(20) character set utf8mb4;</span><br><span class="line">show create table xxx\G</span><br><span class="line">show table status from xxx\G</span><br></pre></td></tr></table></figure>
+        <h4 id="数据库相关"><a href="#数据库相关" class="headerlink" title="数据库相关"></a>数据库相关</h4><p>可以通过length函数查看字符串中字符的数目</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select length(&apos;aa&apos;);</span><br></pre></td></tr></table></figure>
+<p>变更数据库、表的字符集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;character%&apos;;</span><br><span class="line"></span><br><span class="line">ALTER DATABASE</span><br><span class="line">    database_name</span><br><span class="line">    CHARACTER SET = utf8mb4</span><br><span class="line">    COLLATE = utf8mb4_unicode_ci;</span><br><span class="line"></span><br><span class="line">ALTER TABLE</span><br><span class="line">    table_name</span><br><span class="line">    CONVERT TO CHARACTER SET utf8mb4</span><br><span class="line">    COLLATE utf8mb4_unicode_ci;</span><br><span class="line"></span><br><span class="line">ALTER TABLE</span><br><span class="line">    table_name</span><br><span class="line">    CHANGE column_name column_name</span><br><span class="line">    data_type</span><br><span class="line">    CHARACTER SET utf8mb4</span><br><span class="line">    COLLATE utf8mb4_unicode_ci;</span><br></pre></td></tr></table></figure>
+<p>变更表中字段的属性</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table xxx change column_name column_name varchar(20) character set utf8mb4;</span><br></pre></td></tr></table></figure>
+<p>展示建表的语句</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show create table xxx\G</span><br><span class="line">show table status from xxx\G</span><br></pre></td></tr></table></figure>
 <p>Collation的概念是字符比较的规则，每种字符集都会有其默认的Collation。</p>
 <p>很多数据类型的选择其实是没有黑白之分的，在不同的场景下针对一个数据可能需要不同的数据类型。</p>
-<p>mysql中有个存储引擎的概念。主要分为InnoDB和MyISAM。前者相较于后者，其区别主要在于它支持事务、外键和行级锁（命中主键的情况下）。</p>
-<p>直接连接数据库出错，可通过ssh隧道（通过跳板机器）连接mysql</p>
+<p>mysql中有个存储引擎的概念。主要分为InnoDB和MyISAM。前者相较于后者，其区别主要在于它支持<strong>事务、外键和行级锁</strong>（命中主键的情况下）。</p>
+<p>直接连接线上数据库出现无权限的问题，可通过ssh隧道（配置跳板机器）连接mysql</p>
+<p>连接远程数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -h hostname -P port -u username -p</span><br></pre></td></tr></table></figure>
+<p>字符集utf8mb4 general_ci ，可以显示emoji</p>
+<p>gmtUpdate 可以不用设置，这个字段数据库会自动更新的，前提是在数据库中指明新增的默认值和更新值</p>
+<p>有时为了减少连表查询的麻烦，可以存在冗余字段</p>
 
       
     </div>
@@ -650,7 +662,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">61.5k</span>
+    <span title="Site words total count">62.4k</span>
   
 </div>
 
