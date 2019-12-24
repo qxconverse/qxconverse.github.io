@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="监控相关red原则 rate  error duration  prometheus指标详解   指标名 简介     jvm_gc_pause_seconds Time spent in GC pauseGC耗时   jvm_gc_pause_seconds_max    jvm_gc_memory_promoted_bytes_total Count of positive increases">
+<meta name="description" content="监控的red原则 rate  error duration">
 <meta name="keywords" content="监控">
 <meta property="og:type" content="article">
-<meta property="og:title" content="监控">
+<meta property="og:title" content="监控、日志、链路追踪">
 <meta property="og:url" content="http://yoursite.com/2019/09/20/监控/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="监控相关red原则 rate  error duration  prometheus指标详解   指标名 简介     jvm_gc_pause_seconds Time spent in GC pauseGC耗时   jvm_gc_pause_seconds_max    jvm_gc_memory_promoted_bytes_total Count of positive increases">
+<meta property="og:description" content="监控的red原则 rate  error duration">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-23T05:33:53.669Z">
+<meta property="og:updated_time" content="2019-12-23T13:08:45.977Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="监控">
-<meta name="twitter:description" content="监控相关red原则 rate  error duration  prometheus指标详解   指标名 简介     jvm_gc_pause_seconds Time spent in GC pauseGC耗时   jvm_gc_pause_seconds_max    jvm_gc_memory_promoted_bytes_total Count of positive increases">
+<meta name="twitter:title" content="监控、日志、链路追踪">
+<meta name="twitter:description" content="监控的red原则 rate  error duration">
 
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>监控 | Xxqin's Blog</title>
+  <title>监控、日志、链路追踪 | Xxqin's Blog</title>
   
 
 
@@ -300,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">监控</h1>
+          <h1 class="post-title" itemprop="name headline">监控、日志、链路追踪</h1>
         
 
         <div class="post-meta">
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.1k
+                  1.2k
                 </span>
               
 
@@ -408,11 +408,12 @@
       
 
       
-        <h4 id="监控相关"><a href="#监控相关" class="headerlink" title="监控相关"></a>监控相关</h4><h5 id="red原则"><a href="#red原则" class="headerlink" title="red原则"></a>red原则</h5><ol>
+        <h5 id="监控的red原则"><a href="#监控的red原则" class="headerlink" title="监控的red原则"></a>监控的red原则</h5><ol>
 <li>rate </li>
 <li>error</li>
 <li>duration</li>
 </ol>
+<a id="more"></a>
 <h5 id="prometheus指标详解"><a href="#prometheus指标详解" class="headerlink" title="prometheus指标详解"></a>prometheus指标详解</h5><table>
 <thead>
 <tr>
@@ -607,27 +608,27 @@
 </tr>
 <tr>
 <td style="text-align:left">node_memory_MemTotal_bytes</td>
-<td style="text-align:left"><code>Memory information field MemTotal_bytes.</code>内存总容量</td>
+<td style="text-align:left">Memory information field MemTotal_bytes.内存总容量</td>
 </tr>
 <tr>
 <td style="text-align:left">node_memory_MemAvailable_bytes</td>
-<td style="text-align:left"><code>Memory information field MemAvailable_bytes.</code>可用内存容量</td>
+<td style="text-align:left">Memory information field MemAvailable_bytes.可用内存容量</td>
 </tr>
 <tr>
 <td style="text-align:left">node_memory_MemFree_bytes</td>
-<td style="text-align:left"><code>Memory information field MemFree_bytes.</code>空闲内存容量</td>
+<td style="text-align:left">Memory information field MemFree_bytes.空闲内存容量</td>
 </tr>
 <tr>
 <td style="text-align:left"><code>node_filesystem_free_bytes</code></td>
-<td style="text-align:left"><code>Filesystem free space in bytes.</code>文件系统可用空间</td>
+<td style="text-align:left">Filesystem free space in bytes.文件系统可用空间</td>
 </tr>
 <tr>
 <td style="text-align:left">node_filesystem_size_bytes</td>
-<td style="text-align:left"><code>Filesystem size in bytes.</code>文件系统大小</td>
+<td style="text-align:left">Filesystem size in bytes.文件系统大小</td>
 </tr>
 <tr>
 <td style="text-align:left">node_filesystem_avail_bytes</td>
-<td style="text-align:left"><code>Filesystem space available to non-root users in bytes.</code>非根用户可用的文件系统空间</td>
+<td style="text-align:left">Filesystem space available to non-root users in bytes.非根用户可用的文件系统空间</td>
 </tr>
 <tr>
 <td style="text-align:left">projectlogback_events_total</td>
@@ -640,7 +641,19 @@
 </tbody>
 </table>
 <p>node_load1 : 指1分钟内cpu平均负载，同样cpu_load5指5分钟内cpu平均负载，cpu_load15指15分钟内cpu平均负载</p>
-<h5 id="标准化日志示例"><a href="#标准化日志示例" class="headerlink" title="标准化日志示例"></a>标准化日志示例</h5><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"server"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"requestId"</span>: <span class="string">"9ab57e713a17470e8bc8e46c64404246"</span>,</span><br><span class="line"> <span class="attr">"clientIp"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"loglevel"</span>: <span class="string">"ERROR"</span>,</span><br><span class="line"> <span class="attr">"description"</span>: <span class="string">"请求超时或被客户端关闭"</span>,</span><br><span class="line"> <span class="attr">"methodName"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"requestParams"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"urlPath"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"timestamp"</span>: <span class="string">"2019-10-12T15:16:43.208+08:00"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="标准化日志示例"><a href="#标准化日志示例" class="headerlink" title="标准化日志示例"></a>标准化日志示例</h5><p>一些日志记录规则：</p>
+<ul>
+<li>包括时间戳</li>
+<li>格式为 JSON</li>
+<li>请勿记录无意义的事件</li>
+<li>请记录所有应用程序错误</li>
+<li>可以有日志警告</li>
+<li>打开日志记录</li>
+<li>以可读的形式写消息</li>
+<li>请勿在生产中记录信息数据</li>
+<li>请勿记录无法阅读或反应的任何内容</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"server"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"requestId"</span>: <span class="string">"9ab57e713a17470e8bc8e46c64404246"</span>,</span><br><span class="line"> <span class="attr">"clientIp"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"loglevel"</span>: <span class="string">"ERROR"</span>,</span><br><span class="line"> <span class="attr">"description"</span>: <span class="string">"请求超时或被客户端关闭"</span>,</span><br><span class="line"> <span class="attr">"methodName"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"requestParams"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"urlPath"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"timestamp"</span>: <span class="string">"2019-10-12T15:16:43.208+08:00"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="SpringBoot项目中prometheus配置示例"><a href="#SpringBoot项目中prometheus配置示例" class="headerlink" title="SpringBoot项目中prometheus配置示例"></a>SpringBoot项目中prometheus配置示例</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management:</span></span><br><span class="line"><span class="attr">  endpoints:</span></span><br><span class="line"><span class="attr">    web:</span></span><br><span class="line"><span class="attr">      exposure:</span></span><br><span class="line"><span class="attr">        include:</span> <span class="string">'*'</span></span><br><span class="line"><span class="attr">    jmx:</span></span><br><span class="line"><span class="attr">      exposure:</span></span><br><span class="line"><span class="attr">        include:</span> <span class="string">'*'</span></span><br><span class="line"><span class="attr">    shutdown:</span></span><br><span class="line"><span class="attr">      enabled:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  health:</span></span><br><span class="line"><span class="attr">      redis:</span></span><br><span class="line"><span class="attr">        enabled:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  metrics:</span></span><br><span class="line"><span class="attr">    distribution:</span></span><br><span class="line">      <span class="string">percentiles-histogram[http.server.requests]:</span> <span class="literal">true</span></span><br><span class="line">      <span class="string">sla[http.server.requests]:</span> <span class="number">50</span><span class="string">ms</span></span><br><span class="line"><span class="attr">  security:</span></span><br><span class="line"><span class="attr">    enabled:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
 <h5 id="稳定性分析"><a href="#稳定性分析" class="headerlink" title="稳定性分析"></a>稳定性分析</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SELECT request_path, </span><br><span class="line">count(request_path) as request_count,</span><br><span class="line">sum(case when http_status = 499 then 1 else 0 end) as count_499,</span><br><span class="line">sum(case when http_status = 499 then 1 else 0 end) / count(request_path)) as ratio_499,</span><br><span class="line">sum(case when http_status like &quot;5%&quot; then 1 else 0 end) as count_5xx,</span><br><span class="line">sum(case when http_status like &quot;5%&quot; then 1 else 0 end) / count(request_path)) as ratio_5xx,</span><br><span class="line">(sum(request_time) / count(request_path)) as avg_request_time</span><br><span class="line">FROM xxx</span><br><span class="line">WHERE xxx</span><br><span class="line">group by request_path</span><br></pre></td></tr></table></figure>
 <h5 id="在机器上部署prometheus全家桶"><a href="#在机器上部署prometheus全家桶" class="headerlink" title="在机器上部署prometheus全家桶"></a>在机器上部署prometheus全家桶</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run --name=prometheus -d -p 9090:9090 -v /Users/XFade/prometheus/server/prometheus.yml:/etc/prometheus/prometheus.yml -v /Users/XFade/prometheus/server/rules.yml:/etc/prometheus/rules.yml  prom/prometheus:v2.14.0 --config.file=/etc/prometheus/prometheus.yml --web.enable-lifecycle</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker run -d --name=pushgateway -p 9091:9091 prom/pushgateway</span><br><span class="line"></span><br><span class="line">注意容器里的路径要写对，即/etc/alertmanager/alertmanager.yml</span><br><span class="line">docker run -d -p 9093:9093 -v /Users/XFade/prometheus/server/alertmanager.yml:/etc/alertmanager/alertmanager.yml --name alertmanager prom/alertmanager</span><br></pre></td></tr></table></figure>
@@ -863,7 +876,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#监控相关"><span class="nav-number">1.</span> <span class="nav-text">监控相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#red原则"><span class="nav-number">1.1.</span> <span class="nav-text">red原则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#prometheus指标详解"><span class="nav-number">1.2.</span> <span class="nav-text">prometheus指标详解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#标准化日志示例"><span class="nav-number">1.3.</span> <span class="nav-text">标准化日志示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringBoot项目中prometheus配置示例"><span class="nav-number">1.4.</span> <span class="nav-text">SpringBoot项目中prometheus配置示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#稳定性分析"><span class="nav-number">1.5.</span> <span class="nav-text">稳定性分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在机器上部署prometheus全家桶"><span class="nav-number">1.6.</span> <span class="nav-text">在机器上部署prometheus全家桶</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#系统故障排查需要考虑的因素"><span class="nav-number">1.7.</span> <span class="nav-text">系统故障排查需要考虑的因素</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#监控的red原则"><span class="nav-number">1.</span> <span class="nav-text">监控的red原则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#prometheus指标详解"><span class="nav-number">2.</span> <span class="nav-text">prometheus指标详解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#标准化日志示例"><span class="nav-number">3.</span> <span class="nav-text">标准化日志示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringBoot项目中prometheus配置示例"><span class="nav-number">4.</span> <span class="nav-text">SpringBoot项目中prometheus配置示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#稳定性分析"><span class="nav-number">5.</span> <span class="nav-text">稳定性分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在机器上部署prometheus全家桶"><span class="nav-number">6.</span> <span class="nav-text">在机器上部署prometheus全家桶</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#系统故障排查需要考虑的因素"><span class="nav-number">7.</span> <span class="nav-text">系统故障排查需要考虑的因素</span></a></li></ol></div>
             
 
           </div>

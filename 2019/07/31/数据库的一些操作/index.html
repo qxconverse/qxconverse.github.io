@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="数据库相关可以通过length函数查看字符串中字符的数目 1select length(&amp;apos;aa&amp;apos;); 变更数据库、表的字符集 123456789101112131415161718show variables like &amp;apos;character%&amp;apos;;ALTER DATABASE    database_name    CHARACTER SET = utf8mb">
+<meta name="description" content="数据库相关可以通过length函数查看字符串中字符的数目 1select length(&amp;apos;aa&amp;apos;);">
 <meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库相关">
 <meta property="og:url" content="http://yoursite.com/2019/07/31/数据库的一些操作/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="数据库相关可以通过length函数查看字符串中字符的数目 1select length(&amp;apos;aa&amp;apos;); 变更数据库、表的字符集 123456789101112131415161718show variables like &amp;apos;character%&amp;apos;;ALTER DATABASE    database_name    CHARACTER SET = utf8mb">
+<meta property="og:description" content="数据库相关可以通过length函数查看字符串中字符的数目 1select length(&amp;apos;aa&amp;apos;);">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-23T05:23:13.139Z">
+<meta property="og:updated_time" content="2019-12-23T13:08:11.236Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库相关">
-<meta name="twitter:description" content="数据库相关可以通过length函数查看字符串中字符的数目 1select length(&amp;apos;aa&amp;apos;); 变更数据库、表的字符集 123456789101112131415161718show variables like &amp;apos;character%&amp;apos;;ALTER DATABASE    database_name    CHARACTER SET = utf8mb">
+<meta name="twitter:description" content="数据库相关可以通过length函数查看字符串中字符的数目 1select length(&amp;apos;aa&amp;apos;);">
 
 
 
@@ -410,6 +410,7 @@
       
         <h4 id="数据库相关"><a href="#数据库相关" class="headerlink" title="数据库相关"></a>数据库相关</h4><p>可以通过length函数查看字符串中字符的数目</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select length(&apos;aa&apos;);</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>变更数据库、表的字符集</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;character%&apos;;</span><br><span class="line"></span><br><span class="line">ALTER DATABASE</span><br><span class="line">    database_name</span><br><span class="line">    CHARACTER SET = utf8mb4</span><br><span class="line">    COLLATE = utf8mb4_unicode_ci;</span><br><span class="line"></span><br><span class="line">ALTER TABLE</span><br><span class="line">    table_name</span><br><span class="line">    CONVERT TO CHARACTER SET utf8mb4</span><br><span class="line">    COLLATE utf8mb4_unicode_ci;</span><br><span class="line"></span><br><span class="line">ALTER TABLE</span><br><span class="line">    table_name</span><br><span class="line">    CHANGE column_name column_name</span><br><span class="line">    data_type</span><br><span class="line">    CHARACTER SET utf8mb4</span><br><span class="line">    COLLATE utf8mb4_unicode_ci;</span><br></pre></td></tr></table></figure>
 <p>变更表中字段的属性</p>
@@ -455,8 +456,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/30/http的请求的一些细节/" rel="next" title="Maven相关">
-                <i class="fa fa-chevron-left"></i> Maven相关
+              <a href="/2019/07/30/http的请求的一些细节/" rel="next" title="http的请求的一些细节">
+                <i class="fa fa-chevron-left"></i> http的请求的一些细节
               </a>
             
           </div>

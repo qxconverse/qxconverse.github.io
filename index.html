@@ -405,8 +405,7 @@
 
       
         
-          
-            <h3 id="Java探针SpringBoot项目"><a href="#Java探针SpringBoot项目" class="headerlink" title="Java探针SpringBoot项目"></a>Java探针SpringBoot项目</h3><p>通过本博客，您能完成的目标是</p>
+          <h3 id="Java探针SpringBoot项目"><a href="#Java探针SpringBoot项目" class="headerlink" title="Java探针SpringBoot项目"></a>Java探针SpringBoot项目</h3><p>通过本博客，您能完成的目标是</p>
 <ol>
 <li>创建一个javaagent项目，并打包成探针包（agent包）</li>
 <li>监控已有的SpringBoot项目某个类下所有方法的执行时间</li>
@@ -417,220 +416,13 @@
 <li>javassist依赖包</li>
 <li>SpringBoot web项目</li>
 </ol>
-<h4 id="javaagent项目"><a href="#javaagent项目" class="headerlink" title="javaagent项目"></a>javaagent项目</h4><p>创建一个maven项目，其目录结构如下：</p>
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga36ws1ybsj309e08vjrq.jpg" alt="image-20191220145130001"></p>
-<p>核心为MyAgent类和MyTransformer类，第一个类可以理解为agent的入口，需要定义一个premain的方法，方法里面加入一个自定义的transformer类，即MyTransformer，可以理解为写入代码的具体逻辑。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAgent</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 该方法在main方法之前运行，与main方法运行在同一个JVM中 并被同一个System ClassLoader装载</span></span><br><span class="line"><span class="comment">     * 被统一的安全策略(security policy)和上下文(context)管理</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">premain</span><span class="params">(String agentOps, Instrumentation inst)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"This is a agent"</span>);</span><br><span class="line">        <span class="comment">// 添加Transformer</span></span><br><span class="line">        inst.addTransformer(<span class="keyword">new</span> MyTransformer());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 如果不存在 premain(String agentOps, Instrumentation inst) 则会执行 premain(String</span></span><br><span class="line"><span class="comment">     * agentOps)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">premain</span><span class="params">(String agentOps)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"This is a agent"</span>);</span><br><span class="line">        System.out.println(agentOps);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>MyTransformer类需要实现ClassFileTransformer类中的transform方法。该方法最后会返回一个字节数组。在本例中的具体逻辑为，在类加载过程中，如果找到了我们需要探针的类UserController时，则进行加入代码操作。否则，返回null，表示不做任何操作。</p>
-<p>具体所加入代码的作用是在方法执行之后打印该方法执行的时间。当找到被探针类后，获取其下面所有的方法，接着写入加入的代码，就像我们正常写代码那样。区别在于，传入的是代码字符串，比如<code>beginTime = System.currentTimeMillis();</code>。这样就可以监控UserController类中所有方法的执行耗时了。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTransformer</span> <span class="keyword">implements</span> <span class="title">ClassFileTransformer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CLASS_NAME = <span class="string">"xxqin/controller/UserController"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">byte</span>[] transform(ClassLoader loader, String className, Class&lt;?&gt; classBeingRedefined,</span><br><span class="line">                            ProtectionDomain protectionDomain, <span class="keyword">byte</span>[] classfileBuffer) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!CLASS_NAME.equals(className)) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">"类名："</span> + className);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ClassPool pool = ClassPool.getDefault();</span><br><span class="line">            pool.appendClassPath(<span class="keyword">new</span> LoaderClassPath(Thread.currentThread().getContextClassLoader()));</span><br><span class="line">            CtClass ctclass = pool.get(className.replace(<span class="string">"/"</span>, <span class="string">"."</span>));</span><br><span class="line">            CtMethod[] declaredMethods = ctclass.getDeclaredMethods();</span><br><span class="line">            <span class="keyword">for</span> (CtMethod m : declaredMethods) &#123;</span><br><span class="line">                CtMethod method = ctclass.getDeclaredMethod(m.getName());</span><br><span class="line">                method.addLocalVariable(<span class="string">"beginTime"</span>, CtClass.longType);</span><br><span class="line">                method.insertBefore(<span class="string">"beginTime = System.currentTimeMillis();"</span>);</span><br><span class="line">                method.insertAfter(<span class="string">"log.info(\"This method cost: \" + (System.currentTimeMillis() - beginTime) + \"ms.\");"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">"完成加入！"</span>);</span><br><span class="line">            <span class="keyword">return</span> ctclass.toBytecode();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            System.err.println(<span class="string">"加入失败，原因："</span> + e.getMessage());</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这是pom文件，包括引入的依赖包javassist以及打包的插件maven-assembly-plugin。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">project</span> <span class="attr">xmlns</span>=<span class="string">"http://maven.apache.org/POM/4.0.0"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">modelVersion</span>&gt;</span>4.0.0<span class="tag">&lt;/<span class="name">modelVersion</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.xxqin<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>agent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">dependencies</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.javassist/javassist --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.javassist<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javassist<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.20.0-GA<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">dependencies</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-assembly-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">archive</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">manifest</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">addClasspath</span>&gt;</span>true<span class="tag">&lt;/<span class="name">addClasspath</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">manifestEntries</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">Premain-Class</span>&gt;</span>com.xxqin.MyAgent<span class="tag">&lt;/<span class="name">Premain-Class</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">manifestEntries</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">archive</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">descriptorRefs</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">descriptorRef</span>&gt;</span>jar-with-dependencies<span class="tag">&lt;/<span class="name">descriptorRef</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">descriptorRefs</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">executions</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">execution</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">id</span>&gt;</span>make-my-jar-with-dependencies<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">phase</span>&gt;</span>package<span class="tag">&lt;/<span class="name">phase</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;<span class="name">goals</span>&gt;</span></span><br><span class="line">                            <span class="tag">&lt;<span class="name">goal</span>&gt;</span>single<span class="tag">&lt;/<span class="name">goal</span>&gt;</span></span><br><span class="line">                        <span class="tag">&lt;/<span class="name">goals</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;/<span class="name">execution</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">executions</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">project</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>在agent项目路径下执行下面的命令进行打包，最后会生成一个jar包：<code>agent-1.0-SNAPSHOT-jar-with-dependencies.jar</code></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn package</span><br></pre></td></tr></table></figure>
-<h4 id="SpringBoot项目"><a href="#SpringBoot项目" class="headerlink" title="SpringBoot项目"></a>SpringBoot项目</h4><p>由于本篇侧重点是javaagent，所以不再展示该项目的创建等细节</p>
-<p>打包SpringBoot项目，也是package命令，具体不再展示，也会生成一个jar包：<code>qx_music-1.0-SNAPSHOT.jar</code></p>
-<h4 id="运行项目，完成对SpringBoot项目的探针"><a href="#运行项目，完成对SpringBoot项目的探针" class="headerlink" title="运行项目，完成对SpringBoot项目的探针"></a>运行项目，完成对SpringBoot项目的探针</h4><p>执行下面的探针命令，-javaagent后面的路径和-jar后面的路径需要替换成实际的项目jar包所在路径</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -javaagent:target/agent-1.0-SNAPSHOT-jar-with-dependencies.jar -jar target/qx_music-1.0-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
-<p>执行后效果如下，可以看到，在执行时，首先执行agent包里面premian的方法，打印出日志：<code>This is a  agent</code>，接着才会启动SpringBoot项目，在启动的同时，agent会遍历所有的包，当发现了UserController类后，输出日志，并执行加入代码的逻辑。</p>
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga37k2fg5vj30um0cbwh4.jpg" alt="WeChatWorkScreenshot_c1ec2580-6763-4d8d-964d-04a191bd83be"></p>
-<p>等SpringBoot项目启动完成后，访问地址：<code>http://localhost:8888/user/getAll</code>，由于该接口内部会调用UserController类中的某个方法。从日志中可以看出，已经完成了探针操作，即输出了调用该方法的耗时。</p>
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga387w7jfuj30rv016q2y.jpg" alt="image-20191220153658872"></p>
-<h4 id="附：遇到的坑"><a href="#附：遇到的坑" class="headerlink" title="附：遇到的坑"></a>附：遇到的坑</h4><p>在进行javaagent的实践时，一开始<code>mvn package</code>打出的agent包，在执行探针命令后，发现transformer类中的代码执行到<code>ClassPool pool = ClassPool.getDefault();</code>时就没有下文了。最后意识到，可能是因为jar包中没有javassist的依赖，所以找不到ClassPool类。这个问题隐藏很深，因为没有任何报错。后来依据这篇博文<a href="https://www.jianshu.com/p/9c284ed187e0" target="_blank" rel="noopener">https://www.jianshu.com/p/9c284ed187e0</a> ，在pom文件中加入<code>maven-assembly-plugin</code>， 这样就可以将依赖包javassist打入jar包了。</p>
-<p>后来遇到了无法加载类的问题，参考这篇博客解决了：<a href="https://www.kagura.me/dev/20190923102501.html" target="_blank" rel="noopener">https://www.kagura.me/dev/20190923102501.html</a></p>
-<p>如果遇到<code>&quot;Invalid constant type 18”</code>的问题，则需要替换依赖版本，javassist要改成3.20版本</p>
-<p>最后遇到的问题<code>javassist Type top (current frame, locals[2]) is not assignable to long</code>，参考了这篇博客解决了，原来是加入的代码问题：<a href="https://stackoverflow.com/questions/34223471/how-to-get-arround-java-lang-verrifyerror" target="_blank" rel="noopener">https://stackoverflow.com/questions/34223471/how-to-get-arround-java-lang-verrifyerror</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/在gitlab项目中添加CI的过程/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/12/11/在gitlab项目中添加CI的过程/" itemprop="url">在Gitlab项目中添加CI的过程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-11T15:23:52+08:00">
-                2019-12-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  318
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="在Gitlab项目中添加CI的过程"><a href="#在Gitlab项目中添加CI的过程" class="headerlink" title="在Gitlab项目中添加CI的过程"></a>在Gitlab项目中添加CI的过程</h4><h5 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h5><h5 id="获取gitlab-runner"><a href="#获取gitlab-runner" class="headerlink" title="获取gitlab-runner"></a>获取gitlab-runner</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name gitlab-runner --restart always \</span><br><span class="line">  -v /srv/gitlab-runner/config:/etc/gitlab-runner \</span><br><span class="line">  -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">  gitlab/gitlab-runner:latest</span><br></pre></td></tr></table></figure>
-<p>进入到项目的CI设置界面，查看下面2个配置参数</p>
-<ol>
-<li>Specify the following URL during the Runner setup: <code>xxx</code></li>
-<li>Use the following registration token during setup: <code>xxx</code></li>
-</ol>
-<p>分别用于下面的url、registration-token的参数配置</p>
-<h5 id="注册runner"><a href="#注册runner" class="headerlink" title="注册runner"></a>注册runner</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register \</span><br><span class="line">  --non-interactive \</span><br><span class="line">  --executor <span class="string">"docker"</span> \</span><br><span class="line">  --docker-image xxx \</span><br><span class="line">  --url <span class="string">"xxx"</span> \</span><br><span class="line">  --registration-token <span class="string">"xxx"</span> \</span><br><span class="line">  --description <span class="string">"docker-runner"</span> \</span><br><span class="line">  --tag-list <span class="string">"xxx"</span> \</span><br><span class="line">  --run-untagged=<span class="string">"true"</span> \</span><br><span class="line">  --locked=<span class="string">"false"</span> \</span><br><span class="line">  --access-level=<span class="string">"not_protected"</span></span><br></pre></td></tr></table></figure>
-<p>注意：</p>
-<ol>
-<li>其中的xxx是需要根据实际情况进行配置的，包括镜像名称、注册token、标签等，其中后两者可在gitlab项目的CI/CD配置中进行配置；其中的docker-image可以使用官方默认的，也可以自己生成镜像以适应不同的需求</li>
-<li>在mac中要用/Users/Shared来替换/srv</li>
-</ol>
-<p>Gitlab api相关，具体可以看Gitlab api官网</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://xxx/api/v4/projects?private_token=xxx</span><br><span class="line"></span><br><span class="line">curl --header &quot;PRIVATE-TOKEN: xxx&quot; http://xxx/api/v4/projects/project_id/repository/files/xxx?ref=master</span><br></pre></td></tr></table></figure>
-<p>Git提交时的hook相关，参考：<a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks" target="_blank" rel="noopener">https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks</a></p>
-<p>添加git的hook时，遇到的问题</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp .git/hooks/pre-commit /tmp/pre-commit</span><br><span class="line"></span><br><span class="line">tr -d '\r' &lt; /tmp/pre-commit &gt; .git/hooks/pre-commit</span><br></pre></td></tr></table></figure>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/12/20/java探针Springboot项目/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -817,6 +609,183 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mvn sonar:sonar \</span><br><span class="line"> -Dsonar.host.url=xxx \</span><br><span class="line"> -Dsonar.login=xxx</span><br></pre></td></tr></table></figure>
 
           
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/11/在gitlab项目中添加CI的过程/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/12/11/在gitlab项目中添加CI的过程/" itemprop="url">在Gitlab项目中添加CI的过程</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-11T15:23:52+08:00">
+                2019-12-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  318
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="在Gitlab项目中添加CI的过程"><a href="#在Gitlab项目中添加CI的过程" class="headerlink" title="在Gitlab项目中添加CI的过程"></a>在Gitlab项目中添加CI的过程</h4><h5 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h5><h5 id="获取gitlab-runner"><a href="#获取gitlab-runner" class="headerlink" title="获取gitlab-runner"></a>获取gitlab-runner</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name gitlab-runner --restart always \</span><br><span class="line">  -v /srv/gitlab-runner/config:/etc/gitlab-runner \</span><br><span class="line">  -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">  gitlab/gitlab-runner:latest</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/12/11/在gitlab项目中添加CI的过程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1301,7 +1270,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  699
+                  713
                 </span>
               
 
@@ -1339,36 +1308,15 @@
 
       
         
-          
-            <p>查看磁盘的使用情况</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df -h 文件夹名</span><br><span class="line">du --max-depth=1 -h</span><br><span class="line">du -sh 文件夹名</span><br></pre></td></tr></table></figure>
-<p>cp用来复制文件或目录，<code>-r/-R</code> 递归复制该目录及其子目录内容，<code>-f</code> 表示不询问而强制复制</p>
-<p>scp用于在Linux服务器之间复制文件和目录</p>
-<p>从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，不然识别不了。其实可以这样记忆，看以哪个为中心。不管是从远端复制到本地，还是把本地的复制到远端，都在本地操作（主角为本地）。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-v  详细显示输出的具体情况</span><br><span class="line">-r  递归复制整个目录</span><br><span class="line">scp xxx@xxxxxxx:远程路径 本地路径</span><br></pre></td></tr></table></figure>
-<p>diff：查看两个文件的不同</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff f1 f2 &gt; diff.txt</span><br></pre></td></tr></table></figure>
-<p>0代表标准输入，1代表标准输出，2代表错误输出，&gt;代表重定向，grep (global search regular expression(RE) and print out the line）代表全面搜索正则表达式并把行打印出来。|代表管道，将前面一个指令传出的正确输出信息传递给下一个命令，作为标准的输入。注意，它具有单向性，也叫半双工管道。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">du --max-depth=1 -h . 1&gt;/home/qinxue/info.txt 2&gt;/home/qinxue/error.txt</span><br><span class="line">du --max-depth=1 -h . 1&gt;/home/qinxue/info.txt 2&gt;/dev/null </span><br><span class="line">du --max-depth=1 -h . 2&gt;/dev/null </span><br><span class="line">du --max-depth=1 -h . 2&gt;/dev/null | grep qinxue</span><br></pre></td></tr></table></figure>
-<p>mac下用不了<code>--max-depth=1</code>，可以直接用<code>-d 1</code>。</p>
-<p>交互式Shell命令，连接服务器，当出现密码的提示时，自动输入。省去了手动输入的麻烦。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/expect</span></span><br><span class="line">set timeout 30</span><br><span class="line">spawn ssh xx@xxxxxx</span><br><span class="line">expect "password:"</span><br><span class="line">send "xxxxxx\r"</span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
-<p>awk命令的使用说明见下图：</p>
-<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7rpj6zuioj31000i0mz5.jpg" alt="awk"></p>
-<p>参考博客：<a href="http://www.zsythink.net/archives/1336/" target="_blank" rel="noopener">http://www.zsythink.net/archives/1336/</a></p>
-<p>示例如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk '&#123;print $2&#125;' a.txt | sort | uniq &gt; b.txt</span><br></pre></td></tr></table></figure>
-<p>重启linux服务器：reboot</p>
-<p>强制关闭谷歌浏览器，关闭其它的也类似<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep 用户名 |grep chrome</span><br><span class="line">kill -9 chrome主进程的pid</span><br></pre></td></tr></table></figure></p>
-<p>关于打包的指令：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//打包 tar</span><br><span class="line">tar -cvf text.tar * //-v表示进度，text.tar是压缩文件名，*表示所有文件</span><br><span class="line">//解压</span><br><span class="line">tar -xvf text.tar</span><br><span class="line">//压缩 gzip</span><br><span class="line">gzip text.tar</span><br><span class="line">//解压</span><br><span class="line">gzip -d xxx.tar.gz</span><br><span class="line">//比较实用的</span><br><span class="line">tar -zcvf text.tar.gz * //打包</span><br><span class="line">tar -zxvf text.tar.gz //解压</span><br><span class="line">tar -zxvf text.tar.gz -c text/  //解压到指定路径</span><br></pre></td></tr></table></figure>
-<p>在vim中查找关键字，首先切换到命令行模式，然后<code>/keyword</code>，回车，接着可以通过<code>n</code>一个一个查</p>
-<p>查找某个文件夹下java文件代码的行数</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wc -l `find xxx/ -name "*.java"`</span><br></pre></td></tr></table></figure>
-<p>远程连接的机器上运行jar包，使其输出到指定文件，关闭窗口不停止运行；关键命令为nohup</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar xxx.jar &gt; log.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-
-          
+          <p>查看磁盘的使用情况</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">df -h 文件夹名</span><br><span class="line"></span><br><span class="line">du --max-depth=1 -h</span><br><span class="line"></span><br><span class="line">-s是summary的意思，不能和--max-depth同时使用</span><br><span class="line">du -sh 文件夹名</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/10/09/linux常用的操作命令/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1867,7 +1815,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/09/20/监控/" itemprop="url">监控</a></h1>
+                <a class="post-title-link" href="/2019/09/20/监控/" itemprop="url">监控、日志、链路追踪</a></h1>
         
 
         <div class="post-meta">
@@ -1933,7 +1881,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.1k
+                  1.2k
                 </span>
               
 
@@ -1971,261 +1919,18 @@
 
       
         
-          
-            <h4 id="监控相关"><a href="#监控相关" class="headerlink" title="监控相关"></a>监控相关</h4><h5 id="red原则"><a href="#red原则" class="headerlink" title="red原则"></a>red原则</h5><ol>
+          <h5 id="监控的red原则"><a href="#监控的red原则" class="headerlink" title="监控的red原则"></a>监控的red原则</h5><ol>
 <li>rate </li>
 <li>error</li>
 <li>duration</li>
 </ol>
-<h5 id="prometheus指标详解"><a href="#prometheus指标详解" class="headerlink" title="prometheus指标详解"></a>prometheus指标详解</h5><table>
-<thead>
-<tr>
-<th style="text-align:left">指标名</th>
-<th style="text-align:left">简介</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">jvm_gc_pause_seconds</td>
-<td style="text-align:left">Time spent in GC pauseGC耗时</td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_gc_pause_seconds_max</td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_gc_memory_promoted_bytes_total</td>
-<td style="text-align:left">Count of positive increases in the size of the old generation memory pool before GC to after GCGC时，老年代分配的内存空间</td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_gc_memory_allocated_bytes_total</td>
-<td style="text-align:left">Incremented for an increase in the size of the young generation memory pool after one GC to before the nextGC时，年轻代分配的内存空间</td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_gc_live_data_size_bytes</td>
-<td style="text-align:left">Size of old generation memory pool after a full GCFullGC时，老年代的内存空间</td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_gc_max_data_size_bytes</td>
-<td style="text-align:left">Max size of old generation memory poolGC时，老年代的最大内存空间</td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_gc_concurrent_phase_time_seconds</td>
-<td style="text-align:left">Time spent in concurrent phase</td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_gc_concurrent_phase_time_seconds_max</td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_classes_unloaded_total</td>
-<td style="text-align:left">The total number of classes unloaded since the Java virtual machine has started executionJVM启动后未加载的classes数</td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_classes_loaded</td>
-<td style="text-align:left">The number of classes that are currently loaded in the Java virtual machineJVM当前加载的classes数</td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_memory_used_bytes</td>
-<td style="text-align:left">The amount of used memoryJVM已用内存</td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_memory_committed_bytes</td>
-<td style="text-align:left">The amount of memory in bytes that is committed for the Java virtual machine to useJVM可用内存</td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_memory_max_bytes</td>
-<td style="text-align:left">The maximum amount of memory in bytes that can be used for memory managemenJVM最大内存</td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_threads_live</td>
-<td style="text-align:left">The current number of live threads including both daemon and non-daemon threadsJVM当前活跃线程数</td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_threads_peak</td>
-<td style="text-align:left">The peak live thread count since the Java virtual machine started or peak was resetJVM峰值线程数</td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_threads_daemon</td>
-<td style="text-align:left">The current number of live daemon threadsJVM守护线程数</td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_buffer_count</td>
-<td style="text-align:left">An estimate of the number of buffers in the poolJVM当前缓冲区数</td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_buffer_total_capacity_bytes</td>
-<td style="text-align:left">An estimate of the total capacity of the buffers in this poolJVM缓冲区总容量</td>
-</tr>
-<tr>
-<td style="text-align:left">jvm_buffer_memory_used_bytes</td>
-<td style="text-align:left">An estimate of the memory that the Java virtual machine is using for this buffer poolJVM缓冲区已用内存</td>
-</tr>
-<tr>
-<td style="text-align:left">process_start_time_seconds</td>
-<td style="text-align:left">The start time of the Java virtual machineJVM启动时长</td>
-</tr>
-<tr>
-<td style="text-align:left">process_cpu_usage</td>
-<td style="text-align:left">The “recent cpu usage” for the Java Virtual Machine process当前进程CPU使用率</td>
-</tr>
-<tr>
-<td style="text-align:left">process_uptime_seconds</td>
-<td style="text-align:left">The uptime of the Java virtual machine应用已运行时间</td>
-</tr>
-<tr>
-<td style="text-align:left">tomcat_threads_currenttomcat</td>
-<td style="text-align:left">tomcat_global_request_secondstomcat当前线程数，包括守护线程</td>
-</tr>
-<tr>
-<td style="text-align:left">tomcat_threads_config_max</td>
-<td style="text-align:left">tomcat配置的线程最大数</td>
-</tr>
-<tr>
-<td style="text-align:left">tomcat_threads_busy</td>
-<td style="text-align:left">tomcat繁忙线程数</td>
-</tr>
-<tr>
-<td style="text-align:left">tomcat_global_request_max_seconds</td>
-<td style="text-align:left">request最长时间</td>
-</tr>
-<tr>
-<td style="text-align:left">tomcat_global_error_total</td>
-<td style="text-align:left">tomcat全局错误总数</td>
-</tr>
-<tr>
-<td style="text-align:left">tomcat_global_sent_bytes_total</td>
-<td style="text-align:left">tomcat全局发送的字节总数</td>
-</tr>
-<tr>
-<td style="text-align:left">tomcat_global_request_seconds</td>
-<td style="text-align:left">tomcat全局请求总时长</td>
-</tr>
-<tr>
-<td style="text-align:left">tomcat_global_received_bytes_total</td>
-<td style="text-align:left">全局接收到的总字节数</td>
-</tr>
-<tr>
-<td style="text-align:left">tomcat_servlet_error_total</td>
-<td style="text-align:left">servlet发生错误总数</td>
-</tr>
-<tr>
-<td style="text-align:left">tomcat_servlet_request_seconds</td>
-<td style="text-align:left">servlet请求总次数和总时长</td>
-</tr>
-<tr>
-<td style="text-align:left">tomcat_servlet_request_max_seconds</td>
-<td style="text-align:left">servlet请求最长时间</td>
-</tr>
-<tr>
-<td style="text-align:left">tomcat_cache_hit_total</td>
-<td style="text-align:left">tomcat缓存命中次数</td>
-</tr>
-<tr>
-<td style="text-align:left">tomcat_cache_access_total</td>
-<td style="text-align:left">tomcat读取缓存次数</td>
-</tr>
-<tr>
-<td style="text-align:left">tomcat_sessions_created</td>
-<td style="text-align:left">已创建tomcat会话数量</td>
-</tr>
-<tr>
-<td style="text-align:left">[http_server_requests_seconds_count</td>
-<td style="text-align:left">http请求数</td>
-</tr>
-<tr>
-<td style="text-align:left">http_server_requests_seconds_sum</td>
-<td style="text-align:left">http请求时长</td>
-</tr>
-<tr>
-<td style="text-align:left">http_server_requests_seconds</td>
-<td style="text-align:left">http请求的总次数与总时长</td>
-</tr>
-<tr>
-<td style="text-align:left">http_server_requests_seconds_max</td>
-<td style="text-align:left"></td>
-</tr>
-<tr>
-<td style="text-align:left">http_client_requests_seconds_max</td>
-<td style="text-align:left">http请求最大响应时间</td>
-</tr>
-<tr>
-<td style="text-align:left">system_cpu_usage</td>
-<td style="text-align:left">The “recent cpu usage” for the whole system系统CPU使用率</td>
-</tr>
-<tr>
-<td style="text-align:left">system_cpu_count</td>
-<td style="text-align:left">The number of processors available to the Java virtual machineCPU数量</td>
-</tr>
-<tr>
-<td style="text-align:left">system_load_average_1m</td>
-<td style="text-align:left">The sum of the number of runnable entities queued to available processors and the number of runnable entities running on the available processors averaged over a period of time</td>
-</tr>
-<tr>
-<td style="text-align:left">process_files_open</td>
-<td style="text-align:left">The open file descriptor count当前打开句柄数</td>
-</tr>
-<tr>
-<td style="text-align:left">process_files_max</td>
-<td style="text-align:left">The maximum file descriptor count允许最大句柄数</td>
-</tr>
-<tr>
-<td style="text-align:left">node_memory_MemTotal_bytes</td>
-<td style="text-align:left"><code>Memory information field MemTotal_bytes.</code>内存总容量</td>
-</tr>
-<tr>
-<td style="text-align:left">node_memory_MemAvailable_bytes</td>
-<td style="text-align:left"><code>Memory information field MemAvailable_bytes.</code>可用内存容量</td>
-</tr>
-<tr>
-<td style="text-align:left">node_memory_MemFree_bytes</td>
-<td style="text-align:left"><code>Memory information field MemFree_bytes.</code>空闲内存容量</td>
-</tr>
-<tr>
-<td style="text-align:left"><code>node_filesystem_free_bytes</code></td>
-<td style="text-align:left"><code>Filesystem free space in bytes.</code>文件系统可用空间</td>
-</tr>
-<tr>
-<td style="text-align:left">node_filesystem_size_bytes</td>
-<td style="text-align:left"><code>Filesystem size in bytes.</code>文件系统大小</td>
-</tr>
-<tr>
-<td style="text-align:left">node_filesystem_avail_bytes</td>
-<td style="text-align:left"><code>Filesystem space available to non-root users in bytes.</code>非根用户可用的文件系统空间</td>
-</tr>
-<tr>
-<td style="text-align:left">projectlogback_events_total</td>
-<td style="text-align:left">Number of error level events that made it to the logslogback中日志的总数目</td>
-</tr>
-<tr>
-<td style="text-align:left">log4j2_events_total</td>
-<td style="text-align:left">Number of fatal level log events致命级别日志事件数</td>
-</tr>
-</tbody>
-</table>
-<p>node_load1 : 指1分钟内cpu平均负载，同样cpu_load5指5分钟内cpu平均负载，cpu_load15指15分钟内cpu平均负载</p>
-<h5 id="标准化日志示例"><a href="#标准化日志示例" class="headerlink" title="标准化日志示例"></a>标准化日志示例</h5><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"><span class="attr">"server"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"requestId"</span>: <span class="string">"9ab57e713a17470e8bc8e46c64404246"</span>,</span><br><span class="line"> <span class="attr">"clientIp"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"loglevel"</span>: <span class="string">"ERROR"</span>,</span><br><span class="line"> <span class="attr">"description"</span>: <span class="string">"请求超时或被客户端关闭"</span>,</span><br><span class="line"> <span class="attr">"methodName"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"requestParams"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"urlPath"</span>: <span class="string">"xxx"</span>,</span><br><span class="line"> <span class="attr">"timestamp"</span>: <span class="string">"2019-10-12T15:16:43.208+08:00"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="SpringBoot项目中prometheus配置示例"><a href="#SpringBoot项目中prometheus配置示例" class="headerlink" title="SpringBoot项目中prometheus配置示例"></a>SpringBoot项目中prometheus配置示例</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">management:</span></span><br><span class="line"><span class="attr">  endpoints:</span></span><br><span class="line"><span class="attr">    web:</span></span><br><span class="line"><span class="attr">      exposure:</span></span><br><span class="line"><span class="attr">        include:</span> <span class="string">'*'</span></span><br><span class="line"><span class="attr">    jmx:</span></span><br><span class="line"><span class="attr">      exposure:</span></span><br><span class="line"><span class="attr">        include:</span> <span class="string">'*'</span></span><br><span class="line"><span class="attr">    shutdown:</span></span><br><span class="line"><span class="attr">      enabled:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  health:</span></span><br><span class="line"><span class="attr">      redis:</span></span><br><span class="line"><span class="attr">        enabled:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  metrics:</span></span><br><span class="line"><span class="attr">    distribution:</span></span><br><span class="line">      <span class="string">percentiles-histogram[http.server.requests]:</span> <span class="literal">true</span></span><br><span class="line">      <span class="string">sla[http.server.requests]:</span> <span class="number">50</span><span class="string">ms</span></span><br><span class="line"><span class="attr">  security:</span></span><br><span class="line"><span class="attr">    enabled:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure>
-<h5 id="稳定性分析"><a href="#稳定性分析" class="headerlink" title="稳定性分析"></a>稳定性分析</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SELECT request_path, </span><br><span class="line">count(request_path) as request_count,</span><br><span class="line">sum(case when http_status = 499 then 1 else 0 end) as count_499,</span><br><span class="line">sum(case when http_status = 499 then 1 else 0 end) / count(request_path)) as ratio_499,</span><br><span class="line">sum(case when http_status like &quot;5%&quot; then 1 else 0 end) as count_5xx,</span><br><span class="line">sum(case when http_status like &quot;5%&quot; then 1 else 0 end) / count(request_path)) as ratio_5xx,</span><br><span class="line">(sum(request_time) / count(request_path)) as avg_request_time</span><br><span class="line">FROM xxx</span><br><span class="line">WHERE xxx</span><br><span class="line">group by request_path</span><br></pre></td></tr></table></figure>
-<h5 id="在机器上部署prometheus全家桶"><a href="#在机器上部署prometheus全家桶" class="headerlink" title="在机器上部署prometheus全家桶"></a>在机器上部署prometheus全家桶</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run --name=prometheus -d -p 9090:9090 -v /Users/XFade/prometheus/server/prometheus.yml:/etc/prometheus/prometheus.yml -v /Users/XFade/prometheus/server/rules.yml:/etc/prometheus/rules.yml  prom/prometheus:v2.14.0 --config.file=/etc/prometheus/prometheus.yml --web.enable-lifecycle</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">docker run -d --name=pushgateway -p 9091:9091 prom/pushgateway</span><br><span class="line"></span><br><span class="line">注意容器里的路径要写对，即/etc/alertmanager/alertmanager.yml</span><br><span class="line">docker run -d -p 9093:9093 -v /Users/XFade/prometheus/server/alertmanager.yml:/etc/alertmanager/alertmanager.yml --name alertmanager prom/alertmanager</span><br></pre></td></tr></table></figure>
-<h5 id="系统故障排查需要考虑的因素"><a href="#系统故障排查需要考虑的因素" class="headerlink" title="系统故障排查需要考虑的因素"></a>系统故障排查需要考虑的因素</h5><ol>
-<li>内存</li>
-<li>CPU</li>
-<li>磁盘IO</li>
-<li>网络IO</li>
-</ol>
-<p>木桶原理——性能瓶颈</p>
-<p>amdahl定律</p>
-<p>排查法：</p>
-<ol>
-<li>cpu idle     top 1/top -p pid H/ </li>
-<li>mem 可用内存  free -m</li>
-<li>disk  df -h /  iostate</li>
-<li>connection tcp连接数</li>
-</ol>
-<p>jvm工具：jstat/jstack</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/09/20/监控/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

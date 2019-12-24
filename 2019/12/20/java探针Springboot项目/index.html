@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="Java探针SpringBoot项目通过本博客，您能完成的目标是  创建一个javaagent项目，并打包成探针包（agent包） 监控已有的SpringBoot项目某个类下所有方法的执行时间  需要的环境  Idea开发环境 javassist依赖包 SpringBoot web项目  javaagent项目创建一个maven项目，其目录结构如下：  核心为MyAgent类和MyTransfor">
+<meta name="description" content="Java探针SpringBoot项目通过本博客，您能完成的目标是  创建一个javaagent项目，并打包成探针包（agent包） 监控已有的SpringBoot项目某个类下所有方法的执行时间  需要的环境  Idea开发环境 javassist依赖包 SpringBoot web项目">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java探针SpringBoot项目">
 <meta property="og:url" content="http://yoursite.com/2019/12/20/java探针Springboot项目/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="Java探针SpringBoot项目通过本博客，您能完成的目标是  创建一个javaagent项目，并打包成探针包（agent包） 监控已有的SpringBoot项目某个类下所有方法的执行时间  需要的环境  Idea开发环境 javassist依赖包 SpringBoot web项目  javaagent项目创建一个maven项目，其目录结构如下：  核心为MyAgent类和MyTransfor">
+<meta property="og:description" content="Java探针SpringBoot项目通过本博客，您能完成的目标是  创建一个javaagent项目，并打包成探针包（agent包） 监控已有的SpringBoot项目某个类下所有方法的执行时间  需要的环境  Idea开发环境 javassist依赖包 SpringBoot web项目">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1ga36ws1ybsj309e08vjrq.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1ga37k2fg5vj30um0cbwh4.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1ga387w7jfuj30rv016q2y.jpg">
-<meta property="og:updated_time" content="2019-12-20T12:52:30.340Z">
+<meta property="og:updated_time" content="2019-12-23T13:08:22.199Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java探针SpringBoot项目">
-<meta name="twitter:description" content="Java探针SpringBoot项目通过本博客，您能完成的目标是  创建一个javaagent项目，并打包成探针包（agent包） 监控已有的SpringBoot项目某个类下所有方法的执行时间  需要的环境  Idea开发环境 javassist依赖包 SpringBoot web项目  javaagent项目创建一个maven项目，其目录结构如下：  核心为MyAgent类和MyTransfor">
+<meta name="twitter:description" content="Java探针SpringBoot项目通过本博客，您能完成的目标是  创建一个javaagent项目，并打包成探针包（agent包） 监控已有的SpringBoot项目某个类下所有方法的执行时间  需要的环境  Idea开发环境 javassist依赖包 SpringBoot web项目">
 <meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1ga36ws1ybsj309e08vjrq.jpg">
 
 
@@ -423,6 +423,7 @@
 <li>javassist依赖包</li>
 <li>SpringBoot web项目</li>
 </ol>
+<a id="more"></a>
 <h4 id="javaagent项目"><a href="#javaagent项目" class="headerlink" title="javaagent项目"></a>javaagent项目</h4><p>创建一个maven项目，其目录结构如下：</p>
 <p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga36ws1ybsj309e08vjrq.jpg" alt="image-20191220145130001"></p>
 <p>核心为MyAgent类和MyTransformer类，第一个类可以理解为agent的入口，需要定义一个premain的方法，方法里面加入一个自定义的transformer类，即MyTransformer，可以理解为写入代码的具体逻辑。</p>
@@ -475,8 +476,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/12/11/在gitlab项目中添加CI的过程/" rel="next" title="在Gitlab项目中添加CI的过程">
-                <i class="fa fa-chevron-left"></i> 在Gitlab项目中添加CI的过程
+              <a href="/2019/12/11/sonarqube的搭建/" rel="next" title="代码检测sonarqube">
+                <i class="fa fa-chevron-left"></i> 代码检测sonarqube
               </a>
             
           </div>

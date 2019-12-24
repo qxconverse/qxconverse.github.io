@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="mac下安装opencv3一开始用的brew，但是给我下了py2.7和py3.7，而我的python是anaconda3.5，所以干脆用conda安装。 1$ conda install -c menpo opencv3 这样就可以import cv2了 mac下安装tensorflow123$ conda info --envs$ conda create -n tensorflow pytho">
+<meta name="description" content="mac下安装opencv3一开始用的brew，但是给我下了py2.7和py3.7，而我的python是anaconda3.5，所以干脆用conda安装。 1$ conda install -c menpo opencv3 这样就可以import cv2了">
 <meta name="keywords" content="Python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python相关的">
 <meta property="og:url" content="http://yoursite.com/2018/07/17/python相关的/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="mac下安装opencv3一开始用的brew，但是给我下了py2.7和py3.7，而我的python是anaconda3.5，所以干脆用conda安装。 1$ conda install -c menpo opencv3 这样就可以import cv2了 mac下安装tensorflow123$ conda info --envs$ conda create -n tensorflow pytho">
+<meta property="og:description" content="mac下安装opencv3一开始用的brew，但是给我下了py2.7和py3.7，而我的python是anaconda3.5，所以干脆用conda安装。 1$ conda install -c menpo opencv3 这样就可以import cv2了">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-23T03:48:35.888Z">
+<meta property="og:updated_time" content="2019-12-23T13:09:05.649Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python相关的">
-<meta name="twitter:description" content="mac下安装opencv3一开始用的brew，但是给我下了py2.7和py3.7，而我的python是anaconda3.5，所以干脆用conda安装。 1$ conda install -c menpo opencv3 这样就可以import cv2了 mac下安装tensorflow123$ conda info --envs$ conda create -n tensorflow pytho">
+<meta name="twitter:description" content="mac下安装opencv3一开始用的brew，但是给我下了py2.7和py3.7，而我的python是anaconda3.5，所以干脆用conda安装。 1$ conda install -c menpo opencv3 这样就可以import cv2了">
 
 
 
@@ -411,6 +411,7 @@
         <h4 id="mac下安装opencv3"><a href="#mac下安装opencv3" class="headerlink" title="mac下安装opencv3"></a>mac下安装opencv3</h4><p>一开始用的brew，但是给我下了py2.7和py3.7，而我的python是anaconda3.5，所以干脆用conda安装。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ conda install -c menpo opencv3</span><br></pre></td></tr></table></figure>
 <p>这样就可以<code>import cv2</code>了</p>
+<a id="more"></a>
 <h4 id="mac下安装tensorflow"><a href="#mac下安装tensorflow" class="headerlink" title="mac下安装tensorflow"></a>mac下安装tensorflow</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ conda info --envs</span><br><span class="line">$ conda create -n tensorflow python=3.5</span><br><span class="line">$ conda info --envs</span><br></pre></td></tr></table></figure>
 <p>后面安装完成后，需要在环境中使用才行：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ source activate tensorflow</span><br><span class="line">(tensorflow) XFade@qx:~$ python</span><br><span class="line">Python 3.5.4 |Continuum Analytics, Inc.| (default, Aug 14 2017, 12:43:10)</span><br><span class="line">[GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.57)] on darwin</span><br><span class="line">Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.</span><br><span class="line">&gt;&gt;&gt; import tensorflow as tf</span><br><span class="line">&gt;&gt;&gt;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">// 激活环境</span><br><span class="line">$ source activate tensorflow</span><br><span class="line">// 关闭环境</span><br><span class="line">$ source deactivate</span><br></pre></td></tr></table></figure>

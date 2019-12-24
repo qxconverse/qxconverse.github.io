@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Git的基础知识git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。 先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支：">
+<meta name="description" content="Git的基础知识git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。">
 <meta name="keywords" content="版本控制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git相关的操作">
 <meta property="og:url" content="http://yoursite.com/2018/07/17/Git操作/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="Git的基础知识git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。 先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支：">
+<meta property="og:description" content="Git的基础知识git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-20T13:29:26.727Z">
+<meta property="og:updated_time" content="2019-12-23T13:14:24.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git相关的操作">
-<meta name="twitter:description" content="Git的基础知识git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。 先手动删除文件，然后使用git rm &amp;lt;file&amp;gt;和git add &amp;lt;file&amp;gt;效果是一样的。 切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。 Git鼓励大量使用分支：">
+<meta name="twitter:description" content="Git的基础知识git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。">
 
 
 
@@ -409,6 +409,7 @@
 
       
         <h4 id="Git的基础知识"><a href="#Git的基础知识" class="headerlink" title="Git的基础知识"></a>Git的基础知识</h4><p>git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。</p>
+<a id="more"></a>
 <p>先手动删除文件，然后使用<code>git rm &lt;file&gt;</code>和<code>git add &lt;file&gt;</code>效果是一样的。</p>
 <p>切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。</p>
 <p>Git鼓励大量使用分支：</p>
@@ -431,7 +432,7 @@
 <p>git中对比2个版本之间的改动，比如下面的例子</p>
 <p> <code>git diff xxx1 xxx2 --stat</code></p>
 <p>在add之前，查看修改了哪些代码，很实用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD (filename)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff head (filename)</span><br></pre></td></tr></table></figure>
 <p>修改了冲突后，记得add，commit，pull然后再push</p>
 <p>在pull的时候，如果本地有修改过的，那么可以强制恢复到上一次提交的位置。</p>
 <p>修改了代码后，想去掉修改：<code>git co.</code></p>
@@ -452,19 +453,12 @@
 <p>git切换分支的时候，最好保持一个干净的工作区。</p>
 <p>切换到主分支上新建分支时，一定要及时pull！！！</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">新建分支8部曲</span><br><span class="line"></span><br><span class="line">git checkout master</span><br><span class="line">git pull</span><br><span class="line">git checkout -b xxx</span><br><span class="line">git add .</span><br><span class="line">git ci -m &quot;aaaa&quot;</span><br><span class="line">git push --set-upstream origin xxx</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">删除本地分支</span><br><span class="line">git branch -D xxx</span><br><span class="line"></span><br><span class="line">删除远程分支</span><br><span class="line">git push origin --delete xxx</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git回滚到某个版本</span><br><span class="line">git reset --hard xxx</span><br><span class="line"></span><br><span class="line">git对比与上一次版本之间的改动差异</span><br><span class="line">git diff head</span><br></pre></td></tr></table></figure>
+<p>删除分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">删除本地分支</span><br><span class="line">git branch -D xxx</span><br><span class="line">删除远程分支</span><br><span class="line">git push origin --delete xxx</span><br></pre></td></tr></table></figure>
+<p>版本回退<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git回滚到某个版本</span><br><span class="line">git reset --hard xxx</span><br></pre></td></tr></table></figure></p>
+<p>暂存写好的部分，再切换分支</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br><span class="line">git co xxx</span><br><span class="line">git stash pop</span><br></pre></td></tr></table></figure>
-<ol>
-<li>从master分支新建分支A</li>
-<li>在A分支上开发出新功能</li>
-<li>切换到master分支，pull一下</li>
-<li>切换到A分支，merge master到当前分支，并push</li>
-<li>切换到B分支, merge A到当前分支，解决冲突，并push</li>
-<li>合并B到master</li>
-</ol>
-<p>回退到某个指定的版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset —hard xxxxxx</span><br><span class="line">git push -f -u origin master</span><br></pre></td></tr></table></figure>
+<p>多分支复杂操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 从master分支新建分支A</span><br><span class="line">2. 在A分支上开发出新功能</span><br><span class="line">3. 切换到master分支，pull一下</span><br><span class="line">4. 切换到A分支，merge master到当前分支，并push</span><br><span class="line">5. 切换到B分支, merge A到当前分支，解决冲突，并push</span><br><span class="line">6. 合并B到master</span><br></pre></td></tr></table></figure></p>
 
       
     </div>

@@ -79,19 +79,19 @@
 
 
 
-<meta name="description" content="查看磁盘的使用情况 123df -h 文件夹名du --max-depth=1 -hdu -sh 文件夹名 cp用来复制文件或目录，-r/-R 递归复制该目录及其子目录内容，-f 表示不询问而强制复制 scp用于在Linux服务器之间复制文件和目录 从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，不然识别不了。其实可以这样记忆，看以哪个为中心。不管是从远端复制到本">
+<meta name="description" content="查看磁盘的使用情况 123456df -h 文件夹名du --max-depth=1 -h-s是summary的意思，不能和--max-depth同时使用du -sh 文件夹名">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux常用命令">
 <meta property="og:url" content="http://yoursite.com/2019/10/09/linux常用的操作命令/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="查看磁盘的使用情况 123df -h 文件夹名du --max-depth=1 -hdu -sh 文件夹名 cp用来复制文件或目录，-r/-R 递归复制该目录及其子目录内容，-f 表示不询问而强制复制 scp用于在Linux服务器之间复制文件和目录 从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，不然识别不了。其实可以这样记忆，看以哪个为中心。不管是从远端复制到本">
+<meta property="og:description" content="查看磁盘的使用情况 123456df -h 文件夹名du --max-depth=1 -h-s是summary的意思，不能和--max-depth同时使用du -sh 文件夹名">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7rpj6zuioj31000i0mz5.jpg">
-<meta property="og:updated_time" content="2019-12-23T02:54:23.810Z">
+<meta property="og:updated_time" content="2019-12-23T13:08:03.578Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令">
-<meta name="twitter:description" content="查看磁盘的使用情况 123df -h 文件夹名du --max-depth=1 -hdu -sh 文件夹名 cp用来复制文件或目录，-r/-R 递归复制该目录及其子目录内容，-f 表示不询问而强制复制 scp用于在Linux服务器之间复制文件和目录 从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，不然识别不了。其实可以这样记忆，看以哪个为中心。不管是从远端复制到本">
+<meta name="twitter:description" content="查看磁盘的使用情况 123456df -h 文件夹名du --max-depth=1 -h-s是summary的意思，不能和--max-depth同时使用du -sh 文件夹名">
 <meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7rpj6zuioj31000i0mz5.jpg">
 
 
@@ -373,7 +373,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  699
+                  713
                 </span>
               
 
@@ -411,7 +411,8 @@
 
       
         <p>查看磁盘的使用情况</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df -h 文件夹名</span><br><span class="line">du --max-depth=1 -h</span><br><span class="line">du -sh 文件夹名</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">df -h 文件夹名</span><br><span class="line"></span><br><span class="line">du --max-depth=1 -h</span><br><span class="line"></span><br><span class="line">-s是summary的意思，不能和--max-depth同时使用</span><br><span class="line">du -sh 文件夹名</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>cp用来复制文件或目录，<code>-r/-R</code> 递归复制该目录及其子目录内容，<code>-f</code> 表示不询问而强制复制</p>
 <p>scp用于在Linux服务器之间复制文件和目录</p>
 <p>从服务器复制到本地，可以这样写，注意要在本地用scp，而不是在服务器下面用scp，不然识别不了。其实可以这样记忆，看以哪个为中心。不管是从远端复制到本地，还是把本地的复制到远端，都在本地操作（主角为本地）。</p>
