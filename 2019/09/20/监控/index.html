@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="监控的red原则 rate  error duration">
+<meta name="description" content="监控的red原则 rate  error duration  SLI指的是服务质量指标 常见的有：请求延迟（处理请求所消耗的时间）、错误率（请求处理失败的百分比）、系统吞吐量（每秒请求数）。还有一个可用性，代表服务可用时间的百分比。 基础设施监控 CPU 内存 磁盘（存储健康） 网卡（网络健康）">
 <meta name="keywords" content="监控">
 <meta property="og:type" content="article">
 <meta property="og:title" content="监控、日志、链路追踪">
 <meta property="og:url" content="http://yoursite.com/2019/09/20/监控/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="监控的red原则 rate  error duration">
+<meta property="og:description" content="监控的red原则 rate  error duration  SLI指的是服务质量指标 常见的有：请求延迟（处理请求所消耗的时间）、错误率（请求处理失败的百分比）、系统吞吐量（每秒请求数）。还有一个可用性，代表服务可用时间的百分比。 基础设施监控 CPU 内存 磁盘（存储健康） 网卡（网络健康）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-23T13:08:45.977Z">
+<meta property="og:updated_time" content="2019-12-24T14:37:04.324Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="监控、日志、链路追踪">
-<meta name="twitter:description" content="监控的red原则 rate  error duration">
+<meta name="twitter:description" content="监控的red原则 rate  error duration  SLI指的是服务质量指标 常见的有：请求延迟（处理请求所消耗的时间）、错误率（请求处理失败的百分比）、系统吞吐量（每秒请求数）。还有一个可用性，代表服务可用时间的百分比。 基础设施监控 CPU 内存 磁盘（存储健康） 网卡（网络健康）">
 
 
 
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k
+                  1.3k
                 </span>
               
 
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  6
                 </span>
               
             </div>
@@ -413,6 +413,14 @@
 <li>error</li>
 <li>duration</li>
 </ol>
+<p>SLI指的是服务质量指标</p>
+<p>常见的有：请求延迟（处理请求所消耗的时间）、错误率（请求处理失败的百分比）、系统吞吐量（每秒请求数）。还有一个可用性，代表服务可用时间的百分比。</p>
+<h5 id="基础设施监控"><a href="#基础设施监控" class="headerlink" title="基础设施监控"></a>基础设施监控</h5><ul>
+<li>CPU</li>
+<li>内存</li>
+<li>磁盘（存储健康）</li>
+<li>网卡（网络健康）</li>
+</ul>
 <a id="more"></a>
 <h5 id="prometheus指标详解"><a href="#prometheus指标详解" class="headerlink" title="prometheus指标详解"></a>prometheus指标详解</h5><table>
 <thead>
@@ -673,6 +681,7 @@
 <li>connection tcp连接数</li>
 </ol>
 <p>jvm工具：jstat/jstack</p>
+<p>- </p>
 
       
     </div>
@@ -799,7 +808,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">66</span>
+                  <span class="site-state-item-count">67</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -876,7 +885,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#监控的red原则"><span class="nav-number">1.</span> <span class="nav-text">监控的red原则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#prometheus指标详解"><span class="nav-number">2.</span> <span class="nav-text">prometheus指标详解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#标准化日志示例"><span class="nav-number">3.</span> <span class="nav-text">标准化日志示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringBoot项目中prometheus配置示例"><span class="nav-number">4.</span> <span class="nav-text">SpringBoot项目中prometheus配置示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#稳定性分析"><span class="nav-number">5.</span> <span class="nav-text">稳定性分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在机器上部署prometheus全家桶"><span class="nav-number">6.</span> <span class="nav-text">在机器上部署prometheus全家桶</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#系统故障排查需要考虑的因素"><span class="nav-number">7.</span> <span class="nav-text">系统故障排查需要考虑的因素</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#监控的red原则"><span class="nav-number">1.</span> <span class="nav-text">监控的red原则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基础设施监控"><span class="nav-number">2.</span> <span class="nav-text">基础设施监控</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#prometheus指标详解"><span class="nav-number">3.</span> <span class="nav-text">prometheus指标详解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#标准化日志示例"><span class="nav-number">4.</span> <span class="nav-text">标准化日志示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringBoot项目中prometheus配置示例"><span class="nav-number">5.</span> <span class="nav-text">SpringBoot项目中prometheus配置示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#稳定性分析"><span class="nav-number">6.</span> <span class="nav-text">稳定性分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在机器上部署prometheus全家桶"><span class="nav-number">7.</span> <span class="nav-text">在机器上部署prometheus全家桶</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#系统故障排查需要考虑的因素"><span class="nav-number">8.</span> <span class="nav-text">系统故障排查需要考虑的因素</span></a></li></ol></div>
             
 
           </div>
@@ -910,7 +919,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">62.4k</span>
+    <span title="Site words total count">63.6k</span>
   
 </div>
 
