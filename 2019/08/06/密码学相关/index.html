@@ -82,14 +82,14 @@
 <meta name="description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密    A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加密">
 <meta name="keywords" content="密码学">
 <meta property="og:type" content="article">
-<meta property="og:title" content="密码学相关">
+<meta property="og:title" content="数字签名与SSH">
 <meta property="og:url" content="http://yoursite.com/2019/08/06/密码学相关/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
 <meta property="og:description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密    A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加密">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-23T03:18:09.582Z">
+<meta property="og:updated_time" content="2019-12-25T08:14:23.522Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="密码学相关">
+<meta name="twitter:title" content="数字签名与SSH">
 <meta name="twitter:description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密    A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加密">
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>密码学相关 | Xxqin's Blog</title>
+  <title>数字签名与SSH | Xxqin's Blog</title>
   
 
 
@@ -300,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">密码学相关</h1>
+          <h1 class="post-title" itemprop="name headline">数字签名与SSH</h1>
         
 
         <div class="post-meta">
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  352
+                  350
                 </span>
               
 
@@ -433,7 +433,7 @@
 </tr>
 </tbody>
 </table>
-<h4 id="ssh相关"><a href="#ssh相关" class="headerlink" title="ssh相关"></a>ssh相关</h4><p>对于放在Gitlab上的代码，使用https的方式来clone，这样就省去了配置ssh的私钥和公钥的步骤。说白了，只要涉及到ssh协议的传输，那么一定会需要公钥和私钥的，所以，Gitlab相关的Git操作和连接远程服务器都要用。</p>
+<h4 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h4><p>对于放在Gitlab上的代码，使用https的方式来clone，这样就省去了配置ssh的私钥和公钥的步骤。说白了，只要涉及到ssh协议的传输，那么一定会需要公钥和私钥的，所以，Gitlab相关的Git操作和连接远程服务器都要用。</p>
 <p>Mac上terminal通过ssh连接远程Linux服务器的方法：</p>
 <ol>
 <li>生成公、私钥</li>
@@ -477,8 +477,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/06/Nginx相关/" rel="next" title="Nginx相关">
-                <i class="fa fa-chevron-left"></i> Nginx相关
+              <a href="/2019/08/02/Spring相关/" rel="next" title="SpringBoot相关">
+                <i class="fa fa-chevron-left"></i> SpringBoot相关
               </a>
             
           </div>
@@ -487,8 +487,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/17/cas单点登录/" rel="prev" title="CAS单点登录示意图">
-                CAS单点登录示意图 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/06/Nginx相关/" rel="prev" title="Nginx相关">
+                Nginx相关 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -650,7 +650,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#数字签名"><span class="nav-number">1.</span> <span class="nav-text">数字签名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ssh相关"><span class="nav-number">2.</span> <span class="nav-text">ssh相关</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#数字签名"><span class="nav-number">1.</span> <span class="nav-text">数字签名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SSH"><span class="nav-number">2.</span> <span class="nav-text">SSH</span></a></li></ol></div>
             
 
           </div>
