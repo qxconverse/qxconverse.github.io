@@ -367,7 +367,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k
+                  1.1k
                 </span>
               
 
@@ -406,28 +406,21 @@
       
         
           
-            <h3 id="请求耗时中的TP值"><a href="#请求耗时中的TP值" class="headerlink" title="请求耗时中的TP值"></a>请求耗时中的TP值</h3><h4 id="什么是请求耗时"><a href="#什么是请求耗时" class="headerlink" title="什么是请求耗时"></a>什么是请求耗时</h4><p><strong>请求耗时</strong>指的是某个请求从请求到服务器响应花费的总时间。我们经常需要将它作为一个指标来衡量<strong>服务质量</strong>。</p>
-<p>很显然，一个服务的请求耗时越少，表明该服务的质量越高。</p>
-<h4 id="如何获取请求耗时"><a href="#如何获取请求耗时" class="headerlink" title="如何获取请求耗时"></a>如何获取请求耗时</h4><p>如何来获得请求耗时呢？特别地，可以考虑某个接口的请求耗时。空谈请求耗时是没有意义的，我们常常需要度量某个<strong>时间范围</strong>内的请求耗时。比如过去1分钟内的请求耗时、昨天的请求耗时等等。</p>
-<p>有了范围，我们就要统计该范围内接口所有请求的耗时。假设过去5分钟内一共有10次请求，其耗时分别为</p>
+            <h3 id="请求耗时中的TP值"><a href="#请求耗时中的TP值" class="headerlink" title="请求耗时中的TP值"></a>请求耗时中的TP值</h3><h4 id="什么是请求耗时"><a href="#什么是请求耗时" class="headerlink" title="什么是请求耗时"></a>什么是请求耗时</h4><p><strong>请求耗时</strong>指的是某个请求从发出到服务器响应花费的总时间，我们经常需要将它作为一个监控指标来衡量系统的<strong>服务质量</strong>。很显然，一个服务的请求耗时越少，表明该服务的质量越高。</p>
+<h4 id="如何获取请求耗时"><a href="#如何获取请求耗时" class="headerlink" title="如何获取请求耗时"></a>如何获取请求耗时</h4><p>特别地，可以考虑该服务中某个接口的请求耗时。空谈请求耗时是没有意义的，我们需要度量某个<strong>时间范围</strong>内的整体请求耗时。比如过去1分钟内的请求耗时、昨天的请求耗时等等。</p>
+<p>有了范围，我们就要统计该范围内接口所有请求的耗时。假设过去1分钟内一共有10次请求，其耗时分别为</p>
 <p>[34ms, 10ms, 8ms, 12ms, 20ms, 9ms, 18ms, 29ms, 3ms, 15ms]</p>
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga87ija8u8j30zk0qo0t1.jpg" alt="Figure_1"></p>
-<h5 id="平均值统计"><a href="#平均值统计" class="headerlink" title="平均值统计"></a>平均值统计</h5><p>思考一下，我们如何计算该接口的整体请求耗时呢？也许你会说，平均值啊，多么简单而粗暴的统计方式。于是你计算如下：</p>
-<p>(34 + 10 +8 + 12 + 20 + 9 + 18 + 29 + 3 + 15) / 10 = 15.8ms</p>
-<p>看上去挺好的，差不多在15ms左右，没有问题；平均请求耗时看起来很简单，但是却掩盖了一个重要的细节：<strong>很可能大多数请求都是很快的，但是长尾请求速度却很慢。</strong></p>
-<p>比如，再看下面的10次请求耗时：</p>
-<p>[34ms, 500ms, 8ms, 12ms, 20ms, 9ms, 480ms, 29ms, 3ms, 15ms]</p>
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga87og2lmbj30zk0qodg6.jpg" alt="Figure_1"></p>
-<p>此时，再次计算平均值，结果为111ms。假设我们的报警值为120ms。虽然大多数请求在120ms内完成了，但20%的请求却慢了20倍左右！此时报警不会发出，但是服务的确在长尾耗时上出现了巨大大变化。</p>
-<p>因此，我们可以得出一个结论，<strong>耗时指标不应该简单地由平均值来定义。</strong></p>
-<h5 id="百分位值统计"><a href="#百分位值统计" class="headerlink" title="百分位值统计"></a>百分位值统计</h5><p>这里就引入了统计学中的一个概念，<strong>分布</strong>。</p>
-<p>我们将统计所有区间内的耗时，这里简单起见，我们将所有耗时，从小到大排序，得到下面的耗时列表，方便起见，去掉ms：</p>
-<p>[3,  8,  9,  12,  15,  20,  29,  34, 480, 500]</p>
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga87vdl526j30zk0qoaae.jpg" alt="Figure_1"></p>
-<p>此刻，我们定义top percent的概念，即标题中的TP值，也叫百分位值。</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga9034wudfj30hj0d40t6.jpg" alt="Screen Shot 2019-12-25 at 3.28.47 PM"></p>
+<h5 id="平均值统计"><a href="#平均值统计" class="headerlink" title="平均值统计"></a>平均值统计</h5><p>思考一下，我们如何计算该接口的整体请求耗时呢？也许你会说，平均值啊，多么简单而粗暴的统计方式。于是你计算如下：(34 + 10 + 8 + 12 + 20 + 9 + 18 + 29 + 3 + 15) / 10 = 15.8ms。看上去挺准确的，差不多在15ms左右，没有问题。</p>
+<p>平均请求耗时看起来很简单，但是却掩盖了一个重要的细节：<strong>很可能大多数请求都是很快的，但是长尾请求速度却很慢。</strong>比如，再看下面的10次请求耗时：[34ms, 500ms, 8ms, 12ms, 20ms, 9ms, 480ms, 29ms, 3ms, 15ms]</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga90426wrtj30hk0d8t95.jpg" alt="image-20191225152953418"></p>
+<p>计算其平均值，结果为111ms。假设我们的报警值为120ms。虽然大多数请求在120ms内完成了，但20%的请求（这里为2个）却慢了20倍左右！此时报警不会发出，但是服务的确在长尾耗时上出现了巨大的变化。</p>
+<p>因此，我们可以得出一个结论，<strong>请求耗时指标不应该简单地由平均值来定义。</strong></p>
+<h5 id="百分位值统计"><a href="#百分位值统计" class="headerlink" title="百分位值统计"></a>百分位值统计</h5><p>这里就引入了统计学中的一个概念，<strong>分布</strong>。我们将所有耗时从小到大排序，得到下面的耗时列表，方便起见，去掉ms：[3,  8,  9,  12,  15,  20,  29,  34, 480, 500]。</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga9093emb8j30hi0d2q3d.jpg" alt="Screen Shot 2019-12-25 at 3.34.32 PM"></p>
+<p>我们定义Top Percent的概念，即标题中的TP值，也叫百分位值。</p>
 <p><strong>TP值：指在一个时间段内，统计该接口每次调用所消耗的时间，并将这些时间按从小到大的顺序进行排序，并取出第（总次数 $\times$ 百分比）个值。</strong></p>
-<p>比如，在上面的例子中，TP50 = 第（10$\times$50%）个值，即TP50 = 15ms</p>
-<p>依次类推，TP90 = 第（10$\times$90%）个值，即TP90 = 480ms</p>
+<p>比如，在上面的例子中，TP50 = 第（10$\times$50%）个值，即TP50 = 15ms；依此类推，TP90 = 第（10$\times$90%）个值，即TP90 = 480ms。</p>
 <p>稍微转换一下视角，就可以得到下面的结论：</p>
 <ol>
 <li>50%的请求会在15ms内（小于等于）完成</li>
@@ -436,13 +429,18 @@
 <li>99%的请求会在500ms内完成</li>
 </ol>
 <p>利用百分位值可以帮助我们关注其分布性：高百分位，例如99%，体现了最差的情况，而50%则体现了普遍情况。</p>
-<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>我们其实更倾向于关注高分位TP值，<strong>因为如果99%的系统行为都正常的话，那50%部分肯定也就是正常的。所以高分位值对服务性能有更高的要求。</strong></p>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><p>下图中的蓝色线：某段时间范围内，接口请求的耗时由低到高排序所形成</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga90owulubj30gm08rwel.jpg" alt="Screen Shot 2019-12-25 at 3.47.46 PM"></p>
+<ol>
+<li>TPX，表示Top Percent X的值，通常情况下，相同的X，TPX值越大，表明接口整体的耗时越长</li>
+<li>对于同一个接口，使用X值越大的TPX，统计到的值越大，可以看做条件越苛刻（对服务质量的要求更高）</li>
+</ol>
+<p>接着来解释一下这两个结论。</p>
+<p>先来看看同样的TP标准，其值越大，是否意味着其请求耗时要高一些，也就是服务质量要差一些。以TP90举例，看下面的图：</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga90khqkowj30hk0d60t9.jpg" alt="image-20191225154540477"></p>
+<p>很明显，我们会认为接口2的请求耗时要高于接口1的请求耗时，即我们认为接口1服务质量要高些。</p>
+<p>我们其实更倾向于关注高分位TP值，<strong>因为如果99%的系统行为都正常的话，那50%部分肯定也就是正常的。所以高分位值对服务性能有更高的要求。</strong></p>
 <p>比如120ms作为报警值，如果取TP50，因为15ms &lt; 120ms，所以不会有报警；而取TP90的话，因为480ms &gt; 120ms了，因此就会报警了。可见TP90更加苛刻一些。</p>
-<p>再来看看同样的TP标准，其值越大，是否意味着其请求耗时要高一些，也就是服务质量要差一些。以TP50举例。看下面的图：</p>
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga88tnddhdj30zk0qodgf.jpg" alt="Figure_1"></p>
-<p>很明显，我们会认为红圈所代表的接口请求耗时要高于红叉所代表的接口请求耗时，即我们认为红叉接口服务质量要高些。</p>
-<p>总结图如下：</p>
-<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga899flfdyj31b80oaads.jpg" alt="Screen Shot 2019-12-25 at 12.00.37 AM"></p>
 
           
         
@@ -1572,204 +1570,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/08/关于制作PPT的经验/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qin xue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Xxqin's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/10/08/关于制作PPT的经验/" itemprop="url">PPT制作经验</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-08T20:07:39+08:00">
-                2019-10-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/art/" itemprop="url" rel="index">
-                    <span itemprop="name">人文艺术</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  278
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>制作ppt的几点经验</p>
-<ol>
-<li><p>字体要统一，可以分成几大类，比如一级标题、正文等等字体</p>
-</li>
-<li><p>字体大小要统一，比如一级标题、二级标题、正文、说明、图例等等几类字体大小</p>
-</li>
-<li><p>字体样式要统一、比如哪些地方加粗、哪些地方标什么颜色等等</p>
-</li>
-<li><p>字体颜色要统一、比如什么地方用黑色、什么地方用白色、淡蓝色等等</p>
-</li>
-<li><p>背景和前景颜色要能明显区分，浅色背景配深色前景，深色背景配浅色前景（比如形状、或字体）</p>
-</li>
-<li><p>每一页的文字要控制在能够让观众3秒内阅读（扫视）完的数量级别</p>
-</li>
-<li><p>每一页只讲一样东西，配以图片等</p>
-</li>
-<li><p>对于重点的词句，应当加粗显示、或换一个较大的字体大小</p>
-</li>
-<li><p>多用各种图来表示列表</p>
-</li>
-<li><p>当要表示某种组成关系的时候，画框架图</p>
-</li>
-<li><p>当要表示某种次序关系的时候，画时序图或流程图</p>
-</li>
-</ol>
-<p>讲ppt时一定要有互动</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/08/DataSource之Druid/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1957,6 +1757,204 @@
 <p>await：释放锁、沉睡、等待唤醒</p>
 <p>signal：获取锁，开始做事，完毕后，调用signal方法，唤醒沉睡的线程。</p>
 <p>将锁、countdownLatch、Future类解决超时问题等串起来</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/08/关于制作PPT的经验/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/08/关于制作PPT的经验/" itemprop="url">PPT制作经验</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-08T20:07:39+08:00">
+                2019-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/art/" itemprop="url" rel="index">
+                    <span itemprop="name">人文艺术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  278
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>制作ppt的几点经验</p>
+<ol>
+<li><p>字体要统一，可以分成几大类，比如一级标题、正文等等字体</p>
+</li>
+<li><p>字体大小要统一，比如一级标题、二级标题、正文、说明、图例等等几类字体大小</p>
+</li>
+<li><p>字体样式要统一、比如哪些地方加粗、哪些地方标什么颜色等等</p>
+</li>
+<li><p>字体颜色要统一、比如什么地方用黑色、什么地方用白色、淡蓝色等等</p>
+</li>
+<li><p>背景和前景颜色要能明显区分，浅色背景配深色前景，深色背景配浅色前景（比如形状、或字体）</p>
+</li>
+<li><p>每一页的文字要控制在能够让观众3秒内阅读（扫视）完的数量级别</p>
+</li>
+<li><p>每一页只讲一样东西，配以图片等</p>
+</li>
+<li><p>对于重点的词句，应当加粗显示、或换一个较大的字体大小</p>
+</li>
+<li><p>多用各种图来表示列表</p>
+</li>
+<li><p>当要表示某种组成关系的时候，画框架图</p>
+</li>
+<li><p>当要表示某种次序关系的时候，画时序图或流程图</p>
+</li>
+</ol>
+<p>讲ppt时一定要有互动</p>
 
           
         
