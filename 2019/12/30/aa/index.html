@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="graph TB     A[A] --&amp;gt; B[B]      A1[A] --- B1[B]      A4[A] -.- B4[B]      A5[A] -.-&amp;gt; B5[B]      A7[A] ==&amp;gt; B7[B]      A2[A] -- 描述 --- B2[B]      A3[A] -- 描述 --&amp;gt; B3[B]      A6[A] -. 描述 .-&amp;gt; B6[B]      A8">
+<meta name="description" content="sequenceDiagram       participant Alice     participant Bob     Alice-&amp;gt;&amp;gt;John: Hello John, how are you?     loop Healthcheck         John-&amp;gt;&amp;gt;John: Fight against hypochondria     end     Note right of Jo">
 <meta name="keywords" content="测试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mermaid图测试">
 <meta property="og:url" content="http://yoursite.com/2019/12/30/aa/index.html">
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
-<meta property="og:description" content="graph TB     A[A] --&amp;gt; B[B]      A1[A] --- B1[B]      A4[A] -.- B4[B]      A5[A] -.-&amp;gt; B5[B]      A7[A] ==&amp;gt; B7[B]      A2[A] -- 描述 --- B2[B]      A3[A] -- 描述 --&amp;gt; B3[B]      A6[A] -. 描述 .-&amp;gt; B6[B]      A8">
+<meta property="og:description" content="sequenceDiagram       participant Alice     participant Bob     Alice-&amp;gt;&amp;gt;John: Hello John, how are you?     loop Healthcheck         John-&amp;gt;&amp;gt;John: Fight against hypochondria     end     Note right of Jo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-30T05:31:55.737Z">
+<meta property="og:updated_time" content="2019-12-30T06:08:15.822Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mermaid图测试">
-<meta name="twitter:description" content="graph TB     A[A] --&amp;gt; B[B]      A1[A] --- B1[B]      A4[A] -.- B4[B]      A5[A] -.-&amp;gt; B5[B]      A7[A] ==&amp;gt; B7[B]      A2[A] -- 描述 --- B2[B]      A3[A] -- 描述 --&amp;gt; B3[B]      A6[A] -. 描述 .-&amp;gt; B6[B]      A8">
+<meta name="twitter:description" content="sequenceDiagram       participant Alice     participant Bob     Alice-&amp;gt;&amp;gt;John: Hello John, how are you?     loop Healthcheck         John-&amp;gt;&amp;gt;John: Fight against hypochondria     end     Note right of Jo">
 
 
 
@@ -371,7 +371,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  46
+                  88
                 </span>
               
 
@@ -408,16 +408,30 @@
       
 
       
-        <pre class="mermaid">graph TB
-    A[A] --> B[B] 
-    A1[A] --- B1[B] 
-    A4[A] -.- B4[B] 
-    A5[A] -.-> B5[B] 
-    A7[A] ==> B7[B] 
-    A2[A] -- 描述 --- B2[B] 
-    A3[A] -- 描述 --> B3[B] 
-    A6[A] -. 描述 .-> B6[B] 
-    A8[A] == 描述 ==> B8[B]</pre>
+        <pre class="mermaid">sequenceDiagram  
+    participant Alice
+    participant Bob
+    Alice->>John: Hello John, how are you?
+    loop Healthcheck
+        John->>John: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts <br>prevail!
+    John-->>Alice: Great!
+    John->>Bob: How about you?
+    Bob-->>John: Jolly good!</pre>
+
+<pre class="mermaid">gantt
+dateFormat  YYYY-MM-DD
+title Adding GANTT diagram to mermaid
+excludes weekdays 2014-01-10
+
+section A section
+Completed task            :done,    des1, 2014-01-06,2014-01-08
+Active task               :active,  des2, 2014-01-09, 3d
+Future task               :         des3, after des2, 5d
+Future task2               :         des4, after des3, 5d</pre>
+
+
 
 
       
