@@ -413,11 +413,11 @@
 <li>配置线程池，在应用入口或是该配置类上加上@EnableAsync注解。</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建线程池</span></span><br><span class="line"><span class="comment">     * 用于手动创建的线程</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ThreadPoolTaskExecutor <span class="title">mailSendTaskAsyncPool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ThreadPoolTaskExecutor executor = <span class="keyword">new</span> ThreadPoolTaskExecutor();</span><br><span class="line">        executor.setCorePoolSize(config.getCorePoolSize());</span><br><span class="line">        executor.setMaxPoolSize(config.getMaxPoolSize());</span><br><span class="line">        executor.setQueueCapacity(config.getQueueCapacity());</span><br><span class="line">        executor.setKeepAliveSeconds(config.getKeepAliveSeconds());</span><br><span class="line">        executor.setThreadNamePrefix(<span class="string">"mail-task-"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// CALLER_RUNS：不在新线程中执行任务，而是由调用者所在的线程来执行</span></span><br><span class="line">        executor.setRejectedExecutionHandler(<span class="keyword">new</span> ThreadPoolExecutor.CallerRunsPolicy());</span><br><span class="line">        executor.initialize();</span><br><span class="line">        <span class="keyword">return</span> executor;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
+<ol>
 <li>使用的时候，第一种方式，加上@Async注解，并且指定某个线程池的名字（函数里面直接写调用的逻辑），否则会使用主应用的线程池。</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Async</span>(<span class="string">"mailSendTaskAsyncPool"</span>)</span><br><span class="line"><span class="meta">@Scheduled</span>(cron = <span class="string">"0/10 0/1 * * * ? "</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMail</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    logger.info(<span class="string">"send email..."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="3">
+<ol>
 <li>第二种方法，加上ThreadPoolTaskExecutor类型的变量，通过@Qualifier指定某个线程池的名字，并且在函数里面要通过调用该变量的execute方法来执行任务，否则会使用主应用的线程池。</li>
 </ol>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="meta">@Qualifier</span>(<span class="string">"messageSendTaskAsyncPool"</span>)</span><br><span class="line"><span class="keyword">private</span> ThreadPoolTaskExecutor threadPoolTaskExecutor;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">@Scheduled</span>(cron = <span class="string">"0/10 0/1 * * * ? "</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMail</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    threadPoolTaskExecutor.execute(() -&gt; &#123;</span><br><span class="line">        logger.info(<span class="string">"send email..."</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -594,8 +594,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/06/密码学相关/" rel="prev" title="数字签名与SSH">
-                数字签名与SSH <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/06/Nginx相关/" rel="prev" title="Nginx相关">
+                Nginx相关 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -777,7 +777,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
