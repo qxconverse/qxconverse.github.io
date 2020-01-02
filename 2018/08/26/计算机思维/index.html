@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
 <meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-21T13:40:09.839Z">
+<meta property="og:updated_time" content="2020-01-02T08:01:03.451Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机思维">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-21T21:40:09+08:00">
-                2019-12-21
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-02T16:01:03+08:00">
+                2020-01-02
               </time>
             
           </span>
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  873
+                  1k
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -424,7 +424,7 @@
 <a id="more"></a>
 <ol>
 <li>缓存思想：缓存思想特别重要，这是很多设计中必出现的，无论在操作系统层面还是具体应用层面。比如在内存和CPU之间有寄存器；比如在Redis中有缓存机制；Mybatis也有缓存机制，当某些记录很大，而且基本上不会变，且查询频率很高，那么利用缓存是明智的选择。消息队列</li>
-<li>Hash+链表、树形结构思想：说到hash一般会想到hashtable，hashmap等等，树形结构就更多了。共同点是，说到查找，它们是高频词汇。对于无序的东西，我们的查找时间复杂度是n级别的。所以为了优化，会采用2种措施，一种是建立索引，即hash表，计算key值，然后放到对应的位置，如果出现碰撞，通常是加个链表。这样复杂度可以控制在1级别的。凡事都有优缺点，虽然查询快了，但是它是无序的。而如果采用第二种措施，即用树形结构，比如二叉树（红黑树）、B+树等。基本是可以实现logn级别的，虽然慢一些，但其优点是有序。凡是涉及到查找，要想到它们！在ElasticSearch中有这些思想的存在（倒排索引，基于单词文档矩阵模型）。</li>
+<li>Hash+链表、树形结构思想：说到hash一般会想到hashtable，hashmap等等，树形结构就更多了。共同点是，说到查找，它们是高频词汇。对于无序的东西，我们的查找时间复杂度是n级别的。所以为了优化，会采用2种措施，一种是建立索引，即hash表，计算key值，然后放到对应的位置，如果出现碰撞，通常是加个链表。这样复杂度可以控制在1级别的。凡事都有优缺点，虽然查询快了，但是它是无序的。而如果采用第二种措施，即用树形结构，比如二叉树（红黑树）、B+树等。基本是可以实现logn级别的，虽然慢一些，但其优点是有序。凡是涉及到查找，要想到它们！在ElasticSearch中有这些思想的存在（倒排索引，基于单词文档矩阵模型）</li>
 <li>分布式思想：这个不用说了，当应用大了以后，必然出现。涉及到分布式，那么一定会涉及到同步、一致性等等问题。</li>
 <li>解耦思想：这个思想很重要，无论在什么地方都会体现，任何系统，都应当考虑到解耦。</li>
 <li>top-down思想：任何时候可以先从宏观整体考虑，然后再到具体的部分。递归是一种体现。</li>
@@ -433,8 +433,13 @@
 <li>双倍扩容思想：对于一些动态容器，比如C++中的vector扩容，java中的hashmap扩容，Redis中的dict的rehash过程。多多少少有基于原来容量2倍来进行扩容的思想。</li>
 <li>拦截过滤思想</li>
 <li>注册通知（发布、通知）思想，反应器模式</li>
+<li>在起初技术方案/数据库设计的过程中，就需要思考如何便于后续的数据分析（比如各种APP的年度报告）</li>
+<li>调用第三方接口时要考虑qps</li>
+<li>服务的熔断、降级，很大程度上需要配置中心的支持（例如Sentinel组件），熔断器实现的三个状态机：open、half-open、close</li>
+<li>CPU使用率变高的可能原因有：死循环、高并发（因为要做线程之间的来回切换）</li>
+<li>无论是构建还是测试，都要一步到位，一行命令完成所有的步骤或测试</li>
+<li>DAG，即有向无环图，有向即代表有先后的次序，而无环又可以保证不会形成死循环，常常被用来表示事件之间的驱动依赖关系，因此可以用来对任务进行调度。</li>
 </ol>
-<p>DAG，即有向无环图，有向即代表有先后的次序，而无环又可以保证不会形成死循环，常常被用来表示事件之间的驱动依赖关系，因此可以用来对任务进行调度。</p>
 <p>代码review时应当关注的点：</p>
 <ol>
 <li>具体某行代码的深入理解（要求你弄懂整个代码流程）</li>
@@ -661,7 +666,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">65.8k</span>
+    <span title="Site words total count">66.5k</span>
   
 </div>
 

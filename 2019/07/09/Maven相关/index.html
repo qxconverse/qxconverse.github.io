@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
 <meta property="og:description" content="Maven的相关知识通常会在本地仓库和远程中央仓库之间搭建一个公司级别的中间仓库，首先会从中间仓库获取，否则，再从远程中央仓库获取。 Nexus是一个常用的仓库管理器。 项目中在setting.xml文件里配置自己的中间仓库。 exclusions的使用：因为存在依赖传递的规则，B依赖A，但是在B项目中不需要A中的某个jar包，则使用此标签。 dependencyManagement和depend">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-23T13:09:17.121Z">
+<meta property="og:updated_time" content="2020-01-02T07:59:53.373Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Maven相关">
 <meta name="twitter:description" content="Maven的相关知识通常会在本地仓库和远程中央仓库之间搭建一个公司级别的中间仓库，首先会从中间仓库获取，否则，再从远程中央仓库获取。 Nexus是一个常用的仓库管理器。 项目中在setting.xml文件里配置自己的中间仓库。 exclusions的使用：因为存在依赖传递的规则，B依赖A，但是在B项目中不需要A中的某个jar包，则使用此标签。 dependencyManagement和depend">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-23T21:09:17+08:00">
-                2019-12-23
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-02T15:59:53+08:00">
+                2020-01-02
               </time>
             
           </span>
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  214
+                  514
                 </span>
               
 
@@ -428,6 +428,18 @@
 <a id="more"></a>
 <p>maven中的packaging标签，项目的打包类型：pom、jar、war，packing默认是jar类型</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line">父类型都为pom类型</span><br><span class="line">&lt;packaging&gt;jar&lt;/packaging&gt;</span><br><span class="line">内部调用或者是作服务使用</span><br><span class="line">&lt;packaging&gt;war&lt;/packaging&gt;</span><br><span class="line">需要部署的项目</span><br></pre></td></tr></table></figure>
+<p>记录一次很奇怪的mvn依赖的问题</p>
+<ol>
+<li>首先需要在A模块下删除一个包C的依赖</li>
+<li>删除后，发现很多文件都报错了，因为很多其它mvn依赖引入不了，包括springboot包、redis包等等</li>
+<li>当一直添加引入不了的依赖后，还是没法运行，而且因为包的引入在pom文件里面加了很多依赖，显然不是想看到的情况</li>
+</ol>
+<p>后来执行了mvn compile后，报了一个错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;dependencies.dependency.version&apos; for xxx:jar is missing. @ xxx:[unknown-version], xxx/pom.xml, line 124, column 21</span><br></pre></td></tr></table></figure>
+<p>才发现，是因为B模块下还有一处关于包C的引入</p>
+<p>因为此处的错误，导致此依赖后面加入的所有依赖都引入失败了，但是pom文件不会有任何报错，将它删除，运行就没有问题了。</p>
+<p>总结：删除mvn依赖一定要删除彻底，因为依赖很有可能存在与多个模块下的不同pom文件里面；否则通过idea运行就会出现各种问题，而且pom文件也不报错，隐藏得很深，要通过mvn compile命令行才找到原因。</p>
+
       
     </div>
     
@@ -664,7 +676,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">65.8k</span>
+    <span title="Site words total count">66.5k</span>
   
 </div>
 
