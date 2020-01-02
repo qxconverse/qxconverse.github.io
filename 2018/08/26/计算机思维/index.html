@@ -852,6 +852,41 @@
 
 
 
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+        <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitment({
+            id: window.location.pathname, 
+            owner: 'qxconverse',
+            repo: 'qxconverse.github.io',
+            
+            oauth: {
+            
+            
+                client_secret: 'fe06a18ea67aad329c93d816e2770695795a4d0a',
+            
+                client_id: '55fed2680b0b1d3db6c7'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
 
 
 
