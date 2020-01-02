@@ -88,7 +88,7 @@
 <meta property="og:description" content="查看磁盘的使用情况 123456df -h 文件夹名du --max-depth=1 -h-s是summary的意思，不能和--max-depth同时使用du -sh 文件夹名">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7rpj6zuioj31000i0mz5.jpg">
-<meta property="og:updated_time" content="2019-12-24T02:33:25.059Z">
+<meta property="og:updated_time" content="2020-01-02T10:10:17.182Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令">
 <meta name="twitter:description" content="查看磁盘的使用情况 123456df -h 文件夹名du --max-depth=1 -h-s是summary的意思，不能和--max-depth同时使用du -sh 文件夹名">
@@ -330,8 +330,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-24T10:33:25+08:00">
-                2019-12-24
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-02T18:10:17+08:00">
+                2020-01-02
               </time>
             
           </span>
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  740
+                  765
                 </span>
               
 
@@ -450,7 +450,8 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wc -l `find xxx/ -name "*.java"`</span><br></pre></td></tr></table></figure>
 <p>远程连接的机器上运行jar包，使其输出到指定文件，关闭窗口不停止运行；关键命令为nohup</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar xxx.jar &gt; log.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
-<p>批量删除以xxx-开头的所有文件夹，此处使用了正则表达式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf xxx-*</span><br></pre></td></tr></table></figure></p>
+<p>批量删除以xxx-开头的所有文件夹，此处使用了正则表达式<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf xxx-*</span><br></pre></td></tr></table></figure></p>
+<p>杀掉指定的进程<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep xxx | grep -v grep | awk '&#123;print $2&#125;' | sed -n '1p' | xargs kill -9</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -481,8 +482,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/08/DataSource之Druid/" rel="next" title="Druid连接池">
-                <i class="fa fa-chevron-left"></i> Druid连接池
+              <a href="/2019/10/08/关于制作PPT的经验/" rel="next" title="PPT制作经验">
+                <i class="fa fa-chevron-left"></i> PPT制作经验
               </a>
             
           </div>
