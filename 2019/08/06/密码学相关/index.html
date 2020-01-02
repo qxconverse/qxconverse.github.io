@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
 <meta property="og:description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密    A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加密">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-25T08:14:23.522Z">
+<meta property="og:updated_time" content="2020-01-02T10:12:39.624Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数字签名与SSH">
 <meta name="twitter:description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密    A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加密">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-25T16:14:23+08:00">
-                2019-12-25
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-02T18:12:39+08:00">
+                2020-01-02
               </time>
             
           </span>
@@ -360,6 +360,16 @@
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/06/密码学相关/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/08/06/密码学相关/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -383,7 +393,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  350
+                  373
                 </span>
               
 
@@ -459,7 +469,8 @@
 <li>如果为了更加方便地登录，新建config文件，内容如下。就可以使用<code>ssh xxx</code>直接登录。</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host xxx</span><br><span class="line">HostName  远程服务器IP</span><br><span class="line">User 远程连接使用的账号</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
-
+<p>附：使用不同的非对称加密算法生成公钥、私钥</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ed25519</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -880,6 +891,43 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname, 
+            owner: 'qxconverse',
+            repo: 'qxconverse.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'fe06a18ea67aad329c93d816e2770695795a4d0a',
+            
+                client_id: '55fed2680b0b1d3db6c7'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
 
 
 
