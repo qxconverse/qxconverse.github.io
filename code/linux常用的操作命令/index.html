@@ -88,7 +88,7 @@
 <meta property="og:description" content="查看磁盘的使用情况 123456df -h 文件夹名du --max-depth=1 -h-s是summary的意思，不能和--max-depth同时使用du -sh 文件夹名">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7rpj6zuioj31000i0mz5.jpg">
-<meta property="og:updated_time" content="2020-01-02T10:10:17.182Z">
+<meta property="og:updated_time" content="2020-01-03T11:01:49.531Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux常用命令">
 <meta name="twitter:description" content="查看磁盘的使用情况 123456df -h 文件夹名du --max-depth=1 -h-s是summary的意思，不能和--max-depth同时使用du -sh 文件夹名">
@@ -330,8 +330,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-02T18:10:17+08:00">
-                2020-01-02
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-03T19:01:49+08:00">
+                2020-01-03
               </time>
             
           </span>
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  765
+                  846
                 </span>
               
 
@@ -452,6 +452,11 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar xxx.jar &gt; log.txt 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
 <p>批量删除以xxx-开头的所有文件夹，此处使用了正则表达式<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf xxx-*</span><br></pre></td></tr></table></figure></p>
 <p>杀掉指定的进程<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep xxx | grep -v grep | awk '&#123;print $2&#125;' | sed -n '1p' | xargs kill -9</span><br></pre></td></tr></table></figure></p>
+<p>查看某个端口号是否正常启用</p>
+<p>-a或–all 显示所有连线中的Socket；</p>
+<p>-n或–numeric 直接使用IP地址，而不展示域名服务器；</p>
+<p>-p或–programs 显示正在使用Socket的程序识别码和程序名称。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">netstat -an | grep 10882</span><br><span class="line">tcp        0      0 0.0.0.0:10882           0.0.0.0:*               LISTEN</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -493,14 +498,26 @@
 
       
       
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
       
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/art/关于制作PPT的经验/" rel="next" title="PPT制作经验">
-                <i class="fa fa-chevron-left"></i> PPT制作经验
+              <a href="/code/DataSource之Druid/" rel="next" title="Druid连接池">
+                <i class="fa fa-chevron-left"></i> Druid连接池
               </a>
             
           </div>
@@ -683,7 +700,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">66.5k</span>
+    <span title="Site words total count">66.6k</span>
   
 </div>
 
@@ -928,6 +945,23 @@
 
   
   
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 22649,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
 
   
   
