@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Xxqin&#39;s Blog">
 <meta property="og:description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密    A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加密">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-02T10:12:39.624Z">
+<meta property="og:updated_time" content="2020-01-03T03:58:35.505Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数字签名与SSH">
 <meta name="twitter:description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密    A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加密">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-02T18:12:39+08:00">
-                2020-01-02
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-03T11:58:35+08:00">
+                2020-01-03
               </time>
             
           </span>
@@ -470,6 +470,38 @@
     <div>
     
         
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+
+  <p><span>本文标题:</span>数字签名与SSH</p>
+  <p><span>文章作者:</span>qin xue</p>
+  <p><span>发布时间:</span>2019年08月06日 - 12:09:52</p>
+  <p><span>最后更新:</span>2020年01月03日 - 11:58:35</p>
+  <p><span>原始链接:</span><a href="/2019/08/06/密码学相关/" title="数字签名与SSH">https://qxconverse.github.io/2019/08/06/密码学相关/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://qxconverse.github.io/2019/08/06/密码学相关/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
 
 
     
