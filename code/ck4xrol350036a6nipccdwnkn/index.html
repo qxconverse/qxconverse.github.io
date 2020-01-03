@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="校验,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="通用型资源权限校验（Alibaba）隶属于用户个人的页面或者功能必须进行权限控制校验 风险：泄露个人隐私信息，或数据被他人恶意修改 比如用户确认某项交易，需要验证所属性；订单系统中，用户确认订单必须要在已收货之后（流程性） 唯一性校验风险：如果不注意去重，可能会导致下游数据重复或出现对某条数据的多次操作 比如某张用户角色表存在重复数据，需要对某类用户进行扣款操作，不进行校验可能会导致多次扣款的操作">
+<meta name="keywords" content="校验">
+<meta property="og:type" content="article">
+<meta property="og:title" content="参数校验">
+<meta property="og:url" content="https://qxconverse.github.io/code/ck4xrol350036a6nipccdwnkn/index.html">
+<meta property="og:site_name" content="Xxqin&#39;s Blog">
+<meta property="og:description" content="通用型资源权限校验（Alibaba）隶属于用户个人的页面或者功能必须进行权限控制校验 风险：泄露个人隐私信息，或数据被他人恶意修改 比如用户确认某项交易，需要验证所属性；订单系统中，用户确认订单必须要在已收货之后（流程性） 唯一性校验风险：如果不注意去重，可能会导致下游数据重复或出现对某条数据的多次操作 比如某张用户角色表存在重复数据，需要对某类用户进行扣款操作，不进行校验可能会导致多次扣款的操作">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1gai7765bgzj30xq0q5aew.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1gai779v1vnj319l0fo42q.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1gai7bcijwij310q0ex44u.jpg">
+<meta property="og:updated_time" content="2020-01-02T06:42:38.208Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="参数校验">
+<meta name="twitter:description" content="通用型资源权限校验（Alibaba）隶属于用户个人的页面或者功能必须进行权限控制校验 风险：泄露个人隐私信息，或数据被他人恶意修改 比如用户确认某项交易，需要验证所属性；订单系统中，用户确认订单必须要在已收货之后（流程性） 唯一性校验风险：如果不注意去重，可能会导致下游数据重复或出现对某条数据的多次操作 比如某张用户角色表存在重复数据，需要对某类用户进行扣款操作，不进行校验可能会导致多次扣款的操作">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1gai7765bgzj30xq0q5aew.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://qxconverse.github.io/code/ck4xrol350036a6nipccdwnkn/">
+
+
+
+
+
+  <title>参数校验 | Xxqin's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xxqin's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">世界是属于勇敢者的，所以世界是属于我的</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于我">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于我
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-人文艺术">
+          <a href="/categories/art" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            人文艺术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-代码">
+          <a href="/categories/code" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            代码
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-生活">
+          <a href="/categories/life" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            生活
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-随想">
+          <a href="/categories/thoughts" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            随想
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/code/ck4xrol350036a6nipccdwnkn/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">参数校验</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-02T10:36:52+08:00">
+                2020-01-02
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-02T14:42:38+08:00">
+                2020-01-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="通用型"><a href="#通用型" class="headerlink" title="通用型"></a>通用型</h4><h5 id="资源权限校验"><a href="#资源权限校验" class="headerlink" title="资源权限校验"></a>资源权限校验</h5><p>（Alibaba）隶属于用户个人的页面或者功能必须进行权限控制校验</p>
+<p>风险：泄露个人隐私信息，或数据被他人恶意修改</p>
+<p>比如用户确认某项交易，需要验证所属性；订单系统中，用户确认订单必须要在已收货之后（流程性）</p>
+<h5 id="唯一性校验"><a href="#唯一性校验" class="headerlink" title="唯一性校验"></a>唯一性校验</h5><p>风险：如果不注意去重，可能会导致下游数据重复或出现对某条数据的多次操作</p>
+<p>比如某张用户角色表存在重复数据，需要对某类用户进行扣款操作，不进行校验可能会导致多次扣款的操作</p>
+<h5 id="范围参数校验"><a href="#范围参数校验" class="headerlink" title="范围参数校验"></a>范围参数校验</h5><p>风险：可能出现数组越界的情况，业务逻辑出错等</p>
+<p>分页时，需要检查页数是否在范围内；起始日期不能晚于结束日期、非正、非负判断等</p>
+<h5 id="格式化校验"><a href="#格式化校验" class="headerlink" title="格式化校验"></a>格式化校验</h5><p>比如BigDecimal传入为非数字字符串时，会报错：NumberFormatException </p>
+<h5 id="幂等性校验"><a href="#幂等性校验" class="headerlink" title="幂等性校验"></a>幂等性校验</h5><p>某个函数或者接口使用相同参数调用一次或者无限次，其造成的后果是一样的</p>
+<p>风险：对于未做校验的短时间内是否重复调用问题，可能导致错误的结果，如重复下单，重复支付等操作</p>
+<p>附：Http请求的method中哪些具有幂等性？</p>
+<p>GET/PUT/POST/DELETE</p>
+<p>Put:因为它直接把实体部分的数据替换到服务器的资源，我们多次调用它，只会产生一次影响，但是有相同结果的 HTTP 方法，所以满足幂等性。</p>
+<p>思考：如何解决幂等性校验</p>
+<h5 id="用户提交表单校验"><a href="#用户提交表单校验" class="headerlink" title="用户提交表单校验"></a>用户提交表单校验</h5><p>用户提交的内容是否包含脚本代码、是否可能存在xss/csrf攻击等</p>
+<h5 id="上传文件校验"><a href="#上传文件校验" class="headerlink" title="上传文件校验"></a>上传文件校验</h5><p>对于用户上传的文件，需要检查文件大小、文件类型等</p>
+<p><strong>Hibernate-validator中的校验</strong></p>
+<p>部分校验规则：</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gai7765bgzj30xq0q5aew.jpg" alt="Picture1"></p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gai779v1vnj319l0fo42q.jpg" alt="Picture2"></p>
+<h4 id="调用第三方接口"><a href="#调用第三方接口" class="headerlink" title="调用第三方接口"></a>调用第三方接口</h4><h5 id="调用失败校验"><a href="#调用失败校验" class="headerlink" title="调用失败校验"></a>调用失败校验</h5><p>风险：导致业务数据出错</p>
+<p>调用第三方接口时，出现异常，要根据业务情况进行处理，比如抛异常、降级等</p>
+<p>比如获取分页数据中，因为调用失败没有获取到总量，而设置分页totalCount为0；事实上，数量并不为0</p>
+<h5 id="字段判空校验"><a href="#字段判空校验" class="headerlink" title="字段判空校验"></a>字段判空校验</h5><p>风险：获取不到数据导致空指针异常</p>
+<p>（Alibaba）远程调用返回对象时，一律要求进行空指针判断，防止NPE</p>
+<p>需要对各个字段进行校验，因为可能第三方返回的数据结构发生变化，会出现获取为空的情况。例如，返回的json中原先包含id字段，后来没有了。</p>
+<h5 id="层级校验"><a href="#层级校验" class="headerlink" title="层级校验"></a>层级校验</h5><p>风险：可能导致获取不到某个返回字段，而出现空指针异常的问题</p>
+<p>比如微信支付的api中，要求接收到返回内容后，先判断协议字段返回，再判断业务返回，最后判断交易状态</p>
+<p>有些数据在return_code返回为Success时，才有返回；有些数据在result_code返回为success时，才有返回；因此要一步一步地校验以获取数据。</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1gai7bcijwij310q0ex44u.jpg" alt="Picture1"></p>
+<h5 id="特殊值处理"><a href="#特殊值处理" class="headerlink" title="特殊值处理"></a>特殊值处理</h5><p>风险：获取到空的、或不符合查询要求的数据</p>
+<p>某个字段的格式是否正确，是否包含非法字符，并进行业务需求处理</p>
+<p>比如，用户id是否都是有效的，是否出现负数等特殊值</p>
+<h4 id="对外提供的接口"><a href="#对外提供的接口" class="headerlink" title="对外提供的接口"></a>对外提供的接口</h4><p>（Alibaba）对外提供的开放接口，不管是 RPC/API/HTTP 接口，都需要进行参数校验 </p>
+<p>问题：写开放的API接口时如何保证数据的安全性？</p>
+<p>需要考虑的点如下：</p>
+<ol>
+<li>请求来源(身份)是否合法？</li>
+<li>请求参数被篡改？</li>
+<li>请求的唯一性(不可复制)</li>
+</ol>
+<h5 id="直接请求"><a href="#直接请求" class="headerlink" title="直接请求"></a>直接请求</h5><p><a href="http://api.test.com/getUsers?param1=value1&amp;param2=value2" target="_blank" rel="noopener">http://api.test.com/getUsers?param1=value1&amp;param2=value2</a></p>
+<h5 id="请求认证与参数防篡改性"><a href="#请求认证与参数防篡改性" class="headerlink" title="请求认证与参数防篡改性"></a>请求认证与参数防篡改性</h5><p>给app分配对应的key、secret，结合参数和secret进行Sign签名，调用API时需要对请求参数进行签名验证</p>
+<p><a href="http://api.test.com/getUsers?key=app_key&amp;sign=xxx&amp;param1=value1&amp;param2=value2" target="_blank" rel="noopener">http://api.test.com/getUsers?key=app_key&amp;sign=xxx&amp;param1=value1&amp;param2=value2</a></p>
+<p>按照请求参数名称将所有请求参数按照字母先后顺序排序得到：keyvaluekeyvalue…keyvalue 字符串如：将<code>arong=1,mrong=2,crong=3</code>排序为：<code>arong=1,crong=3,mrong=2</code>。 然后将参数名和参数值进行拼接得到参数字符串：arong1crong3mrong2，将secret加在参数字符串的头部后进行MD5加密，加密后的字符串需大写。即得到签名sign。</p>
+<h5 id="请求的唯一性"><a href="#请求的唯一性" class="headerlink" title="请求的唯一性"></a>请求的唯一性</h5><p>为了防止重放攻击（Replay-Attack），（最佳实践）加入nonce和timestamp</p>
+<p><a href="http://api.test.com/getUsers?**key**=app_key&amp;**sign**=xxx" target="_blank" rel="noopener">http://api.test.com/getUsers?**key**=app_key&amp;**sign**=xxx</a> &amp;<strong>timestamp</strong>=201908281808&amp;<strong>nonce</strong>=xxx&amp;param1=value1&amp;param2=value2</p>
+<p>示例可以参考微信支付相关接口</p>
+
+      
+    </div>
+    
+    
+    
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    qin xue
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://qxconverse.github.io/code/ck4xrol350036a6nipccdwnkn/" title="参数校验">https://qxconverse.github.io/code/ck4xrol350036a6nipccdwnkn/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/校验/" rel="tag"># 校验</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/code/ck4xrol2p0021a6nig4nrz1t3/" rel="next" title="代码整洁之道总结">
+                <i class="fa fa-chevron-left"></i> 代码整洁之道总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/code/ck4xrol29000ua6ni1s5no0f4/" rel="prev" title="aa">
+                aa <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="qin xue">
+            
+              <p class="site-author-name" itemprop="name">qin xue</p>
+              <p class="site-description motion-element" itemprop="description">现在就要幸福</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/qxconverse" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xqconverse@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qxconverse/" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#通用型"><span class="nav-number">1.</span> <span class="nav-text">通用型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#资源权限校验"><span class="nav-number">1.1.</span> <span class="nav-text">资源权限校验</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#唯一性校验"><span class="nav-number">1.2.</span> <span class="nav-text">唯一性校验</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#范围参数校验"><span class="nav-number">1.3.</span> <span class="nav-text">范围参数校验</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#格式化校验"><span class="nav-number">1.4.</span> <span class="nav-text">格式化校验</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#幂等性校验"><span class="nav-number">1.5.</span> <span class="nav-text">幂等性校验</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用户提交表单校验"><span class="nav-number">1.6.</span> <span class="nav-text">用户提交表单校验</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#上传文件校验"><span class="nav-number">1.7.</span> <span class="nav-text">上传文件校验</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#调用第三方接口"><span class="nav-number">2.</span> <span class="nav-text">调用第三方接口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#调用失败校验"><span class="nav-number">2.1.</span> <span class="nav-text">调用失败校验</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#字段判空校验"><span class="nav-number">2.2.</span> <span class="nav-text">字段判空校验</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#层级校验"><span class="nav-number">2.3.</span> <span class="nav-text">层级校验</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#特殊值处理"><span class="nav-number">2.4.</span> <span class="nav-text">特殊值处理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对外提供的接口"><span class="nav-number">3.</span> <span class="nav-text">对外提供的接口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#直接请求"><span class="nav-number">3.1.</span> <span class="nav-text">直接请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求认证与参数防篡改性"><span class="nav-number">3.2.</span> <span class="nav-text">请求认证与参数防篡改性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求的唯一性"><span class="nav-number">3.3.</span> <span class="nav-text">请求的唯一性</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qin xue</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">66.5k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+	<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+	<script src="https://billts.site/js/gitment.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitment({
+            id: window.decodeURIComponent(window.location.pathname), 
+            owner: 'qxconverse',
+            repo: 'qxconverse.github.io',
+            
+            oauth: {
+            
+            
+                client_secret: 'fe06a18ea67aad329c93d816e2770695795a4d0a',
+            
+                client_id: '55fed2680b0b1d3db6c7'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+
+</body>
+</html>
