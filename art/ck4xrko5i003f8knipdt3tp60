@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="综艺,辩论,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一.记得还上大学的时候，我只是对这个节目的名称有印象，倒退回去那时应该是大二。现在来讲，我很后悔当初没有看这个节目，而原因仅仅是我一向不喜欢看综艺节目，以为那些里面只有娱乐，没有多少有用的东西。">
+<meta name="keywords" content="综艺,辩论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="奇葩说感想">
+<meta property="og:url" content="https://qxconverse.github.io/art/ck4xrko5i003f8knipdt3tp60">
+<meta property="og:site_name" content="Xxqin&#39;s Blog">
+<meta property="og:description" content="一.记得还上大学的时候，我只是对这个节目的名称有印象，倒退回去那时应该是大二。现在来讲，我很后悔当初没有看这个节目，而原因仅仅是我一向不喜欢看综艺节目，以为那些里面只有娱乐，没有多少有用的东西。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-29T16:10:56.475Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="奇葩说感想">
+<meta name="twitter:description" content="一.记得还上大学的时候，我只是对这个节目的名称有印象，倒退回去那时应该是大二。现在来讲，我很后悔当初没有看这个节目，而原因仅仅是我一向不喜欢看综艺节目，以为那些里面只有娱乐，没有多少有用的东西。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://qxconverse.github.io/art/ck4xrko5i003f8knipdt3tp60">
+
+
+
+
+
+  <title>奇葩说感想 | Xxqin's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Xxqin's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">世界是属于勇敢者的，所以世界是属于我的</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于我">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于我
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-人文艺术">
+          <a href="/categories/art" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            人文艺术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-代码">
+          <a href="/categories/code" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            代码
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-生活">
+          <a href="/categories/life" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            生活
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-随想">
+          <a href="/categories/thoughts" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            随想
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/art/ck4xrko5i003f8knipdt3tp60">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qin xue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Xxqin's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">奇葩说感想</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-27T15:52:35+08:00">
+                2018-12-27
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-07-30T00:10:56+08:00">
+                2019-07-30
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/art/" itemprop="url" rel="index">
+                    <span itemprop="name">人文艺术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="一"><a href="#一" class="headerlink" title="一."></a>一.</h4><p>记得还上大学的时候，我只是对这个节目的名称有印象，倒退回去那时应该是大二。现在来讲，我很后悔当初没有看这个节目，而原因仅仅是我一向不喜欢看综艺节目，以为那些里面只有娱乐，没有多少有用的东西。</p>
+<a id="more"></a>
+<p>可究竟什么是有用的呢？永远没有一个标准答案，况且每个人都有自己的标准答案。什么是真正有用的东西，我觉得是自己所追求的并觉得是对的东西。只有经历过时间的洗礼，才能真正明白一些道理，就像现在我才明白，当初没有必要一枪击毙所有的娱乐节目。至今，我并没有后悔当初没有看快乐大本营、天天向上这样的节目；也没有太后悔看奔跑吧，兄弟以及极限挑战这样的节目。但我后悔当初没有看奇葩说、晓松奇谈这样的节目。如果我在14年大二、我才20岁的时候，就看奇葩说的话，那么我一定会明白人性真实的重要性，勇敢做自己的重要性，追求个性的重要性，人格、思想独立的重要性，以及如何说话、如何辩论的重要性，也会更加注重这些东西。而到了如今24岁的时候才去看，太迟了。</p>
+<p>有时我在想，为什么我感觉活在另外一个世界，为什么缺少了一些其他人所拥有的一些东西。其实很重要的一点就在于，人生体验太迟或是太少。我如果能够再次回到大二，我一定不会只在乎如何考好试，如何复习。而是在除了每天忙着上课的很多其它时间中，做一些自己想做的事情，看一些有意义的书、有意义的电影、有意义的视频。在可以早恋的时候没有早恋，在大学中可以谈恋爱或是学习各种东西的时候也没有去做。而现在才意识到自己真的需要什么的时候，才感叹时间太少。似乎总是由于自己的胆怯地原地踏步而比别人慢一拍。</p>
+<p>与时俱进永远不是一个错误的事情，根据一切要尽早的原则，这也是对的。想想，网络中最新的事情，一定是目前整个时代最新的东西，无论是潮流、文化还是思想，都是最新的（当然排除一些更有远见的一些事物，比如马云的思想，它是超前的）。如果连与时俱进都做不到，何谈远见，思想超前。所以也只有落后于时代。</p>
+<p>虽然这些新鲜的东西不一定是对的、也不一定符合你的胃口。但是你有自己的选择，有自己的人生观，价值观。选择喜欢的东西、求同存异即可。而奇葩说恰恰就是我所想看的东西，一个脱去虚伪的面貌，真实吐露心声，而同时又教会你如何说话、如何辩论的节目。它也更加向我们透露出一个道理，即生活中所有事情没有对错之分，关键看你怎么说，怎么自圆其说；那么很多时候方式最重要，而内容也许只是陪衬。这么好的节目到哪里去找，而我如果更早地知道这些，又会多么地好！</p>
+<p>不要忽略任何新鲜的事物，永远与时俱进。让可能性变得多一些。收回自己的成见，收回自己的玻璃易碎之心。勇敢面对自己也许不愿相信、反感的东西，直到内心足够强大到处事不惊。毕竟事事都有两面性。</p>
+<h4 id="二"><a href="#二" class="headerlink" title="二."></a>二.</h4><p>2018-12-31</p>
+<p>这几天集中看完了奇葩说的前面4季，不得不说，这节目相当好。昨夜梦醒的时候，我第一个想到的就是奇葩说。为什么呢？因为它是唯一在黑夜让我深层次地思考的主题。</p>
+<p>我在想，什么时候掏出自己内心说真话的人成为了奇葩？什么时候那些敢于做自己，敢于摆脱既有思想束缚的人成为了奇葩？难道真正的奇葩不是我们吗？如果说他们是奇葩，那么</p>
+<p>真性情、娘得犯规、思辨独具一格的肖骁，</p>
+<p>平时木讷，只能在辩论中觉醒的巨人颜如晶，</p>
+<p>敢于向世俗挑战，揭穿鸡汤谎言的马薇薇，</p>
+<p>拨开人内心自我欺骗的谎言，语言逻辑功不可破的黄执中，</p>
+<p>一针见血，却具有柔弱的杀伤力的邱晨，</p>
+<p>真的是我眼中的真正的具有思想的人。</p>
+<p>人都是活在自我欺骗中，为什么我们经常说“瞎说什么大实话”，虽然只是一句网络调侃语，不过也透露出，我们一方面承认它是事实，另一方面，我们又希望别人不要揭穿、自己也不想觉醒这样的现象。很多事情，我们不愿接受不同观念的洗礼，有些事情，我们宁愿相信它的一元性，而有些事情，我们宁愿相信它违背我们内心的一面。为什么？为什么我们害怕思考，因为我们想给自己一个心安理得的壳子，遮住自己；因为我们害怕自己受到伤害。我们害怕一旦思考，我们就会对自己持有的舒适的想法产生冲突的碰撞。但是一旦我们打破了这个牢笼，去思考，就会发现生活中没有所谓的对错。一件事情对不对，有标准，但是每个人的标准不一样，再加上事情产生的主体客体以及社会环境的影响，它真的不再那么重要。重要的是，这个来回思考的过程。它真的对吗？对，因为某某某；它错吗？错，因为某某某，关键要自圆其说。这个节目教会我们的就是这个。同时还教我们如何去表达自己，以一种具有感染力的方式。无论是逻辑还是感情；许多辩题，我们总是可以从自由与公平的角度去阐述，现实与理想的角度去阐述。因此，正反面都具有可辩点。所以，我们不但要晓之以理，也要动之以情。</p>
+<p>很多时候，我们放不下自己的虚伪，总是拿之保护自己，可是它真的有那么重要吗？我们只是不想去独立思考，我们接受既有观念的保护，从不敢踏出去一步去追求让自己真正思考后得到的东西。成长的意义在与一次又一次地打破、重构各种思想的过程，一次又一次在多元中碰撞中获得磨炼的过程。到最后，你会发现，对错真的无所谓，但是在这个过程中，你做回了自己，一个能独立思考，并作出选择的自己。</p>
+
+      
+    </div>
+    
+    
+    
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    qin xue
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://qxconverse.github.io/art/ck4xrko5i003f8knipdt3tp60" title="奇葩说感想">https://qxconverse.github.io/art/ck4xrko5i003f8knipdt3tp60</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/综艺/" rel="tag"># 综艺</a>
+          
+            <a href="/tags/辩论/" rel="tag"># 辩论</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/life/ck4xrko68004v8knik4phhvw1" rel="next" title="美食人生">
+                <i class="fa fa-chevron-left"></i> 美食人生
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/art/ck4xrko6l005m8knidsk2lorg" rel="prev" title="辩论常见的漏洞以及招数">
+                辩论常见的漏洞以及招数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="qin xue">
+            
+              <p class="site-author-name" itemprop="name">qin xue</p>
+              <p class="site-description motion-element" itemprop="description">现在就要幸福</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/qxconverse" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xqconverse@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qxconverse/" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一"><span class="nav-number">1.</span> <span class="nav-text">一.</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二"><span class="nav-number">2.</span> <span class="nav-text">二.</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qin xue</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">66.5k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+	<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+	<script src="https://billts.site/js/gitment.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitment({
+            id: window.decodeURIComponent(window.location.pathname), 
+            owner: 'qxconverse',
+            repo: 'qxconverse.github.io',
+            
+            oauth: {
+            
+            
+                client_secret: 'fe06a18ea67aad329c93d816e2770695795a4d0a',
+            
+                client_id: '55fed2680b0b1d3db6c7'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+
+</body>
+</html>
