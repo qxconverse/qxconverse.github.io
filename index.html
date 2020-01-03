@@ -611,7 +611,6 @@
 <p>rsa非对称加密 + hash摘要 = 数字签名</p>
 <p><strong>对于摘要：私钥签名、公钥验证</strong></p>
 <p><strong>对于加密：公钥加密、私钥解密</strong></p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -633,14 +632,13 @@
 </tr>
 </tbody>
 </table>
-</div>
 <h4 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h4><p>对于放在Gitlab上的代码，使用https的方式来clone，这样就省去了配置ssh的私钥和公钥的步骤。说白了，只要涉及到ssh协议的传输，那么一定会需要公钥和私钥的，所以，Gitlab相关的Git操作和连接远程服务器都要用。</p>
 <p>Mac上terminal通过ssh连接远程Linux服务器的方法：</p>
 <ol>
 <li>生成公、私钥</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "xxx"</span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="2">
 <li><p>其中私钥放在自己的电脑<code>~/.ssh</code>目录</p>
 </li>
 <li><p>将公钥放到远程服务器的<code>.ssh/authorized_keys</code>文件里面</p>
@@ -1401,8 +1399,7 @@
       
         
           
-            <div class="table-container">
-<table>
+            <table>
 <thead>
 <tr>
 <th>字段</th>
@@ -1523,7 +1520,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>Access-Control-Allow-Origin: 对于不需具备凭证（credentials）的请求，服务器会以<code>*</code>作为通配符，从而允许所有域都具有访问资源的权限。</p>
 <p>401 VS 403<br>401：表示的是 Unauthentiated: 需要先提供有效凭证验证身份（然而通常返回这个状态码时，响应的响应信息都是Unauthorized）<br>403：表示的是 Unauthorized：你已经提供的有效凭证，但你的身份不不能访问这个资源。</p>
 
@@ -2763,11 +2759,11 @@
     
       pbOptions = {};
       
-          pbOptions.iconStyle = "box";
+          pbOptions.iconStyle = "default";
       
           pbOptions.boxForm = "horizontal";
       
-          pbOptions.position = "bottomCenter";
+          pbOptions.position = "bottomRight";
       
           pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
       
