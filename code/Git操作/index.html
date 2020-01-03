@@ -522,6 +522,13 @@
         
 
         
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
         </div>
       
       
@@ -530,8 +537,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/thoughts/top-down思维/" rel="next" title="top-down思维">
-                <i class="fa fa-chevron-left"></i> top-down思维
+              <a href="/code/python相关的/" rel="next" title="python相关的">
+                <i class="fa fa-chevron-left"></i> python相关的
               </a>
             
           </div>
@@ -540,8 +547,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/code/python相关的/" rel="prev" title="python相关的">
-                python相关的 <i class="fa fa-chevron-right"></i>
+              <a href="/code/微服务中的ribbon和zuul/" rel="prev" title="微服务中的ribbon和zuul">
+                微服务中的ribbon和zuul <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -983,6 +990,31 @@
   
 
   
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
   
   <script type="text/javascript">
   wpac_init = window.wpac_init || [];

@@ -474,6 +474,13 @@
         
 
         
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
         </div>
       
       
@@ -482,8 +489,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/code/Spring相关/" rel="next" title="SpringBoot相关">
-                <i class="fa fa-chevron-left"></i> SpringBoot相关
+              <a href="/code/密码学相关/" rel="next" title="数字签名与SSH">
+                <i class="fa fa-chevron-left"></i> 数字签名与SSH
               </a>
             
           </div>
@@ -492,8 +499,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/code/密码学相关/" rel="prev" title="数字签名与SSH">
-                数字签名与SSH <i class="fa fa-chevron-right"></i>
+              <a href="/code/cas单点登录/" rel="prev" title="CAS单点登录示意图">
+                CAS单点登录示意图 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -935,6 +942,31 @@
   
 
   
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
   
   <script type="text/javascript">
   wpac_init = window.wpac_init || [];
