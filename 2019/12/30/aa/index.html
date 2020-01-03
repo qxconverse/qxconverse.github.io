@@ -890,7 +890,7 @@ Future task2               :         des4, after des3, 5d</pre>
       <script type="text/javascript">
       function renderGitment(){
         var gitment = new Gitment({
-            id: window.location.pathname, 
+            id: window.decodeURIComponent(window.location.pathname), 
             owner: 'qxconverse',
             repo: 'qxconverse.github.io',
             

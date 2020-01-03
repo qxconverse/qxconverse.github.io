@@ -1023,7 +1023,7 @@ table th:nth-of-type(2) {
       <script type="text/javascript">
       function renderGitment(){
         var gitment = new Gitment({
-            id: window.location.pathname, 
+            id: window.decodeURIComponent(window.location.pathname), 
             owner: 'qxconverse',
             repo: 'qxconverse.github.io',
             

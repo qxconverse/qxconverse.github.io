@@ -506,8 +506,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/17/python相关的/" rel="next" title="python相关的">
-                <i class="fa fa-chevron-left"></i> python相关的
+              <a href="/2018/07/17/Git操作/" rel="next" title="Git相关的操作">
+                <i class="fa fa-chevron-left"></i> Git相关的操作
               </a>
             
           </div>
@@ -920,7 +920,7 @@
       <script type="text/javascript">
       function renderGitment(){
         var gitment = new Gitment({
-            id: window.location.pathname, 
+            id: window.decodeURIComponent(window.location.pathname), 
             owner: 'qxconverse',
             repo: 'qxconverse.github.io',
             

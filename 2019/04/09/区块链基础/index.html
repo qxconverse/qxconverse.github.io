@@ -1103,7 +1103,7 @@ protocol fork 比特币协议发生了变化
       <script type="text/javascript">
       function renderGitment(){
         var gitment = new Gitment({
-            id: window.location.pathname, 
+            id: window.decodeURIComponent(window.location.pathname), 
             owner: 'qxconverse',
             repo: 'qxconverse.github.io',
             
