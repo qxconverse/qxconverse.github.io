@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="java内存模型：java虚拟机是一个虚拟的环境，占据着一部分主机的内存。也就是说这是一个中间桥梁，java在运行时不是在赤裸裸的内存上进行的，而是在虚拟机上。">
+<meta name="description" content="java虚拟机java虚拟机是一个虚拟的环境，占据着一部分主机的内存。也就是说这是一个中间桥梁，java在运行时不是在赤裸裸的内存上进行的，而是在虚拟机上。">
 <meta name="keywords" content="Java,面试">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java虚拟机">
 <meta property="og:url" content="https://qxconverse.github.io/code/java虚拟机/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="java内存模型：java虚拟机是一个虚拟的环境，占据着一部分主机的内存。也就是说这是一个中间桥梁，java在运行时不是在赤裸裸的内存上进行的，而是在虚拟机上。">
+<meta property="og:description" content="java虚拟机java虚拟机是一个虚拟的环境，占据着一部分主机的内存。也就是说这是一个中间桥梁，java在运行时不是在赤裸裸的内存上进行的，而是在虚拟机上。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-29T15:55:07.329Z">
+<meta property="og:updated_time" content="2020-01-17T06:58:12.447Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java虚拟机">
-<meta name="twitter:description" content="java内存模型：java虚拟机是一个虚拟的环境，占据着一部分主机的内存。也就是说这是一个中间桥梁，java在运行时不是在赤裸裸的内存上进行的，而是在虚拟机上。">
+<meta name="twitter:description" content="java虚拟机java虚拟机是一个虚拟的环境，占据着一部分主机的内存。也就是说这是一个中间桥梁，java在运行时不是在赤裸裸的内存上进行的，而是在虚拟机上。">
 
 
 
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-07-29T23:55:07+08:00">
-                2019-07-29
+              <time title="更新于" itemprop="dateModified" datetime="2020-01-17T14:58:12+08:00">
+                2020-01-17
               </time>
             
           </span>
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  943
+                  919
                 </span>
               
 
@@ -420,16 +420,16 @@
       
 
       
-        <p>java内存模型：<br>java虚拟机是一个虚拟的环境，占据着一部分主机的内存。也就是说这是一个中间桥梁，java在运行时不是在赤裸裸的内存上进行的，而是在虚拟机上。</p>
+        <h3 id="java虚拟机"><a href="#java虚拟机" class="headerlink" title="java虚拟机"></a>java虚拟机</h3><p>java虚拟机是一个虚拟的环境，占据着一部分主机的内存。也就是说这是一个中间桥梁，java在运行时不是在赤裸裸的内存上进行的，而是在虚拟机上。</p>
 <a id="more"></a>
-<p>这个区域主要分为2大类。一个是线程隔离的，一个是线程共享的。而它们的生命周期也与此有关。一类是随着虚拟机进程的，而另一类是随着线程的。也就是说线程没了，它也就没了。</p>
+<h4 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h4><p>这个区域主要分为2大类。一个是线程隔离的，一个是线程共享的。而它们的生命周期也与此有关。一类是随着虚拟机进程的，而另一类是随着线程的。也就是说线程没了，它也就没了。</p>
 <p>一共有5个区域，其实记忆的时候可以类比C/C++中的堆和栈。好！那么这5个区域分别为：</p>
 <ol>
 <li>程序计数区（线程隔离）</li>
 <li>Java虚拟机栈（栈，线程隔离）</li>
 <li>本地方法栈（栈，线程隔离）</li>
 <li>Java堆（堆，线程共享）</li>
-<li>方法区（堆，线程共享）</li>
+<li>方法区（堆，线程共享，是堆的一个逻辑部分）</li>
 </ol>
 <p>但凡涉及到内存，首先就要想到堆和栈。毕竟从本科的时候起，老师们就开始一直灌输这些了。什么栈溢出，堆溢出。其实，说白了，就是递归的深度超过了一定的数目，和内存不够分配了。一个说的是纵向，一个是横线。类比于算法中的广度优先与深度优先，深度优先搜索使用的一定是栈，因为涉及到递归；而广度优先搜索使用到的是队列，它涉及到堆。</p>
 <p>仔细思考一下，在C/C++中，是否记得一般的运行时局部变量是存放在栈中的，而程序员申请的空间是存放在堆中的。堆位于地址较高的地方，而栈位于较低的地方。一样的啊！！！Java也是这个套路，虚拟机栈和本地方法栈就是为此服务的，只不过一个给Java方法服务，而另外一个给本地方法（Native）服务！</p>
@@ -458,16 +458,14 @@
 </tr>
 </tbody>
 </table>
-<p>看到了吧，其实并没有想象中的那么难以记忆，关键在于总结和联想！！</p>
-<p>再来看看垃圾回收机制吧！</p>
-<p>垃圾回收说白了就是针对堆的，仔细想想，java中所有的对象都是存放在堆中的，所以这个地方是最需要进行垃圾回收的。这个时候就要问自己几个问题，第一，什么时候要回收？第二，怎么回收？<br>关于垃圾回收的方法主要有3种：</p>
+<h4 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h4><p>垃圾回收说白了就是针对堆的，仔细想想，java中所有的对象都是存放在堆中的，所以这个地方是最需要进行垃圾回收的。这个时候就要问自己几个问题，第一，什么时候要回收？第二，怎么回收？<br>关于垃圾回收的方法主要有3种：</p>
 <ol>
 <li>标记-清理（先标记，然后清理）缺点是容易造成碎片</li>
 <li>复制（分为2个区域，每次把存活的对象移动到另外一个区，然后一次性清除当前区的对象）</li>
 <li>标记-整理（先标记，然后整理，也就是说把存活的移动到区域的某一端，然后清理掉端外面的即可）</li>
 </ol>
 <p>目前最流行的当然是综合的方法，新生代中的对象几乎都很短命，复制成本低，所以用方法2；而老年代中放的是长命的对象，往往比较大，所以用方法1或3。</p>
-<p>好了，有了垃圾回收的方法，那么就要问了，对象放在上面地方呢？有以下3个策略。</p>
+<p>好了，有了垃圾回收的方法，那么就要问了，对象放在什么地方呢？有以下3个策略。</p>
 <ol>
 <li>对象优先放在Eden区</li>
 <li>大对象放在老年代</li>
@@ -612,8 +610,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -630,7 +637,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-count">70</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -698,6 +705,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#java虚拟机"><span class="nav-number">1.</span> <span class="nav-text">java虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内存模型"><span class="nav-number">1.1.</span> <span class="nav-text">内存模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#垃圾回收"><span class="nav-number">1.2.</span> <span class="nav-text">垃圾回收</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -725,7 +748,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">66.9k</span>
+    <span title="Site words total count">67.3k</span>
   
 </div>
 

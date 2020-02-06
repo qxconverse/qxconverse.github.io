@@ -87,10 +87,14 @@
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
 <meta property="og:description" content="Maven的相关知识通常会在本地仓库和远程中央仓库之间搭建一个公司级别的中间仓库，首先会从中间仓库获取，否则，再从远程中央仓库获取。 Nexus是一个常用的仓库管理器。 项目中在setting.xml文件里配置自己的中间仓库。 exclusions的使用：因为存在依赖传递的规则，B依赖A，但是在B项目中不需要A中的某个jar包，则使用此标签。 dependencyManagement和depend">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-02T07:59:53.373Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpqoydjpj30fu08kwlg.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpquhfzmj30ig07lglv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpq6doo3j30i20jd40c.jpg">
+<meta property="og:updated_time" content="2020-02-06T07:30:45.669Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Maven相关">
 <meta name="twitter:description" content="Maven的相关知识通常会在本地仓库和远程中央仓库之间搭建一个公司级别的中间仓库，首先会从中间仓库获取，否则，再从远程中央仓库获取。 Nexus是一个常用的仓库管理器。 项目中在setting.xml文件里配置自己的中间仓库。 exclusions的使用：因为存在依赖传递的规则，B依赖A，但是在B项目中不需要A中的某个jar包，则使用此标签。 dependencyManagement和depend">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpqoydjpj30fu08kwlg.jpg">
 
 
 
@@ -328,8 +332,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-02T15:59:53+08:00">
-                2020-01-02
+              <time title="更新于" itemprop="dateModified" datetime="2020-02-06T15:30:45+08:00">
+                2020-02-06
               </time>
             
           </span>
@@ -383,7 +387,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  514
+                  592
                 </span>
               
 
@@ -399,7 +403,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -439,6 +443,13 @@
 <p>才发现，是因为B模块下还有一处关于包C的引入</p>
 <p>因为此处的错误，导致此依赖后面加入的所有依赖都引入失败了，但是pom文件不会有任何报错，将它删除，运行就没有问题了。</p>
 <p>总结：删除mvn依赖一定要删除彻底，因为依赖很有可能存在与多个模块下的不同pom文件里面；否则通过idea运行就会出现各种问题，而且pom文件也不报错，隐藏得很深，要通过mvn compile命令行才找到原因。</p>
+<p>打开一个新的maven项目时，常常遇到有些包解析不出来的问题，多数是因为setting.xml文件的配置问题。</p>
+<p>首先从已有资源中新建项目</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpqoydjpj30fu08kwlg.jpg" alt="Screen Shot 2020-02-06 at 3.18.19 PM"></p>
+<p>接着选择从maven导入</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpquhfzmj30ig07lglv.jpg" alt="Screen Shot 2020-02-06 at 3.19.00 PM"></p>
+<p>这里最关键的地方是要配置Environment settings里面的setting文件。</p>
+<p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpq6doo3j30i20jd40c.jpg" alt="Screen Shot 2020-02-06 at 3.18.19 PM"></p>
 
       
     </div>
@@ -515,8 +526,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/code/网络协议/" rel="prev" title="网络协议">
-                网络协议 <i class="fa fa-chevron-right"></i>
+              <a href="/code/网络协议/" rel="prev" title="服务部署架构">
+                服务部署架构 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -603,7 +614,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-count">70</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -714,7 +725,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">66.9k</span>
+    <span title="Site words total count">67.3k</span>
   
 </div>
 
