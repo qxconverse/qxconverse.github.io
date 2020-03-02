@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
 <meta property="og:description" content="redis的list的底层实现是一个双向链表，也可以使用它实现一个简单的消息队列，生产者push，消费者pop。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-23T02:56:40.547Z">
+<meta property="og:updated_time" content="2020-03-02T02:42:48.152Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis">
 <meta name="twitter:description" content="redis的list的底层实现是一个双向链表，也可以使用它实现一个简单的消息队列，生产者push，消费者pop。">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-23T10:56:40+08:00">
-                2019-12-23
+              <time title="更新于" itemprop="dateModified" datetime="2020-03-02T10:42:48+08:00">
+                2020-03-02
               </time>
             
           </span>
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  958
+                  1k
                 </span>
               
 
@@ -440,6 +440,8 @@
 </ol>
 <p>java项目中Redis相关的配置</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">spring.redis.cluster.max-redirects= # 集群从节点转发的数量. </span><br><span class="line">spring.redis.cluster.nodes= # 集群节点，逗号分隔. </span><br><span class="line">spring.redis.database=0 # 使用的缓存索引编号. </span><br><span class="line">spring.redis.url= # 连接URL，如: redis://user:password@example.com:6379 </span><br><span class="line">spring.redis.host=localhost # 主机. </span><br><span class="line">spring.redis.jedis.pool.max-active=8 # 连接池的最大活动连接数量. </span><br><span class="line">spring.redis.jedis.pool.max-idle=8 # 连接池的最大空闲连接数量. </span><br><span class="line">spring.redis.jedis.pool.max-wait=-1ms # 连接池分配连接的等待时间. </span><br><span class="line">spring.redis.jedis.pool.min-idle=0 # 最小空闲连接数量. </span><br><span class="line">spring.redis.lettuce.pool.max-active=8 # 连接池最大活动连接数量. </span><br><span class="line">spring.redis.lettuce.pool.max-idle=8 # 连接池最大空闲连接数量，负数表示不限制. </span><br><span class="line">spring.redis.lettuce.pool.max-wait=-1ms # 连接池分配连接的最大等待时间，负数表示无限等待不超时. </span><br><span class="line">spring.redis.lettuce.pool.min-idle=0 # 连接池最小空闲连接数量. </span><br><span class="line">spring.redis.lettuce.shutdown-timeout=100ms # 关机超时时间. </span><br><span class="line">spring.redis.password= # Redis服务器的密码 </span><br><span class="line">spring.redis.port=6379 # Redis服务器端口.</span><br><span class="line">spring.redis.sentinel.master= # Redis主服务器地址. </span><br><span class="line">spring.redis.sentinel.nodes= # 逗号分隔的键值对形式的服务器列表. </span><br><span class="line">spring.redis.ssl=false # 是否启用SSL连接.</span><br><span class="line">spring.redis.timeout= # 连接超时</span><br></pre></td></tr></table></figure>
+<p>在springboot2.x的配置中，如果redis没有密码，则不需要加上该字段，而不是什么都不填写的空字段。</p>
+<p>redis集群是不支持lua脚本的，可以使用主从式的redis配置。</p>
 
       
     </div>
@@ -506,8 +508,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/code/数据库事务四种隔离级别/" rel="next" title="数据库事务四种隔离级别">
-                <i class="fa fa-chevron-left"></i> 数据库事务四种隔离级别
+              <a href="/code/计算机网络 and 操作系统/" rel="next" title="计算机网络与操作系统相关知识点">
+                <i class="fa fa-chevron-left"></i> 计算机网络与操作系统相关知识点
               </a>
             
           </div>
@@ -516,8 +518,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/code/计算机网络 and 操作系统/" rel="prev" title="计算机网络与操作系统相关知识点">
-                计算机网络与操作系统相关知识点 <i class="fa fa-chevron-right"></i>
+              <a href="/code/WebApi的安全性/" rel="prev" title="WebApi的安全性">
+                WebApi的安全性 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
