@@ -87,10 +87,12 @@
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
 <meta property="og:description" content="关于线程池的使用">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-09T02:43:25.407Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/00831rSTly1gchpd3pkegj30si07bt99.jpg">
+<meta property="og:updated_time" content="2020-03-04T02:49:50.260Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot相关">
 <meta name="twitter:description" content="关于线程池的使用">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/00831rSTly1gchpd3pkegj30si07bt99.jpg">
 
 
 
@@ -328,8 +330,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-01-09T10:43:25+08:00">
-                2020-01-09
+              <time title="更新于" itemprop="dateModified" datetime="2020-03-04T10:49:50+08:00">
+                2020-03-04
               </time>
             
           </span>
@@ -383,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5.3k
+                  5.4k
                 </span>
               
 
@@ -568,6 +570,9 @@
 <p>spring security通过验证后，可以把认证的信息保存在session里面，当用户session还在，就不需要再做校验了；而当session不在了，就返回给前端消息，前端跳转到登录授权页面就可以了</p>
 <h5 id="Jrebel热加载"><a href="#Jrebel热加载" class="headerlink" title="Jrebel热加载"></a>Jrebel热加载</h5><p>记录一个问题：</p>
 <p>在idea中用jrebel热加载，修改了某个实体类（某个字段的类型），在另外一个service类中的fastjson需要解析该实体类，两个类都重新加载了，但是不重新运行调用相关接口就会报错。</p>
+<h5 id="Bean的循环注入问题"><a href="#Bean的循环注入问题" class="headerlink" title="Bean的循环注入问题"></a>Bean的循环注入问题</h5><p>假设有2个service：A，B。如果在A中注入B、并在B中注入A，就会出现该问题。</p>
+<p><img src="https://tva1.sinaimg.cn/large/00831rSTly1gchpd3pkegj30si07bt99.jpg" alt="Screen Shot 2020-03-04 at 10.46.09 AM"></p>
+<h5 id="Autowired相关"><a href="#Autowired相关" class="headerlink" title="@Autowired相关"></a>@Autowired相关</h5><p>该注解是通过反射的方式实现的</p>
 
       
     </div>
@@ -809,7 +814,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#关于线程池的使用"><span class="nav-number">1.</span> <span class="nav-text">关于线程池的使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#countdownlatch的使用"><span class="nav-number">2.</span> <span class="nav-text">countdownlatch的使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取项目中所有的接口信息"><span class="nav-number">3.</span> <span class="nav-text">获取项目中所有的接口信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java开发提高性能的技术"><span class="nav-number">4.</span> <span class="nav-text">Java开发提高性能的技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#日志规约"><span class="nav-number">5.</span> <span class="nav-text">日志规约</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#懒加载"><span class="nav-number">6.</span> <span class="nav-text">懒加载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#考虑接口的超时"><span class="nav-number">7.</span> <span class="nav-text">考虑接口的超时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#单测相关"><span class="nav-number">8.</span> <span class="nav-text">单测相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Filter，Listener，Servlet的区别"><span class="nav-number">9.</span> <span class="nav-text">Filter，Listener，Servlet的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设计模式中观察者模式与监听模式的区别"><span class="nav-number">10.</span> <span class="nav-text">设计模式中观察者模式与监听模式的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤器和拦截器的区别"><span class="nav-number">11.</span> <span class="nav-text">过滤器和拦截器的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java中的钩子"><span class="nav-number">12.</span> <span class="nav-text">Java中的钩子</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java中的锁"><span class="nav-number">13.</span> <span class="nav-text">Java中的锁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关于静态代码块"><span class="nav-number">14.</span> <span class="nav-text">关于静态代码块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#try-catch-finally执行情况"><span class="nav-number">15.</span> <span class="nav-text">try/catch/finally执行情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Application入口类放置问题"><span class="nav-number">16.</span> <span class="nav-text">Application入口类放置问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringBoot中Tomcat启动问题"><span class="nav-number">17.</span> <span class="nav-text">SpringBoot中Tomcat启动问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Socket流的问题"><span class="nav-number">18.</span> <span class="nav-text">Socket流的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Ajax方式下载文件的问题"><span class="nav-number">19.</span> <span class="nav-text">Ajax方式下载文件的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取文件类型的方法"><span class="nav-number">20.</span> <span class="nav-text">获取文件类型的方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#接入swagger遇到的坑"><span class="nav-number">21.</span> <span class="nav-text">接入swagger遇到的坑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response返回普通文本，html，json的方式"><span class="nav-number">22.</span> <span class="nav-text">response返回普通文本，html，json的方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#幂等性"><span class="nav-number">23.</span> <span class="nav-text">幂等性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Redislock分布式锁的作用"><span class="nav-number">24.</span> <span class="nav-text">Redislock分布式锁的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RequestParam、RequestBody和PathVariable的区别"><span class="nav-number">25.</span> <span class="nav-text">RequestParam、RequestBody和PathVariable的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Spring-Security-Oauth2相关"><span class="nav-number">26.</span> <span class="nav-text">Spring Security Oauth2相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Jrebel热加载"><span class="nav-number">27.</span> <span class="nav-text">Jrebel热加载</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#关于线程池的使用"><span class="nav-number">1.</span> <span class="nav-text">关于线程池的使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#countdownlatch的使用"><span class="nav-number">2.</span> <span class="nav-text">countdownlatch的使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取项目中所有的接口信息"><span class="nav-number">3.</span> <span class="nav-text">获取项目中所有的接口信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java开发提高性能的技术"><span class="nav-number">4.</span> <span class="nav-text">Java开发提高性能的技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#日志规约"><span class="nav-number">5.</span> <span class="nav-text">日志规约</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#懒加载"><span class="nav-number">6.</span> <span class="nav-text">懒加载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#考虑接口的超时"><span class="nav-number">7.</span> <span class="nav-text">考虑接口的超时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#单测相关"><span class="nav-number">8.</span> <span class="nav-text">单测相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Filter，Listener，Servlet的区别"><span class="nav-number">9.</span> <span class="nav-text">Filter，Listener，Servlet的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设计模式中观察者模式与监听模式的区别"><span class="nav-number">10.</span> <span class="nav-text">设计模式中观察者模式与监听模式的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤器和拦截器的区别"><span class="nav-number">11.</span> <span class="nav-text">过滤器和拦截器的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java中的钩子"><span class="nav-number">12.</span> <span class="nav-text">Java中的钩子</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java中的锁"><span class="nav-number">13.</span> <span class="nav-text">Java中的锁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关于静态代码块"><span class="nav-number">14.</span> <span class="nav-text">关于静态代码块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#try-catch-finally执行情况"><span class="nav-number">15.</span> <span class="nav-text">try/catch/finally执行情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Application入口类放置问题"><span class="nav-number">16.</span> <span class="nav-text">Application入口类放置问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringBoot中Tomcat启动问题"><span class="nav-number">17.</span> <span class="nav-text">SpringBoot中Tomcat启动问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Socket流的问题"><span class="nav-number">18.</span> <span class="nav-text">Socket流的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Ajax方式下载文件的问题"><span class="nav-number">19.</span> <span class="nav-text">Ajax方式下载文件的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取文件类型的方法"><span class="nav-number">20.</span> <span class="nav-text">获取文件类型的方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#接入swagger遇到的坑"><span class="nav-number">21.</span> <span class="nav-text">接入swagger遇到的坑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response返回普通文本，html，json的方式"><span class="nav-number">22.</span> <span class="nav-text">response返回普通文本，html，json的方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#幂等性"><span class="nav-number">23.</span> <span class="nav-text">幂等性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Redislock分布式锁的作用"><span class="nav-number">24.</span> <span class="nav-text">Redislock分布式锁的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RequestParam、RequestBody和PathVariable的区别"><span class="nav-number">25.</span> <span class="nav-text">RequestParam、RequestBody和PathVariable的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Spring-Security-Oauth2相关"><span class="nav-number">26.</span> <span class="nav-text">Spring Security Oauth2相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Jrebel热加载"><span class="nav-number">27.</span> <span class="nav-text">Jrebel热加载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Bean的循环注入问题"><span class="nav-number">28.</span> <span class="nav-text">Bean的循环注入问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Autowired相关"><span class="nav-number">29.</span> <span class="nav-text">@Autowired相关</span></a></li></ol></div>
             
 
           </div>
@@ -843,7 +848,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">67.3k</span>
+    <span title="Site words total count">67.4k</span>
   
 </div>
 
