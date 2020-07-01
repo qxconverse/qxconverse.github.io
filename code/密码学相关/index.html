@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密     A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加">
+<meta name="description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密    A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加密">
 <meta name="keywords" content="密码学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数字签名与SSH">
-<meta property="og:url" content="https://xxqin.github.io/code/密码学相关/index.html">
+<meta property="og:url" content="https://qxconverse.github.io/code/密码学相关/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密     A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加">
+<meta property="og:description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密    A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加密">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2020-01-03T03:58:35.505Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数字签名与SSH">
-<meta name="twitter:description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密     A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加">
+<meta name="twitter:description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密    A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加密">
 
 
 
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="https://xxqin.github.io/code/密码学相关/">
+  <link rel="canonical" href="https://qxconverse.github.io/code/密码学相关/">
 
 
 
@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xxqin.github.io/code/密码学相关/">
+    <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/code/密码学相关/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qinxue">
@@ -424,7 +424,6 @@
 <p>rsa非对称加密 + hash摘要 = 数字签名</p>
 <p><strong>对于摘要：私钥签名、公钥验证</strong></p>
 <p><strong>对于加密：公钥加密、私钥解密</strong></p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -446,14 +445,13 @@
 </tr>
 </tbody>
 </table>
-</div>
 <h4 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h4><p>对于放在Gitlab上的代码，使用https的方式来clone，这样就省去了配置ssh的私钥和公钥的步骤。说白了，只要涉及到ssh协议的传输，那么一定会需要公钥和私钥的，所以，Gitlab相关的Git操作和连接远程服务器都要用。</p>
 <p>Mac上terminal通过ssh连接远程Linux服务器的方法：</p>
 <ol>
 <li>生成公、私钥</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "xxx"</span><br></pre></td></tr></table></figure>
-<ol>
+<ol start="2">
 <li><p>其中私钥放在自己的电脑<code>~/.ssh</code>目录</p>
 </li>
 <li><p>将公钥放到远程服务器的<code>.ssh/authorized_keys</code>文件里面</p>
@@ -481,7 +479,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://xxqin.github.io/code/密码学相关/" title="数字签名与SSH">https://xxqin.github.io/code/密码学相关/</a>
+    <a href="https://qxconverse.github.io/code/密码学相关/" title="数字签名与SSH">https://qxconverse.github.io/code/密码学相关/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
