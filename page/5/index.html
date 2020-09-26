@@ -282,6 +282,460 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/code/DataSource之Druid/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qinxue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XXQIN'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/code/DataSource之Druid/" itemprop="url">Druid连接池</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-08T20:07:39+08:00">
+                2019-10-08
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-10-08T20:08:18+08:00">
+                2019-10-08
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  537
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Druid是为监控而生的数据库连接池。</p>
+<p>和java里面线程池、httpclient里面的http请求池类似，凡是涉及到连接、断开操作的东西，都可以有池的概念。为的是更好地实现资源复用。数据库连接池的基本原理是在内部对象池中维护一定数量的数据库连接，并对外暴露数据库连接获取和返回方法。</p>
+<blockquote>
+<p>连接池只应该有maxPoolSize和minPoolSize，druid只保留了maxActive和minIdle，分别相当于maxPoolSize和minPoolSize。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>讲解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>maxActive</td>
+<td>最大连接池数量</td>
+</tr>
+<tr>
+<td>minIdle</td>
+<td>最小连接池数量</td>
+</tr>
+<tr>
+<td>activeCount</td>
+<td>当前连接数</td>
+</tr>
+<tr>
+<td>connectCount</td>
+<td>总的连接次数</td>
+</tr>
+<tr>
+<td>closeCount</td>
+<td>总的断开连接次数</td>
+</tr>
+<tr>
+<td>poolingCount</td>
+<td>连接池中的连接数</td>
+</tr>
+<tr>
+<td>createCount</td>
+<td>创建的连接数</td>
+</tr>
+<tr>
+<td>recycleCount</td>
+<td>回收的总连接数</td>
+</tr>
+<tr>
+<td>activePeak</td>
+<td>当前连接数的峰值</td>
+</tr>
+<tr>
+<td>poolingPeak</td>
+<td>连接池中连接数的峰值</td>
+</tr>
+</tbody>
+</table>
+<p>发现很多地方都有idle这个字眼，idle的意思是：懒散的、闲置的。</p>
+<p>这是线程池的状态信息：从中可以分析出各个参数是什么意思。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    CreateTime:&quot;2019-09-26 09:58:31&quot;,</span><br><span class="line">    ActiveCount:0,</span><br><span class="line">    PoolingCount:5,</span><br><span class="line">    CreateCount:5,</span><br><span class="line">    DestroyCount:0,</span><br><span class="line">    CloseCount:22,</span><br><span class="line">    ConnectCount:22,</span><br><span class="line">    Connections:[</span><br><span class="line">        &#123;ID:706844266, ConnectTime:&quot;2019-09-26 09:58:35&quot;, UseCount:0, LastActiveTime:&quot;2019-09-26 09:58:35&quot;&#125;,</span><br><span class="line">        &#123;ID:107269256, ConnectTime:&quot;2019-09-26 09:58:35&quot;, UseCount:0, LastActiveTime:&quot;2019-09-26 09:58:35&quot;&#125;,</span><br><span class="line">        &#123;ID:1356533172, ConnectTime:&quot;2019-09-26 09:58:35&quot;, UseCount:0, LastActiveTime:&quot;2019-09-26 09:58:35&quot;&#125;,</span><br><span class="line">        &#123;ID:2086937005, ConnectTime:&quot;2019-09-26 09:58:36&quot;, UseCount:7, LastActiveTime:&quot;2019-09-26 10:04:36&quot;&#125;,</span><br><span class="line">        &#123;ID:1523613275, ConnectTime:&quot;2019-09-26 09:58:36&quot;, UseCount:15, LastActiveTime:&quot;2019-09-26 10:04:37&quot;&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于连接池的细节，其为一个生产者/消费者模式，使用ReentrantLock + Condition的方式，即锁与同步方式</p>
+<p>Condition是为了代替传统的Object的wait()/notify()方法，实现线程间的协作。其核心函数为await()、signal()方法，作用分别对应wait()和notify()。</p>
+<p>await：释放锁、沉睡、等待唤醒</p>
+<p>signal：获取锁，开始做事，完毕后，调用signal方法，唤醒沉睡的线程。</p>
+<p>将锁、countdownLatch、Future类解决超时问题等串起来</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/life/狼人杀经验/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qinxue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XXQIN'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/life/狼人杀经验/" itemprop="url">狼人杀经验</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-06T10:15:02+08:00">
+                2019-01-06
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-07-30T00:32:08+08:00">
+                2019-07-30
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/life/" itemprop="url" rel="index">
+                    <span itemprop="name">生活</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  920
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>狼队旱跳预言家，给任何人发金水都是毫无意义的。</li>
+<li>如果有2个以上的预言家竞选，并且好人队很难分清，狼人更倾向于给假的预言家投票。</li>
+<li>如果上警的人发言很没自信，那很大程度上不是预言家。</li>
+<li>如果有人穿自己的衣服，就要说出来，虽然不能决定那个产衣服的人的身份。</li>
+<li>如果你是狼人，你穿衣服被发现了，那就主动让出</li>
+<li>分析票型时，要记住谁站自己一边</li>
+<li>给尸体发金水，很有可能是假的预言家</li>
+<li>平民跳了预言家，如果被预言家怀疑了，就要退水</li>
+<li>女巫如果第一晚不救人，那么预言家最多可以验3个人，第一晚一个，第二晚有人杀他，女巫救，第三晚再验一个。同时保持警徽流，即验谁，如果是好人，给他警徽，否则他就是狼人。所以预言家上警很有必要！</li>
+<li>猎人的衣服，一般没有人敢穿，否则作死。但是穿女巫的衣服比较容易，因为你说自己是女巫，事情都是发生在夜晚。没人知道你是不是真的。</li>
+<li>猎人互殴，那是猎人的事情，不用管，女巫也是。真女巫晚上可以毒死假的女巫。如果有人认女巫，那么真女巫就去毒，毒对的概率50%。</li>
+<li>如果自己真的是好人警长，别人也怀疑自己，这时就要分析狼人的数目，表示我如果是狼的话，已经赢了，但是游戏没有结束，说明我不是狼。</li>
+<li>如果你是平民，且发现神已经死得差不多了，这时候要主动穿衣服。那个真的神要去接，表示我真的不是那个神。不然好人方就很难赢了。</li>
+<li>狼人给金水更容易些，因为他能给对，而好人，除了预言家可以给对，其他人都不敢随意给金水的。</li>
+</ol>
+<p>从最开始的上警开始：<br>一般情况下，警上会有狼，也有没有狼的情况，但是多于两狼的情况比较小。</p>
+<p>平民一般会有上警的，通常情况下是防预言家对跳；当然，狼人这个时候也有可能上警自称防对跳。比较难判断，当后面有比较可信的强神后，防对跳的基本上全会退水。</p>
+<p>前置位平民一般不会跳预言家，因为他也不知道谁是查杀或是金水；因此，前置位跳预言家的一般是狼人或真的预言家。</p>
+<p>狼人跳预言家发金水并没有卵用，一般也不会查杀好人，不然会受到好人怀疑；于是常见的玩法是，狼人跳预言家查杀狼人，玩配合。然后被查杀的狼人自曝，以使好人相信假预言家。</p>
+<p>如果狼人跳预言家后被怀疑，一般会选择自刀。</p>
+<p>女巫的药很关键，开头一般不会用，解药一般会保自己或是救预言家，而毒药一般会在自己死之前撒出去给嫌疑最大的人。</p>
+<p>当一个人各种分析晚上毒杀情况，又不是女巫的时候，他很有可能就是狼人，因为他自己最清楚自己杀了谁，而女巫又救了谁或是毒了谁。</p>
+<p>当一个人前面竞选警长而又不自信的情况时，很有可能是狼人。</p>
+<p>当女巫毒用过了，狼人就可以穿女巫的衣服了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/code/区块链基础/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1813,444 +2267,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/code/剑指Offer解题思路/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qinxue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XXQIN'S BLOG">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/code/剑指Offer解题思路/" itemprop="url">剑指Offer解题思路</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-14T21:35:51+08:00">
-                2018-09-14
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-07-30T00:12:09+08:00">
-                2019-07-30
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1.9k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  6
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-<ol>
-<li>数组中重复的数字：使数组中的每个数字处于其索引的位置（n个数，区间[0,n-1]）</li>
-<li>同3（但是不能改变数组）：二分法：<code>O(nlogn)</code>（n+1个数，区间[1,n]），对数字区间进行划分，而不是对数组区间划分</li>
-<li>替换空格：先让出空间，然后把前面的往后移（联想到插入排序），要两个都想（从前往后、从后往前，哪个好用哪个）</li>
-<li>从尾到头打印链表：栈和递归要联系在一起（DFS，包括它）<br>栈<br>递归</li>
-<li>重建二叉树：递归实现<br>步骤<br>从前序遍历中找第一个<br>找到该数字在中序遍历中的位置<br>划分成左右子树并递归<br>补充：递归（DFS，前中后序遍历），层次遍历（队列实现）</li>
-<li>二叉树的下一个节点（按照中序遍历）<br>一个节点有右子树，那么要找右子树最左的子节点（联想到BST的删除节点）<br>没有右子树，且其为父节点的左子节点，那么直接找父节点<br>没有右子树，且其为父节点的右子节点，那么一直找父节点到该节点为其父节点的左子节点</li>
-<li>两个栈实现队列<br>每次入队，则如S1<br>每次出队，则出S2，如果S2为空，则把S1拿出去<br>补充：两个队列实现栈<br>循环利用两个队列，每次入栈，则入非空的那个队列<br>每次出栈，则把非空队列放到另外一个空队列，只留一个直接出了</li>
-<li>斐波那契数列（用DP来替代递归，即自底向上，且带有记忆性）</li>
-<li>旋转数组的最小数字：二分法<br>两个指针分别指首尾，只需要比较中间的数字<br>如果它处于前面的递增子数组，则它大于等于第一个指针所指元素，故把第一个指针指向中间<br>…</li>
-<li>回溯法（矩阵中的路径）：很多题目都可以利用回溯法解决</li>
-<li>机器人运动范围</li>
-<li>剪绳子（动态规划与贪心算法）</li>
-<li>二进制中1的个数（位运算）<br>一个数减去1和它自身做与运算，可以把最右边（最低位）的1去掉</li>
-<li>数值的整数次方（递归调用，利用公式）</li>
-<li>暂无</li>
-<li>删除链表的节点。把它的值复制到它前面一个节点，然后再操作（联想到5），还要考虑到各种特殊情况<br>补充：凡是与链表相关的题目都要考虑特殊情况，如删除的是第一个节点，如传入的是不是空指针，如链表是否只有一个节点</li>
-<li>暂无</li>
-<li>类似的题目：字符串转double数值<br>代码如下：<br><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4yovx2yrhj30m70pi3zi.jpg" alt="7c750085-f733-4085-89e9-624aeec8ebd5-951466"></li>
-<li>调整数值顺序使得奇数位于偶数前面（采用双指针方法，首尾各一个）</li>
-<li>链表中的倒数第k个节点（采用双指针，一个先移动）</li>
-<li>链表中环的入口节点（一个走一步，另一个走两步…）</li>
-<li>反转链表（3指针问题）：分别指向当前节点、当前的前一个节点、当前的后一个节点</li>
-<li>合并两个排序的链表<br>类似于归并排序<br>采用递归的方法</li>
-<li>树的子结构（递归，要考虑好终止条件）</li>
-<li>二叉树的镜像<br>步骤<br>确保节点不为空，且左右节点不为空<br>交换左右两个节点<br>递归求解左右两个节点为根节点的情况</li>
-<li>对称的二叉树（递归）<br>步骤<br>左右节点是否为空<br>左右节点的值是否相等<br>左右两个分别是不是对称的（递归）</li>
-<li>暂无</li>
-<li>包含min函数的栈<br>使用一个辅助栈，其顶部始终保存最小的数，且其大小时刻与数据栈一样大。如果新来的数小于最小值，则把它放入辅助栈；否则依然把其顶部的元素放进去</li>
-<li>栈的压入、弹出序列<br>先用两个指针指向两个数组的头部，然后不停地入栈，每次入栈后看出栈的数组的指针指向数字是否等于栈顶元素。如果等于，则一直出栈到不等为止</li>
-<li>从上到下打印二叉树：层次遍历，使用队列（BFS）</li>
-<li>二叉搜索树的后序遍历序列（类似于重建二叉树，以最后一个点划分，前面的一些数小于它，后面的大于它，递归）</li>
-<li>二叉树中和为某一值的路径（回溯法，因为是前序遍历，所以先处理当前节点的值，首先把它加入总和之中，并放入数组，然后判断是不是为目标和。整个过程只需要一个数组）</li>
-<li>复杂链表的复制</li>
-<li>二叉搜索树与双向链表（用到左子树的最大值，右子树的最小值的思想，并且是递归的过程）</li>
-<li>序列化二叉树</li>
-<li>字符串的排列（回溯法）</li>
-<li>数组中出现次数超过一半的数字（利用快排中partition函数，这种算法可以找到数组中任意第k大的数字）</li>
-<li>最小的k个数<br>类似于39的思路，缺点是要改变数组<br>采用最大堆，nlogk的复杂度，适合海量数据<br>补充：找最小的k个数，用最大堆；找最大的k个数，用最小堆</li>
-<li>数据流中的中位数<br>使用最大、最小堆来实现。C++中，priority_queue可以实现优先队列，其中<code>less&lt;int&gt;</code>为最大堆（默认的），<code>greater&lt;int&gt;</code>为最小堆</li>
-<li>连续子数组的最大和（动态规划）关键看前面的所有和，如果小于等于0，则抛弃；否则加进去。</li>
-<li>暂无</li>
-<li>暂无</li>
-<li>把数组排成最小的数（定义新的大小比较关系，并利用它排序）</li>
-<li>暂无</li>
-<li>礼物的最大价值（动态规划）</li>
-<li>最长不含重复字符的子字符串（动态规划）</li>
-<li></li>
-<li>第一次只出现一次的字符（利用HashTable，可简单使用数组实现）</li>
-<li>数组中的逆序对（归并排序的拓展，<code>O(nlogn)</code>）</li>
-<li>两个链表的第一个公共节点（每当遇到链表中需要逆着进行时，就要想到栈）（或者类似于22）</li>
-<li>在排序数组中查找数字（类似问题为：有序数组中查找某个数字第一次出现的地方）二分法</li>
-<li>二叉搜索树中的第K大节点（利用中序遍历）</li>
-<li>二叉树的深度（最长的从根到叶子节点的路径的长度）</li>
-<li>数组中数字出现的次数（异或的运算）</li>
-<li>和为S的两个数字<br>前提为有序<br>双指针问题，分别指向头尾<br>补充：和为S的连续正数序列（分别指向最小和最大，初始时分别指向第一个和第二个）</li>
-<li>翻转字符串（先翻转整个的，再翻转局部的）左旋字符串（先局部，后整体）</li>
-<li>队列的最大值<br>滑动窗口的最大值<br>加一个额外的deque，用来保存有可能是滑动窗口最大值的数字的下标。如果已有的数字小于待存入的数字，那么把这些数字全部从尾部删除；如果队列头部的数字已经从窗口里滑出，那么滑出的数字也需要从队列的头部删除。否则就把存入的数字放到队列的尾部。</li>
-<li>暂无</li>
-<li>暂无</li>
-<li>暂无</li>
-<li>暂无</li>
-<li>暂无</li>
-<li>暂无</li>
-<li>暂无</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/code/mybatis相关/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qinxue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XXQIN'S BLOG">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/code/mybatis相关/" itemprop="url">Mybatis相关</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-17T13:48:46+08:00">
-                2018-08-17
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-07-30T00:11:27+08:00">
-                2019-07-30
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  90
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>mybatis中<code>#</code>和<code>$</code>的区别</p>
-<p><code>#</code>会进行预编译，按照类型匹配的，用于变量替换。</p>
-<p><code>$</code>不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它</p>
-<p>如果两个都可以用，最好用#</p>
-<p>select的时候一定要加resultType或者resultMap，否则报错</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"xxx"</span> <span class="attr">resultType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    xxx</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2303,7 +2319,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2314,7 +2330,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2325,7 +2341,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2404,7 +2420,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">69.6k</span>
+    <span title="Site words total count">70.1k</span>
   
 </div>
 

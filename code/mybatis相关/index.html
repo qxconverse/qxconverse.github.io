@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="mybatis中#和$的区别 #会进行预编译，按照类型匹配的，用于变量替换。 $不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它 如果两个都可以用，最好用# select的时候一定要加resultType或者resultMap，否则报错 123&amp;lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&amp;gt;    xxx&amp;lt;/select&amp;gt;">
+<meta name="description" content="mybatis中#和$的区别 #会进行预编译，按照类型匹配的，用于变量替换。 $不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它 如果两个都可以用，最好用# select的时候一定要加resultType或者resultMap，否则报错 123&amp;lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&amp;gt;    xxx&amp;lt;/select&amp;gt; mybatis中判">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mybatis相关">
 <meta property="og:url" content="https://qxconverse.github.io/code/mybatis相关/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="mybatis中#和$的区别 #会进行预编译，按照类型匹配的，用于变量替换。 $不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它 如果两个都可以用，最好用# select的时候一定要加resultType或者resultMap，否则报错 123&amp;lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&amp;gt;    xxx&amp;lt;/select&amp;gt;">
+<meta property="og:description" content="mybatis中#和$的区别 #会进行预编译，按照类型匹配的，用于变量替换。 $不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它 如果两个都可以用，最好用# select的时候一定要加resultType或者resultMap，否则报错 123&amp;lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&amp;gt;    xxx&amp;lt;/select&amp;gt; mybatis中判">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-29T16:11:27.503Z">
+<meta property="og:updated_time" content="2020-07-21T10:03:21.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis相关">
-<meta name="twitter:description" content="mybatis中#和$的区别 #会进行预编译，按照类型匹配的，用于变量替换。 $不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它 如果两个都可以用，最好用# select的时候一定要加resultType或者resultMap，否则报错 123&amp;lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&amp;gt;    xxx&amp;lt;/select&amp;gt;">
+<meta name="twitter:description" content="mybatis中#和$的区别 #会进行预编译，按照类型匹配的，用于变量替换。 $不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它 如果两个都可以用，最好用# select的时候一定要加resultType或者resultMap，否则报错 123&amp;lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&amp;gt;    xxx&amp;lt;/select&amp;gt; mybatis中判">
 
 
 
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-07-30T00:11:27+08:00">
-                2019-07-30
+              <time title="更新于" itemprop="dateModified" datetime="2020-07-21T18:03:21+08:00">
+                2020-07-21
               </time>
             
           </span>
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  90
+                  159
                 </span>
               
 
@@ -426,6 +426,8 @@
 <p>如果两个都可以用，最好用#</p>
 <p>select的时候一定要加resultType或者resultMap，否则报错</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"xxx"</span> <span class="attr">resultType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    xxx</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>mybatis中判断不为空，且不为空字符串，适合字符串的变量；如果是整数型变量，当整数不为0时，没问题；但是如果整数为0，那么会判断它的值为空字符串，导致where中不起作用。</p>
+
       
     </div>
     
@@ -491,8 +493,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/code/浏览器访问网页的整个流程/" rel="next" title="浏览器访问网页的流程">
-                <i class="fa fa-chevron-left"></i> 浏览器访问网页的流程
+              <a href="/code/微服务中的ribbon和zuul/" rel="next" title="微服务中的ribbon和zuul">
+                <i class="fa fa-chevron-left"></i> 微服务中的ribbon和zuul
               </a>
             
           </div>
@@ -501,8 +503,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/code/java虚拟机/" rel="prev" title="Java虚拟机">
-                Java虚拟机 <i class="fa fa-chevron-right"></i>
+              <a href="/code/浏览器访问网页的整个流程/" rel="prev" title="浏览器访问网页的流程">
+                浏览器访问网页的流程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -580,7 +582,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -591,7 +593,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -602,7 +604,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -681,7 +683,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">69.6k</span>
+    <span title="Site words total count">70.1k</span>
   
 </div>
 
