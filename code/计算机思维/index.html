@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
 <meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-07-27T07:04:58.225Z">
+<meta property="og:updated_time" content="2020-10-13T10:13:21.697Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机思维">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-07-27T15:04:58+08:00">
-                2020-07-27
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-13T18:13:21+08:00">
+                2020-10-13
               </time>
             
           </span>
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.4k
+                  1.8k
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  6
                 </span>
               
             </div>
@@ -478,6 +478,11 @@
 <li>减少磁盘的IO</li>
 </ol>
 <p>排查kafka问题的时候，可以借助于kafka工具，查看是哪台机器对topic进行了消费</p>
+<p>测试的时候需要加一种 数据全部为空的情况 （初始化测试问题）；测试时，后端每次更改实现方式，都需要单独再测一遍</p>
+<p>我们经常会谈到前台、中台，有时又会讲到领域驱动设计。其实，这些都要求你对业务、产品有较为深入的理解。并思考如何将业务和项目关联起来。除此之外，你还得掌握最常用的框架，理解这样的框架为什么行得通，为什么适合用它。再往下，就是语言的知识点。再往下，则是跨语言的知识点，比如数据库，网络，操作系统，数据结构和算法等等。有没有很眼熟，对！这些正是你在大学里面学习的课程。大学里面可以不教你框架、可以不教你语言，但必须教你这些。所以，要想在互联网站稳，这些知识才是必须反复去消化、总结的东西。</p>
+<p>熟悉雪花算法</p>
+<p>压测时，要做数据库和dubbo隔离，数据库隔离很简单，迁移一份完全一样的，并改为连接它。dubbo可以采用直连的方式。比如让机器都请求其中一台dubbo服务机器。</p>
+<p>压测出现的问题，主要集中在：数据库连接数、dubbo线程数、gc策略。在高并发下，需要极其优化代码耗时。从减少http请求、dubbo请求、mysql查询等方面解决</p>
 
       
     </div>
@@ -734,7 +739,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">70.1k</span>
+    <span title="Site words total count">70.9k</span>
   
 </div>
 
