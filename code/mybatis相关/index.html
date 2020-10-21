@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
 <meta property="og:description" content="mybatis中#和$的区别 #会进行预编译，按照类型匹配的，用于变量替换。 $不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它 如果两个都可以用，最好用# select的时候一定要加resultType或者resultMap，否则报错 123&amp;lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&amp;gt;    xxx&amp;lt;/select&amp;gt; mybatis中判">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-12T08:33:22.551Z">
+<meta property="og:updated_time" content="2020-10-19T08:01:01.640Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis相关">
 <meta name="twitter:description" content="mybatis中#和$的区别 #会进行预编译，按照类型匹配的，用于变量替换。 $不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它 如果两个都可以用，最好用# select的时候一定要加resultType或者resultMap，否则报错 123&amp;lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&amp;gt;    xxx&amp;lt;/select&amp;gt; mybatis中判">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-12T16:33:22+08:00">
-                2020-10-12
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-19T16:01:01+08:00">
+                2020-10-19
               </time>
             
           </span>
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  252
+                  294
                 </span>
               
 
@@ -430,7 +430,8 @@
 <p>mybatis查询没有数据时返回的list是空集合，即size=0 并不是null</p>
 <p>数据库中设置非空，最好设置默认值；且insert语句中涉及到的字段，不能传入null，要么insert语句不加该字段。也就是说如果可能为空，就要加判断，为空时不插入；</p>
 <p>update很简单，非空就更新</p>
-
+<p>更新mysql用户密码，首先用root账号登陆进去，接着执行下面的命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE mysql.user SET password=PASSWORD(&apos;123456&apos;) WHERE user=&apos;root&apos;; </span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -496,8 +497,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/code/浏览器访问网页的整个流程/" rel="next" title="浏览器访问网页的流程">
-                <i class="fa fa-chevron-left"></i> 浏览器访问网页的流程
+              <a href="/code/微服务中的ribbon和zuul/" rel="next" title="微服务中的ribbon和zuul">
+                <i class="fa fa-chevron-left"></i> 微服务中的ribbon和zuul
               </a>
             
           </div>
@@ -506,8 +507,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/code/IO模型/" rel="prev" title="IO模型">
-                IO模型 <i class="fa fa-chevron-right"></i>
+              <a href="/code/浏览器访问网页的整个流程/" rel="prev" title="浏览器访问网页的流程">
+                浏览器访问网页的流程 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -585,7 +586,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -607,7 +608,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -686,7 +687,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">70.9k</span>
+    <span title="Site words total count">71.4k</span>
   
 </div>
 
