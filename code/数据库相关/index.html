@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Java,">
+  <meta name="keywords" content="数据库,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="mybatis中#和$的区别 #会进行预编译，按照类型匹配的，用于变量替换。 $不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它 如果两个都可以用，最好用# select的时候一定要加resultType或者resultMap，否则报错 123&amp;lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&amp;gt;    xxx&amp;lt;/select&amp;gt; mybatis中判">
-<meta name="keywords" content="Java">
+<meta name="description" content="数据库相关可以通过length函数查看字符串中字符的数目1select length(&amp;apos;aa&amp;apos;);">
+<meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mybatis相关">
-<meta property="og:url" content="https://qxconverse.github.io/code/mybatis相关/index.html">
+<meta property="og:title" content="数据库相关">
+<meta property="og:url" content="https://qxconverse.github.io/code/数据库相关/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="mybatis中#和$的区别 #会进行预编译，按照类型匹配的，用于变量替换。 $不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它 如果两个都可以用，最好用# select的时候一定要加resultType或者resultMap，否则报错 123&amp;lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&amp;gt;    xxx&amp;lt;/select&amp;gt; mybatis中判">
+<meta property="og:description" content="数据库相关可以通过length函数查看字符串中字符的数目1select length(&amp;apos;aa&amp;apos;);">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-19T08:01:01.640Z">
+<meta property="og:updated_time" content="2020-10-22T09:38:44.366Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mybatis相关">
-<meta name="twitter:description" content="mybatis中#和$的区别 #会进行预编译，按照类型匹配的，用于变量替换。 $不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它 如果两个都可以用，最好用# select的时候一定要加resultType或者resultMap，否则报错 123&amp;lt;select id=&quot;xxx&quot; resultType=&quot;int&quot;&amp;gt;    xxx&amp;lt;/select&amp;gt; mybatis中判">
+<meta name="twitter:title" content="数据库相关">
+<meta name="twitter:description" content="数据库相关可以通过length函数查看字符串中字符的数目1select length(&amp;apos;aa&amp;apos;);">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://qxconverse.github.io/code/mybatis相关/">
+  <link rel="canonical" href="https://qxconverse.github.io/code/数据库相关/">
 
 
 
 
 
-  <title>Mybatis相关 | XXQIN'S BLOG</title>
+  <title>数据库相关 | XXQIN'S BLOG</title>
   
 
 
@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/code/mybatis相关/">
+    <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/code/数据库相关/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="qinxue">
@@ -300,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mybatis相关</h1>
+          <h1 class="post-title" itemprop="name headline">数据库相关</h1>
         
 
         <div class="post-meta">
@@ -312,8 +312,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-17T13:48:46+08:00">
-                2018-08-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-31T12:09:52+08:00">
+                2019-07-31
               </time>
             
 
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-19T16:01:01+08:00">
-                2020-10-19
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-22T17:38:44+08:00">
+                2020-10-22
               </time>
             
           </span>
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  294
+                  807
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  3
                 </span>
               
             </div>
@@ -420,18 +420,34 @@
       
 
       
-        <p>mybatis中<code>#</code>和<code>$</code>的区别</p>
-<p><code>#</code>会进行预编译，按照类型匹配的，用于变量替换。</p>
+        <h4 id="数据库相关"><a href="#数据库相关" class="headerlink" title="数据库相关"></a>数据库相关</h4><h5 id="可以通过length函数查看字符串中字符的数目"><a href="#可以通过length函数查看字符串中字符的数目" class="headerlink" title="可以通过length函数查看字符串中字符的数目"></a>可以通过length函数查看字符串中字符的数目</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select length(&apos;aa&apos;);</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h5 id="变更数据库、表的字符集"><a href="#变更数据库、表的字符集" class="headerlink" title="变更数据库、表的字符集"></a>变更数据库、表的字符集</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;character%&apos;;</span><br><span class="line"></span><br><span class="line">ALTER DATABASE</span><br><span class="line">    database_name</span><br><span class="line">    CHARACTER SET = utf8mb4</span><br><span class="line">    COLLATE = utf8mb4_unicode_ci;</span><br><span class="line"></span><br><span class="line">ALTER TABLE</span><br><span class="line">    table_name</span><br><span class="line">    CONVERT TO CHARACTER SET utf8mb4</span><br><span class="line">    COLLATE utf8mb4_unicode_ci;</span><br><span class="line"></span><br><span class="line">ALTER TABLE</span><br><span class="line">    table_name</span><br><span class="line">    CHANGE column_name column_name</span><br><span class="line">    data_type</span><br><span class="line">    CHARACTER SET utf8mb4</span><br><span class="line">    COLLATE utf8mb4_unicode_ci;</span><br></pre></td></tr></table></figure>
+<h5 id="变更表中字段的属性"><a href="#变更表中字段的属性" class="headerlink" title="变更表中字段的属性"></a>变更表中字段的属性</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table xxx change column_name column_name varchar(20) character set utf8mb4;</span><br></pre></td></tr></table></figure>
+<h5 id="展示建表的语句"><a href="#展示建表的语句" class="headerlink" title="展示建表的语句"></a>展示建表的语句</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show create table xxx\G</span><br><span class="line">show table status from xxx\G</span><br></pre></td></tr></table></figure>
+<p>Collation的概念是字符比较的规则，每种字符集都会有其默认的Collation。</p>
+<p>很多数据类型的选择其实是没有黑白之分的，在不同的场景下针对一个数据可能需要不同的数据类型。</p>
+<p>mysql中有个存储引擎的概念。主要分为InnoDB和MyISAM。前者相较于后者，其区别主要在于它支持<strong>事务、外键和行级锁</strong>（命中主键的情况下）。</p>
+<p>直接连接线上数据库出现无权限的问题，可通过ssh隧道（配置跳板机器）连接mysql</p>
+<h5 id="连接远程数据库"><a href="#连接远程数据库" class="headerlink" title="连接远程数据库"></a>连接远程数据库</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -h hostname -P port -u username -p</span><br></pre></td></tr></table></figure>
+<p>字符集utf8mb4 general_ci ，可以显示emoji</p>
+<p>gmtUpdate 可以不用设置，这个字段数据库会自动更新的，前提是在数据库中指明新增的默认值和更新值</p>
+<p>有时为了减少连表查询的麻烦，可以存在冗余字段</p>
+<p>为什么要加索引，其目的是干嘛的？</p>
+<p>索引的本质是一种数据结构。最直接的类比对象是字典。索引会将某列的数据放在数据结构中，并且保存指向某行的地址值。</p>
+<p>基本原则是只如果表中某列在查询过程中使用的非常频繁，那就在该列上创建索引。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;%max_connection%&apos;; 查看最大连接数</span><br><span class="line">set global max_connections=1000;       重新设置最大连接数</span><br><span class="line">show status like  &apos;Threads%&apos;;</span><br></pre></td></tr></table></figure>
+<h5 id="mybatis中-和-的区别"><a href="#mybatis中-和-的区别" class="headerlink" title="mybatis中#和$的区别"></a>mybatis中<code>#</code>和<code>$</code>的区别</h5><p><code>#</code>会进行预编译，按照类型匹配的，用于变量替换。</p>
 <p><code>$</code>不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它</p>
 <p>如果两个都可以用，最好用#</p>
-<p>select的时候一定要加resultType或者resultMap，否则报错</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"xxx"</span> <span class="attr">resultType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    xxx</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>mybatis中判断不为空，且不为空字符串，适合字符串的变量；如果是整数型变量，当整数不为0时，没问题；但是如果整数为0，那么会判断它的值为空字符串，导致where中不起作用。</p>
-<p>mybatis查询没有数据时返回的list是空集合，即size=0 并不是null</p>
-<p>数据库中设置非空，最好设置默认值；且insert语句中涉及到的字段，不能传入null，要么insert语句不加该字段。也就是说如果可能为空，就要加判断，为空时不插入；</p>
+<h5 id="select的时候一定要加resultType或者resultMap，否则报错"><a href="#select的时候一定要加resultType或者resultMap，否则报错" class="headerlink" title="select的时候一定要加resultType或者resultMap，否则报错"></a>select的时候一定要加resultType或者resultMap，否则报错</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"xxx"</span> <span class="attr">resultType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    xxx</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="mybatis中判断不为空，且不为空字符串"><a href="#mybatis中判断不为空，且不为空字符串" class="headerlink" title="mybatis中判断不为空，且不为空字符串"></a>mybatis中判断不为空，且不为空字符串</h5><p>mybatis中判断不为空，且不为空字符串，适合字符串的变量；如果是整数型变量，当整数不为0时，没问题；但是如果整数为0，那么会判断它的值为空字符串，导致where中不起作用。</p>
+<h5 id="mybatis查询没有数据时"><a href="#mybatis查询没有数据时" class="headerlink" title="mybatis查询没有数据时"></a>mybatis查询没有数据时</h5><p>mybatis查询没有数据时返回的list是空集合，即size=0 并不是null。</p>
+<h5 id="数据库中设置非空"><a href="#数据库中设置非空" class="headerlink" title="数据库中设置非空"></a>数据库中设置非空</h5><p>数据库中设置非空，最好设置默认值；且insert语句中涉及到的字段，不能传入null，要么insert语句不加该字段。也就是说如果可能为空，就要加判断，为空时不插入；</p>
 <p>update很简单，非空就更新</p>
-<p>更新mysql用户密码，首先用root账号登陆进去，接着执行下面的命令：</p>
+<h5 id="更新mysql用户密码"><a href="#更新mysql用户密码" class="headerlink" title="更新mysql用户密码"></a>更新mysql用户密码</h5><p>更新mysql用户密码，首先用root账号登陆进去，接着执行下面的命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE mysql.user SET password=PASSWORD(&apos;123456&apos;) WHERE user=&apos;root&apos;; </span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -450,7 +466,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://qxconverse.github.io/code/mybatis相关/" title="Mybatis相关">https://qxconverse.github.io/code/mybatis相关/</a>
+    <a href="https://qxconverse.github.io/code/数据库相关/" title="数据库相关">https://qxconverse.github.io/code/数据库相关/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -465,7 +481,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag"># Java</a>
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
           
         </div>
       
@@ -497,8 +513,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/code/微服务中的ribbon和zuul/" rel="next" title="微服务中的ribbon和zuul">
-                <i class="fa fa-chevron-left"></i> 微服务中的ribbon和zuul
+              <a href="/code/http的请求的一些细节/" rel="next" title="http的请求的一些细节">
+                <i class="fa fa-chevron-left"></i> http的请求的一些细节
               </a>
             
           </div>
@@ -507,8 +523,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/code/浏览器访问网页的整个流程/" rel="prev" title="浏览器访问网页的流程">
-                浏览器访问网页的流程 <i class="fa fa-chevron-right"></i>
+              <a href="/code/Spring相关/" rel="prev" title="SpringBoot相关">
+                SpringBoot相关 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -568,8 +584,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -586,7 +611,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">78</span>
+                  <span class="site-state-item-count">77</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -659,6 +684,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库相关"><span class="nav-number">1.</span> <span class="nav-text">数据库相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#可以通过length函数查看字符串中字符的数目"><span class="nav-number">1.1.</span> <span class="nav-text">可以通过length函数查看字符串中字符的数目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变更数据库、表的字符集"><span class="nav-number">1.2.</span> <span class="nav-text">变更数据库、表的字符集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变更表中字段的属性"><span class="nav-number">1.3.</span> <span class="nav-text">变更表中字段的属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#展示建表的语句"><span class="nav-number">1.4.</span> <span class="nav-text">展示建表的语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#连接远程数据库"><span class="nav-number">1.5.</span> <span class="nav-text">连接远程数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis中-和-的区别"><span class="nav-number">1.6.</span> <span class="nav-text">mybatis中#和$的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#select的时候一定要加resultType或者resultMap，否则报错"><span class="nav-number">1.7.</span> <span class="nav-text">select的时候一定要加resultType或者resultMap，否则报错</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis中判断不为空，且不为空字符串"><span class="nav-number">1.8.</span> <span class="nav-text">mybatis中判断不为空，且不为空字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis查询没有数据时"><span class="nav-number">1.9.</span> <span class="nav-text">mybatis查询没有数据时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库中设置非空"><span class="nav-number">1.10.</span> <span class="nav-text">数据库中设置非空</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#更新mysql用户密码"><span class="nav-number">1.11.</span> <span class="nav-text">更新mysql用户密码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
