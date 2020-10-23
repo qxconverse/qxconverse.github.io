@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
 <meta property="og:description" content="数据库相关可以通过length函数查看字符串中字符的数目1select length(&amp;apos;aa&amp;apos;);">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-22T12:22:53.820Z">
+<meta property="og:updated_time" content="2020-10-23T02:36:01.423Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库相关">
 <meta name="twitter:description" content="数据库相关可以通过length函数查看字符串中字符的数目1select length(&amp;apos;aa&amp;apos;);">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-22T20:22:53+08:00">
-                2020-10-22
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-23T10:36:01+08:00">
+                2020-10-23
               </time>
             
           </span>
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  807
+                  864
                 </span>
               
 
@@ -437,16 +437,17 @@
 <p>索引的本质是一种数据结构。最直接的类比对象是字典。索引会将某列的数据放在数据结构中，并且保存指向某行的地址值。</p>
 <p>基本原则是只如果表中某列在查询过程中使用的非常频繁，那就在该列上创建索引。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;%max_connection%&apos;; 查看最大连接数</span><br><span class="line">set global max_connections=1000;       重新设置最大连接数</span><br><span class="line">show status like  &apos;Threads%&apos;;</span><br></pre></td></tr></table></figure>
+<h5 id="数据库中设置非空"><a href="#数据库中设置非空" class="headerlink" title="数据库中设置非空"></a>数据库中设置非空</h5><p>数据库中设置非空，最好设置默认值；且insert语句中涉及到的字段，不能传入null，要么insert语句不加该字段。也就是说如果可能为空，就要加判断，为空时不插入；</p>
+<p>update很简单，非空就更新</p>
+<h5 id="更新mysql用户密码"><a href="#更新mysql用户密码" class="headerlink" title="更新mysql用户密码"></a>更新mysql用户密码</h5><p>更新mysql用户密码，首先用root账号登陆进去，接着执行下面的命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE mysql.user SET password=PASSWORD(&apos;123456&apos;) WHERE user=&apos;root&apos;; </span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
 <h5 id="mybatis中-和-的区别"><a href="#mybatis中-和-的区别" class="headerlink" title="mybatis中#和$的区别"></a>mybatis中<code>#</code>和<code>$</code>的区别</h5><p><code>#</code>会进行预编译，按照类型匹配的，用于变量替换。</p>
 <p><code>$</code>不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它</p>
 <p>如果两个都可以用，最好用#</p>
 <h5 id="select的时候一定要加resultType或者resultMap，否则报错"><a href="#select的时候一定要加resultType或者resultMap，否则报错" class="headerlink" title="select的时候一定要加resultType或者resultMap，否则报错"></a>select的时候一定要加resultType或者resultMap，否则报错</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"xxx"</span> <span class="attr">resultType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    xxx</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h5 id="mybatis中判断不为空，且不为空字符串"><a href="#mybatis中判断不为空，且不为空字符串" class="headerlink" title="mybatis中判断不为空，且不为空字符串"></a>mybatis中判断不为空，且不为空字符串</h5><p>mybatis中判断不为空，且不为空字符串，适合字符串的变量；如果是整数型变量，当整数不为0时，没问题；但是如果整数为0，那么会判断它的值为空字符串，导致where中不起作用。</p>
 <h5 id="mybatis查询没有数据时"><a href="#mybatis查询没有数据时" class="headerlink" title="mybatis查询没有数据时"></a>mybatis查询没有数据时</h5><p>mybatis查询没有数据时返回的list是空集合，即size=0 并不是null。</p>
-<h5 id="数据库中设置非空"><a href="#数据库中设置非空" class="headerlink" title="数据库中设置非空"></a>数据库中设置非空</h5><p>数据库中设置非空，最好设置默认值；且insert语句中涉及到的字段，不能传入null，要么insert语句不加该字段。也就是说如果可能为空，就要加判断，为空时不插入；</p>
-<p>update很简单，非空就更新</p>
-<h5 id="更新mysql用户密码"><a href="#更新mysql用户密码" class="headerlink" title="更新mysql用户密码"></a>更新mysql用户密码</h5><p>更新mysql用户密码，首先用root账号登陆进去，接着执行下面的命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE mysql.user SET password=PASSWORD(&apos;123456&apos;) WHERE user=&apos;root&apos;; </span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+<h5 id="mybatis如果只有一个参数"><a href="#mybatis如果只有一个参数" class="headerlink" title="mybatis如果只有一个参数"></a>mybatis如果只有一个参数</h5><p>mybatis如果只有一个参数，并且这个参数在sql中进行了类似<code>&lt;if test=&quot;param != null &quot;&gt;&lt;/if&gt;</code>的判断，需要加@Param。否则会都匹配进去</p>
 
       
     </div>
@@ -694,7 +695,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库相关"><span class="nav-number">1.</span> <span class="nav-text">数据库相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#可以通过length函数查看字符串中字符的数目"><span class="nav-number">1.1.</span> <span class="nav-text">可以通过length函数查看字符串中字符的数目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变更数据库、表的字符集"><span class="nav-number">1.2.</span> <span class="nav-text">变更数据库、表的字符集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变更表中字段的属性"><span class="nav-number">1.3.</span> <span class="nav-text">变更表中字段的属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#展示建表的语句"><span class="nav-number">1.4.</span> <span class="nav-text">展示建表的语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#连接远程数据库"><span class="nav-number">1.5.</span> <span class="nav-text">连接远程数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis中-和-的区别"><span class="nav-number">1.6.</span> <span class="nav-text">mybatis中#和$的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#select的时候一定要加resultType或者resultMap，否则报错"><span class="nav-number">1.7.</span> <span class="nav-text">select的时候一定要加resultType或者resultMap，否则报错</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis中判断不为空，且不为空字符串"><span class="nav-number">1.8.</span> <span class="nav-text">mybatis中判断不为空，且不为空字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis查询没有数据时"><span class="nav-number">1.9.</span> <span class="nav-text">mybatis查询没有数据时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库中设置非空"><span class="nav-number">1.10.</span> <span class="nav-text">数据库中设置非空</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#更新mysql用户密码"><span class="nav-number">1.11.</span> <span class="nav-text">更新mysql用户密码</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库相关"><span class="nav-number">1.</span> <span class="nav-text">数据库相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#可以通过length函数查看字符串中字符的数目"><span class="nav-number">1.1.</span> <span class="nav-text">可以通过length函数查看字符串中字符的数目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变更数据库、表的字符集"><span class="nav-number">1.2.</span> <span class="nav-text">变更数据库、表的字符集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变更表中字段的属性"><span class="nav-number">1.3.</span> <span class="nav-text">变更表中字段的属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#展示建表的语句"><span class="nav-number">1.4.</span> <span class="nav-text">展示建表的语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#连接远程数据库"><span class="nav-number">1.5.</span> <span class="nav-text">连接远程数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库中设置非空"><span class="nav-number">1.6.</span> <span class="nav-text">数据库中设置非空</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#更新mysql用户密码"><span class="nav-number">1.7.</span> <span class="nav-text">更新mysql用户密码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis中-和-的区别"><span class="nav-number">1.8.</span> <span class="nav-text">mybatis中#和$的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#select的时候一定要加resultType或者resultMap，否则报错"><span class="nav-number">1.9.</span> <span class="nav-text">select的时候一定要加resultType或者resultMap，否则报错</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis中判断不为空，且不为空字符串"><span class="nav-number">1.10.</span> <span class="nav-text">mybatis中判断不为空，且不为空字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis查询没有数据时"><span class="nav-number">1.11.</span> <span class="nav-text">mybatis查询没有数据时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis如果只有一个参数"><span class="nav-number">1.12.</span> <span class="nav-text">mybatis如果只有一个参数</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -728,7 +729,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">71.5k</span>
+    <span title="Site words total count">71.8k</span>
   
 </div>
 

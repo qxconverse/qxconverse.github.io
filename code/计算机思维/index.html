@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
 <meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-13T10:13:21.697Z">
+<meta property="og:updated_time" content="2020-10-23T02:34:51.873Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机思维">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-13T18:13:21+08:00">
-                2020-10-13
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-23T10:34:51+08:00">
+                2020-10-23
               </time>
             
           </span>
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.8k
+                  2k
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  7
                 </span>
               
             </div>
@@ -483,6 +483,22 @@
 <p>熟悉雪花算法</p>
 <p>压测时，要做数据库和dubbo隔离，数据库隔离很简单，迁移一份完全一样的，并改为连接它。dubbo可以采用直连的方式。比如让机器都请求其中一台dubbo服务机器。</p>
 <p>压测出现的问题，主要集中在：数据库连接数、dubbo线程数、gc策略。在高并发下，需要极其优化代码耗时。从减少http请求、dubbo请求、mysql查询等方面解决</p>
+<p>上线前校验：mysql、配置文件、maven依赖包版本号、dubbo版本号</p>
+<p>涉及到接口修改的地方，要考虑到新旧的兼容问题。因为小程序和后端上线时间间隔一天，更加需要兼容。</p>
+<p>涉及到接口变更时，尽量保留原有接口，再新增一个接口。等稳定后，再去除原有接口。</p>
+<p>接口版本变动问题，后端先上、前端后上的情况：</p>
+<p>假设前端线上版本为a.0，后端线上版本为b.0。后端本次上线的版本为b.1</p>
+<p>在b.1中会有如下情况：</p>
+<ol>
+<li>新增接口，没问题</li>
+<li>减少接口，有问题</li>
+<li>接口、出参不变，新增入参，有问题</li>
+<li>接口、出参不变，减少入参，没问题</li>
+<li>接口、入参不变，出参新增，没问题</li>
+<li>接口、入参不变，出参减少，有问题</li>
+</ol>
+<p>抽象一层，就是当后端减少东西时，或前端新增东西时，有问题；其它情况，没问题。</p>
+<p>这里的东西可能是：接口、入参、出参</p>
 
       
     </div>
@@ -739,7 +755,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">71.5k</span>
+    <span title="Site words total count">71.8k</span>
   
 </div>
 
