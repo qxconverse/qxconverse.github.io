@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
 <meta property="og:description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密    A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加密">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-08-17T09:59:44.332Z">
+<meta property="og:updated_time" content="2020-10-25T11:55:38.425Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数字签名与SSH">
 <meta name="twitter:description" content="数字签名数字签名由非对称加密和数字摘要两种技术合成的。可以防伪造（机密性）和篡改（完整性） rsa非对称加密 + hash摘要 = 数字签名 对于摘要：私钥签名、公钥验证 对于加密：公钥加密、私钥解密    A B 备注     报文-&amp;gt;Hash算法（比如MD5，SHA256）生成摘要-&amp;gt;私钥（A的）签名 使用公钥（A的）验证 摘要部分：A想把签名的消息发给B   使用公钥（B的）加密">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-08-17T17:59:44+08:00">
-                2020-08-17
+              <time title="更新于" itemprop="dateModified" datetime="2020-10-25T19:55:38+08:00">
+                2020-10-25
               </time>
             
           </span>
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  373
+                  398
                 </span>
               
 
@@ -452,13 +452,13 @@
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "xxx"</span><br></pre></td></tr></table></figure>
 <ol start="2">
-<li><p>其中私钥放在自己的电脑<code>~/.ssh</code>目录</p>
+<li><p>其中公钥、私钥放在自己本地<code>~/.ssh</code>文件夹下</p>
 </li>
-<li><p>将公钥放到远程服务器的<code>.ssh/authorized_keys</code>文件里面</p>
+<li><p>将公钥文件内容拷贝到远程服务器的<code>.ssh/authorized_keys</code>文件里面</p>
 </li>
-<li>如果为了更加方便地登录，新建config文件，内容如下。就可以使用<code>ssh xxx</code>直接登录。</li>
+<li>如果为了更加方便地登录，在本地<code>~/.ssh</code>文件夹下新建config文件，内容如下。就可以使用<code>ssh xxx</code>直接登录。</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host xxx</span><br><span class="line">HostName  远程服务器IP</span><br><span class="line">User 远程连接使用的账号</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host xxx </span><br><span class="line">HostName  远程服务器IP</span><br><span class="line">User 远程连接使用的账号，如root</span><br><span class="line">IdentityFile ~/.ssh/id_rsa 私钥文件所在路径</span><br></pre></td></tr></table></figure>
 <p>附：使用不同的非对称加密算法生成公钥、私钥</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ed25519</span><br></pre></td></tr></table></figure>
 
@@ -625,7 +625,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -647,7 +647,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">62</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -742,7 +742,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">71.8k</span>
+    <span title="Site words total count">72.9k</span>
   
 </div>
 
