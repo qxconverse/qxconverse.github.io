@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpqoydjpj30fu08kwlg.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpquhfzmj30ig07lglv.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpq6doo3j30i20jd40c.jpg">
-<meta property="og:updated_time" content="2020-02-06T07:30:45.669Z">
+<meta property="og:updated_time" content="2020-11-17T06:36:58.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Maven相关">
 <meta name="twitter:description" content="Maven的相关知识通常会在本地仓库和远程中央仓库之间搭建一个公司级别的中间仓库，首先会从中间仓库获取，否则，再从远程中央仓库获取。 Nexus是一个常用的仓库管理器。 项目中在setting.xml文件里配置自己的中间仓库。 exclusions的使用：因为存在依赖传递的规则，B依赖A，但是在B项目中不需要A中的某个jar包，则使用此标签。 dependencyManagement和depend">
@@ -332,8 +332,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-02-06T15:30:45+08:00">
-                2020-02-06
+              <time title="更新于" itemprop="dateModified" datetime="2020-11-17T14:36:58+08:00">
+                2020-11-17
               </time>
             
           </span>
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  592
+                  692
                 </span>
               
 
@@ -450,6 +450,9 @@
 <p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpquhfzmj30ig07lglv.jpg" alt="Screen Shot 2020-02-06 at 3.19.00 PM"></p>
 <p>这里最关键的地方是要配置Environment settings里面的setting文件。</p>
 <p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpq6doo3j30i20jd40c.jpg" alt="Screen Shot 2020-02-06 at 3.18.19 PM"></p>
+<p>在deploy到远程仓库时，可以有选择性地部署子包，在不需要部署的子模块下，添加代码如下，即可：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-deploy-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">skip</span>&gt;</span>true<span class="tag">&lt;/<span class="name">skip</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>需要部署的子模块，就不加这段代码。</p>
 
       
     </div>
@@ -731,7 +734,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">72.9k</span>
+    <span title="Site words total count">73.1k</span>
   
 </div>
 

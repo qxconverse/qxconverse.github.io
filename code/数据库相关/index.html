@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
 <meta property="og:description" content="数据库相关可以通过length函数查看字符串中字符的数目1select length(&amp;apos;aa&amp;apos;);">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-29T03:04:26.544Z">
+<meta property="og:updated_time" content="2020-11-18T06:56:05.074Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库相关">
 <meta name="twitter:description" content="数据库相关可以通过length函数查看字符串中字符的数目1select length(&amp;apos;aa&amp;apos;);">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-29T11:04:26+08:00">
-                2020-10-29
+              <time title="更新于" itemprop="dateModified" datetime="2020-11-18T14:56:05+08:00">
+                2020-11-18
               </time>
             
           </span>
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  892
+                  1k
                 </span>
               
 
@@ -448,7 +448,9 @@
 <h5 id="mybatis中判断不为空，且不为空字符串"><a href="#mybatis中判断不为空，且不为空字符串" class="headerlink" title="mybatis中判断不为空，且不为空字符串"></a>mybatis中判断不为空，且不为空字符串</h5><p>mybatis中判断不为空，且不为空字符串，适合字符串的变量；如果是整数型变量，当整数不为0时，没问题；但是如果整数为0，那么会判断它的值为空字符串，导致where中不起作用。</p>
 <h5 id="mybatis查询没有数据时"><a href="#mybatis查询没有数据时" class="headerlink" title="mybatis查询没有数据时"></a>mybatis查询没有数据时</h5><p>mybatis查询没有数据时返回的list是空集合，即size=0 并不是null。</p>
 <h5 id="mybatis如果只有一个参数"><a href="#mybatis如果只有一个参数" class="headerlink" title="mybatis如果只有一个参数"></a>mybatis如果只有一个参数</h5><p>mybatis如果只有一个参数，并且这个参数在sql中进行了类似<code>&lt;if test=&quot;param != null &quot;&gt;&lt;/if&gt;</code>的判断，需要加@Param。否则会都匹配进去</p>
-<h5 id="出现慢查询时，使用explain-sql语句的方式，查看执行信息，排查耗时的地方"><a href="#出现慢查询时，使用explain-sql语句的方式，查看执行信息，排查耗时的地方" class="headerlink" title="出现慢查询时，使用explain+sql语句的方式，查看执行信息，排查耗时的地方"></a>出现慢查询时，使用explain+sql语句的方式，查看执行信息，排查耗时的地方</h5>
+<h5 id="出现慢查询时，使用explain-sql语句的方式，查看执行信息，排查耗时的地方"><a href="#出现慢查询时，使用explain-sql语句的方式，查看执行信息，排查耗时的地方" class="headerlink" title="出现慢查询时，使用explain+sql语句的方式，查看执行信息，排查耗时的地方"></a>出现慢查询时，使用explain+sql语句的方式，查看执行信息，排查耗时的地方</h5><p>很多慢查询的问题，可以先用索引解决，特别是涉及到连表查询的时候</p>
+<p>mybatis中更新操作，最好不要设置updateTime更新语句（前提是数据库中设置<code>CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP</code>）。特别是使用BeanUtils.copyPropertie或根据id获取时，由于里面的updateTime本身就不为空，这时判断<code>&lt;if test=&quot;updateTime != null&quot;&gt;update_time=#{updateTime},&lt;/if&gt;</code>，就会更新为当前已有的那个值，所以，还是没有更新到当前时间。</p>
+
       
     </div>
     
@@ -729,7 +731,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">72.9k</span>
+    <span title="Site words total count">73.1k</span>
   
 </div>
 
