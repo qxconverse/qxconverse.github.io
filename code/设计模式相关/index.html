@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
 <meta property="og:description" content="抽象工厂模式：抽象工厂、抽象产品，具体工厂创建具体产品的实例。达到实例化不同产品的目的 单例模式：一个类只有一个实例，关键要定义一个私有的构造函数，一个私有的实例，一个公有的获取实例的方法 适配器模式：解决接口不兼容的问题，类似于电源适配器 外观模式：通过重新组合类或程序单元，对外提供统一的接口/界面，要联想到Controller里面的各种Dao或Service，就是这种思想！！ 代理模式：让代理">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-23T03:47:43.849Z">
+<meta property="og:updated_time" content="2020-12-20T15:22:46.521Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式相关">
 <meta name="twitter:description" content="抽象工厂模式：抽象工厂、抽象产品，具体工厂创建具体产品的实例。达到实例化不同产品的目的 单例模式：一个类只有一个实例，关键要定义一个私有的构造函数，一个私有的实例，一个公有的获取实例的方法 适配器模式：解决接口不兼容的问题，类似于电源适配器 外观模式：通过重新组合类或程序单元，对外提供统一的接口/界面，要联想到Controller里面的各种Dao或Service，就是这种思想！！ 代理模式：让代理">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-12-23T11:47:43+08:00">
-                2019-12-23
+              <time title="更新于" itemprop="dateModified" datetime="2020-12-20T23:22:46+08:00">
+                2020-12-20
               </time>
             
           </span>
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  243
+                  332
                 </span>
               
 
@@ -425,8 +425,8 @@
 <p>适配器模式：解决接口不兼容的问题，类似于电源适配器</p>
 <p>外观模式：通过重新组合类或程序单元，对外提供统一的接口/界面，要联想到Controller里面的各种Dao或Service，就是这种思想！！</p>
 <p>代理模式：让代理去做一些事情，相当于一个中介的角色，处于客户和目标对象之间</p>
-<p>观察者模式：建立一种对象之间的依赖关系，当被观察者发生变化，会通知所有的观察者</p>
-<p>策略模式：根据环境或条件的不同，选择不同的策略</p>
+<p>观察者模式：建立一种对象之间的依赖关系，当被观察者发生变化，会通知所有的观察者。比如创建订单后，需要继续调用支付接口、通知接口等。<strong>主题（subject）</strong>与<strong>观察者</strong>。订单接口作为主题类，支付和通知接口作为观察者，并注册到主题中，只需要调用创建订单接口，并调用notifyObservers方法后，观察者中的update方法就会被执行到。</p>
+<p>策略模式：根据环境或条件的不同，选择不同的策略。</p>
 
       
     </div>
@@ -582,7 +582,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">79</span>
+                  <span class="site-state-item-count">76</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -604,7 +604,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -683,7 +683,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">73.5k</span>
+    <span title="Site words total count">73.8k</span>
   
 </div>
 
