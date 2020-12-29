@@ -79,18 +79,23 @@
 
 
 
-<meta name="description" content="监控的red原则 rate  error duration  SLI指的是服务质量指标 常见的有：请求延迟（处理请求所消耗的时间）、错误率（请求处理失败的百分比）、系统吞吐量（每秒请求数）。还有一个可用性，代表服务可用时间的百分比。 需要注意的是：监控错误回复的延迟很重要，要和正确的分开来 错误分为多种：显示错误（比如500），隐式错误（虽然返回200，但是回复里面有错误的内容），策略原因导致的失">
+<meta name="description" content="监控的red原则 指标涉及到以下： 系统状况：可达性、CPU、内存、JVM等 各项服务：MySQL、Dubbo、Kafka等 接口访问：400、5xx日志数  rate  error duration  SLI指的是服务质量指标 常见的有：请求延迟（处理请求所消耗的时间）、错误率（请求处理失败的百分比）、系统吞吐量（每秒请求数）。还有一个可用性，代表服务可用时间的百分比。 需要注意的是：监控错误回">
 <meta name="keywords" content="监控">
 <meta property="og:type" content="article">
 <meta property="og:title" content="监控、日志、链路追踪">
 <meta property="og:url" content="https://qxconverse.github.io/code/监控/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="监控的red原则 rate  error duration  SLI指的是服务质量指标 常见的有：请求延迟（处理请求所消耗的时间）、错误率（请求处理失败的百分比）、系统吞吐量（每秒请求数）。还有一个可用性，代表服务可用时间的百分比。 需要注意的是：监控错误回复的延迟很重要，要和正确的分开来 错误分为多种：显示错误（比如500），隐式错误（虽然返回200，但是回复里面有错误的内容），策略原因导致的失">
+<meta property="og:description" content="监控的red原则 指标涉及到以下： 系统状况：可达性、CPU、内存、JVM等 各项服务：MySQL、Dubbo、Kafka等 接口访问：400、5xx日志数  rate  error duration  SLI指的是服务质量指标 常见的有：请求延迟（处理请求所消耗的时间）、错误率（请求处理失败的百分比）、系统吞吐量（每秒请求数）。还有一个可用性，代表服务可用时间的百分比。 需要注意的是：监控错误回">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-12-20T16:38:39.171Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwly1gm3e25cnxbj30wa0dq41d.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwly1gm3e5k3cz7j31590avwhw.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwly1gm3e6dlmc0j316t0jqn4e.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwly1gm3ej2zgv0j30nv0a9myb.jpg">
+<meta property="og:updated_time" content="2020-12-28T03:22:54.128Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="监控、日志、链路追踪">
-<meta name="twitter:description" content="监控的red原则 rate  error duration  SLI指的是服务质量指标 常见的有：请求延迟（处理请求所消耗的时间）、错误率（请求处理失败的百分比）、系统吞吐量（每秒请求数）。还有一个可用性，代表服务可用时间的百分比。 需要注意的是：监控错误回复的延迟很重要，要和正确的分开来 错误分为多种：显示错误（比如500），隐式错误（虽然返回200，但是回复里面有错误的内容），策略原因导致的失">
+<meta name="twitter:description" content="监控的red原则 指标涉及到以下： 系统状况：可达性、CPU、内存、JVM等 各项服务：MySQL、Dubbo、Kafka等 接口访问：400、5xx日志数  rate  error duration  SLI指的是服务质量指标 常见的有：请求延迟（处理请求所消耗的时间）、错误率（请求处理失败的百分比）、系统吞吐量（每秒请求数）。还有一个可用性，代表服务可用时间的百分比。 需要注意的是：监控错误回">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/0081Kckwly1gm3e25cnxbj30wa0dq41d.jpg">
 
 
 
@@ -328,8 +333,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-12-21T00:38:39+08:00">
-                2020-12-21
+              <time title="更新于" itemprop="dateModified" datetime="2020-12-28T11:22:54+08:00">
+                2020-12-28
               </time>
             
           </span>
@@ -383,7 +388,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.2k
+                  2.7k
                 </span>
               
 
@@ -399,7 +404,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  9
+                  11
                 </span>
               
             </div>
@@ -420,7 +425,12 @@
       
 
       
-        <h5 id="监控的red原则"><a href="#监控的red原则" class="headerlink" title="监控的red原则"></a>监控的red原则</h5><ol>
+        <h5 id="监控的red原则"><a href="#监控的red原则" class="headerlink" title="监控的red原则"></a>监控的red原则</h5><p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gm3e25cnxbj30wa0dq41d.jpg" alt="Screen Shot 2020-12-28 at 11.02.25 AM"></p>
+<p>指标涉及到以下：</p>
+<p>系统状况：可达性、CPU、内存、JVM等</p>
+<p>各项服务：MySQL、Dubbo、Kafka等</p>
+<p>接口访问：400、5xx日志数</p>
+<ol>
 <li>rate </li>
 <li>error</li>
 <li>duration</li>
@@ -687,6 +697,15 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">global:</span></span><br><span class="line"> <span class="comment"># resolve_timeout: 10m</span></span><br><span class="line"><span class="attr"> smtp_smarthost:</span> <span class="attr">xx:port</span></span><br><span class="line"><span class="attr"> smtp_from:</span> <span class="string">xx@xx.com</span></span><br><span class="line"><span class="attr"> smtp_auth_username:</span> <span class="string">xx</span></span><br><span class="line"><span class="attr"> smtp_auth_password:</span> <span class="string">xx</span></span><br><span class="line"><span class="attr"> smtp_require_tls:</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="attr">route:</span></span><br><span class="line"><span class="attr"> group_by:</span> <span class="string">['alertname']</span></span><br><span class="line"><span class="attr"> repeat_interval:</span> <span class="number">15</span><span class="string">s</span></span><br><span class="line"><span class="attr"> receiver:</span> <span class="string">live-monitoring</span></span><br><span class="line"></span><br><span class="line"><span class="attr">receivers:</span></span><br><span class="line"><span class="attr"> - name:</span> <span class="string">'live-monitoring'</span></span><br><span class="line"><span class="attr">   email_configs:</span></span><br><span class="line"><span class="attr">     - to:</span> <span class="string">'xx@xx.com'</span></span><br></pre></td></tr></table></figure>
 <p>rules配置：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">groups:</span></span><br><span class="line"><span class="attr">  - name:</span> <span class="string">app-name</span></span><br><span class="line"><span class="attr">    interval:</span> <span class="number">10</span><span class="string">s</span></span><br><span class="line"><span class="attr">    rules:</span></span><br><span class="line">      <span class="comment"># mysql</span></span><br><span class="line"><span class="attr">      - alert:</span> <span class="string">"[xx业务]服务不可达"</span></span><br><span class="line"><span class="attr">        expr:</span> <span class="string">up&#123;_app_="app-name"&#125;</span> <span class="string">==</span> <span class="number">0</span></span><br><span class="line"><span class="attr">        for:</span> <span class="number">90</span><span class="string">s</span></span><br><span class="line"><span class="attr">        labels:</span></span><br><span class="line"><span class="attr">          severity:</span> <span class="string">error</span></span><br><span class="line"><span class="attr">        annotations:</span></span><br><span class="line"><span class="attr">          summary:</span> <span class="string">'up&#123;_app_="app-name"&#125; == 0'</span></span><br><span class="line"><span class="attr">          guideline:</span> <span class="string">"服务不可达，联系OP重启"</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gm3e5k3cz7j31590avwhw.jpg" alt="Picture1"></p>
+<p>配置参数</p>
+<p>expr: 指标表达式，即报警条件</p>
+<p>for：满足报警条件持续时间多久后，才会发送报警</p>
+<p>guideline: 指导规则</p>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gm3e6dlmc0j316t0jqn4e.jpg" alt="Picture1"></p>
+<p>有警必报：需要较为准确的报警规则，以及是否为我们所关注的（全）</p>
+<p>有报必错：报出来的是否准确（准）</p>
+<p>有错必可执行：准确报出来的要有指导执行的措施（可执行）</p>
 <h5 id="系统故障排查需要考虑的因素"><a href="#系统故障排查需要考虑的因素" class="headerlink" title="系统故障排查需要考虑的因素"></a>系统故障排查需要考虑的因素</h5><ol>
 <li>内存</li>
 <li>CPU</li>
@@ -704,6 +723,54 @@
 </ol>
 <p>jvm工具：jstat/jstack</p>
 <p>《SRE谷歌运维解密》第一、二部分<br>1.运维是人和机器共同参与的一项系统性工程<br>2.阅读本书重要的不是看他们最终选择了什么方案或架构，而是看他们选择过程所形成的思考经历<br>3.整个公司商业模式和工作模式上的扩展比简单的资源扩展重要<br>4.讲述希望的同时，也要讲述担忧，要坦率地交流<br>5.物理服务器、机柜、集群、数据中心；管理硬件的软件系统；存储系统；网络；其它组件系统；RPC；研发环境<br>6.如何度量风险：可用性，基于时间；基于请求数<br>7.对风险的容忍度：消费者服务和基础设施服务<br>8.错误预算，主要是对产研和维护的平衡。当预算足够，可进行研发；否则，进行维护<br>9.SLI、SLO、SLA。常见的SLI包括：延迟；错误率；吞吐量；可用性。SLO是服务质量目标的意思，根据SLI制定。而SLA讨论的是如果达到或达不到SLO会有什么后果<br>10.监控包括白盒监控和黑盒监控，白盒往往是一些指标数据；而黑盒往往基于发生的现象。原因和现象的区分对降低监控系统的信噪比很重要<br>11.为什么要监控：做对比实验；报警；预测后续的变化；进行回溯分析。黄金4指标：延迟；错误；流量；饱和度<br>12.当添加新的监控规则时，应该考虑：是否能够被监控到；是不是真的使用户正在受影响；是否需要做某些处理；是否应该立即做处理；应该发出报警给哪些人；是否可以忽略<br>13.自动化可以使效率倍增，但是如果是错误的自动化，也会导致大规模的故障<br>14.减少琐事。哪些是琐事：重复性；随服务数量呈线性增长；没有持久价值；可被自动化的；突然出现的、非计划的<br>15.简化一切：去除无用代码；最小API；模块化；测试、发布的简单化。总之，解耦</p>
+<h5 id="项目中接入prometheus监控"><a href="#项目中接入prometheus监控" class="headerlink" title="项目中接入prometheus监控"></a>项目中接入prometheus监控</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http_server_requests_seconds_count&#123;application=&quot;xxx&quot;,exception=&quot;None&quot;,method=&quot;GET&quot;,</span><br><span class="line">status=&quot;200&quot;,uri=&quot;/metrics/prometheus&quot;,&#125; 368818.0</span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>metric name</td>
+<td>http_server_requests_seconds_count</td>
+<td></td>
+</tr>
+<tr>
+<td>labels</td>
+<td>{}里面的</td>
+<td></td>
+</tr>
+<tr>
+<td>metric value</td>
+<td>368818.0</td>
+<td></td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>1570782664</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gm3ej2zgv0j30nv0a9myb.jpg" alt="Screen Shot 2020-12-28 at 11.19.11 AM"></p>
+<p>rate(v range-vector) calculates the per-second average rate of increase of the time series in the range vector</p>
+<p>Rate计算在范围向量中，时间序列每秒的平均新增率</p>
+<p>irate取的是在指定时间范围内的最近两个数据点来算速率，而rate会取指定时间范围内所有数据点，算出一组速率，然后取平均值作为结果。[]选取的是范围向量，即一段时间类的时序数据</p>
+<p>比如查询过去1分钟内Http返回200的请求的每秒平均新增速率</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rate(http_server_requests_seconds_sum&#123;code=&quot;200&quot;&#125;[1m])</span><br></pre></td></tr></table></figure>
+<p>rate()函数返回值类型只能用counters， 当用图表显示增长缓慢的样本数据时，这个函数是非常合适的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rate(http_server_requests_seconds_sum[1m])/rate(http_server_requests_seconds_count[1m])</span><br></pre></td></tr></table></figure>
+<p>指标命名规范：</p>
+<ul>
+<li>必须有一个单独的单位，比如不能把second和byte混合</li>
+<li>应该使用基础单位，比如seconds而不是milliseconds</li>
+<li>在前缀中显示类似于命名空间的名称，比如<strong>http</strong>_request_duration_seconds表示http请求相关的指标</li>
+<li>在后缀中加入单位，比如http_request_duration_seconds、node_memory_usage_<strong>bytes</strong></li>
+<li>标签维度中体现的是相同的正在监控的对象，比如method、status、uri这些标签都属于http请求的属性</li>
+</ul>
 
       
     </div>
@@ -770,8 +837,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/code/线程池错误/" rel="next" title="Http线程池报错分析">
-                <i class="fa fa-chevron-left"></i> Http线程池报错分析
+              <a href="/code/cas单点登录/" rel="next" title="CAS单点登录示意图">
+                <i class="fa fa-chevron-left"></i> CAS单点登录示意图
               </a>
             
           </div>
@@ -868,7 +935,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">76</span>
+                  <span class="site-state-item-count">73</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -951,7 +1018,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#监控的red原则"><span class="nav-number">1.</span> <span class="nav-text">监控的red原则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基础设施监控"><span class="nav-number">2.</span> <span class="nav-text">基础设施监控</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#prometheus指标详解"><span class="nav-number">3.</span> <span class="nav-text">prometheus指标详解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#标准化日志示例"><span class="nav-number">4.</span> <span class="nav-text">标准化日志示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringBoot项目中prometheus配置示例"><span class="nav-number">5.</span> <span class="nav-text">SpringBoot项目中prometheus配置示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#稳定性分析"><span class="nav-number">6.</span> <span class="nav-text">稳定性分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在机器上部署prometheus全家桶"><span class="nav-number">7.</span> <span class="nav-text">在机器上部署prometheus全家桶</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#系统故障排查需要考虑的因素"><span class="nav-number">8.</span> <span class="nav-text">系统故障排查需要考虑的因素</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#监控的red原则"><span class="nav-number">1.</span> <span class="nav-text">监控的red原则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基础设施监控"><span class="nav-number">2.</span> <span class="nav-text">基础设施监控</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#prometheus指标详解"><span class="nav-number">3.</span> <span class="nav-text">prometheus指标详解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#标准化日志示例"><span class="nav-number">4.</span> <span class="nav-text">标准化日志示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringBoot项目中prometheus配置示例"><span class="nav-number">5.</span> <span class="nav-text">SpringBoot项目中prometheus配置示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#稳定性分析"><span class="nav-number">6.</span> <span class="nav-text">稳定性分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在机器上部署prometheus全家桶"><span class="nav-number">7.</span> <span class="nav-text">在机器上部署prometheus全家桶</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#系统故障排查需要考虑的因素"><span class="nav-number">8.</span> <span class="nav-text">系统故障排查需要考虑的因素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#项目中接入prometheus监控"><span class="nav-number">9.</span> <span class="nav-text">项目中接入prometheus监控</span></a></li></ol></div>
             
 
           </div>
@@ -985,7 +1052,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">73.8k</span>
+    <span title="Site words total count">74k</span>
   
 </div>
 
