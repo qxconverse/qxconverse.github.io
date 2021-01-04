@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="开始写作">
+<meta name="description" content="在Gitlab项目中添加CI的过程安装Docker获取gitlab-runner1234docker run -d --name gitlab-runner --restart always \  -v /srv/gitlab-runner/config:/etc/gitlab-runner \  -v /var/run/docker.sock:/var/run/docker.sock \  gi">
 <meta name="keywords" content="ci&#x2F;cd,运维">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CI&#x2F;CD相关">
 <meta property="og:url" content="https://qxconverse.github.io/code/CI-CD相关/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="开始写作">
+<meta property="og:description" content="在Gitlab项目中添加CI的过程安装Docker获取gitlab-runner1234docker run -d --name gitlab-runner --restart always \  -v /srv/gitlab-runner/config:/etc/gitlab-runner \  -v /var/run/docker.sock:/var/run/docker.sock \  gi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-25T12:12:34.689Z">
+<meta property="og:updated_time" content="2021-01-04T04:23:42.733Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CI&#x2F;CD相关">
-<meta name="twitter:description" content="开始写作">
+<meta name="twitter:description" content="在Gitlab项目中添加CI的过程安装Docker获取gitlab-runner1234docker run -d --name gitlab-runner --restart always \  -v /srv/gitlab-runner/config:/etc/gitlab-runner \  -v /var/run/docker.sock:/var/run/docker.sock \  gi">
 
 
 
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-25T20:12:34+08:00">
-                2020-10-25
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-04T12:23:42+08:00">
+                2021-01-04
               </time>
             
           </span>
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  227
+                  634
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -420,10 +420,28 @@
       
 
       
-        <p>开始写作</p>
-<hr>
+        <h4 id="在Gitlab项目中添加CI的过程"><a href="#在Gitlab项目中添加CI的过程" class="headerlink" title="在Gitlab项目中添加CI的过程"></a>在Gitlab项目中添加CI的过程</h4><h5 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h5><h5 id="获取gitlab-runner"><a href="#获取gitlab-runner" class="headerlink" title="获取gitlab-runner"></a>获取gitlab-runner</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name gitlab-runner --restart always \</span><br><span class="line">  -v /srv/gitlab-runner/config:/etc/gitlab-runner \</span><br><span class="line">  -v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">  gitlab/gitlab-runner:latest</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
-<p>启动报错，发现是无法读取到uc配置，后来看服务器加载的是test1的配置文件，而项目中没有。</p>
+<p>进入到项目的CI设置界面，查看下面2个配置参数</p>
+<ol>
+<li>Specify the following URL during the Runner setup: <code>xxx</code></li>
+<li>Use the following registration token during setup: <code>xxx</code></li>
+</ol>
+<p>分别用于下面的url、registration-token的参数配置</p>
+<h5 id="注册runner"><a href="#注册runner" class="headerlink" title="注册runner"></a>注册runner</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker run --rm -v /srv/gitlab-runner/config:/etc/gitlab-runner gitlab/gitlab-runner register \</span><br><span class="line">  --non-interactive \</span><br><span class="line">  --executor <span class="string">"docker"</span> \</span><br><span class="line">  --docker-image xxx \</span><br><span class="line">  --url <span class="string">"xxx"</span> \</span><br><span class="line">  --registration-token <span class="string">"xxx"</span> \</span><br><span class="line">  --description <span class="string">"docker-runner"</span> \</span><br><span class="line">  --tag-list <span class="string">"xxx"</span> \</span><br><span class="line">  --run-untagged=<span class="string">"true"</span> \</span><br><span class="line">  --locked=<span class="string">"false"</span> \</span><br><span class="line">  --access-level=<span class="string">"not_protected"</span></span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ol>
+<li>其中的xxx是需要根据实际情况进行配置的，包括镜像名称、注册token、标签等，其中后两者可在gitlab项目的CI/CD配置中进行配置；其中的docker-image可以使用官方默认的，也可以自己生成镜像以适应不同的需求</li>
+<li>在mac中要用/Users/Shared来替换/srv</li>
+</ol>
+<p>Gitlab api相关，具体可以看Gitlab api官网</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://xxx/api/v4/projects?private_token=xxx</span><br><span class="line"></span><br><span class="line">curl --header &quot;PRIVATE-TOKEN: xxx&quot; http://xxx/api/v4/projects/project_id/repository/files/xxx?ref=master</span><br></pre></td></tr></table></figure>
+<p>Git提交时的hook相关，参考：<a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks" target="_blank" rel="noopener">https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks</a></p>
+<p>添加git的hook时，遇到的问题</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp .git/hooks/pre-commit /tmp/pre-commit</span><br><span class="line"></span><br><span class="line">tr -d '\r' &lt; /tmp/pre-commit &gt; .git/hooks/pre-commit</span><br></pre></td></tr></table></figure>
+<p>自定义生成的镜像（加入了maven和checkstyle包）</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> maven:<span class="number">3.6</span>.<span class="number">1</span>-jdk-<span class="number">8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> <span class="built_in">set</span> -eux; \</span></span><br><span class="line"><span class="bash">        apt-get install -y --no-install-recommends \</span></span><br><span class="line"><span class="bash">        git \</span></span><br><span class="line"><span class="bash">        curl \</span></span><br><span class="line"><span class="bash">        unzip \</span></span><br><span class="line"><span class="bash">        ; \</span></span><br><span class="line"><span class="bash">        rm -rf /var/lib/apt/lists/*; \</span></span><br><span class="line"><span class="bash">    mkdir -p /usr/<span class="built_in">local</span>/checkstyle; \</span></span><br><span class="line"><span class="bash">    curl -L https://github.com/checkstyle/checkstyle/releases/download/checkstyle-8.23/checkstyle-8.23-all.jar -o /usr/<span class="built_in">local</span>/checkstyle/checkstyle-8.23-all.jar;</span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">ENV TZ=<span class="string">"Asia/Shanghai"</span></span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">LABEL checkstyle.path=<span class="string">"/usr/local/checkstyle/checkstyle-8.23-all.jar"</span></span></span><br><span class="line"><span class="bash"></span></span><br><span class="line"><span class="bash">CMD [<span class="string">"java"</span>]</span></span><br></pre></td></tr></table></figure>
+<h4 id="ci-cd问题记录"><a href="#ci-cd问题记录" class="headerlink" title="ci/cd问题记录"></a>ci/cd问题记录</h4><p>启动报错，发现是无法读取到uc配置，后来看服务器加载的是test1的配置文件，而项目中没有。</p>
 <p>于是慢慢找到了setenv.sh文件，里面SPRING_PROFILES_ACTIVE并没有写成test，而是自动根据所选择的所以就改过去了。</p>
 <p>不过发现不改也有好处，就是可以配置不同的test环境，在项目中可以指定test1/test2配置文件，而不是仅仅只有一个test配置文件。</p>
 <p>部署时如何串起来</p>
@@ -499,8 +517,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/code/python爬虫/" rel="next" title="python爬虫">
-                <i class="fa fa-chevron-left"></i> python爬虫
+              <a href="/life/居家自制美食/" rel="next" title="居家自制美食">
+                <i class="fa fa-chevron-left"></i> 居家自制美食
               </a>
             
           </div>
@@ -570,8 +588,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -588,7 +615,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -599,7 +626,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -610,7 +637,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -662,6 +689,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#在Gitlab项目中添加CI的过程"><span class="nav-number">1.</span> <span class="nav-text">在Gitlab项目中添加CI的过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装Docker"><span class="nav-number">1.1.</span> <span class="nav-text">安装Docker</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取gitlab-runner"><span class="nav-number">1.2.</span> <span class="nav-text">获取gitlab-runner</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注册runner"><span class="nav-number">1.3.</span> <span class="nav-text">注册runner</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ci-cd问题记录"><span class="nav-number">2.</span> <span class="nav-text">ci/cd问题记录</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -675,7 +718,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -689,7 +732,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">69.2k</span>
+    <span title="Site words total count">62.8k</span>
   
 </div>
 

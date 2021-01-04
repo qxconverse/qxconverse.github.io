@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
 <meta property="og:description" content="数据库相关可以通过length函数查看字符串中字符的数目1select length(&amp;apos;aa&amp;apos;);">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-12-25T07:44:20.062Z">
+<meta property="og:updated_time" content="2021-01-04T04:17:34.649Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库相关">
 <meta name="twitter:description" content="数据库相关可以通过length函数查看字符串中字符的数目1select length(&amp;apos;aa&amp;apos;);">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-12-25T15:44:20+08:00">
-                2020-12-25
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-04T12:17:34+08:00">
+                2021-01-04
               </time>
             
           </span>
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1k
+                  1.6k
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  6
                 </span>
               
             </div>
@@ -451,6 +451,67 @@
 <h5 id="出现慢查询时，使用explain-sql语句的方式，查看执行信息，排查耗时的地方"><a href="#出现慢查询时，使用explain-sql语句的方式，查看执行信息，排查耗时的地方" class="headerlink" title="出现慢查询时，使用explain+sql语句的方式，查看执行信息，排查耗时的地方"></a>出现慢查询时，使用explain+sql语句的方式，查看执行信息，排查耗时的地方</h5><p>很多慢查询的问题，可以先用索引解决，特别是涉及到连表查询的时候</p>
 <p>mybatis中更新操作，最好不要设置updateTime更新语句（前提是数据库中设置<code>CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP</code>）。特别是使用BeanUtils.copyPropertie或根据id获取时，由于里面的updateTime本身就不为空，这时判断<code>&lt;if test=&quot;updateTime != null&quot;&gt;update_time=#{updateTime},&lt;/if&gt;</code>，就会更新为当前已有的那个值，所以，还是没有更新到当前时间。</p>
 <h5 id="关于使用limit、offset的问题"><a href="#关于使用limit、offset的问题" class="headerlink" title="关于使用limit、offset的问题"></a>关于使用limit、offset的问题</h5><p><a href="https://explainextended.com/2009/10/23/mysql-order-by-limit-performance-late-row-lookups/" target="_blank" rel="noopener">https://explainextended.com/2009/10/23/mysql-order-by-limit-performance-late-row-lookups/</a></p>
+<h5 id="Druid是为监控而生的数据库连接池"><a href="#Druid是为监控而生的数据库连接池" class="headerlink" title="Druid是为监控而生的数据库连接池"></a>Druid是为监控而生的数据库连接池</h5><p>和java里面线程池、httpclient里面的http请求池类似，凡是涉及到连接、断开操作的东西，都可以有池的概念。为的是更好地实现资源复用。数据库连接池的基本原理是在内部对象池中维护一定数量的数据库连接，并对外暴露数据库连接获取和返回方法。</p>
+<blockquote>
+<p>连接池只应该有maxPoolSize和minPoolSize，druid只保留了maxActive和minIdle，分别相当于maxPoolSize和minPoolSize。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>讲解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>maxActive</td>
+<td>最大连接池数量</td>
+</tr>
+<tr>
+<td>minIdle</td>
+<td>最小连接池数量</td>
+</tr>
+<tr>
+<td>activeCount</td>
+<td>当前连接数</td>
+</tr>
+<tr>
+<td>connectCount</td>
+<td>总的连接次数</td>
+</tr>
+<tr>
+<td>closeCount</td>
+<td>总的断开连接次数</td>
+</tr>
+<tr>
+<td>poolingCount</td>
+<td>连接池中的连接数</td>
+</tr>
+<tr>
+<td>createCount</td>
+<td>创建的连接数</td>
+</tr>
+<tr>
+<td>recycleCount</td>
+<td>回收的总连接数</td>
+</tr>
+<tr>
+<td>activePeak</td>
+<td>当前连接数的峰值</td>
+</tr>
+<tr>
+<td>poolingPeak</td>
+<td>连接池中连接数的峰值</td>
+</tr>
+</tbody>
+</table>
+<p>发现很多地方都有idle这个字眼，idle的意思是：懒散的、闲置的。</p>
+<p>这是线程池的状态信息：从中可以分析出各个参数是什么意思。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    CreateTime:&quot;2019-09-26 09:58:31&quot;,</span><br><span class="line">    ActiveCount:0,</span><br><span class="line">    PoolingCount:5,</span><br><span class="line">    CreateCount:5,</span><br><span class="line">    DestroyCount:0,</span><br><span class="line">    CloseCount:22,</span><br><span class="line">    ConnectCount:22,</span><br><span class="line">    Connections:[</span><br><span class="line">        &#123;ID:706844266, ConnectTime:&quot;2019-09-26 09:58:35&quot;, UseCount:0, LastActiveTime:&quot;2019-09-26 09:58:35&quot;&#125;,</span><br><span class="line">        &#123;ID:107269256, ConnectTime:&quot;2019-09-26 09:58:35&quot;, UseCount:0, LastActiveTime:&quot;2019-09-26 09:58:35&quot;&#125;,</span><br><span class="line">        &#123;ID:1356533172, ConnectTime:&quot;2019-09-26 09:58:35&quot;, UseCount:0, LastActiveTime:&quot;2019-09-26 09:58:35&quot;&#125;,</span><br><span class="line">        &#123;ID:2086937005, ConnectTime:&quot;2019-09-26 09:58:36&quot;, UseCount:7, LastActiveTime:&quot;2019-09-26 10:04:36&quot;&#125;,</span><br><span class="line">        &#123;ID:1523613275, ConnectTime:&quot;2019-09-26 09:58:36&quot;, UseCount:15, LastActiveTime:&quot;2019-09-26 10:04:37&quot;&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于连接池的细节，其为一个生产者/消费者模式，使用ReentrantLock + Condition的方式，即锁与同步方式</p>
+<p>Condition是为了代替传统的Object的wait()/notify()方法，实现线程间的协作。其核心函数为await()、signal()方法，作用分别对应wait()和notify()。</p>
+<p>await：释放锁、沉睡、等待唤醒；signal：获取锁，开始做事，完毕后，调用signal方法，唤醒沉睡的线程。</p>
+<p>将锁、countdownLatch、Future类解决超时问题等串起来。</p>
 
       
     </div>
@@ -517,8 +578,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/code/http的请求的一些细节/" rel="next" title="http的请求的一些细节">
-                <i class="fa fa-chevron-left"></i> http的请求的一些细节
+              <a href="/code/http请求的一些细节/" rel="next" title="http头信息">
+                <i class="fa fa-chevron-left"></i> http头信息
               </a>
             
           </div>
@@ -615,7 +676,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -626,7 +687,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -637,7 +698,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -698,7 +759,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库相关"><span class="nav-number">1.</span> <span class="nav-text">数据库相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#可以通过length函数查看字符串中字符的数目"><span class="nav-number">1.1.</span> <span class="nav-text">可以通过length函数查看字符串中字符的数目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变更数据库、表的字符集"><span class="nav-number">1.2.</span> <span class="nav-text">变更数据库、表的字符集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变更表中字段的属性"><span class="nav-number">1.3.</span> <span class="nav-text">变更表中字段的属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#展示建表的语句"><span class="nav-number">1.4.</span> <span class="nav-text">展示建表的语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#连接远程数据库"><span class="nav-number">1.5.</span> <span class="nav-text">连接远程数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库中设置非空"><span class="nav-number">1.6.</span> <span class="nav-text">数据库中设置非空</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#更新mysql用户密码"><span class="nav-number">1.7.</span> <span class="nav-text">更新mysql用户密码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis中-和-的区别"><span class="nav-number">1.8.</span> <span class="nav-text">mybatis中#和$的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#select的时候一定要加resultType或者resultMap，否则报错"><span class="nav-number">1.9.</span> <span class="nav-text">select的时候一定要加resultType或者resultMap，否则报错</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis中判断不为空，且不为空字符串"><span class="nav-number">1.10.</span> <span class="nav-text">mybatis中判断不为空，且不为空字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis查询没有数据时"><span class="nav-number">1.11.</span> <span class="nav-text">mybatis查询没有数据时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis如果只有一个参数"><span class="nav-number">1.12.</span> <span class="nav-text">mybatis如果只有一个参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#出现慢查询时，使用explain-sql语句的方式，查看执行信息，排查耗时的地方"><span class="nav-number">1.13.</span> <span class="nav-text">出现慢查询时，使用explain+sql语句的方式，查看执行信息，排查耗时的地方</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关于使用limit、offset的问题"><span class="nav-number">1.14.</span> <span class="nav-text">关于使用limit、offset的问题</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库相关"><span class="nav-number">1.</span> <span class="nav-text">数据库相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#可以通过length函数查看字符串中字符的数目"><span class="nav-number">1.1.</span> <span class="nav-text">可以通过length函数查看字符串中字符的数目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变更数据库、表的字符集"><span class="nav-number">1.2.</span> <span class="nav-text">变更数据库、表的字符集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变更表中字段的属性"><span class="nav-number">1.3.</span> <span class="nav-text">变更表中字段的属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#展示建表的语句"><span class="nav-number">1.4.</span> <span class="nav-text">展示建表的语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#连接远程数据库"><span class="nav-number">1.5.</span> <span class="nav-text">连接远程数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库中设置非空"><span class="nav-number">1.6.</span> <span class="nav-text">数据库中设置非空</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#更新mysql用户密码"><span class="nav-number">1.7.</span> <span class="nav-text">更新mysql用户密码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis中-和-的区别"><span class="nav-number">1.8.</span> <span class="nav-text">mybatis中#和$的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#select的时候一定要加resultType或者resultMap，否则报错"><span class="nav-number">1.9.</span> <span class="nav-text">select的时候一定要加resultType或者resultMap，否则报错</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis中判断不为空，且不为空字符串"><span class="nav-number">1.10.</span> <span class="nav-text">mybatis中判断不为空，且不为空字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis查询没有数据时"><span class="nav-number">1.11.</span> <span class="nav-text">mybatis查询没有数据时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis如果只有一个参数"><span class="nav-number">1.12.</span> <span class="nav-text">mybatis如果只有一个参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#出现慢查询时，使用explain-sql语句的方式，查看执行信息，排查耗时的地方"><span class="nav-number">1.13.</span> <span class="nav-text">出现慢查询时，使用explain+sql语句的方式，查看执行信息，排查耗时的地方</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关于使用limit、offset的问题"><span class="nav-number">1.14.</span> <span class="nav-text">关于使用limit、offset的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Druid是为监控而生的数据库连接池"><span class="nav-number">1.15.</span> <span class="nav-text">Druid是为监控而生的数据库连接池</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -718,7 +779,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -732,7 +793,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">69.2k</span>
+    <span title="Site words total count">62.8k</span>
   
 </div>
 

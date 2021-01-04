@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
 <meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-25T12:11:04.003Z">
+<meta property="og:updated_time" content="2021-01-04T04:25:41.581Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机思维">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-25T20:11:04+08:00">
-                2020-10-25
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-04T12:25:41+08:00">
+                2021-01-04
               </time>
             
           </span>
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2.1k
+                  2.8k
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7
+                  9
                 </span>
               
             </div>
@@ -441,8 +441,7 @@
 <li>DAG，即有向无环图，有向即代表有先后的次序，而无环又可以保证不会形成死循环，常常被用来表示事件之间的驱动依赖关系，因此可以用来对任务进行调度。</li>
 <li>堆栈思想，方法的调用过程含有栈的思想，每次开始调用时入栈操作，调用结束后，出栈。</li>
 </ol>
-<p>代码review时应当关注的点：</p>
-<ol>
+<h4 id="代码review时应当关注的点："><a href="#代码review时应当关注的点：" class="headerlink" title="代码review时应当关注的点："></a>代码review时应当关注的点：</h4><ol>
 <li>具体某行代码的深入理解（要求你弄懂整个代码流程）</li>
 <li>参数校验（考虑边界情况）</li>
 <li>对象是否为空（需要检验是否为空）</li>
@@ -509,6 +508,21 @@
 <li>linux指令、线上机器排查问题（运维能力）</li>
 <li>高效写代码、自测与改bug（开发效率）</li>
 </ol>
+<h4 id="阅读关于IaaS、PaaS-SaaS相关的知识点"><a href="#阅读关于IaaS、PaaS-SaaS相关的知识点" class="headerlink" title="阅读关于IaaS、PaaS/SaaS相关的知识点"></a>阅读关于IaaS、PaaS/SaaS相关的知识点</h4><p>我的理解是，从云计算服务角色来看，就是提供东西的多少：SaaS，不给你提供任何东西，成品给你；PaaS，给你提供少量东西，剩下大部分自己做；IaaS，给你提供大多数东西，你可以自由发挥剩下的部分。从用户角色来看，就是获得东西的多少：SaaS，获得全部成品，自己不用劳神；PaaS，获得部分原材料，自己要劳神；IaaS，获得全部原材料，完全自己做。</p>
+<p>SOA的概念：面向服务的架构，我的理解是，它是微服务等很多流行框架的基础思想</p>
+<h4 id="关于5种I-O模型的理解"><a href="#关于5种I-O模型的理解" class="headerlink" title="关于5种I/O模型的理解"></a>关于5种I/O模型的理解</h4><p>以喝咖啡举例， 在网上点了咖啡粉外卖，要等外卖小哥送咖啡，然后泡咖啡，喝咖啡</p>
+<ol>
+<li>阻塞式I/O：一直站在家里等咖啡（其它什么事不做）送到，然后泡咖啡</li>
+<li>非阻塞式I/O：不停地给外卖小哥打电话（其它什么事不做），送到后泡咖啡</li>
+<li>IO多路复用：一开始和小哥说好，到了后打电话，同时站在家里等（于此同时，他还在等其它的外卖，也是什么事不做），一旦咖啡到了，就泡咖啡</li>
+<li>信号驱动式IO：干自己的事情，外卖小哥到了后打电话让你取咖啡，然后你泡咖啡</li>
+<li>异步IO：一直干自己的事情，整个事情都让女朋友来做，做好了通知自己过去喝</li>
+</ol>
+<!--more-->
+<p>前面3种提到的IO都是同步的，与之相对应的是异步IO。这是一个维度，还有一个是阻塞的维度。传统的是阻塞的IO，不管是C端还是S端，都是阻塞的。接着是非阻塞的IO，主要通过C端的轮询来实现。后面的多路复用，它也是非阻塞的，通过选择器和通道来实现。主要采用的是反应器（Reactor）模式。涉及到事件的注册和订阅。</p>
+<p>很早很早之前，Java的api只支持由本地系统套接字库提供的阻塞函数。阻塞体现在服务器端的监听过程，直到有新的连接，这时就建立一个双方通信的socket。接着它继续监听。其缺点是只能同时处理一个连接，要管理多个并发的客户端连接，需要开启多个线程。</p>
+<p>下面是核心的服务端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ServerSocket serverSocket = <span class="keyword">new</span> ServerSocket(<span class="number">8888</span>);</span><br><span class="line">Socket socket = serverSocket.accept();</span><br><span class="line">BufferedReader in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</span><br><span class="line">PrintWriter out = <span class="keyword">new</span> PrintWriter(socket.getOutputStream(), <span class="keyword">true</span>);</span><br><span class="line">String request, response;</span><br><span class="line"><span class="keyword">while</span> ((request = in.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">"OK"</span>.equals(request)) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    response = processRequest(request);</span><br><span class="line">    out.println(response);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -575,8 +589,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/code/IO模型/" rel="next" title="IO模型">
-                <i class="fa fa-chevron-left"></i> IO模型
+              <a href="/code/java虚拟机/" rel="next" title="Java虚拟机">
+                <i class="fa fa-chevron-left"></i> Java虚拟机
               </a>
             
           </div>
@@ -646,8 +660,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -664,7 +687,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -675,7 +698,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -686,7 +709,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -738,6 +761,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码review时应当关注的点："><span class="nav-number">1.</span> <span class="nav-text">代码review时应当关注的点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#阅读关于IaaS、PaaS-SaaS相关的知识点"><span class="nav-number">2.</span> <span class="nav-text">阅读关于IaaS、PaaS/SaaS相关的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于5种I-O模型的理解"><span class="nav-number">3.</span> <span class="nav-text">关于5种I/O模型的理解</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -751,7 +790,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -765,7 +804,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">69.2k</span>
+    <span title="Site words total count">62.8k</span>
   
 </div>
 

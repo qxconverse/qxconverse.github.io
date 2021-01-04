@@ -282,460 +282,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/code/DataSource之Druid/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qinxue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XXQIN'S BLOG">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/code/DataSource之Druid/" itemprop="url">Druid连接池</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-08T20:07:39+08:00">
-                2019-10-08
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-10-08T20:08:18+08:00">
-                2019-10-08
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  537
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Druid是为监控而生的数据库连接池。</p>
-<p>和java里面线程池、httpclient里面的http请求池类似，凡是涉及到连接、断开操作的东西，都可以有池的概念。为的是更好地实现资源复用。数据库连接池的基本原理是在内部对象池中维护一定数量的数据库连接，并对外暴露数据库连接获取和返回方法。</p>
-<blockquote>
-<p>连接池只应该有maxPoolSize和minPoolSize，druid只保留了maxActive和minIdle，分别相当于maxPoolSize和minPoolSize。</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>讲解</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>maxActive</td>
-<td>最大连接池数量</td>
-</tr>
-<tr>
-<td>minIdle</td>
-<td>最小连接池数量</td>
-</tr>
-<tr>
-<td>activeCount</td>
-<td>当前连接数</td>
-</tr>
-<tr>
-<td>connectCount</td>
-<td>总的连接次数</td>
-</tr>
-<tr>
-<td>closeCount</td>
-<td>总的断开连接次数</td>
-</tr>
-<tr>
-<td>poolingCount</td>
-<td>连接池中的连接数</td>
-</tr>
-<tr>
-<td>createCount</td>
-<td>创建的连接数</td>
-</tr>
-<tr>
-<td>recycleCount</td>
-<td>回收的总连接数</td>
-</tr>
-<tr>
-<td>activePeak</td>
-<td>当前连接数的峰值</td>
-</tr>
-<tr>
-<td>poolingPeak</td>
-<td>连接池中连接数的峰值</td>
-</tr>
-</tbody>
-</table>
-<p>发现很多地方都有idle这个字眼，idle的意思是：懒散的、闲置的。</p>
-<p>这是线程池的状态信息：从中可以分析出各个参数是什么意思。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    CreateTime:&quot;2019-09-26 09:58:31&quot;,</span><br><span class="line">    ActiveCount:0,</span><br><span class="line">    PoolingCount:5,</span><br><span class="line">    CreateCount:5,</span><br><span class="line">    DestroyCount:0,</span><br><span class="line">    CloseCount:22,</span><br><span class="line">    ConnectCount:22,</span><br><span class="line">    Connections:[</span><br><span class="line">        &#123;ID:706844266, ConnectTime:&quot;2019-09-26 09:58:35&quot;, UseCount:0, LastActiveTime:&quot;2019-09-26 09:58:35&quot;&#125;,</span><br><span class="line">        &#123;ID:107269256, ConnectTime:&quot;2019-09-26 09:58:35&quot;, UseCount:0, LastActiveTime:&quot;2019-09-26 09:58:35&quot;&#125;,</span><br><span class="line">        &#123;ID:1356533172, ConnectTime:&quot;2019-09-26 09:58:35&quot;, UseCount:0, LastActiveTime:&quot;2019-09-26 09:58:35&quot;&#125;,</span><br><span class="line">        &#123;ID:2086937005, ConnectTime:&quot;2019-09-26 09:58:36&quot;, UseCount:7, LastActiveTime:&quot;2019-09-26 10:04:36&quot;&#125;,</span><br><span class="line">        &#123;ID:1523613275, ConnectTime:&quot;2019-09-26 09:58:36&quot;, UseCount:15, LastActiveTime:&quot;2019-09-26 10:04:37&quot;&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>对于连接池的细节，其为一个生产者/消费者模式，使用ReentrantLock + Condition的方式，即锁与同步方式</p>
-<p>Condition是为了代替传统的Object的wait()/notify()方法，实现线程间的协作。其核心函数为await()、signal()方法，作用分别对应wait()和notify()。</p>
-<p>await：释放锁、沉睡、等待唤醒</p>
-<p>signal：获取锁，开始做事，完毕后，调用signal方法，唤醒沉睡的线程。</p>
-<p>将锁、countdownLatch、Future类解决超时问题等串起来</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/life/狼人杀经验/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qinxue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XXQIN'S BLOG">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/life/狼人杀经验/" itemprop="url">狼人杀经验</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-06T10:15:02+08:00">
-                2019-01-06
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2019-07-30T00:32:08+08:00">
-                2019-07-30
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  920
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  3
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li>狼队旱跳预言家，给任何人发金水都是毫无意义的。</li>
-<li>如果有2个以上的预言家竞选，并且好人队很难分清，狼人更倾向于给假的预言家投票。</li>
-<li>如果上警的人发言很没自信，那很大程度上不是预言家。</li>
-<li>如果有人穿自己的衣服，就要说出来，虽然不能决定那个产衣服的人的身份。</li>
-<li>如果你是狼人，你穿衣服被发现了，那就主动让出</li>
-<li>分析票型时，要记住谁站自己一边</li>
-<li>给尸体发金水，很有可能是假的预言家</li>
-<li>平民跳了预言家，如果被预言家怀疑了，就要退水</li>
-<li>女巫如果第一晚不救人，那么预言家最多可以验3个人，第一晚一个，第二晚有人杀他，女巫救，第三晚再验一个。同时保持警徽流，即验谁，如果是好人，给他警徽，否则他就是狼人。所以预言家上警很有必要！</li>
-<li>猎人的衣服，一般没有人敢穿，否则作死。但是穿女巫的衣服比较容易，因为你说自己是女巫，事情都是发生在夜晚。没人知道你是不是真的。</li>
-<li>猎人互殴，那是猎人的事情，不用管，女巫也是。真女巫晚上可以毒死假的女巫。如果有人认女巫，那么真女巫就去毒，毒对的概率50%。</li>
-<li>如果自己真的是好人警长，别人也怀疑自己，这时就要分析狼人的数目，表示我如果是狼的话，已经赢了，但是游戏没有结束，说明我不是狼。</li>
-<li>如果你是平民，且发现神已经死得差不多了，这时候要主动穿衣服。那个真的神要去接，表示我真的不是那个神。不然好人方就很难赢了。</li>
-<li>狼人给金水更容易些，因为他能给对，而好人，除了预言家可以给对，其他人都不敢随意给金水的。</li>
-</ol>
-<p>从最开始的上警开始：<br>一般情况下，警上会有狼，也有没有狼的情况，但是多于两狼的情况比较小。</p>
-<p>平民一般会有上警的，通常情况下是防预言家对跳；当然，狼人这个时候也有可能上警自称防对跳。比较难判断，当后面有比较可信的强神后，防对跳的基本上全会退水。</p>
-<p>前置位平民一般不会跳预言家，因为他也不知道谁是查杀或是金水；因此，前置位跳预言家的一般是狼人或真的预言家。</p>
-<p>狼人跳预言家发金水并没有卵用，一般也不会查杀好人，不然会受到好人怀疑；于是常见的玩法是，狼人跳预言家查杀狼人，玩配合。然后被查杀的狼人自曝，以使好人相信假预言家。</p>
-<p>如果狼人跳预言家后被怀疑，一般会选择自刀。</p>
-<p>女巫的药很关键，开头一般不会用，解药一般会保自己或是救预言家，而毒药一般会在自己死之前撒出去给嫌疑最大的人。</p>
-<p>当一个人各种分析晚上毒杀情况，又不是女巫的时候，他很有可能就是狼人，因为他自己最清楚自己杀了谁，而女巫又救了谁或是毒了谁。</p>
-<p>当一个人前面竞选警长而又不自信的情况时，很有可能是狼人。</p>
-<p>当女巫毒用过了，狼人就可以穿女巫的衣服了。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/code/区块链基础/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2319,11 +1865,387 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/code/零知识证明/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qinxue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XXQIN'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/code/零知识证明/" itemprop="url">零知识证明</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-22T13:42:06+08:00">
+                2017-10-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-07-30T00:10:01+08:00">
+                2019-07-30
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  366
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>零知识证明（Zero-knowledge proofs）</p>
+<p>零知识证明是一种特殊的交互式证明，其中证明者知道问题的答案，他需要向验证者证明“他知道答案”这一事实，但是要求验证者不能获得答案的任何信息。</p>
+<p>可以参考这样一个简单的例子。证明者和验证者都拿到了一个数独的题目，证明者知道一个解法，他可以采取如下这种零知识证明方法：他找出81张纸片，每一张纸片上写上1到9的一个数字，使得正好有9份写有从1到9的纸片。然后因为他知道答案，他可以把所有的纸片按照解法放在一个9乘9的方格内，使得满足数独的题目要求（每列、每行、每个九宫格都正好有1到9）。放好之后他把所有的纸片翻转，让没有字的一面朝上。这样验证者没办法看到纸片上的数字。接下来，验证者就验证数独的条件是否满足。比如他选一列，这时证明者就把这一列的纸片收集起来，把顺序任意打乱，然后把纸片翻过来，让验证者看到1到9的纸片都出现了。整个过程中验证者都无法得知每张纸片的位置，但是却能验证确实是1到9都出现了。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/art/读书笔记/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qinxue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XXQIN'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/art/读书笔记/" itemprop="url">读书笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-11T13:48:46+08:00">
+                2016-12-11
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-07-30T00:08:26+08:00">
+                2019-07-30
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/art/" itemprop="url" rel="index">
+                    <span itemprop="name">人文艺术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="精神分析引论-2016-12-11"><a href="#精神分析引论-2016-12-11" class="headerlink" title="精神分析引论 (2016-12-11)"></a>精神分析引论 (2016-12-11)</h4><p>一个孩童总要先爱自己，才能学会牺牲一部分自我去关爱他人。即便他从一开始便表现出对某些人的喜爱，那也是因为他需要他们，不能离开他们，总之仍是出于自私的目的。直到后来，爱的冲动才脱离自私。人可以说是因为自私才学会关爱他人。</p>
+<p>今天终于看完了这本很厚的书，前面有关于失误行为和梦的部分看得比较认真，而后面关于精神分析由于其内容太过专业且相对前面示例较少、理论过多而看得比较粗略。</p>
+<p>首先前面两部分是为后面的精神分析做铺垫的，大致上讲的是潜意识和意识的知识，无论是失误行为还是梦，我的理解是对压抑在最深处的潜意识的一种释放，而这些潜意识与大脑中的意识是矛盾的、争锋相对的。而梦境又是很扭曲的，也是有过二级加工的，对一些内容进行过滤；不得不说，弗洛伊德的许多关于此方面的理论都与性挂钩，除此之外，他还很侧重对童年进行研究。比如他强调了儿童时的经历对成年后梦境以及一些精神官能症（比如歇斯底里症，强迫症，妄想症等等）的影响。而性更是与这些相结合起来了，在他的精神分析理论中，这些症状的产生往往是因为在性上面的失败，并强调一旦性方面得到了满足，这些症状便会消失。其中他提出了力比多这个概念，泛指一切身体器官的快感，包括性倒错者和儿童的性生活。精神分析学认为，力比多是一种本能，是一种力量，是人的心理现象发生的驱动力。力比多定理是指：一个人的力比多（性的欲望）是有限的，如果他/她将力比多用在一个人身上，那么用在另一个人身上的分量就会减少。他对症状的化解提出的观点是：将潜意识的东西移到意识中。由于水平有限，暂时的感受就是这些。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/art/读书笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2371,7 +2293,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2382,7 +2304,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2393,7 +2315,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -2458,7 +2380,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -2472,7 +2394,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">69.2k</span>
+    <span title="Site words total count">62.8k</span>
   
 </div>
 
