@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="未授权读取（read uncommitted） 授权读取（read committed） 可重复读取（repeatable read） 序列化（serializable）">
+<meta name="description" content="数据库事务四种隔离级别">
 <meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库事务四种隔离级别">
 <meta property="og:url" content="https://qxconverse.github.io/code/数据库事务四种隔离级别/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="未授权读取（read uncommitted） 授权读取（read committed） 可重复读取（repeatable read） 序列化（serializable）">
+<meta property="og:description" content="数据库事务四种隔离级别">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-29T16:14:48.788Z">
+<meta property="og:updated_time" content="2021-01-06T12:02:37.342Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库事务四种隔离级别">
-<meta name="twitter:description" content="未授权读取（read uncommitted） 授权读取（read committed） 可重复读取（repeatable read） 序列化（serializable）">
+<meta name="twitter:description" content="数据库事务四种隔离级别">
 
 
 
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-07-30T00:14:48+08:00">
-                2019-07-30
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-06T20:02:37+08:00">
+                2021-01-06
               </time>
             
           </span>
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  878
+                  889
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -420,11 +420,12 @@
       
 
       
-        <p>未授权读取（read uncommitted）</p>
+        <p>数据库事务四种隔离级别</p>
+<a id="more"></a>
+<p>未授权读取（read uncommitted）</p>
 <p>授权读取（read committed）</p>
 <p>可重复读取（repeatable read）</p>
 <p>序列化（serializable）</p>
-<a id="more"></a>
 <p>为什么会提出这四个概念，是因为在一个事务执行的过程中，可能出现以下几种情况：</p>
 <ol>
 <li>更新丢失：两个事务同时更新一行数据，一个事务对数据的更新把另外一个事务对数据的更新覆盖了。不能应对并发</li>

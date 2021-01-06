@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g5fy3sx82dj30pi0ejq76.jpg">
-<meta property="og:updated_time" content="2021-01-04T09:38:46.856Z">
+<meta property="og:updated_time" content="2021-01-06T06:28:53.807Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机思维">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！">
@@ -331,8 +331,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-04T17:38:46+08:00">
-                2021-01-04
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-06T14:28:53+08:00">
+                2021-01-06
               </time>
             
           </span>
@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5.3k
+                  5.2k
                 </span>
               
 
@@ -443,21 +443,9 @@
 <li>无论是构建还是测试，都要一步到位，一行命令完成所有的步骤或测试</li>
 <li>DAG，即有向无环图，有向即代表有先后的次序，而无环又可以保证不会形成死循环，常常被用来表示事件之间的驱动依赖关系，因此可以用来对任务进行调度。</li>
 <li>堆栈思想，方法的调用过程含有栈的思想，每次开始调用时入栈操作，调用结束后，出栈。</li>
+<li>多台机器部署+nginx可以利用负载均衡实现高可用的目标</li>
+<li>遇到要做的东西时，直接去github上搜，比如需要做校验yml文件的小工具时，就可以使用关键词lint，比如yamllint，这样基本上都能搜出来一些项目</li>
 </ol>
-<h4 id="代码review时应当关注的点："><a href="#代码review时应当关注的点：" class="headerlink" title="代码review时应当关注的点："></a>代码review时应当关注的点：</h4><ol>
-<li>具体某行代码的深入理解（要求你弄懂整个代码流程）</li>
-<li>参数校验（考虑边界情况）</li>
-<li>对象是否为空（需要检验是否为空）</li>
-<li>异常处理（各种异常情况）</li>
-<li>日志的级别（弄清楚不同的问题的严重性）</li>
-<li>http状态码和服务器错误码的区别（一个前端一个后台）</li>
-<li>具体某个函数的理解（基础功）</li>
-<li>代码规范（习惯、风格）</li>
-<li>框架或库的选用（思考业务场景，不同框架的优缺点）</li>
-</ol>
-<p>SMART原则(具体/可衡量/可达到/彼此相关/有截止期限)</p>
-<p>多台机器部署+nginx可以利用负载均衡实现高可用的目标</p>
-<p>遇到要做的东西时，直接去github上搜，比如需要做校验yml文件的小工具时，就可以使用关键词lint，比如yamllint，这样基本上都能搜出来一些项目</p>
 <p>几种编程思想</p>
 <ol>
 <li>面向对象</li>
@@ -482,7 +470,6 @@
 <p>排查kafka问题的时候，可以借助于kafka工具，查看是哪台机器对topic进行了消费</p>
 <p>测试的时候需要加一种 数据全部为空的情况 （初始化测试问题）；测试时，后端每次更改实现方式，都需要单独再测一遍</p>
 <p>我们经常会谈到前台、中台，有时又会讲到领域驱动设计。其实，这些都要求你对业务、产品有较为深入的理解。并思考如何将业务和项目关联起来。除此之外，你还得掌握最常用的框架，理解这样的框架为什么行得通，为什么适合用它。再往下，就是语言的知识点。再往下，则是跨语言的知识点，比如数据库，网络，操作系统，数据结构和算法等等。有没有很眼熟，对！这些正是你在大学里面学习的课程。大学里面可以不教你框架、可以不教你语言，但必须教你这些。所以，要想在互联网站稳，这些知识才是必须反复去消化、总结的东西。</p>
-<p>熟悉雪花算法</p>
 <p>压测时，要做数据库和dubbo隔离，数据库隔离很简单，迁移一份完全一样的，并改为连接它。dubbo可以采用直连的方式。比如让机器都请求其中一台dubbo服务机器。</p>
 <p>压测出现的问题，主要集中在：数据库连接数、dubbo线程数、gc策略。在高并发下，需要极其优化代码耗时。从减少http请求、dubbo请求、mysql查询等方面解决</p>
 <p>上线前校验：mysql、配置文件、maven依赖包版本号、dubbo版本号</p>
@@ -623,6 +610,7 @@
 <p>9.maven</p>
 <p>10.swagger</p>
 <p>11.ci、cd</p>
+<h4 id="钩子函数和回调函数的区别"><a href="#钩子函数和回调函数的区别" class="headerlink" title="钩子函数和回调函数的区别"></a>钩子函数和回调函数的区别</h4><p>一般认为，钩子函数就是回调函数的一种，其实还是有差异的，差异地方就是：触发的时机不同。钩子函数在捕获消息的第一时间就执行，而回调函数是捕获结束时，最后一个被执行的。</p>
 
       
     </div>
@@ -870,7 +858,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码review时应当关注的点："><span class="nav-number">1.</span> <span class="nav-text">代码review时应当关注的点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#阅读关于IaaS、PaaS-SaaS相关的知识点"><span class="nav-number">2.</span> <span class="nav-text">阅读关于IaaS、PaaS/SaaS相关的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于5种I-O模型的理解"><span class="nav-number">3.</span> <span class="nav-text">关于5种I/O模型的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计模式相关"><span class="nav-number">4.</span> <span class="nav-text">设计模式相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#csrf"><span class="nav-number">5.</span> <span class="nav-text">csrf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#需要关注的知识点"><span class="nav-number">6.</span> <span class="nav-text">需要关注的知识点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#阅读关于IaaS、PaaS-SaaS相关的知识点"><span class="nav-number">1.</span> <span class="nav-text">阅读关于IaaS、PaaS/SaaS相关的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于5种I-O模型的理解"><span class="nav-number">2.</span> <span class="nav-text">关于5种I/O模型的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计模式相关"><span class="nav-number">3.</span> <span class="nav-text">设计模式相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#csrf"><span class="nav-number">4.</span> <span class="nav-text">csrf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#需要关注的知识点"><span class="nav-number">5.</span> <span class="nav-text">需要关注的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#钩子函数和回调函数的区别"><span class="nav-number">6.</span> <span class="nav-text">钩子函数和回调函数的区别</span></a></li></ol></div>
             
 
           </div>

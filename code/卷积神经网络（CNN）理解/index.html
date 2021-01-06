@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="在卷积神经网络中，拿图像来举个例子，比如图像为$m\times m$像素大小，那么就会有$m\times m$个输入，假如第一层有n个神经元，如果采用全连接的方式，那么共有$m\times m \times n$个连接，即需要$m\times m \times n$个参数。 首先我们采用稀疏连接，即每个神经元仅仅连接图像的一部分，比如$k\times k$个像素点，这里的$k&amp;lt;m$，暂时不管">
+<meta name="description" content="在卷积神经网络中，拿图像来举个例子，比如图像为$m\times m$像素大小，那么就会有$m\times m$个输入，假如第一层有n个神经元，如果采用全连接的方式，那么共有$m\times m \times n$个连接，即需要$m\times m \times n$个参数。">
 <meta name="keywords" content="深度学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="卷积神经网络（CNN）理解">
 <meta property="og:url" content="https://qxconverse.github.io/code/卷积神经网络（CNN）理解/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="在卷积神经网络中，拿图像来举个例子，比如图像为$m\times m$像素大小，那么就会有$m\times m$个输入，假如第一层有n个神经元，如果采用全连接的方式，那么共有$m\times m \times n$个连接，即需要$m\times m \times n$个参数。 首先我们采用稀疏连接，即每个神经元仅仅连接图像的一部分，比如$k\times k$个像素点，这里的$k&amp;lt;m$，暂时不管">
+<meta property="og:description" content="在卷积神经网络中，拿图像来举个例子，比如图像为$m\times m$像素大小，那么就会有$m\times m$个输入，假如第一层有n个神经元，如果采用全连接的方式，那么共有$m\times m \times n$个连接，即需要$m\times m \times n$个参数。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-13T16:28:12.973Z">
+<meta property="og:updated_time" content="2021-01-06T11:56:51.857Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="卷积神经网络（CNN）理解">
-<meta name="twitter:description" content="在卷积神经网络中，拿图像来举个例子，比如图像为$m\times m$像素大小，那么就会有$m\times m$个输入，假如第一层有n个神经元，如果采用全连接的方式，那么共有$m\times m \times n$个连接，即需要$m\times m \times n$个参数。 首先我们采用稀疏连接，即每个神经元仅仅连接图像的一部分，比如$k\times k$个像素点，这里的$k&amp;lt;m$，暂时不管">
+<meta name="twitter:description" content="在卷积神经网络中，拿图像来举个例子，比如图像为$m\times m$像素大小，那么就会有$m\times m$个输入，假如第一层有n个神经元，如果采用全连接的方式，那么共有$m\times m \times n$个连接，即需要$m\times m \times n$个参数。">
 
 
 
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-07-14T00:28:12+08:00">
-                2019-07-14
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-06T19:56:51+08:00">
+                2021-01-06
               </time>
             
           </span>
@@ -421,6 +421,7 @@
 
       
         <p>在卷积神经网络中，拿图像来举个例子，比如图像为$m\times m$像素大小，那么就会有$m\times m$个输入，假如第一层有n个神经元，如果采用全连接的方式，那么共有$m\times m \times n$个连接，即需要$m\times m \times n$个参数。</p>
+<a id="more"></a>
 <p>首先我们采用稀疏连接，即每个神经元仅仅连接图像的一部分，比如$k\times k$个像素点，这里的$k&lt;m$，暂时不管连接的方式，那么连接数和参数的个数会降低到$k\times k\times n$。</p>
 <p>其次我们再利用第二个武器，即权值共享，那么这个时候我们的每个神经元连接到$k\times k$区域的像素上的参数是一样的，所以连接数还是$k\times k\times n$，但是参数会降低到$k\times k$。</p>
 <p>好的，到目前为止，我们使用的是神经元来解释的。现在把神经元也想象成一个二维矩阵，唯一不同的是，这里将原来的一维变成了二维。而这个转变正好适用于CNN在图像上的应用。这时，我们把之前的参数（也叫权值）也看成一个二维矩阵，即一个<strong>核</strong>。利用卷积操作来运算。所以对应于之前的，我们说只连接图像的一部分，$k\times k$大小，那么这时我们定义一个核，大小也是$k\times k$，然后在这个图像中不停地移动来做卷积运算，假设每次只移动一个像素（即步长stride为1），最后就会得到输出边长为$(m-k)/1 + 1$大小的方形矩阵（图像），这时对应之前的神经元概念，其实现在的神经元个数不是$n$了，而是${((m-k)/1 + 1)} ^2$了。注：新生成的图像的边长大小（假设图像和核都宽高相等的）为$(imagesize-kernelsize)/stride + 1$。</p>
