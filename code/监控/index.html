@@ -79,22 +79,22 @@
 
 
 
-<meta name="description" content="监控的red原则 指标涉及到以下： 系统状况：可达性、CPU、内存、JVM等 各项服务：MySQL、Dubbo、Kafka等 接口访问：400、5xx日志数  rate  error duration  SLI指的是服务质量指标 常见的有：请求延迟（处理请求所消耗的时间）、错误率（请求处理失败的百分比）、系统吞吐量（每秒请求数）。还有一个可用性，代表服务可用时间的百分比。 需要注意的是：监控错误回">
+<meta name="description" content="监控的red原则">
 <meta name="keywords" content="监控">
 <meta property="og:type" content="article">
 <meta property="og:title" content="监控、日志、链路追踪">
 <meta property="og:url" content="https://qxconverse.github.io/code/监控/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="监控的red原则 指标涉及到以下： 系统状况：可达性、CPU、内存、JVM等 各项服务：MySQL、Dubbo、Kafka等 接口访问：400、5xx日志数  rate  error duration  SLI指的是服务质量指标 常见的有：请求延迟（处理请求所消耗的时间）、错误率（请求处理失败的百分比）、系统吞吐量（每秒请求数）。还有一个可用性，代表服务可用时间的百分比。 需要注意的是：监控错误回">
+<meta property="og:description" content="监控的red原则">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwly1gm3e25cnxbj30wa0dq41d.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwly1gm3e5k3cz7j31590avwhw.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwly1gm3e6dlmc0j316t0jqn4e.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwly1gm3ej2zgv0j30nv0a9myb.jpg">
-<meta property="og:updated_time" content="2021-01-04T04:21:41.827Z">
+<meta property="og:updated_time" content="2021-01-06T12:20:26.847Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="监控、日志、链路追踪">
-<meta name="twitter:description" content="监控的red原则 指标涉及到以下： 系统状况：可达性、CPU、内存、JVM等 各项服务：MySQL、Dubbo、Kafka等 接口访问：400、5xx日志数  rate  error duration  SLI指的是服务质量指标 常见的有：请求延迟（处理请求所消耗的时间）、错误率（请求处理失败的百分比）、系统吞吐量（每秒请求数）。还有一个可用性，代表服务可用时间的百分比。 需要注意的是：监控错误回">
+<meta name="twitter:description" content="监控的red原则">
 <meta name="twitter:image" content="https://tva1.sinaimg.cn/large/0081Kckwly1gm3e25cnxbj30wa0dq41d.jpg">
 
 
@@ -333,8 +333,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-04T12:21:41+08:00">
-                2021-01-04
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-06T20:20:26+08:00">
+                2021-01-06
               </time>
             
           </span>
@@ -425,7 +425,9 @@
       
 
       
-        <h5 id="监控的red原则"><a href="#监控的red原则" class="headerlink" title="监控的red原则"></a>监控的red原则</h5><p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gm3e25cnxbj30wa0dq41d.jpg" alt="Screen Shot 2020-12-28 at 11.02.25 AM"></p>
+        <p>监控的red原则</p>
+<a id="more"></a>
+<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gm3e25cnxbj30wa0dq41d.jpg" alt="Screen Shot 2020-12-28 at 11.02.25 AM"></p>
 <p>指标涉及到以下：</p>
 <p>系统状况：可达性、CPU、内存、JVM等</p>
 <p>各项服务：MySQL、Dubbo、Kafka等</p>
@@ -447,7 +449,7 @@
 <li>磁盘（存储健康）</li>
 <li>网卡（网络健康）</li>
 </ul>
-<a id="more"></a>
+<!--more-->
 <h5 id="prometheus指标详解"><a href="#prometheus指标详解" class="headerlink" title="prometheus指标详解"></a>prometheus指标详解</h5><table>
 <thead>
 <tr>
@@ -1018,7 +1020,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#监控的red原则"><span class="nav-number">1.</span> <span class="nav-text">监控的red原则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基础设施监控"><span class="nav-number">2.</span> <span class="nav-text">基础设施监控</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#prometheus指标详解"><span class="nav-number">3.</span> <span class="nav-text">prometheus指标详解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#标准化日志示例"><span class="nav-number">4.</span> <span class="nav-text">标准化日志示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringBoot项目中prometheus配置示例"><span class="nav-number">5.</span> <span class="nav-text">SpringBoot项目中prometheus配置示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#稳定性分析"><span class="nav-number">6.</span> <span class="nav-text">稳定性分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在机器上部署prometheus全家桶"><span class="nav-number">7.</span> <span class="nav-text">在机器上部署prometheus全家桶</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#系统故障排查需要考虑的因素"><span class="nav-number">8.</span> <span class="nav-text">系统故障排查需要考虑的因素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#项目中接入prometheus监控"><span class="nav-number">9.</span> <span class="nav-text">项目中接入prometheus监控</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#基础设施监控"><span class="nav-number">1.</span> <span class="nav-text">基础设施监控</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#prometheus指标详解"><span class="nav-number">2.</span> <span class="nav-text">prometheus指标详解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#标准化日志示例"><span class="nav-number">3.</span> <span class="nav-text">标准化日志示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringBoot项目中prometheus配置示例"><span class="nav-number">4.</span> <span class="nav-text">SpringBoot项目中prometheus配置示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#稳定性分析"><span class="nav-number">5.</span> <span class="nav-text">稳定性分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在机器上部署prometheus全家桶"><span class="nav-number">6.</span> <span class="nav-text">在机器上部署prometheus全家桶</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#系统故障排查需要考虑的因素"><span class="nav-number">7.</span> <span class="nav-text">系统故障排查需要考虑的因素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#项目中接入prometheus监控"><span class="nav-number">8.</span> <span class="nav-text">项目中接入prometheus监控</span></a></li></ol></div>
             
 
           </div>

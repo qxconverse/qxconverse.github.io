@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="服务部署架构Zookeeper与NginxNginx是著名的反向代理服务器，也被广泛的作为负载均衡服务器；ZooKeeper是分布式协调服务框架，有时也被用来做负载均衡。 zookeeper的作用包含：配置管理，名字服务，分布式锁和集群管理。可以把zookeeper理解为一个动物园管理者，负责管理动物园里面的所有动物。每个动物看做一台机器，它们有自己的特点（即配置），有自己的名字（即IP地址等）,">
+<meta name="description" content="zookeeper和dubbo等理解">
 <meta name="keywords" content="架构">
 <meta property="og:type" content="article">
 <meta property="og:title" content="服务部署架构">
 <meta property="og:url" content="https://qxconverse.github.io/code/网络协议/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="服务部署架构Zookeeper与NginxNginx是著名的反向代理服务器，也被广泛的作为负载均衡服务器；ZooKeeper是分布式协调服务框架，有时也被用来做负载均衡。 zookeeper的作用包含：配置管理，名字服务，分布式锁和集群管理。可以把zookeeper理解为一个动物园管理者，负责管理动物园里面的所有动物。每个动物看做一台机器，它们有自己的特点（即配置），有自己的名字（即IP地址等）,">
+<meta property="og:description" content="zookeeper和dubbo等理解">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-10-12T08:37:05.867Z">
+<meta property="og:updated_time" content="2021-01-06T12:19:42.204Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="服务部署架构">
-<meta name="twitter:description" content="服务部署架构Zookeeper与NginxNginx是著名的反向代理服务器，也被广泛的作为负载均衡服务器；ZooKeeper是分布式协调服务框架，有时也被用来做负载均衡。 zookeeper的作用包含：配置管理，名字服务，分布式锁和集群管理。可以把zookeeper理解为一个动物园管理者，负责管理动物园里面的所有动物。每个动物看做一台机器，它们有自己的特点（即配置），有自己的名字（即IP地址等）,">
+<meta name="twitter:description" content="zookeeper和dubbo等理解">
 
 
 
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-10-12T16:37:05+08:00">
-                2020-10-12
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-06T20:19:42+08:00">
+                2021-01-06
               </time>
             
           </span>
@@ -420,7 +420,9 @@
       
 
       
-        <h4 id="服务部署架构"><a href="#服务部署架构" class="headerlink" title="服务部署架构"></a>服务部署架构</h4><h5 id="Zookeeper与Nginx"><a href="#Zookeeper与Nginx" class="headerlink" title="Zookeeper与Nginx"></a>Zookeeper与Nginx</h5><p>Nginx是著名的反向代理服务器，也被广泛的作为负载均衡服务器；ZooKeeper是分布式协调服务框架，有时也被用来做负载均衡。</p>
+        <p>zookeeper和dubbo等理解</p>
+<a id="more"></a>
+<h4 id="服务部署架构"><a href="#服务部署架构" class="headerlink" title="服务部署架构"></a>服务部署架构</h4><h5 id="Zookeeper与Nginx"><a href="#Zookeeper与Nginx" class="headerlink" title="Zookeeper与Nginx"></a>Zookeeper与Nginx</h5><p>Nginx是著名的反向代理服务器，也被广泛的作为负载均衡服务器；ZooKeeper是分布式协调服务框架，有时也被用来做负载均衡。</p>
 <p>zookeeper的作用包含：配置管理，名字服务，分布式锁和集群管理。可以把zookeeper理解为一个动物园管理者，负责管理动物园里面的所有动物。每个动物看做一台机器，它们有自己的特点（即配置），有自己的名字（即IP地址等）,因为有很多动物（看做集群），它们在动物园里面活动不能产生冲突（分布式锁）。</p>
 <p>499是nginx自定义的一个状态码，其含义为“client has closed connection”。这很有可能是因为服务器端处理的时间过长，客户端“不耐烦”了。要解决此问题，就需要在程序上面做些优化了。</p>
 <p>大量的429错误，即在一定的时间内用户发送了太多的请求，即超出了“频次限制”。</p>
