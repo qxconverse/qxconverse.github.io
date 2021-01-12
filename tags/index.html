@@ -135,6 +135,14 @@
 
 
 
+
+<link rel="stylesheet" type="text/css" href="waifu.css">
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="flat-ui.min.css">
+<script src="live2d.min.js"></script>
+<script src="waifu-tips.js"></script>
+<script type="text/javascript">initModel()</script>
+
 </head>
 
 <body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -289,10 +297,10 @@
         
           <div class="tag-cloud">
             <div class="tag-cloud-title">
-                目前共计 48 个标签
+                目前共计 47 个标签
             </div>
             <div class="tag-cloud-tags">
-              <a href="/tags/CI-CD/" style="font-size: 12px; color: #ccc">CI/CD</a> <a href="/tags/Java/" style="font-size: 21px; color: #6f6f6f">Java</a> <a href="/tags/Linux/" style="font-size: 12px; color: #ccc">Linux</a> <a href="/tags/PPT/" style="font-size: 12px; color: #ccc">PPT</a> <a href="/tags/PS/" style="font-size: 12px; color: #ccc">PS</a> <a href="/tags/Python/" style="font-size: 12px; color: #ccc">Python</a> <a href="/tags/Spring/" style="font-size: 12px; color: #ccc">Spring</a> <a href="/tags/Web安全/" style="font-size: 12px; color: #ccc">Web安全</a> <a href="/tags/ci-cd/" style="font-size: 12px; color: #ccc">ci/cd</a> <a href="/tags/t1/" style="font-size: 21px; color: #6f6f6f">t1</a> <a href="/tags/t2/" style="font-size: 21px; color: #6f6f6f">t2</a> <a href="/tags/代码/" style="font-size: 12px; color: #ccc">代码</a> <a href="/tags/区块链/" style="font-size: 12px; color: #ccc">区块链</a> <a href="/tags/单点登录/" style="font-size: 12px; color: #ccc">单点登录</a> <a href="/tags/备忘/" style="font-size: 12px; color: #ccc">备忘</a> <a href="/tags/密码学/" style="font-size: 21px; color: #6f6f6f">密码学</a> <a href="/tags/工具/" style="font-size: 12px; color: #ccc">工具</a> <a href="/tags/年度总结/" style="font-size: 12px; color: #ccc">年度总结</a> <a href="/tags/心理/" style="font-size: 12px; color: #ccc">心理</a> <a href="/tags/思维/" style="font-size: 21px; color: #6f6f6f">思维</a> <a href="/tags/总结/" style="font-size: 12px; color: #ccc">总结</a> <a href="/tags/摄影/" style="font-size: 21px; color: #6f6f6f">摄影</a> <a href="/tags/操作系统/" style="font-size: 12px; color: #ccc">操作系统</a> <a href="/tags/收纳/" style="font-size: 12px; color: #ccc">收纳</a> <a href="/tags/数据库/" style="font-size: 30px; color: #111">数据库</a> <a href="/tags/日常/" style="font-size: 12px; color: #ccc">日常</a> <a href="/tags/架构/" style="font-size: 12px; color: #ccc">架构</a> <a href="/tags/校验/" style="font-size: 12px; color: #ccc">校验</a> <a href="/tags/正则表达式/" style="font-size: 12px; color: #ccc">正则表达式</a> <a href="/tags/深度学习/" style="font-size: 21px; color: #6f6f6f">深度学习</a> <a href="/tags/游戏/" style="font-size: 12px; color: #ccc">游戏</a> <a href="/tags/版本控制/" style="font-size: 21px; color: #6f6f6f">版本控制</a> <a href="/tags/电影/" style="font-size: 12px; color: #ccc">电影</a> <a href="/tags/监控/" style="font-size: 21px; color: #6f6f6f">监控</a> <a href="/tags/社交网络/" style="font-size: 12px; color: #ccc">社交网络</a> <a href="/tags/算法/" style="font-size: 21px; color: #6f6f6f">算法</a> <a href="/tags/经验/" style="font-size: 12px; color: #ccc">经验</a> <a href="/tags/综艺/" style="font-size: 12px; color: #ccc">综艺</a> <a href="/tags/美食/" style="font-size: 21px; color: #6f6f6f">美食</a> <a href="/tags/胆怯/" style="font-size: 12px; color: #ccc">胆怯</a> <a href="/tags/计算机基础/" style="font-size: 12px; color: #ccc">计算机基础</a> <a href="/tags/计算机网络/" style="font-size: 21px; color: #6f6f6f">计算机网络</a> <a href="/tags/记录/" style="font-size: 12px; color: #ccc">记录</a> <a href="/tags/辩论/" style="font-size: 21px; color: #6f6f6f">辩论</a> <a href="/tags/运维/" style="font-size: 12px; color: #ccc">运维</a> <a href="/tags/钢琴/" style="font-size: 12px; color: #ccc">钢琴</a> <a href="/tags/阅读/" style="font-size: 21px; color: #6f6f6f">阅读</a> <a href="/tags/面试/" style="font-size: 21px; color: #6f6f6f">面试</a>
+              <a href="/tags/Java/" style="font-size: 21px; color: #6f6f6f">Java</a> <a href="/tags/Linux/" style="font-size: 12px; color: #ccc">Linux</a> <a href="/tags/PPT/" style="font-size: 12px; color: #ccc">PPT</a> <a href="/tags/PS/" style="font-size: 12px; color: #ccc">PS</a> <a href="/tags/Python/" style="font-size: 12px; color: #ccc">Python</a> <a href="/tags/Spring/" style="font-size: 12px; color: #ccc">Spring</a> <a href="/tags/Web安全/" style="font-size: 12px; color: #ccc">Web安全</a> <a href="/tags/ci-cd/" style="font-size: 12px; color: #ccc">ci/cd</a> <a href="/tags/t1/" style="font-size: 21px; color: #6f6f6f">t1</a> <a href="/tags/t2/" style="font-size: 21px; color: #6f6f6f">t2</a> <a href="/tags/代码/" style="font-size: 12px; color: #ccc">代码</a> <a href="/tags/区块链/" style="font-size: 12px; color: #ccc">区块链</a> <a href="/tags/单点登录/" style="font-size: 12px; color: #ccc">单点登录</a> <a href="/tags/备忘/" style="font-size: 12px; color: #ccc">备忘</a> <a href="/tags/密码学/" style="font-size: 21px; color: #6f6f6f">密码学</a> <a href="/tags/工具/" style="font-size: 12px; color: #ccc">工具</a> <a href="/tags/年度总结/" style="font-size: 12px; color: #ccc">年度总结</a> <a href="/tags/心理/" style="font-size: 12px; color: #ccc">心理</a> <a href="/tags/思维/" style="font-size: 21px; color: #6f6f6f">思维</a> <a href="/tags/总结/" style="font-size: 12px; color: #ccc">总结</a> <a href="/tags/摄影/" style="font-size: 21px; color: #6f6f6f">摄影</a> <a href="/tags/操作系统/" style="font-size: 12px; color: #ccc">操作系统</a> <a href="/tags/收纳/" style="font-size: 12px; color: #ccc">收纳</a> <a href="/tags/数据库/" style="font-size: 30px; color: #111">数据库</a> <a href="/tags/日常/" style="font-size: 12px; color: #ccc">日常</a> <a href="/tags/架构/" style="font-size: 12px; color: #ccc">架构</a> <a href="/tags/校验/" style="font-size: 12px; color: #ccc">校验</a> <a href="/tags/正则表达式/" style="font-size: 12px; color: #ccc">正则表达式</a> <a href="/tags/深度学习/" style="font-size: 21px; color: #6f6f6f">深度学习</a> <a href="/tags/游戏/" style="font-size: 12px; color: #ccc">游戏</a> <a href="/tags/版本控制/" style="font-size: 21px; color: #6f6f6f">版本控制</a> <a href="/tags/电影/" style="font-size: 12px; color: #ccc">电影</a> <a href="/tags/监控/" style="font-size: 21px; color: #6f6f6f">监控</a> <a href="/tags/社交网络/" style="font-size: 12px; color: #ccc">社交网络</a> <a href="/tags/算法/" style="font-size: 21px; color: #6f6f6f">算法</a> <a href="/tags/经验/" style="font-size: 12px; color: #ccc">经验</a> <a href="/tags/综艺/" style="font-size: 12px; color: #ccc">综艺</a> <a href="/tags/美食/" style="font-size: 21px; color: #6f6f6f">美食</a> <a href="/tags/胆怯/" style="font-size: 12px; color: #ccc">胆怯</a> <a href="/tags/计算机基础/" style="font-size: 12px; color: #ccc">计算机基础</a> <a href="/tags/计算机网络/" style="font-size: 21px; color: #6f6f6f">计算机网络</a> <a href="/tags/记录/" style="font-size: 12px; color: #ccc">记录</a> <a href="/tags/辩论/" style="font-size: 21px; color: #6f6f6f">辩论</a> <a href="/tags/运维/" style="font-size: 12px; color: #ccc">运维</a> <a href="/tags/钢琴/" style="font-size: 12px; color: #ccc">钢琴</a> <a href="/tags/阅读/" style="font-size: 21px; color: #6f6f6f">阅读</a> <a href="/tags/面试/" style="font-size: 21px; color: #6f6f6f">面试</a>
             </div>
           </div>
         
@@ -361,7 +369,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -383,7 +391,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -462,7 +470,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">64k</span>
+    <span title="Site words total count">63k</span>
   
 </div>
 
@@ -523,6 +531,20 @@
         
       </div>
     </footer>
+
+<div class="waifu" id="waifu">
+<div class="waifu-tips" style="opacity: 1;"></div>
+<canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+<div class="waifu-tool">
+<span class="fui-home"></span>
+<span class="fui-chat"></span>
+<span class="fui-eye"></span>
+<span class="fui-user"></span>
+<span class="fui-photo"></span>
+<span class="fui-info-circle"></span>
+<span class="fui-cross"></span>
+</div>
+</div>
 
     
       <div class="back-to-top">

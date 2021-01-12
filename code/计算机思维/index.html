@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g5fy3sx82dj30pi0ejq76.jpg">
-<meta property="og:updated_time" content="2021-01-06T06:28:53.807Z">
+<meta property="og:updated_time" content="2021-01-11T09:41:21.404Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机思维">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！">
@@ -138,6 +138,14 @@
 
 
 
+
+
+<link rel="stylesheet" type="text/css" href="waifu.css">
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="flat-ui.min.css">
+<script src="live2d.min.js"></script>
+<script src="waifu-tips.js"></script>
+<script type="text/javascript">initModel()</script>
 
 </head>
 
@@ -331,8 +339,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-06T14:28:53+08:00">
-                2021-01-06
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-11T17:41:21+08:00">
+                2021-01-11
               </time>
             
           </span>
@@ -386,7 +394,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5.2k
+                  5.3k
                 </span>
               
 
@@ -513,7 +521,7 @@
 <p>很早很早之前，Java的api只支持由本地系统套接字库提供的阻塞函数。阻塞体现在服务器端的监听过程，直到有新的连接，这时就建立一个双方通信的socket。接着它继续监听。其缺点是只能同时处理一个连接，要管理多个并发的客户端连接，需要开启多个线程。</p>
 <p>下面是核心的服务端代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ServerSocket serverSocket = <span class="keyword">new</span> ServerSocket(<span class="number">8888</span>);</span><br><span class="line">Socket socket = serverSocket.accept();</span><br><span class="line">BufferedReader in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</span><br><span class="line">PrintWriter out = <span class="keyword">new</span> PrintWriter(socket.getOutputStream(), <span class="keyword">true</span>);</span><br><span class="line">String request, response;</span><br><span class="line"><span class="keyword">while</span> ((request = in.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">"OK"</span>.equals(request)) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    response = processRequest(request);</span><br><span class="line">    out.println(response);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="设计模式相关"><a href="#设计模式相关" class="headerlink" title="设计模式相关"></a>设计模式相关</h4><p>抽象工厂模式：抽象工厂、抽象产品，具体工厂创建具体产品的实例。达到实例化不同产品的目的</p>
+<h4 id="设计模式相关"><a href="#设计模式相关" class="headerlink" title="设计模式相关"></a>设计模式相关</h4><p>工厂模式：工厂方法模式：扩展产品，iPhone到miPhone。抽象工厂模式：扩展产品簇。例如在已经有iPhone、MAC的情况下同时增加MiPhone和MiPC。</p>
 <p>单例模式：一个类只有一个实例，关键要定义一个<strong>私有的构造函数</strong>，一个<strong>私有的实例</strong>，一个<strong>公有的获取实例的方法</strong></p>
 <p>适配器模式：解决接口不兼容的问题，类似于电源适配器</p>
 <p>外观模式：通过重新组合类或程序单元，对外提供统一的接口/界面，要联想到Controller里面的各种Dao或Service，就是这种思想！！</p>
@@ -521,6 +529,7 @@
 <p>观察者模式：建立一种对象之间的依赖关系，当被观察者发生变化，会通知所有的观察者。比如创建订单后，需要继续调用支付接口、通知接口等。<strong>主题（subject）</strong>与<strong>观察者</strong>。订单接口作为主题类，支付和通知接口作为观察者，并注册到主题中，只需要调用创建订单接口，并调用notifyObservers方法后，观察者中的update方法就会被执行到。</p>
 <p>策略模式：根据环境或条件的不同，选择不同的策略。</p>
 <p>装饰器模式：是对继承方案的一种替代，Java中的I/O类大量使用该模式。参考：<a href="https://www.cnblogs.com/volcano-liu/p/10897897.html" target="_blank" rel="noopener">https://www.cnblogs.com/volcano-liu/p/10897897.html</a></p>
+<p>构建者模式：当一个类的构造函数参数个数超过4个，而且这些参数有些是可选的参数，考虑使用构造者模式。例子：@Builder注解生成的实体类。</p>
 <h4 id="csrf"><a href="#csrf" class="headerlink" title="csrf"></a>csrf</h4><p>时序图如下：</p>
 <p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg" alt="csrf"></p>
 <p>下面的博客已经讲的很好了。但是里面没有讲csrftoken相关的东西。</p>
@@ -775,7 +784,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -797,7 +806,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -892,7 +901,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">64k</span>
+    <span title="Site words total count">63k</span>
   
 </div>
 
@@ -953,6 +962,20 @@
         
       </div>
     </footer>
+
+<div class="waifu" id="waifu">
+<div class="waifu-tips" style="opacity: 1;"></div>
+<canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+<div class="waifu-tool">
+<span class="fui-home"></span>
+<span class="fui-chat"></span>
+<span class="fui-eye"></span>
+<span class="fui-user"></span>
+<span class="fui-photo"></span>
+<span class="fui-info-circle"></span>
+<span class="fui-cross"></span>
+</div>
+</div>
 
     
       <div class="back-to-top">

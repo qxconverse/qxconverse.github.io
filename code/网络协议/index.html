@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
 <meta property="og:description" content="zookeeper和dubbo等理解">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-01-06T12:19:42.204Z">
+<meta property="og:updated_time" content="2021-01-08T08:42:33.665Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="服务部署架构">
 <meta name="twitter:description" content="zookeeper和dubbo等理解">
@@ -135,6 +135,14 @@
 
 
 
+
+
+<link rel="stylesheet" type="text/css" href="waifu.css">
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="flat-ui.min.css">
+<script src="live2d.min.js"></script>
+<script src="waifu-tips.js"></script>
+<script type="text/javascript">initModel()</script>
 
 </head>
 
@@ -328,8 +336,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-06T20:19:42+08:00">
-                2021-01-06
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-08T16:42:33+08:00">
+                2021-01-08
               </time>
             
           </span>
@@ -422,7 +430,7 @@
       
         <p>zookeeper和dubbo等理解</p>
 <a id="more"></a>
-<h4 id="服务部署架构"><a href="#服务部署架构" class="headerlink" title="服务部署架构"></a>服务部署架构</h4><h5 id="Zookeeper与Nginx"><a href="#Zookeeper与Nginx" class="headerlink" title="Zookeeper与Nginx"></a>Zookeeper与Nginx</h5><p>Nginx是著名的反向代理服务器，也被广泛的作为负载均衡服务器；ZooKeeper是分布式协调服务框架，有时也被用来做负载均衡。</p>
+<h4 id="服务部署架构"><a href="#服务部署架构" class="headerlink" title="服务部署架构"></a>服务部署架构</h4><h5 id="Zookeeper与Nginx"><a href="#Zookeeper与Nginx" class="headerlink" title="Zookeeper与Nginx"></a>Zookeeper与Nginx</h5><p>Nginx是一个高性能的HTTP和<strong>反向代理服务器</strong>，也被广泛的作为负载均衡服务器；ZooKeeper是分布式协调服务框架，有时也被用来做负载均衡。</p>
 <p>zookeeper的作用包含：配置管理，名字服务，分布式锁和集群管理。可以把zookeeper理解为一个动物园管理者，负责管理动物园里面的所有动物。每个动物看做一台机器，它们有自己的特点（即配置），有自己的名字（即IP地址等）,因为有很多动物（看做集群），它们在动物园里面活动不能产生冲突（分布式锁）。</p>
 <p>499是nginx自定义的一个状态码，其含义为“client has closed connection”。这很有可能是因为服务器端处理的时间过长，客户端“不耐烦”了。要解决此问题，就需要在程序上面做些优化了。</p>
 <p>大量的429错误，即在一定的时间内用户发送了太多的请求，即超出了“频次限制”。</p>
@@ -610,7 +618,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">53</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -632,7 +640,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -727,7 +735,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">64k</span>
+    <span title="Site words total count">63k</span>
   
 </div>
 
@@ -788,6 +796,20 @@
         
       </div>
     </footer>
+
+<div class="waifu" id="waifu">
+<div class="waifu-tips" style="opacity: 1;"></div>
+<canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+<div class="waifu-tool">
+<span class="fui-home"></span>
+<span class="fui-chat"></span>
+<span class="fui-eye"></span>
+<span class="fui-user"></span>
+<span class="fui-photo"></span>
+<span class="fui-info-circle"></span>
+<span class="fui-cross"></span>
+</div>
+</div>
 
     
       <div class="back-to-top">
