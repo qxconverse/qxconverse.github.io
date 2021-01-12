@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g5fy3sx82dj30pi0ejq76.jpg">
-<meta property="og:updated_time" content="2021-01-11T09:41:21.404Z">
+<meta property="og:updated_time" content="2021-01-12T09:21:10.820Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机思维">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考，正所谓万精油！！">
@@ -334,8 +334,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-11T17:41:21+08:00">
-                2021-01-11
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-12T17:21:10+08:00">
+                2021-01-12
               </time>
             
           </span>
@@ -389,7 +389,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5.3k
+                  5.5k
                 </span>
               
 
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  18
+                  19
                 </span>
               
             </div>
@@ -615,6 +615,107 @@
 <p>10.swagger</p>
 <p>11.ci、cd</p>
 <h4 id="钩子函数和回调函数的区别"><a href="#钩子函数和回调函数的区别" class="headerlink" title="钩子函数和回调函数的区别"></a>钩子函数和回调函数的区别</h4><p>一般认为，钩子函数就是回调函数的一种，其实还是有差异的，差异地方就是：触发的时机不同。钩子函数在捕获消息的第一时间就执行，而回调函数是捕获结束时，最后一个被执行的。</p>
+<h4 id="es相关"><a href="#es相关" class="headerlink" title="es相关"></a>es相关</h4><p>提到es，一定要首先联想到小时候用的《新华字典》，它们有很多相似点；其次要想到<strong>倒排索引</strong>，它是基于trie前缀树（term index的实现）。</p>
+<p>es是NoSQL数据库。以MySQL来作对比，index对应数据库；doc（文档）对应行，文档是包含一个或多个域（即Field）的容器，以JSON格式进行表示；field对应列。</p>
+<p>相关重要概念：term index，term dictionary，posting list。</p>
+<p>如有3条数据：</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Age</th>
+<th>Sex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Kate</td>
+<td>24</td>
+<td>Female</td>
+</tr>
+<tr>
+<td>2</td>
+<td>John</td>
+<td>24</td>
+<td>Male</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Bill</td>
+<td>29</td>
+<td>Male</td>
+</tr>
+</tbody>
+</table>
+<p>索引如下：</p>
+<p>name</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Posting List</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kate</td>
+<td>1</td>
+</tr>
+<tr>
+<td>John</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Bill</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>age</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Posting List</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>24</td>
+<td>[1, 2]</td>
+</tr>
+<tr>
+<td>29</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>sex</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Posting List</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Female</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Male</td>
+<td>[2, 3]</td>
+</tr>
+</tbody>
+</table>
+<p>一张图解释什么叫倒排索引</p>
+<pre class="mermaid">graph LR
+  A[term index] --> B[term dictionary]
+  B --> C[posting list]</pre>
+
 
       
     </div>
@@ -862,7 +963,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#阅读关于IaaS、PaaS-SaaS相关的知识点"><span class="nav-number">1.</span> <span class="nav-text">阅读关于IaaS、PaaS/SaaS相关的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于5种I-O模型的理解"><span class="nav-number">2.</span> <span class="nav-text">关于5种I/O模型的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计模式相关"><span class="nav-number">3.</span> <span class="nav-text">设计模式相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#csrf"><span class="nav-number">4.</span> <span class="nav-text">csrf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#需要关注的知识点"><span class="nav-number">5.</span> <span class="nav-text">需要关注的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#钩子函数和回调函数的区别"><span class="nav-number">6.</span> <span class="nav-text">钩子函数和回调函数的区别</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#阅读关于IaaS、PaaS-SaaS相关的知识点"><span class="nav-number">1.</span> <span class="nav-text">阅读关于IaaS、PaaS/SaaS相关的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于5种I-O模型的理解"><span class="nav-number">2.</span> <span class="nav-text">关于5种I/O模型的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计模式相关"><span class="nav-number">3.</span> <span class="nav-text">设计模式相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#csrf"><span class="nav-number">4.</span> <span class="nav-text">csrf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#需要关注的知识点"><span class="nav-number">5.</span> <span class="nav-text">需要关注的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#钩子函数和回调函数的区别"><span class="nav-number">6.</span> <span class="nav-text">钩子函数和回调函数的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#es相关"><span class="nav-number">7.</span> <span class="nav-text">es相关</span></a></li></ol></div>
             
 
           </div>
@@ -896,7 +997,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">63k</span>
+    <span title="Site words total count">63.2k</span>
   
 </div>
 
