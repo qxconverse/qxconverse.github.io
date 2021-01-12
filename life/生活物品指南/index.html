@@ -139,11 +139,6 @@
 
 <link rel="stylesheet" type="text/css" href="/lib/waifu/waifu.css">
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/lib/waifu/flat-ui.min.css">
-<script src="/lib/waifu/live2d.min.js"></script>
-<script src="/lib/waifu/waifu-tips.js"></script>
-<script type="text/javascript">initModel()</script>
-
 </head>
 
 <body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -437,6 +432,7 @@
 <h4 id="实战部分"><a href="#实战部分" class="headerlink" title="实战部分"></a>实战部分</h4><p>👆是理论，下面以我目前的生活物品情况进行实战。</p>
 <p>丢弃就不再阐述，凡是用不到的，或以目前的认知，无法涉猎的，都可丢弃；</p>
 <p><strong>分类</strong>，分类会包括很多维度，下面以常见的分类进行：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -502,7 +498,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p><strong>重组</strong>，重组的常见示例如下：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -533,6 +531,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 
       
     </div>
@@ -878,19 +877,19 @@
       </div>
     </footer>
 
-<div class="waifu" id="waifu">
-<div class="waifu-tips" style="opacity: 1;"></div>
-<canvas id="live2d" width="280" height="250" class="live2d"></canvas>
-<div class="waifu-tool">
-<span class="fui-home"></span>
-<span class="fui-chat"></span>
-<span class="fui-eye"></span>
-<span class="fui-user"></span>
-<span class="fui-photo"></span>
-<span class="fui-info-circle"></span>
-<span class="fui-cross"></span>
-</div>
-</div>
+    <div class="waifu" id="waifu">
+      <div class="waifu-tips" style="opacity: 1;"></div>
+      <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+      <div class="waifu-tool">
+        <span class="fui-home"></span>
+        <span class="fui-chat"></span>
+        <span class="fui-eye"></span>
+        <span class="fui-user"></span>
+        <span class="fui-photo"></span>
+        <span class="fui-info-circle"></span>
+        <span class="fui-cross"></span>
+      </div>
+    </div>
 
     
       <div class="back-to-top">
@@ -1127,5 +1126,10 @@
   
 
 
+<script src="/lib/waifu/live2d.min.js"></script>
+<script src="/lib/waifu/waifu-tips.js"></script>
+<script type="text/javascript">initModel()</script>
+
 </body>
 </html>
+<link rel="stylesheet" type="text/css" href="/lib/waifu/flat-ui.min.css">
