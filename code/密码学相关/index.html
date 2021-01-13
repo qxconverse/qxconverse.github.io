@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
 <meta property="og:description" content="数字签名由非对称加密和数字摘要两种技术合成的，可以防伪造（机密性）和篡改（完整性）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-01-06T12:10:39.859Z">
+<meta property="og:updated_time" content="2021-01-12T12:11:41.338Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数字签名与SSH">
 <meta name="twitter:description" content="数字签名由非对称加密和数字摘要两种技术合成的，可以防伪造（机密性）和篡改（完整性）。">
@@ -331,8 +331,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-06T20:10:39+08:00">
-                2021-01-06
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-12T20:11:41+08:00">
+                2021-01-12
               </time>
             
           </span>
@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  398
+                  422
                 </span>
               
 
@@ -449,7 +449,8 @@
 </tr>
 </tbody>
 </table>
-<h4 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h4><p>对于放在Gitlab上的代码，使用https的方式来clone，这样就省去了配置ssh的私钥和公钥的步骤。说白了，只要涉及到ssh协议的传输，那么一定会需要公钥和私钥的，所以，Gitlab相关的Git操作和连接远程服务器都要用。</p>
+<h4 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h4><p>please tell me who you are的故事</p>
+<p>对于放在Gitlab上的代码，使用https的方式来clone，这样就省去了配置ssh的私钥和公钥的步骤。说白了，只要涉及到ssh协议的传输，那么一定会需要公钥和私钥的，所以，Gitlab相关的Git操作和连接远程服务器都要用。</p>
 <p>Mac上terminal通过ssh连接远程Linux服务器的方法：</p>
 <ol>
 <li>生成公、私钥</li>
@@ -465,6 +466,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host xxx </span><br><span class="line">HostName  远程服务器IP</span><br><span class="line">User 远程连接使用的账号，如root</span><br><span class="line">IdentityFile ~/.ssh/id_rsa 私钥文件所在路径</span><br></pre></td></tr></table></figure>
 <p>附：使用不同的非对称加密算法生成公钥、私钥</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ed25519</span><br></pre></td></tr></table></figure>
+<p>更加具体的内容：<a href="https://www.cnblogs.com/xz816111/p/9479139.html" target="_blank" rel="noopener">https://www.cnblogs.com/xz816111/p/9479139.html</a></p>
 
       
     </div>
@@ -746,7 +748,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">63.2k</span>
+    <span title="Site words total count">63.4k</span>
   
 </div>
 
