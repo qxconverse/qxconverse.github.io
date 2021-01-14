@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="计算机,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
+<meta name="keywords" content="计算机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机基础">
+<meta property="og:url" content="https://qxconverse.github.io/code/代码_计算机基础/index.html">
+<meta property="og:site_name" content="XXQIN&#39;S BLOG">
+<meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg">
+<meta property="og:updated_time" content="2021-01-13T01:41:03.749Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机基础">
+<meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://qxconverse.github.io/code/代码_计算机基础/">
+
+
+
+
+
+  <title>计算机基础 | XXQIN'S BLOG</title>
+  
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/lib/waifu/waifu.css">
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XXQIN'S BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">世界是属于勇敢者的，所以世界是属于我的</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于我">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于我
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-诗和远方">
+          <a href="/categories/dream" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            诗和远方
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-代码">
+          <a href="/categories/code" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            代码
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-思维">
+          <a href="/categories/thinking" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            思维
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/code/代码_计算机基础/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qinxue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XXQIN'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">计算机基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-26T21:27:51+08:00">
+                2018-08-26
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-13T09:41:03+08:00">
+                2021-01-13
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  18
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！</p>
+<a id="more"></a>
+<ol>
+<li>缓存思想：缓存思想特别重要，这是很多设计中必出现的，无论在操作系统层面还是具体应用层面。比如在内存和CPU之间有寄存器；比如在Redis中有缓存机制；Mybatis也有缓存机制，当某些记录很大，而且基本上不会变，且查询频率很高，那么利用缓存是明智的选择。消息队列</li>
+<li>Hash+链表、树形结构思想：说到hash一般会想到hashtable，hashmap等等，树形结构就更多了。共同点是，说到查找，它们是高频词汇。对于无序的东西，我们的查找时间复杂度是n级别的。所以为了优化，会采用2种措施，一种是建立索引，即hash表，计算key值，然后放到对应的位置，如果出现碰撞，通常是加个链表。这样复杂度可以控制在1级别的。凡事都有优缺点，虽然查询快了，但是它是无序的。而如果采用第二种措施，即用树形结构，比如二叉树（红黑树）、B+树等。基本是可以实现logn级别的，虽然慢一些，但其优点是有序。凡是涉及到查找，要想到它们！在ElasticSearch中有这些思想的存在（倒排索引，基于单词文档矩阵模型）</li>
+<li>分布式思想：这个不用说了，当应用大了以后，必然出现。涉及到分布式，那么一定会涉及到同步、一致性等等问题。</li>
+<li>解耦思想：这个思想很重要，无论在什么地方都会体现，任何系统，都应当考虑到解耦。</li>
+<li>top-down思想：任何时候可以先从宏观整体考虑，然后再到具体的部分。递归是一种体现。</li>
+<li>主从思想：这一思想常常出现在分布式中</li>
+<li>DP思想：这个不用说，算法中最难以理解，也是最能解决复杂问题的一种思想。</li>
+<li>双倍扩容思想：对于一些动态容器，比如C++中的vector扩容，java中的hashmap扩容，Redis中的dict的rehash过程。多多少少有基于原来容量2倍来进行扩容的思想。</li>
+<li>拦截过滤思想</li>
+<li>注册通知（发布、通知）思想，反应器模式</li>
+<li>在起初技术方案/数据库设计的过程中，就需要思考如何便于后续的数据分析（比如各种APP的年度报告）</li>
+<li>调用第三方接口时要考虑qps</li>
+<li>服务的熔断、降级，很大程度上需要配置中心的支持（例如Sentinel组件），熔断器实现的三个状态机：open、half-open、close</li>
+<li>CPU使用率变高的可能原因有：死循环、高并发（因为要做线程之间的来回切换）</li>
+<li>无论是构建还是测试，都要一步到位，一行命令完成所有的步骤或测试</li>
+<li>DAG，即有向无环图，有向即代表有先后的次序，而无环又可以保证不会形成死循环，常常被用来表示事件之间的驱动依赖关系，因此可以用来对任务进行调度。</li>
+<li>堆栈思想，方法的调用过程含有栈的思想，每次开始调用时入栈操作，调用结束后，出栈。</li>
+<li>多台机器部署+nginx可以利用负载均衡实现高可用的目标</li>
+<li>遇到要做的东西时，直接去github上搜，比如需要做校验yml文件的小工具时，就可以使用关键词lint，比如yamllint，这样基本上都能搜出来一些项目</li>
+</ol>
+<p>几种编程思想</p>
+<ol>
+<li>面向对象</li>
+<li>面向过程</li>
+<li>面向切面</li>
+<li>面向函数式</li>
+</ol>
+<p>常见的设计理念：</p>
+<p>distinct/sorted/mutable/nullable/state</p>
+<p>state表示有状态或无状态，即每次的操作是否为独立的，不依赖前后操作，比如filter/map就是无状态的；而unique/sort就是有状态的。</p>
+<p>柯里化，联想到reduce函数，g(x,y,z)转变成f(x)f(y)f(z)。</p>
+<p>部分函数，类似于有默认参数的函数</p>
+<p>闭包</p>
+<p>递归</p>
+<p>记忆化</p>
+<p>计算机的运算速度与它的存储和通信子系统速度的差距太大了。内部处理器一万次的运算都有可能比一次http的请求要快。基于此，优化后端接口响应时间，需要从以下几个方面入手：</p>
+<ol>
+<li>减少网络请求（http/dubbo/kafka）</li>
+<li>减少数据库请求</li>
+<li>减少磁盘的IO</li>
+</ol>
+<p>排查kafka问题的时候，可以借助于kafka工具，查看是哪台机器对topic进行了消费</p>
+<p>测试的时候需要加一种 数据全部为空的情况 （初始化测试问题）；测试时，后端每次更改实现方式，都需要单独再测一遍</p>
+<p>我们经常会谈到前台、中台，有时又会讲到领域驱动设计。其实，这些都要求你对业务、产品有较为深入的理解。并思考如何将业务和项目关联起来。除此之外，你还得掌握最常用的框架，理解这样的框架为什么行得通，为什么适合用它。再往下，就是语言的知识点。再往下，则是跨语言的知识点，比如数据库，网络，操作系统，数据结构和算法等等。有没有很眼熟，对！这些正是你在大学里面学习的课程。大学里面可以不教你框架、可以不教你语言，但必须教你这些。所以，要想在互联网站稳，这些知识才是必须反复去消化、总结的东西。</p>
+<p>压测时，要做数据库和dubbo隔离，数据库隔离很简单，迁移一份完全一样的，并改为连接它。dubbo可以采用直连的方式。比如让机器都请求其中一台dubbo服务机器。</p>
+<p>压测出现的问题，主要集中在：数据库连接数、dubbo线程数、gc策略。在高并发下，需要极其优化代码耗时。从减少http请求、dubbo请求、mysql查询等方面解决</p>
+<p>上线前校验：mysql、配置文件、maven依赖包版本号、dubbo版本号</p>
+<p>涉及到接口修改的地方，要考虑到新旧的兼容问题。因为小程序和后端上线时间间隔一天，更加需要兼容。</p>
+<p>涉及到接口变更时，尽量保留原有接口，再新增一个接口。等稳定后，再去除原有接口。</p>
+<p>接口版本变动问题，后端先上、前端后上的情况：</p>
+<p>假设前端线上版本为a.0，后端线上版本为b.0。后端本次上线的版本为b.1</p>
+<p>在b.1中会有如下情况：</p>
+<ol>
+<li>新增接口，没问题</li>
+<li>减少接口，有问题</li>
+<li>接口、出参不变，新增入参，有问题</li>
+<li>接口、出参不变，减少入参，没问题</li>
+<li>接口、入参不变，出参新增，没问题</li>
+<li>接口、入参不变，出参减少，有问题</li>
+</ol>
+<p>抽象一层，就是当后端减少东西时，或前端新增东西时，有问题；其它情况，没问题。</p>
+<p>这里的东西可能是：接口、入参、出参</p>
+<p>平时写的需求、做的项目涉及到什么？</p>
+<ol>
+<li><p>项目层次结构和接口设计（系统架构）</p>
+</li>
+<li><p>http、rpc、消息队列（系统通信）</p>
+</li>
+<li>监控系统构建（高可用性、高稳定性）</li>
+<li>linux指令、线上机器排查问题（运维能力）</li>
+<li>高效写代码、自测与改bug（开发效率）</li>
+</ol>
+<h4 id="阅读关于IaaS、PaaS-SaaS相关的知识点"><a href="#阅读关于IaaS、PaaS-SaaS相关的知识点" class="headerlink" title="阅读关于IaaS、PaaS/SaaS相关的知识点"></a>阅读关于IaaS、PaaS/SaaS相关的知识点</h4><p>我的理解是，从云计算服务角色来看，就是提供东西的多少：SaaS，不给你提供任何东西，成品给你；PaaS，给你提供少量东西，剩下大部分自己做；IaaS，给你提供大多数东西，你可以自由发挥剩下的部分。从用户角色来看，就是获得东西的多少：SaaS，获得全部成品，自己不用劳神；PaaS，获得部分原材料，自己要劳神；IaaS，获得全部原材料，完全自己做。</p>
+<p>SOA的概念：面向服务的架构，我的理解是，它是微服务等很多流行框架的基础思想</p>
+<h4 id="关于5种I-O模型的理解"><a href="#关于5种I-O模型的理解" class="headerlink" title="关于5种I/O模型的理解"></a>关于5种I/O模型的理解</h4><p>以喝咖啡举例， 在网上点了咖啡粉外卖，要等外卖小哥送咖啡，然后泡咖啡，喝咖啡</p>
+<ol>
+<li>阻塞式I/O：一直站在家里等咖啡（其它什么事不做）送到，然后泡咖啡</li>
+<li>非阻塞式I/O：不停地给外卖小哥打电话（其它什么事不做），送到后泡咖啡</li>
+<li>IO多路复用：一开始和小哥说好，到了后打电话，同时站在家里等（于此同时，他还在等其它的外卖，也是什么事不做），一旦咖啡到了，就泡咖啡</li>
+<li>信号驱动式IO：干自己的事情，外卖小哥到了后打电话让你取咖啡，然后你泡咖啡</li>
+<li>异步IO：一直干自己的事情，整个事情都让女朋友来做，做好了通知自己过去喝</li>
+</ol>
+<p>前面3种提到的IO都是同步的，与之相对应的是异步IO。这是一个维度，还有一个是阻塞的维度。传统的是阻塞的IO，不管是C端还是S端，都是阻塞的。接着是非阻塞的IO，主要通过C端的轮询来实现。后面的多路复用，它也是非阻塞的，通过选择器和通道来实现。主要采用的是反应器（Reactor）模式。涉及到事件的注册和订阅。</p>
+<p>很早很早之前，Java的api只支持由本地系统套接字库提供的阻塞函数。阻塞体现在服务器端的监听过程，直到有新的连接，这时就建立一个双方通信的socket。接着它继续监听。其缺点是只能同时处理一个连接，要管理多个并发的客户端连接，需要开启多个线程。</p>
+<p>下面是核心的服务端代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ServerSocket serverSocket = <span class="keyword">new</span> ServerSocket(<span class="number">8888</span>);</span><br><span class="line">Socket socket = serverSocket.accept();</span><br><span class="line">BufferedReader in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</span><br><span class="line">PrintWriter out = <span class="keyword">new</span> PrintWriter(socket.getOutputStream(), <span class="keyword">true</span>);</span><br><span class="line">String request, response;</span><br><span class="line"><span class="keyword">while</span> ((request = in.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">"OK"</span>.equals(request)) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    response = processRequest(request);</span><br><span class="line">    out.println(response);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="设计模式相关"><a href="#设计模式相关" class="headerlink" title="设计模式相关"></a>设计模式相关</h4><p>工厂模式：工厂方法模式：扩展产品，iPhone到miPhone。抽象工厂模式：扩展产品簇。例如在已经有iPhone、MAC的情况下同时增加MiPhone和MiPC。</p>
+<p>单例模式：一个类只有一个实例，关键要定义一个<strong>私有的构造函数</strong>，一个<strong>私有的实例</strong>，一个<strong>公有的获取实例的方法</strong></p>
+<p>适配器模式：解决接口不兼容的问题，类似于电源适配器</p>
+<p>外观模式：通过重新组合类或程序单元，对外提供统一的接口/界面，要联想到Controller里面的各种Dao或Service，就是这种思想！！</p>
+<p>代理模式：让代理去做一些事情，相当于一个中介的角色，处于客户和目标对象之间</p>
+<p>观察者模式：建立一种对象之间的依赖关系，当被观察者发生变化，会通知所有的观察者。比如创建订单后，需要继续调用支付接口、通知接口等。<strong>主题（subject）</strong>与<strong>观察者</strong>。订单接口作为主题类，支付和通知接口作为观察者，并注册到主题中，只需要调用创建订单接口，并调用notifyObservers方法后，观察者中的update方法就会被执行到。</p>
+<p>策略模式：根据环境或条件的不同，选择不同的策略。</p>
+<p>装饰器模式：是对继承方案的一种替代，Java中的I/O类大量使用该模式。参考：<a href="https://www.cnblogs.com/volcano-liu/p/10897897.html" target="_blank" rel="noopener">https://www.cnblogs.com/volcano-liu/p/10897897.html</a></p>
+<p>构建者模式：当一个类的构造函数参数个数超过4个，而且这些参数有些是可选的参数，考虑使用构造者模式。例子：@Builder注解生成的实体类。</p>
+<h4 id="csrf"><a href="#csrf" class="headerlink" title="csrf"></a>csrf</h4><p>时序图如下：</p>
+<p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg" alt="csrf"></p>
+<p>下面的博客已经讲的很好了。但是里面没有讲csrftoken相关的东西。</p>
+<p>参考博客：<a href="http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html" target="_blank" rel="noopener">http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html</a></p>
+<p>关于csrftoken，这篇博客很棒：<a href="https://github.com/pillarjs/understanding-csrf/blob/master/README.md" target="_blank" rel="noopener">https://github.com/pillarjs/understanding-csrf/blob/master/README.md</a></p>
+<p>通常的防御措施包括</p>
+<ol>
+<li>只使用json api，这样只能用ajax来提交json，而不能直接使用form提交</li>
+<li>禁止cors（跨域请求）</li>
+<li>检查referrer header，看来自哪个网站</li>
+<li>使用csrftoken，具体的步骤是，服务器发送给客户端一个token，客户端需要提交带有token的表单，接着服务器验证token是否合法，否则拒绝该请求</li>
+</ol>
+<p>有个疑问，为什么有些服务器把返回来的csrftoken显示在浏览器上？这样不是很容易被爬虫吗？</p>
+<p>算法题常见的思路：</p>
+<ol>
+<li>用双指针（甚至多指针）（比如头尾逼近）</li>
+<li>想到二分的思想</li>
+<li>想到patition的思想（快排里的）</li>
+<li>想到用空间换时间</li>
+<li>想到用哈希table（比如用数组构造，或是调用unordered_set或unordered_map）</li>
+<li>想到用查找表（比如map/set等一系列的）</li>
+<li>想到用动态规划或贪心算法</li>
+<li>想到用回朔法</li>
+</ol>
+<p>若结点的存储地址与其关键字值之间存在某种对应关系，则这种存储结构为散列存储。<br>散列存储：散列存储，又称hash存储，是一种力图将数据元素的存储位置与关键码之间建立确定对应关系的查找技术。<br>基本思想：由节点的关键码值决定节点的存储地址。散列技术除了可以用于查找外，还可以用于存储。</p>
+<p>特点：<br>散列是数组存储方式的一种发展，相比数组，散列的数据访问速度要高于数组，因为可以依据存储数据的部分内容找到数据在数组中的存储位置，进而能够快速实现数据的访问，理想的散列访问速度是非常迅速的，而不像在数组中的遍历过程，采用存储数组中内容的部分元素作为映射函数的输入，映射函数的输出就是存储数据的位置，这样的访问速度就省去了遍历数组的实现，因此时间复杂度可以认为为<code>O(1)</code>，而数组遍历的时间复杂度为<code>O(n)</code>。</p>
+<p>1.排序算法的思考方式</p>
+<ul>
+<li>有没有可能包含大量重复的元素？</li>
+<li>是否大部分数据距离它正确的位置很近？是否近乎有序？</li>
+<li>是否数据的取值范围非常有限？比如对学生成绩排序。</li>
+<li>是否需要稳定排序？</li>
+<li>是否是使用链表存储的？</li>
+<li>数据的大小是否可以装载在内存里？</li>
+</ul>
+<p>SVM和Logistic回归的比较：（1）经典的SVM，直接输出类别，不给出后验概率；（2）Logistic回归，会给出属于哪一个类别的后验概率；（3）比较重点是二者目标函数的异同。</p>
+<p>SVR回归区别于传统的回归，在计算模型输出和真实输出之前的差别时，可以容忍小部分的偏差$\epsilon$。</p>
+<p>逻辑回归模型参数的求解，一般通过极大似然估计，也就得到了logloss。至于logloss，个人觉得有一个稍微有点物理意义的解释：可以把logloss分解成真实分布的熵+真实分布与预测分布的相对熵（KL散度），前半部分是固定的，所以最小化logloss相当于在最小化真实分布与预测分布之间的差异。</p>
+<p>bagging是并行式集成学习方法的最著名的代表。</p>
+<p>m个样本的数据集可放回随机取出一个样本放入采样集。m次采样中，含有m个样本的采样集。采样出T个含有m个训练样本的采样集。基于每一个采样集，训练出一个基学习器。再将这些结合起来。</p>
+<p>与标准adaboost只适用于二分类任务不同，bagging能不经修改地用于多分类、回归等任务。</p>
+<p>Bagging 是 Bootstrap Aggregating 的简称，意思就是再取样 (Bootstrap) 然后在每个样本上训练出来的模型取平均，所以是降低模型的 variance. Bagging 比如 Random Forest 这种先天并行的算法都有这个效果。</p>
+<p>Boosting 则是迭代算法，每一次迭代都根据上一次迭代的预测结果对样本进行加权，所以随着迭代不断进行，误差会越来越小，所以模型的 bias 会不断降低。这种算法无法并行，例子比如 Adaptive Boosting.</p>
+<p>1.总结极大似然估计和最大后验估计</p>
+<p>2.朴素贝叶斯分类</p>
+<p>3，线性回归</p>
+<p>4，svr回归</p>
+<p>5.pca，lpa</p>
+<p>数据结构：  </p>
+<p>   1。最大子序列和：一串序列，找出和最大的子序列：用一个变量储存第i位之前最大的和，碰到新的数字进行相应的加减法， 一旦这个变量小于0就置为0。  </p>
+<p>   2。平衡二叉树是怎么回事，介绍一下  </p>
+<p>   3。链表中有环怎么找？两个指针  </p>
+<p>   4。海量数据中找中位数（数据有100G,内存只有1G）：利用外部排序确定，或者可以用两个堆</p>
+<p>对于海量数据的情况，一定要想到分治法，即不断地二分划分，这样的算法复杂度就是<code>O(logN)</code>。而且还要想到用位来操作。很多算法问题也会用到。这是一个你在想不出用什么方法的时候最有可能利用的方法。</p>
+<p>当然也要想到用桶排序。</p>
+<p>堆排序、快速排序、希尔排序、直接选择排序不是稳定的排序算法，而基数排序、冒泡排序、直接插入排序、折半插入排序、归并排序是稳定的排序算法。</p>
+<ol>
+<li><p>在每一个链表中取出第一个值，然后把它们放在一个大小为N的数组里，然后把这个数组当成heap建成小(大)根堆。此步骤的时间复杂度为<code>O(N)</code></p>
+</li>
+<li><p>取出堆中的最小值(也是数组的第一个值), 然后把该最小值所处的链表的下一个值放在数组的第一个位置。如果链表中有一个已经为空（元素已经都被取出），则改变heap的大小。此步骤的时间复杂度为<code>O(logN)</code>.</p>
+</li>
+<li><p>不断的重复步骤二，直到所有的链表都为空。</p>
+</li>
+</ol>
+<p>最终的时间复杂度为：$(O(N)+O(N<em>logN))</em>M$</p>
+<h4 id="需要关注的知识点"><a href="#需要关注的知识点" class="headerlink" title="需要关注的知识点"></a>需要关注的知识点</h4><p>1.语言（序列化、注解、反射、java探针）</p>
+<p>2.spring</p>
+<p>3.http</p>
+<p>4.数据库（mysql、数据源、mybatis）</p>
+<p>5.缓存（cache、redis）</p>
+<p>6.安全（认证、授权）</p>
+<p>7.日志（logback）</p>
+<p>8.监控组件（cat组件）</p>
+<p>9.maven</p>
+<p>10.swagger</p>
+<p>11.ci、cd</p>
+<h4 id="钩子函数和回调函数的区别"><a href="#钩子函数和回调函数的区别" class="headerlink" title="钩子函数和回调函数的区别"></a>钩子函数和回调函数的区别</h4><p>一般认为，钩子函数就是回调函数的一种，其实还是有差异的，差异地方就是：触发的时机不同。钩子函数在捕获消息的第一时间就执行，而回调函数是捕获结束时，最后一个被执行的。</p>
+<h4 id="es相关"><a href="#es相关" class="headerlink" title="es相关"></a>es相关</h4><p>提到es，一定要首先联想到小时候用的《新华字典》，它们有很多相似点；其次要想到<strong>倒排索引</strong>，它是基于trie前缀树（term index的实现）。</p>
+<p>es是NoSQL数据库。以MySQL来作对比，index对应数据库；doc（文档）对应行，文档是包含一个或多个域（即Field）的容器，以JSON格式进行表示；field对应列。</p>
+<p>相关重要概念：term index，term dictionary，posting list。</p>
+<p>如有3条数据：</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Age</th>
+<th>Sex</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Kate</td>
+<td>24</td>
+<td>Female</td>
+</tr>
+<tr>
+<td>2</td>
+<td>John</td>
+<td>24</td>
+<td>Male</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Bill</td>
+<td>29</td>
+<td>Male</td>
+</tr>
+</tbody>
+</table>
+<p>索引如下：</p>
+<p>name</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Posting List</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kate</td>
+<td>1</td>
+</tr>
+<tr>
+<td>John</td>
+<td>2</td>
+</tr>
+<tr>
+<td>Bill</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>age</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Posting List</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>24</td>
+<td>[1, 2]</td>
+</tr>
+<tr>
+<td>29</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p>sex</p>
+<table>
+<thead>
+<tr>
+<th>Term</th>
+<th>Posting List</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Female</td>
+<td>1</td>
+</tr>
+<tr>
+<td>Male</td>
+<td>[2, 3]</td>
+</tr>
+</tbody>
+</table>
+<p>一张图解释什么叫倒排索引</p>
+<pre class="mermaid">graph LR
+  A[term index] --> B[term dictionary]
+  B --> C[posting list]</pre>
+
+
+      
+    </div>
+    
+    
+    
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    qinxue
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://qxconverse.github.io/code/代码_计算机基础/" title="计算机基础">https://qxconverse.github.io/code/代码_计算机基础/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/计算机/" rel="tag"># 计算机</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/code/代码_java虚拟机/" rel="next" title="Java虚拟机">
+                <i class="fa fa-chevron-left"></i> Java虚拟机
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/code/代码_数据库事务四种隔离级别/" rel="prev" title="数据库事务四种隔离级别">
+                数据库事务四种隔离级别 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="qinxue">
+            
+              <p class="site-author-name" itemprop="name">qinxue</p>
+              <p class="site-description motion-element" itemprop="description">现在就要幸福</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/qxconverse" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xqconverse@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qxconverse/csdncsdn" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/2875242050/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#阅读关于IaaS、PaaS-SaaS相关的知识点"><span class="nav-number">1.</span> <span class="nav-text">阅读关于IaaS、PaaS/SaaS相关的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于5种I-O模型的理解"><span class="nav-number">2.</span> <span class="nav-text">关于5种I/O模型的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计模式相关"><span class="nav-number">3.</span> <span class="nav-text">设计模式相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#csrf"><span class="nav-number">4.</span> <span class="nav-text">csrf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#需要关注的知识点"><span class="nav-number">5.</span> <span class="nav-text">需要关注的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#钩子函数和回调函数的区别"><span class="nav-number">6.</span> <span class="nav-text">钩子函数和回调函数的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#es相关"><span class="nav-number">7.</span> <span class="nav-text">es相关</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qinxue</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">62.9k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="waifu" id="waifu">
+      <div class="waifu-tips" style="opacity: 1;"></div>
+      <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+      <div class="waifu-tool">
+        <span class="fui-home"></span>
+        <span class="fui-chat"></span>
+        <span class="fui-eye"></span>
+        <span class="fui-user"></span>
+        <span class="fui-photo"></span>
+        <span class="fui-info-circle"></span>
+        <span class="fui-cross"></span>
+      </div>
+    </div>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+	<link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+	<script src="https://billts.site/js/gitment.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitment({
+            id: window.decodeURIComponent(window.location.pathname), 
+            owner: 'qxconverse',
+            repo: 'qxconverse.github.io',
+            
+            oauth: {
+            
+            
+                client_secret: 'fe06a18ea67aad329c93d816e2770695795a4d0a',
+            
+                client_id: '55fed2680b0b1d3db6c7'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "middleRight";
+      
+          pbOptions.networks = "Weibo,Douban,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 22649,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+  
+
+
+  
+
+  
+
+
+<script src="/lib/waifu/live2d.min.js"></script>
+<script src="/lib/waifu/waifu-tips.js"></script>
+<script type="text/javascript">initModel()</script>
+<link rel="stylesheet" type="text/css" href="/lib/waifu/flat-ui.min.css">
+</body>
+</html>
