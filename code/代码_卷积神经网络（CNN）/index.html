@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="卷积神经网络（CNN）本章不按照书本的顺序讲，但是会涉及到书本的大多数内容:-） 特别鸣谢吴恩达大佬的视频课程:-）视频课程传送门">
+<meta name="description" content="本章不按照书本的顺序讲，但是会涉及到书本的大多数内容:-） 特别鸣谢吴恩达大佬的视频课程:-）视频课程传送门">
 <meta name="keywords" content="深度学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="卷积神经网络（CNN）">
 <meta property="og:url" content="https://qxconverse.github.io/code/代码_卷积神经网络（CNN）/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="卷积神经网络（CNN）本章不按照书本的顺序讲，但是会涉及到书本的大多数内容:-） 特别鸣谢吴恩达大佬的视频课程:-）视频课程传送门">
+<meta property="og:description" content="本章不按照书本的顺序讲，但是会涉及到书本的大多数内容:-） 特别鸣谢吴恩达大佬的视频课程:-）视频课程传送门">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYyOTU5OTM3">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMDE5NDI1">
@@ -99,10 +99,10 @@
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMjMxMjI5">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMjUyMjc4">
 <meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMzExMzgw">
-<meta property="og:updated_time" content="2019-07-29T16:12:53.356Z">
+<meta property="og:updated_time" content="2021-01-20T02:37:23.794Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="卷积神经网络（CNN）">
-<meta name="twitter:description" content="卷积神经网络（CNN）本章不按照书本的顺序讲，但是会涉及到书本的大多数内容:-） 特别鸣谢吴恩达大佬的视频课程:-）视频课程传送门">
+<meta name="twitter:description" content="本章不按照书本的顺序讲，但是会涉及到书本的大多数内容:-） 特别鸣谢吴恩达大佬的视频课程:-）视频课程传送门">
 <meta name="twitter:image" content="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYyOTU5OTM3">
 
 
@@ -334,8 +334,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-07-30T00:12:53+08:00">
-                2019-07-30
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-20T10:37:23+08:00">
+                2021-01-20
               </time>
             
           </span>
@@ -389,7 +389,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.9k
+                  2.6k
                 </span>
               
 
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6
+                  9
                 </span>
               
             </div>
@@ -426,7 +426,7 @@
       
 
       
-        <h3 id="卷积神经网络（CNN）"><a href="#卷积神经网络（CNN）" class="headerlink" title="卷积神经网络（CNN）"></a>卷积神经网络（CNN）</h3><p><strong>本章不按照书本的顺序讲，但是会涉及到书本的大多数内容:-）</strong></p>
+        <p><strong>本章不按照书本的顺序讲，但是会涉及到书本的大多数内容:-）</strong></p>
 <p><strong>特别鸣谢吴恩达大佬的视频课程:-）</strong><a href="http://mooc.study.163.com/learn/deeplearning_ai-2001281004?tid=2001392030#/learn/content" target="_blank" rel="noopener">视频课程传送门</a></p>
 <a id="more"></a>
 <h4 id="1-深度学习的主要领域"><a href="#1-深度学习的主要领域" class="headerlink" title="1.深度学习的主要领域"></a>1.深度学习的主要领域</h4><p>计算机视觉、语音识别、自然语言处理、推荐系统等。随着数据量巨规模的增大，这些领域在发生很大的变化。而在计算机视觉领域，我们更多要用到卷积神经网络。那么卷积神经网络能做些什么呢？（以下用CNN代替卷积神经网络）</p>
@@ -513,6 +513,12 @@
 </ul>
 <h4 id="15-计算机视觉的现状"><a href="#15-计算机视觉的现状" class="headerlink" title="15.计算机视觉的现状"></a>15.计算机视觉的现状</h4><p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMzExMzgw" alt="这里写图片描述"></p>
 <h4 id="16-目标检测及人脸识别（选讲）"><a href="#16-目标检测及人脸识别（选讲）" class="headerlink" title="16.目标检测及人脸识别（选讲）"></a>16.目标检测及人脸识别（选讲）</h4><p>如果时间足够，可以提一下，当然也可以去吴恩达的视频里看。</p>
+<h4 id="17-个人理解"><a href="#17-个人理解" class="headerlink" title="17.个人理解"></a>17.个人理解</h4><p>在卷积神经网络中，拿图像来举个例子，比如图像为$m\times m$像素大小，那么就会有$m\times m$个输入，假如第一层有n个神经元，如果采用全连接的方式，那么共有$m\times m \times n$个连接，即需要$m\times m \times n$个参数。</p>
+<p>首先我们采用稀疏连接，即每个神经元仅仅连接图像的一部分，比如$k\times k$个像素点，这里的$k&lt;m$，暂时不管连接的方式，那么连接数和参数的个数会降低到$k\times k\times n$。</p>
+<p>其次我们再利用第二个武器，即权值共享，那么这个时候我们的每个神经元连接到$k\times k$区域的像素上的参数是一样的，所以连接数还是$k\times k\times n$，但是参数会降低到$k\times k$。</p>
+<p>好的，到目前为止，我们使用的是神经元来解释的。现在把神经元也想象成一个二维矩阵，唯一不同的是，这里将原来的一维变成了二维。而这个转变正好适用于CNN在图像上的应用。这时，我们把之前的参数（也叫权值）也看成一个二维矩阵，即一个<strong>核</strong>。利用卷积操作来运算。所以对应于之前的，我们说只连接图像的一部分，$k\times k$大小，那么这时我们定义一个核，大小也是$k\times k$，然后在这个图像中不停地移动来做卷积运算，假设每次只移动一个像素（即步长stride为1），最后就会得到输出边长为$(m-k)/1 + 1$大小的方形矩阵（图像），这时对应之前的神经元概念，其实现在的神经元个数不是$n$了，而是${((m-k)/1 + 1)} ^2$了。注：新生成的图像的边长大小（假设图像和核都宽高相等的）为$(imagesize-kernelsize)/stride + 1$。</p>
+<p>OK ，这个时候只是输出了一幅图像，即得到了一个特征映射（我们把上面一段的卷积操作叫做特征映射），通常在图像CNN里面，会产生很多个特征映射，假设我们产生M个映射，即需要生成M个边长为$(m-k)/1 + 1$大小的方形矩阵（图像），那么需要多少个参数呢？之前说了，对于一个映射，我们的参数个数为核的大小，即$k\times k$个，那么现在需要的参数个数为$k\times k\times M$。</p>
+<p>以上就是CNN中的卷积层的核心概念，其中用到的思想包括：<strong>稀疏交互</strong>，<strong>权值共享</strong>，<strong>多特征映射</strong>。</p>
 
       
     </div>
@@ -677,7 +683,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -699,7 +705,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">44</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -760,7 +766,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积神经网络（CNN）"><span class="nav-number">1.</span> <span class="nav-text">卷积神经网络（CNN）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-深度学习的主要领域"><span class="nav-number">1.1.</span> <span class="nav-text">1.深度学习的主要领域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-计算机视觉中常见的问题"><span class="nav-number">1.2.</span> <span class="nav-text">2.计算机视觉中常见的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-既然名字叫CNN，那为什么要卷积呢？什么是卷积操作？"><span class="nav-number">1.3.</span> <span class="nav-text">3.既然名字叫CNN，那为什么要卷积呢？什么是卷积操作？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-边缘检测问题"><span class="nav-number">1.4.</span> <span class="nav-text">4.边缘检测问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Padding卷积"><span class="nav-number">1.5.</span> <span class="nav-text">5.Padding卷积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Strided卷积"><span class="nav-number">1.6.</span> <span class="nav-text">6.Strided卷积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-多维度、多卷积核进行卷积"><span class="nav-number">1.7.</span> <span class="nav-text">7.多维度、多卷积核进行卷积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-单层卷积网络"><span class="nav-number">1.8.</span> <span class="nav-text">8.单层卷积网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-卷积网络示例"><span class="nav-number">1.9.</span> <span class="nav-text">9.卷积网络示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-池化"><span class="nav-number">1.10.</span> <span class="nav-text">10.池化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-为什么会使用卷积"><span class="nav-number">1.11.</span> <span class="nav-text">11.为什么会使用卷积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-常见网络的简单分析"><span class="nav-number">1.12.</span> <span class="nav-text">12.常见网络的简单分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-迁移学习"><span class="nav-number">1.13.</span> <span class="nav-text">13.迁移学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-数据增强"><span class="nav-number">1.14.</span> <span class="nav-text">14.数据增强</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-计算机视觉的现状"><span class="nav-number">1.15.</span> <span class="nav-text">15.计算机视觉的现状</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#16-目标检测及人脸识别（选讲）"><span class="nav-number">1.16.</span> <span class="nav-text">16.目标检测及人脸识别（选讲）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-深度学习的主要领域"><span class="nav-number">1.</span> <span class="nav-text">1.深度学习的主要领域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-计算机视觉中常见的问题"><span class="nav-number">2.</span> <span class="nav-text">2.计算机视觉中常见的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-既然名字叫CNN，那为什么要卷积呢？什么是卷积操作？"><span class="nav-number">3.</span> <span class="nav-text">3.既然名字叫CNN，那为什么要卷积呢？什么是卷积操作？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-边缘检测问题"><span class="nav-number">4.</span> <span class="nav-text">4.边缘检测问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Padding卷积"><span class="nav-number">5.</span> <span class="nav-text">5.Padding卷积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-Strided卷积"><span class="nav-number">6.</span> <span class="nav-text">6.Strided卷积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-多维度、多卷积核进行卷积"><span class="nav-number">7.</span> <span class="nav-text">7.多维度、多卷积核进行卷积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-单层卷积网络"><span class="nav-number">8.</span> <span class="nav-text">8.单层卷积网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-卷积网络示例"><span class="nav-number">9.</span> <span class="nav-text">9.卷积网络示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-池化"><span class="nav-number">10.</span> <span class="nav-text">10.池化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-为什么会使用卷积"><span class="nav-number">11.</span> <span class="nav-text">11.为什么会使用卷积</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-常见网络的简单分析"><span class="nav-number">12.</span> <span class="nav-text">12.常见网络的简单分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-迁移学习"><span class="nav-number">13.</span> <span class="nav-text">13.迁移学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14-数据增强"><span class="nav-number">14.</span> <span class="nav-text">14.数据增强</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15-计算机视觉的现状"><span class="nav-number">15.</span> <span class="nav-text">15.计算机视觉的现状</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#16-目标检测及人脸识别（选讲）"><span class="nav-number">16.</span> <span class="nav-text">16.目标检测及人脸识别（选讲）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#17-个人理解"><span class="nav-number">17.</span> <span class="nav-text">17.个人理解</span></a></li></ol></div>
             
 
           </div>
@@ -794,7 +800,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">62.9k</span>
+    <span title="Site words total count">59.6k</span>
   
 </div>
 
