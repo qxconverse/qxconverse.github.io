@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="数据库相关可以通过length函数查看字符串中字符的数目1select length(&amp;apos;aa&amp;apos;);">
+<meta name="description" content="很多数据类型的选择其实是没有黑白之分的，在不同的场景下针对一个数据可能需要不同的数据类型。">
 <meta name="keywords" content="数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据库相关">
 <meta property="og:url" content="https://qxconverse.github.io/code/代码_数据库相关/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="数据库相关可以通过length函数查看字符串中字符的数目1select length(&amp;apos;aa&amp;apos;);">
+<meta property="og:description" content="很多数据类型的选择其实是没有黑白之分的，在不同的场景下针对一个数据可能需要不同的数据类型。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-01-04T04:17:34.649Z">
+<meta property="og:updated_time" content="2021-01-23T11:59:08.231Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库相关">
-<meta name="twitter:description" content="数据库相关可以通过length函数查看字符串中字符的数目1select length(&amp;apos;aa&amp;apos;);">
+<meta name="twitter:description" content="很多数据类型的选择其实是没有黑白之分的，在不同的场景下针对一个数据可能需要不同的数据类型。">
 
 
 
@@ -321,8 +321,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-04T12:17:34+08:00">
-                2021-01-04
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-23T19:59:08+08:00">
+                2021-01-23
               </time>
             
           </span>
@@ -376,7 +376,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.6k
+                  1.9k
                 </span>
               
 
@@ -413,98 +413,42 @@
       
 
       
-        <h4 id="数据库相关"><a href="#数据库相关" class="headerlink" title="数据库相关"></a>数据库相关</h4><h5 id="可以通过length函数查看字符串中字符的数目"><a href="#可以通过length函数查看字符串中字符的数目" class="headerlink" title="可以通过length函数查看字符串中字符的数目"></a>可以通过length函数查看字符串中字符的数目</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select length(&apos;aa&apos;);</span><br></pre></td></tr></table></figure>
+        <p>很多数据类型的选择其实是没有黑白之分的，在不同的场景下针对一个数据可能需要不同的数据类型。</p>
 <a id="more"></a>
-<h5 id="变更数据库、表的字符集"><a href="#变更数据库、表的字符集" class="headerlink" title="变更数据库、表的字符集"></a>变更数据库、表的字符集</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;character%&apos;;</span><br><span class="line"></span><br><span class="line">ALTER DATABASE</span><br><span class="line">    database_name</span><br><span class="line">    CHARACTER SET = utf8mb4</span><br><span class="line">    COLLATE = utf8mb4_unicode_ci;</span><br><span class="line"></span><br><span class="line">ALTER TABLE</span><br><span class="line">    table_name</span><br><span class="line">    CONVERT TO CHARACTER SET utf8mb4</span><br><span class="line">    COLLATE utf8mb4_unicode_ci;</span><br><span class="line"></span><br><span class="line">ALTER TABLE</span><br><span class="line">    table_name</span><br><span class="line">    CHANGE column_name column_name</span><br><span class="line">    data_type</span><br><span class="line">    CHARACTER SET utf8mb4</span><br><span class="line">    COLLATE utf8mb4_unicode_ci;</span><br></pre></td></tr></table></figure>
-<h5 id="变更表中字段的属性"><a href="#变更表中字段的属性" class="headerlink" title="变更表中字段的属性"></a>变更表中字段的属性</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table xxx change column_name column_name varchar(20) character set utf8mb4;</span><br></pre></td></tr></table></figure>
-<h5 id="展示建表的语句"><a href="#展示建表的语句" class="headerlink" title="展示建表的语句"></a>展示建表的语句</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show create table xxx\G</span><br><span class="line">show table status from xxx\G</span><br></pre></td></tr></table></figure>
 <p>Collation的概念是字符比较的规则，每种字符集都会有其默认的Collation。</p>
-<p>很多数据类型的选择其实是没有黑白之分的，在不同的场景下针对一个数据可能需要不同的数据类型。</p>
-<p>mysql中有个存储引擎的概念。主要分为InnoDB和MyISAM。前者相较于后者，其区别主要在于它支持<strong>事务、外键和行级锁</strong>（命中主键的情况下）。</p>
-<p>直接连接线上数据库出现无权限的问题，可通过ssh隧道（配置跳板机器）连接mysql</p>
-<h5 id="连接远程数据库"><a href="#连接远程数据库" class="headerlink" title="连接远程数据库"></a>连接远程数据库</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql -h hostname -P port -u username -p</span><br></pre></td></tr></table></figure>
-<p>字符集utf8mb4 general_ci ，可以显示emoji</p>
-<p>gmtUpdate 可以不用设置，这个字段数据库会自动更新的，前提是在数据库中指明新增的默认值和更新值</p>
-<p>有时为了减少连表查询的麻烦，可以存在冗余字段</p>
-<p>为什么要加索引，其目的是干嘛的？</p>
-<p>索引的本质是一种数据结构。最直接的类比对象是字典。索引会将某列的数据放在数据结构中，并且保存指向某行的地址值。</p>
-<p>基本原则是只如果表中某列在查询过程中使用的非常频繁，那就在该列上创建索引。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;%max_connection%&apos;; 查看最大连接数</span><br><span class="line">set global max_connections=1000;       重新设置最大连接数</span><br><span class="line">show status like  &apos;Threads%&apos;;</span><br></pre></td></tr></table></figure>
-<h5 id="数据库中设置非空"><a href="#数据库中设置非空" class="headerlink" title="数据库中设置非空"></a>数据库中设置非空</h5><p>数据库中设置非空，最好设置默认值；且insert语句中涉及到的字段，不能传入null，要么insert语句不加该字段。也就是说如果可能为空，就要加判断，为空时不插入；</p>
-<p>update很简单，非空就更新</p>
-<h5 id="更新mysql用户密码"><a href="#更新mysql用户密码" class="headerlink" title="更新mysql用户密码"></a>更新mysql用户密码</h5><p>更新mysql用户密码，首先用root账号登陆进去，接着执行下面的命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE mysql.user SET password=PASSWORD(&apos;123456&apos;) WHERE user=&apos;root&apos;; </span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
-<h5 id="mybatis中-和-的区别"><a href="#mybatis中-和-的区别" class="headerlink" title="mybatis中#和$的区别"></a>mybatis中<code>#</code>和<code>$</code>的区别</h5><p><code>#</code>会进行预编译，按照类型匹配的，用于变量替换。</p>
+<p>MySQL中有个存储引擎的概念。主要分为InnoDB和MyISAM。前者相较于后者，其区别主要在于它支持<strong>事务、外键和行级锁</strong>（命中主键的情况下）。</p>
+<p>为什么要加索引，其目的是干嘛的？索引的本质是一种数据结构。最直接的类比对象是字典。索引会将某列的数据放在数据结构中，并且保存指向某行的地址值。基本原则是只如果表中某列在查询过程中使用的非常频繁，那就在该列上创建索引。</p>
+<p>数据库中设置非空，最好设置默认值；且insert语句中涉及到的字段，不能传入null，要么insert语句不加该字段。也就是说如果可能为空，就要加判断，为空时不插入；update很简单，非空就更新。</p>
+<h4 id="Mybatis中的注意点"><a href="#Mybatis中的注意点" class="headerlink" title="Mybatis中的注意点"></a>Mybatis中的注意点</h4><h5 id="mybatis中-和-的区别"><a href="#mybatis中-和-的区别" class="headerlink" title="mybatis中#和$的区别"></a>mybatis中<code>#</code>和<code>$</code>的区别</h5><p><code>#</code>会进行预编译，按照类型匹配的，用于变量替换。</p>
 <p><code>$</code>不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它</p>
 <p>如果两个都可以用，最好用#</p>
-<h5 id="select的时候一定要加resultType或者resultMap，否则报错"><a href="#select的时候一定要加resultType或者resultMap，否则报错" class="headerlink" title="select的时候一定要加resultType或者resultMap，否则报错"></a>select的时候一定要加resultType或者resultMap，否则报错</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"xxx"</span> <span class="attr">resultType</span>=<span class="string">"int"</span>&gt;</span></span><br><span class="line">    xxx</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h5 id="mybatis中判断不为空，且不为空字符串"><a href="#mybatis中判断不为空，且不为空字符串" class="headerlink" title="mybatis中判断不为空，且不为空字符串"></a>mybatis中判断不为空，且不为空字符串</h5><p>mybatis中判断不为空，且不为空字符串，适合字符串的变量；如果是整数型变量，当整数不为0时，没问题；但是如果整数为0，那么会判断它的值为空字符串，导致where中不起作用。</p>
 <h5 id="mybatis查询没有数据时"><a href="#mybatis查询没有数据时" class="headerlink" title="mybatis查询没有数据时"></a>mybatis查询没有数据时</h5><p>mybatis查询没有数据时返回的list是空集合，即size=0 并不是null。</p>
 <h5 id="mybatis如果只有一个参数"><a href="#mybatis如果只有一个参数" class="headerlink" title="mybatis如果只有一个参数"></a>mybatis如果只有一个参数</h5><p>mybatis如果只有一个参数，并且这个参数在sql中进行了类似<code>&lt;if test=&quot;param != null &quot;&gt;&lt;/if&gt;</code>的判断，需要加@Param。否则会都匹配进去</p>
-<h5 id="出现慢查询时，使用explain-sql语句的方式，查看执行信息，排查耗时的地方"><a href="#出现慢查询时，使用explain-sql语句的方式，查看执行信息，排查耗时的地方" class="headerlink" title="出现慢查询时，使用explain+sql语句的方式，查看执行信息，排查耗时的地方"></a>出现慢查询时，使用explain+sql语句的方式，查看执行信息，排查耗时的地方</h5><p>很多慢查询的问题，可以先用索引解决，特别是涉及到连表查询的时候</p>
+<h4 id="慢查询排查方法"><a href="#慢查询排查方法" class="headerlink" title="慢查询排查方法"></a>慢查询排查方法</h4><h5 id="出现慢查询时，使用explain-sql语句的方式，查看执行信息，排查耗时的地方"><a href="#出现慢查询时，使用explain-sql语句的方式，查看执行信息，排查耗时的地方" class="headerlink" title="出现慢查询时，使用explain+sql语句的方式，查看执行信息，排查耗时的地方"></a>出现慢查询时，使用explain+sql语句的方式，查看执行信息，排查耗时的地方</h5><p>很多慢查询的问题，可以先用索引解决，特别是涉及到连表查询的时候</p>
 <p>mybatis中更新操作，最好不要设置updateTime更新语句（前提是数据库中设置<code>CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP</code>）。特别是使用BeanUtils.copyPropertie或根据id获取时，由于里面的updateTime本身就不为空，这时判断<code>&lt;if test=&quot;updateTime != null&quot;&gt;update_time=#{updateTime},&lt;/if&gt;</code>，就会更新为当前已有的那个值，所以，还是没有更新到当前时间。</p>
 <h5 id="关于使用limit、offset的问题"><a href="#关于使用limit、offset的问题" class="headerlink" title="关于使用limit、offset的问题"></a>关于使用limit、offset的问题</h5><p><a href="https://explainextended.com/2009/10/23/mysql-order-by-limit-performance-late-row-lookups/" target="_blank" rel="noopener">https://explainextended.com/2009/10/23/mysql-order-by-limit-performance-late-row-lookups/</a></p>
-<h5 id="Druid是为监控而生的数据库连接池"><a href="#Druid是为监控而生的数据库连接池" class="headerlink" title="Druid是为监控而生的数据库连接池"></a>Druid是为监控而生的数据库连接池</h5><p>和java里面线程池、httpclient里面的http请求池类似，凡是涉及到连接、断开操作的东西，都可以有池的概念。为的是更好地实现资源复用。数据库连接池的基本原理是在内部对象池中维护一定数量的数据库连接，并对外暴露数据库连接获取和返回方法。</p>
-<blockquote>
-<p>连接池只应该有maxPoolSize和minPoolSize，druid只保留了maxActive和minIdle，分别相当于maxPoolSize和minPoolSize。</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>参数</th>
-<th>讲解</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>maxActive</td>
-<td>最大连接池数量</td>
-</tr>
-<tr>
-<td>minIdle</td>
-<td>最小连接池数量</td>
-</tr>
-<tr>
-<td>activeCount</td>
-<td>当前连接数</td>
-</tr>
-<tr>
-<td>connectCount</td>
-<td>总的连接次数</td>
-</tr>
-<tr>
-<td>closeCount</td>
-<td>总的断开连接次数</td>
-</tr>
-<tr>
-<td>poolingCount</td>
-<td>连接池中的连接数</td>
-</tr>
-<tr>
-<td>createCount</td>
-<td>创建的连接数</td>
-</tr>
-<tr>
-<td>recycleCount</td>
-<td>回收的总连接数</td>
-</tr>
-<tr>
-<td>activePeak</td>
-<td>当前连接数的峰值</td>
-</tr>
-<tr>
-<td>poolingPeak</td>
-<td>连接池中连接数的峰值</td>
-</tr>
-</tbody>
-</table>
-<p>发现很多地方都有idle这个字眼，idle的意思是：懒散的、闲置的。</p>
-<p>这是线程池的状态信息：从中可以分析出各个参数是什么意思。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    CreateTime:&quot;2019-09-26 09:58:31&quot;,</span><br><span class="line">    ActiveCount:0,</span><br><span class="line">    PoolingCount:5,</span><br><span class="line">    CreateCount:5,</span><br><span class="line">    DestroyCount:0,</span><br><span class="line">    CloseCount:22,</span><br><span class="line">    ConnectCount:22,</span><br><span class="line">    Connections:[</span><br><span class="line">        &#123;ID:706844266, ConnectTime:&quot;2019-09-26 09:58:35&quot;, UseCount:0, LastActiveTime:&quot;2019-09-26 09:58:35&quot;&#125;,</span><br><span class="line">        &#123;ID:107269256, ConnectTime:&quot;2019-09-26 09:58:35&quot;, UseCount:0, LastActiveTime:&quot;2019-09-26 09:58:35&quot;&#125;,</span><br><span class="line">        &#123;ID:1356533172, ConnectTime:&quot;2019-09-26 09:58:35&quot;, UseCount:0, LastActiveTime:&quot;2019-09-26 09:58:35&quot;&#125;,</span><br><span class="line">        &#123;ID:2086937005, ConnectTime:&quot;2019-09-26 09:58:36&quot;, UseCount:7, LastActiveTime:&quot;2019-09-26 10:04:36&quot;&#125;,</span><br><span class="line">        &#123;ID:1523613275, ConnectTime:&quot;2019-09-26 09:58:36&quot;, UseCount:15, LastActiveTime:&quot;2019-09-26 10:04:37&quot;&#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>对于连接池的细节，其为一个生产者/消费者模式，使用ReentrantLock + Condition的方式，即锁与同步方式</p>
+<h4 id="连接池概念"><a href="#连接池概念" class="headerlink" title="连接池概念"></a>连接池概念</h4><h5 id="Druid是为监控而生的数据库连接池"><a href="#Druid是为监控而生的数据库连接池" class="headerlink" title="Druid是为监控而生的数据库连接池"></a>Druid是为监控而生的数据库连接池</h5><p>和Java里面线程池、httpclient里面的http请求池类似，凡是涉及到连接、断开操作的东西，都可以有池的概念。为的是更好地实现资源复用。数据库连接池的基本原理是在内部对象池中维护一定数量的数据库连接，并对外暴露数据库连接获取和返回方法。连接池中包含的信息包括各种连接数的值（当前值、峰值、总值等）。</p>
+<p>发现很多地方都有idle这个字眼，idle的意思是：懒散的、闲置的。对于连接池的细节，其为一个生产者/消费者模式，使用ReentrantLock + Condition的方式，即锁与同步方式</p>
 <p>Condition是为了代替传统的Object的wait()/notify()方法，实现线程间的协作。其核心函数为await()、signal()方法，作用分别对应wait()和notify()。</p>
 <p>await：释放锁、沉睡、等待唤醒；signal：获取锁，开始做事，完毕后，调用signal方法，唤醒沉睡的线程。</p>
-<p>将锁、countdownLatch、Future类解决超时问题等串起来。</p>
+<h4 id="数据库事务的4种隔离级别"><a href="#数据库事务的4种隔离级别" class="headerlink" title="数据库事务的4种隔离级别"></a>数据库事务的4种隔离级别</h4><p>未授权读取（read uncommitted）</p>
+<p>授权读取（read committed）</p>
+<p>可重复读取（repeatable read）</p>
+<p>序列化（serializable）</p>
+<p>为什么会提出这四个概念，是因为在一个事务执行的过程中，可能出现以下几种情况：</p>
+<ol>
+<li>更新丢失：两个事务同时更新一行数据，一个事务对数据的更新把另外一个事务对数据的更新覆盖了。不能应对并发</li>
+<li>脏读：一个事务读取到了另外一个事务未提交的数据操作结果</li>
+<li>不可重复读：一个事务对同一行数据重复读取2次，但是得到了不同的结果</li>
+<li>虚读：事务T1读取了某一数据后，事务T2对其做了修改，当事务T1再次读该数据时得到了与第一次不同的值</li>
+<li>幻读：事务在操作的过程中进行2次查询，第一次查询到的结果包含了第一次查询中未出现的数据或者缺少了第一次查询中出现的数据。这是因为在两次查询过程中另外一个事务插入数据造成的</li>
+</ol>
+<p><strong>未授权读取（我在写，你就不能写，但是你可以读）就是一个事务可以读取另一个未提交事务的数据。</strong><br>如果一个事务已经开始写数据，则另外一个事务不允许同时进行写操作，但是允许其它事务读此行数据。该隔离级别可以通过“排他写锁”实现。<br>避免了更新丢失，却可能出现脏读。也就是说事务B读取到了事务A未提交的数据</p>
+<p><strong>授权读取（我在读，你可以读；但是我在写，如果还没有提交，你不能读）</strong><br>就是一个事务要等另一个事务提交后才能读取数据。读取数据的事务允许其它事务继续访问该行数据，但是未提交的写事务将会禁止其它事务访问该行。<br>避免了脏读，但是可能出现不可重复读。事务A事先读取了数据，事务B紧接着更新了数据，并提交了事务，而事务A再次读取该数据时，数据已经发生了变化。</p>
+<p><strong>可重复读取（我在读，你不能写，可以读）</strong><br>就是在开始读取数据（事务开启）时，不再允许修改操作读取数据的事务将会禁止写事务（但允许读事务），写事务则禁止任何其它的事务。避免了不可重复读和脏读，但是有时可能出现幻读。可以通过“共享读锁”和“排他写锁”实现。<br>重复读可以解决不可重复读问题。不可重复读对应的是修改，即UPDATE操作。但是可能还会有幻读问题。因为幻读问题对应的是插入INSERT操作，而不是UPDATE操作。</p>
+<p><strong>序列化，事务只能一个接着一个地执行，但不能并发执行。可以解决幻读问题</strong></p>
+<p>总结：对于大多数应用程序，可以优先考虑把数据库的隔离级别设置为read committed。可以避免脏读，而且有较好的并发性能。尽管可能导致不可重复读、幻读和第二类丢失更新这些并发问题。可以由应用程序采用悲观锁或乐观锁来控制。MySQL默认的隔离级别就是repeatable read。</p>
 
       
     </div>
@@ -571,8 +515,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/code/代码_http请求的一些细节/" rel="next" title="http头信息">
-                <i class="fa fa-chevron-left"></i> http头信息
+              <a href="/code/代码_Maven相关/" rel="next" title="Maven相关">
+                <i class="fa fa-chevron-left"></i> Maven相关
               </a>
             
           </div>
@@ -660,7 +604,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -682,7 +626,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -743,7 +687,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库相关"><span class="nav-number">1.</span> <span class="nav-text">数据库相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#可以通过length函数查看字符串中字符的数目"><span class="nav-number">1.1.</span> <span class="nav-text">可以通过length函数查看字符串中字符的数目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变更数据库、表的字符集"><span class="nav-number">1.2.</span> <span class="nav-text">变更数据库、表的字符集</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变更表中字段的属性"><span class="nav-number">1.3.</span> <span class="nav-text">变更表中字段的属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#展示建表的语句"><span class="nav-number">1.4.</span> <span class="nav-text">展示建表的语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#连接远程数据库"><span class="nav-number">1.5.</span> <span class="nav-text">连接远程数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库中设置非空"><span class="nav-number">1.6.</span> <span class="nav-text">数据库中设置非空</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#更新mysql用户密码"><span class="nav-number">1.7.</span> <span class="nav-text">更新mysql用户密码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis中-和-的区别"><span class="nav-number">1.8.</span> <span class="nav-text">mybatis中#和$的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#select的时候一定要加resultType或者resultMap，否则报错"><span class="nav-number">1.9.</span> <span class="nav-text">select的时候一定要加resultType或者resultMap，否则报错</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis中判断不为空，且不为空字符串"><span class="nav-number">1.10.</span> <span class="nav-text">mybatis中判断不为空，且不为空字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis查询没有数据时"><span class="nav-number">1.11.</span> <span class="nav-text">mybatis查询没有数据时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis如果只有一个参数"><span class="nav-number">1.12.</span> <span class="nav-text">mybatis如果只有一个参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#出现慢查询时，使用explain-sql语句的方式，查看执行信息，排查耗时的地方"><span class="nav-number">1.13.</span> <span class="nav-text">出现慢查询时，使用explain+sql语句的方式，查看执行信息，排查耗时的地方</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关于使用limit、offset的问题"><span class="nav-number">1.14.</span> <span class="nav-text">关于使用limit、offset的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Druid是为监控而生的数据库连接池"><span class="nav-number">1.15.</span> <span class="nav-text">Druid是为监控而生的数据库连接池</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Mybatis中的注意点"><span class="nav-number">1.</span> <span class="nav-text">Mybatis中的注意点</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis中-和-的区别"><span class="nav-number">1.1.</span> <span class="nav-text">mybatis中#和$的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis中判断不为空，且不为空字符串"><span class="nav-number">1.2.</span> <span class="nav-text">mybatis中判断不为空，且不为空字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis查询没有数据时"><span class="nav-number">1.3.</span> <span class="nav-text">mybatis查询没有数据时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis如果只有一个参数"><span class="nav-number">1.4.</span> <span class="nav-text">mybatis如果只有一个参数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#慢查询排查方法"><span class="nav-number">2.</span> <span class="nav-text">慢查询排查方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#出现慢查询时，使用explain-sql语句的方式，查看执行信息，排查耗时的地方"><span class="nav-number">2.1.</span> <span class="nav-text">出现慢查询时，使用explain+sql语句的方式，查看执行信息，排查耗时的地方</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关于使用limit、offset的问题"><span class="nav-number">2.2.</span> <span class="nav-text">关于使用limit、offset的问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#连接池概念"><span class="nav-number">3.</span> <span class="nav-text">连接池概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Druid是为监控而生的数据库连接池"><span class="nav-number">3.1.</span> <span class="nav-text">Druid是为监控而生的数据库连接池</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库事务的4种隔离级别"><span class="nav-number">4.</span> <span class="nav-text">数据库事务的4种隔离级别</span></a></li></ol></div>
             
 
           </div>
@@ -777,7 +721,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">59.1k</span>
+    <span title="Site words total count">56.6k</span>
   
 </div>
 

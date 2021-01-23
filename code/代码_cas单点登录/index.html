@@ -88,7 +88,7 @@
 <meta property="og:description" content="cas单点登录的分析图示：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7t60ewr8bj30u01daafn.jpg">
-<meta property="og:updated_time" content="2021-01-21T01:51:00.303Z">
+<meta property="og:updated_time" content="2021-01-23T12:00:30.006Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CAS单点登录示意图">
 <meta name="twitter:description" content="cas单点登录的分析图示：">
@@ -323,8 +323,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-21T09:51:00+08:00">
-                2021-01-21
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-23T20:00:30+08:00">
+                2021-01-23
               </time>
             
           </span>
@@ -378,7 +378,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  367
+                  369
                 </span>
               
 
@@ -418,15 +418,13 @@
         <p>cas单点登录的分析图示：</p>
 <a id="more"></a>
 <p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7t60ewr8bj30u01daafn.jpg" alt="cas"></p>
-<p>在项目的代码里面，有如下的配置，即进行单点登录时的cas服务器为<code>xxx</code>。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">shiro:</span><br><span class="line">  casLoginServerUrlPrefix: xxx</span><br><span class="line">  casLogoutServerUrlPrefix: xxx</span><br><span class="line">  casTicketValidatorServerUrlPrefix: xxx</span><br><span class="line">  server: yyy</span><br><span class="line">  shiroSessionKeyPre: &apos;kkk&apos;</span><br><span class="line">  shiroSessionExpireSeconds: 3600</span><br><span class="line">  globalSessionTimeoutSeconds: 3600</span><br></pre></td></tr></table></figure>
-<p>启动项目后，访问yyy，未登录，所以跳转到cas服务器上xxx/login?service=yyy/shiro-cas<code>，展示出登录界面。输入用户名和密码后，以post请求调用了</code>authentication/authenticate`的方法。</p>
-<p>post请求的数据如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	&quot;mainAuthMethodName&quot;: &quot;username-password&quot;,</span><br><span class="line">	&quot;credential&quot;: &#123;</span><br><span class="line">		&quot;username&quot;: &quot;1000003718&quot;,</span><br><span class="line">		&quot;password&quot;: &quot;xxx&quot;,</span><br><span class="line">		&quot;encodeVersion&quot;: &quot;2&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;context&quot;: &#123;</span><br><span class="line">		&quot;deviceId&quot;: &quot;default&quot;,</span><br><span class="line">		&quot;sign&quot;: &quot;default&quot;</span><br><span class="line">	&#125;,</span><br><span class="line">	&quot;version&quot;: &quot;2.0&quot;,</span><br><span class="line">	&quot;accountSystem&quot;: &quot;employee&quot;,</span><br><span class="line">	&quot;service&quot;: &quot;yyy/shiro-cas&quot;,</span><br><span class="line">	&quot;loginTicketId&quot;: &quot;xxx&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其中credential（凭据）中即包含了用户名和密码（经过加密的，每次不一样）。</p>
-<p>cas服务器返回的数据包含了ticket。</p>
-<p>接着调用项目中的<code>shiro-cas?ticket=ttt</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Request URL: yyy/shiro-cas?ticket=ttt</span><br></pre></td></tr></table></figure>
+<p>以shiro-cas为例。在项目的代码里面有如下的配置，其中进行单点登录时的cas服务器为<code>xxx</code>，而ticket验证服务器为<code>yyy</code>。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">shiro:</span></span><br><span class="line"><span class="attr">  casFilterUrlPattern:</span> <span class="string">/shiro-cas</span></span><br><span class="line"><span class="attr">  casServerUrlPrefix:</span> <span class="string">xxx</span></span><br><span class="line"><span class="attr">  shiroServerUrlPrefix:</span> <span class="attr">http://yourtologin.com</span></span><br><span class="line"><span class="attr">  casTicketValidatorServerUrlPrefix:</span> <span class="string">yyy</span></span><br><span class="line"><span class="attr">  cookieDomain:</span> <span class="string">'xx.com'</span></span><br><span class="line"><span class="attr">  loginUrl:</span> <span class="string">$&#123;shiro.casServerUrlPrefix&#125;/login?service=$&#123;shiro.shiroServerUrlPrefix&#125;$&#123;shiro.casFilterUrlPattern&#125;</span></span><br><span class="line"><span class="attr">  logoutUrl:</span> <span class="string">$&#123;shiro.casServerUrlPrefix&#125;/logout?service=$&#123;shiro.shiroServerUrlPrefix&#125;</span></span><br><span class="line"><span class="attr">  shiroSessionKeyPre:</span> <span class="string">'kkk'</span></span><br><span class="line"><span class="attr">  shiroSessionExpireSeconds:</span> <span class="number">3600</span></span><br><span class="line"><span class="attr">  globalSessionTimeoutSeconds:</span> <span class="number">3600</span></span><br></pre></td></tr></table></figure>
+<p>启动项目后，访问<code>http://yourtologin.com</code>。未登录，所以跳转到cas服务器上<code>xxx/login?service=http://yourtologin.com/shiro-cas</code>，展示出登录界面。</p>
+<p>输入用户名和密码后，以post请求调用了<code>authentication/authenticate</code>的方法。post请求的数据如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="attr">"mainAuthMethodName"</span>: <span class="string">"username-password"</span>,</span><br><span class="line">	<span class="attr">"credential"</span>: &#123;</span><br><span class="line">		<span class="attr">"username"</span>: <span class="string">"1000003718"</span>,</span><br><span class="line">		<span class="attr">"password"</span>: <span class="string">"xxxxxx"</span>,</span><br><span class="line">		<span class="attr">"encodeVersion"</span>: <span class="string">"2"</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">"context"</span>: &#123;</span><br><span class="line">		<span class="attr">"deviceId"</span>: <span class="string">"default"</span>,</span><br><span class="line">		<span class="attr">"sign"</span>: <span class="string">"default"</span></span><br><span class="line">	&#125;,</span><br><span class="line">	<span class="attr">"version"</span>: <span class="string">"2.0"</span>,</span><br><span class="line">	<span class="attr">"accountSystem"</span>: <span class="string">"employee"</span>,</span><br><span class="line">	<span class="attr">"service"</span>: <span class="string">"http://yourtologin.com/shiro-cas"</span>,</span><br><span class="line">	<span class="attr">"loginTicketId"</span>: <span class="string">"xxxxxx"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中credential（凭据）中即包含了用户名和密码（经过加密的，每次不一样）。cas服务器返回的数据包含了ticket。</p>
+<p>接着调用项目中的<code>http://yourtologin.com/shiro-cas?ticket=ttt</code>。</p>
 <p>项目代码在类<code>PcShiroCasRealm</code>中，其登录认证的逻辑如下：</p>
 <ol>
 <li>获取到token，其中包含ticket，userId和isRememberMe。此时只有ticket不为空</li>
@@ -583,7 +581,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -605,7 +603,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -684,7 +682,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">59.1k</span>
+    <span title="Site words total count">56.6k</span>
   
 </div>
 

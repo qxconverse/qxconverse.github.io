@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="数据库,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -79,18 +79,16 @@
 
 
 
-<meta name="description" content="未授权读取（read uncommitted）">
-<meta name="keywords" content="数据库">
-<meta property="og:type" content="article">
-<meta property="og:title" content="数据库事务四种隔离级别">
-<meta property="og:url" content="https://qxconverse.github.io/code/代码_数据库事务四种隔离级别/index.html">
+<meta name="description" content="现在就要幸福">
+<meta property="og:type" content="website">
+<meta property="og:title" content="XXQIN&#39;S BLOG">
+<meta property="og:url" content="https://qxconverse.github.io/tags/依赖控制/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="未授权读取（read uncommitted）">
+<meta property="og:description" content="现在就要幸福">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-01-06T12:12:59.789Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据库事务四种隔离级别">
-<meta name="twitter:description" content="未授权读取（read uncommitted）">
+<meta name="twitter:title" content="XXQIN&#39;S BLOG">
+<meta name="twitter:description" content="现在就要幸福">
 
 
 
@@ -120,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="https://qxconverse.github.io/code/代码_数据库事务四种隔离级别/">
+  <link rel="canonical" href="https://qxconverse.github.io/tags/依赖控制/">
 
 
 
 
 
-  <title>数据库事务四种隔离级别 | XXQIN'S BLOG</title>
+  <title>标签: 依赖控制 | XXQIN'S BLOG</title>
   
 
 
@@ -148,7 +146,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -262,274 +260,52 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block tag">
 
-  
+    <div id="posts" class="posts-collapse">
+      <div class="collection-title">
+        <h1>依赖控制<small>标签</small>
+        </h1>
+      </div>
 
-  
-  
-  
+      
+        
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/code/代码_数据库事务四种隔离级别/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="qinxue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XXQIN'S BLOG">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/code/代码_Maven相关/" itemprop="url">
+              
+                <span itemprop="name">Maven相关</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">数据库事务四种隔离级别</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-02T21:27:51+08:00">
-                2018-09-02
-              </time>
-            
-
-            
-              <span class="post-meta-divider">|</span>
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-check-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">更新于&#58;</span>
-              
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-06T20:12:59+08:00">
-                2021-01-06
-              </time>
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/code/" itemprop="url" rel="index">
-                    <span itemprop="name">代码</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
-            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
-            </span>
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  878
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>未授权读取（read uncommitted）</p>
-<a id="more"></a>
-<p>授权读取（read committed）</p>
-<p>可重复读取（repeatable read）</p>
-<p>序列化（serializable）</p>
-<p>为什么会提出这四个概念，是因为在一个事务执行的过程中，可能出现以下几种情况：</p>
-<ol>
-<li>更新丢失：两个事务同时更新一行数据，一个事务对数据的更新把另外一个事务对数据的更新覆盖了。不能应对并发</li>
-<li>脏读：一个事务读取到了另外一个事务未提交的数据操作结果</li>
-<li>不可重复读：一个事务对同一行数据重复读取2次，但是得到了不同的结果</li>
-<li>虚读：事务T1读取了某一数据后，事务T2对其做了修改，当事务T1再次读该数据时得到了与第一次不同的值</li>
-<li>幻读：事务在操作的过程中进行2次查询，第一次查询到的结果包含了第一次查询中未出现的数据或者缺少了第一次查询中出现的数据。这是因为在两次查询过程中另外一个事务插入数据造成的</li>
-</ol>
-<p><strong>未授权读取（我在写，你就不能写，但是你可以读）就是一个事务可以读取另一个未提交事务的数据。</strong><br>如果一个事务已经开始写数据，则另外一个事务不允许同时进行写操作，但是允许其它事务读此行数据。该隔离级别可以通过“排他写锁”实现。<br>避免了更新丢失，却可能出现脏读。也就是说事务B读取到了事务A未提交的数据</p>
-<p><strong>授权读取（我在读，你可以读；但是我在写，如果还没有提交，你不能读）</strong><br>就是一个事务要等另一个事务提交后才能读取数据。读取数据的事务允许其它事务继续访问该行数据，但是未提交的写事务将会禁止其它事务访问该行。<br>避免了脏读，但是可能出现不可重复读。事务A事先读取了数据，事务B紧接着更新了数据，并提交了事务，而事务A再次读取该数据时，数据已经发生了变化。</p>
-<p><strong>可重复读取（我在读，你不能写，可以读）</strong><br>就是在开始读取数据（事务开启）时，不再允许修改操作读取数据的事务将会禁止写事务（但允许读事务），写事务则禁止任何其它的事务。避免了不可重复读和脏读，但是有时可能出现幻读。可以通过“共享读锁”和“排他写锁”实现。<br>重复读可以解决不可重复读问题。不可重复读对应的是修改，即UPDATE操作。但是可能还会有幻读问题。因为幻读问题对应的是插入INSERT操作，而不是UPDATE操作。</p>
-<p><strong>序列化，事务只能一个接着一个地执行，但不能并发执行。可以解决幻读问题</strong></p>
-<p>总结：对于大多数应用程序，可以优先考虑把数据库的隔离级别设置为read committed。可以避免脏读，而且有较好的并发性能。尽管可能导致不可重复读、幻读和第二类丢失更新这些并发问题。可以由应用程序采用悲观锁或乐观锁来控制。MySQL默认的隔离级别就是repeatable read。</p>
-
-      
-    </div>
-    
-    
-    
-    
-
-    
-
-    
-      <div>
-        <ul class="post-copyright">
-  <li class="post-copyright-author">
-    <strong>本文作者：</strong>
-    qinxue
-  </li>
-  <li class="post-copyright-link">
-    <strong>本文链接：</strong>
-    <a href="https://qxconverse.github.io/code/代码_数据库事务四种隔离级别/" title="数据库事务四种隔离级别">https://qxconverse.github.io/code/代码_数据库事务四种隔离级别/</a>
-  </li>
-  <li class="post-copyright-license">
-    <strong>版权声明： </strong>
-    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2019-07-09T12:09:52+08:00" content="2019-07-09">
+          07-09
+        </time>
       </div>
-    
 
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/数据库/" rel="tag"># 数据库</a>
-          
-        </div>
-      
-
-      
-      
-        <div class="post-widgets">
-        
-          <div class="wp_rating">
-            <div id="wpac-rating"></div>
-          </div>
-        
-
-        
-
-        
-          
-          <div id="needsharebutton-postbottom">
-            <span class="btn">
-              <i class="fa fa-share-alt" aria-hidden="true"></i>
-            </span>
-          </div>
-        
-        </div>
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/code/代码_计算机基础/" rel="next" title="计算机基础">
-                <i class="fa fa-chevron-left"></i> 计算机基础
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/code/代码_WebApi的安全性/" rel="prev" title="WebApi的安全性">
-                WebApi的安全性 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
       
     </div>
+
   </div>
+  
+  
+  
+
+  
 
 
           </div>
@@ -537,10 +313,6 @@
 
 
           
-
-  
-
-
 
         </div>
         
@@ -577,7 +349,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -599,7 +371,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -678,7 +450,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">59.1k</span>
+    <span title="Site words total count">56.6k</span>
   
 </div>
 
@@ -837,10 +609,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
@@ -921,25 +689,28 @@
   </script>
 
   
-  <script type="text/javascript">
-  wpac_init = window.wpac_init || [];
-  wpac_init.push({widget: 'Rating', id: 22649,
-    el: 'wpac-rating',
-    color: 'fc6423'
-  });
-  (function() {
-    if ('WIDGETPACK_LOADED' in window) return;
-    WIDGETPACK_LOADED = true;
-    var mc = document.createElement('script');
-    mc.type = 'text/javascript';
-    mc.async = true;
-    mc.src = '//embed.widgetpack.com/widget.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-  })();
-  </script>
-
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

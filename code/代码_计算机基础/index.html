@@ -88,7 +88,7 @@
 <meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg">
-<meta property="og:updated_time" content="2021-01-22T08:47:58.462Z">
+<meta property="og:updated_time" content="2021-01-23T12:00:06.208Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机基础">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
@@ -323,8 +323,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-22T16:47:58+08:00">
-                2021-01-22
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-23T20:00:06+08:00">
+                2021-01-23
               </time>
             
           </span>
@@ -378,7 +378,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5.2k
+                  6.7k
                 </span>
               
 
@@ -394,7 +394,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  18
+                  23
                 </span>
               
             </div>
@@ -693,6 +693,52 @@
   A[term index] --> B[term dictionary]
   B --> C[posting list]</pre>
 
+<h4 id="服务部署架构"><a href="#服务部署架构" class="headerlink" title="服务部署架构"></a>服务部署架构</h4><h5 id="Zookeeper与Nginx"><a href="#Zookeeper与Nginx" class="headerlink" title="Zookeeper与Nginx"></a>Zookeeper与Nginx</h5><p>Nginx关键词：HTTP服务器、<strong>反向代理服务器</strong>，负载均衡服务器</p>
+<p>ZooKeeper关键词：分布式协调服务框架，负载均衡服务器</p>
+<p>Zookeeper的作用包含：配置管理，名字服务，分布式锁和集群管理。可以把zookeeper理解为一个动物园管理者，负责管理动物园里面的所有动物。每个动物看做一台机器，它们有自己的特点（即配置），有自己的名字（即IP地址等）,因为有很多动物（看做集群），它们在动物园里面活动不能产生冲突（分布式锁）。</p>
+<p>499错误：Nginx自定义的一个状态码，其含义为“client has closed connection”。这很有可能是因为服务器端处理的时间过长，客户端“不耐烦”了。要解决此问题，就需要在程序上面做些优化了。</p>
+<p>429错误：大量的429错误，即在一定的时间内用户发送了太多的请求，即超出了“频次限制”。</p>
+<p>反向代理结合负载均衡“味道更佳”。</p>
+<h5 id="Dubbo和Http"><a href="#Dubbo和Http" class="headerlink" title="Dubbo和Http"></a>Dubbo和Http</h5><p>Dubbo的provider需要暴露地址和端口，用于注册；而Dubbo的consumer端只需要指定暴露的地址，无需端口号。其它参考：<a href="https://www.zhihu.com/question/41609070" target="_blank" rel="noopener">https://www.zhihu.com/question/41609070</a></p>
+<p>RPC在使用形式上像调用本地函数（或方法）一样去调用远程的函数（或方法）。</p>
+<p>http接口是在接口不多、系统与系统交互较少的情况下，解决信息孤岛初期常使用的一种通信手段；优点就是简单、直接、开发方便。利用现成的http协议进行传输。但是如果是一个大型的网站，内部子系统较多、接口非常多的情况下，RPC框架的好处就显示出来了</p>
+<p>对于dubbo的应用，消费方需要引入提供方的maven包，但是包里面只有接口（只暴露接口），没有具体的实现。所以有rpc在里面，即需要调用远程提供方的方法。</p>
+<h4 id="Nio相关"><a href="#Nio相关" class="headerlink" title="Nio相关"></a>Nio相关</h4><p>其中中最常使用的是多路复用，它是非阻塞的。最主要的有3个组件</p>
+<ol>
+<li>Selector（多路复用选择器，类似于netty里面的EventLoop，可以看做是一个线程）</li>
+<li>Channel（封装了Socket），注意一个Channel只能注册到一个Selector上，一个Selector可以被多个Channel注册，并监听这些Channel。</li>
+<li>ByteBuffer（用于存取数据）</li>
+</ol>
+<p>可以类比为一个快递站。一开始快递站的主管一个人负责所有的快递签收，当一卡车的货运过来的时候，它就会把这些快递全部收取。有客户来取得时候，他就得在所有的快递里面一个一个找。</p>
+<p>接着，主管想到了一个好的方法。将不同的快递分门别类地摆放，比如申通放在一个架子上，圆通放一个架子，顺丰放一个等等。这时客户来取得时候，他只需要去相应的架子上去找。</p>
+<p>后来，主管发现，这样一来，当客户多的时候，他忙不过来，于是，他雇佣了3个员工。这3个人分别负责不同的快递。A负责圆通、申通、中通，B负责顺丰，C负责韵达。这时就好多了。</p>
+<p>可以看到，每一件快递可以看做是字节流。而货车可以看作ByteBuffer。每一条快递通道看作Channel，ABC就是Selector。</p>
+<p>客户端调用：<code>http://api.xxx.com/getInfo?Id=value</code>，这种方式简单粗暴，在浏览器直接输入<code>http://api.xxx.com/getInfo?Id=value</code>，即可获取到相关的信息了，但是这样的方式会存在很严重的安全性问题，没有进行任何的验证，大家都可以通过这个方法获取到产品列表，导致信息泄露。</p>
+<!--more-->
+<ol>
+<li>如何验证调用者身份呢？</li>
+<li>如何防止参数被篡改呢？</li>
+<li>如何保证请求的唯一性？</li>
+<li>如何保证请求的唯一性，防止请求被恶意攻击呢？</li>
+</ol>
+<p>使用Token+签名认证（微信支付中有这种思想在里面）</p>
+<ol>
+<li>做一个认证服务，提供一个认证的WebApi，用户先访问它获取对应的Token</li>
+<li>用户拿着相应的Token以及请求的参数和服务器端提供的签名算法计算出签名后再去访问指定的Api</li>
+<li>服务器端每次接收到请求就获取对应用户的Token和请求参数，服务器端再次计算签名和客户端签名做对比，如果验证通过则正常访问相应的Api，验证失败则返回具体的失败信息。</li>
+</ol>
+<p>使用签名（签名算法+签名参数）</p>
+<ol>
+<li>给每个http请求添加一个签名，服务端来验证签名的合法性，如果签名合法则执行响应的操作，如果签名非法则直接拒绝请求。</li>
+<li>签名算法一般都使用Hash散列算法，常用的有MD5，SHA系列算法。这些算法可以根据不同的输入，计算出不同的结果，而且碰撞的概率很低。</li>
+<li>可以用Http请求的queryString然后加上时间戳还有随机数来作为签名的参数。</li>
+</ol>
+<p>WebApi跨域问题解决方案：CORS。什么是跨域问题？</p>
+<ol>
+<li>同源策略：出于安全考虑，浏览器会限制脚本中发起的跨站请求，浏览器要求JavaScript或Cookie只能访问同域下的内容。跨域问题的根本原因是浏览器的安全限制，默认禁止跨域的动态资源请求。</li>
+<li>正是由于这个原因，我们不同项目之间的调用就会被浏览器阻止。比如我们最常见的场景：WebApi作为数据服务层，它是一个单独的项目，我们的MVC项目作为Web的显示层，这个时候我们的MVC里面就需要调用WebApi里面的接口取数据展现在页面上。因为我们的WebApi和MVC是两个不同的项目，所以运行起来之后就存在上面说的跨域的问题。</li>
+</ol>
+<p>还有一篇更好的文章：<a href="https://www.cnblogs.com/codelir/p/5327462.html" target="_blank" rel="noopener">https://www.cnblogs.com/codelir/p/5327462.html</a></p>
 
       
     </div>
@@ -769,8 +815,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/code/代码_数据库事务四种隔离级别/" rel="prev" title="数据库事务四种隔离级别">
-                数据库事务四种隔离级别 <i class="fa fa-chevron-right"></i>
+              <a href="/thinking/思维_时间、精力管理/" rel="prev" title="时间管理与精力管理">
+                时间管理与精力管理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -848,7 +894,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">41</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -870,7 +916,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -931,7 +977,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#阅读关于IaaS、PaaS-SaaS相关的知识点"><span class="nav-number">1.</span> <span class="nav-text">阅读关于IaaS、PaaS/SaaS相关的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于5种I-O模型的理解"><span class="nav-number">2.</span> <span class="nav-text">关于5种I/O模型的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计模式相关"><span class="nav-number">3.</span> <span class="nav-text">设计模式相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#适配器模式vs代理模式"><span class="nav-number">3.1.</span> <span class="nav-text">适配器模式vs代理模式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#csrf"><span class="nav-number">4.</span> <span class="nav-text">csrf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#需要关注的知识点"><span class="nav-number">5.</span> <span class="nav-text">需要关注的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#钩子函数和回调函数的区别"><span class="nav-number">6.</span> <span class="nav-text">钩子函数和回调函数的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#es相关"><span class="nav-number">7.</span> <span class="nav-text">es相关</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#阅读关于IaaS、PaaS-SaaS相关的知识点"><span class="nav-number">1.</span> <span class="nav-text">阅读关于IaaS、PaaS/SaaS相关的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于5种I-O模型的理解"><span class="nav-number">2.</span> <span class="nav-text">关于5种I/O模型的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计模式相关"><span class="nav-number">3.</span> <span class="nav-text">设计模式相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#适配器模式vs代理模式"><span class="nav-number">3.1.</span> <span class="nav-text">适配器模式vs代理模式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#csrf"><span class="nav-number">4.</span> <span class="nav-text">csrf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#需要关注的知识点"><span class="nav-number">5.</span> <span class="nav-text">需要关注的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#钩子函数和回调函数的区别"><span class="nav-number">6.</span> <span class="nav-text">钩子函数和回调函数的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#es相关"><span class="nav-number">7.</span> <span class="nav-text">es相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务部署架构"><span class="nav-number">8.</span> <span class="nav-text">服务部署架构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Zookeeper与Nginx"><span class="nav-number">8.1.</span> <span class="nav-text">Zookeeper与Nginx</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dubbo和Http"><span class="nav-number">8.2.</span> <span class="nav-text">Dubbo和Http</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nio相关"><span class="nav-number">9.</span> <span class="nav-text">Nio相关</span></a></li></ol></div>
             
 
           </div>
@@ -965,7 +1011,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">59.1k</span>
+    <span title="Site words total count">56.6k</span>
   
 </div>
 
