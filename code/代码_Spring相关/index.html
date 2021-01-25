@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="关于线程池的使用">
+<meta name="description" content="countdownlatch的使用  设置需要计数的个数  接着设置多个线程跑任务，每个任务跑完后，调用countDown方法。 此时立即开始调用await方法，让主线程一直等着一段时间。 如果所有的任务在那段时间内完成了，就继续主线程，此时await返回一个true。同时getCount返回0； 如果在这段时间内未完成所有的任务，则不会继续等待了，继续执行主线程，此时await返回false，">
 <meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot相关">
 <meta property="og:url" content="https://qxconverse.github.io/code/代码_Spring相关/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="关于线程池的使用">
+<meta property="og:description" content="countdownlatch的使用  设置需要计数的个数  接着设置多个线程跑任务，每个任务跑完后，调用countDown方法。 此时立即开始调用await方法，让主线程一直等着一段时间。 如果所有的任务在那段时间内完成了，就继续主线程，此时await返回一个true。同时getCount返回0； 如果在这段时间内未完成所有的任务，则不会继续等待了，继续执行主线程，此时await返回false，">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/00831rSTly1gchpd3pkegj30si07bt99.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7t5wi02wij31ra0l4jxg.jpg">
-<meta property="og:updated_time" content="2020-12-28T13:00:18.411Z">
+<meta property="og:updated_time" content="2021-01-23T12:27:31.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot相关">
-<meta name="twitter:description" content="关于线程池的使用">
+<meta name="twitter:description" content="countdownlatch的使用  设置需要计数的个数  接着设置多个线程跑任务，每个任务跑完后，调用countDown方法。 此时立即开始调用await方法，让主线程一直等着一段时间。 如果所有的任务在那段时间内完成了，就继续主线程，此时await返回一个true。同时getCount返回0； 如果在这段时间内未完成所有的任务，则不会继续等待了，继续执行主线程，此时await返回false，">
 <meta name="twitter:image" content="https://tva1.sinaimg.cn/large/00831rSTly1gchpd3pkegj30si07bt99.jpg">
 
 
@@ -324,8 +324,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2020-12-28T21:00:18+08:00">
-                2020-12-28
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-23T20:27:31+08:00">
+                2021-01-23
               </time>
             
           </span>
@@ -379,7 +379,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5.9k
+                  5k
                 </span>
               
 
@@ -395,7 +395,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  22
+                  18
                 </span>
               
             </div>
@@ -416,41 +416,15 @@
       
 
       
-        <h5 id="关于线程池的使用"><a href="#关于线程池的使用" class="headerlink" title="关于线程池的使用"></a>关于线程池的使用</h5><a id="more"></a>
-<ol>
-<li>配置线程池，在应用入口或是该配置类上加上@EnableAsync注解。</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建线程池</span></span><br><span class="line"><span class="comment">     * 用于手动创建的线程</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ThreadPoolTaskExecutor <span class="title">mailSendTaskAsyncPool</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ThreadPoolTaskExecutor executor = <span class="keyword">new</span> ThreadPoolTaskExecutor();</span><br><span class="line">        executor.setCorePoolSize(config.getCorePoolSize());</span><br><span class="line">        executor.setMaxPoolSize(config.getMaxPoolSize());</span><br><span class="line">        executor.setQueueCapacity(config.getQueueCapacity());</span><br><span class="line">        executor.setKeepAliveSeconds(config.getKeepAliveSeconds());</span><br><span class="line">        executor.setThreadNamePrefix(<span class="string">"mail-task-"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// CALLER_RUNS：不在新线程中执行任务，而是由调用者所在的线程来执行</span></span><br><span class="line">        executor.setRejectedExecutionHandler(<span class="keyword">new</span> ThreadPoolExecutor.CallerRunsPolicy());</span><br><span class="line">        executor.initialize();</span><br><span class="line">        <span class="keyword">return</span> executor;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>使用的时候，第一种方式，加上@Async注解，并且指定某个线程池的名字（函数里面直接写调用的逻辑），否则会使用主应用的线程池。</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Async</span>(<span class="string">"mailSendTaskAsyncPool"</span>)</span><br><span class="line"><span class="meta">@Scheduled</span>(cron = <span class="string">"0/10 0/1 * * * ? "</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMail</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    logger.info(<span class="string">"send email..."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>第二种方法，加上ThreadPoolTaskExecutor类型的变量，通过@Qualifier指定某个线程池的名字，并且在函数里面要通过调用该变量的execute方法来执行任务，否则会使用主应用的线程池。</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="meta">@Qualifier</span>(<span class="string">"messageSendTaskAsyncPool"</span>)</span><br><span class="line"><span class="keyword">private</span> ThreadPoolTaskExecutor threadPoolTaskExecutor;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta">@Scheduled</span>(cron = <span class="string">"0/10 0/1 * * * ? "</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendMail</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    threadPoolTaskExecutor.execute(() -&gt; &#123;</span><br><span class="line">        logger.info(<span class="string">"send email..."</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>推荐使用第二种方法，可以在函数里面具体某个地方调用，而不需要把要执行的动作单独写成一个函数。</p>
-<p>需要注意的是，线程池的使用和任务调度是2个不同的东西。可以单独使用任务调度的，此时使用的就是默认的主应用的线程，或是单独使用线程池。</p>
-<p>当在一个配置类中，出现多个返回类型一样的Bean时，使用时要用@Qualifier来区别，值取为该Bean的方法名即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Description:</span><br><span class="line"></span><br><span class="line">Field threadPoolTaskExecutor in xxqin.task.AsyncTask required a single bean, but 2 were found:</span><br><span class="line">	- mailSendTaskAsyncPool: defined by method &apos;mailSendTaskAsyncPool&apos; in class path resource [xxqin/config/ThreadPoolConfig.class]</span><br><span class="line">	- messageSendTaskAsyncPool: defined by method &apos;messageSendTaskAsyncPool&apos; in class path resource [xxqin/config/ThreadPoolConfig.class]</span><br><span class="line"></span><br><span class="line">Action:</span><br><span class="line"></span><br><span class="line">Consider marking one of the beans as @Primary, updating the consumer to accept multiple beans, or using @Qualifier to identify the bean that should be consumed</span><br></pre></td></tr></table></figure>
-<h5 id="countdownlatch的使用"><a href="#countdownlatch的使用" class="headerlink" title="countdownlatch的使用"></a>countdownlatch的使用</h5><ol>
-<li>设置需要计数的个数</li>
+        <ol>
+<li><p>countdownlatch的使用</p>
+</li>
+<li><p>设置需要计数的个数</p>
+</li>
 <li>接着设置多个线程跑任务，每个任务跑完后，调用countDown方法。</li>
 <li>此时立即开始调用await方法，让主线程一直等着一段时间。</li>
 <li>如果所有的任务在那段时间内完成了，就继续主线程，此时await返回一个true。同时getCount返回0；</li>
 <li>如果在这段时间内未完成所有的任务，则不会继续等待了，继续执行主线程，此时await返回false，同时getCount返回还剩余的任务数。</li>
-</ol>
-<h5 id="获取项目中所有的接口信息"><a href="#获取项目中所有的接口信息" class="headerlink" title="获取项目中所有的接口信息"></a>获取项目中所有的接口信息</h5><p>RequestMappingHandlerMapping的类，它可以获取到所有的映射</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> List&lt;Map&lt;String, String&gt;&gt; getRequestMappingInfo() &#123;</span><br><span class="line">    Map&lt;RequestMappingInfo, HandlerMethod&gt; map = requestMappingHandlerMapping.getHandlerMethods();</span><br><span class="line">    List&lt;Map&lt;String, String&gt;&gt; mappingInfo = Lists.newArrayList();</span><br><span class="line">    <span class="keyword">for</span> (Map.Entry&lt;RequestMappingInfo, HandlerMethod&gt; m : map.entrySet()) &#123;</span><br><span class="line">        Map&lt;String, String&gt; map1 = Maps.newHashMap();</span><br><span class="line">        PatternsRequestCondition p = m.getKey().getPatternsCondition();</span><br><span class="line">        HandlerMethod method = m.getValue();</span><br><span class="line">        map1.put(<span class="string">"className"</span>, method.getMethod().getDeclaringClass().getName());</span><br><span class="line">        map1.put(<span class="string">"method"</span>, method.getMethod().getName());</span><br><span class="line">        <span class="keyword">for</span> (String url : p.getPatterns()) &#123;</span><br><span class="line">            map1.put(<span class="string">"url"</span>, url);</span><br><span class="line">        &#125;</span><br><span class="line">        mappingInfo.add(map1);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> mappingInfo;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="Java开发提高性能的技术"><a href="#Java开发提高性能的技术" class="headerlink" title="Java开发提高性能的技术"></a>Java开发提高性能的技术</h5><ol>
-<li>缓冲（消费系统、redis缓存）</li>
-<li>“池”化、比如线程池、Http连接池、Dubbo连接池、数据库连接池、模型（比如机器学习的模型等）连接池等   池的内存泄漏：httpclient最大连接数；池的连接泄漏、http非200的时候，httpclient不会自动释放，可以finally手动释放或升级httpclient</li>
-<li>重量资源提前加载</li>
-<li>代码优化</li>
-<li>线程池的使用、读写分离锁代替独占锁</li>
-<li>并行代替串行、负载均衡、空间时间相互换</li>
-<li>redis如何管理key? try catch和for循环的位置</li>
-<li>cpu密集型、io密集型应用线程池设置的大小，分别为N+1、2N+1，其中N为CPU的个数</li>
 </ol>
 <p>org.apache.catalina.connector.ClientAbortException: java.io.IOException: Broken pipe<br>由于各种原因，客户端断开了连接，这时，服务器再向已经断开连接的客户端写数据时就发生了broken pipe异常</p>
 <h5 id="日志规约"><a href="#日志规约" class="headerlink" title="日志规约"></a>日志规约</h5><p>在DAO层，产生的异常类型有很多，无法用细粒度的异常进行catch，使用catch(Exception e)方式，并 throw new DAOException(e)，不需要打印日志，因为日志在 Manager/Service 层一定需要捕获并打印到日志文件中去，如果同台服务器再打日 志，浪费性能和存储。 </p>
@@ -472,10 +446,6 @@
 <p>在调用api接口，要小心参数为空字符的情况，特别是该参数要拿去查询数据库。为空可能就会查到全部。</p>
 <p>类似于mybatis里面，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxx!=null and xxx!=“”。空字符</span><br></pre></td></tr></table></figure></p>
 <h5 id="考虑接口的超时"><a href="#考虑接口的超时" class="headerlink" title="考虑接口的超时"></a>考虑接口的超时</h5><p>关于昨天的线上故障，因为线程池达到最大的线程数量。而大数据那边服务崩了后，就一直没有回应，我们调用时没有设置超时断开，导致所有线程都阻塞着，从而出现线上故障。需要考虑tomcat线程池设置</p>
-<p>写代码时，必须做到每一小块的单元测试，保证无误；再一步步地往下写。不然代码多了，很难找到容易出错的地方。</p>
-<h5 id="单测相关"><a href="#单测相关" class="headerlink" title="单测相关"></a>单测相关</h5><p>切换为junit5: <a href="https://spring.io/projects/spring-framework#learn" target="_blank" rel="noopener">https://spring.io/projects/spring-framework#learn</a></p>
-<p>如何需要对特定角色的用户进行过滤，可以采用拦截器的方式，自定义一个继承自HandlerInterceptor的类，重写其中的preHandle、postHandle和afterCompletion的方法。</p>
-<p>starter jar包里面可以实现注入，这样在项目中就可以直接作为参数传进来了。</p>
 <p>bean是有IoC容器管理的对象</p>
 <p>ApplicationContext接口代表了IoC容器</p>
 <p>自定义Constraint注解进行验证，通过@Constraint(validatedBy = xxx.class)的方式</p>
@@ -825,7 +795,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#关于线程池的使用"><span class="nav-number">1.</span> <span class="nav-text">关于线程池的使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#countdownlatch的使用"><span class="nav-number">2.</span> <span class="nav-text">countdownlatch的使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取项目中所有的接口信息"><span class="nav-number">3.</span> <span class="nav-text">获取项目中所有的接口信息</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java开发提高性能的技术"><span class="nav-number">4.</span> <span class="nav-text">Java开发提高性能的技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#日志规约"><span class="nav-number">5.</span> <span class="nav-text">日志规约</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#懒加载"><span class="nav-number">6.</span> <span class="nav-text">懒加载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#考虑接口的超时"><span class="nav-number">7.</span> <span class="nav-text">考虑接口的超时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#单测相关"><span class="nav-number">8.</span> <span class="nav-text">单测相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Filter，Listener，Servlet的区别"><span class="nav-number">9.</span> <span class="nav-text">Filter，Listener，Servlet的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设计模式中观察者模式与监听模式的区别"><span class="nav-number">10.</span> <span class="nav-text">设计模式中观察者模式与监听模式的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤器和拦截器的区别"><span class="nav-number">11.</span> <span class="nav-text">过滤器和拦截器的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java中的钩子"><span class="nav-number">12.</span> <span class="nav-text">Java中的钩子</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java中的锁"><span class="nav-number">13.</span> <span class="nav-text">Java中的锁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关于静态代码块"><span class="nav-number">14.</span> <span class="nav-text">关于静态代码块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内部类作用"><span class="nav-number">15.</span> <span class="nav-text">内部类作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#try-catch-finally执行情况"><span class="nav-number">16.</span> <span class="nav-text">try/catch/finally执行情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Application入口类放置问题"><span class="nav-number">17.</span> <span class="nav-text">Application入口类放置问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringBoot中Tomcat启动问题"><span class="nav-number">18.</span> <span class="nav-text">SpringBoot中Tomcat启动问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Socket流的问题"><span class="nav-number">19.</span> <span class="nav-text">Socket流的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Ajax方式下载文件的问题"><span class="nav-number">20.</span> <span class="nav-text">Ajax方式下载文件的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取文件类型的方法"><span class="nav-number">21.</span> <span class="nav-text">获取文件类型的方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#接入swagger遇到的坑"><span class="nav-number">22.</span> <span class="nav-text">接入swagger遇到的坑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response返回普通文本，html，json的方式"><span class="nav-number">23.</span> <span class="nav-text">response返回普通文本，html，json的方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#幂等性"><span class="nav-number">24.</span> <span class="nav-text">幂等性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Redislock分布式锁的作用"><span class="nav-number">25.</span> <span class="nav-text">Redislock分布式锁的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RequestParam、RequestBody和PathVariable的区别"><span class="nav-number">26.</span> <span class="nav-text">RequestParam、RequestBody和PathVariable的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Spring-Security-Oauth2相关"><span class="nav-number">27.</span> <span class="nav-text">Spring Security Oauth2相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Jrebel热加载"><span class="nav-number">28.</span> <span class="nav-text">Jrebel热加载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Bean的循环注入问题"><span class="nav-number">29.</span> <span class="nav-text">Bean的循环注入问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Autowired相关"><span class="nav-number">30.</span> <span class="nav-text">@Autowired相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注解处理器"><span class="nav-number">31.</span> <span class="nav-text">注解处理器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#java-agent"><span class="nav-number">32.</span> <span class="nav-text">java agent</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#http连接池"><span class="nav-number">33.</span> <span class="nav-text">http连接池</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#日志规约"><span class="nav-number">1.</span> <span class="nav-text">日志规约</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#懒加载"><span class="nav-number">2.</span> <span class="nav-text">懒加载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#考虑接口的超时"><span class="nav-number">3.</span> <span class="nav-text">考虑接口的超时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Filter，Listener，Servlet的区别"><span class="nav-number">4.</span> <span class="nav-text">Filter，Listener，Servlet的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设计模式中观察者模式与监听模式的区别"><span class="nav-number">5.</span> <span class="nav-text">设计模式中观察者模式与监听模式的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤器和拦截器的区别"><span class="nav-number">6.</span> <span class="nav-text">过滤器和拦截器的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java中的钩子"><span class="nav-number">7.</span> <span class="nav-text">Java中的钩子</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java中的锁"><span class="nav-number">8.</span> <span class="nav-text">Java中的锁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关于静态代码块"><span class="nav-number">9.</span> <span class="nav-text">关于静态代码块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内部类作用"><span class="nav-number">10.</span> <span class="nav-text">内部类作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#try-catch-finally执行情况"><span class="nav-number">11.</span> <span class="nav-text">try/catch/finally执行情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Application入口类放置问题"><span class="nav-number">12.</span> <span class="nav-text">Application入口类放置问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringBoot中Tomcat启动问题"><span class="nav-number">13.</span> <span class="nav-text">SpringBoot中Tomcat启动问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Socket流的问题"><span class="nav-number">14.</span> <span class="nav-text">Socket流的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Ajax方式下载文件的问题"><span class="nav-number">15.</span> <span class="nav-text">Ajax方式下载文件的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取文件类型的方法"><span class="nav-number">16.</span> <span class="nav-text">获取文件类型的方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#接入swagger遇到的坑"><span class="nav-number">17.</span> <span class="nav-text">接入swagger遇到的坑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response返回普通文本，html，json的方式"><span class="nav-number">18.</span> <span class="nav-text">response返回普通文本，html，json的方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#幂等性"><span class="nav-number">19.</span> <span class="nav-text">幂等性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Redislock分布式锁的作用"><span class="nav-number">20.</span> <span class="nav-text">Redislock分布式锁的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RequestParam、RequestBody和PathVariable的区别"><span class="nav-number">21.</span> <span class="nav-text">RequestParam、RequestBody和PathVariable的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Spring-Security-Oauth2相关"><span class="nav-number">22.</span> <span class="nav-text">Spring Security Oauth2相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Jrebel热加载"><span class="nav-number">23.</span> <span class="nav-text">Jrebel热加载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Bean的循环注入问题"><span class="nav-number">24.</span> <span class="nav-text">Bean的循环注入问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Autowired相关"><span class="nav-number">25.</span> <span class="nav-text">@Autowired相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注解处理器"><span class="nav-number">26.</span> <span class="nav-text">注解处理器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#java-agent"><span class="nav-number">27.</span> <span class="nav-text">java agent</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#http连接池"><span class="nav-number">28.</span> <span class="nav-text">http连接池</span></a></li></ol></div>
             
 
           </div>
@@ -859,7 +829,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">56.6k</span>
+    <span title="Site words total count">55.2k</span>
   
 </div>
 
