@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="t1,t2,">
+  <meta name="keywords" content="自动化,">
 
 
 
@@ -80,25 +80,22 @@
 
 
 <meta name="description" content="代码自动生成器插件">
-<meta name="keywords" content="t1,t2">
+<meta name="keywords" content="自动化">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于maven项目的代码自动生成器">
+<meta property="og:title" content="基于maven项目的代码自动生成器插件">
 <meta property="og:url" content="https://qxconverse.github.io/code/基于maven项目的代码自动生成器/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
 <meta property="og:description" content="代码自动生成器插件">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwly1glu2xc33q2j31600jkdhm.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwly1glu31bh2h3j315w0lkdi6.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwly1glu3aokexxj30n40fo40p.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gn0wjonr73j314a0m60v9.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwly1glug2tajy7j31dm0h4gq3.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwly1gluh7o1wytj321e0san30.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/0081Kckwly1gluhj5xf51j30tq0iywgx.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gn0wf4g848j31180r2114.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gn0wi2lwlxj30uu0jego3.jpg">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gn0wjonr73j314a0m60v9.jpg">
-<meta property="og:updated_time" content="2021-01-26T02:46:42.932Z">
+<meta property="og:updated_time" content="2021-01-27T09:48:56.786Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基于maven项目的代码自动生成器">
+<meta name="twitter:title" content="基于maven项目的代码自动生成器插件">
 <meta name="twitter:description" content="代码自动生成器插件">
 <meta name="twitter:image" content="https://tva1.sinaimg.cn/large/0081Kckwly1glu2xc33q2j31600jkdhm.jpg">
 
@@ -136,7 +133,7 @@
 
 
 
-  <title>基于maven项目的代码自动生成器 | XXQIN'S BLOG</title>
+  <title>基于maven项目的代码自动生成器插件 | XXQIN'S BLOG</title>
   
 
 
@@ -303,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">基于maven项目的代码自动生成器</h1>
+          <h1 class="post-title" itemprop="name headline">基于maven项目的代码自动生成器插件</h1>
         
 
         <div class="post-meta">
@@ -331,8 +328,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-26T10:46:42+08:00">
-                2021-01-26
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-27T17:48:56+08:00">
+                2021-01-27
               </time>
             
           </span>
@@ -386,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.2k
+                  1.3k
                 </span>
               
 
@@ -402,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4
+                  5
                 </span>
               
             </div>
@@ -425,26 +422,50 @@
       
         <p>代码自动生成器插件</p>
 <a id="more"></a>
-<h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>本篇文章的背景：在日常的开发过程中，经常需要写实体类和相关类，这些是可以自动生成的。目标是：了解代码自动生成的简单原理、能够自己写一个代码自动生成器maven插件。</p>
+<h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>本篇文章的背景：在日常的开发过程中，经常需要写实体类和相关类，这些是可以自动生成的。</p>
+<p>目标是：了解代码自动生成的简单原理、能够自己写一个代码自动生成器maven插件。</p>
 <p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1glu2xc33q2j31600jkdhm.jpg" alt="Screen Shot 2020-12-20 at 9.47.28 AM"></p>
 <h4 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h4><h5 id="数据库与实体类、ORM关系"><a href="#数据库与实体类、ORM关系" class="headerlink" title="数据库与实体类、ORM关系"></a>数据库与实体类、ORM关系</h5><p>ORM（对象关系映射）：通过实例对象的语法，完成关系型数据库的操作的技术</p>
 <p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1glu31bh2h3j315w0lkdi6.jpg" alt="Screen Shot 2020-12-20 at 9.50.59 AM"></p>
-<h5 id="ORM实例解释"><a href="#ORM实例解释" class="headerlink" title="ORM实例解释"></a>ORM实例解释</h5><p>下面的图展示了面对对象语言特性和关系型数据库特性的对应关系。</p>
-<p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1glu3aokexxj30n40fo40p.jpg" alt="Screen Shot 2020-12-20 at 10.00.24 AM"></p>
+<h5 id="ORM实例解释"><a href="#ORM实例解释" class="headerlink" title="ORM实例解释"></a>ORM实例解释</h5><p>下面的表格展示了面对对象语言特性和关系型数据库特性的对应关系。</p>
+<table>
+<thead>
+<tr>
+<th>面对对象语言特性</th>
+<th>关系型数据库特性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>类（classes）</td>
+<td>表（tables）</td>
+</tr>
+<tr>
+<td>对象（object）</td>
+<td>记录（record）、行数据</td>
+</tr>
+<tr>
+<td>属性（attribute）</td>
+<td>字段（field）、列数据</td>
+</tr>
+</tbody>
+</table>
 <h5 id="orm实例解释"><a href="#orm实例解释" class="headerlink" title="orm实例解释"></a>orm实例解释</h5><p>如果要从数据库中查询一条id为66的记录。那对应的sql为</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from hot_product where id = 66</span><br></pre></td></tr></table></figure>
 <p>传统的写法为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">res = db.execSql(“SELECT * FROM hot_product where id = 66”); </span><br><span class="line">productId = res[0][”product_id”];</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">res = db.execSql(&quot;SELECT * FROM hot_product where id = 66&quot;); </span><br><span class="line">productId = res[0][&quot;product_id&quot;];</span><br></pre></td></tr></table></figure>
 <p>而对应的orm写法需要写一个映射xml，定义方法名，sql语句，入参和出参类型。如下：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getById"</span> <span class="attr">resultType</span>=<span class="string">"com.ke.magneto.api.entity.HotProductEntity"</span>&gt;</span></span><br><span class="line">    select id, product_id, weight, create_time, update_time</span><br><span class="line">    from hot_product</span><br><span class="line">    where id = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>该内容的意思是，定义一个名为getById的方法，该方法会去执行select标签内的sql语句，其中入参为id，出参为一个名为HotProductEntity的类的对象。可以看出，这和一般的定义方法类似，唯一的区别在于，该映射方法所总的事情很单一，就是执行预设的sql语句。</p>
 <p>在其它地方用到时，就像调用其它方法一样，代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HotProduct hotProduct = HotProductMapper.getById(<span class="number">66</span>); </span><br><span class="line"><span class="keyword">int</span> productId = hotProduct.productId;</span><br></pre></td></tr></table></figure>
-<h4 id="如何自动生成代码"><a href="#如何自动生成代码" class="headerlink" title="如何自动生成代码"></a>如何自动生成代码</h4><p>我们的目的是生成实体类、mapper类和xml文件，这些内容是很有规律的，如下表</p>
+<h4 id="如何自动生成代码"><a href="#如何自动生成代码" class="headerlink" title="如何自动生成代码"></a>如何自动生成代码</h4><h5 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h5><p>整体的框架图如下：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gn0wjonr73j314a0m60v9.jpg" alt="Screen Shot 2020-12-20 at 6.23.45 PM"></p>
+<p>我们的目的是生成实体类、mapper类和xml文件，这些内容是很有规律的，如下表</p>
 <table>
 <thead>
 <tr>
-<th></th>
+<th>文件类型</th>
 <th>文件名</th>
 <th>字段名</th>
 <th>方法名</th>
@@ -549,13 +570,10 @@
 </ol>
 <p>具体配置的解读如下：</p>
 <p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gluh7o1wytj321e0san30.jpg" alt="Screen Shot 2020-12-20 at 6.01.45 PM"></p>
-<h4 id="如何结合到项目中"><a href="#如何结合到项目中" class="headerlink" title="如何结合到项目中"></a>如何结合到项目中</h4><h5 id="嵌入式"><a href="#嵌入式" class="headerlink" title="嵌入式"></a>嵌入式</h5><p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gluhj5xf51j30tq0iywgx.jpg" alt="Screen Shot 2020-12-20 at 6.03.41 PM" style="zoom:50%;"></p>
-<p>每个项目新建一个代码自动生成器模块，文件直接生成到对应的模块中。缺点：冗余</p>
-<h5 id="项目化"><a href="#项目化" class="headerlink" title="项目化"></a>项目化</h5><p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gn0wf4g848j31180r2114.jpg" alt="Screen Shot 2020-12-20 at 6.03.41 PM" style="zoom:50%;"></p>
-<p>自动生成器项目会生成文件到对应项目的模块中；缺点：项目耦合、生成过程繁杂</p>
+<h4 id="如何结合到项目中"><a href="#如何结合到项目中" class="headerlink" title="如何结合到项目中"></a>如何结合到项目中</h4><h5 id="嵌入式"><a href="#嵌入式" class="headerlink" title="嵌入式"></a>嵌入式</h5><p>每个项目新建一个代码自动生成器模块，文件直接生成到对应的模块中。缺点：冗余</p>
+<h5 id="项目化"><a href="#项目化" class="headerlink" title="项目化"></a>项目化</h5><p>自动生成器项目会生成文件到对应项目的模块中；缺点：项目耦合、生成过程繁杂</p>
 <h5 id="插件化"><a href="#插件化" class="headerlink" title="插件化"></a>插件化</h5><p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gn0wi2lwlxj30uu0jego3.jpg" alt="Screen Shot 2020-12-20 at 6.03.41 PM" style="zoom:50%;"></p>
 <p>每个项目单独引入代码自动生成器插件，自行维护配置文件，文件直接生成到对应的模块中。</p>
-<h4 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h4><p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gn0wjonr73j314a0m60v9.jpg" alt="Screen Shot 2020-12-20 at 6.23.45 PM"></p>
 
       
     </div>
@@ -575,7 +593,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://qxconverse.github.io/code/基于maven项目的代码自动生成器/" title="基于maven项目的代码自动生成器">https://qxconverse.github.io/code/基于maven项目的代码自动生成器/</a>
+    <a href="https://qxconverse.github.io/code/基于maven项目的代码自动生成器/" title="基于maven项目的代码自动生成器插件">https://qxconverse.github.io/code/基于maven项目的代码自动生成器/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -590,9 +608,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/t1/" rel="tag"># t1</a>
-          
-            <a href="/tags/t2/" rel="tag"># t2</a>
+            <a href="/tags/自动化/" rel="tag"># 自动化</a>
           
         </div>
       
@@ -731,7 +747,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -792,7 +808,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#是什么"><span class="nav-number">2.</span> <span class="nav-text">是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库与实体类、ORM关系"><span class="nav-number">2.1.</span> <span class="nav-text">数据库与实体类、ORM关系</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ORM实例解释"><span class="nav-number">2.2.</span> <span class="nav-text">ORM实例解释</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#orm实例解释"><span class="nav-number">2.3.</span> <span class="nav-text">orm实例解释</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何自动生成代码"><span class="nav-number">3.</span> <span class="nav-text">如何自动生成代码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#表信息获取"><span class="nav-number">3.1.</span> <span class="nav-text">表信息获取</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自己写一个代码生成器"><span class="nav-number">3.2.</span> <span class="nav-text">自己写一个代码生成器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#借助于现有工具"><span class="nav-number">3.3.</span> <span class="nav-text">借助于现有工具</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何结合到项目中"><span class="nav-number">4.</span> <span class="nav-text">如何结合到项目中</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#嵌入式"><span class="nav-number">4.1.</span> <span class="nav-text">嵌入式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#项目化"><span class="nav-number">4.2.</span> <span class="nav-text">项目化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#插件化"><span class="nav-number">4.3.</span> <span class="nav-text">插件化</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#框架"><span class="nav-number">5.</span> <span class="nav-text">框架</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#是什么"><span class="nav-number">2.</span> <span class="nav-text">是什么</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库与实体类、ORM关系"><span class="nav-number">2.1.</span> <span class="nav-text">数据库与实体类、ORM关系</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ORM实例解释"><span class="nav-number">2.2.</span> <span class="nav-text">ORM实例解释</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#orm实例解释"><span class="nav-number">2.3.</span> <span class="nav-text">orm实例解释</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何自动生成代码"><span class="nav-number">3.</span> <span class="nav-text">如何自动生成代码</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#框架"><span class="nav-number">3.1.</span> <span class="nav-text">框架</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#表信息获取"><span class="nav-number">3.2.</span> <span class="nav-text">表信息获取</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自己写一个代码生成器"><span class="nav-number">3.3.</span> <span class="nav-text">自己写一个代码生成器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#借助于现有工具"><span class="nav-number">3.4.</span> <span class="nav-text">借助于现有工具</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何结合到项目中"><span class="nav-number">4.</span> <span class="nav-text">如何结合到项目中</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#嵌入式"><span class="nav-number">4.1.</span> <span class="nav-text">嵌入式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#项目化"><span class="nav-number">4.2.</span> <span class="nav-text">项目化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#插件化"><span class="nav-number">4.3.</span> <span class="nav-text">插件化</span></a></li></ol></li></ol></div>
             
 
           </div>
