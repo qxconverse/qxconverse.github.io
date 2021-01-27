@@ -79,21 +79,20 @@
 
 
 
-<meta name="description" content="countdownlatch的使用  设置需要计数的个数  接着设置多个线程跑任务，每个任务跑完后，调用countDown方法。 此时立即开始调用await方法，让主线程一直等着一段时间。 如果所有的任务在那段时间内完成了，就继续主线程，此时await返回一个true。同时getCount返回0； 如果在这段时间内未完成所有的任务，则不会继续等待了，继续执行主线程，此时await返回false，">
+<meta name="description" content="懒加载@Lazy，可以让controller懒加载；DispatcherServlet在第一次访问接口时加载 Spring 4.x 支持条件注解@Conditional 什么样的要交给IoC容器 @Autowire，按类型匹配@Resource，根据bean的名称，如果找不到，就根据类型 BeanDefinition，会判断是否懒加载、是否单例等等 了解InitializingBean，可以让某个">
 <meta name="keywords" content="Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot相关">
 <meta property="og:url" content="https://qxconverse.github.io/code/代码_Spring相关/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="countdownlatch的使用  设置需要计数的个数  接着设置多个线程跑任务，每个任务跑完后，调用countDown方法。 此时立即开始调用await方法，让主线程一直等着一段时间。 如果所有的任务在那段时间内完成了，就继续主线程，此时await返回一个true。同时getCount返回0； 如果在这段时间内未完成所有的任务，则不会继续等待了，继续执行主线程，此时await返回false，">
+<meta property="og:description" content="懒加载@Lazy，可以让controller懒加载；DispatcherServlet在第一次访问接口时加载 Spring 4.x 支持条件注解@Conditional 什么样的要交给IoC容器 @Autowire，按类型匹配@Resource，根据bean的名称，如果找不到，就根据类型 BeanDefinition，会判断是否懒加载、是否单例等等 了解InitializingBean，可以让某个">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://tva1.sinaimg.cn/large/00831rSTly1gchpd3pkegj30si07bt99.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7t5wi02wij31ra0l4jxg.jpg">
-<meta property="og:updated_time" content="2021-01-23T12:27:31.301Z">
+<meta property="og:updated_time" content="2021-01-27T10:15:55.978Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot相关">
-<meta name="twitter:description" content="countdownlatch的使用  设置需要计数的个数  接着设置多个线程跑任务，每个任务跑完后，调用countDown方法。 此时立即开始调用await方法，让主线程一直等着一段时间。 如果所有的任务在那段时间内完成了，就继续主线程，此时await返回一个true。同时getCount返回0； 如果在这段时间内未完成所有的任务，则不会继续等待了，继续执行主线程，此时await返回false，">
-<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/00831rSTly1gchpd3pkegj30si07bt99.jpg">
+<meta name="twitter:description" content="懒加载@Lazy，可以让controller懒加载；DispatcherServlet在第一次访问接口时加载 Spring 4.x 支持条件注解@Conditional 什么样的要交给IoC容器 @Autowire，按类型匹配@Resource，根据bean的名称，如果找不到，就根据类型 BeanDefinition，会判断是否懒加载、是否单例等等 了解InitializingBean，可以让某个">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7t5wi02wij31ra0l4jxg.jpg">
 
 
 
@@ -324,8 +323,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-23T20:27:31+08:00">
-                2021-01-23
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-27T18:15:55+08:00">
+                2021-01-27
               </time>
             
           </span>
@@ -379,7 +378,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5k
+                  4k
                 </span>
               
 
@@ -395,7 +394,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  18
+                  14
                 </span>
               
             </div>
@@ -416,20 +415,7 @@
       
 
       
-        <ol start="2">
-<li><p>countdownlatch的使用</p>
-</li>
-<li><p>设置需要计数的个数</p>
-</li>
-<li>接着设置多个线程跑任务，每个任务跑完后，调用countDown方法。</li>
-<li>此时立即开始调用await方法，让主线程一直等着一段时间。</li>
-<li>如果所有的任务在那段时间内完成了，就继续主线程，此时await返回一个true。同时getCount返回0；</li>
-<li>如果在这段时间内未完成所有的任务，则不会继续等待了，继续执行主线程，此时await返回false，同时getCount返回还剩余的任务数。</li>
-</ol>
-<p>org.apache.catalina.connector.ClientAbortException: java.io.IOException: Broken pipe<br>由于各种原因，客户端断开了连接，这时，服务器再向已经断开连接的客户端写数据时就发生了broken pipe异常</p>
-<h5 id="日志规约"><a href="#日志规约" class="headerlink" title="日志规约"></a>日志规约</h5><p>在DAO层，产生的异常类型有很多，无法用细粒度的异常进行catch，使用catch(Exception e)方式，并 throw new DAOException(e)，不需要打印日志，因为日志在 Manager/Service 层一定需要捕获并打印到日志文件中去，如果同台服务器再打日 志，浪费性能和存储。 </p>
-<p>总结就是，dao层不需要打日志，仅仅把异常扔出去就可以，应为后面的Service会负责打日志。</p>
-<h5 id="懒加载"><a href="#懒加载" class="headerlink" title="懒加载"></a>懒加载</h5><p>@Lazy，可以让controller懒加载；DispatcherServlet在第一次访问接口时加载</p>
+        <h5 id="懒加载"><a href="#懒加载" class="headerlink" title="懒加载"></a>懒加载</h5><p>@Lazy，可以让controller懒加载；DispatcherServlet在第一次访问接口时加载</p>
 <p>Spring 4.x 支持条件注解@Conditional</p>
 <p>什么样的要交给IoC容器</p>
 <p>@Autowire，按类型匹配<br>@Resource，根据bean的名称，如果找不到，就根据类型</p>
@@ -444,7 +430,6 @@
 <li>运行时-执行期（动态代理）：后置初始化时，会判断，有没有需要创建动态代理类</li>
 </ol>
 <p>在调用api接口，要小心参数为空字符的情况，特别是该参数要拿去查询数据库。为空可能就会查到全部。</p>
-<p>类似于mybatis里面，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xxx!=null and xxx!=“”。空字符</span><br></pre></td></tr></table></figure></p>
 <h5 id="考虑接口的超时"><a href="#考虑接口的超时" class="headerlink" title="考虑接口的超时"></a>考虑接口的超时</h5><p>关于昨天的线上故障，因为线程池达到最大的线程数量。而大数据那边服务崩了后，就一直没有回应，我们调用时没有设置超时断开，导致所有线程都阻塞着，从而出现线上故障。需要考虑tomcat线程池设置</p>
 <p>bean是有IoC容器管理的对象</p>
 <p>ApplicationContext接口代表了IoC容器</p>
@@ -485,9 +470,6 @@
 <p>执行顺序：静态代码块 &gt; mian方法 &gt; 构造代码块 &gt; 构造方法。 其中静态代码块只执行一次。构造代码块在每次创建对象是都会执行。其中要理解的2个概念，类的加载（静态构造块），类的实例化（构造块+构造方法）</p>
 <h5 id="内部类作用"><a href="#内部类作用" class="headerlink" title="内部类作用"></a>内部类作用</h5><p>内部类的作用：1.用匿名内部类实现回调功能。2.类中定义多个内部类，去继承多个父类，从而实现多继承。当然也可以使用实现多个接口的方式实现。3.封装性。定义一个private的内部类，再在外部类定义一个public修饰的方法，间接调用。4.通过内部类模拟闭包（接受外部变量，并返回内部类）</p>
 <h5 id="try-catch-finally执行情况"><a href="#try-catch-finally执行情况" class="headerlink" title="try/catch/finally执行情况"></a>try/catch/finally执行情况</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">try 尝试</span><br><span class="line">&#123;</span><br><span class="line">　　需要被检测异常的代码</span><br><span class="line">&#125;</span><br><span class="line">catch（异常类 变量）</span><br><span class="line">&#123;</span><br><span class="line">　　处理异常的代码</span><br><span class="line">&#125;</span><br><span class="line">catch（异常类 变量）</span><br><span class="line">&#123;</span><br><span class="line">　　处理异常的代码</span><br><span class="line">　　return; 退出整个方法，但finally依旧执行。</span><br><span class="line">　　System.exit(0); 退出java虚拟机，只有这种情况finally不会执行。</span><br><span class="line">&#125;</span><br><span class="line">finally 最终化</span><br><span class="line">&#123;</span><br><span class="line">　　一定会被执行的代码，除了上面提到的一种情况。</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="Application入口类放置问题"><a href="#Application入口类放置问题" class="headerlink" title="Application入口类放置问题"></a>Application入口类放置问题</h5><p>在springboot中，有时service注入到controller里面失败，是因为Application入口类的问题，在扫描时，它会自动扫描与它同目录或是子目录里面的bean，所以最好不要把它放到controller包里面，这样不会扫描到service底下的类。直接把它放到与controller、service平级的目录下。</p>
-<h5 id="SpringBoot中Tomcat启动问题"><a href="#SpringBoot中Tomcat启动问题" class="headerlink" title="SpringBoot中Tomcat启动问题"></a>SpringBoot中Tomcat启动问题</h5><p>在SpringBoot的配置中，如果不加下面的，是无法启动Tomcat的。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 <h5 id="Socket流的问题"><a href="#Socket流的问题" class="headerlink" title="Socket流的问题"></a>Socket流的问题</h5><ol>
 <li>getInputStream方法可以得到一个输入流，客户端的Socket对象上的getInputStream方法得到输入流其实就是从服务器端发回的数据</li>
 <li>getOutputStream方法得到的是一个输出流，客户端的Socket对象上的getOutputStream方法得到的输出流其实就是发送给服务器端的数据</li>
@@ -510,13 +492,6 @@
 <p>这样发现其它的界面确实加载出来了。但是swagger-ui.html的资源文件加载不出来了（能访问，不是404）。这就很冲突了。因为它这边直接放在static底下没有分类的文件夹，而我的有。</p>
 <p>后来改成这样就可以了：思路很简单，原来的静态文件还是通过<code>/static/**</code>来加载<code>classpath:/static/</code>，swagger的则通过<code>/**</code>来加载<code>classpath:/META-INF/resources/</code>，加载的路径也不一样的。之前搞混淆了。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addResourceHandlers</span><span class="params">(ResourceHandlerRegistry registry)</span> </span>&#123;</span><br><span class="line">	registry.addResourceHandler(<span class="string">"/**"</span>).addResourceLocations(<span class="string">"classpath:/META-INF/resources/"</span>);</span><br><span class="line">	registry.addResourceHandler(<span class="string">"/static/**"</span>).addResourceLocations(<span class="string">"classpath:/static/"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="response返回普通文本，html，json的方式"><a href="#response返回普通文本，html，json的方式" class="headerlink" title="response返回普通文本，html，json的方式"></a>response返回普通文本，html，json的方式</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">response.setContentType(&quot;text/plain;charset=utf-8&quot;);</span><br><span class="line">response.getWriter().write(content);</span><br></pre></td></tr></table></figure>
-<p>可以看到唯一的<strong>区别在于setContentType里面的内容不同</strong>，而一致的是都是通过下面的语句来写数据到response。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">response.getWriter().write(xxx);</span><br></pre></td></tr></table></figure>
-<h5 id="幂等性"><a href="#幂等性" class="headerlink" title="幂等性"></a>幂等性</h5><p>分布式、高并发必须要考虑到这一点，不然会出现隐患。比如用户在下单的时候，点击一次，后台接受请求并处理成功了，但是由于网络原因这个响应没有到达用户那儿，用户以为下单不成功，又点击一次。又或者接单，虽然会检验状态，但是更完美的做法是，如果司机接单成功了再次点击接单，此时还是直接返回成功。这就是幂等性，重复请求应该得到相同结果。</p>
-<p>微服务正确的姿势，不同的微服务应该使用不同的数据库，这样才能完全解耦，独立部署</p>
-<h5 id="Redislock分布式锁的作用"><a href="#Redislock分布式锁的作用" class="headerlink" title="Redislock分布式锁的作用"></a>Redislock分布式锁的作用</h5><p>想象一下，我发布订单，然后取消的同时，你是司机又接了单，怎么办？还有就是多个司机一起去接这个单。单机部署，用sychronized同步就行。但是在分布式环境下，sychronized就失效了，因为它只是在代码层面上做同步，所以要么用分布式锁，redis，zookeeper都可以实现，要么用mysql的行锁，但是后者效率很低。</p>
-<p>Redislock相当于把锁的信息放进redis里面，有其它操作相同订单的时候，就会去查，如果依然锁着，就不能操作</p>
 <h5 id="RequestParam、RequestBody和PathVariable的区别"><a href="#RequestParam、RequestBody和PathVariable的区别" class="headerlink" title="RequestParam、RequestBody和PathVariable的区别"></a>RequestParam、RequestBody和PathVariable的区别</h5><p>前者从URL中提取请求的参数比如问号后面的。而后者从URI中提取参数。</p>
 <p>比如对于<code>http://localhost:8080/shop/order/1001/receipts?date=xxx</code>。@RequestParam提取date参数而@PathVariable提取出orderId 即”1001”。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(value=<span class="string">"/order/&#123;orderId&#125;/receipts"</span>, method = RequestMethod.GET)</span><br><span class="line"><span class="function"><span class="keyword">public</span> List <span class="title">listUsersInvoices</span><span class="params">(@PathVariable(<span class="string">"orderId"</span>)</span> <span class="keyword">int</span> order, @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"date"</span>, required = <span class="keyword">false</span>)</span> Date dateOrNull) </span>&#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>RequestBody的一个重要的用法是方法中接受一个类参数，在请求参数的时候content-type使用application/json格式的数据。而不是一般的表单数据。在postman中，则要选择raw，application/json格式。</p>
@@ -535,8 +510,6 @@
 <p>spring security通过验证后，可以把认证的信息保存在session里面，当用户session还在，就不需要再做校验了；而当session不在了，就返回给前端消息，前端跳转到登录授权页面就可以了</p>
 <h5 id="Jrebel热加载"><a href="#Jrebel热加载" class="headerlink" title="Jrebel热加载"></a>Jrebel热加载</h5><p>记录一个问题：</p>
 <p>在idea中用jrebel热加载，修改了某个实体类（某个字段的类型），在另外一个service类中的fastjson需要解析该实体类，两个类都重新加载了，但是不重新运行调用相关接口就会报错。</p>
-<h5 id="Bean的循环注入问题"><a href="#Bean的循环注入问题" class="headerlink" title="Bean的循环注入问题"></a>Bean的循环注入问题</h5><p>假设有2个service：A，B。如果在A中注入B、并在B中注入A，就会出现该问题。</p>
-<p><img src="https://tva1.sinaimg.cn/large/00831rSTly1gchpd3pkegj30si07bt99.jpg" alt="Screen Shot 2020-03-04 at 10.46.09 AM"></p>
 <h5 id="Autowired相关"><a href="#Autowired相关" class="headerlink" title="@Autowired相关"></a>@Autowired相关</h5><p>该注解是通过反射的方式实现的</p>
 <p>使用Java8</p>
 <p>使用Objects.<em>equals</em>来比较<em>2</em>个值</p>
@@ -795,7 +768,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#日志规约"><span class="nav-number">1.</span> <span class="nav-text">日志规约</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#懒加载"><span class="nav-number">2.</span> <span class="nav-text">懒加载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#考虑接口的超时"><span class="nav-number">3.</span> <span class="nav-text">考虑接口的超时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Filter，Listener，Servlet的区别"><span class="nav-number">4.</span> <span class="nav-text">Filter，Listener，Servlet的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设计模式中观察者模式与监听模式的区别"><span class="nav-number">5.</span> <span class="nav-text">设计模式中观察者模式与监听模式的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤器和拦截器的区别"><span class="nav-number">6.</span> <span class="nav-text">过滤器和拦截器的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java中的钩子"><span class="nav-number">7.</span> <span class="nav-text">Java中的钩子</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java中的锁"><span class="nav-number">8.</span> <span class="nav-text">Java中的锁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关于静态代码块"><span class="nav-number">9.</span> <span class="nav-text">关于静态代码块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内部类作用"><span class="nav-number">10.</span> <span class="nav-text">内部类作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#try-catch-finally执行情况"><span class="nav-number">11.</span> <span class="nav-text">try/catch/finally执行情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Application入口类放置问题"><span class="nav-number">12.</span> <span class="nav-text">Application入口类放置问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SpringBoot中Tomcat启动问题"><span class="nav-number">13.</span> <span class="nav-text">SpringBoot中Tomcat启动问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Socket流的问题"><span class="nav-number">14.</span> <span class="nav-text">Socket流的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Ajax方式下载文件的问题"><span class="nav-number">15.</span> <span class="nav-text">Ajax方式下载文件的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取文件类型的方法"><span class="nav-number">16.</span> <span class="nav-text">获取文件类型的方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#接入swagger遇到的坑"><span class="nav-number">17.</span> <span class="nav-text">接入swagger遇到的坑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#response返回普通文本，html，json的方式"><span class="nav-number">18.</span> <span class="nav-text">response返回普通文本，html，json的方式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#幂等性"><span class="nav-number">19.</span> <span class="nav-text">幂等性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Redislock分布式锁的作用"><span class="nav-number">20.</span> <span class="nav-text">Redislock分布式锁的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RequestParam、RequestBody和PathVariable的区别"><span class="nav-number">21.</span> <span class="nav-text">RequestParam、RequestBody和PathVariable的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Spring-Security-Oauth2相关"><span class="nav-number">22.</span> <span class="nav-text">Spring Security Oauth2相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Jrebel热加载"><span class="nav-number">23.</span> <span class="nav-text">Jrebel热加载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Bean的循环注入问题"><span class="nav-number">24.</span> <span class="nav-text">Bean的循环注入问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Autowired相关"><span class="nav-number">25.</span> <span class="nav-text">@Autowired相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注解处理器"><span class="nav-number">26.</span> <span class="nav-text">注解处理器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#java-agent"><span class="nav-number">27.</span> <span class="nav-text">java agent</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#http连接池"><span class="nav-number">28.</span> <span class="nav-text">http连接池</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#懒加载"><span class="nav-number">1.</span> <span class="nav-text">懒加载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#考虑接口的超时"><span class="nav-number">2.</span> <span class="nav-text">考虑接口的超时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Filter，Listener，Servlet的区别"><span class="nav-number">3.</span> <span class="nav-text">Filter，Listener，Servlet的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设计模式中观察者模式与监听模式的区别"><span class="nav-number">4.</span> <span class="nav-text">设计模式中观察者模式与监听模式的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤器和拦截器的区别"><span class="nav-number">5.</span> <span class="nav-text">过滤器和拦截器的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java中的钩子"><span class="nav-number">6.</span> <span class="nav-text">Java中的钩子</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java中的锁"><span class="nav-number">7.</span> <span class="nav-text">Java中的锁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关于静态代码块"><span class="nav-number">8.</span> <span class="nav-text">关于静态代码块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内部类作用"><span class="nav-number">9.</span> <span class="nav-text">内部类作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#try-catch-finally执行情况"><span class="nav-number">10.</span> <span class="nav-text">try/catch/finally执行情况</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Socket流的问题"><span class="nav-number">11.</span> <span class="nav-text">Socket流的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Ajax方式下载文件的问题"><span class="nav-number">12.</span> <span class="nav-text">Ajax方式下载文件的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#获取文件类型的方法"><span class="nav-number">13.</span> <span class="nav-text">获取文件类型的方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#接入swagger遇到的坑"><span class="nav-number">14.</span> <span class="nav-text">接入swagger遇到的坑</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RequestParam、RequestBody和PathVariable的区别"><span class="nav-number">15.</span> <span class="nav-text">RequestParam、RequestBody和PathVariable的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Spring-Security-Oauth2相关"><span class="nav-number">16.</span> <span class="nav-text">Spring Security Oauth2相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Jrebel热加载"><span class="nav-number">17.</span> <span class="nav-text">Jrebel热加载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Autowired相关"><span class="nav-number">18.</span> <span class="nav-text">@Autowired相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#注解处理器"><span class="nav-number">19.</span> <span class="nav-text">注解处理器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#java-agent"><span class="nav-number">20.</span> <span class="nav-text">java agent</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#http连接池"><span class="nav-number">21.</span> <span class="nav-text">http连接池</span></a></li></ol></div>
             
 
           </div>
@@ -829,7 +802,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">56.5k</span>
+    <span title="Site words total count">55.8k</span>
   
 </div>
 
