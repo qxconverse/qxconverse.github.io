@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="Git的基础知识git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。">
+<meta name="description" content="Git的两个核心特征是：去中心化、记录快照而非差异比较。">
 <meta name="keywords" content="版本控制">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git相关的操作">
 <meta property="og:url" content="https://qxconverse.github.io/code/代码_Git操作/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="Git的基础知识git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。">
+<meta property="og:description" content="Git的两个核心特征是：去中心化、记录快照而非差异比较。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-01-22T10:43:12.895Z">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gn3hjagitqj30fz08ajsr.jpg">
+<meta property="og:updated_time" content="2021-01-29T03:03:35.194Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git相关的操作">
-<meta name="twitter:description" content="Git的基础知识git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。">
+<meta name="twitter:description" content="Git的两个核心特征是：去中心化、记录快照而非差异比较。">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gn3hjagitqj30fz08ajsr.jpg">
 
 
 
@@ -321,8 +323,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-22T18:43:12+08:00">
-                2021-01-22
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-29T11:03:35+08:00">
+                2021-01-29
               </time>
             
           </span>
@@ -376,7 +378,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1.4k
+                  823
                 </span>
               
 
@@ -392,7 +394,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5
+                  3
                 </span>
               
             </div>
@@ -413,10 +415,14 @@
       
 
       
-        <h4 id="Git的基础知识"><a href="#Git的基础知识" class="headerlink" title="Git的基础知识"></a>Git的基础知识</h4><p>git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。</p>
+        <blockquote>
+<p>Git的两个核心特征是：去中心化、记录快照而非差异比较。</p>
+</blockquote>
 <a id="more"></a>
+<h4 id="Git的基础知识"><a href="#Git的基础知识" class="headerlink" title="Git的基础知识"></a>Git的基础知识</h4><p>Git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。</p>
+<p>参考图：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gn3hjagitqj30fz08ajsr.jpg" alt="3832193-9f91b2096b08eeae"></p>
 <p>先手动删除文件，然后使用<code>git rm &lt;file&gt;</code>和<code>git add &lt;file&gt;</code>效果是一样的。</p>
-<p>切换到原来的分支后，文件的内容并没有变化，因为我们是在另外的一个分支上开发的。</p>
 <p>Git鼓励大量使用分支：</p>
 <p>查看分支：<code>git branch</code></p>
 <p>创建分支：<code>git branch &lt;name&gt;</code></p>
@@ -424,22 +430,9 @@
 <p>创建+切换分支：<code>git checkout -b &lt;name&gt;</code></p>
 <p>合并某分支到当前分支：<code>git merge &lt;name&gt;</code></p>
 <p>删除分支：<code>git branch -d &lt;name&gt;</code></p>
-<p>合并分支时，加上<code>--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。</p>
-<p>新建分支的时候，一定要注意是在哪个分支上建立的。</p>
-<p>在实际开发中，我们应该按照几个基本原则进行分支管理：</p>
-<p>首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；我们每个人都有自己的分支，时不时地往dev分支上合并就可以了。</p>
-<p>所以，团队合作的分支看起来就像这样：</p>
-<p>当修改完bug分支后，要及时地在master上删除该分支，如果切换到dev分支上再删除bug分支，就会报错。</p>
-<p>通常涉及到多个人开发，比如A和B。B从github上clone了项目。并且新建并切换到dev分支了。</p>
-<p>这个时候A（你）和B（你的小伙伴）对同一个文件进行了修改，发生了冲突。假设B先push了，而你后面想push，就会发生错误。所以可以先pull一下。pull也可能失败，原因是没有指定本地dev分支与远程origin/dev分支的链接，根据提示，设置dev和origin/dev的链接：<br><code>git branch --set-upstream-to=origin/dev dev</code></p>
-<p>这回pull成功，但是合并有冲突，需要手动解决，解决的方法和分支管理中的解决冲突完全一样。解决后，add，ci,再push。这样就完美解决了冲突。</p>
-<p>这时B如果要再次编辑，首先需要pull一下。然后再进行后续操作。如果他不pull，push后有冲突，那么解决方法同上A所做的。</p>
+<p>合并分支时，加上<code>--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并；而fast forward合并就看不出来曾经做过合并。</p>
 <p>git中对比2个版本之间的改动，比如下面的例子</p>
 <p> <code>git diff xxx1 xxx2 --stat</code></p>
-<p>在add之前，查看修改了哪些代码，很实用。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff head (filename)</span><br></pre></td></tr></table></figure>
-<p>修改了冲突后，记得add，commit，pull然后再push</p>
-<p>在pull的时候，如果本地有修改过的，那么可以强制恢复到上一次提交的位置。</p>
 <p>修改了代码后，想去掉修改：<code>git co.</code></p>
 <p>修改了代码后，add了，但想撤回：<code>git reset HEAD .</code></p>
 <p>修改了代码后，add/commit了，但想撤回：<code>git reset —hard xxxxxxxxx</code></p>
@@ -467,8 +460,6 @@
 <p>git统计各个提交者的代码行数</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git log --author="$name" --pretty=tformat: --numstat | awk '&#123; add += $1; subs += $2; loc += $1 - $2 &#125; END &#123; printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc &#125;' -; done</span><br></pre></td></tr></table></figure>
 <p>Git提交时的hook相关，参考：<a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks" target="_blank" rel="noopener">https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks</a></p>
-<p>添加git的hook时，遇到的问题</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp .git/hooks/pre-commit /tmp/pre-commit</span><br><span class="line"></span><br><span class="line">tr -d '\r' &lt; /tmp/pre-commit &gt; .git/hooks/pre-commit</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -741,7 +732,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">52.2k</span>
+    <span title="Site words total count">51.8k</span>
   
 </div>
 

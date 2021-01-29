@@ -88,7 +88,7 @@
 <meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg">
-<meta property="og:updated_time" content="2021-01-28T06:54:55.966Z">
+<meta property="og:updated_time" content="2021-01-29T03:05:49.353Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机基础">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
@@ -323,8 +323,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-28T14:54:55+08:00">
-                2021-01-28
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-29T11:05:49+08:00">
+                2021-01-29
               </time>
             
           </span>
@@ -378,7 +378,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  8.3k
+                  8.4k
                 </span>
               
 
@@ -394,7 +394,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  29
+                  30
                 </span>
               
             </div>
@@ -440,6 +440,17 @@
 <li>加密；签名；随机数+时间戳。</li>
 <li>池的概念。各种池子。</li>
 <li>tcp是传输层协议、http是应用层协议。而socket则是tcp/ip的一个编程实现</li>
+<li>操作系统层面的编码问题</li>
+</ol>
+<p><strong>回车+换行</strong></p>
+<p>回车<code>\r</code> 本义是光标重新回到本行开头，r的英文return，控制字符为CR，即Carriage Return；</p>
+<p>换行 <code>\n</code> 本义是光标往下一行（不一定到下一行行首），n的英文newline，控制字符为LF，即Line Feed；</p>
+<p>换行的ASCII码是10，回车的ASCII码是13。</p>
+<p>然而，在不同操作系统下，使用稍有差异：</p>
+<ol>
+<li><code>\n</code>:  Unix系统里，每行的结尾是&lt;换行&gt;</li>
+<li><code>\r\n</code>: Windows系统里面，每行的结尾是&lt;回车&gt;&lt;换行&gt;</li>
+<li><code>\r</code>: Mac系统里，每行的结尾是&lt;回车&gt;。Mac OS 9及之前才是 <code>\r</code>， 新的早已经是<code>\n</code>。</li>
 </ol>
 <p>几种编程思想</p>
 <ol>
@@ -506,8 +517,6 @@
 </ol>
 <h5 id="注解处理器"><a href="#注解处理器" class="headerlink" title="注解处理器"></a>注解处理器</h5><p>编译时期对注解的处理，和运行时采用反射进行的处理不同。如大名鼎鼎的lombok插件就是基于此技术实现的，能够在编译时期生成字节码。</p>
 <p>具体jsr（Java Specification Requests的缩写，即Java规范提案）可参考：<a href="https://www.jcp.org/en/jsr/detail?id=269" target="_blank" rel="noopener">https://www.jcp.org/en/jsr/detail?id=269</a></p>
-<h5 id="java-agent"><a href="#java-agent" class="headerlink" title="java agent"></a>java agent</h5><p>也叫java探针，提供了操作运行时字节码的功能。具体参考另外一篇文章。</p>
-<p>其中阿里的arthas（java问题诊断神器）就是基于此技术实现的。</p>
 <h5 id="Autowired相关"><a href="#Autowired相关" class="headerlink" title="@Autowired相关"></a>@Autowired相关</h5><p>该注解是通过反射的方式实现的</p>
 <h5 id="Filter，Listener，Servlet的区别"><a href="#Filter，Listener，Servlet的区别" class="headerlink" title="Filter，Listener，Servlet的区别"></a>Filter，Listener，Servlet的区别</h5><p>Servlet是基本的服务端程序，他来自接口Servlet，接口中有方法service。</p>
 <p>Listener是监听器，用于监听Servlet，他是基于观察者模式的，他的核心接口是ServletContextListener，继承自EventListener。</p>
@@ -624,7 +633,6 @@
 <p>es是NoSQL数据库。以MySQL来作对比，index对应数据库；doc（文档）对应行，文档是包含一个或多个域（即Field）的容器，以JSON格式进行表示；field对应列。</p>
 <p>相关重要概念：term index，term dictionary，posting list。</p>
 <p>如有3条数据：</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -655,10 +663,8 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>索引如下：</p>
 <p>name</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -681,9 +687,7 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>age</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -702,9 +706,7 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>sex</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -723,7 +725,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>一张图解释什么叫倒排索引</p>
 <pre class="mermaid">graph LR
   A[term index] --> B[term dictionary]
@@ -1041,7 +1042,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#注解处理器"><span class="nav-number">1.</span> <span class="nav-text">注解处理器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#java-agent"><span class="nav-number">2.</span> <span class="nav-text">java agent</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Autowired相关"><span class="nav-number">3.</span> <span class="nav-text">@Autowired相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Filter，Listener，Servlet的区别"><span class="nav-number">4.</span> <span class="nav-text">Filter，Listener，Servlet的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤器和拦截器的区别"><span class="nav-number">5.</span> <span class="nav-text">过滤器和拦截器的区别</span></a></li></ol><li class="nav-item nav-level-4"><a class="nav-link" href="#阅读关于IaaS、PaaS-SaaS相关的知识点"><span class="nav-number"></span> <span class="nav-text">阅读关于IaaS、PaaS/SaaS相关的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于5种I-O模型的理解"><span class="nav-number"></span> <span class="nav-text">关于5种I/O模型的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计模式相关"><span class="nav-number"></span> <span class="nav-text">设计模式相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#适配器模式vs代理模式"><span class="nav-number">1.</span> <span class="nav-text">适配器模式vs代理模式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#csrf"><span class="nav-number"></span> <span class="nav-text">csrf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#需要关注的知识点"><span class="nav-number"></span> <span class="nav-text">需要关注的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#钩子函数和回调函数的区别"><span class="nav-number"></span> <span class="nav-text">钩子函数和回调函数的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#es相关"><span class="nav-number"></span> <span class="nav-text">es相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务部署架构"><span class="nav-number"></span> <span class="nav-text">服务部署架构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Zookeeper与Nginx"><span class="nav-number">1.</span> <span class="nav-text">Zookeeper与Nginx</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dubbo和Http"><span class="nav-number">2.</span> <span class="nav-text">Dubbo和Http</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nio相关"><span class="nav-number"></span> <span class="nav-text">Nio相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对外提供的接口"><span class="nav-number"></span> <span class="nav-text">对外提供的接口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#直接请求"><span class="nav-number">1.</span> <span class="nav-text">直接请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求认证与参数防篡改性"><span class="nav-number">2.</span> <span class="nav-text">请求认证与参数防篡改性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求的唯一性"><span class="nav-number">3.</span> <span class="nav-text">请求的唯一性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java开发提高性能的技术"><span class="nav-number">4.</span> <span class="nav-text">Java开发提高性能的技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#幂等性"><span class="nav-number">5.</span> <span class="nav-text">幂等性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Redislock分布式锁的作用"><span class="nav-number">6.</span> <span class="nav-text">Redislock分布式锁的作用</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#注解处理器"><span class="nav-number">1.</span> <span class="nav-text">注解处理器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Autowired相关"><span class="nav-number">2.</span> <span class="nav-text">@Autowired相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Filter，Listener，Servlet的区别"><span class="nav-number">3.</span> <span class="nav-text">Filter，Listener，Servlet的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤器和拦截器的区别"><span class="nav-number">4.</span> <span class="nav-text">过滤器和拦截器的区别</span></a></li></ol><li class="nav-item nav-level-4"><a class="nav-link" href="#阅读关于IaaS、PaaS-SaaS相关的知识点"><span class="nav-number"></span> <span class="nav-text">阅读关于IaaS、PaaS/SaaS相关的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于5种I-O模型的理解"><span class="nav-number"></span> <span class="nav-text">关于5种I/O模型的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计模式相关"><span class="nav-number"></span> <span class="nav-text">设计模式相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#适配器模式vs代理模式"><span class="nav-number">1.</span> <span class="nav-text">适配器模式vs代理模式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#csrf"><span class="nav-number"></span> <span class="nav-text">csrf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#需要关注的知识点"><span class="nav-number"></span> <span class="nav-text">需要关注的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#钩子函数和回调函数的区别"><span class="nav-number"></span> <span class="nav-text">钩子函数和回调函数的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#es相关"><span class="nav-number"></span> <span class="nav-text">es相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务部署架构"><span class="nav-number"></span> <span class="nav-text">服务部署架构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Zookeeper与Nginx"><span class="nav-number">1.</span> <span class="nav-text">Zookeeper与Nginx</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dubbo和Http"><span class="nav-number">2.</span> <span class="nav-text">Dubbo和Http</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nio相关"><span class="nav-number"></span> <span class="nav-text">Nio相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对外提供的接口"><span class="nav-number"></span> <span class="nav-text">对外提供的接口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#直接请求"><span class="nav-number">1.</span> <span class="nav-text">直接请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求认证与参数防篡改性"><span class="nav-number">2.</span> <span class="nav-text">请求认证与参数防篡改性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求的唯一性"><span class="nav-number">3.</span> <span class="nav-text">请求的唯一性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java开发提高性能的技术"><span class="nav-number">4.</span> <span class="nav-text">Java开发提高性能的技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#幂等性"><span class="nav-number">5.</span> <span class="nav-text">幂等性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Redislock分布式锁的作用"><span class="nav-number">6.</span> <span class="nav-text">Redislock分布式锁的作用</span></a></li></ol></li></div>
             
 
           </div>
@@ -1075,7 +1076,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">52.2k</span>
+    <span title="Site words total count">51.8k</span>
   
 </div>
 
