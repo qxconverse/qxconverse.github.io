@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="个人总结">
+<meta name="description" content="PPT是一个具体，思维上也莫非如此！">
 <meta name="keywords" content="PPT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PPT制作经验">
 <meta property="og:url" content="https://qxconverse.github.io/thinking/思维_关于制作PPT的经验/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="个人总结">
+<meta property="og:description" content="PPT是一个具体，思维上也莫非如此！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-01-22T02:34:37.241Z">
+<meta property="og:updated_time" content="2021-01-29T06:33:57.761Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PPT制作经验">
-<meta name="twitter:description" content="个人总结">
+<meta name="twitter:description" content="PPT是一个具体，思维上也莫非如此！">
 
 
 
@@ -321,8 +321,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-22T10:34:37+08:00">
-                2021-01-22
+              <time title="更新于" itemprop="dateModified" datetime="2021-01-29T14:33:57+08:00">
+                2021-01-29
               </time>
             
           </span>
@@ -376,7 +376,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  791
+                  798
                 </span>
               
 
@@ -413,7 +413,9 @@
       
 
       
-        <p>个人总结</p>
+        <blockquote>
+<p>PPT是一个具体，思维上也莫非如此！</p>
+</blockquote>
 <a id="more"></a>
 <h4 id="关于样式等"><a href="#关于样式等" class="headerlink" title="关于样式等"></a>关于样式等</h4><ol>
 <li>字体要统一，可以分成几大类，比如一级标题、正文等等字体</li>
@@ -427,15 +429,49 @@
 <li>多用各种图来表示列表</li>
 <li>当要表示某种组成关系的时候，画框架图</li>
 <li>当要表示某种次序关系的时候，画时序图或流程图</li>
+<li>讲ppt时一定要有互动</li>
 </ol>
-<p>讲ppt时一定要有互动</p>
-<h4 id="关于内容"><a href="#关于内容" class="headerlink" title="关于内容"></a>关于内容</h4><p>总结归纳-&gt;去除偏技术型语言-&gt;利用star原则（挂钩业务且要有数据、表现出复杂性）-&gt;用专业术语包装-&gt;思考与未来画饼</p>
-<p>原始：修复cms活动管理中重复提交的问题</p>
-<p>总结归纳：修复系统中用户重复提交的问题</p>
-<p>去除偏技术型语言：解决系统中用户重复操作导致的数据不一致问题</p>
-<p>利用star原则：现状：社区电商活动管理，用户在系统中重复操作会导致活动配置出错的问题；目标：保证在用户的异常操作下数据的正确性；行动：加入分布式锁防止重放操作；结果：用户的所有情况下的操作均不会导致活动配置出错，配置操作达到100%的正确率。</p>
-<p>用专业术语包装：提高系统的鲁棒性和稳定性，实现对用户操作的友好性</p>
-<p>思考与未来画饼：未来会从多个方面解决数据不一致问题，提高用户操作系统的容错性</p>
+<h4 id="关于内容"><a href="#关于内容" class="headerlink" title="关于内容"></a>关于内容</h4><pre class="mermaid">graph LR
+  A[总结归纳] --> B[去除偏技术型语言]
+  B --> C[利用star原则] 
+  C --> D[用专业术语包装]
+  D --> E[思考与未来画饼]</pre>
+
+<p>例子</p>
+<table>
+<thead>
+<tr>
+<th>过程</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原始</td>
+<td>修复cms活动管理中重复提交的问题</td>
+</tr>
+<tr>
+<td>总结归纳</td>
+<td>修复系统中用户重复提交的问题</td>
+</tr>
+<tr>
+<td>去除偏技术型语言</td>
+<td>解决系统中用户重复操作导致的数据不一致问题</td>
+</tr>
+<tr>
+<td>利用star原则</td>
+<td><strong>现状</strong>：社区电商活动管理，用户在系统中重复操作会导致活动配置出错的问题；<strong>目标</strong>：保证在用户的异常操作下数据的正确性；<strong>行动</strong>：加入分布式锁防止重放操作；<strong>结果</strong>：用户的所有情况下的操作均不会导致活动配置出错，配置操作达到100%的正确率。</td>
+</tr>
+<tr>
+<td>用专业术语包装</td>
+<td>提高系统的鲁棒性和稳定性，实现对用户操作的友好性</td>
+</tr>
+<tr>
+<td>思考与未来画饼</td>
+<td>未来会从多个方面解决数据不一致问题，提高用户操作系统的容错性</td>
+</tr>
+</tbody>
+</table>
 <h4 id="什么是好的ppt"><a href="#什么是好的ppt" class="headerlink" title="什么是好的ppt"></a>什么是好的ppt</h4><ol>
 <li>有结构（逻辑严谨）</li>
 <li>有观点（富有洞察）</li>
@@ -764,7 +800,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">51.8k</span>
+    <span title="Site words total count">51.5k</span>
   
 </div>
 
