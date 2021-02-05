@@ -88,7 +88,7 @@
 <meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg">
-<meta property="og:updated_time" content="2021-01-29T06:29:05.906Z">
+<meta property="og:updated_time" content="2021-02-05T02:27:33.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机基础">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
@@ -323,8 +323,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-29T14:29:05+08:00">
-                2021-01-29
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-05T10:27:33+08:00">
+                2021-02-05
               </time>
             
           </span>
@@ -438,7 +438,7 @@
 <li>多台机器部署+nginx可以利用负载均衡实现高可用的目标</li>
 <li>遇到要做的东西时，直接去github上搜，比如需要做校验yml文件的小工具时，就可以使用关键词lint，比如yamllint，这样基本上都能搜出来一些项目</li>
 <li>加密；签名；随机数+时间戳。</li>
-<li>池的概念。各种池子。</li>
+<li>池化思想。各种池子。包括线程池、数据库连接池、redis连接池等等</li>
 <li>tcp是传输层协议、http是应用层协议。而socket则是tcp/ip的一个编程实现</li>
 <li>操作系统层面的编码问题</li>
 </ol>
@@ -633,6 +633,7 @@
 <p>es是NoSQL数据库。以MySQL来作对比，index对应数据库；doc（文档）对应行，文档是包含一个或多个域（即Field）的容器，以JSON格式进行表示；field对应列。</p>
 <p>相关重要概念：term index，term dictionary，posting list。</p>
 <p>如有3条数据：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -663,8 +664,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>索引如下：</p>
 <p>name</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -687,7 +690,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>age</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -706,7 +711,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>sex</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -725,6 +732,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>一张图解释什么叫倒排索引</p>
 <pre class="mermaid">graph LR
   A[term index] --> B[term dictionary]
@@ -1075,7 +1083,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">51.5k</span>
+    <span title="Site words total count">51.6k</span>
   
 </div>
 
