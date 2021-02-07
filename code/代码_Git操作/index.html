@@ -88,7 +88,7 @@
 <meta property="og:description" content="Git的两个核心特征是：去中心化、记录快照而非差异比较。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gn3hjagitqj30fz08ajsr.jpg">
-<meta property="og:updated_time" content="2021-02-07T03:36:11.286Z">
+<meta property="og:updated_time" content="2021-02-07T03:42:22.337Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git相关的操作">
 <meta name="twitter:description" content="Git的两个核心特征是：去中心化、记录快照而非差异比较。">
@@ -323,7 +323,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-02-07T11:36:11+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-07T11:42:22+08:00">
                 2021-02-07
               </time>
             
@@ -378,7 +378,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  752
+                  680
                 </span>
               
 
@@ -394,7 +394,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  2
                 </span>
               
             </div>
@@ -422,80 +422,65 @@
 <h4 id="Git的基础知识"><a href="#Git的基础知识" class="headerlink" title="Git的基础知识"></a>Git的基础知识</h4><p>Git的工作区就是保存在电脑上的实体文件夹；stage称为暂存区，add时添加到里面；master是主分支，而HEAD可以理解为一个指针，指向当前的版本。</p>
 <p>参考图：</p>
 <p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gn3hjagitqj30fz08ajsr.jpg" alt="3832193-9f91b2096b08eeae"></p>
-<p>附上部分指令</p>
-<table>
+<h4 id="部分指令"><a href="#部分指令" class="headerlink" title="部分指令"></a>部分指令</h4><table>
 <thead>
 <tr>
 <th>指令</th>
 <th>含义</th>
-<th></th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>git branch</code></td>
 <td>查看分支</td>
-<td></td>
 </tr>
 <tr>
 <td><code>git branch name</code></td>
 <td>创建分支</td>
-<td></td>
 </tr>
 <tr>
 <td><code>git checkout name</code></td>
 <td>切换分支</td>
-<td></td>
 </tr>
 <tr>
 <td><code>git checkout -b name</code></td>
 <td>创建+切换分支</td>
-<td></td>
 </tr>
 <tr>
 <td><code>git merge name</code></td>
 <td>合并某分支到当前分支</td>
-<td></td>
 </tr>
 <tr>
 <td><code>git branch -D xxx</code></td>
 <td>删除本地分支</td>
-<td></td>
 </tr>
 <tr>
 <td><code>git push origin --delete xxx</code></td>
 <td>删除远程分支</td>
-<td></td>
 </tr>
 <tr>
 <td><code>git diff xxx1 xxx2 --stat</code></td>
 <td>对比2个版本之间的改动</td>
-<td></td>
 </tr>
 <tr>
 <td><code>git co .</code></td>
 <td>修改了代码后，想去掉修改</td>
-<td></td>
 </tr>
 <tr>
 <td><code>git reset HEAD .</code></td>
 <td>修改了代码后，add了，但想撤回</td>
-<td></td>
 </tr>
 <tr>
 <td><code>git reset —hard xxxxxxxxx</code></td>
 <td>修改了代码后，add并commit了，但想撤回</td>
-<td></td>
 </tr>
 <tr>
 <td><code>git reset --hard xxx</code><br><code>git push -f</code></td>
 <td>git回滚到某个版本</td>
-<td></td>
 </tr>
 <tr>
 <td><code>git checkout master</code><br><code>git pull</code><br><code>git checkout -b xxx</code><br><code>git add .</code><br><code>git ci -m &quot;aaaa&quot;</code><br><code>git push --set-upstream origin xxx</code></td>
 <td>新建分支操作</td>
-<td></td>
 </tr>
 <tr>
 <td><code>git stash</code><br><code>git co xxx</code><br><code>git stash pop</code></td>
@@ -503,8 +488,11 @@
 </tr>
 </tbody>
 </table>
-<p>合并分支时，加上<code>--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并；而fast forward合并就看不出来曾经做过合并。</p>
-<p>解决git pull/push每次都需要输入密码问题：<a href="https://blog.csdn.net/nongweiyilady/article/details/77772602" target="_blank" rel="noopener">https://blog.csdn.net/nongweiyilady/article/details/77772602</a></p>
+<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ol>
+<li>合并分支时，加上<code>--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并；而fast forward合并就看不出来曾经做过合并。</li>
+<li>Git切换分支的时候，最好保持一个干净的工作区。</li>
+<li>切换到主分支上新建分支时，一定要及时pull！！！</li>
+</ol>
 <h4 id="Git最佳实践："><a href="#Git最佳实践：" class="headerlink" title="Git最佳实践："></a>Git最佳实践：</h4><ol>
 <li>要经常提交（细粒度地提交）</li>
 <li>将功能分成很多小块，每次全部完成某个小块时再提交，不要还没完成就提交</li>
@@ -515,12 +503,9 @@
 <li>要经常使用branch，比如开发的新特性分支、修改的bug分支等等</li>
 <li>工作流程的规则要保持一致，至少要和团队一致</li>
 </ol>
-<p>Git切换分支的时候，最好保持一个干净的工作区。</p>
-<p>切换到主分支上新建分支时，一定要及时pull！！！</p>
-<p>多分支复杂操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 从master分支新建分支A</span><br><span class="line">2. 在A分支上开发出新功能</span><br><span class="line">3. 切换到master分支，pull一下</span><br><span class="line">4. 切换到A分支，merge master到当前分支，并push</span><br><span class="line">5. 切换到B分支, merge A到当前分支，解决冲突，并push</span><br><span class="line">6. 合并B到master</span><br></pre></td></tr></table></figure></p>
-<p>git统计各个提交者的代码行数</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git log --author="$name" --pretty=tformat: --numstat | awk '&#123; add += $1; subs += $2; loc += $1 - $2 &#125; END &#123; printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc &#125;' -; done</span><br></pre></td></tr></table></figure>
-<p>Git提交时的hook相关，参考：<a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks" target="_blank" rel="noopener">https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks</a></p>
+<h4 id="Git统计各个提交者的代码行数"><a href="#Git统计各个提交者的代码行数" class="headerlink" title="Git统计各个提交者的代码行数"></a>Git统计各个提交者的代码行数</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git log --author="$name" --pretty=tformat: --numstat | awk '&#123; add += $1; subs += $2; loc += $1 - $2 &#125; END &#123; printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc &#125;' -; done</span><br></pre></td></tr></table></figure>
+<h4 id="Git提交时的hook相关"><a href="#Git提交时的hook相关" class="headerlink" title="Git提交时的hook相关"></a>Git提交时的hook相关</h4><p>参考：<a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks" target="_blank" rel="noopener">https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks</a></p>
+<h4 id="解决git-pull-push每次都需要输入密码问题"><a href="#解决git-pull-push每次都需要输入密码问题" class="headerlink" title="解决git pull/push每次都需要输入密码问题"></a>解决git pull/push每次都需要输入密码问题</h4><p>参考：<a href="https://blog.csdn.net/nongweiyilady/article/details/77772602" target="_blank" rel="noopener">https://blog.csdn.net/nongweiyilady/article/details/77772602</a></p>
 
       
     </div>
@@ -759,7 +744,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Git的基础知识"><span class="nav-number">1.</span> <span class="nav-text">Git的基础知识</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Git最佳实践："><span class="nav-number">2.</span> <span class="nav-text">Git最佳实践：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Git的基础知识"><span class="nav-number">1.</span> <span class="nav-text">Git的基础知识</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部分指令"><span class="nav-number">2.</span> <span class="nav-text">部分指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意点"><span class="nav-number">3.</span> <span class="nav-text">注意点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Git最佳实践："><span class="nav-number">4.</span> <span class="nav-text">Git最佳实践：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Git统计各个提交者的代码行数"><span class="nav-number">5.</span> <span class="nav-text">Git统计各个提交者的代码行数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Git提交时的hook相关"><span class="nav-number">6.</span> <span class="nav-text">Git提交时的hook相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解决git-pull-push每次都需要输入密码问题"><span class="nav-number">7.</span> <span class="nav-text">解决git pull/push每次都需要输入密码问题</span></a></li></ol></div>
             
 
           </div>
@@ -793,7 +778,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">50.2k</span>
+    <span title="Site words total count">50.1k</span>
   
 </div>
 
