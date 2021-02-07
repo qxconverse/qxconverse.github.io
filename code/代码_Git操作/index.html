@@ -88,7 +88,7 @@
 <meta property="og:description" content="Git的两个核心特征是：去中心化、记录快照而非差异比较。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/008eGmZEly1gn3hjagitqj30fz08ajsr.jpg">
-<meta property="og:updated_time" content="2021-01-29T03:03:35.194Z">
+<meta property="og:updated_time" content="2021-02-07T03:36:11.286Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git相关的操作">
 <meta name="twitter:description" content="Git的两个核心特征是：去中心化、记录快照而非差异比较。">
@@ -323,8 +323,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-29T11:03:35+08:00">
-                2021-01-29
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-07T11:36:11+08:00">
+                2021-02-07
               </time>
             
           </span>
@@ -378,7 +378,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  823
+                  752
                 </span>
               
 
@@ -419,24 +419,91 @@
 <p>Git的两个核心特征是：去中心化、记录快照而非差异比较。</p>
 </blockquote>
 <a id="more"></a>
-<h4 id="Git的基础知识"><a href="#Git的基础知识" class="headerlink" title="Git的基础知识"></a>Git的基础知识</h4><p>Git的工作区就是保存在电脑上的实体文件夹，而stage称为暂存区，add时添加到里面，master就是主分支，而HEAD可以理解为一个指针，指向当前的版本。</p>
+<h4 id="Git的基础知识"><a href="#Git的基础知识" class="headerlink" title="Git的基础知识"></a>Git的基础知识</h4><p>Git的工作区就是保存在电脑上的实体文件夹；stage称为暂存区，add时添加到里面；master是主分支，而HEAD可以理解为一个指针，指向当前的版本。</p>
 <p>参考图：</p>
 <p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gn3hjagitqj30fz08ajsr.jpg" alt="3832193-9f91b2096b08eeae"></p>
-<p>先手动删除文件，然后使用<code>git rm &lt;file&gt;</code>和<code>git add &lt;file&gt;</code>效果是一样的。</p>
-<p>Git鼓励大量使用分支：</p>
-<p>查看分支：<code>git branch</code></p>
-<p>创建分支：<code>git branch &lt;name&gt;</code></p>
-<p>切换分支：<code>git checkout &lt;name&gt;</code></p>
-<p>创建+切换分支：<code>git checkout -b &lt;name&gt;</code></p>
-<p>合并某分支到当前分支：<code>git merge &lt;name&gt;</code></p>
-<p>删除分支：<code>git branch -d &lt;name&gt;</code></p>
+<p>附上部分指令</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>含义</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git branch</code></td>
+<td>查看分支</td>
+<td></td>
+</tr>
+<tr>
+<td><code>git branch name</code></td>
+<td>创建分支</td>
+<td></td>
+</tr>
+<tr>
+<td><code>git checkout name</code></td>
+<td>切换分支</td>
+<td></td>
+</tr>
+<tr>
+<td><code>git checkout -b name</code></td>
+<td>创建+切换分支</td>
+<td></td>
+</tr>
+<tr>
+<td><code>git merge name</code></td>
+<td>合并某分支到当前分支</td>
+<td></td>
+</tr>
+<tr>
+<td><code>git branch -D xxx</code></td>
+<td>删除本地分支</td>
+<td></td>
+</tr>
+<tr>
+<td><code>git push origin --delete xxx</code></td>
+<td>删除远程分支</td>
+<td></td>
+</tr>
+<tr>
+<td><code>git diff xxx1 xxx2 --stat</code></td>
+<td>对比2个版本之间的改动</td>
+<td></td>
+</tr>
+<tr>
+<td><code>git co .</code></td>
+<td>修改了代码后，想去掉修改</td>
+<td></td>
+</tr>
+<tr>
+<td><code>git reset HEAD .</code></td>
+<td>修改了代码后，add了，但想撤回</td>
+<td></td>
+</tr>
+<tr>
+<td><code>git reset —hard xxxxxxxxx</code></td>
+<td>修改了代码后，add并commit了，但想撤回</td>
+<td></td>
+</tr>
+<tr>
+<td><code>git reset --hard xxx</code><br><code>git push -f</code></td>
+<td>git回滚到某个版本</td>
+<td></td>
+</tr>
+<tr>
+<td><code>git checkout master</code><br><code>git pull</code><br><code>git checkout -b xxx</code><br><code>git add .</code><br><code>git ci -m &quot;aaaa&quot;</code><br><code>git push --set-upstream origin xxx</code></td>
+<td>新建分支操作</td>
+<td></td>
+</tr>
+<tr>
+<td><code>git stash</code><br><code>git co xxx</code><br><code>git stash pop</code></td>
+<td>暂存写好的部分，再切换分支</td>
+</tr>
+</tbody>
+</table>
 <p>合并分支时，加上<code>--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并；而fast forward合并就看不出来曾经做过合并。</p>
-<p>git中对比2个版本之间的改动，比如下面的例子</p>
-<p> <code>git diff xxx1 xxx2 --stat</code></p>
-<p>修改了代码后，想去掉修改：<code>git co.</code></p>
-<p>修改了代码后，add了，但想撤回：<code>git reset HEAD .</code></p>
-<p>修改了代码后，add/commit了，但想撤回：<code>git reset —hard xxxxxxxxx</code></p>
-<p>上传文件到linux的命令：<code>rz</code></p>
 <p>解决git pull/push每次都需要输入密码问题：<a href="https://blog.csdn.net/nongweiyilady/article/details/77772602" target="_blank" rel="noopener">https://blog.csdn.net/nongweiyilady/article/details/77772602</a></p>
 <h4 id="Git最佳实践："><a href="#Git最佳实践：" class="headerlink" title="Git最佳实践："></a>Git最佳实践：</h4><ol>
 <li>要经常提交（细粒度地提交）</li>
@@ -448,14 +515,8 @@
 <li>要经常使用branch，比如开发的新特性分支、修改的bug分支等等</li>
 <li>工作流程的规则要保持一致，至少要和团队一致</li>
 </ol>
-<p>git切换分支的时候，最好保持一个干净的工作区。</p>
+<p>Git切换分支的时候，最好保持一个干净的工作区。</p>
 <p>切换到主分支上新建分支时，一定要及时pull！！！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">新建分支8部曲</span><br><span class="line"></span><br><span class="line">git checkout master</span><br><span class="line">git pull</span><br><span class="line">git checkout -b xxx</span><br><span class="line">git add .</span><br><span class="line">git ci -m &quot;aaaa&quot;</span><br><span class="line">git push --set-upstream origin xxx</span><br></pre></td></tr></table></figure>
-<p>删除分支</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">删除本地分支</span><br><span class="line">git branch -D xxx</span><br><span class="line">删除远程分支</span><br><span class="line">git push origin --delete xxx</span><br></pre></td></tr></table></figure>
-<p>版本回退<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git回滚到某个版本</span><br><span class="line">git reset --hard xxx</span><br><span class="line">git push -f</span><br></pre></td></tr></table></figure></p>
-<p>暂存写好的部分，再切换分支</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br><span class="line">git co xxx</span><br><span class="line">git stash pop</span><br></pre></td></tr></table></figure>
 <p>多分支复杂操作<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. 从master分支新建分支A</span><br><span class="line">2. 在A分支上开发出新功能</span><br><span class="line">3. 切换到master分支，pull一下</span><br><span class="line">4. 切换到A分支，merge master到当前分支，并push</span><br><span class="line">5. 切换到B分支, merge A到当前分支，解决冲突，并push</span><br><span class="line">6. 合并B到master</span><br></pre></td></tr></table></figure></p>
 <p>git统计各个提交者的代码行数</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git log --author="$name" --pretty=tformat: --numstat | awk '&#123; add += $1; subs += $2; loc += $1 - $2 &#125; END &#123; printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc &#125;' -; done</span><br></pre></td></tr></table></figure>
@@ -732,7 +793,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">50.3k</span>
+    <span title="Site words total count">50.2k</span>
   
 </div>
 
