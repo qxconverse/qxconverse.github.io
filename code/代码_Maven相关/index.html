@@ -79,21 +79,21 @@
 
 
 
-<meta name="description" content="中间仓库">
+<meta name="description" content="依赖控制、版本控制、仓库、编译打包部署等">
 <meta name="keywords" content="依赖控制,maven">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Maven相关">
 <meta property="og:url" content="https://qxconverse.github.io/code/代码_Maven相关/index.html">
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
-<meta property="og:description" content="中间仓库">
+<meta property="og:description" content="依赖控制、版本控制、仓库、编译打包部署等">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpqoydjpj30fu08kwlg.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpquhfzmj30ig07lglv.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpq6doo3j30i20jd40c.jpg">
-<meta property="og:updated_time" content="2021-01-23T10:39:43.554Z">
+<meta property="og:updated_time" content="2021-02-07T03:00:13.369Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Maven相关">
-<meta name="twitter:description" content="中间仓库">
+<meta name="twitter:description" content="依赖控制、版本控制、仓库、编译打包部署等">
 <meta name="twitter:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpqoydjpj30fu08kwlg.jpg">
 
 
@@ -325,8 +325,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-23T18:39:43+08:00">
-                2021-01-23
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-07T11:00:13+08:00">
+                2021-02-07
               </time>
             
           </span>
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  674
+                  691
                 </span>
               
 
@@ -417,9 +417,11 @@
       
 
       
-        <p>中间仓库</p>
+        <blockquote>
+<p>依赖控制、版本控制、仓库、编译打包部署等</p>
+</blockquote>
 <a id="more"></a>
-<p>我们通常会在本地仓库和远程中央仓库之间搭建一个公司级别的中间仓库。首先会从中间仓库获取，否则，再从远程中央仓库获取。Nexus是一个常用的仓库管理器。</p>
+<h5 id="中间仓库"><a href="#中间仓库" class="headerlink" title="中间仓库"></a>中间仓库</h5><p>我们通常会在本地仓库和远程中央仓库之间搭建一个公司级别的中间仓库。首先会从中间仓库获取，否则，再从远程中央仓库获取。Nexus是一个常用的仓库管理器。</p>
 <p>项目中在setting.xml文件里配置自己的中间仓库。</p>
 <h5 id="exclusions的使用"><a href="#exclusions的使用" class="headerlink" title="exclusions的使用"></a>exclusions的使用</h5><p>因为存在依赖传递的规则，B依赖A，但是在B项目中不需要A中的某个jar包，则使用此标签。</p>
 <h5 id="dependencyManagement和dependencies的区别"><a href="#dependencyManagement和dependencies的区别" class="headerlink" title="dependencyManagement和dependencies的区别"></a>dependencyManagement和dependencies的区别</h5><p>参考地址：<a href="https://www.cnblogs.com/myhappylife/p/5872070.html" target="_blank" rel="noopener">https://www.cnblogs.com/myhappylife/p/5872070.html</a></p>
@@ -601,7 +603,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -623,7 +625,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -684,7 +686,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#exclusions的使用"><span class="nav-number">1.</span> <span class="nav-text">exclusions的使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#dependencyManagement和dependencies的区别"><span class="nav-number">2.</span> <span class="nav-text">dependencyManagement和dependencies的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#maven中的packaging标签"><span class="nav-number">3.</span> <span class="nav-text">maven中的packaging标签</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#记录一次很奇怪的mvn依赖的问题"><span class="nav-number">4.</span> <span class="nav-text">记录一次很奇怪的mvn依赖的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#打开新maven项目"><span class="nav-number">5.</span> <span class="nav-text">打开新maven项目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#如何选择性deploy包到远程仓库？"><span class="nav-number">6.</span> <span class="nav-text">如何选择性deploy包到远程仓库？</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#中间仓库"><span class="nav-number">1.</span> <span class="nav-text">中间仓库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#exclusions的使用"><span class="nav-number">2.</span> <span class="nav-text">exclusions的使用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#dependencyManagement和dependencies的区别"><span class="nav-number">3.</span> <span class="nav-text">dependencyManagement和dependencies的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#maven中的packaging标签"><span class="nav-number">4.</span> <span class="nav-text">maven中的packaging标签</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#记录一次很奇怪的mvn依赖的问题"><span class="nav-number">5.</span> <span class="nav-text">记录一次很奇怪的mvn依赖的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#打开新maven项目"><span class="nav-number">6.</span> <span class="nav-text">打开新maven项目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#如何选择性deploy包到远程仓库？"><span class="nav-number">7.</span> <span class="nav-text">如何选择性deploy包到远程仓库？</span></a></li></ol></div>
             
 
           </div>
@@ -718,7 +720,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">51.6k</span>
+    <span title="Site words total count">50.3k</span>
   
 </div>
 
