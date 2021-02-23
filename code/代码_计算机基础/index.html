@@ -88,7 +88,7 @@
 <meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg">
-<meta property="og:updated_time" content="2021-02-07T07:28:59.503Z">
+<meta property="og:updated_time" content="2021-02-23T10:26:16.833Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机基础">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
@@ -323,8 +323,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-02-07T15:28:59+08:00">
-                2021-02-07
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-23T18:26:16+08:00">
+                2021-02-23
               </time>
             
           </span>
@@ -378,7 +378,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  8.5k
+                  8.7k
                 </span>
               
 
@@ -804,6 +804,9 @@
 <h5 id="幂等性"><a href="#幂等性" class="headerlink" title="幂等性"></a>幂等性</h5><p>分布式、高并发必须要考虑到这一点，不然会出现隐患。比如用户在下单的时候，点击一次，后台接受请求并处理成功了，但是由于网络原因这个响应没有到达用户那儿，用户以为下单不成功，又点击一次。又或者接单，虽然会检验状态，但是更完美的做法是，如果司机接单成功了再次点击接单，此时还是直接返回成功。这就是幂等性，重复请求应该得到相同结果。</p>
 <h5 id="Redislock分布式锁的作用"><a href="#Redislock分布式锁的作用" class="headerlink" title="Redislock分布式锁的作用"></a>Redislock分布式锁的作用</h5><p>想象一下，我发布订单，然后取消的同时，你是司机又接了单，怎么办？还有就是多个司机一起去接这个单。单机部署，用sychronized同步就行。但是在分布式环境下，sychronized就失效了，因为它只是在代码层面上做同步，所以要么用分布式锁，redis，zookeeper都可以实现，要么用mysql的行锁，但是后者效率很低。</p>
 <p>Redislock相当于把锁的信息放进redis里面，有其它操作相同订单的时候，就会去查，如果依然锁着，就不能操作</p>
+<h5 id="Java中的SPI机制"><a href="#Java中的SPI机制" class="headerlink" title="Java中的SPI机制"></a>Java中的SPI机制</h5><p>可以理解为：我作为一个规则制定者（第一层规则制定者），我自己指定一个大的接口，但是不具体实现。如果有多个不同的人（第二层实现者）想细化我的这个规则，他们自己实现即可。一旦他们实现了这些细则，就可以给想用的人（第三层使用者）去使用了。</p>
+<p>例子：水龙头。</p>
+<p>首先假设工业部（第一层制定者）说，所有的水龙头必须直径15mm。接着，不同的水龙头制造厂商（第二层实现者）均各自生产不同的水龙头，但是他们直径都是15mm。最后买家（第三层使用者）根据自己的需求买某个厂商生产的水龙头。</p>
 
       
     </div>
@@ -1042,7 +1045,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#注解处理器"><span class="nav-number">1.</span> <span class="nav-text">注解处理器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Autowired相关"><span class="nav-number">2.</span> <span class="nav-text">@Autowired相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Filter，Listener，Servlet的区别"><span class="nav-number">3.</span> <span class="nav-text">Filter，Listener，Servlet的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤器和拦截器的区别"><span class="nav-number">4.</span> <span class="nav-text">过滤器和拦截器的区别</span></a></li></ol><li class="nav-item nav-level-4"><a class="nav-link" href="#阅读关于IaaS、PaaS-SaaS相关的知识点"><span class="nav-number"></span> <span class="nav-text">阅读关于IaaS、PaaS/SaaS相关的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于5种I-O模型的理解"><span class="nav-number"></span> <span class="nav-text">关于5种I/O模型的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计模式相关"><span class="nav-number"></span> <span class="nav-text">设计模式相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#适配器模式vs代理模式"><span class="nav-number">1.</span> <span class="nav-text">适配器模式vs代理模式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#csrf"><span class="nav-number"></span> <span class="nav-text">csrf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#需要关注的知识点"><span class="nav-number"></span> <span class="nav-text">需要关注的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#钩子函数和回调函数的区别"><span class="nav-number"></span> <span class="nav-text">钩子函数和回调函数的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#es相关"><span class="nav-number"></span> <span class="nav-text">es相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务部署架构"><span class="nav-number"></span> <span class="nav-text">服务部署架构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Zookeeper与Nginx"><span class="nav-number">1.</span> <span class="nav-text">Zookeeper与Nginx</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dubbo和Http"><span class="nav-number">2.</span> <span class="nav-text">Dubbo和Http</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nio相关"><span class="nav-number"></span> <span class="nav-text">Nio相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对外提供的接口"><span class="nav-number"></span> <span class="nav-text">对外提供的接口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#直接请求"><span class="nav-number">1.</span> <span class="nav-text">直接请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求认证与参数防篡改性"><span class="nav-number">2.</span> <span class="nav-text">请求认证与参数防篡改性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求的唯一性"><span class="nav-number">3.</span> <span class="nav-text">请求的唯一性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java开发提高性能的技术"><span class="nav-number">4.</span> <span class="nav-text">Java开发提高性能的技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#幂等性"><span class="nav-number">5.</span> <span class="nav-text">幂等性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Redislock分布式锁的作用"><span class="nav-number">6.</span> <span class="nav-text">Redislock分布式锁的作用</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#注解处理器"><span class="nav-number">1.</span> <span class="nav-text">注解处理器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Autowired相关"><span class="nav-number">2.</span> <span class="nav-text">@Autowired相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Filter，Listener，Servlet的区别"><span class="nav-number">3.</span> <span class="nav-text">Filter，Listener，Servlet的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤器和拦截器的区别"><span class="nav-number">4.</span> <span class="nav-text">过滤器和拦截器的区别</span></a></li></ol><li class="nav-item nav-level-4"><a class="nav-link" href="#阅读关于IaaS、PaaS-SaaS相关的知识点"><span class="nav-number"></span> <span class="nav-text">阅读关于IaaS、PaaS/SaaS相关的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于5种I-O模型的理解"><span class="nav-number"></span> <span class="nav-text">关于5种I/O模型的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计模式相关"><span class="nav-number"></span> <span class="nav-text">设计模式相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#适配器模式vs代理模式"><span class="nav-number">1.</span> <span class="nav-text">适配器模式vs代理模式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#csrf"><span class="nav-number"></span> <span class="nav-text">csrf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#需要关注的知识点"><span class="nav-number"></span> <span class="nav-text">需要关注的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#钩子函数和回调函数的区别"><span class="nav-number"></span> <span class="nav-text">钩子函数和回调函数的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#es相关"><span class="nav-number"></span> <span class="nav-text">es相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务部署架构"><span class="nav-number"></span> <span class="nav-text">服务部署架构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Zookeeper与Nginx"><span class="nav-number">1.</span> <span class="nav-text">Zookeeper与Nginx</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dubbo和Http"><span class="nav-number">2.</span> <span class="nav-text">Dubbo和Http</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nio相关"><span class="nav-number"></span> <span class="nav-text">Nio相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对外提供的接口"><span class="nav-number"></span> <span class="nav-text">对外提供的接口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#直接请求"><span class="nav-number">1.</span> <span class="nav-text">直接请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求认证与参数防篡改性"><span class="nav-number">2.</span> <span class="nav-text">请求认证与参数防篡改性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求的唯一性"><span class="nav-number">3.</span> <span class="nav-text">请求的唯一性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java开发提高性能的技术"><span class="nav-number">4.</span> <span class="nav-text">Java开发提高性能的技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#幂等性"><span class="nav-number">5.</span> <span class="nav-text">幂等性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Redislock分布式锁的作用"><span class="nav-number">6.</span> <span class="nav-text">Redislock分布式锁的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java中的SPI机制"><span class="nav-number">7.</span> <span class="nav-text">Java中的SPI机制</span></a></li></ol></li></div>
             
 
           </div>
@@ -1076,7 +1079,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">50.2k</span>
+    <span title="Site words total count">50.4k</span>
   
 </div>
 
