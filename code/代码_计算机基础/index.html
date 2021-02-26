@@ -88,7 +88,7 @@
 <meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg">
-<meta property="og:updated_time" content="2021-02-26T10:33:16.926Z">
+<meta property="og:updated_time" content="2021-02-26T11:50:25.726Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机基础">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
@@ -323,7 +323,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-02-26T18:33:16+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2021-02-26T19:50:25+08:00">
                 2021-02-26
               </time>
             
@@ -378,7 +378,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  8.8k
+                  8.3k
                 </span>
               
 
@@ -394,7 +394,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  31
+                  29
                 </span>
               
             </div>
@@ -533,9 +533,9 @@
 <p>拦截器依赖于web框架，在SpringMVC中就是依赖于SpringMVC框架。在实现上基于Java的反射机制，属于面向切面编程（AOP）的一种运用。</p>
 <p>反映在代码配置中，filter是在web.xml里面配置的，而拦截器是在spring相关的配置中的。</p>
 <p>Servlet的监听器Listener是实现了javax.servlet.ServletContextListener接口的服务器端程序，它和filter一样也是随web应用的启动而启动，只初始化一次，随web应用的停止而销毁。主要作用是：做一些初始化的内容添加工作、设置一些基本的内容、比如一些参数或者是一些固定的对象等等。例如利用监听器对数据库连接池DataSource的初始化。监听器对象可以在事情发生前、发生后可以做一些必要的处理。</p>
-<h4 id="阅读关于IaaS、PaaS-SaaS相关的知识点"><a href="#阅读关于IaaS、PaaS-SaaS相关的知识点" class="headerlink" title="阅读关于IaaS、PaaS/SaaS相关的知识点"></a>阅读关于IaaS、PaaS/SaaS相关的知识点</h4><p>我的理解是，从云计算服务角色来看，就是提供东西的多少：SaaS，不给你提供任何东西，成品给你；PaaS，给你提供少量东西，剩下大部分自己做；IaaS，给你提供大多数东西，你可以自由发挥剩下的部分。从用户角色来看，就是获得东西的多少：SaaS，获得全部成品，自己不用劳神；PaaS，获得部分原材料，自己要劳神；IaaS，获得全部原材料，完全自己做。</p>
+<h5 id="阅读关于IaaS、PaaS-SaaS相关的知识点"><a href="#阅读关于IaaS、PaaS-SaaS相关的知识点" class="headerlink" title="阅读关于IaaS、PaaS/SaaS相关的知识点"></a>阅读关于IaaS、PaaS/SaaS相关的知识点</h5><p>我的理解是，从云计算服务角色来看，就是提供东西的多少：SaaS，不给你提供任何东西，成品给你；PaaS，给你提供少量东西，剩下大部分自己做；IaaS，给你提供大多数东西，你可以自由发挥剩下的部分。从用户角色来看，就是获得东西的多少：SaaS，获得全部成品，自己不用劳神；PaaS，获得部分原材料，自己要劳神；IaaS，获得全部原材料，完全自己做。</p>
 <p>SOA的概念：面向服务的架构，我的理解是，它是微服务等很多流行框架的基础思想</p>
-<h4 id="关于5种I-O模型的理解"><a href="#关于5种I-O模型的理解" class="headerlink" title="关于5种I/O模型的理解"></a>关于5种I/O模型的理解</h4><p>以喝咖啡举例， 在网上点了咖啡粉外卖，要等外卖小哥送咖啡，然后泡咖啡，喝咖啡</p>
+<h5 id="关于5种I-O模型的理解"><a href="#关于5种I-O模型的理解" class="headerlink" title="关于5种I/O模型的理解"></a>关于5种I/O模型的理解</h5><p>以喝咖啡举例， 在网上点了咖啡粉外卖，要等外卖小哥送咖啡，然后泡咖啡，喝咖啡</p>
 <ol>
 <li>阻塞式I/O：一直站在家里等咖啡（其它什么事不做）送到，然后泡咖啡</li>
 <li>非阻塞式I/O：不停地给外卖小哥打电话（其它什么事不做），送到后泡咖啡</li>
@@ -548,7 +548,7 @@
 <p>IO多路复用、事件驱动、注册和订阅、反应器（Reactor）模式，可以连着一起记忆。</p>
 <p>下面是核心的服务端代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ServerSocket serverSocket = <span class="keyword">new</span> ServerSocket(<span class="number">8888</span>);</span><br><span class="line">Socket socket = serverSocket.accept();</span><br><span class="line">BufferedReader in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</span><br><span class="line">PrintWriter out = <span class="keyword">new</span> PrintWriter(socket.getOutputStream(), <span class="keyword">true</span>);</span><br><span class="line">String request, response;</span><br><span class="line"><span class="keyword">while</span> ((request = in.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">"OK"</span>.equals(request)) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    response = processRequest(request);</span><br><span class="line">    out.println(response);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="设计模式相关"><a href="#设计模式相关" class="headerlink" title="设计模式相关"></a>设计模式相关</h4><p>工厂模式：工厂方法模式：扩展产品，iPhone到miPhone。抽象工厂模式：扩展产品簇。例如在已经有iPhone、MAC的情况下同时增加MiPhone和MiPC。</p>
+<h5 id="设计模式相关"><a href="#设计模式相关" class="headerlink" title="设计模式相关"></a>设计模式相关</h5><p>工厂模式：工厂方法模式：扩展产品，iPhone到miPhone。抽象工厂模式：扩展产品簇。例如在已经有iPhone、MAC的情况下同时增加MiPhone和MiPC。</p>
 <p>单例模式：一个类只有一个实例，关键要定义一个<strong>私有的构造函数</strong>，一个<strong>私有的实例</strong>，一个<strong>公有的获取实例的方法</strong></p>
 <p>适配器模式：解决接口不兼容的问题，类似于电源适配器</p>
 <p>外观模式：通过重新组合类或程序单元，对外提供统一的接口/界面，要联想到Controller里面的各种Dao或Service，就是这种思想！！</p>
@@ -559,7 +559,7 @@
 <p>构建者模式：当一个类的构造函数参数个数超过4个，而且这些参数有些是可选的参数，考虑使用构造者模式。例子：@Builder注解生成的实体类。</p>
 <h5 id="适配器模式vs代理模式"><a href="#适配器模式vs代理模式" class="headerlink" title="适配器模式vs代理模式"></a>适配器模式vs代理模式</h5><p>相同点：都是在中间加了一层去处理</p>
 <p>区别：目的不一样，<strong>适配器是为了解决新旧不兼容的问题；而代理提供的接口和原本的接口是一样的</strong>，只是充当一个中介的作用。</p>
-<h4 id="csrf"><a href="#csrf" class="headerlink" title="csrf"></a>csrf</h4><p>时序图如下：</p>
+<h5 id="csrf"><a href="#csrf" class="headerlink" title="csrf"></a>csrf</h5><p>时序图如下：</p>
 <p><img src="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg" alt="csrf"></p>
 <p>下面的博客已经讲的很好了。但是里面没有讲csrftoken相关的东西。</p>
 <p>参考博客：<a href="http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html" target="_blank" rel="noopener">http://www.cnblogs.com/hyddd/archive/2009/04/09/1432744.html</a></p>
@@ -594,19 +594,6 @@
 <li>是否是使用链表存储的？</li>
 <li>数据的大小是否可以装载在内存里？</li>
 </ul>
-<p>SVM和Logistic回归的比较：（1）经典的SVM，直接输出类别，不给出后验概率；（2）Logistic回归，会给出属于哪一个类别的后验概率；（3）比较重点是二者目标函数的异同。</p>
-<p>SVR回归区别于传统的回归，在计算模型输出和真实输出之前的差别时，可以容忍小部分的偏差$\epsilon$。</p>
-<p>逻辑回归模型参数的求解，一般通过极大似然估计，也就得到了logloss。至于logloss，个人觉得有一个稍微有点物理意义的解释：可以把logloss分解成真实分布的熵+真实分布与预测分布的相对熵（KL散度），前半部分是固定的，所以最小化logloss相当于在最小化真实分布与预测分布之间的差异。</p>
-<p>bagging是并行式集成学习方法的最著名的代表。</p>
-<p>m个样本的数据集可放回随机取出一个样本放入采样集。m次采样中，含有m个样本的采样集。采样出T个含有m个训练样本的采样集。基于每一个采样集，训练出一个基学习器。再将这些结合起来。</p>
-<p>与标准adaboost只适用于二分类任务不同，bagging能不经修改地用于多分类、回归等任务。</p>
-<p>Bagging 是 Bootstrap Aggregating 的简称，意思就是再取样 (Bootstrap) 然后在每个样本上训练出来的模型取平均，所以是降低模型的 variance. Bagging 比如 Random Forest 这种先天并行的算法都有这个效果。</p>
-<p>Boosting 则是迭代算法，每一次迭代都根据上一次迭代的预测结果对样本进行加权，所以随着迭代不断进行，误差会越来越小，所以模型的 bias 会不断降低。这种算法无法并行，例子比如 Adaptive Boosting.</p>
-<p>1.总结极大似然估计和最大后验估计</p>
-<p>2.朴素贝叶斯分类</p>
-<p>3，线性回归</p>
-<p>4，svr回归</p>
-<p>5.pca，lpa</p>
 <p>数据结构：  </p>
 <p>   1。最大子序列和：一串序列，找出和最大的子序列：用一个变量储存第i位之前最大的和，碰到新的数字进行相应的加减法， 一旦这个变量小于0就置为0。  </p>
 <p>   2。平衡二叉树是怎么回事，介绍一下  </p>
@@ -624,7 +611,7 @@
 </li>
 </ol>
 <p>最终的时间复杂度为：$(O(N)+O(N<em>logN))</em>M$</p>
-<h4 id="需要关注的知识点"><a href="#需要关注的知识点" class="headerlink" title="需要关注的知识点"></a>需要关注的知识点</h4><p>1.语言（序列化、注解、反射、java探针）</p>
+<h5 id="需要关注的知识点"><a href="#需要关注的知识点" class="headerlink" title="需要关注的知识点"></a>需要关注的知识点</h5><p>1.语言（序列化、注解、反射、java探针）</p>
 <p>2.spring</p>
 <p>3.http</p>
 <p>4.数据库（mysql、数据源、mybatis）</p>
@@ -635,8 +622,8 @@
 <p>9.maven</p>
 <p>10.swagger</p>
 <p>11.ci、cd</p>
-<h4 id="钩子函数和回调函数的区别"><a href="#钩子函数和回调函数的区别" class="headerlink" title="钩子函数和回调函数的区别"></a>钩子函数和回调函数的区别</h4><p>一般认为，钩子函数就是回调函数的一种，其实还是有差异的，差异地方就是：触发的时机不同。钩子函数在捕获消息的第一时间就执行，而回调函数是捕获结束时，最后一个被执行的。</p>
-<h4 id="es相关"><a href="#es相关" class="headerlink" title="es相关"></a>es相关</h4><p>提到es，一定要首先联想到小时候用的《新华字典》，它们有很多相似点；其次要想到<strong>倒排索引</strong>，它是基于trie前缀树（term index的实现）。</p>
+<h5 id="钩子函数和回调函数的区别"><a href="#钩子函数和回调函数的区别" class="headerlink" title="钩子函数和回调函数的区别"></a>钩子函数和回调函数的区别</h5><p>一般认为，钩子函数就是回调函数的一种，其实还是有差异的，差异地方就是：触发的时机不同。钩子函数在捕获消息的第一时间就执行，而回调函数是捕获结束时，最后一个被执行的。</p>
+<h5 id="es相关"><a href="#es相关" class="headerlink" title="es相关"></a>es相关</h5><p>提到es，一定要首先联想到小时候用的《新华字典》，它们有很多相似点；其次要想到<strong>倒排索引</strong>，它是基于trie前缀树（term index的实现）。</p>
 <p>es是NoSQL数据库。以MySQL来作对比，index对应数据库；doc（文档）对应行，文档是包含一个或多个域（即Field）的容器，以JSON格式进行表示；field对应列。</p>
 <p>相关重要概念：term index，term dictionary，posting list。</p>
 <p>如有3条数据：</p>
@@ -737,7 +724,7 @@
   A[term index] --> B[term dictionary]
   B --> C[posting list]</pre>
 
-<h4 id="服务部署架构"><a href="#服务部署架构" class="headerlink" title="服务部署架构"></a>服务部署架构</h4><h5 id="Zookeeper与Nginx"><a href="#Zookeeper与Nginx" class="headerlink" title="Zookeeper与Nginx"></a>Zookeeper与Nginx</h5><p>Nginx关键词：HTTP服务器、<strong>反向代理服务器</strong>，负载均衡服务器</p>
+<h5 id="Zookeeper与Nginx"><a href="#Zookeeper与Nginx" class="headerlink" title="Zookeeper与Nginx"></a>Zookeeper与Nginx</h5><p>Nginx关键词：HTTP服务器、<strong>反向代理服务器</strong>，负载均衡服务器</p>
 <p>ZooKeeper关键词：分布式协调服务框架，负载均衡服务器</p>
 <p>Zookeeper的作用包含：配置管理，名字服务，分布式锁和集群管理。可以把zookeeper理解为一个动物园管理者，负责管理动物园里面的所有动物。每个动物看做一台机器，它们有自己的特点（即配置），有自己的名字（即IP地址等）,因为有很多动物（看做集群），它们在动物园里面活动不能产生冲突（分布式锁）。</p>
 <p>499错误：Nginx自定义的一个状态码，其含义为“client has closed connection”。这很有可能是因为服务器端处理的时间过长，客户端“不耐烦”了。要解决此问题，就需要在程序上面做些优化了。</p>
@@ -747,7 +734,7 @@
 <p>RPC在使用形式上像调用本地函数（或方法）一样去调用远程的函数（或方法）。</p>
 <p>http接口是在接口不多、系统与系统交互较少的情况下，解决信息孤岛初期常使用的一种通信手段；优点就是简单、直接、开发方便。利用现成的http协议进行传输。但是如果是一个大型的网站，内部子系统较多、接口非常多的情况下，RPC框架的好处就显示出来了</p>
 <p>对于dubbo的应用，消费方需要引入提供方的maven包，但是包里面只有接口（只暴露接口），没有具体的实现。所以有rpc在里面，即需要调用远程提供方的方法。</p>
-<h4 id="Nio相关"><a href="#Nio相关" class="headerlink" title="Nio相关"></a>Nio相关</h4><p>其中中最常使用的是多路复用，它是非阻塞的。最主要的有3个组件</p>
+<h5 id="Nio相关"><a href="#Nio相关" class="headerlink" title="Nio相关"></a>Nio相关</h5><p>其中中最常使用的是多路复用，它是非阻塞的。最主要的有3个组件</p>
 <ol>
 <li>Selector（多路复用选择器，类似于netty里面的EventLoop，可以看做是一个线程）</li>
 <li>Channel（封装了Socket），注意一个Channel只能注册到一个Selector上，一个Selector可以被多个Channel注册，并监听这些Channel。</li>
@@ -782,7 +769,7 @@
 <li>正是由于这个原因，我们不同项目之间的调用就会被浏览器阻止。比如我们最常见的场景：WebApi作为数据服务层，它是一个单独的项目，我们的MVC项目作为Web的显示层，这个时候我们的MVC里面就需要调用WebApi里面的接口取数据展现在页面上。因为我们的WebApi和MVC是两个不同的项目，所以运行起来之后就存在上面说的跨域的问题。</li>
 </ol>
 <p>还有一篇更好的文章：<a href="https://www.cnblogs.com/codelir/p/5327462.html" target="_blank" rel="noopener">https://www.cnblogs.com/codelir/p/5327462.html</a></p>
-<h4 id="对外提供的接口"><a href="#对外提供的接口" class="headerlink" title="对外提供的接口"></a>对外提供的接口</h4><p>（Alibaba）对外提供的开放接口，不管是 RPC/API/HTTP 接口，都需要进行参数校验 </p>
+<h5 id="对外提供的接口"><a href="#对外提供的接口" class="headerlink" title="对外提供的接口"></a>对外提供的接口</h5><p>（Alibaba）对外提供的开放接口，不管是 RPC/API/HTTP 接口，都需要进行参数校验 </p>
 <p>问题：写开放的API接口时如何保证数据的安全性？</p>
 <p>需要考虑的点如下：</p>
 <ol>
@@ -1051,7 +1038,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#注解处理器"><span class="nav-number">1.</span> <span class="nav-text">注解处理器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Autowired相关"><span class="nav-number">2.</span> <span class="nav-text">@Autowired相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Filter，Listener，Servlet的区别"><span class="nav-number">3.</span> <span class="nav-text">Filter，Listener，Servlet的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤器和拦截器的区别"><span class="nav-number">4.</span> <span class="nav-text">过滤器和拦截器的区别</span></a></li></ol><li class="nav-item nav-level-4"><a class="nav-link" href="#阅读关于IaaS、PaaS-SaaS相关的知识点"><span class="nav-number"></span> <span class="nav-text">阅读关于IaaS、PaaS/SaaS相关的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于5种I-O模型的理解"><span class="nav-number"></span> <span class="nav-text">关于5种I/O模型的理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计模式相关"><span class="nav-number"></span> <span class="nav-text">设计模式相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#适配器模式vs代理模式"><span class="nav-number">1.</span> <span class="nav-text">适配器模式vs代理模式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#csrf"><span class="nav-number"></span> <span class="nav-text">csrf</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#需要关注的知识点"><span class="nav-number"></span> <span class="nav-text">需要关注的知识点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#钩子函数和回调函数的区别"><span class="nav-number"></span> <span class="nav-text">钩子函数和回调函数的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#es相关"><span class="nav-number"></span> <span class="nav-text">es相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务部署架构"><span class="nav-number"></span> <span class="nav-text">服务部署架构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Zookeeper与Nginx"><span class="nav-number">1.</span> <span class="nav-text">Zookeeper与Nginx</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dubbo和Http"><span class="nav-number">2.</span> <span class="nav-text">Dubbo和Http</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nio相关"><span class="nav-number"></span> <span class="nav-text">Nio相关</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对外提供的接口"><span class="nav-number"></span> <span class="nav-text">对外提供的接口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#直接请求"><span class="nav-number">1.</span> <span class="nav-text">直接请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求认证与参数防篡改性"><span class="nav-number">2.</span> <span class="nav-text">请求认证与参数防篡改性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求的唯一性"><span class="nav-number">3.</span> <span class="nav-text">请求的唯一性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java开发提高性能的技术"><span class="nav-number">4.</span> <span class="nav-text">Java开发提高性能的技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#幂等性"><span class="nav-number">5.</span> <span class="nav-text">幂等性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Redislock分布式锁的作用"><span class="nav-number">6.</span> <span class="nav-text">Redislock分布式锁的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java中的SPI机制"><span class="nav-number">7.</span> <span class="nav-text">Java中的SPI机制</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#注解处理器"><span class="nav-number">1.</span> <span class="nav-text">注解处理器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Autowired相关"><span class="nav-number">2.</span> <span class="nav-text">@Autowired相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Filter，Listener，Servlet的区别"><span class="nav-number">3.</span> <span class="nav-text">Filter，Listener，Servlet的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤器和拦截器的区别"><span class="nav-number">4.</span> <span class="nav-text">过滤器和拦截器的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#阅读关于IaaS、PaaS-SaaS相关的知识点"><span class="nav-number">5.</span> <span class="nav-text">阅读关于IaaS、PaaS/SaaS相关的知识点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关于5种I-O模型的理解"><span class="nav-number">6.</span> <span class="nav-text">关于5种I/O模型的理解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设计模式相关"><span class="nav-number">7.</span> <span class="nav-text">设计模式相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#适配器模式vs代理模式"><span class="nav-number">8.</span> <span class="nav-text">适配器模式vs代理模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#csrf"><span class="nav-number">9.</span> <span class="nav-text">csrf</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#需要关注的知识点"><span class="nav-number">10.</span> <span class="nav-text">需要关注的知识点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#钩子函数和回调函数的区别"><span class="nav-number">11.</span> <span class="nav-text">钩子函数和回调函数的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#es相关"><span class="nav-number">12.</span> <span class="nav-text">es相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Zookeeper与Nginx"><span class="nav-number">13.</span> <span class="nav-text">Zookeeper与Nginx</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dubbo和Http"><span class="nav-number">14.</span> <span class="nav-text">Dubbo和Http</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Nio相关"><span class="nav-number">15.</span> <span class="nav-text">Nio相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对外提供的接口"><span class="nav-number">16.</span> <span class="nav-text">对外提供的接口</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#直接请求"><span class="nav-number">17.</span> <span class="nav-text">直接请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求认证与参数防篡改性"><span class="nav-number">18.</span> <span class="nav-text">请求认证与参数防篡改性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求的唯一性"><span class="nav-number">19.</span> <span class="nav-text">请求的唯一性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java开发提高性能的技术"><span class="nav-number">20.</span> <span class="nav-text">Java开发提高性能的技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#幂等性"><span class="nav-number">21.</span> <span class="nav-text">幂等性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Redislock分布式锁的作用"><span class="nav-number">22.</span> <span class="nav-text">Redislock分布式锁的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java中的SPI机制"><span class="nav-number">23.</span> <span class="nav-text">Java中的SPI机制</span></a></li></ol></div>
             
 
           </div>
@@ -1085,7 +1072,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">50.6k</span>
+    <span title="Site words total count">50k</span>
   
 </div>
 
