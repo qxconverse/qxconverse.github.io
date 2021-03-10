@@ -88,7 +88,7 @@
 <meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg">
-<meta property="og:updated_time" content="2021-02-26T11:50:25.726Z">
+<meta property="og:updated_time" content="2021-03-10T04:08:54.743Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机基础">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
@@ -323,8 +323,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-02-26T19:50:25+08:00">
-                2021-02-26
+              <time title="更新于" itemprop="dateModified" datetime="2021-03-10T12:08:54+08:00">
+                2021-03-10
               </time>
             
           </span>
@@ -378,7 +378,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  8.3k
+                  8.7k
                 </span>
               
 
@@ -394,7 +394,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  29
+                  31
                 </span>
               
             </div>
@@ -517,6 +517,7 @@
 <li>ApplicationContext接口代表了IoC容器</li>
 </ol>
 <p>AOP的原理是动态代理，动态代理的原理是反射。</p>
+<p>IoC的实现原理就是工厂模式加反射机制。反射+工厂模式+配置文件=IOC</p>
 <p>bean、context、core。</p>
 <p>bean：创建（BeanFactory）、定义（BeanDefinition）、解析（BeanDefinitionReader）</p>
 <p>IOC是管理bean的，具体要做的事情是：包扫描（管理哪些）、类注册（进行管理）</p>
@@ -611,22 +612,12 @@
 </li>
 </ol>
 <p>最终的时间复杂度为：$(O(N)+O(N<em>logN))</em>M$</p>
-<h5 id="需要关注的知识点"><a href="#需要关注的知识点" class="headerlink" title="需要关注的知识点"></a>需要关注的知识点</h5><p>1.语言（序列化、注解、反射、java探针）</p>
-<p>2.spring</p>
-<p>3.http</p>
-<p>4.数据库（mysql、数据源、mybatis）</p>
-<p>5.缓存（cache、redis）</p>
-<p>6.安全（认证、授权）</p>
-<p>7.日志（logback）</p>
-<p>8.监控组件（cat组件）</p>
-<p>9.maven</p>
-<p>10.swagger</p>
-<p>11.ci、cd</p>
 <h5 id="钩子函数和回调函数的区别"><a href="#钩子函数和回调函数的区别" class="headerlink" title="钩子函数和回调函数的区别"></a>钩子函数和回调函数的区别</h5><p>一般认为，钩子函数就是回调函数的一种，其实还是有差异的，差异地方就是：触发的时机不同。钩子函数在捕获消息的第一时间就执行，而回调函数是捕获结束时，最后一个被执行的。</p>
 <h5 id="es相关"><a href="#es相关" class="headerlink" title="es相关"></a>es相关</h5><p>提到es，一定要首先联想到小时候用的《新华字典》，它们有很多相似点；其次要想到<strong>倒排索引</strong>，它是基于trie前缀树（term index的实现）。</p>
 <p>es是NoSQL数据库。以MySQL来作对比，index对应数据库；doc（文档）对应行，文档是包含一个或多个域（即Field）的容器，以JSON格式进行表示；field对应列。</p>
 <p>相关重要概念：term index，term dictionary，posting list。</p>
 <p>如有3条数据：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -657,8 +648,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>索引如下：</p>
 <p>name</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -681,7 +674,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>age</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -700,7 +695,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>sex</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -719,6 +716,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>一张图解释什么叫倒排索引</p>
 <pre class="mermaid">graph LR
   A[term index] --> B[term dictionary]
@@ -800,6 +798,16 @@
 <h5 id="Java中的SPI机制"><a href="#Java中的SPI机制" class="headerlink" title="Java中的SPI机制"></a>Java中的SPI机制</h5><p>可以理解为：我作为一个规则制定者（第一层规则制定者），我自己指定一个大的接口，但是不具体实现。如果有多个不同的人（第二层实现者）想细化我的这个规则，他们自己实现即可。一旦他们实现了这些细则，就可以给想用的人（第三层使用者）去使用了。</p>
 <p>例子：水龙头。</p>
 <p>首先假设工业部（第一层制定者）说，所有的水龙头必须直径15mm。接着，不同的水龙头制造厂商（第二层实现者）均各自生产不同的水龙头，但是他们直径都是15mm。最后买家（第三层使用者）根据自己的需求买某个厂商生产的水龙头。</p>
+<h5 id="swagger配置中的一个有问题"><a href="#swagger配置中的一个有问题" class="headerlink" title="swagger配置中的一个有问题"></a>swagger配置中的一个有问题</h5><p>springfox中有这样一个类，用来控制一些配置项的东西。里面的enabled默认为true。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Docket</span><span class="params">(DocumentationType documentationType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.apiInfo = ApiInfo.DEFAULT;</span><br><span class="line">        <span class="keyword">this</span>.groupName = <span class="string">"default"</span>;</span><br><span class="line">        <span class="keyword">this</span>.enabled = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">this</span>.genericsNamingStrategy = <span class="keyword">new</span> DefaultGenericTypeNamingStrategy();</span><br><span class="line">        <span class="keyword">this</span>.applyDefaultResponseMessages = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">this</span>.host = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">this</span>.pathMapping = Optional.absent();</span><br><span class="line">        <span class="keyword">this</span>.apiSelector = ApiSelector.DEFAULT;</span><br><span class="line">        <span class="keyword">this</span>.enableUrlTemplating = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">this</span>.vendorExtensions = Lists.newArrayList();</span><br><span class="line">        <span class="keyword">this</span>.documentationType = documentationType;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>我们在用swagger的时候，需要写一个config类，来生成这个bean，通常是这样的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger</span>2</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Swagger2Configuration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;swagger.enabled&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">boolean</span> isEnable;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 用于配置swagger2，包含文档基本信息</span></span><br><span class="line"><span class="comment">	 * 指定swagger2的作用域（这里指定包路径下的所有API）</span></span><br><span class="line"><span class="comment">	 *</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> Docket</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Docket <span class="title">createRestApi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">			.enable(isEnable)</span><br><span class="line">			.groupName(<span class="string">"jiafu"</span>)</span><br><span class="line">			.apiInfo(apiInfo())</span><br><span class="line">			.select()</span><br><span class="line">			.apis(RequestHandlerSelectors.basePackage(<span class="string">"com.ke.jiafu.aftersale.controller"</span>))</span><br><span class="line">			.paths(PathSelectors.any())</span><br><span class="line">			.build();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> ApiInfo <span class="title">apiInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</span><br><span class="line">			.title(<span class="string">"家服售后接口文档"</span>)</span><br><span class="line">			.version(<span class="string">"1.0"</span>)</span><br><span class="line">			.build();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里通过swagger.enabled来控制是否开启。</p>
+<p>而如果在config类上加上这个注解<code>@ConditionalOnProperty(name = &quot;swagger.enabled&quot;, matchIfMissing = true)</code></p>
+<p>就会有意思了，当不配置<code>swagger.enabled</code>时，会执行config；但是当配置后，只有写成false，才不执行config，也就不会注入bean了，打开swagger-ui.html就会报错。而除了false其它值都会生效。原因就在于注解中没有加上havingValue参数。</p>
+<p>其中的玄机就在这两个注解参数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * The string representation of the expected value for the properties. If not</span></span><br><span class="line"><span class="comment">	 * specified, the property must &lt;strong&gt;not&lt;/strong&gt; be equal to &#123;<span class="doctag">@code</span> false&#125;.</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> the expected value</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function">String <span class="title">havingValue</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Specify if the condition should match if the property is not set. Defaults to</span></span><br><span class="line"><span class="comment">	 * &#123;<span class="doctag">@code</span> false&#125;.</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> if should match if the property is missing</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">boolean</span> <span class="title">matchIfMissing</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">false</span></span>;</span><br></pre></td></tr></table></figure>
+<p>所以通过是否注入config的方式来控制swagger是否开启，不太优雅。最好的方式，还是像上面那样，通过传参的方式控制是否生成bean，从而控制swagger是否开启。既然Docket已经提供了这个构造方法，就要用起来。</p>
 
       
     </div>
@@ -955,7 +963,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -966,7 +974,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -977,7 +985,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -1038,7 +1046,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#注解处理器"><span class="nav-number">1.</span> <span class="nav-text">注解处理器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Autowired相关"><span class="nav-number">2.</span> <span class="nav-text">@Autowired相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Filter，Listener，Servlet的区别"><span class="nav-number">3.</span> <span class="nav-text">Filter，Listener，Servlet的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤器和拦截器的区别"><span class="nav-number">4.</span> <span class="nav-text">过滤器和拦截器的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#阅读关于IaaS、PaaS-SaaS相关的知识点"><span class="nav-number">5.</span> <span class="nav-text">阅读关于IaaS、PaaS/SaaS相关的知识点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关于5种I-O模型的理解"><span class="nav-number">6.</span> <span class="nav-text">关于5种I/O模型的理解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设计模式相关"><span class="nav-number">7.</span> <span class="nav-text">设计模式相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#适配器模式vs代理模式"><span class="nav-number">8.</span> <span class="nav-text">适配器模式vs代理模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#csrf"><span class="nav-number">9.</span> <span class="nav-text">csrf</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#需要关注的知识点"><span class="nav-number">10.</span> <span class="nav-text">需要关注的知识点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#钩子函数和回调函数的区别"><span class="nav-number">11.</span> <span class="nav-text">钩子函数和回调函数的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#es相关"><span class="nav-number">12.</span> <span class="nav-text">es相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Zookeeper与Nginx"><span class="nav-number">13.</span> <span class="nav-text">Zookeeper与Nginx</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dubbo和Http"><span class="nav-number">14.</span> <span class="nav-text">Dubbo和Http</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Nio相关"><span class="nav-number">15.</span> <span class="nav-text">Nio相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对外提供的接口"><span class="nav-number">16.</span> <span class="nav-text">对外提供的接口</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#直接请求"><span class="nav-number">17.</span> <span class="nav-text">直接请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求认证与参数防篡改性"><span class="nav-number">18.</span> <span class="nav-text">请求认证与参数防篡改性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求的唯一性"><span class="nav-number">19.</span> <span class="nav-text">请求的唯一性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java开发提高性能的技术"><span class="nav-number">20.</span> <span class="nav-text">Java开发提高性能的技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#幂等性"><span class="nav-number">21.</span> <span class="nav-text">幂等性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Redislock分布式锁的作用"><span class="nav-number">22.</span> <span class="nav-text">Redislock分布式锁的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java中的SPI机制"><span class="nav-number">23.</span> <span class="nav-text">Java中的SPI机制</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#注解处理器"><span class="nav-number">1.</span> <span class="nav-text">注解处理器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Autowired相关"><span class="nav-number">2.</span> <span class="nav-text">@Autowired相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Filter，Listener，Servlet的区别"><span class="nav-number">3.</span> <span class="nav-text">Filter，Listener，Servlet的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#过滤器和拦截器的区别"><span class="nav-number">4.</span> <span class="nav-text">过滤器和拦截器的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#阅读关于IaaS、PaaS-SaaS相关的知识点"><span class="nav-number">5.</span> <span class="nav-text">阅读关于IaaS、PaaS/SaaS相关的知识点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关于5种I-O模型的理解"><span class="nav-number">6.</span> <span class="nav-text">关于5种I/O模型的理解</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#设计模式相关"><span class="nav-number">7.</span> <span class="nav-text">设计模式相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#适配器模式vs代理模式"><span class="nav-number">8.</span> <span class="nav-text">适配器模式vs代理模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#csrf"><span class="nav-number">9.</span> <span class="nav-text">csrf</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#钩子函数和回调函数的区别"><span class="nav-number">10.</span> <span class="nav-text">钩子函数和回调函数的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#es相关"><span class="nav-number">11.</span> <span class="nav-text">es相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Zookeeper与Nginx"><span class="nav-number">12.</span> <span class="nav-text">Zookeeper与Nginx</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dubbo和Http"><span class="nav-number">13.</span> <span class="nav-text">Dubbo和Http</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Nio相关"><span class="nav-number">14.</span> <span class="nav-text">Nio相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对外提供的接口"><span class="nav-number">15.</span> <span class="nav-text">对外提供的接口</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#直接请求"><span class="nav-number">16.</span> <span class="nav-text">直接请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求认证与参数防篡改性"><span class="nav-number">17.</span> <span class="nav-text">请求认证与参数防篡改性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#请求的唯一性"><span class="nav-number">18.</span> <span class="nav-text">请求的唯一性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java开发提高性能的技术"><span class="nav-number">19.</span> <span class="nav-text">Java开发提高性能的技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#幂等性"><span class="nav-number">20.</span> <span class="nav-text">幂等性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Redislock分布式锁的作用"><span class="nav-number">21.</span> <span class="nav-text">Redislock分布式锁的作用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Java中的SPI机制"><span class="nav-number">22.</span> <span class="nav-text">Java中的SPI机制</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#swagger配置中的一个有问题"><span class="nav-number">23.</span> <span class="nav-text">swagger配置中的一个有问题</span></a></li></ol></div>
             
 
           </div>
@@ -1072,7 +1080,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">50k</span>
+    <span title="Site words total count">51.6k</span>
   
 </div>
 

@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="XXQIN&#39;S BLOG">
 <meta property="og:description" content="很多数据类型的选择其实是没有黑白之分的，在不同的场景下针对一个数据可能需要不同的数据类型。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-02-19T03:34:45.507Z">
+<meta property="og:updated_time" content="2021-03-02T10:41:15.243Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库相关">
 <meta name="twitter:description" content="很多数据类型的选择其实是没有黑白之分的，在不同的场景下针对一个数据可能需要不同的数据类型。">
@@ -321,8 +321,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-02-19T11:34:45+08:00">
-                2021-02-19
+              <time title="更新于" itemprop="dateModified" datetime="2021-03-02T18:41:15+08:00">
+                2021-03-02
               </time>
             
           </span>
@@ -447,9 +447,9 @@
 <li>虚读：事务T1读取了某一数据后，事务T2对其做了修改，当事务T1再次读该数据时得到了与第一次不同的值</li>
 <li>幻读：事务在操作的过程中进行2次查询，第一次查询到的结果包含了第一次查询中未出现的数据或者缺少了第一次查询中出现的数据。这是因为在两次查询过程中另外一个事务插入数据造成的</li>
 </ol>
-<p><strong>未授权读取（我在写，你就不能写，但是你可以读）就是一个事务可以读取另一个未提交事务的数据。</strong><br>如果一个事务已经开始写数据，则另外一个事务不允许同时进行写操作，但是允许其它事务读此行数据。该隔离级别可以通过“排他写锁”实现。<br>避免了更新丢失，却可能出现脏读。也就是说事务B读取到了事务A未提交的数据</p>
-<p><strong>授权读取（我在读，你可以读；但是我在写，如果还没有提交，你不能读）</strong><br>就是一个事务要等另一个事务提交后才能读取数据。读取数据的事务允许其它事务继续访问该行数据，但是未提交的写事务将会禁止其它事务访问该行。<br>避免了脏读，但是可能出现不可重复读。事务A事先读取了数据，事务B紧接着更新了数据，并提交了事务，而事务A再次读取该数据时，数据已经发生了变化。</p>
-<p><strong>可重复读取（我在读，你不能写，可以读）</strong><br>就是在开始读取数据（事务开启）时，不再允许修改操作读取数据的事务将会禁止写事务（但允许读事务），写事务则禁止任何其它的事务。避免了不可重复读和脏读，但是有时可能出现幻读。可以通过“共享读锁”和“排他写锁”实现。<br>重复读可以解决不可重复读问题。不可重复读对应的是修改，即UPDATE操作。但是可能还会有幻读问题。因为幻读问题对应的是插入INSERT操作，而不是UPDATE操作。</p>
+<p><strong>未授权读取（我在写，你就不能写；但是你可以读）就是一个事务可以读取另一个未提交事务的数据。</strong><br>如果一个事务已经开始写数据，则另外一个事务不允许同时进行写操作，但是允许其它事务读此行数据。该隔离级别可以通过“排他写锁”实现。<br>避免了更新丢失，却可能出现脏读。也就是说事务B读取到了事务A未提交的数据</p>
+<p><strong>授权读取（我在写，如果还没有提交，你不能读）</strong><br>就是一个事务要等另一个事务提交后才能读取数据。读取数据的事务允许其它事务继续访问该行数据，但是未提交的写事务将会禁止其它事务访问该行。<br>避免了脏读，但是可能出现不可重复读。事务A事先读取了数据，事务B紧接着更新了数据，并提交了事务，而事务A再次读取该数据时，数据已经发生了变化。</p>
+<p><strong>可重复读取（我在读，你不能写）</strong><br>就是在开始读取数据（事务开启）时，不再允许修改操作读取数据的事务将会禁止写事务（但允许读事务），写事务则禁止任何其它的事务。避免了不可重复读和脏读，但是有时可能出现幻读。可以通过“共享读锁”和“排他写锁”实现。<br>重复读可以解决不可重复读问题。不可重复读对应的是修改，即UPDATE操作。但是可能还会有幻读问题。因为幻读问题对应的是插入INSERT操作，而不是UPDATE操作。</p>
 <p><strong>序列化，事务只能一个接着一个地执行，但不能并发执行。可以解决幻读问题</strong></p>
 <p>总结：对于大多数应用程序，可以优先考虑把数据库的隔离级别设置为read committed。可以避免脏读，而且有较好的并发性能。尽管可能导致不可重复读、幻读和第二类丢失更新这些并发问题。可以由应用程序采用悲观锁或乐观锁来控制。MySQL默认的隔离级别就是repeatable read。</p>
 
@@ -607,7 +607,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -618,7 +618,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -629,7 +629,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">40</span>
+                  <span class="site-state-item-count">42</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -724,7 +724,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">50k</span>
+    <span title="Site words total count">51.6k</span>
   
 </div>
 
