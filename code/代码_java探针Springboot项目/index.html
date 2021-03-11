@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1ga36ws1ybsj309e08vjrq.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1ga37k2fg5vj30um0cbwh4.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwly1ga387w7jfuj30rv016q2y.jpg">
-<meta property="og:updated_time" content="2021-01-29T03:06:53.904Z">
+<meta property="og:updated_time" content="2021-03-10T08:11:42.386Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java探针SpringBoot项目">
 <meta name="twitter:description" content="Java探针底层原理是操作运行时字节码。阿里的arthas（Java问题诊断神器）就是基于此技术实现的。">
@@ -325,8 +325,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-01-29T11:06:53+08:00">
-                2021-01-29
+              <time title="更新于" itemprop="dateModified" datetime="2021-03-10T16:11:42+08:00">
+                2021-03-10
               </time>
             
           </span>
@@ -431,6 +431,7 @@
 <li>javassist依赖包</li>
 <li>SpringBoot web项目</li>
 </ol>
+<p>其核心点是instrument类，javassist包提供了工具类的作用。</p>
 <h4 id="javaagent项目"><a href="#javaagent项目" class="headerlink" title="javaagent项目"></a>javaagent项目</h4><p>创建一个maven项目，其目录结构如下：</p>
 <p><img src="https://tva1.sinaimg.cn/large/006tNbRwly1ga36ws1ybsj309e08vjrq.jpg" alt="image-20191220145130001"></p>
 <p>核心为MyAgent类和MyTransformer类，第一个类可以理解为agent的入口，需要定义一个premain的方法，方法里面加入一个自定义的transformer类，即MyTransformer，可以理解为写入代码的具体逻辑。</p>
