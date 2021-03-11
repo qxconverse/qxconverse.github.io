@@ -88,7 +88,7 @@
 <meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg">
-<meta property="og:updated_time" content="2021-03-11T03:07:16.036Z">
+<meta property="og:updated_time" content="2021-03-11T04:08:54.152Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机基础">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
@@ -323,7 +323,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-03-11T11:07:16+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2021-03-11T12:08:54+08:00">
                 2021-03-11
               </time>
             
@@ -617,6 +617,7 @@
 <p>es是NoSQL数据库。以MySQL来作对比，index对应数据库；doc（文档）对应行，文档是包含一个或多个域（即Field）的容器，以JSON格式进行表示；field对应列。</p>
 <p>相关重要概念：term index，term dictionary，posting list。</p>
 <p>如有3条数据：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -647,8 +648,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>索引如下：</p>
 <p>name</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -671,7 +674,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>age</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -690,7 +695,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>sex</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -709,6 +716,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>一张图解释什么叫倒排索引</p>
 <pre class="mermaid">graph LR
   A[term index] --> B[term dictionary]
@@ -767,12 +775,12 @@
 <li>请求参数被篡改？</li>
 <li>请求的唯一性(不可复制)</li>
 </ol>
-<h5 id="直接请求"><a href="#直接请求" class="headerlink" title="直接请求"></a>直接请求</h5><p><a href="http://api.test.com/getUsers?param1=value1&amp;param2=value2" target="_blank" rel="noopener">http://api.test.com/getUsers?param1=value1&amp;param2=value2</a></p>
+<h5 id="直接请求"><a href="#直接请求" class="headerlink" title="直接请求"></a>直接请求</h5><p><code>http://api.test.com/getUsers?param1=value1&amp;param2=value2</code></p>
 <h5 id="请求认证与参数防篡改性"><a href="#请求认证与参数防篡改性" class="headerlink" title="请求认证与参数防篡改性"></a>请求认证与参数防篡改性</h5><p>给app分配对应的key、secret，结合参数和secret进行Sign签名，调用API时需要对请求参数进行签名验证</p>
-<p><a href="http://api.test.com/getUsers?key=app_key&amp;sign=xxx&amp;param1=value1&amp;param2=value2" target="_blank" rel="noopener">http://api.test.com/getUsers?key=app_key&amp;sign=xxx&amp;param1=value1&amp;param2=value2</a></p>
+<p><code>http://api.test.com/getUsers?key=app_key&amp;sign=xxx&amp;param1=value1&amp;param2=value2</code></p>
 <p>按照请求参数名称将所有请求参数按照字母先后顺序排序得到：keyvaluekeyvalue…keyvalue 字符串如：将<code>arong=1,mrong=2,crong=3</code>排序为：<code>arong=1,crong=3,mrong=2</code>。 然后将参数名和参数值进行拼接得到参数字符串：arong1crong3mrong2，将secret加在参数字符串的头部后进行MD5加密，加密后的字符串需大写。即得到签名sign。</p>
 <h5 id="请求的唯一性"><a href="#请求的唯一性" class="headerlink" title="请求的唯一性"></a>请求的唯一性</h5><p>为了防止重放攻击（Replay-Attack），（最佳实践）加入nonce和timestamp</p>
-<p><a href="http://api.test.com/getUsers?**key**=app_key&amp;**sign**=xxx" target="_blank" rel="noopener">http://api.test.com/getUsers?**key**=app_key&amp;**sign**=xxx</a> &amp;<strong>timestamp</strong>=201908281808&amp;<strong>nonce</strong>=xxx&amp;param1=value1&amp;param2=value2</p>
+<p><code>http://api.test.com/getUsers?key=app_key&amp;sign=xxx&amp;timestamp=201908281808&amp;nonce=xxx&amp;param1=value1&amp;param2=value2</code></p>
 <p>示例可以参考微信支付相关接口</p>
 <h5 id="Java开发提高性能的技术"><a href="#Java开发提高性能的技术" class="headerlink" title="Java开发提高性能的技术"></a>Java开发提高性能的技术</h5><ol>
 <li>缓冲（消费系统、redis缓存）</li>
@@ -793,7 +801,7 @@
 <h5 id="swagger配置中的一个有问题"><a href="#swagger配置中的一个有问题" class="headerlink" title="swagger配置中的一个有问题"></a>swagger配置中的一个有问题</h5><p>springfox中有这样一个类，用来控制一些配置项的东西。里面的enabled默认为true。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Docket</span><span class="params">(DocumentationType documentationType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.apiInfo = ApiInfo.DEFAULT;</span><br><span class="line">        <span class="keyword">this</span>.groupName = <span class="string">"default"</span>;</span><br><span class="line">        <span class="keyword">this</span>.enabled = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">this</span>.genericsNamingStrategy = <span class="keyword">new</span> DefaultGenericTypeNamingStrategy();</span><br><span class="line">        <span class="keyword">this</span>.applyDefaultResponseMessages = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">this</span>.host = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">this</span>.pathMapping = Optional.absent();</span><br><span class="line">        <span class="keyword">this</span>.apiSelector = ApiSelector.DEFAULT;</span><br><span class="line">        <span class="keyword">this</span>.enableUrlTemplating = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">this</span>.vendorExtensions = Lists.newArrayList();</span><br><span class="line">        <span class="keyword">this</span>.documentationType = documentationType;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <p>我们在用swagger的时候，需要写一个config类，来生成这个bean，通常是这样的：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger</span>2</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Swagger2Configuration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;swagger.enabled&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">boolean</span> isEnable;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 用于配置swagger2，包含文档基本信息</span></span><br><span class="line"><span class="comment">	 * 指定swagger2的作用域（这里指定包路径下的所有API）</span></span><br><span class="line"><span class="comment">	 *</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> Docket</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Docket <span class="title">createRestApi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">			.enable(isEnable)</span><br><span class="line">			.groupName(<span class="string">"xxx"</span>)</span><br><span class="line">			.apiInfo(apiInfo())</span><br><span class="line">			.select()</span><br><span class="line">			.apis(RequestHandlerSelectors.basePackage(<span class="string">"com.ke.xxx.controller"</span>))</span><br><span class="line">			.paths(PathSelectors.any())</span><br><span class="line">			.build();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> ApiInfo <span class="title">apiInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</span><br><span class="line">			.title(<span class="string">"xxx"</span>)</span><br><span class="line">			.version(<span class="string">"1.0"</span>)</span><br><span class="line">			.build();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger</span>2</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Swagger2Configuration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;swagger.enabled&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">boolean</span> isEnable;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 用于配置swagger2，包含文档基本信息</span></span><br><span class="line"><span class="comment">	 * 指定swagger2的作用域（这里指定包路径下的所有API）</span></span><br><span class="line"><span class="comment">	 *</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> Docket</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Docket <span class="title">createRestApi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">			.enable(isEnable)</span><br><span class="line">			.groupName(<span class="string">"xxx"</span>)</span><br><span class="line">			.apiInfo(apiInfo())</span><br><span class="line">			.select()</span><br><span class="line">			.apis(RequestHandlerSelectors.basePackage(<span class="string">"com.xxx.xxx.controller"</span>))</span><br><span class="line">			.paths(PathSelectors.any())</span><br><span class="line">			.build();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> ApiInfo <span class="title">apiInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</span><br><span class="line">			.title(<span class="string">"xxx"</span>)</span><br><span class="line">			.version(<span class="string">"1.0"</span>)</span><br><span class="line">			.build();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里通过swagger.enabled来控制是否开启。</p>
 <p>而如果在config类上加上这个注解<code>@ConditionalOnProperty(name = &quot;swagger.enabled&quot;, matchIfMissing = true)</code></p>
 <p>就会有意思了，当不配置<code>swagger.enabled</code>时，会执行config；但是当配置后，只有写成false，才不执行config，也就不会注入bean了，打开swagger-ui.html就会报错。而除了false其它值都会生效。原因就在于注解中没有加上havingValue参数。</p>
