@@ -88,7 +88,7 @@
 <meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg">
-<meta property="og:updated_time" content="2021-03-11T04:08:54.152Z">
+<meta property="og:updated_time" content="2021-03-11T10:08:48.897Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机基础">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
@@ -323,7 +323,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-03-11T12:08:54+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2021-03-11T18:08:48+08:00">
                 2021-03-11
               </time>
             
@@ -508,9 +508,9 @@
 <p>AOP的几种实现手段</p>
 <ol>
 <li>框架预留扩展钩子，Filter/HandlerInterceptor/DubboFilter</li>
-<li>编译器纺入 .java-&gt;.class : lombok/aspectJ</li>
-<li>运行时-类加载期（java agent）：ketrace(分布式追踪链路)/dkimi</li>
-<li>运行时-执行期（动态代理）：后置初始化时，会判断，有没有需要创建动态代理类</li>
+<li>编译器纺入 .java-&gt;.class : lombok/aspectJ（注解处理器）</li>
+<li>运行时-类加载期（java agent）：ketrace(分布式追踪链路)/dkimi（java agent）</li>
+<li>运行时-执行期（动态代理）：后置初始化时，会判断，有没有需要创建动态代理类（反射）</li>
 </ol>
 <ol>
 <li>Bean是有IoC容器管理的对象</li>
@@ -617,7 +617,6 @@
 <p>es是NoSQL数据库。以MySQL来作对比，index对应数据库；doc（文档）对应行，文档是包含一个或多个域（即Field）的容器，以JSON格式进行表示；field对应列。</p>
 <p>相关重要概念：term index，term dictionary，posting list。</p>
 <p>如有3条数据：</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -648,10 +647,8 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>索引如下：</p>
 <p>name</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -674,9 +671,7 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>age</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -695,9 +690,7 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>sex</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -716,7 +709,6 @@
 </tr>
 </tbody>
 </table>
-</div>
 <p>一张图解释什么叫倒排索引</p>
 <pre class="mermaid">graph LR
   A[term index] --> B[term dictionary]
@@ -1080,7 +1072,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">51.6k</span>
+    <span title="Site words total count">51.9k</span>
   
 </div>
 

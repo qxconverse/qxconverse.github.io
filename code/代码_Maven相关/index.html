@@ -90,7 +90,7 @@
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpqoydjpj30fu08kwlg.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpquhfzmj30ig07lglv.jpg">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpq6doo3j30i20jd40c.jpg">
-<meta property="og:updated_time" content="2021-02-07T03:00:13.369Z">
+<meta property="og:updated_time" content="2021-03-16T06:29:49.214Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Maven相关">
 <meta name="twitter:description" content="依赖控制、版本控制、仓库、编译打包部署等">
@@ -325,8 +325,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-02-07T11:00:13+08:00">
-                2021-02-07
+              <time title="更新于" itemprop="dateModified" datetime="2021-03-16T14:29:49+08:00">
+                2021-03-16
               </time>
             
           </span>
@@ -380,7 +380,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  691
+                  817
                 </span>
               
 
@@ -396,7 +396,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -423,10 +423,33 @@
 <a id="more"></a>
 <h5 id="中间仓库"><a href="#中间仓库" class="headerlink" title="中间仓库"></a>中间仓库</h5><p>我们通常会在本地仓库和远程中央仓库之间搭建一个公司级别的中间仓库。首先会从中间仓库获取，否则，再从远程中央仓库获取。Nexus是一个常用的仓库管理器。</p>
 <p>项目中在setting.xml文件里配置自己的中间仓库。</p>
+<p>mirror的使用，其实是一个路由的作用。比如我有一个仓库A，当我配置了一个mirror，并且mirrorOf写成A后，那么以后每次从A获取jar包时，都会路由到这个mirror上。</p>
 <h5 id="exclusions的使用"><a href="#exclusions的使用" class="headerlink" title="exclusions的使用"></a>exclusions的使用</h5><p>因为存在依赖传递的规则，B依赖A，但是在B项目中不需要A中的某个jar包，则使用此标签。</p>
 <h5 id="dependencyManagement和dependencies的区别"><a href="#dependencyManagement和dependencies的区别" class="headerlink" title="dependencyManagement和dependencies的区别"></a>dependencyManagement和dependencies的区别</h5><p>参考地址：<a href="https://www.cnblogs.com/myhappylife/p/5872070.html" target="_blank" rel="noopener">https://www.cnblogs.com/myhappylife/p/5872070.html</a></p>
-<h5 id="maven中的packaging标签"><a href="#maven中的packaging标签" class="headerlink" title="maven中的packaging标签"></a>maven中的packaging标签</h5><p>项目的打包类型包括：pom、jar、war，packing，默认是jar类型</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;packaging&gt;pom&lt;/packaging&gt;</span><br><span class="line">父类型都为pom类型</span><br><span class="line">&lt;packaging&gt;jar&lt;/packaging&gt;</span><br><span class="line">内部调用或者是作服务使用</span><br><span class="line">&lt;packaging&gt;war&lt;/packaging&gt;</span><br><span class="line">需要部署的项目</span><br></pre></td></tr></table></figure>
+<h5 id="maven中的packaging标签"><a href="#maven中的packaging标签" class="headerlink" title="maven中的packaging标签"></a>maven中的packaging标签</h5><p>项目的打包类型包括：pom、jar、war，默认是jar类型</p>
+<p>如果是一个单一无层级项目，用pom会导致无法build、compile等</p>
+<table>
+<thead>
+<tr>
+<th>类别</th>
+<th>使用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pom</td>
+<td>在父级工程或聚合工程中，比如一个项目中包含了很多小的模块，那么该项目用pom，而项目下每个模块就用jar</td>
+</tr>
+<tr>
+<td>jar</td>
+<td>内部调用或者是作服务使用、类的归档文件</td>
+</tr>
+<tr>
+<td>war</td>
+<td>需要部署到tomcat的项目，里面包含了各种class文件、html、jsp文件等等</td>
+</tr>
+</tbody>
+</table>
 <h5 id="记录一次很奇怪的mvn依赖的问题"><a href="#记录一次很奇怪的mvn依赖的问题" class="headerlink" title="记录一次很奇怪的mvn依赖的问题"></a>记录一次很奇怪的mvn依赖的问题</h5><ol>
 <li>首先需要在A模块下删除一个包C的依赖</li>
 <li>删除后，发现很多文件都报错了，因为很多其它mvn依赖引入不了，包括springboot包、redis包等等</li>
@@ -720,7 +743,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">51.6k</span>
+    <span title="Site words total count">51.9k</span>
   
 </div>
 
