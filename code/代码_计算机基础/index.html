@@ -88,7 +88,7 @@
 <meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg">
-<meta property="og:updated_time" content="2021-03-26T03:42:06.738Z">
+<meta property="og:updated_time" content="2021-03-26T04:08:31.553Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机基础">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
@@ -323,7 +323,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-03-26T11:42:06+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2021-03-26T12:08:31+08:00">
                 2021-03-26
               </time>
             
@@ -378,7 +378,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  8.8k
+                  8.9k
                 </span>
               
 
@@ -394,7 +394,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  31
+                  32
                 </span>
               
             </div>
@@ -802,7 +802,10 @@
 <p>所以通过是否注入config的方式来控制swagger是否开启，不太优雅。最好的方式，还是像上面那样，通过传参的方式控制是否生成bean，从而控制swagger是否开启。既然Docket已经提供了这个构造方法，就要用起来。</p>
 <h5 id="Springboot项目profiles-active配置的坑"><a href="#Springboot项目profiles-active配置的坑" class="headerlink" title="Springboot项目profiles.active配置的坑"></a>Springboot项目profiles.active配置的坑</h5><p>假设springboot项目中有application-test.yml配置文件，且在application.yml配置了如下：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">profiles:</span></span><br><span class="line"><span class="attr">  active:</span> <span class="string">test</span></span><br></pre></td></tr></table></figure>
-<p>对于这里的test，如果写成TEST，那么打成jar包后运行会找不到application-test.yml配置文件，从而启动失败。但是在Idea中直接运行项目，则不会出现这种情况。</p>
+<p>对于这里的test，如果写成TEST，那么打成jar包后运行会找不到application-test.yml配置文件，从而启动失败。但是在Idea中直接运行项目，则不会出现这种情况。比较奇怪的是，在Idea中这里的读取是不区分大小写的，哪怕写成TeSt，也能运行起来，说明找到了test配置文件。但写成TeSt2就运行不了。</p>
+<p>如果不加这句，Idea启动也会报错，因为读不到default的配置。</p>
+<p>当然在运行时，也可以指定。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar xxx.jar --spring.profiles.active=test</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1075,7 +1078,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">52k</span>
+    <span title="Site words total count">52.1k</span>
   
 </div>
 
