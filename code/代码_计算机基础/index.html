@@ -88,7 +88,7 @@
 <meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg">
-<meta property="og:updated_time" content="2021-03-26T04:08:31.553Z">
+<meta property="og:updated_time" content="2021-03-30T03:22:35.329Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机基础">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
@@ -323,8 +323,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-03-26T12:08:31+08:00">
-                2021-03-26
+              <time title="更新于" itemprop="dateModified" datetime="2021-03-30T11:22:35+08:00">
+                2021-03-30
               </time>
             
           </span>
@@ -378,7 +378,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  8.9k
+                  9.1k
                 </span>
               
 
@@ -724,6 +724,16 @@
 <p>RPC在使用形式上像调用本地函数（或方法）一样去调用远程的函数（或方法）。</p>
 <p>http接口是在接口不多、系统与系统交互较少的情况下，解决信息孤岛初期常使用的一种通信手段；优点就是简单、直接、开发方便。利用现成的http协议进行传输。但是如果是一个大型的网站，内部子系统较多、接口非常多的情况下，RPC框架的好处就显示出来了</p>
 <p>对于dubbo的应用，消费方需要引入提供方的maven包，但是包里面只有接口（只暴露接口），没有具体的实现。所以有rpc在里面，即需要调用远程提供方的方法。</p>
+<p>http的无状态特征</p>
+<ol>
+<li>没有记忆功能</li>
+<li>web应用需要有状态</li>
+<li>cookie、session、application的产生</li>
+</ol>
+<p>具体是一个逛商店的例子（会员等）。</p>
+<p>每一次逛商场都是独立的事情。（原始无记忆）</p>
+<p>但如果商场搞活动，你赶上了，买了件衣服，后来商场给了你一张优惠券；下次你又来了，拿着这张优惠券，商场就记得你了，并且给你折扣。（session）</p>
+<p>更进一步，如果他们搞活动卖会员卡，你买了一张，那以后每次来，商场都知道是你，并且你都可以直接以折扣价买东西了（cookie）</p>
 <h5 id="Nio相关"><a href="#Nio相关" class="headerlink" title="Nio相关"></a>Nio相关</h5><p>其中中最常使用的是多路复用，它是非阻塞的。最主要的有3个组件</p>
 <ol>
 <li>Selector（多路复用选择器，类似于netty里面的EventLoop，可以看做是一个线程）</li>
@@ -1078,7 +1088,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">52.1k</span>
+    <span title="Site words total count">52.3k</span>
   
 </div>
 
