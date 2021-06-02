@@ -88,7 +88,7 @@
 <meta property="og:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g7tarugiw9j31ad0u0dlo.jpg">
-<meta property="og:updated_time" content="2021-05-19T02:29:32.255Z">
+<meta property="og:updated_time" content="2021-06-02T06:38:10.701Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机基础">
 <meta name="twitter:description" content="在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！">
@@ -323,8 +323,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2021-05-19T10:29:32+08:00">
-                2021-05-19
+              <time title="更新于" itemprop="dateModified" datetime="2021-06-02T14:38:10+08:00">
+                2021-06-02
               </time>
             
           </span>
@@ -378,7 +378,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  9.1k
+                  9.2k
                 </span>
               
 
@@ -813,7 +813,7 @@
 <h5 id="Springboot项目profiles-active配置的坑"><a href="#Springboot项目profiles-active配置的坑" class="headerlink" title="Springboot项目profiles.active配置的坑"></a>Springboot项目profiles.active配置的坑</h5><p>假设springboot项目中有application-test.yml配置文件，且在application.yml配置了如下：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">profiles:</span></span><br><span class="line"><span class="attr">  active:</span> <span class="string">test</span></span><br></pre></td></tr></table></figure>
 <p>对于这里的test，如果写成TEST，那么打成jar包后运行会找不到application-test.yml配置文件，从而启动失败。但是在Idea中直接运行项目，则不会出现这种情况。比较奇怪的是，在Idea中这里的读取是不区分大小写的，哪怕写成TeSt，也能运行起来，说明找到了test配置文件。但写成TeSt2就运行不了。</p>
-<p>如果不加这句，Idea启动也会报错，因为读不到default的配置。</p>
+<p>如果不加上面的profiles.active配置，Idea启动也会报错，因为读不到default的配置文件。</p>
 <p>当然在运行时，也可以指定。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar xxx.jar --spring.profiles.active=test</span><br></pre></td></tr></table></figure>
 <h5 id="Spring的大多数问题都是包冲突问题、配置文件未找到等问题"><a href="#Spring的大多数问题都是包冲突问题、配置文件未找到等问题" class="headerlink" title="Spring的大多数问题都是包冲突问题、配置文件未找到等问题"></a>Spring的大多数问题都是包冲突问题、配置文件未找到等问题</h5><h5 id="线上问题排查方式"><a href="#线上问题排查方式" class="headerlink" title="线上问题排查方式"></a>线上问题排查方式</h5><ol>
