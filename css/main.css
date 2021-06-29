@@ -1865,7 +1865,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffffc3;
+  background: #66ff3e;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2979,27 +2979,12 @@ body {
   background-position: 50% 50%;
   background-color: #fff;
 }
-.header-inner {
-  border-radius: 15px;
-  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1), 0 2px 4px 0px rgba(0,0,0,0.1);
-  margin-top: 10px;
-  width: 270px !important;
-  background: rgba(255,255,255,0.9);
-}
 .header-inner:hover {
   transition-property: all;
   transition-duration: 0.3s;
   transition-timing-function: ease;
   transition-delay: 0s;
   box-shadow: 0 2px 4px 0px rgba(0,0,0,0.1), 0 4px 8px 0px rgba(0,0,0,0.1), 0 8px 16px 0px rgba(0,0,0,0.1), 0 16px 32px 0px rgba(0,0,0,0.1) !important;
-}
-.sidebar-inner {
-  border-radius: 15px;
-  position: absolute;
-  overflow: hidden;
-  width: 270px;
-  box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1), 0 2px 4px 0px rgba(0,0,0,0.1);
-  background: rgba(255,255,255,0.9);
 }
 .sidebar-inner:hover {
   color: #faebd7;
