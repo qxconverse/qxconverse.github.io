@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据库,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="很多数据类型的选择其实是没有黑白之分的，在不同的场景下针对一个数据可能需要不同的数据类型。">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库相关">
+<meta property="og:url" content="https://qxconverse.github.io/code/代码/代码_数据库相关/index.html">
+<meta property="og:site_name" content="XXQIN&#39;S BLOG">
+<meta property="og:description" content="很多数据类型的选择其实是没有黑白之分的，在不同的场景下针对一个数据可能需要不同的数据类型。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2021-03-02T10:41:15.243Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库相关">
+<meta name="twitter:description" content="很多数据类型的选择其实是没有黑白之分的，在不同的场景下针对一个数据可能需要不同的数据类型。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://qxconverse.github.io/code/代码/代码_数据库相关/">
+
+
+
+
+
+  <title>数据库相关 | XXQIN'S BLOG</title>
+  
+
+
+
+
+
+
+
+
+<!-- 
+<link rel="stylesheet" type="text/css" href="/lib/waifu/waifu.css"/>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> -->
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XXQIN'S BLOG</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">世界是属于勇敢者的，所以世界是属于我的</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-主页">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            主页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-关于我">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于我
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-标签">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-分类">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-categories"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-思维">
+          <a href="/categories/thinking" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-thought-bubble"></i> <br>
+            
+            思维
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-生活">
+          <a href="/categories/life" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-mug-hot"></i> <br>
+            
+            生活
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-代码">
+          <a href="/categories/code" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-code"></i> <br>
+            
+            代码
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-健康">
+          <a href="/categories/health" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heart-pulse"></i> <br>
+            
+            健康
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-经济">
+          <a href="/categories/economic" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-coins"></i> <br>
+            
+            经济
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-人文">
+          <a href="/categories/humanity" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-books"></i> <br>
+            
+            人文
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://qxconverse.github.io/code/代码/代码_数据库相关/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="qinxue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XXQIN'S BLOG">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据库相关</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-31T12:09:52+08:00">
+                2019-07-31
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2021-03-02T18:41:15+08:00">
+                2021-03-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/categories/code/" itemprop="url" rel="index">
+                    <span itemprop="name">代码</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i> 浏览
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>次
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1.9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>很多数据类型的选择其实是没有黑白之分的，在不同的场景下针对一个数据可能需要不同的数据类型。</p>
+</blockquote>
+<a id="more"></a>
+<p>Collation的概念是字符比较的规则，每种字符集都会有其默认的Collation。</p>
+<p>MySQL中有个存储引擎的概念。主要分为InnoDB和MyISAM。前者相较于后者，其区别主要在于它支持<strong>事务、外键和行级锁</strong>（命中主键的情况下）。</p>
+<p>为什么要加索引，其目的是干嘛的？索引的本质是一种数据结构。最直接的类比对象是字典。索引会将某列的数据放在数据结构中，并且保存指向某行的地址值。基本原则是只如果表中某列在查询过程中使用的非常频繁，那就在该列上创建索引。</p>
+<p>数据库中设置非空，最好设置默认值；且insert语句中涉及到的字段，不能传入null，要么insert语句不加该字段。也就是说如果可能为空，就要加判断，为空时不插入；update很简单，非空就更新。</p>
+<h4 id="Mybatis中的注意点"><a href="#Mybatis中的注意点" class="headerlink" title="Mybatis中的注意点"></a>Mybatis中的注意点</h4><h5 id="mybatis中-和-的区别"><a href="#mybatis中-和-的区别" class="headerlink" title="mybatis中#和$的区别"></a>mybatis中<code>#</code>和<code>$</code>的区别</h5><p><code>#</code>会进行预编译，按照类型匹配的，用于变量替换。</p>
+<p><code>$</code>不进行数据类型匹配，简单的字符串拼接，一般不能用占位符的用它</p>
+<p>如果两个都可以用，最好用#</p>
+<h5 id="mybatis中判断不为空，且不为空字符串"><a href="#mybatis中判断不为空，且不为空字符串" class="headerlink" title="mybatis中判断不为空，且不为空字符串"></a>mybatis中判断不为空，且不为空字符串</h5><p>mybatis中判断不为空，且不为空字符串，适合字符串的变量；如果是整数型变量，当整数不为0时，没问题；但是如果整数为0，那么会判断它的值为空字符串，导致where中不起作用。</p>
+<h5 id="mybatis查询没有数据时"><a href="#mybatis查询没有数据时" class="headerlink" title="mybatis查询没有数据时"></a>mybatis查询没有数据时</h5><p>mybatis查询没有数据时返回的list是空集合，即size=0 并不是null。</p>
+<h5 id="mybatis如果只有一个参数"><a href="#mybatis如果只有一个参数" class="headerlink" title="mybatis如果只有一个参数"></a>mybatis如果只有一个参数</h5><p>mybatis如果只有一个参数，并且这个参数在sql中进行了类似<code>&lt;if test=&quot;param != null &quot;&gt;&lt;/if&gt;</code>的判断，需要加@Param。否则会都匹配进去</p>
+<h5 id="mybatis-plus-问题：Invalid-bound-statement"><a href="#mybatis-plus-问题：Invalid-bound-statement" class="headerlink" title="mybatis plus 问题：Invalid bound statement"></a>mybatis plus 问题：Invalid bound statement</h5><p>参考：<a href="https://blog.csdn.net/wwrzyy/article/details/86034458" target="_blank" rel="noopener">https://blog.csdn.net/wwrzyy/article/details/86034458</a></p>
+<h4 id="慢查询排查方法"><a href="#慢查询排查方法" class="headerlink" title="慢查询排查方法"></a>慢查询排查方法</h4><h5 id="出现慢查询时，使用explain-sql语句的方式，查看执行信息，排查耗时的地方"><a href="#出现慢查询时，使用explain-sql语句的方式，查看执行信息，排查耗时的地方" class="headerlink" title="出现慢查询时，使用explain+sql语句的方式，查看执行信息，排查耗时的地方"></a>出现慢查询时，使用explain+sql语句的方式，查看执行信息，排查耗时的地方</h5><p>很多慢查询的问题，可以先用索引解决，特别是涉及到连表查询的时候</p>
+<p>mybatis中更新操作，最好不要设置updateTime更新语句（前提是数据库中设置<code>CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP</code>）。特别是使用BeanUtils.copyPropertie或根据id获取时，由于里面的updateTime本身就不为空，这时判断<code>&lt;if test=&quot;updateTime != null&quot;&gt;update_time=#{updateTime},&lt;/if&gt;</code>，就会更新为当前已有的那个值，所以，还是没有更新到当前时间。</p>
+<h5 id="关于使用limit、offset的问题"><a href="#关于使用limit、offset的问题" class="headerlink" title="关于使用limit、offset的问题"></a>关于使用limit、offset的问题</h5><p><a href="https://explainextended.com/2009/10/23/mysql-order-by-limit-performance-late-row-lookups/" target="_blank" rel="noopener">https://explainextended.com/2009/10/23/mysql-order-by-limit-performance-late-row-lookups/</a></p>
+<h4 id="连接池概念"><a href="#连接池概念" class="headerlink" title="连接池概念"></a>连接池概念</h4><h5 id="Druid是为监控而生的数据库连接池"><a href="#Druid是为监控而生的数据库连接池" class="headerlink" title="Druid是为监控而生的数据库连接池"></a>Druid是为监控而生的数据库连接池</h5><p>和Java里面线程池、httpclient里面的http请求池类似，凡是涉及到连接、断开操作的东西，都可以有池的概念。为的是更好地实现资源复用。数据库连接池的基本原理是在内部对象池中维护一定数量的数据库连接，并对外暴露数据库连接获取和返回方法。连接池中包含的信息包括各种连接数的值（当前值、峰值、总值等）。</p>
+<p>发现很多地方都有idle这个字眼，idle的意思是：懒散的、闲置的。对于连接池的细节，其为一个生产者/消费者模式，使用ReentrantLock + Condition的方式，即锁与同步方式</p>
+<p>Condition是为了代替传统的Object的wait()/notify()方法，实现线程间的协作。其核心函数为await()、signal()方法，作用分别对应wait()和notify()。</p>
+<p>await：释放锁、沉睡、等待唤醒；signal：获取锁，开始做事，完毕后，调用signal方法，唤醒沉睡的线程。</p>
+<h4 id="数据库事务的4种隔离级别"><a href="#数据库事务的4种隔离级别" class="headerlink" title="数据库事务的4种隔离级别"></a>数据库事务的4种隔离级别</h4><p>未授权读取（read uncommitted）</p>
+<p>授权读取（read committed）</p>
+<p>可重复读取（repeatable read）</p>
+<p>序列化（serializable）</p>
+<p>为什么会提出这四个概念，是因为在一个事务执行的过程中，可能出现以下几种情况：</p>
+<ol>
+<li>更新丢失：两个事务同时更新一行数据，一个事务对数据的更新把另外一个事务对数据的更新覆盖了。不能应对并发</li>
+<li>脏读：一个事务读取到了另外一个事务未提交的数据操作结果</li>
+<li>不可重复读：一个事务对同一行数据重复读取2次，但是得到了不同的结果</li>
+<li>虚读：事务T1读取了某一数据后，事务T2对其做了修改，当事务T1再次读该数据时得到了与第一次不同的值</li>
+<li>幻读：事务在操作的过程中进行2次查询，第一次查询到的结果包含了第一次查询中未出现的数据或者缺少了第一次查询中出现的数据。这是因为在两次查询过程中另外一个事务插入数据造成的</li>
+</ol>
+<p><strong>未授权读取（我在写，你就不能写；但是你可以读）就是一个事务可以读取另一个未提交事务的数据。</strong><br>如果一个事务已经开始写数据，则另外一个事务不允许同时进行写操作，但是允许其它事务读此行数据。该隔离级别可以通过“排他写锁”实现。<br>避免了更新丢失，却可能出现脏读。也就是说事务B读取到了事务A未提交的数据</p>
+<p><strong>授权读取（我在写，如果还没有提交，你不能读）</strong><br>就是一个事务要等另一个事务提交后才能读取数据。读取数据的事务允许其它事务继续访问该行数据，但是未提交的写事务将会禁止其它事务访问该行。<br>避免了脏读，但是可能出现不可重复读。事务A事先读取了数据，事务B紧接着更新了数据，并提交了事务，而事务A再次读取该数据时，数据已经发生了变化。</p>
+<p><strong>可重复读取（我在读，你不能写）</strong><br>就是在开始读取数据（事务开启）时，不再允许修改操作读取数据的事务将会禁止写事务（但允许读事务），写事务则禁止任何其它的事务。避免了不可重复读和脏读，但是有时可能出现幻读。可以通过“共享读锁”和“排他写锁”实现。<br>重复读可以解决不可重复读问题。不可重复读对应的是修改，即UPDATE操作。但是可能还会有幻读问题。因为幻读问题对应的是插入INSERT操作，而不是UPDATE操作。</p>
+<p><strong>序列化，事务只能一个接着一个地执行，但不能并发执行。可以解决幻读问题</strong></p>
+<p>总结：对于大多数应用程序，可以优先考虑把数据库的隔离级别设置为read committed。可以避免脏读，而且有较好的并发性能。尽管可能导致不可重复读、幻读和第二类丢失更新这些并发问题。可以由应用程序采用悲观锁或乐观锁来控制。MySQL默认的隔离级别就是repeatable read。</p>
+
+      
+    </div>
+    
+    
+    
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    qinxue
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://qxconverse.github.io/code/代码/代码_数据库相关/" title="数据库相关">https://qxconverse.github.io/code/代码/代码_数据库相关/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/code/代码/代码_Maven相关/" rel="next" title="Maven相关">
+                <i class="fa fa-chevron-left"></i> Maven相关
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/code/代码/密码学相关/" rel="prev" title="数字签名与SSH">
+                数字签名与SSH <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">qinxue</p>
+              <p class="site-description motion-element" itemprop="description">现在就要幸福</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/qxconverse" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:xqconverse@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qxconverse/csdncsdn" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/2875242050/profile?topnav=1&wvr=6&is_all=1" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-globe"></i>微博</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Mybatis中的注意点"><span class="nav-number">1.</span> <span class="nav-text">Mybatis中的注意点</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis中-和-的区别"><span class="nav-number">1.1.</span> <span class="nav-text">mybatis中#和$的区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis中判断不为空，且不为空字符串"><span class="nav-number">1.2.</span> <span class="nav-text">mybatis中判断不为空，且不为空字符串</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis查询没有数据时"><span class="nav-number">1.3.</span> <span class="nav-text">mybatis查询没有数据时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis如果只有一个参数"><span class="nav-number">1.4.</span> <span class="nav-text">mybatis如果只有一个参数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#mybatis-plus-问题：Invalid-bound-statement"><span class="nav-number">1.5.</span> <span class="nav-text">mybatis plus 问题：Invalid bound statement</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#慢查询排查方法"><span class="nav-number">2.</span> <span class="nav-text">慢查询排查方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#出现慢查询时，使用explain-sql语句的方式，查看执行信息，排查耗时的地方"><span class="nav-number">2.1.</span> <span class="nav-text">出现慢查询时，使用explain+sql语句的方式，查看执行信息，排查耗时的地方</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#关于使用limit、offset的问题"><span class="nav-number">2.2.</span> <span class="nav-text">关于使用limit、offset的问题</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#连接池概念"><span class="nav-number">3.</span> <span class="nav-text">连接池概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Druid是为监控而生的数据库连接池"><span class="nav-number">3.1.</span> <span class="nav-text">Druid是为监控而生的数据库连接池</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库事务的4种隔离级别"><span class="nav-number">4.</span> <span class="nav-text">数据库事务的4种隔离级别</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2014 &mdash; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">qinxue</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">61.5k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+  <script src="https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js"></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
+
+
+        
+<div class="busuanzi-count">
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i> 访问人数
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      次
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i> 访问总量
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    <!-- <div class="waifu" id="waifu">
+      <div class="waifu-tips" style="opacity: 1;"></div>
+      <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+      <div class="waifu-tool">
+        <span class="fui-home"></span>
+        <span class="fui-chat"></span>
+        <span class="fui-eye"></span>
+        <span class="fui-user"></span>
+        <span class="fui-photo"></span>
+        <span class="fui-info-circle"></span>
+        <span class="fui-cross"></span>
+      </div>
+    </div> -->
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "default";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "middleRight";
+      
+          pbOptions.networks = "Weibo,Douban,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 22649,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+  
+
+
+  
+
+  
+
+
+<!-- <script src="/lib/waifu/live2d.min.js"></script>
+<script src="/lib/waifu/waifu-tips.js"></script>
+<script type="text/javascript">initModel()</script>
+<link rel="stylesheet" type="text/css" href="/lib/waifu/flat-ui.min.css"/> -->
+</body>
+</html>
