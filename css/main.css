@@ -1865,7 +1865,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #369d6f;
+  background: #0ae4c3;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3172,56 +3172,4 @@ p {
   height: 10px;
 /*background: url(../images/scrollbar_arrow.png) no-repeat 0 0;*/
 /*可以添加滚动条样式*/
-}
-.posts-collapse::before {
-  background: linear-gradient(180deg, #f79533 0, #f37055 15%, #ef4e7b 30%, #a166ab 44%, #5073b8 58%, #1098ad 72%, #07b39b 86%, #6dba82 100%);
-  opacity: 0.3;
-}
-.page-archive .posts-collapse .archive-move-on {
-  background-color: #fc6423;
-}
-.posts-collapse .collection-title::before {
-  background-color: #fc6423;
-}
-.posts-collapse .collection-year::before {
-  background-color: #8a2be2;
-}
-.posts-collapse .post-header::before {
-  background-color: #808080;
-  opacity: 0;
-}
-.posts-collapse .post-meta {
-  color: #5073b8;
-  font-weight: 900;
-}
-.posts-collapse .post-title {
-  margin-left: 5px;
-}
-.posts-collapse .post-header {
-  position: relative;
-  box-shadow: 0 1px 3px rgba(111,66,193,0), 0 0px 6px #6f42c1;
-  padding: 2px 10px;
-  margin: 8px;
-  border-bottom: none;
-  border-radius: 10px;
-  width: 85%;
-}
-.posts-collapse .post-header:hover {
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
-  transition-delay: 0s;
-  transition-property: inherit;
-  box-shadow: 0 1px 3px rgba(111,66,193,0), 0 0px 17px 2px #6f42c1;
-  -webkit-transform: scale(1.02) !important;
-  -moz-transform: scale(1.02) !important;
-  -ms-transform: scale(1.02) !important;
-  -o-transform: scale(1.02) !important;
-  transform: scale(1.02) !important;
-}
-.posts-collapse .post-title a,
-.posts-collapse .post-title span.exturl {
-  font-size: small;
-}
-.tag-cloud-tags a:before {
-  content: "🔖";
 }
