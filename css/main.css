@@ -1865,7 +1865,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #f0d766;
+  background: #369d6f;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3014,18 +3014,6 @@ body {
   box-shadow: 1px 2px 8px 4px rgba(0,0,0,0.15);
   background: rgba(255,255,255,0.9);
 }
-.pagination {
-  border-radius: 15px;
-  box-shadow: 1px 2px 8px 4px rgba(0,0,0,0.15);
-  background: rgba(255,255,255,0.9);
-}
-.pagination:hover {
-  transition-property: all;
-  transition-duration: 0.3s;
-  transition-timing-function: ease;
-  transition-delay: 0s;
-  box-shadow: 0 2px 4px 0px rgba(0,0,0,0.1), 0 4px 8px 0px rgba(0,0,0,0.1), 0 8px 16px 0px rgba(0,0,0,0.1), 0 16px 32px 0px rgba(0,0,0,0.1) !important;
-}
 .comments {
   border-radius: 15px;
   box-shadow: 0 1px 2px 0px rgba(0,0,0,0.1), 0 2px 4px 0px rgba(0,0,0,0.1);
@@ -3145,9 +3133,6 @@ hr {
 }
 .posts-expand .post-title-link::before {
   background-image: linear-gradient(90deg, #a166ab 0, #ef4e7b 25%, #f37055 50%, #ef4e7b 75%, #a166ab 100%);
-}
-.category-list a {
-  color: #6f42c1;
 }
 p {
   margin: 0 0 10px 0;
