@@ -461,6 +461,7 @@
 <p>rsa非对称加密 + hash摘要 = 数字签名</p>
 <p><strong>对于摘要：私钥签名、公钥验证</strong></p>
 <p><strong>对于加密：公钥加密、私钥解密</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -482,6 +483,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h4 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h4><p>please tell me who you are的故事</p>
 <p>对于放在Gitlab上的代码，使用https的方式来clone，这样就省去了配置ssh的私钥和公钥的步骤。说白了，只要涉及到ssh协议的传输，那么一定会需要公钥和私钥的，所以，Gitlab相关的Git操作和连接远程服务器都要用。</p>
 <p>Mac上terminal通过ssh连接远程Linux服务器的方法：</p>
@@ -489,7 +491,7 @@
 <li>生成公、私钥</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "xxx"</span><br></pre></td></tr></table></figure>
-<ol start="2">
+<ol>
 <li><p>其中公钥、私钥放在自己本地<code>~/.ssh</code>文件夹下</p>
 </li>
 <li><p>将公钥文件内容拷贝到远程服务器的<code>.ssh/authorized_keys</code>文件里面</p>
@@ -542,10 +544,6 @@
       
       
         <div class="post-widgets">
-        
-          <div class="wp_rating">
-            <div id="wpac-rating"></div>
-          </div>
         
 
         
@@ -1015,23 +1013,6 @@
   </script>
 
   
-  <script type="text/javascript">
-  wpac_init = window.wpac_init || [];
-  wpac_init.push({widget: 'Rating', id: 22649,
-    el: 'wpac-rating',
-    color: 'fc6423'
-  });
-  (function() {
-    if ('WIDGETPACK_LOADED' in window) return;
-    WIDGETPACK_LOADED = true;
-    var mc = document.createElement('script');
-    mc.type = 'text/javascript';
-    mc.async = true;
-    mc.src = '//embed.widgetpack.com/widget.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-  })();
-  </script>
-
 
   
   

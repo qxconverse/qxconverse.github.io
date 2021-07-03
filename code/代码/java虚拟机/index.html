@@ -467,6 +467,7 @@
 <p>但凡涉及到内存，首先就要想到堆和栈。毕竟从本科的时候起，老师们就开始一直灌输这些了。什么栈溢出，堆溢出。其实，说白了，就是递归的深度超过了一定的数目，和内存不够分配了。一个说的是纵向，一个是横线。类比于算法中的广度优先与深度优先，深度优先搜索使用的一定是栈，因为涉及到递归；而广度优先搜索使用到的是队列，它涉及到堆。</p>
 <p>仔细思考一下，在C/C++中，是否记得一般的运行时局部变量是存放在栈中的，而程序员申请的空间是存放在堆中的。堆位于地址较高的地方，而栈位于较低的地方。一样的啊！！！Java也是这个套路，虚拟机栈和本地方法栈就是为此服务的，只不过一个给Java方法服务，而另外一个给本地方法（Native）服务！</p>
 <p>其实宏观地可以结合算法和数据结构以及计算机体系来理解这些，如下：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -487,10 +488,11 @@
 <td>堆区（内存中非连续）</td>
 <td>广度优先搜索</td>
 <td>堆（heap），优先队列（基于堆）</td>
-<td>—-</td>
+<td>——</td>
 </tr>
 </tbody>
 </table>
+</div>
 <h4 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h4><p>垃圾回收说白了就是针对堆的，仔细想想，java中所有的对象都是存放在堆中的，所以这个地方是最需要进行垃圾回收的。这个时候就要问自己几个问题，第一，什么时候要回收？第二，怎么回收？<br>关于垃圾回收的方法主要有3种：</p>
 <ol>
 <li>标记-清理（先标记，然后清理）缺点是容易造成碎片</li>
@@ -548,10 +550,6 @@
       
       
         <div class="post-widgets">
-        
-          <div class="wp_rating">
-            <div id="wpac-rating"></div>
-          </div>
         
 
         
@@ -1021,23 +1019,6 @@
   </script>
 
   
-  <script type="text/javascript">
-  wpac_init = window.wpac_init || [];
-  wpac_init.push({widget: 'Rating', id: 22649,
-    el: 'wpac-rating',
-    color: 'fc6423'
-  });
-  (function() {
-    if ('WIDGETPACK_LOADED' in window) return;
-    WIDGETPACK_LOADED = true;
-    var mc = document.createElement('script');
-    mc.type = 'text/javascript';
-    mc.async = true;
-    mc.src = '//embed.widgetpack.com/widget.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-  })();
-  </script>
-
 
   
   

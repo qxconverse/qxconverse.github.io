@@ -657,6 +657,7 @@
 <p>es是NoSQL数据库。以MySQL来作对比，index对应数据库；doc（文档）对应行，文档是包含一个或多个域（即Field）的容器，以JSON格式进行表示；field对应列。</p>
 <p>相关重要概念：term index，term dictionary，posting list。</p>
 <p>如有3条数据：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -687,8 +688,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>索引如下：</p>
 <p>name</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -711,7 +714,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>age</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -730,7 +735,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>sex</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -749,6 +756,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>一张图解释什么叫倒排索引</p>
 <pre class="mermaid">graph LR
   A[term index] --> B[term dictionary]
@@ -906,10 +914,6 @@
       
       
         <div class="post-widgets">
-        
-          <div class="wp_rating">
-            <div id="wpac-rating"></div>
-          </div>
         
 
         
@@ -1379,23 +1383,6 @@
   </script>
 
   
-  <script type="text/javascript">
-  wpac_init = window.wpac_init || [];
-  wpac_init.push({widget: 'Rating', id: 22649,
-    el: 'wpac-rating',
-    color: 'fc6423'
-  });
-  (function() {
-    if ('WIDGETPACK_LOADED' in window) return;
-    WIDGETPACK_LOADED = true;
-    var mc = document.createElement('script');
-    mc.type = 'text/javascript';
-    mc.async = true;
-    mc.src = '//embed.widgetpack.com/widget.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
-  })();
-  </script>
-
 
   
   
