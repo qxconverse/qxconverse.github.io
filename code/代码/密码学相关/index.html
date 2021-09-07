@@ -184,7 +184,7 @@
       
         
         <li class="menu-item menu-item-主页">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -194,7 +194,7 @@
       
         
         <li class="menu-item menu-item-关于我">
-          <a href="/about/%20" rel="section">
+          <a href="/about/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
@@ -204,7 +204,7 @@
       
         
         <li class="menu-item menu-item-标签">
-          <a href="/tags/%20" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -214,7 +214,7 @@
       
         
         <li class="menu-item menu-item-分类">
-          <a href="/categories%20" rel="section">
+          <a href="/categories" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -224,7 +224,7 @@
       
         
         <li class="menu-item menu-item-思维">
-          <a href="/categories/thinking%20" rel="section">
+          <a href="/categories/thinking" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br />
             
@@ -234,7 +234,7 @@
       
         
         <li class="menu-item menu-item-生活">
-          <a href="/categories/life%20" rel="section">
+          <a href="/categories/life" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-bath"></i> <br />
             
@@ -244,7 +244,7 @@
       
         
         <li class="menu-item menu-item-代码">
-          <a href="/categories/code%20" rel="section">
+          <a href="/categories/code" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
             
@@ -254,7 +254,7 @@
       
         
         <li class="menu-item menu-item-健康">
-          <a href="/categories/health%20" rel="section">
+          <a href="/categories/health" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
             
@@ -264,7 +264,7 @@
       
         
         <li class="menu-item menu-item-经济">
-          <a href="/categories/economic%20" rel="section">
+          <a href="/categories/economic" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-line-chart"></i> <br />
             
@@ -274,7 +274,7 @@
       
         
         <li class="menu-item menu-item-人文">
-          <a href="/categories/humanity%20" rel="section">
+          <a href="/categories/humanity" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
             
@@ -456,11 +456,11 @@
 <p>目前在计算机业界应用广泛的基本上就是密码学中的非对称加密和Hash算法。</p>
 </blockquote>
 <a id="more"></a>
-
 <h4 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h4><p>数字签名由非对称加密和数字摘要两种技术合成的，可以防伪造（机密性）和篡改（完整性）。</p>
 <p>rsa非对称加密 + hash摘要 = 数字签名</p>
 <p><strong>对于摘要：私钥签名、公钥验证</strong></p>
 <p><strong>对于加密：公钥加密、私钥解密</strong></p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -469,7 +469,8 @@
 <th>备注</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>报文-&gt;Hash算法（比如MD5，SHA256）生成摘要-&gt;私钥（A的）签名</td>
 <td>使用公钥（A的）验证</td>
 <td>摘要部分：A想把签名的消息发给B</td>
@@ -479,7 +480,9 @@
 <td>使用私钥（B的）解密</td>
 <td>加密部分：A想把加密的消息发给B，让B知道是什么消息</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h4><p>please tell me who you are的故事</p>
 <p>对于放在Gitlab上的代码，使用https的方式来clone，这样就省去了配置ssh的私钥和公钥的步骤。说白了，只要涉及到ssh协议的传输，那么一定会需要公钥和私钥的，所以，Gitlab相关的Git操作和连接远程服务器都要用。</p>
 <p>Mac上terminal通过ssh连接远程Linux服务器的方法：</p>
@@ -487,20 +490,16 @@
 <li>生成公、私钥</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "xxx"</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
+<ol>
 <li><p>其中公钥、私钥放在自己本地<code>~/.ssh</code>文件夹下</p>
 </li>
 <li><p>将公钥文件内容拷贝到远程服务器的<code>.ssh/authorized_keys</code>文件里面</p>
 </li>
-<li><p>如果为了更加方便地登录，在本地<code>~/.ssh</code>文件夹下新建config文件，内容如下。就可以使用<code>ssh xxx</code>直接登录。</p>
-</li>
+<li>如果为了更加方便地登录，在本地<code>~/.ssh</code>文件夹下新建config文件，内容如下。就可以使用<code>ssh xxx</code>直接登录。</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host xxx </span><br><span class="line">HostName  远程服务器IP</span><br><span class="line">User 远程连接使用的账号，如root</span><br><span class="line">IdentityFile ~/.ssh/id_rsa 私钥文件所在路径</span><br></pre></td></tr></table></figure>
-
 <p>附：使用不同的非对称加密算法生成公钥、私钥</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ed25519</span><br></pre></td></tr></table></figure>
-
 <p>更加具体的内容：<a href="https://www.cnblogs.com/xz816111/p/9479139.html" target="_blank" rel="noopener">https://www.cnblogs.com/xz816111/p/9479139.html</a></p>
 
       

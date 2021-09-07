@@ -186,7 +186,7 @@
       
         
         <li class="menu-item menu-item-主页">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -196,7 +196,7 @@
       
         
         <li class="menu-item menu-item-关于我">
-          <a href="/about/%20" rel="section">
+          <a href="/about/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
@@ -206,7 +206,7 @@
       
         
         <li class="menu-item menu-item-标签">
-          <a href="/tags/%20" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -216,7 +216,7 @@
       
         
         <li class="menu-item menu-item-分类">
-          <a href="/categories%20" rel="section">
+          <a href="/categories" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -226,7 +226,7 @@
       
         
         <li class="menu-item menu-item-思维">
-          <a href="/categories/thinking%20" rel="section">
+          <a href="/categories/thinking" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br />
             
@@ -236,7 +236,7 @@
       
         
         <li class="menu-item menu-item-生活">
-          <a href="/categories/life%20" rel="section">
+          <a href="/categories/life" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-bath"></i> <br />
             
@@ -246,7 +246,7 @@
       
         
         <li class="menu-item menu-item-代码">
-          <a href="/categories/code%20" rel="section">
+          <a href="/categories/code" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
             
@@ -256,7 +256,7 @@
       
         
         <li class="menu-item menu-item-健康">
-          <a href="/categories/health%20" rel="section">
+          <a href="/categories/health" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
             
@@ -266,7 +266,7 @@
       
         
         <li class="menu-item menu-item-经济">
-          <a href="/categories/economic%20" rel="section">
+          <a href="/categories/economic" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-line-chart"></i> <br />
             
@@ -276,7 +276,7 @@
       
         
         <li class="menu-item menu-item-人文">
-          <a href="/categories/humanity%20" rel="section">
+          <a href="/categories/humanity" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
             
@@ -458,18 +458,19 @@
 <p>Git的两个核心特征是：去中心化、记录快照而非差异比较。</p>
 </blockquote>
 <a id="more"></a>
-
 <h4 id="Git的基础知识"><a href="#Git的基础知识" class="headerlink" title="Git的基础知识"></a>Git的基础知识</h4><p>Git的工作区就是保存在电脑上的实体文件夹；stage称为暂存区，add时添加到里面；master是主分支，而HEAD可以理解为一个指针，指向当前的版本。</p>
 <p>参考图：</p>
 <p><img src="https://tva1.sinaimg.cn/large/008eGmZEly1gn3hjagitqj30fz08ajsr.jpg" alt="3832193-9f91b2096b08eeae"></p>
-<h4 id="部分指令"><a href="#部分指令" class="headerlink" title="部分指令"></a>部分指令</h4><table>
+<h4 id="部分指令"><a href="#部分指令" class="headerlink" title="部分指令"></a>部分指令</h4><div class="table-container">
+<table>
 <thead>
 <tr>
 <th>指令</th>
 <th>含义</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><code>git branch</code></td>
 <td>查看分支</td>
 </tr>
@@ -525,7 +526,9 @@
 <td><code>git stash</code><br/><code>git co xxx</code><br/><code>git stash pop</code></td>
 <td>暂存写好的部分，再切换分支</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ol>
 <li>合并分支时，加上<code>--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并；而fast forward合并就看不出来曾经做过合并。</li>
 <li>Git切换分支的时候，最好保持一个干净的工作区。</li>
@@ -542,7 +545,6 @@
 <li>工作流程的规则要保持一致，至少要和团队一致</li>
 </ol>
 <h4 id="Git统计各个提交者的代码行数"><a href="#Git统计各个提交者的代码行数" class="headerlink" title="Git统计各个提交者的代码行数"></a>Git统计各个提交者的代码行数</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --format='%aN' | sort -u | while read name; do echo -en "$name\t"; git log --author="$name" --pretty=tformat: --numstat | awk '&#123; add += $1; subs += $2; loc += $1 - $2 &#125; END &#123; printf "added lines: %s, removed lines: %s, total lines: %s\n", add, subs, loc &#125;' -; done</span><br></pre></td></tr></table></figure>
-
 <h4 id="Git提交时的hook相关"><a href="#Git提交时的hook相关" class="headerlink" title="Git提交时的hook相关"></a>Git提交时的hook相关</h4><p>参考：<a href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks" target="_blank" rel="noopener">https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks</a></p>
 <h4 id="解决git-pull-push每次都需要输入密码问题"><a href="#解决git-pull-push每次都需要输入密码问题" class="headerlink" title="解决git pull/push每次都需要输入密码问题"></a>解决git pull/push每次都需要输入密码问题</h4><p>参考：<a href="https://blog.csdn.net/nongweiyilady/article/details/77772602" target="_blank" rel="noopener">https://blog.csdn.net/nongweiyilady/article/details/77772602</a></p>
 

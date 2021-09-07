@@ -185,7 +185,7 @@
       
         
         <li class="menu-item menu-item-主页">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -195,7 +195,7 @@
       
         
         <li class="menu-item menu-item-关于我">
-          <a href="/about/%20" rel="section">
+          <a href="/about/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
@@ -205,7 +205,7 @@
       
         
         <li class="menu-item menu-item-标签">
-          <a href="/tags/%20" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -215,7 +215,7 @@
       
         
         <li class="menu-item menu-item-分类">
-          <a href="/categories%20" rel="section">
+          <a href="/categories" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -225,7 +225,7 @@
       
         
         <li class="menu-item menu-item-思维">
-          <a href="/categories/thinking%20" rel="section">
+          <a href="/categories/thinking" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br />
             
@@ -235,7 +235,7 @@
       
         
         <li class="menu-item menu-item-生活">
-          <a href="/categories/life%20" rel="section">
+          <a href="/categories/life" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-bath"></i> <br />
             
@@ -245,7 +245,7 @@
       
         
         <li class="menu-item menu-item-代码">
-          <a href="/categories/code%20" rel="section">
+          <a href="/categories/code" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
             
@@ -255,7 +255,7 @@
       
         
         <li class="menu-item menu-item-健康">
-          <a href="/categories/health%20" rel="section">
+          <a href="/categories/health" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
             
@@ -265,7 +265,7 @@
       
         
         <li class="menu-item menu-item-经济">
-          <a href="/categories/economic%20" rel="section">
+          <a href="/categories/economic" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-line-chart"></i> <br />
             
@@ -275,7 +275,7 @@
       
         
         <li class="menu-item menu-item-人文">
-          <a href="/categories/humanity%20" rel="section">
+          <a href="/categories/humanity" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
             
@@ -455,7 +455,6 @@
       
         <p>java虚拟机是一个虚拟的环境，占据着一部分主机的内存。也就是说这是一个中间桥梁，java在运行时不是在赤裸裸的内存上进行的，而是在虚拟机上。</p>
 <a id="more"></a>
-
 <h4 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h4><p>这个区域主要分为2大类。一个是线程隔离的，一个是线程共享的。而它们的生命周期也与此有关。一类是随着虚拟机进程的，而另一类是随着线程的。也就是说线程没了，它也就没了。</p>
 <p>一共有5个区域，其实记忆的时候可以类比C/C++中的堆和栈。好！那么这5个区域分别为：</p>
 <ol>
@@ -468,6 +467,7 @@
 <p>但凡涉及到内存，首先就要想到堆和栈。毕竟从本科的时候起，老师们就开始一直灌输这些了。什么栈溢出，堆溢出。其实，说白了，就是递归的深度超过了一定的数目，和内存不够分配了。一个说的是纵向，一个是横线。类比于算法中的广度优先与深度优先，深度优先搜索使用的一定是栈，因为涉及到递归；而广度优先搜索使用到的是队列，它涉及到堆。</p>
 <p>仔细思考一下，在C/C++中，是否记得一般的运行时局部变量是存放在栈中的，而程序员申请的空间是存放在堆中的。堆位于地址较高的地方，而栈位于较低的地方。一样的啊！！！Java也是这个套路，虚拟机栈和本地方法栈就是为此服务的，只不过一个给Java方法服务，而另外一个给本地方法（Native）服务！</p>
 <p>其实宏观地可以结合算法和数据结构以及计算机体系来理解这些，如下：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -477,7 +477,8 @@
 <th>计算机思想</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>栈区（内存中连续）</td>
 <td>深度优先搜索</td>
 <td>栈（stack）</td>
@@ -487,9 +488,11 @@
 <td>堆区（内存中非连续）</td>
 <td>广度优先搜索</td>
 <td>堆（heap），优先队列（基于堆）</td>
-<td>—-</td>
+<td>——</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h4 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h4><p>垃圾回收说白了就是针对堆的，仔细想想，java中所有的对象都是存放在堆中的，所以这个地方是最需要进行垃圾回收的。这个时候就要问自己几个问题，第一，什么时候要回收？第二，怎么回收？<br>关于垃圾回收的方法主要有3种：</p>
 <ol>
 <li>标记-清理（先标记，然后清理）缺点是容易造成碎片</li>

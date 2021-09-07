@@ -189,7 +189,7 @@
       
         
         <li class="menu-item menu-item-主页">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -199,7 +199,7 @@
       
         
         <li class="menu-item menu-item-关于我">
-          <a href="/about/%20" rel="section">
+          <a href="/about/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
@@ -209,7 +209,7 @@
       
         
         <li class="menu-item menu-item-标签">
-          <a href="/tags/%20" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -219,7 +219,7 @@
       
         
         <li class="menu-item menu-item-分类">
-          <a href="/categories%20" rel="section">
+          <a href="/categories" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -229,7 +229,7 @@
       
         
         <li class="menu-item menu-item-思维">
-          <a href="/categories/thinking%20" rel="section">
+          <a href="/categories/thinking" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br />
             
@@ -239,7 +239,7 @@
       
         
         <li class="menu-item menu-item-生活">
-          <a href="/categories/life%20" rel="section">
+          <a href="/categories/life" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-bath"></i> <br />
             
@@ -249,7 +249,7 @@
       
         
         <li class="menu-item menu-item-代码">
-          <a href="/categories/code%20" rel="section">
+          <a href="/categories/code" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
             
@@ -259,7 +259,7 @@
       
         
         <li class="menu-item menu-item-健康">
-          <a href="/categories/health%20" rel="section">
+          <a href="/categories/health" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
             
@@ -269,7 +269,7 @@
       
         
         <li class="menu-item menu-item-经济">
-          <a href="/categories/economic%20" rel="section">
+          <a href="/categories/economic" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-line-chart"></i> <br />
             
@@ -279,7 +279,7 @@
       
         
         <li class="menu-item menu-item-人文">
-          <a href="/categories/humanity%20" rel="section">
+          <a href="/categories/humanity" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
             
@@ -461,7 +461,6 @@
 <p>依赖控制、版本控制、仓库、编译打包部署等</p>
 </blockquote>
 <a id="more"></a>
-
 <h5 id="中间仓库"><a href="#中间仓库" class="headerlink" title="中间仓库"></a>中间仓库</h5><p>我们通常会在本地仓库和远程中央仓库之间搭建一个公司级别的中间仓库。首先会从中间仓库获取，否则，再从远程中央仓库获取。Nexus是一个常用的仓库管理器。</p>
 <p>项目中在setting.xml文件里配置自己的中间仓库。</p>
 <p>mirror的使用，其实是一个路由的作用。比如我有一个仓库A，当我配置了一个mirror，并且mirrorOf写成A后，那么以后每次从A获取jar包时，都会路由到这个mirror上。</p>
@@ -469,6 +468,7 @@
 <h5 id="dependencyManagement和dependencies的区别"><a href="#dependencyManagement和dependencies的区别" class="headerlink" title="dependencyManagement和dependencies的区别"></a>dependencyManagement和dependencies的区别</h5><p>参考地址：<a href="https://www.cnblogs.com/myhappylife/p/5872070.html" target="_blank" rel="noopener">https://www.cnblogs.com/myhappylife/p/5872070.html</a></p>
 <h5 id="maven中的packaging标签"><a href="#maven中的packaging标签" class="headerlink" title="maven中的packaging标签"></a>maven中的packaging标签</h5><p>项目的打包类型包括：pom、jar、war，默认是jar类型</p>
 <p>如果是一个单一无层级项目，用pom会导致无法build、compile等</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -476,7 +476,8 @@
 <th>使用场景</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>pom</td>
 <td>在父级工程或聚合工程中，比如一个项目中包含了很多小的模块，那么该项目用pom，而项目下每个模块就用jar</td>
 </tr>
@@ -488,7 +489,9 @@
 <td>war</td>
 <td>需要部署到tomcat的项目，里面包含了各种class文件、html、jsp文件等等</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <h5 id="记录一次很奇怪的mvn依赖的问题"><a href="#记录一次很奇怪的mvn依赖的问题" class="headerlink" title="记录一次很奇怪的mvn依赖的问题"></a>记录一次很奇怪的mvn依赖的问题</h5><ol>
 <li>首先需要在A模块下删除一个包C的依赖</li>
 <li>删除后，发现很多文件都报错了，因为很多其它mvn依赖引入不了，包括springboot包、redis包等等</li>
@@ -496,7 +499,6 @@
 </ol>
 <p>后来执行了mvn compile后，报了一个错误</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#39;dependencies.dependency.version&#39; for xxx:jar is missing. @ xxx:[unknown-version], xxx&#x2F;pom.xml, line 124, column 21</span><br></pre></td></tr></table></figure>
-
 <p>才发现，是因为B模块下还有一处关于包C的引入</p>
 <p>因为此处的错误，导致此依赖后面加入的所有依赖都引入失败了，但是pom文件不会有任何报错，将它删除，运行就没有问题了。</p>
 <p>总结：删除mvn依赖一定要删除彻底，因为依赖很有可能存在与多个模块下的不同pom文件里面；否则通过idea运行就会出现各种问题，而且pom文件也不报错，隐藏得很深，要通过mvn compile命令行才找到原因。</p>
@@ -508,7 +510,6 @@
 <p><img src="https://tva1.sinaimg.cn/large/006tNbRwgy1gbmpq6doo3j30i20jd40c.jpg" alt="Screen Shot 2020-02-06 at 3.18.19 PM"></p>
 <h5 id="如何选择性deploy包到远程仓库？"><a href="#如何选择性deploy包到远程仓库？" class="headerlink" title="如何选择性deploy包到远程仓库？"></a>如何选择性deploy包到远程仓库？</h5><p>在deploy到远程仓库时，可以有选择性地部署子包，在不需要部署的子模块下，添加代码如下，即可：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>maven-deploy-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.5<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">skip</span>&gt;</span>true<span class="tag">&lt;/<span class="name">skip</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
 <p>需要部署的子模块，就不加这段代码。</p>
 
       

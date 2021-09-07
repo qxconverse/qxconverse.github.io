@@ -186,7 +186,7 @@
       
         
         <li class="menu-item menu-item-主页">
-          <a href="/%20" rel="section">
+          <a href="/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
@@ -196,7 +196,7 @@
       
         
         <li class="menu-item menu-item-关于我">
-          <a href="/about/%20" rel="section">
+          <a href="/about/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
@@ -206,7 +206,7 @@
       
         
         <li class="menu-item menu-item-标签">
-          <a href="/tags/%20" rel="section">
+          <a href="/tags/" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
@@ -216,7 +216,7 @@
       
         
         <li class="menu-item menu-item-分类">
-          <a href="/categories%20" rel="section">
+          <a href="/categories" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
@@ -226,7 +226,7 @@
       
         
         <li class="menu-item menu-item-思维">
-          <a href="/categories/thinking%20" rel="section">
+          <a href="/categories/thinking" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-lightbulb-o"></i> <br />
             
@@ -236,7 +236,7 @@
       
         
         <li class="menu-item menu-item-生活">
-          <a href="/categories/life%20" rel="section">
+          <a href="/categories/life" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-bath"></i> <br />
             
@@ -246,7 +246,7 @@
       
         
         <li class="menu-item menu-item-代码">
-          <a href="/categories/code%20" rel="section">
+          <a href="/categories/code" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-code"></i> <br />
             
@@ -256,7 +256,7 @@
       
         
         <li class="menu-item menu-item-健康">
-          <a href="/categories/health%20" rel="section">
+          <a href="/categories/health" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
             
@@ -266,7 +266,7 @@
       
         
         <li class="menu-item menu-item-经济">
-          <a href="/categories/economic%20" rel="section">
+          <a href="/categories/economic" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-line-chart"></i> <br />
             
@@ -276,7 +276,7 @@
       
         
         <li class="menu-item menu-item-人文">
-          <a href="/categories/humanity%20" rel="section">
+          <a href="/categories/humanity" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
             
@@ -456,7 +456,6 @@
       
         <p>在计算机中，有如下的思维，一定要熟记于心，无论遇到什么问题，都可以往这方面思考！</p>
 <a id="more"></a>
-
 <ol>
 <li>缓存思想：缓存思想特别重要，这是很多设计中必出现的，无论在操作系统层面还是具体应用层面。比如在内存和CPU之间有寄存器；比如在Redis中有缓存机制；Mybatis也有缓存机制，当某些记录很大，而且基本上不会变，且查询频率很高，那么利用缓存是明智的选择。消息队列</li>
 <li>Hash+链表、树形结构思想：说到hash一般会想到hashtable，hashmap等等，树形结构就更多了。共同点是，说到查找，它们是高频词汇。对于无序的东西，我们的查找时间复杂度是n级别的。所以为了优化，会采用2种措施，一种是建立索引，即hash表，计算key值，然后放到对应的位置，如果出现碰撞，通常是加个链表。这样复杂度可以控制在1级别的。凡事都有优缺点，虽然查询快了，但是它是无序的。而如果采用第二种措施，即用树形结构，比如二叉树（红黑树）、B+树等。基本是可以实现logn级别的，虽然慢一些，但其优点是有序。凡是涉及到查找，要想到它们！在ElasticSearch中有这些思想的存在（倒排索引，基于单词文档矩阵模型）</li>
@@ -484,7 +483,7 @@
 <li>分层可以将庞大而复杂的问题，转化为若干较小的局部问题，而这些较小的局部问题就比较易于研究和处理。例如计算机网络的分层。</li>
 </ol>
 <p><strong>回车+换行</strong></p>
-<p>回车<code> \r</code> 本义是光标重新回到本行开头，r的英文return，控制字符为CR，即Carriage Return；</p>
+<p>回车<code>\r</code> 本义是光标重新回到本行开头，r的英文return，控制字符为CR，即Carriage Return；</p>
 <p>换行 <code>\n</code> 本义是光标往下一行（不一定到下一行行首），n的英文newline，控制字符为LF，即Line Feed；</p>
 <p>换行的ASCII码是10，回车的ASCII码是13。</p>
 <p>然而，在不同操作系统下，使用稍有差异：</p>
@@ -541,12 +540,9 @@
 </li>
 <li><p>http、rpc、消息队列（系统通信）</p>
 </li>
-<li><p>监控系统构建（高可用性、高稳定性）</p>
-</li>
-<li><p>linux指令、线上机器排查问题（运维能力）</p>
-</li>
-<li><p>高效写代码、自测与改bug（开发效率）</p>
-</li>
+<li>监控系统构建（高可用性、高稳定性）</li>
+<li>linux指令、线上机器排查问题（运维能力）</li>
+<li>高效写代码、自测与改bug（开发效率）</li>
 </ol>
 <p>AOP的几种实现手段</p>
 <ol>
@@ -592,7 +588,6 @@
 <p>IO多路复用、事件驱动、注册和订阅、反应器（Reactor）模式，可以连着一起记忆。</p>
 <p>下面是核心的服务端代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ServerSocket serverSocket = <span class="keyword">new</span> ServerSocket(<span class="number">8888</span>);</span><br><span class="line">Socket socket = serverSocket.accept();</span><br><span class="line">BufferedReader in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(socket.getInputStream()));</span><br><span class="line">PrintWriter out = <span class="keyword">new</span> PrintWriter(socket.getOutputStream(), <span class="keyword">true</span>);</span><br><span class="line">String request, response;</span><br><span class="line"><span class="keyword">while</span> ((request = in.readLine()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="string">"OK"</span>.equals(request)) &#123;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    response = processRequest(request);</span><br><span class="line">    out.println(response);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h5 id="设计模式相关"><a href="#设计模式相关" class="headerlink" title="设计模式相关"></a>设计模式相关</h5><p>工厂模式：工厂方法模式：扩展产品，iPhone到miPhone。抽象工厂模式：扩展产品簇。例如在已经有iPhone、MAC的情况下同时增加MiPhone和MiPC。</p>
 <p>单例模式：一个类只有一个实例，关键要定义一个<strong>私有的构造函数</strong>，一个<strong>私有的实例</strong>，一个<strong>公有的获取实例的方法</strong></p>
 <p>适配器模式：解决接口不兼容的问题，类似于电源适配器</p>
@@ -655,12 +650,13 @@
 <li><p>不断的重复步骤二，直到所有的链表都为空。</p>
 </li>
 </ol>
-<p>最终的时间复杂度为：$(O(N)+O(N*logN))*M$</p>
+<p>最终的时间复杂度为：$(O(N)+O(N<em>logN))</em>M$</p>
 <h5 id="钩子函数和回调函数的区别"><a href="#钩子函数和回调函数的区别" class="headerlink" title="钩子函数和回调函数的区别"></a>钩子函数和回调函数的区别</h5><p>一般认为，钩子函数就是回调函数的一种，其实还是有差异的，差异地方就是：触发的时机不同。钩子函数在捕获消息的第一时间就执行，而回调函数是捕获结束时，最后一个被执行的。</p>
 <h5 id="es相关"><a href="#es相关" class="headerlink" title="es相关"></a>es相关</h5><p>提到es，一定要首先联想到小时候用的《新华字典》，它们有很多相似点；其次要想到<strong>倒排索引</strong>，它是基于trie前缀树（term index的实现）。</p>
 <p>es是NoSQL数据库。以MySQL来作对比，index对应数据库；doc（文档）对应行，文档是包含一个或多个域（即Field）的容器，以JSON格式进行表示；field对应列。</p>
 <p>相关重要概念：term index，term dictionary，posting list。</p>
 <p>如有3条数据：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -670,7 +666,8 @@
 <th>Sex</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>1</td>
 <td>Kate</td>
 <td>24</td>
@@ -688,9 +685,12 @@
 <td>29</td>
 <td>Male</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>索引如下：</p>
 <p>name</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -698,7 +698,8 @@
 <th>Posting List</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Kate</td>
 <td>1</td>
 </tr>
@@ -710,8 +711,11 @@
 <td>Bill</td>
 <td>3</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>age</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -719,7 +723,8 @@
 <th>Posting List</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>24</td>
 <td>[1, 2]</td>
 </tr>
@@ -727,8 +732,11 @@
 <td>29</td>
 <td>3</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>sex</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -736,7 +744,8 @@
 <th>Posting List</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>Female</td>
 <td>1</td>
 </tr>
@@ -744,7 +753,9 @@
 <td>Male</td>
 <td>[2, 3]</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>一张图解释什么叫倒排索引</p>
 <pre class="mermaid">graph LR
   A[term index] --> B[term dictionary]
@@ -838,25 +849,20 @@
 <p>首先假设工业部（第一层制定者）说，所有的水龙头必须直径15mm。接着，不同的水龙头制造厂商（第二层实现者）均各自生产不同的水龙头，但是他们直径都是15mm。最后买家（第三层使用者）根据自己的需求买某个厂商生产的水龙头。</p>
 <h5 id="swagger配置中的一个有问题"><a href="#swagger配置中的一个有问题" class="headerlink" title="swagger配置中的一个有问题"></a>swagger配置中的一个有问题</h5><p>springfox中有这样一个类，用来控制一些配置项的东西。里面的enabled默认为true。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Docket</span><span class="params">(DocumentationType documentationType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.apiInfo = ApiInfo.DEFAULT;</span><br><span class="line">        <span class="keyword">this</span>.groupName = <span class="string">"default"</span>;</span><br><span class="line">        <span class="keyword">this</span>.enabled = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">this</span>.genericsNamingStrategy = <span class="keyword">new</span> DefaultGenericTypeNamingStrategy();</span><br><span class="line">        <span class="keyword">this</span>.applyDefaultResponseMessages = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">this</span>.host = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">this</span>.pathMapping = Optional.absent();</span><br><span class="line">        <span class="keyword">this</span>.apiSelector = ApiSelector.DEFAULT;</span><br><span class="line">        <span class="keyword">this</span>.enableUrlTemplating = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">this</span>.vendorExtensions = Lists.newArrayList();</span><br><span class="line">        <span class="keyword">this</span>.documentationType = documentationType;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
 <p>我们在用swagger的时候，需要写一个config类，来生成这个bean，通常是这样的：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableSwagger</span>2</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Swagger2Configuration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Value</span>(<span class="string">"$&#123;swagger.enabled&#125;"</span>)</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">boolean</span> isEnable;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 用于配置swagger2，包含文档基本信息</span></span><br><span class="line"><span class="comment">	 * 指定swagger2的作用域（这里指定包路径下的所有API）</span></span><br><span class="line"><span class="comment">	 *</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> Docket</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Docket <span class="title">createRestApi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">			.enable(isEnable)</span><br><span class="line">			.groupName(<span class="string">"xxx"</span>)</span><br><span class="line">			.apiInfo(apiInfo())</span><br><span class="line">			.select()</span><br><span class="line">			.apis(RequestHandlerSelectors.basePackage(<span class="string">"com.xxx.xxx.controller"</span>))</span><br><span class="line">			.paths(PathSelectors.any())</span><br><span class="line">			.build();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> ApiInfo <span class="title">apiInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</span><br><span class="line">			.title(<span class="string">"xxx"</span>)</span><br><span class="line">			.version(<span class="string">"1.0"</span>)</span><br><span class="line">			.build();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>这里通过swagger.enabled来控制是否开启。</p>
 <p>而如果在config类上加上这个注解<code>@ConditionalOnProperty(name = &quot;swagger.enabled&quot;, matchIfMissing = true)</code></p>
 <p>就会有意思了，当不配置<code>swagger.enabled</code>时，会执行config；但是当配置后，只有写成false，才不执行config，也就不会注入bean了，打开swagger-ui.html就会报错。而除了false其它值都会生效。原因就在于注解中没有加上havingValue参数。</p>
 <p>其中的玄机就在这两个注解参数。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * The string representation of the expected value for the properties. If not</span></span><br><span class="line"><span class="comment">	 * specified, the property must &lt;strong&gt;not&lt;/strong&gt; be equal to &#123;<span class="doctag">@code</span> false&#125;.</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> the expected value</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function">String <span class="title">havingValue</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * Specify if the condition should match if the property is not set. Defaults to</span></span><br><span class="line"><span class="comment">	 * &#123;<span class="doctag">@code</span> false&#125;.</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> if should match if the property is missing</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">boolean</span> <span class="title">matchIfMissing</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">false</span></span>;</span><br></pre></td></tr></table></figure>
-
 <p>所以通过是否注入config的方式来控制swagger是否开启，不太优雅。最好的方式，还是像上面那样，通过传参的方式控制是否生成bean，从而控制swagger是否开启。既然Docket已经提供了这个构造方法，就要用起来。</p>
 <h5 id="Springboot项目profiles-active配置的坑"><a href="#Springboot项目profiles-active配置的坑" class="headerlink" title="Springboot项目profiles.active配置的坑"></a>Springboot项目profiles.active配置的坑</h5><p>假设springboot项目中有application-test.yml配置文件，且在application.yml配置了如下：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">profiles:</span></span><br><span class="line"><span class="attr">  active:</span> <span class="string">test</span></span><br></pre></td></tr></table></figure>
-
 <p>对于这里的test，如果写成TEST，那么打成jar包后运行会找不到application-test.yml配置文件，从而启动失败。但是在Idea中直接运行项目，则不会出现这种情况。比较奇怪的是，在Idea中这里的读取是不区分大小写的，哪怕写成TeSt，也能运行起来，说明找到了test配置文件。但写成TeSt2就运行不了。</p>
 <p>如果不加上面的profiles.active配置，Idea启动也会报错，因为读不到default的配置文件。</p>
 <p>当然在运行时，也可以指定。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar xxx.jar --spring.profiles.active=test</span><br></pre></td></tr></table></figure>
-
 <h5 id="Spring的大多数问题都是包冲突问题、配置文件未找到等问题"><a href="#Spring的大多数问题都是包冲突问题、配置文件未找到等问题" class="headerlink" title="Spring的大多数问题都是包冲突问题、配置文件未找到等问题"></a>Spring的大多数问题都是包冲突问题、配置文件未找到等问题</h5><h5 id="线上问题排查方式"><a href="#线上问题排查方式" class="headerlink" title="线上问题排查方式"></a>线上问题排查方式</h5><ol>
 <li>数据库线程池</li>
 <li>dubbo线程池</li>
