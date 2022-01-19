@@ -458,6 +458,7 @@
         <p><strong>本章不按照书本的顺序讲，但是会涉及到书本的大多数内容:-）</strong></p>
 <p><strong>特别鸣谢吴恩达大佬的视频课程:-）</strong><a href="http://mooc.study.163.com/learn/deeplearning_ai-2001281004?tid=2001392030#/learn/content" target="_blank" rel="noopener">视频课程传送门</a></p>
 <a id="more"></a>
+
 <h4 id="1-深度学习的主要领域"><a href="#1-深度学习的主要领域" class="headerlink" title="1.深度学习的主要领域"></a>1.深度学习的主要领域</h4><p>计算机视觉、语音识别、自然语言处理、推荐系统等。随着数据量巨规模的增大，这些领域在发生很大的变化。而在计算机视觉领域，我们更多要用到卷积神经网络。那么卷积神经网络能做些什么呢？（以下用CNN代替卷积神经网络）</p>
 <h4 id="2-计算机视觉中常见的问题"><a href="#2-计算机视觉中常见的问题" class="headerlink" title="2.计算机视觉中常见的问题"></a>2.计算机视觉中常见的问题</h4><p>图像分类、目标检测、图像风格转换（前面两个大家应该比较熟悉）等问题都可以利用CNN来解决。当然还有很多其它的计算机视觉方向可以使用CNN。</p>
 <p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYyOTU5OTM3" alt="这里写图片描述"></p>
@@ -483,7 +484,7 @@
 <p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMTA1NDgz" alt="这里写图片描述"></p>
 <h4 id="7-多维度、多卷积核进行卷积"><a href="#7-多维度、多卷积核进行卷积" class="headerlink" title="7.多维度、多卷积核进行卷积"></a>7.多维度、多卷积核进行卷积</h4><p>我们知道，现实中的图像往往更多是RGB格式的，不仅仅是2D的。而上面的示例都是在二维平面上进行的。</p>
 <p>当引入到多维（比如在这里就是3维，即3个channel）后，卷积操作就会做一点点的改变。这时一张图像（或卷积核或特征映射）可以表示成这样的一个张量:</p>
-<p><strong>(m, height, width, channels)</strong>，比如5张32$\times$32大小的RGB图像可以表示成<strong>(5, 32, 32, 3)</strong>，再比如，由50个卷积核操作后大小为28$\times$28的特征映射可以表示为<strong>(1, 28, 28, 50)</strong>。再比如，10个大小为3$\times$3的3维度的卷积核可以表示为<strong>(10, 3, 3, 3)</strong></p>
+<p><strong>(m, height, width, channels)<strong>，比如5张32$\times$32大小的RGB图像可以表示成</strong>(5, 32, 32, 3)<strong>，再比如，由50个卷积核操作后大小为28$\times$28的特征映射可以表示为</strong>(1, 28, 28, 50)<strong>。再比如，10个大小为3$\times$3的3维度的卷积核可以表示为</strong>(10, 3, 3, 3)</strong></p>
 <p>具体看示例。</p>
 <p><strong>通过使用多个不同的核，这样我们可以学习到多个特征</strong>。</p>
 <p><img src="https://imgconvert.csdnimg.cn/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTA2MTYzMTE2NjA1" alt="这里写图片描述"></p>
