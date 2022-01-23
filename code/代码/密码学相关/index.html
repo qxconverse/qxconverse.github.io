@@ -446,11 +446,11 @@
 <p>目前在计算机业界应用广泛的基本上就是密码学中的非对称加密和Hash算法。</p>
 </blockquote>
 <a id="more"></a>
+
 <h4 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h4><p>数字签名由非对称加密和数字摘要两种技术合成的，可以防伪造（机密性）和篡改（完整性）。</p>
 <p>rsa非对称加密 + hash摘要 = 数字签名</p>
 <p><strong>对于摘要：私钥签名、公钥验证</strong></p>
 <p><strong>对于加密：公钥加密、私钥解密</strong></p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -459,8 +459,7 @@
 <th>备注</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>报文-&gt;Hash算法（比如MD5，SHA256）生成摘要-&gt;私钥（A的）签名</td>
 <td>使用公钥（A的）验证</td>
 <td>摘要部分：A想把签名的消息发给B</td>
@@ -470,9 +469,7 @@
 <td>使用私钥（B的）解密</td>
 <td>加密部分：A想把加密的消息发给B，让B知道是什么消息</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <h4 id="SSH"><a href="#SSH" class="headerlink" title="SSH"></a>SSH</h4><p>please tell me who you are的故事</p>
 <p>对于放在Gitlab上的代码，使用https的方式来clone，这样就省去了配置ssh的私钥和公钥的步骤。说白了，只要涉及到ssh协议的传输，那么一定会需要公钥和私钥的，所以，Gitlab相关的Git操作和连接远程服务器都要用。</p>
 <p>Mac上terminal通过ssh连接远程Linux服务器的方法：</p>
@@ -480,16 +477,20 @@
 <li>生成公、私钥</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "xxx"</span><br></pre></td></tr></table></figure>
-<ol>
+
+<ol start="2">
 <li><p>其中公钥、私钥放在自己本地<code>~/.ssh</code>文件夹下</p>
 </li>
 <li><p>将公钥文件内容拷贝到远程服务器的<code>.ssh/authorized_keys</code>文件里面</p>
 </li>
-<li>如果为了更加方便地登录，在本地<code>~/.ssh</code>文件夹下新建config文件，内容如下。就可以使用<code>ssh xxx</code>直接登录。</li>
+<li><p>如果为了更加方便地登录，在本地<code>~/.ssh</code>文件夹下新建config文件，内容如下。就可以使用<code>ssh xxx</code>直接登录。</p>
+</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host xxx </span><br><span class="line">HostName  远程服务器IP</span><br><span class="line">User 远程连接使用的账号，如root</span><br><span class="line">IdentityFile ~/.ssh/id_rsa 私钥文件所在路径</span><br></pre></td></tr></table></figure>
+
 <p>附：使用不同的非对称加密算法生成公钥、私钥</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ed25519</span><br></pre></td></tr></table></figure>
+
 <p>更加具体的内容：<a href="https://www.cnblogs.com/xz816111/p/9479139.html" target="_blank" rel="noopener">https://www.cnblogs.com/xz816111/p/9479139.html</a></p>
 <h4 id="零知识证明"><a href="#零知识证明" class="headerlink" title="零知识证明"></a>零知识证明</h4><p>其是一种特殊的交互式证明，其中证明者知道问题的答案，他需要向验证者证明“他知道答案”这一事实，但是要求验证者不能获得答案的任何信息。</p>
 <p>可以参考这样一个简单的例子。证明者和验证者都拿到了一个数独的题目，证明者知道一个解法，他可以采取如下这种零知识证明方法：他找出81张纸片，每一张纸片写上1到9的一个数字，使得正好有9份写有从1到9的纸片。因为他知道答案，他可以把所有的纸片按照解法放在一个9乘9的方格内，使得满足数独的题目要求（每列、每行、每个九宫格都正好有1到9）。放好之后他把所有的纸片翻转，让没有字的一面朝上。这样验证者没办法看到纸片上的数字。接下来，验证者就验证数独的条件是否满足。比如他选一列，这时证明者就把这一列的纸片收集起来，把顺序任意打乱，然后把纸片翻过来，让验证者看到1到9的纸片都出现了。整个过程中验证者都无法得知每张纸片的位置，但是却能验证确实是1到9都出现了。</p>
@@ -644,7 +645,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -655,7 +656,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -666,7 +667,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -761,7 +762,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">35.4k</span>
+    <span title="Site words total count">25k</span>
   
 </div>
 
