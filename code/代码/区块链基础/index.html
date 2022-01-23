@@ -223,16 +223,6 @@
         </li>
       
         
-        <li class="menu-item menu-item-生活">
-          <a href="/categories/life" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-bath"></i> <br />
-            
-            生活
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-代码">
           <a href="/categories/code" rel="section">
             
@@ -243,32 +233,12 @@
         </li>
       
         
-        <li class="menu-item menu-item-健康">
-          <a href="/categories/health" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-heart"></i> <br />
-            
-            健康
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-经济">
           <a href="/categories/economic" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-line-chart"></i> <br />
             
             经济
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-人文">
-          <a href="/categories/humanity" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
-            
-            人文
           </a>
         </li>
       
@@ -446,6 +416,7 @@
 <p>根据B站上北大教授肖老师的教学视频，记录的</p>
 </blockquote>
 <a id="more"></a>
+
 <h4 id="密码学基础"><a href="#密码学基础" class="headerlink" title="密码学基础"></a>密码学基础</h4><p>区块链中密码学的核心概念：<strong>hash</strong>和<strong>签名</strong></p>
 <p>hash有三个重要的特性</p>
 <ol>
@@ -454,7 +425,6 @@
 <li>puzzle friendly</li>
 </ol>
 <p>分别的解释：</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -462,8 +432,7 @@
 <th>解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>collision resistance（碰撞抵制）</td>
 <td>很难找到$x,y$，使得$h(x)=h(y)$</td>
 </tr>
@@ -475,9 +444,7 @@
 <td>puzzle friendly</td>
 <td>其分布难以控制</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p>比如sealed envelope，A方发布消息，B方接受消息。hiding可以保证B方很难破解消息，而碰撞抵制可以防止A方进行篡改。这个签名过的消息则保存在可信的第三方。</p>
 <p>目前广泛使用的是SHA-256（secure hash algorithm）</p>
 <p>在密码学中，分为<strong>对称加密</strong>与<strong>非对称加密</strong>。非对称加密中，包含有公钥与私钥$(public key, private key)$。pk加密，sk解密。需要注意的是用的是同一人的pk和sk。而签名正好相反，sk签名，pk验证。</p>
@@ -503,12 +470,10 @@
 </ol>
 <h5 id="比特币"><a href="#比特币" class="headerlink" title="比特币"></a>比特币</h5><ol>
 <li>谁发行（挖矿）</li>
-<li><p>验证有效性（防范双花攻击），所有用户共同维护一个数据库，即区块链</p>
-<p>交易中，需要发款人的签名和收款人的地址（相当于银行账号），地址是通过收款人的公钥推算出来的（hash+转换）；输入部分说明币的来源，以及A的pk，输出部分给出收款人pk的hash  。</p>
-</li>
+<li>验证有效性（防范双花攻击），所有用户共同维护一个数据库，即区块链</li>
 </ol>
+<p> 交易中，需要发款人的签名和收款人的地址（相当于银行账号），地址是通过收款人的公钥推算出来的（hash+转换）；输入部分说明币的来源，以及A的pk，输出部分给出收款人pk的hash  。</p>
 <p>每个区块分为<strong>块头</strong>和<strong>块身</strong></p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -517,8 +482,7 @@
 <th></th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>block header</td>
 <td>version, hash of previous block header, merkle root hash, target, nonce</td>
 <td>$H(block header) &lt;= target$，hash的值是针对block header的</td>
@@ -526,10 +490,9 @@
 <tr>
 <td>block body</td>
 <td>transaction list</td>
+<td></td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p>节点分为：full node和light node；系统中大多数的节点是轻节点</p>
 <p>账本的内容要取得分布式共识（distribution consensus）</p>
 <p>比特币中的共识协议：</p>
@@ -554,7 +517,7 @@
 <p>每个交易有多个输入和多个输出</p>
 <p>total inputs = total outputs</p>
 <p>比特币系统设计的第二个激励机制：交易费（第一个激励，初块奖励，21万减半），要保证挖矿的难度，确保10分钟挖出一个。</p>
-<p>21w <em> 10 / (60 </em>24 * 365) ~~ 4年，即每四年减半</p>
+<p>21w * 10 / (60 *24 * 365) ~~ 4年，即每四年减半</p>
 <p>你把你的交易打包在我的区块里，我会给你一定的交易费</p>
 <p>account-based ledger 基于账户的账本</p>
 <p>比如以太坊使用的就是这种模式</p>
@@ -566,7 +529,7 @@
 <p>memoryless（多次实验不会相互影响）</p>
 <p>出块时间服从指数分布；10分钟，属于系统的平均出块时间；将来还要挖多长时间和过去挖了多久没有关系，这样保证了公平性</p>
 <p>总共的比特币总量为2100万，总量守恒，区块链无限长。 </p>
-<p>21w <em> 50 </em>(1+0.5+0.25+…+…)</p>
+<p>21w * 50 *(1+0.5+0.25+…+…)</p>
 <p>Bitcoin is secured by mining.</p>
 <p>多等几个确认（第六次确认），被篡改的概率会呈指数级下降</p>
 <p>confirmation</p>
@@ -615,7 +578,7 @@
 <li>私钥丢失了，由于去中心化，没办法找回密码，账户里面的钱就没有了，永远取不出来了；如果私钥泄露了，可以把钱转到另外的安全账户上。公私钥一旦生成就不能更改了，所以只能重新创建一个账号。</li>
 <li>如果转钱时收款人地址写错了，怎么办？没有办法取消已经发布的交易。地址是由公钥的hash得到的。如果是非法的地址（即不存在的公钥），那钱就再也取不出来了。</li>
 <li>不存在偷答案，每个矿工挖到的nonce都是和自己的收款地址绑定在一起的。</li>
-<li>事先不需要知道哪个矿工获得交易费，一个交易会有很多个输入与输出，当total inputs大于total outputs时，差值作为交易费。哪个矿工挖到了，就可以计算出交易费。</li>
+<li> 事先不需要知道哪个矿工获得交易费，一个交易会有很多个输入与输出，当total inputs大于total outputs时，差值作为交易费。哪个矿工挖到了，就可以计算出交易费。</li>
 <li>每天产生的区块数目差不多的，交易数目的变化主要取决于每个区块中包含的交易数目。</li>
 </ol>
 <h4 id="bitcoin-and-anonymity"><a href="#bitcoin-and-anonymity" class="headerlink" title="bitcoin and anonymity"></a>bitcoin and anonymity</h4><p>与隐私保护有关</p>
